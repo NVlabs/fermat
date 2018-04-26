@@ -1,0 +1,209 @@
+newmtl grey_and_white_room:BottleCap
+illum 4
+Kd 0.46 0.00 0.00
+Ka 0.40 0.40 0.40
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl grey_and_white_room:Branches
+illum 4
+Kd 0.00 0.00 0.00
+Ks 0.40 0.40 0.40
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ns 20.00
+newmtl grey_and_white_room:BrushedStainlessSteel
+illum 4
+Kd 0.00 0.00 0.00
+Ks 0.80 0.80 0.80
+Ka 0.40 0.40 0.40
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ns 100.00
+newmtl grey_and_white_room:Dirt
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.40 0.40 0.40
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ns 5.00
+newmtl grey_and_white_room:FireplaceGlass
+illum 4
+Kd 0.00 0.00 0.00
+Ks 0.40 0.40 0.40
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ns 50.00
+newmtl grey_and_white_room:Floor
+illum 4
+Kd 0.00 0.00 0.00
+Ks 0.50 0.50 0.50
+Ni 1.50
+Ns 8.00
+#map_Ks -s 2 2 textures/escher-fishes-2.tga
+newmtl grey_and_white_room:Glass
+illum 4
+Kd 0.00 0.00 0.00
+Ks 0.90 0.90 0.90
+Ka 0.40 0.40 0.40
+Tf 1.00 1.00 1.00
+Ni 1.00
+ Ns 100.0
+newmtl grey_and_white_room:Leaves
+illum 4
+Kd 0.00 0.00 0.00
+Ks 0.40 0.40 0.40
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 10.00
+map_Kd textures\leaf.tga
+map_d textures\leaf_alpha.png
+newmtl grey_and_white_room:MattePaint
+illum 4
+Kd 0.00 0.00 0.00
+Ks 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+Ns 20
+Ni 10.00
+newmtl grey_and_white_room:Mirror
+illum 4
+Kd 0.00 0.00 0.00
+Ks 0.12 0.12 0.12
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ns 20.00
+newmtl grey_and_white_room:Painting
+illum 4
+Kd 0.00 0.00 0.00
+Ks 0.01 0.01 0.01
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ns 120.00
+Ke 1 1 1
+map_Ke textures\escher-relativity.tga
+newmtl grey_and_white_room:PaintingBack
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.40 0.40 0.40
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ns 10.00
+newmtl grey_and_white_room:Paneling
+illum 4
+Kd 0.00 0.00 0.00
+Ks 0.40 0.40 0.40
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ns 20.0
+newmtl grey_and_white_room:PlantPot
+illum 4
+Kd 0.00 0.00 0.00
+Ks 0.40 0.40 0.40
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ns 20.00
+newmtl grey_and_white_room:Sofa
+illum 4
+Kd 0.00 0.00 0.00
+Ks 0.05 0.05 0.05
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ns 5.00
+newmtl grey_and_white_room:SofaLegs
+illum 4
+Kd 0.00 0.00 0.00
+Ks 0.40 0.40 0.40
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ns 6.00
+newmtl grey_and_white_room:TableWood
+illum 4
+Kd 0.00 0.00 0.00
+Ks 0.80 0.80 0.80
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ns 50.0
+# map_Ks textures\escher-fishes-bw.tga
+newmtl grey_and_white_room:Transluscent
+illum 4
+Kd 0.30 0.30 0.30
+Ka 0.40 0.40 0.40
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl grey_and_white_room:Walls
+illum 4
+Kd 0.00 0.00 0.00
+Ks 0.30 0.30 0.30
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ns 10.00
+# map_Kd textures\escher-pegasus-tile.tga
+# map_Ks textures\escher-pegasus-tile.tga
+newmtl grey_and_white_room:initialShadingGroup
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl grey_and_white_room:lambert2SG_light
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Ke 5.00 5.00 5.00
+Ni 1.00
+newmtl lambert3SG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Ke 2.00 7.00 6.90
+Ni 1.00
+
+newmtl leftWall
+  Ns 7.0000
+  Ni 1.5000
+  illum 2
+  Kd 0.0 0.0 0.0
+  Ks 0.4 0.4 0.4
+  Ke 0 0 0
+ # map_Kd -s 8 8 textures/escher-pegasus-tile.tga
+ # map_Ks -s 8 8 textures/escher-pegasus-tile.tga
+
+newmtl lightWall
+illum 4
+  Kd 0.01 0.01 0.01
+  Ks 0.01 0.01 0.01
+  Ke 10 10 10
+  map_Ke -s 1 1 textures/escher-hand-sphere-c.tga
+
+newmtl newFloor
+illum 4
+Kd 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ks 0.50 0.50 0.50
+Ni 1.50
+Ns 8.00
+# map_Ks -s 8 8 textures/escher-fishes-2.tga
+
+newmtl newCeiling
+  Ns 30.0000
+  Ni 1.0000
+  illum 2
+  Kd 0.0   0.0  0.0
+  Ks 0.6   0.6  0.6
+  Ke 0     0    0
+#  map_Ks -s 4 4 textures/escher-fishes-2.tga
+
+newmtl ceilingLight
+illum 4
+  Kd 0.01 0.01 0.01
+  Ks 0.01 0.01 0.01
+  Ke 600 440 200
+
+newmtl lightBlocker
+illum 4
+Kd 0.00 0.00 0.00
+Ks 0.80 0.80 0.80
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ns 30.00
+# map_Ks textures/escher-reptiles.tga
