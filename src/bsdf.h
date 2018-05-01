@@ -43,8 +43,10 @@
 #include <cugar/bsdf/ltc.h>
 #include <renderer_view.h>
 
-#define DIFFUSE_ONLY	0
-#define SPECULAR_ONLY	0
+#define DIFFUSE_ONLY		0
+#define SPECULAR_ONLY		0
+#define SUPPRESS_SPECULAR	0
+#define SUPPRESS_DIFFUSE	0
 
 ///@addtogroup Fermat
 ///@{
@@ -102,6 +104,7 @@ struct Bsdf
 
 		kReflectionMask			= 0x5u,
 		kTransmissionMask		= 0xAu,
+		kAllComponents			= 0xFFu
 	};
 
 	typedef cugar::LambertTransBsdf	diffuse_trans_component;
@@ -168,13 +171,14 @@ struct Bsdf
 		const RendererView	renderer,
 		const MeshMaterial	material,
 		const float			mollification_factor = 1.0f,
-		const float			mollification_bias = 0.0f) :
+		const float			mollification_bias   = 0.0f,
+		const float			min_roughness		 = 0.0f) :
 		m_diffuse(cugar::Vector3f(material.diffuse.x, material.diffuse.y, material.diffuse.z) / M_PIf),
 		m_diffuse_trans(cugar::Vector3f(material.diffuse_trans.x, material.diffuse_trans.y, material.diffuse_trans.z) / M_PIf),
 	#if defined(USE_LTC)
-		m_glossy(material.roughness * mollification_factor + mollification_bias, renderer.ltc_M, renderer.ltc_Minv, renderer.ltc_A, renderer.ltc_size),
+		m_glossy(cugar::max(material.roughness * mollification_factor + mollification_bias, min_roughness), renderer.ltc_M, renderer.ltc_Minv, renderer.ltc_A, renderer.ltc_size),
 	#else
-		m_glossy(material.roughness * mollification_factor + mollification_bias),
+		m_glossy(cugar::max(material.roughness * mollification_factor + mollification_bias, min_roughness)),
 		m_glossy_trans(material.roughness /** mollification_factor + mollification_bias*/, true, material.index_of_refraction, 1.0f),
 	#endif
 		m_fresnel(cugar::Vector3f(material.specular.x, material.specular.y, material.specular.z) / M_PIf),
@@ -232,7 +236,11 @@ struct Bsdf
 	/// evaluate the BSDF f(V,L)
 	///
 	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
-	cugar::Vector3f f(const cugar::DifferentialGeometry& geometry, const cugar::Vector3f V, const cugar::Vector3f L) const
+	cugar::Vector3f f(
+		const cugar::DifferentialGeometry&	geometry,
+		const cugar::Vector3f				V,
+		const cugar::Vector3f				L,
+		const ComponentType					components	= kAllComponents) const
 	{
 		cugar::Vector3f r_coeff;
 		cugar::Vector3f t_coeff;
@@ -250,10 +258,10 @@ struct Bsdf
 		}
 
 		return
-			m_diffuse.f(geometry, V, L)			* t_coeff * m_opacity * factor + 
-			m_diffuse_trans.f(geometry, V, L)	* t_coeff * m_opacity * factor +
-			m_glossy.f(geometry, V, L)			* r_coeff * factor + 
-			m_glossy_trans.f(geometry, V, L)	* t_coeff * (1.0f - m_opacity) * factor;
+			((components & kDiffuseReflection)	 ? m_diffuse.f(geometry, V, L)			* t_coeff * m_opacity * factor		: 0.0f) + 
+			((components & kDiffuseTransmission) ? m_diffuse_trans.f(geometry, V, L)	* t_coeff * m_opacity * factor		: 0.0f) +
+			((components & kGlossyReflection)    ? m_glossy.f(geometry, V, L)			* r_coeff * factor					: 0.0f) + 
+			((components & kGlossyTransmission)	 ? m_glossy_trans.f(geometry, V, L)	* t_coeff * (1.0f - m_opacity) * factor : 0.0f);
 	}
 
 	/// evaluate the BSDF f(V,L) and p(V,L) in a single call
@@ -326,16 +334,17 @@ struct Bsdf
 		const cugar::Vector3f				L,
 		cugar::Vector3f&					f,
 		float&								p,
-		const cugar::SphericalMeasure		measure = cugar::kProjectedSolidAngle,
-		bool								RR = true) const
+		const cugar::SphericalMeasure		measure		= cugar::kProjectedSolidAngle,
+		const bool							RR			= true,
+		const ComponentType					components	= kAllComponents) const
 	{
-		cugar::Vector3f f_d, f_g, f_dt, f_gt;
-		float           p_d, p_g, p_dt, p_gt;
+		cugar::Vector3f f_d(0.0f), f_g(0.0f), f_dt(0.0f), f_gt(0.0f);
+		float           p_d(0.0f), p_g(0.0f), p_dt(0.0f), p_gt(0.0f);
 
-		m_diffuse.f_and_p(geometry, V, L, f_d, p_d, measure);
-		m_diffuse_trans.f_and_p(geometry, V, L, f_dt, p_dt, measure);
-		m_glossy.f_and_p(geometry, V, L, f_g, p_g, measure);
-		m_glossy_trans.f_and_p(geometry, V, L, f_gt, p_gt, measure);
+		if (components & kDiffuseReflection)	m_diffuse.f_and_p(geometry, V, L, f_d, p_d, measure);
+		if (components & kDiffuseTransmission)	m_diffuse_trans.f_and_p(geometry, V, L, f_dt, p_dt, measure);
+		if (components & kGlossyReflection)		m_glossy.f_and_p(geometry, V, L, f_g, p_g, measure);
+		if (components & kGlossyTransmission)	m_glossy_trans.f_and_p(geometry, V, L, f_gt, p_gt, measure);
 
 		float diffuse_refl_prob;
 		float diffuse_trans_prob;
@@ -381,7 +390,13 @@ struct Bsdf
 	/// evaluate the total projected probability p(V,L) = p(L|V)
 	///
 	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
-	float p(const cugar::DifferentialGeometry& geometry, const cugar::Vector3f V, const cugar::Vector3f L, const cugar::SphericalMeasure measure = cugar::kProjectedSolidAngle, bool RR = true) const
+	float p(
+		const cugar::DifferentialGeometry&	geometry,
+		const cugar::Vector3f				V,
+		const cugar::Vector3f				L,
+		const cugar::SphericalMeasure		measure		= cugar::kProjectedSolidAngle,
+		const bool							RR			= true,
+		const ComponentType					components	= kAllComponents) const
 	{
 		float diffuse_refl_prob;
 		float diffuse_trans_prob;
@@ -400,12 +415,12 @@ struct Bsdf
 			glossy_trans_prob   *= inv_sum;
 		}
 
-		float p_d, p_g, p_dt, p_gt;
+		float p_d(0.0f), p_g(0.0f), p_dt(0.0f), p_gt(0.0f);
 
-		p_d  = m_diffuse.p(geometry, V, L, measure);
-		p_dt = m_diffuse_trans.p(geometry, V, L, measure);
-		p_g  = m_glossy.p(geometry, V, L, measure);
-		p_gt = m_glossy_trans.p(geometry, V, L, measure);
+		if (components & kDiffuseReflection)	p_d  = m_diffuse.p(geometry, V, L, measure);
+		if (components & kDiffuseTransmission)	p_dt = m_diffuse_trans.p(geometry, V, L, measure);
+		if (components & kGlossyReflection)		p_g  = m_glossy.p(geometry, V, L, measure);
+		if (components & kGlossyTransmission)	p_gt = m_glossy_trans.p(geometry, V, L, measure);
 
 		return
 			p_d * diffuse_refl_prob +
@@ -443,6 +458,12 @@ struct Bsdf
 	#elif SPECULAR_ONLY
 		// disable Fresnel mixing - allow specular only
 		r_coeff = cugar::Vector3f(1.0f);
+		t_coeff = cugar::Vector3f(0.0f);
+	#endif
+	#if SUPPRESS_SPECULAR
+		r_coeff = cugar::Vector3f(0.0f);
+	#endif
+	#if SUPPRESS_DIFFUSE
 		t_coeff = cugar::Vector3f(0.0f);
 	#endif
 
@@ -506,6 +527,12 @@ struct Bsdf
 		r_coeff = cugar::Vector3f(1.0f);
 		t_coeff = cugar::Vector3f(0.0f);
 	#endif
+	#if SUPPRESS_SPECULAR
+		r_coeff = cugar::Vector3f(0.0f);
+	#endif
+	#if SUPPRESS_DIFFUSE
+		t_coeff = cugar::Vector3f(0.0f);
+	#endif
 	}
 
 	/// evaluate the Fresnel weight for the glossy component
@@ -560,7 +587,8 @@ struct Bsdf
 		float&								out_p_proj,
 		cugar::Vector3f&					out_g,
 		bool								RR					= true,
-		bool								evaluate_full_bsdf	= false) const
+		bool								evaluate_full_bsdf	= false,
+		const ComponentType					components			= kAllComponents) const
 	{
 		cugar::Vector3f g(0.0f);
 		float			p(0.0f);
@@ -575,6 +603,12 @@ struct Bsdf
 		float glossy_trans_prob;
 
 		sampling_weights(geometry, in, diffuse_refl_prob, diffuse_trans_prob, glossy_refl_prob, glossy_trans_prob);
+
+		// set to zero unwanted components
+		if ((components & kDiffuseReflection)	== 0)	diffuse_refl_prob	= 0;
+		if ((components & kDiffuseTransmission)	== 0)	diffuse_trans_prob	= 0;
+		if ((components & kGlossyReflection)	== 0)	glossy_refl_prob	= 0;
+		if ((components & kGlossyTransmission)	== 0)	glossy_trans_prob	= 0;
 
 		if (RR == false)
 		{
@@ -646,9 +680,9 @@ struct Bsdf
 			// re-evaluate the entire BSDF and its sampling probabilities
 			if (evaluate_full_bsdf)
 			{
-				p_proj	= this->p(geometry, in, out, cugar::kProjectedSolidAngle, RR);
+				p_proj	= this->p(geometry, in, out, cugar::kProjectedSolidAngle, RR, components);
 				p		= p_proj * dot(out, geometry.normal_s);
-				g		= this->f(geometry, in, out) / p_proj;
+				g		= this->f(geometry, in, out, components) / p_proj;
 			}
 			else
 			{

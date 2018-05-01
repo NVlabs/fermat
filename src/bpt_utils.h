@@ -480,7 +480,8 @@ bool scatter(
 	cugar::Vector3f&		out_w,
 	bool					RR					= true,
 	bool					output_alpha		= true,
-	bool					evaluate_full_bsdf	= false)
+	bool					evaluate_full_bsdf	= false,
+	Bsdf::ComponentType		components			= Bsdf::kAllComponents)
 {
 	bool scattered = v.bsdf.sample(
 		v.geom,
@@ -492,7 +493,8 @@ bool scatter(
 		out_p_proj,
 		out_w,
 		RR,
-		evaluate_full_bsdf);
+		evaluate_full_bsdf,
+		components);
 
 	if (output_alpha)
 		out_w *= v.alpha;

@@ -747,6 +747,34 @@ uint64 radical_inverse(uint64 bits, const uint64 scramble)
 	return (scramble ^ bits) >> (64 - 52); // Account for 52 bits precision.
 }
 
+/// A pseudorandom permutation function (see "Correlated Multi-Jittered Sampling", by Andrew Kensler)
+///
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+uint32 permute(uint32 i, uint32 l, uint32 p) 
+{
+	uint32 w = l - 1;
+	w |= w >> 1;
+	w |= w >> 2;
+	w |= w >> 4;
+	w |= w >> 8;
+	w |= w >> 16;
+	do {
+		i ^= p;					i *= 0xe170893d;
+		i ^= (i & w)	>> 4;
+		i ^= p			>> 8;	i *= 0x0929eb3;
+		i ^= p			>> 23;
+		i ^= (i & w)	>> 1;	i *= 1 | p >> 27;
+								i *= 0x6935fa69;
+		i ^= (i & w)	>> 11;	i *= 0x74dcb303;
+		i ^= (i & w)	>> 2;	i *= 0x9e501cc3;
+		i ^= (i & w)	>> 2;	i *= 0xc860a3df;
+		i ^= i			>> 5;
+		i &= w;
+	} while (i >= l);
+
+	return (i + p) % l;
+}
+
 #if defined(__CUDA_ARCH__)
 
 CUGAR_FORCEINLINE CUGAR_DEVICE 
