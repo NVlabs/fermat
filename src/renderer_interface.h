@@ -52,6 +52,7 @@ struct RendererInterface
 	///
 	virtual void init(int argc, char** argv, Renderer& renderer) {}
 
+	///\anchor RendererInterfaceRenderMethod
 	/// this method is responsible for rendering a given frame in a progressive rendering
 	///
 	/// \param	instance		the frame instance

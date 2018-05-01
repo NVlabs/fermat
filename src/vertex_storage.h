@@ -33,7 +33,7 @@
 ///@addtogroup Fermat
 ///@{
 
-///@addtogroup VertexGeometry
+///@addtogroup VertexGeometryModule
 ///@{
 
 enum class VertexSampling
@@ -108,5 +108,5 @@ struct VertexStorage
 	DomainBuffer<CUDA_BUFFER, uint32>	vertex_counter;	// vertex counts, by depth
 };
 
-///@} VertexGeometry
+///@} VertexGeometryModule
 ///@} Fermat

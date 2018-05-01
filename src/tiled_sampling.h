@@ -35,7 +35,7 @@
 ///@addtogroup Fermat
 ///@{
 
-///@addtogroup Sampling
+///@addtogroup SamplingModule
 ///@{
 
 /// utility function for [0,1) randoms
@@ -334,5 +334,5 @@ inline void load_samples(const char* nameradix, const uint32 X, const uint32 Y, 
 	}
 }
 
-///@} Sampling
+///@} SamplingModule
 ///@} Fermat

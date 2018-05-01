@@ -43,7 +43,7 @@
 ///@addtogroup Fermat
 ///@{
 
-///@addtogroup VertexGeometry
+///@addtogroup VertexGeometryModule
 ///@{
 
 ///
@@ -120,5 +120,5 @@ cugar::Vector3f unpack_hemispherical_direction(const uint32 packed_dir)
 	return cugar::Vector3f(u.x * m, u.y * m, l * 2 - 1);
 }
 
-///@} VertexGeometry
+///@} VertexGeometryModule
 ///@} Fermat

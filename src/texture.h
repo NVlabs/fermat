@@ -41,7 +41,7 @@
 ///@addtogroup Fermat
 ///@{
 
-///@addtogroup Textures
+///@addtogroup TexturesModule
 ///@{
 
 /// A \ref TextureStorage "Texture" view object to be used within CUDA kernels
@@ -326,5 +326,5 @@ cugar::Vector4f texture_lookup(float4 st, const TextureReference texture_ref, co
 		return default_value;
 }
 
-///@} Textures
+///@} TexturesModule
 ///@} Fermat

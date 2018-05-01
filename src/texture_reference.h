@@ -33,7 +33,7 @@
 ///@addtogroup Fermat
 ///@{
 
-///@addtogroup Textures
+///@addtogroup TexturesModule
 ///@{
 
 /// A reference to a texture object
@@ -49,5 +49,5 @@ struct TextureReference
 	float2	scaling;
 };
 
-///@} Textures
+///@} TexturesModule
 ///@} Fermat

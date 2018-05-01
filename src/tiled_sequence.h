@@ -34,7 +34,7 @@
 ///@addtogroup Fermat
 ///@{
 
-///@addtogroup Sampling
+///@addtogroup SamplingModule
 ///@{
 
 /// A tiled sample sequence view.
@@ -125,5 +125,5 @@ struct TiledSequence
 	DomainBuffer<HOST_BUFFER, float>	m_sequence_samples;
 };
 
-///@} Sampling
+///@} SamplingModule
 ///@} Fermat
