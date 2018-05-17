@@ -25,9 +25,9 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-//\page cugar_page CUGAR
+// \mainpage CUGAR
 
-/// \mainpage CUGAR
+///\page cugar_page CUGAR
 ///
 ///\htmlonly
 /// <img src="nvidia_cubes.png" style="position:relative; bottom:-10px; border:0px;"/>

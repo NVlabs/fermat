@@ -111,7 +111,7 @@ struct one_or_zero
 /// A functor to negate the input value
 ///
 template <typename T>
-struct not
+struct not_functor
 {
     typedef unary_function_tag function_tag;
     typedef T argument_type;
