@@ -23,7 +23,7 @@ Fermat has the following dependencies:
 
  - cub         : contained in the package
  - freeglut    : contained in the package
- - CUDA 8.0    : not contained - it should be separately downloaded and installed on the system
+ - CUDA 9.2    : not contained - it should be separately downloaded and installed on the system
  - OptiX 4.0.1 : not contained - it should be separately downloaded and copied in the folder contrib/OptiX
 
 Its distribution also contains a set of adapted models originally taken from Benedikt Bitterli's rendering resources:
