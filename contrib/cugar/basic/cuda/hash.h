@@ -1,6 +1,6 @@
 /*
  * cugar
- * Copyright (c) 2011-2014, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2011-2018, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -34,6 +34,7 @@
 #include <cugar/basic/types.h>
 #include <cugar/basic/atomics.h>
 #include <cugar/basic/numbers.h>
+#include <cugar/basic/cuda/pointers.h>
 
 namespace cugar {
 namespace cuda {
@@ -535,6 +536,9 @@ struct SyncFreeHashMap
 
 #else
 
+#define HASH_UNCACHED_LOAD(x)    load<LOAD_VOLATILE>(x)
+#define HASH_UNCACHED_STORE(x,v) store<STORE_VOLATILE>(x,v)
+
 /// This class implements a device-side Hash Map, allowing arbitrary threads from potentially
 /// different CTAs of a cuda kernel to add new entries at the same time.
 ///
@@ -572,8 +576,8 @@ struct SyncFreeHashMap
     CUGAR_HOST_DEVICE
     SyncFreeHashMap(const uint32 _table_size, KeyT* _hash, KeyT* _unique, uint32* _slots, uint32* _count) :
         hash(_hash),
-        unique((volatile KeyT*)_unique),
-        slots((volatile uint32*)_slots),
+        unique(_unique),
+        slots(_slots),
         count(_count),
 		table_size(_table_size) {}
 
@@ -614,8 +618,8 @@ struct SyncFreeHashMap
 			if (old == INVALID_KEY)
 			{
 				const uint32 unique_id = atomic_add(count, 1);
-				unique[unique_id] = key;
-				slots[slot] = unique_id;
+				HASH_UNCACHED_STORE(&unique[unique_id], key);
+				HASH_UNCACHED_STORE(&slots[slot], unique_id);
 				__threadfence(); // make sure the write will eventually be visible
 			}
 			return true;
@@ -667,8 +671,8 @@ struct SyncFreeHashMap
         if (old == INVALID_KEY)
         {
             const uint32 unique_id = atomic_add( count, 1 );
-            unique[ unique_id ] = key;
-            slots[ slot ] = unique_id;
+            HASH_UNCACHED_STORE(&unique[ unique_id ], key);
+            HASH_UNCACHED_STORE(&slots[ slot ], unique_id);
             __threadfence(); // make sure the write will eventually be visible
         }
     }
@@ -717,8 +721,8 @@ struct SyncFreeHashMap
         if (old == INVALID_KEY)
         {
             const uint32 unique_id = atomic_add( count, 1 );
-            unique[ unique_id ] = key;
-            slots[ slot ] = unique_id;
+            HASH_UNCACHED_STORE(&unique[ unique_id ], key);
+            HASH_UNCACHED_STORE(&slots[ slot ], unique_id);
             __threadfence(); // make sure the write will eventually be visible
 			*pos = unique_id;
 			return true;	// first thread to fetch this entry
@@ -726,7 +730,7 @@ struct SyncFreeHashMap
         else
         {
             // loop until the slot has been written to
-            while (slots[slot] == 0xFFFFFFFFu) {}
+            while (HASH_UNCACHED_LOAD(&slots[slot]) == 0xFFFFFFFFu) {}
 
 			*pos = slots[slot];
 			return false;	// pre-existing entry
@@ -774,7 +778,7 @@ struct SyncFreeHashMap
 		}
 
         // loop until the slot has been written to
-        while (slots[slot] == 0xFFFFFFFFu) {}
+        while (HASH_UNCACHED_LOAD(&slots[slot]) == 0xFFFFFFFFu) {}
 
         return slots[slot];
     }
@@ -787,11 +791,11 @@ struct SyncFreeHashMap
     ///
     KeyT get_unique(const uint32 i) const { return unique[i]; }
 
-    KeyT*            hash;
-    volatile KeyT*   unique;
-    volatile uint32* slots;
-    uint32*          count;
-	uint32           table_size;
+    KeyT*           hash;
+    KeyT*			unique;
+    uint32*			slots;
+    uint32*         count;
+	uint32          table_size;
 };
 
 /// This class implements a device-side Hash Map, allowing arbitrary threads from potentially

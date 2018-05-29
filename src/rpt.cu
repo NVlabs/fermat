@@ -84,16 +84,13 @@ namespace {
 		float*		probs;
 		uint32*		pixels;
 		uint32*		size;
+		uint32		max_size;
 
 		FERMAT_DEVICE
 		void warp_append(const PixelInfo pixel, const Ray& ray, const float4 weight, const float4 weight2, const float p)
 		{
-			cugar::cuda::warp_static_atomic atomic_adder(size);
-
-			uint32 slot;
-
-			//atomic_adder.add<1>(true, &slot);
-			slot = cugar::atomic_add(size,1u);
+			const uint32 slot = cugar::cuda::warp_increment(size);
+			FERMAT_ASSERT(slot < max_size);
 
 			rays[slot]		= ray;
 			weights[slot]	= weight;
@@ -474,10 +471,10 @@ namespace {
 
 		template <typename T>
 		CUGAR_DEVICE
-		T shuffle(T input, const uint32 idx) const { return cub::ShuffleIndex(input, idx, TILE_SIZE); }
+		T shuffle(T input, const uint32 idx) const { return cub::ShuffleIndex(input, idx, __activemask()); }
 
 		CUGAR_DEVICE
-		void sync() { /* TODO in CUDA 9! */ }
+		void sync() { __syncwarp(); }
 	};
 
 	FERMAT_DEVICE
@@ -523,8 +520,8 @@ namespace {
 		cugar::Vector2f p_sum  = 0.0f;
 
 		// check if this pixel actually exists
-		if (pixel_coords.x > renderer.res_x ||
-			pixel_coords.y > renderer.res_y)
+		if (pixel_coords.x >= renderer.res_x ||
+			pixel_coords.y >= renderer.res_y)
 			return;	// this thread can go home...
 
 		// 2.
@@ -564,7 +561,7 @@ namespace {
 			for (uint32 k = 0; k < MACRO_TILE_SIZE; ++k)
 			{
 				// make sure threads don't go out of sync, as they have to read the same locations of memory
-				//group.sync(); // TODO: make sure to use the coalesced threads after the first returns!
+				group.sync(); // TODO: make sure to use the coalesced threads after the first returns!
 
 				// compute the pixel coordinates for this thread
 				const uint2 pixel_coords_k = compute_pixel_coordinates(k, pixel_class, macro_tile, renderer);
@@ -701,7 +698,7 @@ namespace {
 		for (uint32 k = 0; k < MACRO_TILE_SIZE; ++k)
 		{
 			// make sure threads don't go out of sync, as they have to read the same locations of memory
-			//group.sync(); // TODO: make sure to use the coalesced threads after the first returns!
+			group.sync(); // TODO: make sure to use the coalesced threads after the first returns!
 
 			cdf[k] = k ? cdf[k-1] : 0.0f;
 
@@ -839,26 +836,6 @@ namespace {
 		// accumulate the final result to the image
 		renderer.fb(FBufferDesc::COMPOSITED_C, pixel) += cugar::Vector4f(f_sum, 0.0f) / float(renderer.instance + 1);
 	  #endif
-
-		// IDEAS to test:
-		// 1. bilateral / EWA filtering with importance sampled shadow rays according to filter weights;
-		//    the shadowing term can be optionally denoised separately.
-		// 2. empirical sample reuse: if, say, filtering/reusing across 25 pixels, make a guesstimate of how
-		//    large each sample hit is (as a disc in world-space), and reproject to the central pixel,
-		//    taking into account of the bounded size of the discs (i.e. a sample at cos(theta) = 0 wouldn't
-		//    be infinitely large, but just larger).
-		//    Basically: try to bound the solid angle expansion by a reasonable amount.
-		// 2.a. check if the lobe-aware filtering might provide any useful insight for the diffuse case as well
-		// 2.b. keep in mind that when doing unbiased path reuse (without MIS) the problematic case is actually
-		//    when the original sampling pdf (relative to the reused neighbor) is low, but the new cos(theta)
-		//    is large: 1/pdf is effectively a MC estimate of solid angle.
-		//    So the point is: can we improve, with a different quadrature rule?
-		// 2.c. keep in mind the original irradiance gradients by Greg Ward - maybe there is something in there
-		//    too (i.e. adapt to an individual hemispherical texel, one 25th of a hemisphere). This could actually
-		//    be providing the bound we want (as a gradient magnitude), remembering that gradient is only valid
-		//    until the hit facet is 1. correctly oriented towards the new point (i.e. facing it), 2. still visible.
-		// All the above could be combined together into a "better" denoising filter, with more appropriate weights
-		// than a simple Gaussian.
 	}
 
 	__global__
@@ -1362,6 +1339,7 @@ void RPT::render(const uint32 instance, Renderer& renderer)
 	queue1.probs		= m_probs.ptr();
 	queue1.pixels		= m_pixels.ptr();
 	queue1.size			= m_counters.ptr();
+	queue1.max_size     = n_pixels;
 
 	queue2.rays			= queue1.rays + n_pixels;
 	queue2.hits			= queue1.hits + n_pixels;
@@ -1370,6 +1348,7 @@ void RPT::render(const uint32 instance, Renderer& renderer)
 	queue2.probs		= queue1.probs + n_pixels;
 	queue2.pixels		= queue1.pixels + n_pixels;
 	queue2.size			= queue1.size + 1;
+	queue2.max_size     = n_pixels;
 
 	shadow_queue.rays		= queue2.rays + n_pixels;
 	shadow_queue.hits		= queue2.hits + n_pixels;
@@ -1378,6 +1357,7 @@ void RPT::render(const uint32 instance, Renderer& renderer)
 	shadow_queue.probs		= queue2.probs + n_pixels;
 	shadow_queue.pixels		= queue2.pixels + n_pixels;
 	shadow_queue.size		= queue2.size + 1;
+	shadow_queue.max_size   = n_pixels * REUSE_SHADOW_SAMPLES;
 
 	cugar::Timer timer;
 	timer.start();

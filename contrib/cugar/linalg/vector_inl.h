@@ -1,6 +1,6 @@
 /*
  * cugar
- * Copyright (c) 2011-2014, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2011-2018, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -215,6 +215,18 @@ Vector<T,DIM> max(const Vector<T,DIM>& op1, const T op2)
 		r[d] = cugar::max( op1[d], op2 );
 	return r;
 }
+
+template <typename T, uint32 DIM>
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+Vector<T, DIM> abs(const Vector<T, DIM>& op)
+{
+	Vector<T,DIM> r;
+#pragma unroll
+	for (uint32 d = 0; d < DIM; ++d)
+		r[d] = cugar::abs( op[d] );
+	return r;
+}
+
 template <typename T, uint32 DIM>
 CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
 bool any(const Vector<T,DIM>& op)

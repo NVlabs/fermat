@@ -53,7 +53,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
-    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 8.0.props" />
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 9.2.props" />
   </ImportGroup>
   <ImportGroup Label="Shared">
   </ImportGroup>
@@ -146,7 +146,7 @@
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(CudaToolkitLibDir);../../contrib/freeglut/win64/Release/; ../../contrib/OptiX/lib64; ../../contrib/cugar/win64;</AdditionalLibraryDirectories>
     </Link>
     <CudaCompile>
-      <CodeGeneration>compute_52,sm_52</CodeGeneration>
+      <CodeGeneration>compute_70,sm_70</CodeGeneration>
       <PtxAsOptionV>true</PtxAsOptionV>
       <Include>$(CudaToolkitIncludeDir);../../src/; ../../src/mesh/;  ../../contrib;  ../../contrib/OptiX/include/; ../../contrib/freeglut/include/;</Include>
       <TargetMachinePlatform>64</TargetMachinePlatform>
@@ -238,6 +238,6 @@
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 8.0.targets" />
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 9.2.targets" />
   </ImportGroup>
 </Project>

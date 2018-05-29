@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2018, NVIDIA Corporation
+ * Copyright (c) 2010-2011, NVIDIA Corporation
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,9 +26,12 @@
  */
 
 #include <cugar/image/tga.h>
+#include <cugar/basic/numbers.h>
 #include <windows.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <vector>
+#include <algorithm>
 
 namespace cugar {
 
@@ -129,7 +132,7 @@ unsigned char* load_tga ( const char *filename, TGAHeader *hdr )
 /************************************************************************/
 /*                                                                      */
 /************************************************************************/
-bool write_tga ( const char* filename, int width, int height, const unsigned char *pixdata, TGAPixels input_type)
+bool write_tga(const char* filename, int width, int height, const unsigned char *pixdata, TGAPixels input_type)
 {
     FILE *fp;
     if ( !(fp=fopen(filename,"wb")) )
@@ -184,5 +187,28 @@ bool write_tga ( const char* filename, int width, int height, const unsigned cha
     fclose ( fp );
     return true;
 }
+
+// Write a TGA to file, 24 bpp, with the specified parameters. rgb indicates
+// whether pixdata is in RGB or BGR format.
+bool write_tga(const char* filename, int width, int height, const float *pixdata, TGAPixels input_type, bool normalize)
+{
+	std::vector<unsigned char> rgb( width*height*3 );
+	if (input_type == TGAPixels::BW)
+	{
+		float max_val = *std::max_element( pixdata, pixdata + width*height );
+		float norm = normalize && max_val ? 1.0f / max_val : 1.0f;
+
+		for (int i = 0; i < width*height; ++i)
+		{
+			const float c = pixdata[i] * norm;
+
+			rgb[i*3 + 0] = rgb[i*3 + 1] = rgb[i*3 + 2] = cugar::quantize( c, 256 );
+		}
+
+		return write_tga( filename, width, height, &rgb[0], TGAPixels::RGB );
+	}
+	return false;
+}
+
 
 } // namespace cugar

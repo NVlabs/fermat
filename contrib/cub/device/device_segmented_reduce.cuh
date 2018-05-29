@@ -1,7 +1,7 @@
 
 /******************************************************************************
  * Copyright (c) 2011, Duane Merrill.  All rights reserved.
- * Copyright (c) 2011-2016, NVIDIA CORPORATION.  All rights reserved.
+ * Copyright (c) 2011-2018, NVIDIA CORPORATION.  All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -37,6 +37,7 @@
 #include <stdio.h>
 #include <iterator>
 
+#include "../iterator/arg_index_input_iterator.cuh"
 #include "dispatch/dispatch_reduce.cuh"
 #include "dispatch/dispatch_reduce_by_key.cuh"
 #include "../util_type.cuh"
@@ -96,21 +97,21 @@ struct DeviceSegmentedReduce
      * int          *d_in;          // e.g., [8, 6, 7, 5, 3, 0, 9]
      * int          *d_out;         // e.g., [-, -, -]
      * CustomMin    min_op;
-     * int          init;           // e.g., INT_MAX
+     * int          initial_value;           // e.g., INT_MAX
      * ...
      *
      * // Determine temporary device storage requirements
      * void     *d_temp_storage = NULL;
      * size_t   temp_storage_bytes = 0;
      * cub::DeviceSegmentedReduce::Reduce(d_temp_storage, temp_storage_bytes, d_in, d_out,
-     *     num_segments, d_offsets, d_offsets + 1, min_op, init);
+     *     num_segments, d_offsets, d_offsets + 1, min_op, initial_value);
      *
      * // Allocate temporary storage
      * cudaMalloc(&d_temp_storage, temp_storage_bytes);
      *
      * // Run reduction
      * cub::DeviceSegmentedReduce::Reduce(d_temp_storage, temp_storage_bytes, d_in, d_out,
-     *     num_segments, d_offsets, d_offsets + 1, min_op, init);
+     *     num_segments, d_offsets, d_offsets + 1, min_op, initial_value);
      *
      * // d_out <-- [6, INT_MAX, 0]
      *
@@ -118,12 +119,14 @@ struct DeviceSegmentedReduce
      *
      * \tparam InputIteratorT       <b>[inferred]</b> Random-access input iterator type for reading input items \iterator
      * \tparam OutputIteratorT      <b>[inferred]</b> Output iterator type for recording the reduced aggregate \iterator
+     * \tparam OffsetIteratorT      <b>[inferred]</b> Random-access input iterator type for reading segment offsets \iterator
      * \tparam ReductionOp          <b>[inferred]</b> Binary reduction functor type having member <tt>T operator()(const T &a, const T &b)</tt>
      * \tparam T                    <b>[inferred]</b> Data element type that is convertible to the \p value type of \p InputIteratorT
      */
     template <
         typename            InputIteratorT,
         typename            OutputIteratorT,
+        typename            OffsetIteratorT,
         typename            ReductionOp,
         typename            T>
     CUB_RUNTIME_FUNCTION
@@ -133,17 +136,17 @@ struct DeviceSegmentedReduce
         InputIteratorT      d_in,                               ///< [in] Pointer to the input sequence of data items
         OutputIteratorT     d_out,                              ///< [out] Pointer to the output aggregate
         int                 num_segments,                       ///< [in] The number of segments that comprise the sorting data
-        int                 *d_begin_offsets,                   ///< [in] %Device-accessible pointer to the sequence of beginning offsets of length \p num_segments, such that <tt>d_begin_offsets[i]</tt> is the first element of the <em>i</em><sup>th</sup> data segment in <tt>d_keys_*</tt> and <tt>d_values_*</tt>
-        int                 *d_end_offsets,                     ///< [in] %Device-accessible pointer to the sequence of ending offsets of length \p num_segments, such that <tt>d_end_offsets[i]-1</tt> is the last element of the <em>i</em><sup>th</sup> data segment in <tt>d_keys_*</tt> and <tt>d_values_*</tt>.  If <tt>d_end_offsets[i]-1</tt> <= <tt>d_begin_offsets[i]</tt>, the <em>i</em><sup>th</sup> is considered empty.
+        OffsetIteratorT     d_begin_offsets,                    ///< [in] Pointer to the sequence of beginning offsets of length \p num_segments, such that <tt>d_begin_offsets[i]</tt> is the first element of the <em>i</em><sup>th</sup> data segment in <tt>d_keys_*</tt> and <tt>d_values_*</tt>
+        OffsetIteratorT     d_end_offsets,                      ///< [in] Pointer to the sequence of ending offsets of length \p num_segments, such that <tt>d_end_offsets[i]-1</tt> is the last element of the <em>i</em><sup>th</sup> data segment in <tt>d_keys_*</tt> and <tt>d_values_*</tt>.  If <tt>d_end_offsets[i]-1</tt> <= <tt>d_begin_offsets[i]</tt>, the <em>i</em><sup>th</sup> is considered empty.
         ReductionOp         reduction_op,                       ///< [in] Binary reduction functor 
-        T                   init,                               ///< [in] Initial value of the reduction for each segment
+        T                   initial_value,                      ///< [in] Initial value of the reduction for each segment
         cudaStream_t        stream              = 0,            ///< [in] <b>[optional]</b> CUDA stream to launch kernels within.  Default is stream<sub>0</sub>.
         bool                debug_synchronous   = false)        ///< [in] <b>[optional]</b> Whether or not to synchronize the stream after every kernel launch to check for errors.  Also causes launch configurations to be printed to the console.  Default is \p false.
     {
         // Signed integer type for global offsets
         typedef int OffsetT;
 
-        return DispatchSegmentedReduce<InputIteratorT, OutputIteratorT, OffsetT, ReductionOp>::Dispatch(
+        return DispatchSegmentedReduce<InputIteratorT, OutputIteratorT, OffsetIteratorT, OffsetT, ReductionOp>::Dispatch(
             d_temp_storage,
             temp_storage_bytes,
             d_in,
@@ -152,7 +155,7 @@ struct DeviceSegmentedReduce
             d_begin_offsets,
             d_end_offsets,
             reduction_op,
-            init,
+            initial_value,
             stream,
             debug_synchronous);
     }
@@ -202,10 +205,12 @@ struct DeviceSegmentedReduce
      *
      * \tparam InputIteratorT     <b>[inferred]</b> Random-access input iterator type for reading input items \iterator
      * \tparam OutputIteratorT    <b>[inferred]</b> Output iterator type for recording the reduced aggregate \iterator
+     * \tparam OffsetIteratorT      <b>[inferred]</b> Random-access input iterator type for reading segment offsets \iterator
      */
     template <
         typename            InputIteratorT,
-        typename            OutputIteratorT>
+        typename            OutputIteratorT,
+        typename            OffsetIteratorT>
     CUB_RUNTIME_FUNCTION
     static cudaError_t Sum(
         void                *d_temp_storage,                    ///< [in] %Device-accessible allocation of temporary storage.  When NULL, the required allocation size is written to \p temp_storage_bytes and no work is done.
@@ -213,15 +218,20 @@ struct DeviceSegmentedReduce
         InputIteratorT      d_in,                               ///< [in] Pointer to the input sequence of data items
         OutputIteratorT     d_out,                              ///< [out] Pointer to the output aggregate
         int                 num_segments,                       ///< [in] The number of segments that comprise the sorting data
-        int                 *d_begin_offsets,                   ///< [in] %Device-accessible pointer to the sequence of beginning offsets of length \p num_segments, such that <tt>d_begin_offsets[i]</tt> is the first element of the <em>i</em><sup>th</sup> data segment in <tt>d_keys_*</tt> and <tt>d_values_*</tt>
-        int                 *d_end_offsets,                     ///< [in] %Device-accessible pointer to the sequence of ending offsets of length \p num_segments, such that <tt>d_end_offsets[i]-1</tt> is the last element of the <em>i</em><sup>th</sup> data segment in <tt>d_keys_*</tt> and <tt>d_values_*</tt>.  If <tt>d_end_offsets[i]-1</tt> <= <tt>d_begin_offsets[i]</tt>, the <em>i</em><sup>th</sup> is considered empty.
+        OffsetIteratorT     d_begin_offsets,                    ///< [in] Pointer to the sequence of beginning offsets of length \p num_segments, such that <tt>d_begin_offsets[i]</tt> is the first element of the <em>i</em><sup>th</sup> data segment in <tt>d_keys_*</tt> and <tt>d_values_*</tt>
+        OffsetIteratorT     d_end_offsets,                      ///< [in] Pointer to the sequence of ending offsets of length \p num_segments, such that <tt>d_end_offsets[i]-1</tt> is the last element of the <em>i</em><sup>th</sup> data segment in <tt>d_keys_*</tt> and <tt>d_values_*</tt>.  If <tt>d_end_offsets[i]-1</tt> <= <tt>d_begin_offsets[i]</tt>, the <em>i</em><sup>th</sup> is considered empty.
         cudaStream_t        stream              = 0,            ///< [in] <b>[optional]</b> CUDA stream to launch kernels within.  Default is stream<sub>0</sub>.
         bool                debug_synchronous   = false)        ///< [in] <b>[optional]</b> Whether or not to synchronize the stream after every kernel launch to check for errors.  Also causes launch configurations to be printed to the console.  Default is \p false.
     {
-        typedef int OffsetT;                                                    // Signed integer type for global offsets
-        typedef typename std::iterator_traits<InputIteratorT>::value_type T;    // Data element type
+        // Signed integer type for global offsets
+        typedef int OffsetT;
 
-        return DispatchSegmentedReduce<InputIteratorT, OutputIteratorT, OffsetT, cub::Sum>::Dispatch(
+        // The output value type
+        typedef typename If<(Equals<typename std::iterator_traits<OutputIteratorT>::value_type, void>::VALUE),  // OutputT =  (if output iterator's value type is void) ?
+            typename std::iterator_traits<InputIteratorT>::value_type,                                          // ... then the input iterator's value type,
+            typename std::iterator_traits<OutputIteratorT>::value_type>::Type OutputT;                          // ... else the output iterator's value type
+
+        return DispatchSegmentedReduce<InputIteratorT,  OutputIteratorT, OffsetIteratorT, OffsetT, cub::Sum>::Dispatch(
             d_temp_storage,
             temp_storage_bytes,
             d_in,
@@ -230,7 +240,7 @@ struct DeviceSegmentedReduce
             d_begin_offsets,
             d_end_offsets,
             cub::Sum(),
-            T(),            // zero-initialize
+            OutputT(),            // zero-initialize
             stream,
             debug_synchronous);
     }
@@ -280,10 +290,12 @@ struct DeviceSegmentedReduce
      *
      * \tparam InputIteratorT     <b>[inferred]</b> Random-access input iterator type for reading input items \iterator
      * \tparam OutputIteratorT    <b>[inferred]</b> Output iterator type for recording the reduced aggregate \iterator
+     * \tparam OffsetIteratorT      <b>[inferred]</b> Random-access input iterator type for reading segment offsets \iterator
      */
     template <
         typename            InputIteratorT,
-        typename            OutputIteratorT>
+        typename            OutputIteratorT,
+        typename            OffsetIteratorT>
     CUB_RUNTIME_FUNCTION
     static cudaError_t Min(
         void                *d_temp_storage,                    ///< [in] %Device-accessible allocation of temporary storage.  When NULL, the required allocation size is written to \p temp_storage_bytes and no work is done.
@@ -291,15 +303,18 @@ struct DeviceSegmentedReduce
         InputIteratorT      d_in,                               ///< [in] Pointer to the input sequence of data items
         OutputIteratorT     d_out,                              ///< [out] Pointer to the output aggregate
         int                 num_segments,                       ///< [in] The number of segments that comprise the sorting data
-        int                 *d_begin_offsets,                   ///< [in] %Device-accessible pointer to the sequence of beginning offsets of length \p num_segments, such that <tt>d_begin_offsets[i]</tt> is the first element of the <em>i</em><sup>th</sup> data segment in <tt>d_keys_*</tt> and <tt>d_values_*</tt>
-        int                 *d_end_offsets,                     ///< [in] %Device-accessible pointer to the sequence of ending offsets of length \p num_segments, such that <tt>d_end_offsets[i]-1</tt> is the last element of the <em>i</em><sup>th</sup> data segment in <tt>d_keys_*</tt> and <tt>d_values_*</tt>.  If <tt>d_end_offsets[i]-1</tt> <= <tt>d_begin_offsets[i]</tt>, the <em>i</em><sup>th</sup> is considered empty.
+        OffsetIteratorT     d_begin_offsets,                    ///< [in] Pointer to the sequence of beginning offsets of length \p num_segments, such that <tt>d_begin_offsets[i]</tt> is the first element of the <em>i</em><sup>th</sup> data segment in <tt>d_keys_*</tt> and <tt>d_values_*</tt>
+        OffsetIteratorT     d_end_offsets,                      ///< [in] Pointer to the sequence of ending offsets of length \p num_segments, such that <tt>d_end_offsets[i]-1</tt> is the last element of the <em>i</em><sup>th</sup> data segment in <tt>d_keys_*</tt> and <tt>d_values_*</tt>.  If <tt>d_end_offsets[i]-1</tt> <= <tt>d_begin_offsets[i]</tt>, the <em>i</em><sup>th</sup> is considered empty.
         cudaStream_t        stream              = 0,            ///< [in] <b>[optional]</b> CUDA stream to launch kernels within.  Default is stream<sub>0</sub>.
         bool                debug_synchronous   = false)        ///< [in] <b>[optional]</b> Whether or not to synchronize the stream after every kernel launch to check for errors.  Also causes launch configurations to be printed to the console.  Default is \p false.
     {
-        typedef int OffsetT;                                                    // Signed integer type for global offsets
-        typedef typename std::iterator_traits<InputIteratorT>::value_type T;    // Data element type
+        // Signed integer type for global offsets
+        typedef int OffsetT;
 
-        return DispatchSegmentedReduce<InputIteratorT, OutputIteratorT, OffsetT, cub::Min>::Dispatch(
+        // The input value type
+        typedef typename std::iterator_traits<InputIteratorT>::value_type InputT;
+
+        return DispatchSegmentedReduce<InputIteratorT,  OutputIteratorT, OffsetIteratorT, OffsetT, cub::Min>::Dispatch(
             d_temp_storage,
             temp_storage_bytes,
             d_in,
@@ -308,7 +323,7 @@ struct DeviceSegmentedReduce
             d_begin_offsets,
             d_end_offsets,
             cub::Min(),
-            Traits<T>::Max(),    // replace with std::numeric_limits<T>::max() when C++11 support is more prevalent
+            Traits<InputT>::Max(),    // replace with std::numeric_limits<T>::max() when C++11 support is more prevalent
             stream,
             debug_synchronous);
     }
@@ -360,10 +375,12 @@ struct DeviceSegmentedReduce
      *
      * \tparam InputIteratorT     <b>[inferred]</b> Random-access input iterator type for reading input items (of some type \p T) \iterator
      * \tparam OutputIteratorT    <b>[inferred]</b> Output iterator type for recording the reduced aggregate (having value type <tt>KeyValuePair<int, T></tt>) \iterator
+     * \tparam OffsetIteratorT      <b>[inferred]</b> Random-access input iterator type for reading segment offsets \iterator
      */
     template <
         typename            InputIteratorT,
-        typename            OutputIteratorT>
+        typename            OutputIteratorT,
+        typename            OffsetIteratorT>
     CUB_RUNTIME_FUNCTION
     static cudaError_t ArgMin(
         void                *d_temp_storage,                    ///< [in] %Device-accessible allocation of temporary storage.  When NULL, the required allocation size is written to \p temp_storage_bytes and no work is done.
@@ -371,28 +388,42 @@ struct DeviceSegmentedReduce
         InputIteratorT      d_in,                               ///< [in] Pointer to the input sequence of data items
         OutputIteratorT     d_out,                              ///< [out] Pointer to the output aggregate
         int                 num_segments,                       ///< [in] The number of segments that comprise the sorting data
-        int                 *d_begin_offsets,                   ///< [in] %Device-accessible pointer to the sequence of beginning offsets of length \p num_segments, such that <tt>d_begin_offsets[i]</tt> is the first element of the <em>i</em><sup>th</sup> data segment in <tt>d_keys_*</tt> and <tt>d_values_*</tt>
-        int                 *d_end_offsets,                     ///< [in] %Device-accessible pointer to the sequence of ending offsets of length \p num_segments, such that <tt>d_end_offsets[i]-1</tt> is the last element of the <em>i</em><sup>th</sup> data segment in <tt>d_keys_*</tt> and <tt>d_values_*</tt>.  If <tt>d_end_offsets[i]-1</tt> <= <tt>d_begin_offsets[i]</tt>, the <em>i</em><sup>th</sup> is considered empty.
+        OffsetIteratorT     d_begin_offsets,                    ///< [in] Pointer to the sequence of beginning offsets of length \p num_segments, such that <tt>d_begin_offsets[i]</tt> is the first element of the <em>i</em><sup>th</sup> data segment in <tt>d_keys_*</tt> and <tt>d_values_*</tt>
+        OffsetIteratorT     d_end_offsets,                      ///< [in] Pointer to the sequence of ending offsets of length \p num_segments, such that <tt>d_end_offsets[i]-1</tt> is the last element of the <em>i</em><sup>th</sup> data segment in <tt>d_keys_*</tt> and <tt>d_values_*</tt>.  If <tt>d_end_offsets[i]-1</tt> <= <tt>d_begin_offsets[i]</tt>, the <em>i</em><sup>th</sup> is considered empty.
         cudaStream_t        stream              = 0,            ///< [in] <b>[optional]</b> CUDA stream to launch kernels within.  Default is stream<sub>0</sub>.
         bool                debug_synchronous   = false)        ///< [in] <b>[optional]</b> Whether or not to synchronize the stream after every kernel launch to check for errors.  Also causes launch configurations to be printed to the console.  Default is \p false.
     {
-        typedef int OffsetT;                                                        // Signed integer type for global offsets
-        typedef typename std::iterator_traits<InputIteratorT>::value_type T;        // Data element type
-        typedef ArgIndexInputIterator<InputIteratorT, int> ArgIndexInputIteratorT;  // Wrapped input iterator type
+        // Signed integer type for global offsets
+        typedef int OffsetT;
 
-        ArgIndexInputIteratorT      d_argmin_in(d_in);
-        KeyValuePair<OffsetT, T>    init = {1, Traits<T>::Max()};   // replace with std::numeric_limits<T>::max() when C++11 support is more prevalent
+        // The input type
+        typedef typename std::iterator_traits<InputIteratorT>::value_type InputValueT;
 
-        return DispatchSegmentedReduce<ArgIndexInputIteratorT, OutputIteratorT, OffsetT, cub::ArgMin>::Dispatch(
+        // The output tuple type
+        typedef typename If<(Equals<typename std::iterator_traits<OutputIteratorT>::value_type, void>::VALUE),  // OutputT =  (if output iterator's value type is void) ?
+            KeyValuePair<OffsetT, InputValueT>,                                                                 // ... then the key value pair OffsetT + InputValueT
+            typename std::iterator_traits<OutputIteratorT>::value_type>::Type OutputTupleT;                     // ... else the output iterator's value type
+
+        // The output value type
+        typedef typename OutputTupleT::Value OutputValueT;
+
+        // Wrapped input iterator to produce index-value <OffsetT, InputT> tuples
+        typedef ArgIndexInputIterator<InputIteratorT, OffsetT, OutputValueT> ArgIndexInputIteratorT;
+        ArgIndexInputIteratorT d_indexed_in(d_in);
+
+        // Initial value
+        OutputTupleT initial_value(1, Traits<InputValueT>::Max());   // replace with std::numeric_limits<T>::max() when C++11 support is more prevalent
+
+        return DispatchSegmentedReduce<ArgIndexInputIteratorT,  OutputIteratorT, OffsetIteratorT, OffsetT, cub::ArgMin>::Dispatch(
             d_temp_storage,
             temp_storage_bytes,
-            d_argmin_in,
+            d_indexed_in,
             d_out,
             num_segments,
             d_begin_offsets,
             d_end_offsets,
             cub::ArgMin(),
-            init,
+            initial_value,
             stream,
             debug_synchronous);
     }
@@ -442,10 +473,12 @@ struct DeviceSegmentedReduce
      *
      * \tparam InputIteratorT     <b>[inferred]</b> Random-access input iterator type for reading input items \iterator
      * \tparam OutputIteratorT    <b>[inferred]</b> Output iterator type for recording the reduced aggregate \iterator
+     * \tparam OffsetIteratorT      <b>[inferred]</b> Random-access input iterator type for reading segment offsets \iterator
      */
     template <
         typename            InputIteratorT,
-        typename            OutputIteratorT>
+        typename            OutputIteratorT,
+        typename            OffsetIteratorT>
     CUB_RUNTIME_FUNCTION
     static cudaError_t Max(
         void                *d_temp_storage,                    ///< [in] %Device-accessible allocation of temporary storage.  When NULL, the required allocation size is written to \p temp_storage_bytes and no work is done.
@@ -453,15 +486,18 @@ struct DeviceSegmentedReduce
         InputIteratorT      d_in,                               ///< [in] Pointer to the input sequence of data items
         OutputIteratorT     d_out,                              ///< [out] Pointer to the output aggregate
         int                 num_segments,                       ///< [in] The number of segments that comprise the sorting data
-        int                 *d_begin_offsets,                   ///< [in] %Device-accessible pointer to the sequence of beginning offsets of length \p num_segments, such that <tt>d_begin_offsets[i]</tt> is the first element of the <em>i</em><sup>th</sup> data segment in <tt>d_keys_*</tt> and <tt>d_values_*</tt>
-        int                 *d_end_offsets,                     ///< [in] %Device-accessible pointer to the sequence of ending offsets of length \p num_segments, such that <tt>d_end_offsets[i]-1</tt> is the last element of the <em>i</em><sup>th</sup> data segment in <tt>d_keys_*</tt> and <tt>d_values_*</tt>.  If <tt>d_end_offsets[i]-1</tt> <= <tt>d_begin_offsets[i]</tt>, the <em>i</em><sup>th</sup> is considered empty.
+        OffsetIteratorT     d_begin_offsets,                    ///< [in] Pointer to the sequence of beginning offsets of length \p num_segments, such that <tt>d_begin_offsets[i]</tt> is the first element of the <em>i</em><sup>th</sup> data segment in <tt>d_keys_*</tt> and <tt>d_values_*</tt>
+        OffsetIteratorT     d_end_offsets,                      ///< [in] Pointer to the sequence of ending offsets of length \p num_segments, such that <tt>d_end_offsets[i]-1</tt> is the last element of the <em>i</em><sup>th</sup> data segment in <tt>d_keys_*</tt> and <tt>d_values_*</tt>.  If <tt>d_end_offsets[i]-1</tt> <= <tt>d_begin_offsets[i]</tt>, the <em>i</em><sup>th</sup> is considered empty.
         cudaStream_t        stream              = 0,            ///< [in] <b>[optional]</b> CUDA stream to launch kernels within.  Default is stream<sub>0</sub>.
         bool                debug_synchronous   = false)        ///< [in] <b>[optional]</b> Whether or not to synchronize the stream after every kernel launch to check for errors.  Also causes launch configurations to be printed to the console.  Default is \p false.
     {
-        typedef int OffsetT;                                                    // Signed integer type for global offsets
-        typedef typename std::iterator_traits<InputIteratorT>::value_type T;    // Data element type
+        // Signed integer type for global offsets
+        typedef int OffsetT;
 
-        return DispatchSegmentedReduce<InputIteratorT, OutputIteratorT, OffsetT, cub::Max>::Dispatch(
+        // The input value type
+        typedef typename std::iterator_traits<InputIteratorT>::value_type InputT;
+
+        return DispatchSegmentedReduce<InputIteratorT,  OutputIteratorT, OffsetIteratorT, OffsetT, cub::Max>::Dispatch(
             d_temp_storage,
             temp_storage_bytes,
             d_in,
@@ -470,7 +506,7 @@ struct DeviceSegmentedReduce
             d_begin_offsets,
             d_end_offsets,
             cub::Max(),
-            Traits<T>::Lowest(),    // replace with std::numeric_limits<T>::lowest() when C++11 support is more prevalent
+            Traits<InputT>::Lowest(),    // replace with std::numeric_limits<T>::lowest() when C++11 support is more prevalent
             stream,
             debug_synchronous);
     }
@@ -522,10 +558,12 @@ struct DeviceSegmentedReduce
      *
      * \tparam InputIteratorT     <b>[inferred]</b> Random-access input iterator type for reading input items (of some type \p T) \iterator
      * \tparam OutputIteratorT    <b>[inferred]</b> Output iterator type for recording the reduced aggregate (having value type <tt>KeyValuePair<int, T></tt>) \iterator
+     * \tparam OffsetIteratorT    <b>[inferred]</b> Random-access input iterator type for reading segment offsets \iterator
      */
     template <
         typename            InputIteratorT,
-        typename            OutputIteratorT>
+        typename            OutputIteratorT,
+        typename            OffsetIteratorT>
     CUB_RUNTIME_FUNCTION
     static cudaError_t ArgMax(
         void                *d_temp_storage,                    ///< [in] %Device-accessible allocation of temporary storage.  When NULL, the required allocation size is written to \p temp_storage_bytes and no work is done.
@@ -533,28 +571,42 @@ struct DeviceSegmentedReduce
         InputIteratorT      d_in,                               ///< [in] Pointer to the input sequence of data items
         OutputIteratorT     d_out,                              ///< [out] Pointer to the output aggregate
         int                 num_segments,                       ///< [in] The number of segments that comprise the sorting data
-        int                 *d_begin_offsets,                   ///< [in] %Device-accessible pointer to the sequence of beginning offsets of length \p num_segments, such that <tt>d_begin_offsets[i]</tt> is the first element of the <em>i</em><sup>th</sup> data segment in <tt>d_keys_*</tt> and <tt>d_values_*</tt>
-        int                 *d_end_offsets,                     ///< [in] %Device-accessible pointer to the sequence of ending offsets of length \p num_segments, such that <tt>d_end_offsets[i]-1</tt> is the last element of the <em>i</em><sup>th</sup> data segment in <tt>d_keys_*</tt> and <tt>d_values_*</tt>.  If <tt>d_end_offsets[i]-1</tt> <= <tt>d_begin_offsets[i]</tt>, the <em>i</em><sup>th</sup> is considered empty.
+        OffsetIteratorT     d_begin_offsets,                    ///< [in] Pointer to the sequence of beginning offsets of length \p num_segments, such that <tt>d_begin_offsets[i]</tt> is the first element of the <em>i</em><sup>th</sup> data segment in <tt>d_keys_*</tt> and <tt>d_values_*</tt>
+        OffsetIteratorT     d_end_offsets,                      ///< [in] Pointer to the sequence of ending offsets of length \p num_segments, such that <tt>d_end_offsets[i]-1</tt> is the last element of the <em>i</em><sup>th</sup> data segment in <tt>d_keys_*</tt> and <tt>d_values_*</tt>.  If <tt>d_end_offsets[i]-1</tt> <= <tt>d_begin_offsets[i]</tt>, the <em>i</em><sup>th</sup> is considered empty.
         cudaStream_t        stream              = 0,            ///< [in] <b>[optional]</b> CUDA stream to launch kernels within.  Default is stream<sub>0</sub>.
         bool                debug_synchronous   = false)        ///< [in] <b>[optional]</b> Whether or not to synchronize the stream after every kernel launch to check for errors.  Also causes launch configurations to be printed to the console.  Default is \p false.
     {
-        typedef int OffsetT;                                                            // Signed integer type for global offsets
-        typedef typename std::iterator_traits<InputIteratorT>::value_type T;            // Data element type
-        typedef ArgIndexInputIterator<InputIteratorT, int> ArgIndexInputIteratorT;      // Wrapped input iterator
+        // Signed integer type for global offsets
+        typedef int OffsetT;
 
-        ArgIndexInputIteratorT      d_argmax_in(d_in);
-        KeyValuePair<OffsetT, T>    init = {1, Traits<T>::Lowest()};     // replace with std::numeric_limits<T>::lowest() when C++11 support is more prevalent
+        // The input type
+        typedef typename std::iterator_traits<InputIteratorT>::value_type InputValueT;
 
-        return DispatchSegmentedReduce<ArgIndexInputIteratorT, OutputIteratorT, OffsetT, cub::ArgMax>::Dispatch(
+        // The output tuple type
+        typedef typename If<(Equals<typename std::iterator_traits<OutputIteratorT>::value_type, void>::VALUE),  // OutputT =  (if output iterator's value type is void) ?
+            KeyValuePair<OffsetT, InputValueT>,                                                                 // ... then the key value pair OffsetT + InputValueT
+            typename std::iterator_traits<OutputIteratorT>::value_type>::Type OutputTupleT;                     // ... else the output iterator's value type
+
+        // The output value type
+        typedef typename OutputTupleT::Value OutputValueT;
+
+        // Wrapped input iterator to produce index-value <OffsetT, InputT> tuples
+        typedef ArgIndexInputIterator<InputIteratorT, OffsetT, OutputValueT> ArgIndexInputIteratorT;
+        ArgIndexInputIteratorT d_indexed_in(d_in);
+
+        // Initial value
+        OutputTupleT initial_value(1, Traits<InputValueT>::Lowest());     // replace with std::numeric_limits<T>::lowest() when C++11 support is more prevalent
+
+        return DispatchSegmentedReduce<ArgIndexInputIteratorT, OutputIteratorT, OffsetIteratorT, OffsetT, cub::ArgMax>::Dispatch(
             d_temp_storage,
             temp_storage_bytes,
-            d_argmax_in,
+            d_indexed_in,
             d_out,
             num_segments,
             d_begin_offsets,
             d_end_offsets,
             cub::ArgMax(),
-            init,
+            initial_value,
             stream,
             debug_synchronous);
     }

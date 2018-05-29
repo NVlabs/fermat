@@ -104,12 +104,7 @@ struct RayQueue
 	FERMAT_DEVICE
 	void warp_append(const PixelInfo pixel, const Ray& ray, const float4 weight, const float p, float4 path_w)
 	{
-		cugar::cuda::warp_static_atomic atomic_adder(size);
-
-		uint32 slot;
-
-		//atomic_adder.add<1>(true, &slot);
-		slot = atomicAdd(size, 1u);
+		const uint32 slot = cugar::cuda::warp_increment(size);
 
 		rays[slot]			= ray;
 		weights[slot]		= weight;
@@ -120,12 +115,7 @@ struct RayQueue
 	FERMAT_DEVICE
 	void warp_append(const PixelInfo pixel, const Ray& ray, const float4 weight, const float p)
 	{
-		cugar::cuda::warp_static_atomic atomic_adder(size);
-
-		uint32 slot;
-
-		//atomic_adder.add<1>(true, &slot);
-		slot = atomicAdd(size, 1u);
+		const uint32 slot = cugar::cuda::warp_increment(size);
 
 		rays[slot]		= ray;
 		weights[slot]	= weight;
@@ -135,12 +125,7 @@ struct RayQueue
 	FERMAT_DEVICE
 	void warp_append(const PixelInfo pixel, const Ray& ray, const float4 weight, const uint32 path_id)
 	{
-		cugar::cuda::warp_static_atomic atomic_adder(size);
-
-		uint32 slot;
-
-		//atomic_adder.add<1>(true, &slot);
-		slot = atomicAdd(size, 1u);
+		const uint32 slot = cugar::cuda::warp_increment(size);
 
 		rays[slot]			= ray;
 		weights[slot]		= weight;

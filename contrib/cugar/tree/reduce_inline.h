@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2018, NVIDIA Corporation
+ * Copyright (c) 2010-2011, NVIDIA Corporation
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,6 +28,7 @@
 #pragma once
 
 #include <cugar/basic/types.h>
+#include <cugar/basic/iterator.h>
 
 namespace cugar {
 
@@ -44,7 +45,6 @@ void tree_reduce(
     Output_iterator         out_values,
     const Operator          op,
     const Value_type        def_value)
-)
 {
     if (tree.is_leaf(node_id))
     {
@@ -89,9 +89,10 @@ void tree_reduce(
     const Tree_visitor      tree,
     Output_iterator         out_values,
     const Operator          op)
-)
 {
-    if (!tree.is_leaf(node_id))
+	typedef typename iterator_traits<Output_iterator>::value_type	Value_type;
+
+	if (!tree.is_leaf(node_id))
     {
         const uint32 child_count = tree.get_child_count( node_id );
         for (uint32 i = 0; i < child_count; ++i)
@@ -99,7 +100,7 @@ void tree_reduce(
             tree_reduce(
                 tree.get_child( node_id, i ),
                 tree,
-                out_values
+                out_values,
                 op );
         }
 

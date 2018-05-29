@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2018, NVIDIA Corporation
+ * Copyright (c) 2010-2011, NVIDIA Corporation
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -189,7 +189,13 @@ struct CUGAR_ALIGN_BEGIN(8) Bintree_node<leaf_range_tag>
     {
         return m_packed_info >> 2u;
     }
-    /// get range size
+    /// get leaf offset
+    ///
+    CUGAR_HOST_DEVICE uint32 get_leaf_begin() const
+    {
+        return m_packed_info >> 2u;
+    }
+	/// get range size
     ///
     CUGAR_HOST_DEVICE uint32 get_range_size() const
     {

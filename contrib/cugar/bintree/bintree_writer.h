@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2018, NVIDIA Corporation
+ * Copyright (c) 2010-2011, NVIDIA Corporation
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -62,8 +62,9 @@ struct Bintree_writer_context<node_type, leaf_index_tag>
         uint2*     leaf_ranges   = NULL,
         uint32*    leaf_pointers = NULL,
         uint32*    parents       = NULL,
-        uint32*    skip_nodes    = NULL) :
-        m_nodes(nodes), m_leaf_ranges(leaf_ranges), m_leaf_pointers(leaf_pointers), m_parents(parents), m_skip_nodes(skip_nodes) {}
+        uint32*    skip_nodes    = NULL,
+        uint2*     node_ranges   = NULL) :
+        m_nodes(nodes), m_leaf_ranges(leaf_ranges), m_leaf_pointers(leaf_pointers), m_parents(parents), m_skip_nodes(skip_nodes), m_node_ranges(node_ranges) {}
 
     /// write a new node
     ///
@@ -76,12 +77,18 @@ struct Bintree_writer_context<node_type, leaf_index_tag>
 
         if (m_skip_nodes)
             m_skip_nodes[ node ] = skip_node;
-    }
+
+	    if (m_node_ranges)
+            m_node_ranges[ node ] = make_uint2( begin, end );
+	}
     /// write a new leaf
     ///
     CUGAR_HOST_DEVICE void write_leaf(const uint32 leaf_index, const uint32 node_index, const uint32 begin, const uint32 end)
     {
-        if (m_leaf_ranges)
+        if (m_node_ranges)
+            m_node_ranges[ node_index ] = make_uint2( begin, end );
+
+		if (m_leaf_ranges)
             m_leaf_ranges[ leaf_index ] = make_uint2( begin, end );
 
         if (m_leaf_pointers)
@@ -93,6 +100,7 @@ struct Bintree_writer_context<node_type, leaf_index_tag>
     uint32*     m_leaf_pointers;///< leaf pointers
     uint32*     m_parents;      ///< parent pointers
     uint32*     m_skip_nodes;   ///< skip nodes pointer
+    uint2*      m_node_ranges;  ///< node ranges
 };
 
 /// Binary tree writer context class leaf_range_tag specialization
@@ -110,8 +118,9 @@ struct Bintree_writer_context<node_type, leaf_range_tag>
         uint2*     leaf_ranges   = NULL,
         uint32*    leaf_pointers = NULL,
         uint32*    parents       = NULL,
-        uint32*    skip_nodes    = NULL) :
-        m_nodes(nodes), m_leaf_ranges(leaf_ranges), m_leaf_pointers(leaf_pointers), m_parents(parents), m_skip_nodes(skip_nodes) {}
+        uint32*    skip_nodes    = NULL,
+        uint2*     node_ranges   = NULL) :
+        m_nodes(nodes), m_leaf_ranges(leaf_ranges), m_leaf_pointers(leaf_pointers), m_parents(parents), m_skip_nodes(skip_nodes), m_node_ranges(node_ranges) {}
 
 
     /// write a new node
@@ -128,7 +137,10 @@ struct Bintree_writer_context<node_type, leaf_range_tag>
 
         if (m_skip_nodes)
             m_skip_nodes[ node ] = skip_node;
-    }
+
+	    if (m_node_ranges)
+            m_node_ranges[ node ] = make_uint2( begin, end );
+	}
     /// write a new leaf
     ///
     CUGAR_HOST_DEVICE void write_leaf(const uint32 leaf_index, const uint32 node_index, const uint32 begin, const uint32 end)
@@ -138,13 +150,17 @@ struct Bintree_writer_context<node_type, leaf_range_tag>
 
         if (m_leaf_pointers)
             m_leaf_pointers[ leaf_index ] = node_index;
-    }
+
+        if (m_node_ranges)
+            m_node_ranges[ node_index ] = make_uint2( begin, end );
+	}
 
     node_type*  m_nodes;        ///< node pointer
     uint2*      m_leaf_ranges;  ///< leaf ranges
     uint32*     m_leaf_pointers;///< leaf pointers
     uint32*     m_parents;      ///< parent pointers
     uint32*     m_skip_nodes;   ///< skip nodes pointer
+    uint2*      m_node_ranges;  ///< node ranges
 };
 
 /// A simple binary tree writer implementation to be used with
@@ -172,14 +188,16 @@ struct Bintree_writer
         range_vector*    leaf_ranges   = NULL,
         index_vector*    leaf_pointers = NULL,
         index_vector*    parents       = NULL,
-        index_vector*    skip_nodes    = NULL) :
-        m_nodes( nodes ), m_leaf_ranges( m_leaf_ranges ), m_leaf_pointers( NULL ), m_parents( parents ), m_skip_nodes( skip_nodes ) {}
+        index_vector*    skip_nodes    = NULL,
+		range_vector*    node_ranges   = NULL) :
+        m_nodes( nodes ), m_leaf_ranges( m_leaf_ranges ), m_leaf_pointers( NULL ), m_parents( parents ), m_skip_nodes( skip_nodes ), m_node_ranges(node_ranges) {}
 
     void set_nodes(node_vector*             nodes)          { m_nodes = nodes; }
     void set_parents(index_vector*          parents)        { m_parents = parents; }
     void set_skip_nodes(index_vector*       skip_nodes)     { m_skip_nodes = skip_nodes; }
     void set_leaf_pointers(index_vector*    leaf_pointers)  { m_leaf_pointers = leaf_pointers; }
     void set_leaf_ranges(range_vector*      leaf_ranges)    { m_leaf_ranges = leaf_ranges; }
+    void set_node_ranges(range_vector*      node_ranges)    { m_node_ranges = node_ranges; }
 
     /// reserve space for more nodes
     ///
@@ -189,6 +207,7 @@ struct Bintree_writer
         if (m_nodes->size() < n) m_nodes->resize(n);
         if (m_parents && m_parents->size() < n) m_parents->resize(n);
         if (m_skip_nodes && m_skip_nodes->size() < n) m_skip_nodes->resize(n);
+        if (m_node_ranges && m_node_ranges->size() < n) m_node_ranges->resize(n);
     }
 
     /// reserve space for more leaves
@@ -209,7 +228,8 @@ struct Bintree_writer
             m_leaf_ranges   ? raw_pointer( *m_leaf_ranges )     : NULL,
             m_leaf_pointers ? raw_pointer( *m_leaf_pointers )   : NULL,
             m_parents       ? raw_pointer( *m_parents )         : NULL,
-            m_skip_nodes    ? raw_pointer( *m_skip_nodes )      : NULL );
+            m_skip_nodes    ? raw_pointer( *m_skip_nodes )      : NULL,
+            m_node_ranges   ? raw_pointer( *m_node_ranges )     : NULL );
     }
 
     node_vector*    m_nodes;
@@ -217,6 +237,7 @@ struct Bintree_writer
     index_vector*   m_leaf_pointers;
     index_vector*   m_parents;
     index_vector*   m_skip_nodes;
+    range_vector*   m_node_ranges;
 };
 
 ///@}

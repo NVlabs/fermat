@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2018, NVIDIA Corporation
+ * Copyright (c) 2010-2011, NVIDIA Corporation
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -118,7 +118,21 @@ struct Bvh_node_3d : public Bvh_node
         return *this;
     }
 
-    Bbox<Vector3f> bbox;
+	/// construct a node from two float4's
+	///
+	CUGAR_HOST_DEVICE
+	static Bvh_node_3d load_ldg(const Bvh_node_3d* node)
+	{
+	#if defined(CUGAR_DEVICE_COMPILATION)
+		const float4 f0 = __ldg(reinterpret_cast<const float4*>(node));
+		const float4 f1 = __ldg(reinterpret_cast<const float4*>(node) + 1);
+		return Bvh_node_3d(f0,f1);
+	#else
+		return *node;
+	#endif
+	}
+	
+	Bbox<Vector3f> bbox;
 };
 CUGAR_ALIGN_END(16)
 

@@ -1,6 +1,6 @@
 /*
  * cugar
- * Copyright (c) 2011-2014, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2011-2018, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -464,6 +464,13 @@ Vector<T,DIM> min(const Vector<T,DIM>& op1, const T op2);
 template <typename T, uint32 DIM>
 CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
 Vector<T,DIM> max(const Vector<T,DIM>& op1, const T op2);
+
+/// \relates Vector
+/// component-wise vector abs
+///
+template <typename T, uint32 DIM>
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+Vector<T,DIM> abs(const Vector<T,DIM>& op);
 
 /// \relates Vector
 /// return the maximum component

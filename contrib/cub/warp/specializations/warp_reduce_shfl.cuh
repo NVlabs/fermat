@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (c) 2011, Duane Merrill.  All rights reserved.
- * Copyright (c) 2011-2016, NVIDIA CORPORATION.  All rights reserved.
+ * Copyright (c) 2011-2018, NVIDIA CORPORATION.  All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -48,6 +48,8 @@ namespace cub {
 
 /**
  * \brief WarpReduceShfl provides SHFL-based variants of parallel reduction of items partitioned across a CUDA thread warp.
+ *
+ * LOGICAL_WARP_THREADS must be a power-of-two
  */
 template <
     typename    T,                      ///< Data type being reduced
@@ -69,6 +71,10 @@ struct WarpReduceShfl
 
         /// Number of logical warps in a PTX warp
         LOGICAL_WARPS = CUB_WARP_THREADS(PTX_ARCH) / LOGICAL_WARP_THREADS,
+
+        /// The 5-bit SHFL mask for logically splitting warps into sub-segments starts 8-bits up
+        SHFL_C = (CUB_WARP_THREADS(PTX_ARCH) - LOGICAL_WARP_THREADS) << 8
+
     };
 
     template <typename S>
@@ -81,27 +87,6 @@ struct WarpReduceShfl
     };
 
 
-    // Creates a mask where the last thread in each logical warp is set
-    template <int WARP, int WARPS>
-    struct LastLaneMask
-    {
-        enum {
-            BASE_MASK   = 1 << (LOGICAL_WARP_THREADS - 1),
-            MASK        = (LastLaneMask<WARP + 1, WARPS>::MASK << LOGICAL_WARP_THREADS) | BASE_MASK,
-        };
-    };
-
-    // Creates a mask where the last thread in each logical warp is set
-    template <int WARP>
-    struct LastLaneMask<WARP, WARP>
-    {
-        enum {
-            MASK        = 1 << (LOGICAL_WARP_THREADS - 1),
-        };
-    };
-
-
-
     /// Shared memory storage layout type
     typedef NullType TempStorage;
 
@@ -110,7 +95,14 @@ struct WarpReduceShfl
     // Thread fields
     //---------------------------------------------------------------------
 
-    int lane_id;
+    /// Lane index in logical warp
+    unsigned int lane_id;
+
+    /// Logical warp index in 32-thread physical warp
+    unsigned int warp_id;
+
+    /// 32-thread physical warp member mask of logical warp
+    unsigned int member_mask;
 
 
     //---------------------------------------------------------------------
@@ -119,10 +111,19 @@ struct WarpReduceShfl
 
     /// Constructor
     __device__ __forceinline__ WarpReduceShfl(
-        TempStorage &temp_storage)
-    :
-        lane_id(LaneId())
-    {}
+        TempStorage &/*temp_storage*/)
+    {
+        lane_id = LaneId();
+        warp_id = 0;
+        member_mask = 0xffffffffu >> (CUB_WARP_THREADS(PTX_ARCH) - LOGICAL_WARP_THREADS);
+
+        if (!IS_ARCH_WARP)
+        {
+            warp_id = lane_id / LOGICAL_WARP_THREADS;
+            lane_id = lane_id % LOGICAL_WARP_THREADS;
+            member_mask = member_mask << (warp_id * LOGICAL_WARP_THREADS);
+        }
+    }
 
 
     //---------------------------------------------------------------------
@@ -132,13 +133,25 @@ struct WarpReduceShfl
     /// Reduction (specialized for summation across uint32 types)
     __device__ __forceinline__ unsigned int ReduceStep(
         unsigned int    input,              ///< [in] Calling thread's input item.
-        cub::Sum        reduction_op,       ///< [in] Binary reduction operator
+        cub::Sum        /*reduction_op*/,   ///< [in] Binary reduction operator
         int             last_lane,          ///< [in] Index of last lane in segment
         int             offset)             ///< [in] Up-offset to pull from
     {
         unsigned int output;
+        int shfl_c = last_lane | SHFL_C;   // Shuffle control (mask and last_lane)
 
         // Use predicate set from SHFL to guard against invalid peers
+#ifdef CUB_USE_COOPERATIVE_GROUPS
+        asm volatile(
+            "{"
+            "  .reg .u32 r0;"
+            "  .reg .pred p;"
+            "  shfl.sync.down.b32 r0|p, %1, %2, %3, %5;"
+            "  @p add.u32 r0, r0, %4;"
+            "  mov.u32 %0, r0;"
+            "}"
+            : "=r"(output) : "r"(input), "r"(offset), "r"(shfl_c), "r"(input), "r"(member_mask));
+#else
         asm volatile(
             "{"
             "  .reg .u32 r0;"
@@ -147,7 +160,8 @@ struct WarpReduceShfl
             "  @p add.u32 r0, r0, %4;"
             "  mov.u32 %0, r0;"
             "}"
-            : "=r"(output) : "r"(input), "r"(offset), "r"(last_lane), "r"(input));
+            : "=r"(output) : "r"(input), "r"(offset), "r"(shfl_c), "r"(input));
+#endif
 
         return output;
     }
@@ -156,13 +170,25 @@ struct WarpReduceShfl
     /// Reduction (specialized for summation across fp32 types)
     __device__ __forceinline__ float ReduceStep(
         float           input,              ///< [in] Calling thread's input item.
-        cub::Sum        reduction_op,       ///< [in] Binary reduction operator
+        cub::Sum        /*reduction_op*/,   ///< [in] Binary reduction operator
         int             last_lane,          ///< [in] Index of last lane in segment
         int             offset)             ///< [in] Up-offset to pull from
     {
         float output;
+        int shfl_c = last_lane | SHFL_C;   // Shuffle control (mask and last_lane)
 
         // Use predicate set from SHFL to guard against invalid peers
+#ifdef CUB_USE_COOPERATIVE_GROUPS
+        asm volatile(
+            "{"
+            "  .reg .f32 r0;"
+            "  .reg .pred p;"
+            "  shfl.sync.down.b32 r0|p, %1, %2, %3, %5;"
+            "  @p add.f32 r0, r0, %4;"
+            "  mov.f32 %0, r0;"
+            "}"
+            : "=f"(output) : "f"(input), "r"(offset), "r"(shfl_c), "f"(input), "r"(member_mask));
+#else
         asm volatile(
             "{"
             "  .reg .f32 r0;"
@@ -171,7 +197,8 @@ struct WarpReduceShfl
             "  @p add.f32 r0, r0, %4;"
             "  mov.f32 %0, r0;"
             "}"
-            : "=f"(output) : "f"(input), "r"(offset), "r"(last_lane), "f"(input));
+            : "=f"(output) : "f"(input), "r"(offset), "r"(shfl_c), "f"(input));
+#endif
 
         return output;
     }
@@ -180,12 +207,27 @@ struct WarpReduceShfl
     /// Reduction (specialized for summation across unsigned long long types)
     __device__ __forceinline__ unsigned long long ReduceStep(
         unsigned long long  input,              ///< [in] Calling thread's input item.
-        cub::Sum            reduction_op,       ///< [in] Binary reduction operator
+        cub::Sum            /*reduction_op*/,   ///< [in] Binary reduction operator
         int                 last_lane,          ///< [in] Index of last lane in segment
         int                 offset)             ///< [in] Up-offset to pull from
     {
         unsigned long long output;
+        int shfl_c = last_lane | SHFL_C;   // Shuffle control (mask and last_lane)
 
+#ifdef CUB_USE_COOPERATIVE_GROUPS
+        asm volatile(
+            "{"
+            "  .reg .u32 lo;"
+            "  .reg .u32 hi;"
+            "  .reg .pred p;"
+            "  mov.b64 {lo, hi}, %1;"
+            "  shfl.sync.down.b32 lo|p, lo, %2, %3, %4;"
+            "  shfl.sync.down.b32 hi|p, hi, %2, %3, %4;"
+            "  mov.b64 %0, {lo, hi};"
+            "  @p add.u64 %0, %0, %1;"
+            "}"
+            : "=l"(output) : "l"(input), "r"(offset), "r"(shfl_c), "r"(member_mask));
+#else
         asm volatile(
             "{"
             "  .reg .u32 lo;"
@@ -197,7 +239,8 @@ struct WarpReduceShfl
             "  mov.b64 %0, {lo, hi};"
             "  @p add.u64 %0, %0, %1;"
             "}"
-            : "=l"(output) : "l"(input), "r"(offset), "r"(last_lane));
+            : "=l"(output) : "l"(input), "r"(offset), "r"(shfl_c));
+#endif
 
         return output;
     }
@@ -206,13 +249,28 @@ struct WarpReduceShfl
     /// Reduction (specialized for summation across long long types)
     __device__ __forceinline__ long long ReduceStep(
         long long           input,              ///< [in] Calling thread's input item.
-        cub::Sum            reduction_op,       ///< [in] Binary reduction operator
+        cub::Sum            /*reduction_op*/,   ///< [in] Binary reduction operator
         int                 last_lane,          ///< [in] Index of last lane in segment
         int                 offset)             ///< [in] Up-offset to pull from
     {
         long long output;
+        int shfl_c = last_lane | SHFL_C;   // Shuffle control (mask and last_lane)
 
         // Use predicate set from SHFL to guard against invalid peers
+#ifdef CUB_USE_COOPERATIVE_GROUPS
+        asm volatile(
+            "{"
+            "  .reg .u32 lo;"
+            "  .reg .u32 hi;"
+            "  .reg .pred p;"
+            "  mov.b64 {lo, hi}, %1;"
+            "  shfl.sync.down.b32 lo|p, lo, %2, %3, %4;"
+            "  shfl.sync.down.b32 hi|p, hi, %2, %3, %4;"
+            "  mov.b64 %0, {lo, hi};"
+            "  @p add.s64 %0, %0, %1;"
+            "}"
+            : "=l"(output) : "l"(input), "r"(offset), "r"(shfl_c), "r"(member_mask));
+#else
         asm volatile(
             "{"
             "  .reg .u32 lo;"
@@ -224,7 +282,8 @@ struct WarpReduceShfl
             "  mov.b64 %0, {lo, hi};"
             "  @p add.s64 %0, %0, %1;"
             "}"
-            : "=l"(output) : "l"(input), "r"(offset), "r"(last_lane));
+            : "=l"(output) : "l"(input), "r"(offset), "r"(shfl_c));
+#endif
 
         return output;
     }
@@ -233,13 +292,30 @@ struct WarpReduceShfl
     /// Reduction (specialized for summation across double types)
     __device__ __forceinline__ double ReduceStep(
         double              input,              ///< [in] Calling thread's input item.
-        cub::Sum            reduction_op,       ///< [in] Binary reduction operator
+        cub::Sum            /*reduction_op*/,   ///< [in] Binary reduction operator
         int                 last_lane,          ///< [in] Index of last lane in segment
         int                 offset)             ///< [in] Up-offset to pull from
     {
         double output;
+        int shfl_c = last_lane | SHFL_C;   // Shuffle control (mask and last_lane)
 
         // Use predicate set from SHFL to guard against invalid peers
+#ifdef CUB_USE_COOPERATIVE_GROUPS
+        asm volatile(
+            "{"
+            "  .reg .u32 lo;"
+            "  .reg .u32 hi;"
+            "  .reg .pred p;"
+            "  .reg .f64 r0;"
+            "  mov.b64 %0, %1;"
+            "  mov.b64 {lo, hi}, %1;"
+            "  shfl.sync.down.b32 lo|p, lo, %2, %3, %4;"
+            "  shfl.sync.down.b32 hi|p, hi, %2, %3, %4;"
+            "  mov.b64 r0, {lo, hi};"
+            "  @p add.f64 %0, %0, r0;"
+            "}"
+            : "=d"(output) : "d"(input), "r"(offset), "r"(shfl_c), "r"(member_mask));
+#else
         asm volatile(
             "{"
             "  .reg .u32 lo;"
@@ -253,7 +329,8 @@ struct WarpReduceShfl
             "  mov.b64 r0, {lo, hi};"
             "  @p add.f64 %0, %0, r0;"
             "}"
-            : "=d"(output) : "d"(input), "r"(offset), "r"(last_lane));
+            : "=d"(output) : "d"(input), "r"(offset), "r"(shfl_c));
+#endif
 
         return output;
     }
@@ -263,13 +340,13 @@ struct WarpReduceShfl
     template <typename ValueT, typename KeyT>
     __device__ __forceinline__ KeyValuePair<KeyT, ValueT> ReduceStep(
         KeyValuePair<KeyT, ValueT>                  input,              ///< [in] Calling thread's input item.
-        SwizzleScanOp<ReduceByKeyOp<cub::Sum> >     reduction_op,       ///< [in] Binary reduction operator
+        SwizzleScanOp<ReduceByKeyOp<cub::Sum> >     /*reduction_op*/,   ///< [in] Binary reduction operator
         int                                         last_lane,          ///< [in] Index of last lane in segment
         int                                         offset)             ///< [in] Up-offset to pull from
     {
         KeyValuePair<KeyT, ValueT> output;
 
-        KeyT other_key = ShuffleDown(input.key, offset, last_lane);
+        KeyT other_key = ShuffleDown<LOGICAL_WARP_THREADS>(input.key, offset, last_lane, member_mask);
         
         output.key = input.key;
         output.value = ReduceStep(
@@ -291,7 +368,7 @@ struct WarpReduceShfl
     template <typename ValueT, typename OffsetT>
     __device__ __forceinline__ KeyValuePair<OffsetT, ValueT> ReduceStep(
         KeyValuePair<OffsetT, ValueT>                 input,              ///< [in] Calling thread's input item.
-        SwizzleScanOp<ReduceBySegmentOp<cub::Sum> >   reduction_op,       ///< [in] Binary reduction operator
+        SwizzleScanOp<ReduceBySegmentOp<cub::Sum> >   /*reduction_op*/,   ///< [in] Binary reduction operator
         int                                           last_lane,          ///< [in] Index of last lane in segment
         int                                           offset)             ///< [in] Up-offset to pull from
     {
@@ -317,10 +394,10 @@ struct WarpReduceShfl
     {
         _T output = input;
 
-        _T temp = ShuffleDown(output, offset);
+        _T temp = ShuffleDown<LOGICAL_WARP_THREADS>(output, offset, last_lane, member_mask);
 
         // Perform reduction op if valid
-        if (offset <= last_lane - lane_id)
+        if (offset + lane_id <= last_lane)
             output = reduction_op(input, temp);
 
         return output;
@@ -330,27 +407,24 @@ struct WarpReduceShfl
     /// Reduction step (specialized for small unsigned integers size 32b or less)
     template <typename _T, typename ReductionOp>
     __device__ __forceinline__ _T ReduceStep(
-        _T              input,              ///< [in] Calling thread's input item.
-        ReductionOp     reduction_op,       ///< [in] Binary reduction operator
-        int             last_lane,          ///< [in] Index of last lane in segment
-        int             offset,             ///< [in] Up-offset to pull from
-        Int2Type<true>  is_small_unsigned)  ///< [in] Marker type indicating whether T is a small unsigned integer
+        _T              input,                  ///< [in] Calling thread's input item.
+        ReductionOp     reduction_op,           ///< [in] Binary reduction operator
+        int             last_lane,              ///< [in] Index of last lane in segment
+        int             offset,                 ///< [in] Up-offset to pull from
+        Int2Type<true>  /*is_small_unsigned*/)  ///< [in] Marker type indicating whether T is a small unsigned integer
     {
-        // Recast as uint32 to take advantage of any specializations
-        unsigned int temp = reinterpret_cast<unsigned int &>(input);
-        temp = ReduceStep(temp, reduction_op, last_lane, offset);
-        return reinterpret_cast<_T&>(temp);
+        return ReduceStep(input, reduction_op, last_lane, offset);
     }
 
 
     /// Reduction step (specialized for types other than small unsigned integers size 32b or less)
     template <typename _T, typename ReductionOp>
     __device__ __forceinline__ _T ReduceStep(
-        _T              input,              ///< [in] Calling thread's input item.
-        ReductionOp     reduction_op,       ///< [in] Binary reduction operator
-        int             last_lane,          ///< [in] Index of last lane in segment
-        int             offset,             ///< [in] Up-offset to pull from
-        Int2Type<false> is_small_unsigned)  ///< [in] Marker type indicating whether T is a small unsigned integer
+        _T              input,                  ///< [in] Calling thread's input item.
+        ReductionOp     reduction_op,           ///< [in] Binary reduction operator
+        int             last_lane,              ///< [in] Index of last lane in segment
+        int             offset,                 ///< [in] Up-offset to pull from
+        Int2Type<false> /*is_small_unsigned*/)  ///< [in] Marker type indicating whether T is a small unsigned integer
     {
         return ReduceStep(input, reduction_op, last_lane, offset);
     }
@@ -365,7 +439,7 @@ struct WarpReduceShfl
         T&              input,              ///< [in] Calling thread's input item.
         ReductionOp     reduction_op,       ///< [in] Binary reduction operator
         int             last_lane,          ///< [in] Index of last lane in segment
-        Int2Type<STEP>  step)
+        Int2Type<STEP>  /*step*/)
     {
         input = ReduceStep(input, reduction_op, last_lane, 1 << STEP, Int2Type<IsInteger<T>::IS_SMALL_UNSIGNED>());
 
@@ -374,10 +448,10 @@ struct WarpReduceShfl
 
     template <typename ReductionOp>
     __device__ __forceinline__ void ReduceStep(
-        T&              input,              ///< [in] Calling thread's input item.
-        ReductionOp     reduction_op,       ///< [in] Binary reduction operator
-        int             last_lane,          ///< [in] Index of last lane in segment
-        Int2Type<STEPS> step)
+        T&              /*input*/,              ///< [in] Calling thread's input item.
+        ReductionOp     /*reduction_op*/,       ///< [in] Binary reduction operator
+        int             /*last_lane*/,          ///< [in] Index of last lane in segment
+        Int2Type<STEPS> /*step*/)
     {}
 
 
@@ -388,40 +462,26 @@ struct WarpReduceShfl
     /// Reduction
     template <
         bool            ALL_LANES_VALID,        ///< Whether all lanes in each warp are contributing a valid fold of items
-        int             FOLDED_ITEMS_PER_LANE,  ///< Number of items folded into each lane
         typename        ReductionOp>
     __device__ __forceinline__ T Reduce(
         T               input,                  ///< [in] Calling thread's input
-        int             folded_items_per_warp,  ///< [in] Total number of valid items folded into each logical warp
+        int             valid_items,            ///< [in] Total number of valid items across the logical warp
         ReductionOp     reduction_op)           ///< [in] Binary reduction operator
     {
-        // Get the last thread in the logical warp
-        int first_warp_thread   = 0;
-        int last_warp_thread    = LOGICAL_WARP_THREADS - 1;
-        if (!IS_ARCH_WARP)
-        {
-            first_warp_thread = lane_id & (~(LOGICAL_WARP_THREADS - 1));
-            last_warp_thread |= lane_id;
-        }
-
-        // Common case is FOLDED_ITEMS_PER_LANE = 1 (or a multiple of 32)
-        int lanes_with_valid_data = (folded_items_per_warp - 1) / FOLDED_ITEMS_PER_LANE;
-
-        // Get the last valid lane
         int last_lane = (ALL_LANES_VALID) ?
-            last_warp_thread :
-            CUB_MIN(last_warp_thread, first_warp_thread + lanes_with_valid_data);
+                            LOGICAL_WARP_THREADS - 1 :
+                            valid_items - 1;
 
         T output = input;
 
-/*
-        // Iterate reduction steps
-        #pragma unroll
-        for (int STEP = 0; STEP < STEPS; STEP++)
-        {
-            output = ReduceStep(output, reduction_op, last_lane, 1 << STEP, Int2Type<IsInteger<T>::IS_SMALL_UNSIGNED>());
-        }
-*/
+//        // Iterate reduction steps
+//        #pragma unroll
+//        for (int STEP = 0; STEP < STEPS; STEP++)
+//        {
+//            output = ReduceStep(output, reduction_op, last_lane, 1 << STEP, Int2Type<IsInteger<T>::IS_SMALL_UNSIGNED>());
+//        }
+
+        // Template-iterate reduction steps
         ReduceStep(output, reduction_op, last_lane, Int2Type<0>());
 
         return output;
@@ -439,29 +499,37 @@ struct WarpReduceShfl
         ReductionOp     reduction_op)       ///< [in] Binary reduction operator
     {
         // Get the start flags for each thread in the warp.
-        int warp_flags = __ballot(flag);
+        int warp_flags = WARP_BALLOT(flag, member_mask);
 
+        // Convert to tail-segmented
         if (HEAD_SEGMENTED)
             warp_flags >>= 1;
 
-        // Mask in the last lanes of each logical warp
-        warp_flags |= LastLaneMask<1, LOGICAL_WARPS>::MASK;
-
         // Mask out the bits below the current thread
         warp_flags &= LaneMaskGe();
+
+        // Mask of physical lanes outside the logical warp and convert to logical lanemask
+        if (!IS_ARCH_WARP)
+        {
+            warp_flags = (warp_flags & member_mask) >> (warp_id * LOGICAL_WARP_THREADS);
+        }
+
+        // Mask in the last lane of logical warp
+        warp_flags |= 1u << (LOGICAL_WARP_THREADS - 1);
 
         // Find the next set flag
         int last_lane = __clz(__brev(warp_flags));
 
         T output = input;
-/*
-        // Iterate reduction steps
-        #pragma unroll
-        for (int STEP = 0; STEP < STEPS; STEP++)
-        {
-            output = ReduceStep(output, reduction_op, last_lane, 1 << STEP, Int2Type<IsInteger<T>::IS_SMALL_UNSIGNED>());
-        }
-*/
+
+//        // Iterate reduction steps
+//        #pragma unroll
+//        for (int STEP = 0; STEP < STEPS; STEP++)
+//        {
+//            output = ReduceStep(output, reduction_op, last_lane, 1 << STEP, Int2Type<IsInteger<T>::IS_SMALL_UNSIGNED>());
+//        }
+
+        // Template-iterate reduction steps
         ReduceStep(output, reduction_op, last_lane, Int2Type<0>());
 
         return output;

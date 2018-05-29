@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2018, NVIDIA Corporation
+ * Copyright (c) 2010-2016, NVIDIA Corporation
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -71,10 +71,10 @@ struct Variance_estimator
 	}
 
 	CUGAR_HOST_DEVICE
-	T mean()	 const { return m_mean; }
+	float mean()	 const { return m_mean; }
 
 	CUGAR_HOST_DEVICE
-	T variance() const { return m_n > 1 ? m_M2 / (m_n - 1) : 0.0f; }
+	float variance() const { return m_n > 1 ? m_M2 / (m_n - 1) : 0.0f; }
 
 	T		m_mean;
 	T		m_M2;

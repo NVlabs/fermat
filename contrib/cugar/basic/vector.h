@@ -1,6 +1,6 @@
 /*
  * cugar
- * Copyright (c) 2011-2014, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2011-2018, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -351,6 +351,13 @@ typename device_iterator_type<T>::type device_iterator(const T it)
 {
     // wrap the plain iterator
     return typename device_iterator_type<T>::type( it );
+}
+
+template <typename domain_tag, typename T>
+void make_room(vector<domain_tag, T>& vec, const size_t min_size)
+{
+	if (vec.size() < min_size)
+		vec.resize(min_size);
 }
 
 ///@} Basic

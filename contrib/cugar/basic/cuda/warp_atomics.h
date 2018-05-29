@@ -50,6 +50,46 @@ namespace cuda {
 /// This module various types of CUDA atomics
 ///@{
 
+/// increment the value at ptr by 1 and return the old value
+///
+__device__ __forceinline__
+unsigned int warp_increment(unsigned int *ptr)
+{
+#if !defined(__CUDA_ARCH__) || __CUDA_ARCH__ >= 700
+	const unsigned int lane_id = threadIdx.x & 31;
+
+	int pred;
+	int mask = __match_all_sync(__activemask(), (unsigned long long)ptr, &pred);
+	int leader = __ffs(mask) - 1;    // select a leader
+
+	int res = 0;
+	if (lane_id == leader)                  // leader does the update
+		res = atomicAdd(ptr, __popc(mask));
+
+	res = __shfl_sync(mask, res, leader);    // get leader’s old value
+	return res + __popc(mask & ((1 << lane_id) - 1)); //compute old value
+#else
+    const uint32 warp_tid   = threadIdx.x & 31;
+    const uint32 warp_mask  = __ballot_sync( __activemask(), true );
+    const uint32 warp_count = __popc( warp_mask );
+    const uint32 warp_scan  = __popc( warp_mask << (warpSize - warp_tid) );
+
+	const uint32 first_tid = ffs(warp_mask) - 1;
+
+	uint32 broadcast_offset = 0;
+
+    // acquire an offset for this warp
+	if (warp_tid == first_tid)
+        broadcast_offset = atomicAdd( ptr, warp_count );
+
+	// obtain the offset from the first participating thread
+	const uint32 offset = cub::ShuffleIndex<32>(broadcast_offset, first_tid, __activemask());
+
+    // compute the per-thread offset
+    return offset + warp_scan;
+#endif
+}
+
 /// An efficient warp-synchronous atomic adder, to add or subtract compile-time constants to a shared integer.
 ///
 /// Given a pointer to an integer (e.g. representing a "pool"), this class allows the threads
@@ -115,7 +155,7 @@ struct warp_static_atomic
     static void static_add(bool p, uint32* dest)
     {
         const uint32 warp_tid   = threadIdx.x & 31;
-        const uint32 warp_mask  = __ballot( p );
+        const uint32 warp_mask  = __ballot_sync( __activemask(), p );
         const uint32 warp_count = __popc( warp_mask );
         const uint32 warp_scan  = __popc( warp_mask << (warpSize - warp_tid) );
 
@@ -133,7 +173,7 @@ struct warp_static_atomic
     static void static_sub(bool p, uint32* dest)
     {
         const uint32 warp_tid   = threadIdx.x & 31;
-        const uint32 warp_mask  = __ballot( p );
+        const uint32 warp_mask  = __ballot_sync( __activemask(), p );
         const uint32 warp_count = __popc( warp_mask );
         const uint32 warp_scan  = __popc( warp_mask << (warpSize - warp_tid) );
 
@@ -152,7 +192,7 @@ struct warp_static_atomic
     static void static_add(bool p, uint32* dest, uint32* result)
     {
         const uint32 warp_tid   = threadIdx.x & 31;
-        const uint32 warp_mask  = __ballot( p );
+        const uint32 warp_mask  = __ballot_sync( __activemask(), p );
         const uint32 warp_count = __popc( warp_mask );
         const uint32 warp_scan  = __popc( warp_mask << (warpSize - warp_tid) );
 
@@ -165,7 +205,7 @@ struct warp_static_atomic
             broadcast_offset = atomicAdd( dest, warp_count * N );
 
 		// obtain the offset from the first participating thread
-		const uint32 offset = cub::ShuffleIndex(broadcast_offset, first_tid);
+		const uint32 offset = cub::ShuffleIndex<32>(broadcast_offset, first_tid, __activemask());
 
         // compute the per-thread offset
         *result = offset + warp_scan * N;
@@ -181,7 +221,7 @@ struct warp_static_atomic
     static void static_sub(bool p, uint32* dest, uint32* result)
     {
         const uint32 warp_tid   = threadIdx.x & 31;
-        const uint32 warp_mask  = __ballot( p );
+        const uint32 warp_mask  = __ballot_sync( __activemask(), p );
         const uint32 warp_count = __popc( warp_mask );
         const uint32 warp_scan  = __popc( warp_mask << (warpSize - warp_tid) );
 
@@ -194,7 +234,7 @@ struct warp_static_atomic
             broadcast_offset = atomicSub( dest, warp_count * N );
 
 		// obtain the offset from the first participating thread
-		const uint32 offset = cub::ShuffleIndex(broadcast_offset, first_tid);
+		const uint32 offset = cub::ShuffleIndex<32>(broadcast_offset, first_tid, __activemask());
 
         // compute the per-thread offset
         *result = offset - warp_scan * N;
@@ -375,7 +415,7 @@ struct warp_atomic
             base_index = atomicAdd( dest, warp_count );
 
         // compute the per-thread offset
-        *result = cub::ShuffleIndex( base_index, 0 ) + warp_scan;
+        *result = cub::ShuffleIndex<32>( base_index, 0, __activemask() ) + warp_scan;
     }
 
     /// subtract a per-thread value to the shared integer: useful to dealloc entries from a common pool
@@ -401,7 +441,7 @@ struct warp_atomic
             base_index = atomicSub( dest, warp_count );
 
         // compute the per-thread offset
-        *result = cub::ShuffleIndex( base_index, 0 ) - warp_scan;
+        *result = cub::ShuffleIndex<32>( base_index, 0, __activemask() ) - warp_scan;
     }
 
     /// add zero or exactly N per thread to a shared value without waiting for the result: useful to dealloc N entries from a common pool

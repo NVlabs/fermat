@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2018, NVIDIA Corporation
+ * Copyright (c) 2010-2011, NVIDIA Corporation
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -40,6 +40,9 @@ namespace cugar {
 namespace cuda {
 
 namespace kd_knn {
+
+#define KNN_LOOKUP_BLOCK_SIZE	64
+#define KNN_LOOKUP_CTA_BLOCKS	32
 
 CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
 float comp(const float2 v, const uint32 i)
@@ -125,12 +128,12 @@ __device__ void lookup_2d(
 
     while (1)
     {
-        const Kd_node node = kd_nodes[ node_index ];
+        const Kd_node node = Kd_node::load_ldg( kd_nodes + node_index );
 
         if (node.is_leaf())
         {
             // find the closest neighbor in this leaf
-            const uint2 leaf = kd_leaves[ node.get_leaf_index() ];
+            const uint2 leaf = __ldg( &kd_leaves[ node.get_leaf_index() ] );
             for (uint32 i = leaf.x; i < leaf.y; ++i)
             {
                 const VectorType delta = kd_points[i] - query;
@@ -172,14 +175,14 @@ __device__ void lookup_2d(
 
     while (node_index != uint32(-1))
     {
-        const Kd_node node = kd_nodes[ node_index ];
+        const Kd_node node = Kd_node::load_ldg( kd_nodes + node_index );
 
         if (node.is_leaf())
         {
             if (first_leaf != node_index)
             {
                 // find the closest neighbor in this leaf
-                const uint2 leaf = kd_leaves[ node.get_leaf_index() ];
+                const uint2 leaf = __ldg( &kd_leaves[ node.get_leaf_index() ] );
                 for (uint32 i = leaf.x; i < leaf.y; ++i)
                 {
                     const VectorType delta = kd_points[i] - query;
@@ -262,12 +265,12 @@ __device__ void lookup_3d(
 
     while (1)
     {
-        const Kd_node node = kd_nodes[ node_index ];
+        const Kd_node node = Kd_node::load_ldg( kd_nodes + node_index );
 
         if (node.is_leaf())
         {
             // find the closest neighbor in this leaf
-            const uint2 leaf = kd_leaves[ node.get_leaf_index() ];
+            const uint2 leaf = __ldg( &kd_leaves[ node.get_leaf_index() ]);
             for (uint32 i = leaf.x; i < leaf.y; ++i)
             {
                 const VectorType delta = kd_points[i] - query;
@@ -309,14 +312,14 @@ __device__ void lookup_3d(
 
     while (node_index != uint32(-1))
     {
-        const Kd_node node = kd_nodes[ node_index ];
+        const Kd_node node = Kd_node::load_ldg( kd_nodes + node_index );
 
         if (node.is_leaf())
         {
             if (first_leaf != node_index)
             {
                 // find the closest neighbor in this leaf
-                const uint2 leaf = kd_leaves[ node.get_leaf_index() ];
+                const uint2 leaf = __ldg( &kd_leaves[ node.get_leaf_index() ] );
                 for (uint32 i = leaf.x; i < leaf.y; ++i)
                 {
                     const VectorType delta = kd_points[i] - query;
@@ -385,7 +388,7 @@ struct Compare
 };
 
 #if 0
-FORCE_INLINE CUGAR_HOST_DEVICE float norm3(const float4 v) { return v.x*v.x + v.y*v.y + v.z*v.z; }
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float norm3(const float4 v) { return v.x*v.x + v.y*v.y + v.z*v.z; }
 
 #define KNN_REORDER_STACK(LhsIndex, RhsIndex) \
 if (norm3( stack[stackp - (LhsIndex)] ) < \
@@ -414,6 +417,11 @@ __device__ void lookup_2d(
     const PointIterator     kd_points,
     Kd_knn<3>::Result*      results)
 {
+	KD_KNN_STATS_DEF(uint32,	leaf_tests,		0u);
+	KD_KNN_STATS_DEF(uint32,	point_tests,	0u);
+	KD_KNN_STATS_DEF(uint32,	node_pops,		0u);
+	KD_KNN_STATS_DEF(uint32,	node_pushes,	0u);
+
     //
     // 1-st pass: find the smallest node containing the query point and compute an upper bound
     // on the search distance
@@ -432,7 +440,7 @@ __device__ void lookup_2d(
 
     while (1)
     {
-        const Kd_node node = kd_nodes[ node_index ];
+        const Kd_node node = Kd_node::load_ldg( kd_nodes + node_index );
         const uint2 range = kd_ranges[ node_index ];
 
         if (range.y - range.x < K)
@@ -452,7 +460,7 @@ __device__ void lookup_2d(
     }
 
     //
-    // 2-nd pass: in the entry subtree, found an upper bound on distance
+    // 2-nd pass: in the entry subtree, find an upper bound on distance
     // looking at the first K neighbors encountered during a traversal
     //
 
@@ -496,7 +504,7 @@ __device__ void lookup_2d(
         while (node_index != uint32(-1))
         {
             KD_KNN_STATS_ADD( node_tests, 1u );
-            const Kd_node node  = kd_nodes[ node_index ];
+	        const Kd_node node = Kd_node::load_ldg( kd_nodes + node_index );
             const uint2   range = kd_ranges[ node_index ];
 
             if (node.is_leaf() || range.y - range.x <= M)
@@ -611,14 +619,14 @@ __device__ void lookup_2d(
     while (node_index != uint32(-1))
     {
         KD_KNN_STATS_ADD( node_tests, 1u );
-        const Kd_node node = kd_nodes[ node_index ];
+        const Kd_node node = Kd_node::load_ldg( kd_nodes + node_index );
 
         if (node.is_leaf() || entry_subtree == node_index)
         {
             if (entry_subtree != node_index)
             {
                 // find the closest neighbors in this leaf
-                const uint2 range = kd_leaves[ node.get_leaf_index() ];
+                const uint2 range = __ldg( &kd_leaves[ node.get_leaf_index() ] );
 
                 KD_KNN_STATS_ADD( leaf_tests, 1u );
                 KD_KNN_STATS_ADD( point_tests, range.y - range.x );
@@ -733,14 +741,21 @@ __device__ void lookup_3d(
     const PointIterator     kd_points,
     Kd_knn<3>::Result*      results)
 {
-    //
+	KD_KNN_STATS_DEF(uint32,	leaf_tests,		0u);
+	KD_KNN_STATS_DEF(uint32,	point_tests,	0u);
+	KD_KNN_STATS_DEF(uint32,	node_pops,		0u);
+	KD_KNN_STATS_DEF(uint32,	node_pushes,	0u);
+	
+	//
     // 1-st pass: find the smallest node containing the query point and compute an upper bound
     // on the search distance
     //
 	typedef vector_view<float2*> queue_vector_type;
 	float2 queue_storage[K+1];
+	//typedef vector_view< register_array<float2,K+1> > queue_vector_type;
+	//register_array<float2,K+1> queue_storage;
 	queue_vector_type queue_vector(0,queue_storage);
-    priority_queue<float2,queue_vector_type,Compare> queue( queue_vector );
+	priority_queue<float2,queue_vector_type,Compare> queue( queue_vector );
     float max_dist2 = 1.0e16f;
 
     // start from the root node
@@ -751,7 +766,7 @@ __device__ void lookup_3d(
 
     while (1)
     {
-        const Kd_node node = kd_nodes[ node_index ];
+        const Kd_node node = Kd_node::load_ldg( kd_nodes + node_index );
         const uint2 range = kd_ranges[ node_index ];
 
         if (range.y - range.x < K)
@@ -771,7 +786,7 @@ __device__ void lookup_3d(
     }
 
     //
-    // 2-nd pass: in the entry subtree, found an upper bound on distance
+    // 2-nd pass: in the entry subtree, find an upper bound on distance
     // looking at the first K neighbors encountered during a traversal
     //
 
@@ -815,7 +830,7 @@ __device__ void lookup_3d(
         while (node_index != uint32(-1))
         {
             KD_KNN_STATS_ADD( node_tests, 1u );
-            const Kd_node node  = kd_nodes[ node_index ];
+	        const Kd_node node = Kd_node::load_ldg( kd_nodes + node_index );
             const uint2   range = kd_ranges[ node_index ];
 
             if (node.is_leaf() || range.y - range.x <= M)
@@ -930,14 +945,14 @@ __device__ void lookup_3d(
     while (node_index != uint32(-1))
     {
         KD_KNN_STATS_ADD( node_tests, 1u );
-        const Kd_node node = kd_nodes[ node_index ];
+        const Kd_node node = Kd_node::load_ldg( kd_nodes + node_index );
 
         if (node.is_leaf() || entry_subtree == node_index)
         {
             if (entry_subtree != node_index)
             {
                 // find the closest neighbors in this leaf
-                const uint2 range = kd_leaves[ node.get_leaf_index() ];
+                const uint2 range = __ldg( &kd_leaves[ node.get_leaf_index() ] );
 
                 KD_KNN_STATS_ADD( leaf_tests, 1u );
                 KD_KNN_STATS_ADD( point_tests, range.y - range.x );
@@ -1134,6 +1149,7 @@ __global__ void lookup_kernel_1(
 }
 
 template <uint32 DIM, uint32 K, typename QueryIterator, typename PointIterator>
+//__launch_bounds__(KNN_LOOKUP_BLOCK_SIZE, KNN_LOOKUP_CTA_BLOCKS)
 __global__ void lookup_kernel(
     const uint32                    n_points,
     const QueryIterator             points_begin,
@@ -1225,7 +1241,7 @@ void Kd_knn<DIM>::run(
 {
     const uint32 n_points = uint32( points_end - points_begin );
 
-    const uint32 BLOCK_SIZE = 64;
+    const uint32 BLOCK_SIZE = KNN_LOOKUP_BLOCK_SIZE;
     const uint32 max_blocks = (uint32)cuda::max_active_blocks(
         kd_knn::lookup_kernel<DIM,K,QueryIterator,PointIterator>, BLOCK_SIZE, 0);
     const uint32 n_blocks   = cugar::min( max_blocks, uint32(n_points + BLOCK_SIZE-1) / BLOCK_SIZE );

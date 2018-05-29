@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2018, NVIDIA Corporation
+ * Copyright (c) 2010-2011, NVIDIA Corporation
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -36,7 +36,6 @@
 #include <iterator>
 
 namespace cugar {
-namespace cuda {
 
 ///@defgroup TreesModule Trees
 /// This module defines utility functions to operate with generic trees, such as tree reductions
@@ -143,7 +142,6 @@ void tree_reduce(
     Output_iterator         node_values,
     const Operator          op,
     const Value_type        def_value);
-
 ///
 /// Reduce a bunch of values attached to the leaves of a tree, with a simple bottom-up propagation.
 ///
@@ -155,7 +153,6 @@ void tree_reduce(
 
 ///@} TreesModule
 
-} // namespace cuda
 } // namespace cugar
 
 #include <cugar/tree/reduce_inline.h>

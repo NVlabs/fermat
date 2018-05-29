@@ -1,7 +1,7 @@
 /*
  * CUGAR : Cuda Graphics Accelerator
  *
- * Copyright (c) 2010-2018, NVIDIA Corporation
+ * Copyright (c) 2010-2016, NVIDIA Corporation
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -152,7 +152,7 @@ __global__ void split_kernel(
     }
 
     // keep the warp looping until there's some work to do
-    while (__any(*(volatile uint32*)&counters->work_counter))
+    while (__any_sync(0xFFFFFFFF, *(volatile uint32*)&counters->work_counter))
     {
         // fetch new tasks for inactive lanes
         uint32 new_node;
@@ -290,9 +290,9 @@ void split(
     Counters*           counters)
 {
     const uint32 BLOCK_SIZE = 128;
-    const size_t max_blocks = cuda::max_active_blocks(split_kernel<BLOCK_SIZE,Tree,Integer>, BLOCK_SIZE, 0);
-    const size_t n_blocks   = cugar::min( max_blocks, size_t(n_nodes + BLOCK_SIZE-1) / BLOCK_SIZE );
-    const size_t grid_size  = n_blocks * BLOCK_SIZE;
+    const uint32 max_blocks = (uint32)cuda::max_active_blocks(split_kernel<BLOCK_SIZE,Tree,Integer>, BLOCK_SIZE, 0);
+    const uint32 n_blocks   = cugar::min( max_blocks, uint32(n_nodes + BLOCK_SIZE-1) / BLOCK_SIZE );
+    const uint32 grid_size  = n_blocks * BLOCK_SIZE;
 
     split_kernel<BLOCK_SIZE> <<<n_blocks,BLOCK_SIZE>>> (
         grid_size,

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2018, NVIDIA Corporation
+ * Copyright (c) 2010-2011, NVIDIA Corporation
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -192,6 +192,22 @@ struct Kd_context
     BboxType			m_bbox;
 };
 
+// a small kernel to calculate Morton codes
+template <typename PointIterator, typename Integer, typename MortonFunctor>
+__global__
+void morton_kernel(const uint32 n_points, const PointIterator points_begin, Integer* out, const MortonFunctor morton)
+{
+	const uint32 thread_id = threadIdx.x + blockIdx.x * blockDim.x;
+
+	if (thread_id < n_points)
+	{
+		typedef typename std::iterator_traits<PointIterator>::value_type VectorType;
+
+		const VectorType p = points_begin[thread_id];
+		out[thread_id] = morton(p);
+	}
+}
+
 }; // namespace kd
 
 // build a k-d tree given a set of points
@@ -208,24 +224,34 @@ void Kd_builder<Integer>::build(
 	const uint32 DIM = BboxType::vector_type::DIMENSION;
     const uint32 n_points = uint32( points_end - points_begin );
 
-    m_bbox = bbox;
     need_space( m_codes, n_points );
     need_space( index, n_points );
 	need_space( m_temp_codes, n_points );
 	need_space( m_temp_index, n_points );
 
     // compute the Morton code for each point
+  #if 1
+	{
+		const uint32 blockSize = (uint32)cugar::cuda::max_blocksize_with_highest_occupancy(kd::morton_kernel< Iterator,Integer,morton_functor<Integer,DIM> >, 0u);
+		const dim3 gridSize(cugar::divide_ri(n_points, blockSize));
+		kd::morton_kernel<<< gridSize, blockSize >>> (n_points, points_begin, raw_pointer(m_codes), morton_functor<Integer,DIM>( bbox ));
+	}
+	//cuda::sync_and_check_error("morton codes");
+  #else
     thrust::transform(
         points_begin,
         points_begin + n_points,
         m_codes.begin(),
         morton_functor<Integer,DIM>( bbox ) );
+  #endif
 
     // setup the point indices, from 0 to n_points-1
     thrust::copy(
         thrust::counting_iterator<uint32>(0),
         thrust::counting_iterator<uint32>(0) + n_points,
         index.begin() );
+
+	//cuda::sync_and_check_error("copy");
 
 	if (n_points > 1)
 	{
@@ -248,7 +274,7 @@ void Kd_builder<Integer>::build(
 	}
 
     // generate a kd-tree
-    kd::Kd_context<DIM,BboxType,Integer,OutputTree> bintree_context( tree, thrust::raw_pointer_cast( &m_codes.front() ), m_bbox );
+    kd::Kd_context<DIM,BboxType,Integer,OutputTree> bintree_context( tree, thrust::raw_pointer_cast( &m_codes.front() ), bbox );
 
     const uint32 bits = kd::Morton_bits<Integer,DIM>::value;
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2018, NVIDIA Corporation
+ * Copyright (c) 2010-2016, NVIDIA Corporation
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -130,7 +130,14 @@ struct Kd_node
         m_packed_info( split_dim | (index << 3) ),
         m_split_plane( split_plane ) {}
 
-    /// is a leaf?
+    /// leaf constructor
+    ///
+    /// \param index    child index
+    CUGAR_HOST_DEVICE Kd_node(const uint32 packed_info, const float split_plane) :
+        m_packed_info( packed_info ),
+		m_split_plane(split_plane) {}
+	
+	/// is a leaf?
     ///
     CUGAR_HOST_DEVICE uint32 is_leaf() const
     {
@@ -183,7 +190,29 @@ struct Kd_node
     ///
     CUGAR_HOST_DEVICE float get_split_plane() const { return m_split_plane; }
 
-    uint32 m_packed_info;
+	CUGAR_HOST_DEVICE
+	static Kd_node load(const Kd_node* node)
+	{
+	#if defined(CUGAR_DEVICE_COMPILATION)
+		const uint2 u = *reinterpret_cast<const uint2*>(node);
+		return Kd_node(u.x,__uint_as_float(u.y));
+	#else
+		return *node;
+	#endif
+	}
+
+	CUGAR_HOST_DEVICE
+	static Kd_node load_ldg(const Kd_node* node)
+	{
+	#if defined(CUGAR_DEVICE_COMPILATION)
+		const uint2 u = __ldg(reinterpret_cast<const uint2*>(node));
+		return Kd_node(u.x,__uint_as_float(u.y));
+	#else
+		return *node;
+	#endif
+	}
+
+	uint32 m_packed_info;
     float  m_split_plane;
 };
 

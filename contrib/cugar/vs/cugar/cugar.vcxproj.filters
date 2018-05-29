@@ -1,0 +1,444 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\cugar">
+      <UniqueIdentifier>{bc9a891a-494b-4d77-9f68-65c5dfed7229}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cugar\basic">
+      <UniqueIdentifier>{3e40ba02-fccb-45b9-9f77-79c999973ec7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cugar\basic\cuda">
+      <UniqueIdentifier>{71a1e9e7-d920-41d3-99a2-6d189d0e2bdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cugar\analysis">
+      <UniqueIdentifier>{ca05607d-b61e-4890-ae95-810c1a87ceea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cugar\bintree">
+      <UniqueIdentifier>{d16f2ba7-d682-435d-97fc-698ba4c45fd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cugar\linalg">
+      <UniqueIdentifier>{b2c89cff-f36f-4fbc-8bb4-fda08e813817}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cugar\sampling">
+      <UniqueIdentifier>{c5382975-f23c-40af-b865-6fb94055fe39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cugar\spherical">
+      <UniqueIdentifier>{aef88690-36a4-48f1-973f-347ea3bd0eb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cugar\bvh">
+      <UniqueIdentifier>{2ff4e8ee-b417-4831-ae29-855268aa075a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cugar\bvh\cuda">
+      <UniqueIdentifier>{342cc7bb-958a-47a3-a5f3-f2e45060f18f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cugar\bits">
+      <UniqueIdentifier>{9fed7eca-3679-41fb-b9e4-de5b29b740ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cugar\radixtree">
+      <UniqueIdentifier>{2a43b2f4-8d3e-4fe8-abb5-4638ec7ab473}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cugar\radixtree\cuda">
+      <UniqueIdentifier>{65274189-45c0-408e-a621-4cbc48877203}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cugar\tree">
+      <UniqueIdentifier>{7b445c8d-b1c4-4165-a999-4a9ea2d735ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cugar\tree\cuda">
+      <UniqueIdentifier>{81d8a066-772b-4696-82e1-728f9435fe1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\cugar\bsdf">
+      <UniqueIdentifier>{066c073f-d998-45ba-abc4-559c2969a0c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cugar\kd">
+      <UniqueIdentifier>{c28f8874-c0f6-46c3-b97b-174003cbef68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cugar\kd\cuda">
+      <UniqueIdentifier>{8c72e445-af88-4cc9-85d9-161a7d99c456}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cugar\image">
+      <UniqueIdentifier>{413c8a77-a50c-427b-8004-a28bd2588a43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cugar\color">
+      <UniqueIdentifier>{8d5afe28-2d98-405b-b6d3-2d13da4a88a8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\bsdf\ggx.h">
+      <Filter>Source Files\cugar\bsdf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\bsdf\lambert.h">
+      <Filter>Source Files\cugar\bsdf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\bsdf\differential_geometry.h">
+      <Filter>Source Files\cugar\bsdf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\bsdf\lambert_edf.h">
+      <Filter>Source Files\cugar\bsdf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\sampling\lfsr.h">
+      <Filter>Source Files\cugar\sampling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\image\tga.h">
+      <Filter>Source Files\cugar\image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\color\rgbe.h">
+      <Filter>Source Files\cugar\color</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\bsdf\lambert_trans.h">
+      <Filter>Source Files\cugar\bsdf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\sampling\variance.h">
+      <Filter>Source Files\cugar\sampling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kd\kd_node.h">
+      <Filter>Source Files\cugar\kd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kd\cuda\kd_builder.h">
+      <Filter>Source Files\cugar\kd\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kd\cuda\kd_builder_inline.h">
+      <Filter>Source Files\cugar\kd\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kd\cuda\kd_context.h">
+      <Filter>Source Files\cugar\kd\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kd\cuda\knn.h">
+      <Filter>Source Files\cugar\kd\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kd\cuda\knn_inline.h">
+      <Filter>Source Files\cugar\kd\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\bsdf\ltc.h">
+      <Filter>Source Files\cugar\bsdf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\bsdf\ggx_smith.h">
+      <Filter>Source Files\cugar\bsdf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\bsdf\ggx_common.h">
+      <Filter>Source Files\cugar\bsdf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\basic\memory_arena.h">
+      <Filter>Source Files\cugar\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\sampling\em.h">
+      <Filter>Source Files\cugar\sampling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\sampling\em_inl.h">
+      <Filter>Source Files\cugar\sampling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\sampling\mixtures.h">
+      <Filter>Source Files\cugar\sampling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\sampling\em_test.h">
+      <Filter>Source Files\cugar\sampling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\sampling\latin_hypercube.h">
+      <Filter>Source Files\cugar\sampling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\sampling\latin_hypercube_inline.h">
+      <Filter>Source Files\cugar\sampling</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cugar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\basic\algorithms.h">
+      <Filter>Source Files\cugar\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\basic\exceptions.h">
+      <Filter>Source Files\cugar\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\basic\functors.h">
+      <Filter>Source Files\cugar\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\basic\iterator.h">
+      <Filter>Source Files\cugar\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\basic\numbers.h">
+      <Filter>Source Files\cugar\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\basic\primitives.h">
+      <Filter>Source Files\cugar\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\basic\primitives_inl.h">
+      <Filter>Source Files\cugar\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\basic\strided_iterator.h">
+      <Filter>Source Files\cugar\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\basic\thrust_view.h">
+      <Filter>Source Files\cugar\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\basic\timer.h">
+      <Filter>Source Files\cugar\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\basic\types.h">
+      <Filter>Source Files\cugar\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\basic\utils.h">
+      <Filter>Source Files\cugar\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\basic\vector.h">
+      <Filter>Source Files\cugar\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\basic\vector_view.h">
+      <Filter>Source Files\cugar\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\basic\cuda\arch.h">
+      <Filter>Source Files\cugar\basic\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\basic\cuda\arch_inl.h">
+      <Filter>Source Files\cugar\basic\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\basic\cuda\hash.h">
+      <Filter>Source Files\cugar\basic\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\basic\cuda\pointers.h">
+      <Filter>Source Files\cugar\basic\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\basic\cuda\primitives.h">
+      <Filter>Source Files\cugar\basic\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\basic\cuda\primitives_inl.h">
+      <Filter>Source Files\cugar\basic\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\basic\cuda\sort.h">
+      <Filter>Source Files\cugar\basic\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\basic\cuda\timer.h">
+      <Filter>Source Files\cugar\basic\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\analysis\project.h">
+      <Filter>Source Files\cugar\analysis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\spherical\mappings.h">
+      <Filter>Source Files\cugar\spherical</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\spherical\mappings_inline.h">
+      <Filter>Source Files\cugar\spherical</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\spherical\oct.h">
+      <Filter>Source Files\cugar\spherical</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\spherical\sh.h">
+      <Filter>Source Files\cugar\spherical</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\spherical\sh_inline.h">
+      <Filter>Source Files\cugar\spherical</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\linalg\bbox.h">
+      <Filter>Source Files\cugar\linalg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\linalg\bbox_inline.h">
+      <Filter>Source Files\cugar\linalg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\linalg\vector.h">
+      <Filter>Source Files\cugar\linalg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\linalg\vector_inl.h">
+      <Filter>Source Files\cugar\linalg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\bintree\bintree_node.h">
+      <Filter>Source Files\cugar\bintree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\sampling\cp_rotations.h">
+      <Filter>Source Files\cugar\sampling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\sampling\distributions.h">
+      <Filter>Source Files\cugar\sampling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\sampling\multijitter.h">
+      <Filter>Source Files\cugar\sampling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\sampling\multijitter_inline.h">
+      <Filter>Source Files\cugar\sampling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\sampling\processes.h">
+      <Filter>Source Files\cugar\sampling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\sampling\processes_inline.h">
+      <Filter>Source Files\cugar\sampling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\sampling\random.h">
+      <Filter>Source Files\cugar\sampling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\sampling\weyl.h">
+      <Filter>Source Files\cugar\sampling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\linalg\matrix.h">
+      <Filter>Source Files\cugar\linalg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\linalg\matrix_inline.h">
+      <Filter>Source Files\cugar\linalg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\linalg\linear.h">
+      <Filter>Source Files\cugar\linalg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\bvh\bvh_inline.h">
+      <Filter>Source Files\cugar\bvh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\bvh\bvh_sah_builder.h">
+      <Filter>Source Files\cugar\bvh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\bvh\bvh_sah_builder_inline.h">
+      <Filter>Source Files\cugar\bvh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\bvh\bvh.h">
+      <Filter>Source Files\cugar\bvh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\bvh\cuda\lbvh_builder.h">
+      <Filter>Source Files\cugar\bvh\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\bvh\cuda\lbvh_builder_inline.h">
+      <Filter>Source Files\cugar\bvh\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\bvh\cuda\lbvh_test.h">
+      <Filter>Source Files\cugar\bvh\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\bvh\cuda\packing.h">
+      <Filter>Source Files\cugar\bvh\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\bintree\bintree_writer.h">
+      <Filter>Source Files\cugar\bintree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\bits\bitmask.h">
+      <Filter>Source Files\cugar\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\bits\morton.h">
+      <Filter>Source Files\cugar\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\bits\popcount.h">
+      <Filter>Source Files\cugar\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\radixtree\radixtree.h">
+      <Filter>Source Files\cugar\radixtree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\radixtree\radixtree_inline.h">
+      <Filter>Source Files\cugar\radixtree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\radixtree\cuda\radixtree_inline.h">
+      <Filter>Source Files\cugar\radixtree\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\radixtree\cuda\radixtree.h">
+      <Filter>Source Files\cugar\radixtree\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\radixtree\cuda\radixtree_context.h">
+      <Filter>Source Files\cugar\radixtree\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\bintree\bintree_visitor.h">
+      <Filter>Source Files\cugar\bintree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tree\cuda\reduce.h">
+      <Filter>Source Files\cugar\tree\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tree\cuda\reduce_inline.h">
+      <Filter>Source Files\cugar\tree\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tree\reduce.h">
+      <Filter>Source Files\cugar\tree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tree\reduce_inline.h">
+      <Filter>Source Files\cugar\tree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\basic\atomics.h">
+      <Filter>Source Files\cugar\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\basic\threads.h">
+      <Filter>Source Files\cugar\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\basic\priority_queue.h">
+      <Filter>Source Files\cugar\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\basic\priority_queue_inline.h">
+      <Filter>Source Files\cugar\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\basic\cuda\allocator.h">
+      <Filter>Source Files\cugar\basic\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\basic\shared_pointer.h">
+      <Filter>Source Files\cugar\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\basic\cuda\warp_atomics.h">
+      <Filter>Source Files\cugar\basic\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\bvh\bvh_node.h">
+      <Filter>Source Files\cugar\bvh</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\basic\exceptions.cpp">
+      <Filter>Source Files\cugar\basic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\image\tga.cpp">
+      <Filter>Source Files\cugar\image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\sampling\em_test.cpp">
+      <Filter>Source Files\cugar\sampling</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\basic\timer.cpp">
+      <Filter>Source Files\cugar\basic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\spherical\oct.cpp">
+      <Filter>Source Files\cugar\spherical</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\spherical\sh.cpp">
+      <Filter>Source Files\cugar\spherical</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\basic\atomics.cpp">
+      <Filter>Source Files\cugar\basic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\basic\threads.cpp">
+      <Filter>Source Files\cugar\basic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\basic\cuda\allocator.cpp">
+      <Filter>Source Files\cugar\basic\cuda</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\basic\cuda\arch.cpp">
+      <Filter>Source Files\cugar\basic\cuda</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CudaCompile Include="..\..\basic\cuda\sort.cu">
+      <Filter>Source Files\cugar\basic\cuda</Filter>
+    </CudaCompile>
+    <CudaCompile Include="..\..\bsdf\ltc_test.cu">
+      <Filter>Source Files\cugar\bsdf</Filter>
+    </CudaCompile>
+    <CudaCompile Include="..\..\kd\cuda\kd_test.cu">
+      <Filter>Source Files\cugar\kd\cuda</Filter>
+    </CudaCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\cugar.dox">
+      <Filter>Source Files\cugar</Filter>
+    </None>
+  </ItemGroup>
+</Project>

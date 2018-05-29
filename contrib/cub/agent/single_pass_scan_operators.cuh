@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (c) 2011, Duane Merrill.  All rights reserved.
- * Copyright (c) 2011-2016, NVIDIA CORPORATION.  All rights reserved.
+ * Copyright (c) 2011-2018, NVIDIA CORPORATION.  All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -105,7 +105,7 @@ struct BlockScanRunningPrefixOp
 enum ScanTileStatus
 {
     SCAN_TILE_OOB,          // Out-of-bounds (e.g., padding)
-    SCAN_TILE_INVALID = 99,      // Not yet processed
+    SCAN_TILE_INVALID = 99, // Not yet processed
     SCAN_TILE_PARTIAL,      // Tile aggregate is available
     SCAN_TILE_INCLUSIVE,    // Inclusive tile prefix is available
 };
@@ -164,25 +164,24 @@ struct ScanTileState<T, true>
 
 
     // Device storage
-    TileDescriptor *d_tile_status;
-
+    TxnWord *d_tile_descriptors;
 
     /// Constructor
     __host__ __device__ __forceinline__
     ScanTileState()
     :
-        d_tile_status(NULL)
+        d_tile_descriptors(NULL)
     {}
 
 
     /// Initializer
     __host__ __device__ __forceinline__
     cudaError_t Init(
-        int     num_tiles,                          ///< [in] Number of tiles
+        int     /*num_tiles*/,                      ///< [in] Number of tiles
         void    *d_temp_storage,                    ///< [in] %Device-accessible allocation of temporary storage.  When NULL, the required allocation size is written to \p temp_storage_bytes and no work is done.
-        size_t  temp_storage_bytes)                 ///< [in] Size in bytes of \t d_temp_storage allocation
+        size_t  /*temp_storage_bytes*/)             ///< [in] Size in bytes of \t d_temp_storage allocation
     {
-        d_tile_status = reinterpret_cast<TileDescriptor*>(d_temp_storage);
+        d_tile_descriptors = reinterpret_cast<TxnWord*>(d_temp_storage);
         return cudaSuccess;
     }
 
@@ -206,16 +205,22 @@ struct ScanTileState<T, true>
     __device__ __forceinline__ void InitializeStatus(int num_tiles)
     {
         int tile_idx = (blockIdx.x * blockDim.x) + threadIdx.x;
+
+        TxnWord val = TxnWord();
+        TileDescriptor *descriptor = reinterpret_cast<TileDescriptor*>(&val);
+
         if (tile_idx < num_tiles)
         {
             // Not-yet-set
-            d_tile_status[TILE_STATUS_PADDING + tile_idx].status = StatusWord(SCAN_TILE_INVALID);
+            descriptor->status = StatusWord(SCAN_TILE_INVALID);
+            d_tile_descriptors[TILE_STATUS_PADDING + tile_idx] = val;
         }
 
         if ((blockIdx.x == 0) && (threadIdx.x < TILE_STATUS_PADDING))
         {
             // Padding
-            d_tile_status[threadIdx.x].status = StatusWord(SCAN_TILE_OOB);
+            descriptor->status = StatusWord(SCAN_TILE_OOB);
+            d_tile_descriptors[threadIdx.x] = val;
         }
     }
 
@@ -231,7 +236,7 @@ struct ScanTileState<T, true>
 
         TxnWord alias;
         *reinterpret_cast<TileDescriptor*>(&alias) = tile_descriptor;
-        ThreadStore<STORE_CG>(reinterpret_cast<TxnWord*>(d_tile_status + TILE_STATUS_PADDING + tile_idx), alias);
+        ThreadStore<STORE_CG>(d_tile_descriptors + TILE_STATUS_PADDING + tile_idx, alias);
     }
 
 
@@ -246,7 +251,7 @@ struct ScanTileState<T, true>
 
         TxnWord alias;
         *reinterpret_cast<TileDescriptor*>(&alias) = tile_descriptor;
-        ThreadStore<STORE_CG>(reinterpret_cast<TxnWord*>(d_tile_status + TILE_STATUS_PADDING + tile_idx), alias);
+        ThreadStore<STORE_CG>(d_tile_descriptors + TILE_STATUS_PADDING + tile_idx, alias);
     }
 
     /**
@@ -257,16 +262,14 @@ struct ScanTileState<T, true>
         StatusWord      &status,
         T               &value)
     {
-        TxnWord         alias           = ThreadLoad<LOAD_CG>(reinterpret_cast<TxnWord*>(d_tile_status + TILE_STATUS_PADDING + tile_idx));
-        TileDescriptor  tile_descriptor = reinterpret_cast<TileDescriptor&>(alias);
-
-        while (tile_descriptor.status == SCAN_TILE_INVALID)
+        TileDescriptor tile_descriptor;
+        do
         {
             __threadfence_block(); // prevent hoisting loads from loop
-
-            alias           = ThreadLoad<LOAD_CG>(reinterpret_cast<TxnWord*>(d_tile_status + TILE_STATUS_PADDING + tile_idx));
+            TxnWord alias = ThreadLoad<LOAD_CG>(d_tile_descriptors + TILE_STATUS_PADDING + tile_idx);
             tile_descriptor = reinterpret_cast<TileDescriptor&>(alias);
-        }
+
+        } while (WARP_ANY((tile_descriptor.status == SCAN_TILE_INVALID), 0xffffffff));
 
         status = tile_descriptor.status;
         value = tile_descriptor.value;
@@ -527,25 +530,25 @@ struct ReduceByKeyScanTileState<ValueT, KeyT, true>
 
 
     // Device storage
-    TileDescriptor *d_tile_status;
+    TxnWord *d_tile_descriptors;
 
 
     /// Constructor
     __host__ __device__ __forceinline__
     ReduceByKeyScanTileState()
     :
-        d_tile_status(NULL)
+        d_tile_descriptors(NULL)
     {}
 
 
     /// Initializer
     __host__ __device__ __forceinline__
     cudaError_t Init(
-        int     num_tiles,                          ///< [in] Number of tiles
+        int     /*num_tiles*/,                      ///< [in] Number of tiles
         void    *d_temp_storage,                    ///< [in] %Device-accessible allocation of temporary storage.  When NULL, the required allocation size is written to \p temp_storage_bytes and no work is done.
-        size_t  temp_storage_bytes)                 ///< [in] Size in bytes of \t d_temp_storage allocation
+        size_t  /*temp_storage_bytes*/)             ///< [in] Size in bytes of \t d_temp_storage allocation
     {
-        d_tile_status = reinterpret_cast<TileDescriptor*>(d_temp_storage);
+        d_tile_descriptors = reinterpret_cast<TxnWord*>(d_temp_storage);
         return cudaSuccess;
     }
 
@@ -568,17 +571,22 @@ struct ReduceByKeyScanTileState<ValueT, KeyT, true>
      */
     __device__ __forceinline__ void InitializeStatus(int num_tiles)
     {
-        int tile_idx = (blockIdx.x * blockDim.x) + threadIdx.x;
+        int             tile_idx    = (blockIdx.x * blockDim.x) + threadIdx.x;
+        TxnWord         val         = TxnWord();
+        TileDescriptor  *descriptor = reinterpret_cast<TileDescriptor*>(&val);
+
         if (tile_idx < num_tiles)
         {
             // Not-yet-set
-            d_tile_status[TILE_STATUS_PADDING + tile_idx].status = StatusWord(SCAN_TILE_INVALID);
+            descriptor->status = StatusWord(SCAN_TILE_INVALID);
+            d_tile_descriptors[TILE_STATUS_PADDING + tile_idx] = val;
         }
 
         if ((blockIdx.x == 0) && (threadIdx.x < TILE_STATUS_PADDING))
         {
             // Padding
-            d_tile_status[threadIdx.x].status = StatusWord(SCAN_TILE_OOB);
+            descriptor->status = StatusWord(SCAN_TILE_OOB);
+            d_tile_descriptors[threadIdx.x] = val;
         }
     }
 
@@ -595,7 +603,7 @@ struct ReduceByKeyScanTileState<ValueT, KeyT, true>
 
         TxnWord alias;
         *reinterpret_cast<TileDescriptor*>(&alias) = tile_descriptor;
-        ThreadStore<STORE_CG>(reinterpret_cast<TxnWord*>(d_tile_status + TILE_STATUS_PADDING + tile_idx), alias);
+        ThreadStore<STORE_CG>(d_tile_descriptors + TILE_STATUS_PADDING + tile_idx, alias);
     }
 
 
@@ -611,7 +619,7 @@ struct ReduceByKeyScanTileState<ValueT, KeyT, true>
 
         TxnWord alias;
         *reinterpret_cast<TileDescriptor*>(&alias) = tile_descriptor;
-        ThreadStore<STORE_CG>(reinterpret_cast<TxnWord*>(d_tile_status + TILE_STATUS_PADDING + tile_idx), alias);
+        ThreadStore<STORE_CG>(d_tile_descriptors + TILE_STATUS_PADDING + tile_idx, alias);
     }
 
     /**
@@ -622,16 +630,29 @@ struct ReduceByKeyScanTileState<ValueT, KeyT, true>
         StatusWord              &status,
         KeyValuePairT           &value)
     {
-        TxnWord         alias           = ThreadLoad<LOAD_CG>(reinterpret_cast<TxnWord*>(d_tile_status + TILE_STATUS_PADDING + tile_idx));
-        TileDescriptor  tile_descriptor = reinterpret_cast<TileDescriptor&>(alias);
+//        TxnWord         alias           = ThreadLoad<LOAD_CG>(d_tile_descriptors + TILE_STATUS_PADDING + tile_idx);
+//        TileDescriptor  tile_descriptor = reinterpret_cast<TileDescriptor&>(alias);
+//
+//        while (tile_descriptor.status == SCAN_TILE_INVALID)
+//        {
+//            __threadfence_block(); // prevent hoisting loads from loop
+//
+//            alias           = ThreadLoad<LOAD_CG>(d_tile_descriptors + TILE_STATUS_PADDING + tile_idx);
+//            tile_descriptor = reinterpret_cast<TileDescriptor&>(alias);
+//        }
+//
+//        status      = tile_descriptor.status;
+//        value.value = tile_descriptor.value;
+//        value.key   = tile_descriptor.key;
 
-        while (tile_descriptor.status == SCAN_TILE_INVALID)
+        TileDescriptor tile_descriptor;
+        do
         {
-            __threadfence_block();  // prevent hoisting loads from loop
-
-            alias           = ThreadLoad<LOAD_CG>(reinterpret_cast<TxnWord*>(d_tile_status + TILE_STATUS_PADDING + tile_idx));
+            __threadfence_block(); // prevent hoisting loads from loop
+            TxnWord alias = ThreadLoad<LOAD_CG>(d_tile_descriptors + TILE_STATUS_PADDING + tile_idx);
             tile_descriptor = reinterpret_cast<TileDescriptor&>(alias);
-        }
+
+        } while (WARP_ANY((tile_descriptor.status == SCAN_TILE_INVALID), 0xffffffff));
 
         status      = tile_descriptor.status;
         value.value = tile_descriptor.value;
@@ -652,13 +673,14 @@ struct ReduceByKeyScanTileState<ValueT, KeyT, true>
  * aggregates/prefixes from predecessor tiles to become available.
  */
 template <
-    typename T,
-    typename ScanOpT,
-    typename ScanTileStateT>
+    typename    T,
+    typename    ScanOpT,
+    typename    ScanTileStateT,
+    int         PTX_ARCH = CUB_PTX_ARCH>
 struct TilePrefixCallbackOp
 {
     // Parameterized warp reduce
-    typedef WarpReduce<T> WarpReduceT;
+    typedef WarpReduce<T, CUB_PTX_WARP_THREADS, PTX_ARCH> WarpReduceT;
 
     // Temporary storage type
     struct _TempStorage
@@ -666,6 +688,7 @@ struct TilePrefixCallbackOp
         typename WarpReduceT::TempStorage   warp_reduce;
         T                                   exclusive_prefix;
         T                                   inclusive_prefix;
+        T                                   block_aggregate;
     };
 
     // Alias wrapper allowing temporary storage to be unioned
@@ -690,8 +713,8 @@ struct TilePrefixCallbackOp
         ScanOpT              scan_op,
         int                 tile_idx)
     :
-        tile_status(tile_status),
         temp_storage(temp_storage.Alias()),
+        tile_status(tile_status),
         scan_op(scan_op),
         tile_idx(tile_idx) {}
 
@@ -721,9 +744,11 @@ struct TilePrefixCallbackOp
     __device__ __forceinline__
     T operator()(T block_aggregate)
     {
+
         // Update our status with our tile-aggregate
         if (threadIdx.x == 0)
         {
+            temp_storage.block_aggregate = block_aggregate;
             tile_status.SetPartial(tile_idx, block_aggregate);
         }
 
@@ -738,7 +763,7 @@ struct TilePrefixCallbackOp
         exclusive_prefix = window_aggregate;
 
         // Keep sliding the window back until we come across a tile whose inclusive prefix is known
-        while (WarpAll(predecessor_status != StatusWord(SCAN_TILE_INCLUSIVE)))
+        while (WARP_ALL((predecessor_status != StatusWord(SCAN_TILE_INCLUSIVE)), 0xffffffff))
         {
             predecessor_idx -= CUB_PTX_WARP_THREADS;
 
@@ -773,6 +798,13 @@ struct TilePrefixCallbackOp
     T GetInclusivePrefix()
     {
         return temp_storage.inclusive_prefix;
+    }
+
+    // Get the block aggregate stored in temporary storage
+    __device__ __forceinline__
+    T GetBlockAggregate()
+    {
+        return temp_storage.block_aggregate;
     }
 
 };

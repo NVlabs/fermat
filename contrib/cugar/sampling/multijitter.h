@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2018, NVIDIA Corporation
+ * Copyright (c) 2010-2011, NVIDIA Corporation
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -55,6 +55,53 @@ namespace cugar {
  *  This module defines utilities to construct multi-jittered sampling patterns
  *  \{
  */
+
+/// The repeatable correlated multi-jitter function described in:
+/// "Correlated Multi-Jittered Sampling", by Andrew Kensler
+///
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+float2 correlated_multijitter(const uint32 s, const uint32 m, const uint32 n, const uint32 p)
+{
+	const uint32 sx = permute(s % m, m, p * 0xa511e9b3);
+	const uint32 sy = permute(s / m, n, p * 0x63d83595);
+	const float jx = randfloat(s, p * 0xa399d265);
+	const float jy = randfloat(s, p * 0x711ad6a5);
+	return make_float2(
+		(s % m + (sy + jx) / n) / m,
+		(s / m + (sx + jy) / m) / n );
+}
+
+/// A stateful sampler that implements the repeatable correlated multi-jitter function described in:
+/// "Correlated Multi-Jittered Sampling", by Andrew Kensler
+///
+struct CorrelatedMJSampler
+{
+	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+	CorrelatedMJSampler(const uint32 _s, const uint32 _m, const uint32 _n, const uint32 _p) :
+		s(_s), m(_m), n(_n), p(_p), c(-1.0f) {}
+
+	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+	float next()
+	{
+		if (c != -1.0f)
+		{
+			const float r = c; c = -1.0f;
+			return r;
+		}
+		else
+		{
+			const float2 r = correlated_multijitter( s, m, n, p++ );
+			c = r.y;
+			return r.x;
+		}
+	}
+
+	uint32 s;
+	uint32 m;
+	uint32 n;
+	uint32 p;
+	float  c;
+};
 
 ///
 /// Multi-Jittered Sampler

@@ -1,6 +1,6 @@
 /*
  * cugar
- * Copyright (c) 2011-2014, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2011-2018, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -140,6 +140,12 @@
 #define WINONLY(x) x
 #else
 #define WINONLY(x)
+#endif
+
+#ifdef _MSC_VER
+#ifndef _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS 1
+#endif
 #endif
 
 // CUGAR_VAR_UNUSED can be prepended to a variable to turn off unused variable warnings

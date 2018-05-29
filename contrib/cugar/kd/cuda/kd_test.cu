@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2018, NVIDIA Corporation
+ * Copyright (c) 2010-2011, NVIDIA Corporation
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -243,7 +243,8 @@ void test_knn(
             kd_nodes,
             kd_ranges,
             kd_leaves,
-            kd_points,
+			cuda::make_load_pointer<cuda::LOAD_LDG>(kd_points),
+			//kd_points,
             results );
 
         cudaEventRecord( stop, 0 );
@@ -422,7 +423,7 @@ void kd_test_2d()
         builder.build(
             context,
             kd_index,
-            Bbox3f( Vector3f(0.0f), Vector3f(1.0f) ),
+            Bbox2f( Vector2f(0.0f), Vector2f(1.0f) ),
             d_points.begin(),
             d_points.begin() + n_points,
             8u );
@@ -624,7 +625,7 @@ void kd_test_3d()
     uint32 n_test_points = 256*1024;
 
     vector<device_tag,cuda::Kd_knn_result> d_results( n_test_points*64 );
-
+	
     test_knn<1>(
         n_test_points,
         raw_pointer( kd_nodes ),
@@ -684,8 +685,14 @@ void kd_test_3d()
 
 void kd_test()
 {
-	kd_test_2d();
-	kd_test_3d();
+	try{
+		kd_test_2d();
+		kd_test_3d();
+	}
+	catch (cuda_error error)
+	{
+		fprintf(stderr, "error caught: %s\n", error.what());
+	}
 }
 
 } // namespace cugar

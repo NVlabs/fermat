@@ -35,7 +35,7 @@
 ///
 ///\par
 ///\n
-/// <b>Fermat</b>, is a high performance research oriented physically based rendering system,
+/// <a href="https://github.com/NVlabs/fermat">Fermat</a>, is a high performance research oriented physically based rendering system,
 /// trying to produce beautiful pictures following the mathematician&apos;s principle of least time.
 ///\n
 /// It is a CUDA physically based research renderer designed and developed by Jacopo Pantaleoni at NVIDIA.
@@ -46,13 +46,13 @@
 /// The choice of CUDA C++ has been made for various reasons: the first was to allow the highest level of expression and
 /// flexibility in terms of programmability (for example, with template based meta-programming); the second was perhaps
 /// historical: when Fermat's development was started, other ray tracing platforms like Microsoft DXR did not exist yet.
-/// The ray tracing core employed by Fermat is OptiX prime - though it is highly likely that future versions will switch
+/// The ray tracing core employed by Fermat is OptiX Prime - though it is highly likely that future versions will switch
 /// to OptiX, or even offer a DXR backend.
 ///\n
-/// Fermat is built on top of another library co-developed for this project: CUGAR - CUDA Graphics AcceleratoR.
+/// Fermat is built on top of another library co-developed for this project: \ref cugar_page - CUDA Graphics AcceleratoR.
 /// This is a template library of low-level graphics tools, including algorithms for BVH, Kd-tree and octree construction,
 /// sphericals harmonics, sampling, and so on and so on.
-/// While packaged together, CUGAR can be thought of a separate educational project by itself.
+/// While packaged together, CUGAR can be thought of as a separate educational project by itself.
 /// More information can be found in the relevant Doxygen documentation.
 ///
 /// \section FermatIntroductionSection Introduction
@@ -77,7 +77,7 @@
 ///   EGRW '02 Proceedings of the 13th Eurographics workshop on Rendering
 ///   Pages 125-134
 ///\par
-/// All renderers are implemented on top of a single virtual interace, namely the RendererInterface.
+/// All renderers are implemented on top of a single virtual interface, namely the RendererInterface.
 /// Among the various methods this class must implement (e.g. for self initialization, registering auxiliary frame-buffer channels, handling mouse and keyboard events, etc),
 /// it must implement the \ref RendererInterfaceRenderMethod "void RendererInterface::render(const uint32 instance, Renderer& renderer)" method, which takes a frame <i>instance</i> number, useful for progressive rendering, and a reference to a Renderer object:
 /// the latter encodes all the information belonging to the current rendering context, including the scene mesh, the output frame-buffer, and so on and so on.
@@ -118,7 +118,17 @@
 ///
 /// \section Contributors
 ///\par
-/// Fermat is made and mantained by <a href="jpantaleoni@nvidia.com">Jacopo Pantaleoni</a>.
+/// <a href="https://github.com/NVlabs/fermat">Fermat</a> is made and mantained by <a href="jpantaleoni@nvidia.com">Jacopo Pantaleoni</a>.
+///
+/// \section DownloadSection Download
+///\par
+/// You can download Fermat from GitHub at:
+///\n
+/// <a href="https://github.com/NVlabs/fermat">https://github.com/NVlabs/fermat</a>
+///\n
+/// or directly clone the repository with the command:
+///\n
+/// git clone https://github.com/NVlabs/fermat.io
 ///
 ///\htmlonly
 /// <a href="http://nvidia.com"><img src="nvidia.png" style="position:relative; bottom:-10px; border:0px;"/></a>

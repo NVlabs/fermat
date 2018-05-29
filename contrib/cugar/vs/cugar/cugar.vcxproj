@@ -1,0 +1,310 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{BAAC2EFC-A764-40B2-9333-633048E0E7AD}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>cugar</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 9.2.props" />
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <CustomBuildAfterTargets>Build</CustomBuildAfterTargets>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;CUGAR_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;CUGAR_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;CUGAR_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\..\..\;..\..\contrib;%(AdditionalIncludeDirectories);$(CudaToolkitIncludeDir)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;cudart.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <CudaCompile>
+      <CodeGeneration>compute_70,sm_70</CodeGeneration>
+      <TargetMachinePlatform>64</TargetMachinePlatform>
+    </CudaCompile>
+    <CustomBuildStep>
+      <Command>copy $(TargetPath)/cugar.lib ../../win64/</Command>
+    </CustomBuildStep>
+    <PostBuildEvent>
+      <Command>copy $(TargetPath) ..\..\win64\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\analysis\project.h" />
+    <ClInclude Include="..\..\basic\algorithms.h" />
+    <ClInclude Include="..\..\basic\atomics.h" />
+    <ClInclude Include="..\..\basic\cuda\allocator.h" />
+    <ClInclude Include="..\..\basic\cuda\arch.h" />
+    <ClInclude Include="..\..\basic\cuda\arch_inl.h" />
+    <ClInclude Include="..\..\basic\cuda\hash.h" />
+    <ClInclude Include="..\..\basic\cuda\pointers.h" />
+    <ClInclude Include="..\..\basic\cuda\primitives.h" />
+    <ClInclude Include="..\..\basic\cuda\primitives_inl.h" />
+    <ClInclude Include="..\..\basic\cuda\sort.h" />
+    <ClInclude Include="..\..\basic\cuda\timer.h" />
+    <ClInclude Include="..\..\basic\cuda\warp_atomics.h" />
+    <ClInclude Include="..\..\basic\exceptions.h" />
+    <ClInclude Include="..\..\basic\functors.h" />
+    <ClInclude Include="..\..\basic\iterator.h" />
+    <ClInclude Include="..\..\basic\memory_arena.h" />
+    <ClInclude Include="..\..\basic\numbers.h" />
+    <ClInclude Include="..\..\basic\primitives.h" />
+    <ClInclude Include="..\..\basic\primitives_inl.h" />
+    <ClInclude Include="..\..\basic\priority_queue.h" />
+    <ClInclude Include="..\..\basic\priority_queue_inline.h" />
+    <ClInclude Include="..\..\basic\shared_pointer.h" />
+    <ClInclude Include="..\..\basic\strided_iterator.h" />
+    <ClInclude Include="..\..\basic\threads.h" />
+    <ClInclude Include="..\..\basic\thrust_view.h" />
+    <ClInclude Include="..\..\basic\timer.h" />
+    <ClInclude Include="..\..\basic\types.h" />
+    <ClInclude Include="..\..\basic\utils.h" />
+    <ClInclude Include="..\..\basic\vector.h" />
+    <ClInclude Include="..\..\basic\vector_view.h" />
+    <ClInclude Include="..\..\bintree\bintree_visitor.h" />
+    <ClInclude Include="..\..\bintree\bintree_writer.h" />
+    <ClInclude Include="..\..\bintree\bintree_node.h" />
+    <ClInclude Include="..\..\bits\bitmask.h" />
+    <ClInclude Include="..\..\bits\morton.h" />
+    <ClInclude Include="..\..\bits\popcount.h" />
+    <ClInclude Include="..\..\bsdf\differential_geometry.h" />
+    <ClInclude Include="..\..\bsdf\ggx.h" />
+    <ClInclude Include="..\..\bsdf\ggx_common.h" />
+    <ClInclude Include="..\..\bsdf\ggx_smith.h" />
+    <ClInclude Include="..\..\bsdf\lambert.h" />
+    <ClInclude Include="..\..\bsdf\lambert_edf.h" />
+    <ClInclude Include="..\..\bsdf\lambert_trans.h" />
+    <ClInclude Include="..\..\bsdf\ltc.h" />
+    <ClInclude Include="..\..\bvh\bvh.h" />
+    <ClInclude Include="..\..\bvh\bvh_inline.h" />
+    <ClInclude Include="..\..\bvh\bvh_node.h" />
+    <ClInclude Include="..\..\bvh\bvh_sah_builder.h" />
+    <ClInclude Include="..\..\bvh\bvh_sah_builder_inline.h" />
+    <ClInclude Include="..\..\bvh\cuda\lbvh_builder.h" />
+    <ClInclude Include="..\..\bvh\cuda\lbvh_builder_inline.h" />
+    <ClInclude Include="..\..\bvh\cuda\lbvh_test.h" />
+    <ClInclude Include="..\..\bvh\cuda\packing.h" />
+    <ClInclude Include="..\..\color\rgbe.h" />
+    <ClInclude Include="..\..\image\tga.h" />
+    <ClInclude Include="..\..\kd\cuda\kd_builder.h" />
+    <ClInclude Include="..\..\kd\cuda\kd_builder_inline.h" />
+    <ClInclude Include="..\..\kd\cuda\kd_context.h" />
+    <ClInclude Include="..\..\kd\cuda\knn.h" />
+    <ClInclude Include="..\..\kd\cuda\knn_inline.h" />
+    <ClInclude Include="..\..\kd\kd_node.h" />
+    <ClInclude Include="..\..\linalg\bbox.h" />
+    <ClInclude Include="..\..\linalg\bbox_inline.h" />
+    <ClInclude Include="..\..\linalg\linear.h" />
+    <ClInclude Include="..\..\linalg\matrix.h" />
+    <ClInclude Include="..\..\linalg\matrix_inline.h" />
+    <ClInclude Include="..\..\linalg\vector.h" />
+    <ClInclude Include="..\..\linalg\vector_inl.h" />
+    <ClInclude Include="..\..\radixtree\cuda\radixtree.h" />
+    <ClInclude Include="..\..\radixtree\cuda\radixtree_context.h" />
+    <ClInclude Include="..\..\radixtree\cuda\radixtree_inline.h" />
+    <ClInclude Include="..\..\radixtree\radixtree.h" />
+    <ClInclude Include="..\..\radixtree\radixtree_inline.h" />
+    <ClInclude Include="..\..\sampling\cp_rotations.h" />
+    <ClInclude Include="..\..\sampling\distributions.h" />
+    <ClInclude Include="..\..\sampling\em.h" />
+    <ClInclude Include="..\..\sampling\em_inl.h" />
+    <ClInclude Include="..\..\sampling\em_test.h" />
+    <ClInclude Include="..\..\sampling\latin_hypercube.h" />
+    <ClInclude Include="..\..\sampling\latin_hypercube_inline.h" />
+    <ClInclude Include="..\..\sampling\lfsr.h" />
+    <ClInclude Include="..\..\sampling\mixtures.h" />
+    <ClInclude Include="..\..\sampling\multijitter.h" />
+    <ClInclude Include="..\..\sampling\multijitter_inline.h" />
+    <ClInclude Include="..\..\sampling\processes.h" />
+    <ClInclude Include="..\..\sampling\processes_inline.h" />
+    <ClInclude Include="..\..\sampling\random.h" />
+    <ClInclude Include="..\..\sampling\variance.h" />
+    <ClInclude Include="..\..\sampling\weyl.h" />
+    <ClInclude Include="..\..\spherical\mappings.h" />
+    <ClInclude Include="..\..\spherical\mappings_inline.h" />
+    <ClInclude Include="..\..\spherical\oct.h" />
+    <ClInclude Include="..\..\spherical\sh.h" />
+    <ClInclude Include="..\..\spherical\sh_inline.h" />
+    <ClInclude Include="..\..\tree\cuda\reduce.h" />
+    <ClInclude Include="..\..\tree\cuda\reduce_inline.h" />
+    <ClInclude Include="..\..\tree\reduce.h" />
+    <ClInclude Include="..\..\tree\reduce_inline.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\basic\atomics.cpp" />
+    <ClCompile Include="..\..\basic\cuda\allocator.cpp" />
+    <ClCompile Include="..\..\basic\cuda\arch.cpp" />
+    <ClCompile Include="..\..\basic\exceptions.cpp" />
+    <ClCompile Include="..\..\basic\threads.cpp" />
+    <ClCompile Include="..\..\basic\timer.cpp" />
+    <ClCompile Include="..\..\image\tga.cpp" />
+    <ClCompile Include="..\..\sampling\em_test.cpp" />
+    <ClCompile Include="..\..\spherical\oct.cpp" />
+    <ClCompile Include="..\..\spherical\sh.cpp" />
+    <ClCompile Include="cugar.cpp" />
+    <ClCompile Include="dllmain.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CudaCompile Include="..\..\basic\cuda\sort.cu" />
+    <CudaCompile Include="..\..\bsdf\ltc_test.cu" />
+    <CudaCompile Include="..\..\kd\cuda\kd_test.cu" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\cugar.dox" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 9.2.targets" />
+  </ImportGroup>
+</Project>

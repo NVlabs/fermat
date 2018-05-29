@@ -198,6 +198,7 @@ void SortEnactor::sort(const uint32 count, SortBuffers<uint32*,uint32*>& buffers
     if (kernel.device_func)
     {
       kernel.device_func<<<1, kernel.num_threads>>>(buffers.keys[buffers.selector], buffers.values[buffers.selector], count);
+	  //cuda::sync_and_check_error("sort kernel");
       return;
     }
 
@@ -257,6 +258,7 @@ void SortEnactor::sort(const uint32 count, SortBuffers<uint64*,uint32*>& buffers
     if (kernel.device_func)
     {
       kernel.device_func<<<1, kernel.num_threads>>>(buffers.keys[buffers.selector], buffers.values[buffers.selector], count);
+	  //cuda::sync_and_check_error("sort kernel");
       return;
     }
 

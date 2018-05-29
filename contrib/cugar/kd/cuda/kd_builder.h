@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2018, NVIDIA Corporation
+ * Copyright (c) 2010-2016, NVIDIA Corporation
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -149,7 +149,6 @@ struct Kd_builder
     vector<device_tag,Integer>			m_codes;
 	caching_device_vector<Integer>      m_temp_codes;
 	caching_device_vector<uint32>       m_temp_index;
-    Bbox3f                              m_bbox;
     uint32                              m_node_count;
     uint32                              m_leaf_count;
 

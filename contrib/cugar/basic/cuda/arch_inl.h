@@ -1,6 +1,6 @@
 /*
  * cugar
- * Copyright (c) 2011-2014, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2011-2018, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -219,11 +219,17 @@ inline size_t max_active_blocks_per_multiprocessor(const cudaDeviceProp&        
 template <typename KernelFunction>
 size_t max_active_blocks_per_multiprocessor(KernelFunction kernel, const size_t CTA_SIZE, const size_t dynamic_smem_bytes)
 {
+  #if 0
     cudaDeviceProp properties = get_device_properties();
 
     cudaFuncAttributes attributes = function_attributes( kernel );
 
     return max_active_blocks_per_multiprocessor(properties, attributes, CTA_SIZE, dynamic_smem_bytes);
+  #else
+	int maxActiveBlocks;
+	cudaOccupancyMaxActiveBlocksPerMultiprocessor( &maxActiveBlocks, kernel, int(CTA_SIZE), int(dynamic_smem_bytes) );
+	return size_t(maxActiveBlocks);
+  #endif
 }
 
 template <typename KernelFunction>
@@ -267,18 +273,39 @@ inline size_t max_blocksize_with_highest_occupancy(const cudaDeviceProp&        
         if (highest_occupancy == max_occupancy)
             return max_blocksize;
     }
-
     return max_blocksize;
 }
+
+// a utility unary functor to return the number of smem bytes per block, given the amount of smem bytes per thread
+//
+struct PerThreadSmemUnaryFunction
+{
+	// constructor
+	CUGAR_HOST_DEVICE
+	PerThreadSmemUnaryFunction(const int _bytes_per_thread) : bytes_per_thread(_bytes_per_thread) {}
+
+	// unary operator
+	CUGAR_HOST_DEVICE
+	int operator() (const int block_size) const { return block_size * bytes_per_thread; }
+
+	int bytes_per_thread;
+};
 
 template <typename KernelFunction>
 size_t max_blocksize_with_highest_occupancy(KernelFunction kernel, size_t dynamic_smem_bytes_per_thread)
 {
+#if 0
     cudaDeviceProp properties = get_device_properties();
 
     cudaFuncAttributes attributes = function_attributes( kernel );
 
     return max_blocksize_with_highest_occupancy(properties, attributes, dynamic_smem_bytes_per_thread);
+#else
+	int blockSize;
+	int minGridSize;
+	cudaOccupancyMaxPotentialBlockSizeVariableSMem( &minGridSize, &blockSize, kernel, PerThreadSmemUnaryFunction(int(dynamic_smem_bytes_per_thread)));
+	return size_t(blockSize);
+#endif
 }
 
 inline bool is_tcc_enabled()
@@ -293,7 +320,9 @@ inline void check_error(const cudaError_t error, const char *message)
 	if (error != cudaSuccess)
     {
         const char* error_string = cudaGetErrorString(error);
-        throw cuda_error( error_string );
+		char error_message[2048];
+		sprintf(error_message, "%s in %s", error_string, message);
+        throw cuda_error( error_message );
 	}
 }
 inline void check_error(const char *message)

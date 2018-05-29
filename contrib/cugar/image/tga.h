@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2018, NVIDIA Corporation
+ * Copyright (c) 2010-2011, NVIDIA Corporation
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -62,16 +62,17 @@ enum class TGAPixels
 {
 	RGB  = 0,
 	BGR  = 1,
-	RGBA = 2
+	RGBA = 2,
+	BW   = 3
 };
 
 // Load an uncompressed tga image, 24 or 32 bpp. The pixel memory is allocated
 // by the routine and must be freed by the caller using delete[].
-unsigned char*  load_tga ( const char *filename, TGAHeader *hdr );
+unsigned char*  load_tga(const char *filename, TGAHeader *hdr);
 
 // Write a TGA to file, 24 bpp, with the specified parameters. rgb indicates
 // whether pixdata is in RGB or BGR format.
-bool            write_tga ( const char* filename, int width, int height, const unsigned char *pixdata, TGAPixels input_type);
+bool            write_tga(const char* filename, int width, int height, const unsigned char *pixdata, TGAPixels input_type);
 
 } // namespace cugar
 

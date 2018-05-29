@@ -1,7 +1,7 @@
 /*
  * CUGAR : Cuda Graphics Accelerator
  *
- * Copyright (c) 2011-2014, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2011-2018, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -33,6 +33,7 @@
 #include <cugar/basic/types.h>
 #include <vector_types.h>
 #include <vector_functions.h>
+#include <cuda_fp16.h>
 
 namespace cugar {
 
@@ -44,7 +45,15 @@ namespace cugar {
 #endif
 
 #ifndef M_PIf
-#define M_PIf float(M_PI)
+#define M_PIf 3.14159265358979323846f
+#endif
+
+#ifndef M_TWO_PI
+#define M_TWO_PI 6.28318530717958647693
+#endif
+
+#ifndef M_TWO_PIf
+#define M_TWO_PIf 6.28318530717958647693f
 #endif
 
 CUGAR_HOST_DEVICE inline bool is_finite(const double x)
@@ -661,7 +670,7 @@ struct FLCG_random : LCG_random
 	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float next() { return this->LCG_random::next() / float(LCG_random::MAX); }
 };
 
-/// an indexed random number generator (by Andrew Kensler)
+/// an indexed random number generator (see "Correlated Multi-Jittered Sampling", by Andrew Kensler)
 ///
 /// \param i		the index in the random stream
 /// \param p		the seed
