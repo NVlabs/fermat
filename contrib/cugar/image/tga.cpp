@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2011, NVIDIA Corporation
+ * Copyright (c) 2010-2018, NVIDIA Corporation
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -206,6 +206,24 @@ bool write_tga(const char* filename, int width, int height, const float *pixdata
 		}
 
 		return write_tga( filename, width, height, &rgb[0], TGAPixels::RGB );
+	}
+	else if (input_type == TGAPixels::RGB || input_type == TGAPixels::BGR)
+	{
+		float max_val = *std::max_element( pixdata, pixdata + width*height*3 );
+		float norm = normalize && max_val ? 1.0f / max_val : 1.0f;
+
+		for (int i = 0; i < width*height; ++i)
+		{
+			const float c0 = pixdata[i*3+0] * norm;
+			const float c1 = pixdata[i*3+1] * norm;
+			const float c2 = pixdata[i*3+2] * norm;
+
+			rgb[i*3 + 0] = cugar::quantize( c0, 256 );
+			rgb[i*3 + 1] = cugar::quantize( c1, 256 );
+			rgb[i*3 + 2] = cugar::quantize( c2, 256 );
+		}
+
+		return write_tga( filename, width, height, &rgb[0], input_type );
 	}
 	return false;
 }
