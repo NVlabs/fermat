@@ -290,8 +290,16 @@ void split(
     Counters*           counters)
 {
     const uint32 BLOCK_SIZE = 128;
-    const uint32 max_blocks = (uint32)cuda::max_active_blocks(split_kernel<BLOCK_SIZE,Tree,Integer>, BLOCK_SIZE, 0);
-    const uint32 n_blocks   = cugar::min( max_blocks, uint32(n_nodes + BLOCK_SIZE-1) / BLOCK_SIZE );
+
+    uint32 major = 1;
+    uint32 minor = 0;
+    cuda::device_arch( major, minor );
+
+    size_t max_blocks = (7 == major && 0 == minor) ?
+		cuda::multiprocessor_count() :
+		cuda::max_active_blocks(split_kernel<BLOCK_SIZE,Tree,Integer>, BLOCK_SIZE, 0);
+
+    const uint32 n_blocks   = cugar::min( uint32(max_blocks), uint32(n_nodes + BLOCK_SIZE-1) / BLOCK_SIZE );
     const uint32 grid_size  = n_blocks * BLOCK_SIZE;
 
     split_kernel<BLOCK_SIZE> <<<n_blocks,BLOCK_SIZE>>> (
