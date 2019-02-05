@@ -71,7 +71,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">TexturesModule<div class="ingroups"><a class="el" href="group___fermat.html">Fermat</a></div></div>  </div>
 </div><!--header-->
@@ -80,22 +81,55 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_texture_view.html">TextureView</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_mip_map_view.html">MipMapView</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_texture_storage.html">TextureStorage&lt; TYPE &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_mip_map_storage.html">MipMapStorage&lt; TYPE &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_texture_reference.html">TextureReference</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_texture_view.html">TextureView</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_mip_map_view.html">MipMapView</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:ga87c0af527c07361181b2af404b384b82"><td class="memItemLeft" align="right" valign="top"><a id="ga87c0af527c07361181b2af404b384b82"></a>
+FERMAT_HOST_DEVICE FERMAT_FORCEINLINE float4&#160;</td><td class="memItemRight" valign="bottom"><b>texture_load</b> (const float4 *tex)</td></tr>
+<tr class="separator:ga87c0af527c07361181b2af404b384b82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga80c6b2d36a2a58dd91a11fff93f40937"><td class="memItemLeft" align="right" valign="top"><a id="ga80c6b2d36a2a58dd91a11fff93f40937"></a>
 FERMAT_HOST_DEVICE FERMAT_FORCEINLINE <a class="el" href="structcugar_1_1_vector.html">cugar::Vector4f</a>&#160;</td><td class="memItemRight" valign="bottom"><b>texture_lookup</b> (float4 st, const <a class="el" href="struct_texture_reference.html">TextureReference</a> texture_ref, const <a class="el" href="struct_mip_map_view.html">MipMapView</a> *textures, const float4 default_value)</td></tr>
 <tr class="separator:ga80c6b2d36a2a58dd91a11fff93f40937"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac41ff3200f14118ea951d1d26f5e1421"><td class="memItemLeft" align="right" valign="top"><a id="gac41ff3200f14118ea951d1d26f5e1421"></a>
+FERMAT_HOST_DEVICE FERMAT_FORCEINLINE <a class="el" href="structcugar_1_1_vector.html">cugar::Vector4f</a>&#160;</td><td class="memItemRight" valign="bottom"><b>bilinear_texture_lookup_unscaled</b> (<a class="el" href="structcugar_1_1_vector.html">cugar::Vector4f</a> st, const <a class="el" href="struct_texture_reference.html">TextureReference</a> texture_ref, const <a class="el" href="struct_mip_map_view.html">MipMapView</a> *textures, const float4 default_value)</td></tr>
+<tr class="separator:gac41ff3200f14118ea951d1d26f5e1421"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gadeb88db4f9ae0a87f98ec8acec9a54b5"><td class="memItemLeft" align="right" valign="top"><a id="gadeb88db4f9ae0a87f98ec8acec9a54b5"></a>
+FERMAT_HOST_DEVICE FERMAT_FORCEINLINE <a class="el" href="structcugar_1_1_vector.html">cugar::Vector4f</a>&#160;</td><td class="memItemRight" valign="bottom"><b>bilinear_texture_lookup</b> (<a class="el" href="structcugar_1_1_vector.html">cugar::Vector4f</a> st, const <a class="el" href="struct_texture_reference.html">TextureReference</a> texture_ref, const <a class="el" href="struct_mip_map_view.html">MipMapView</a> *textures, const float4 default_value)</td></tr>
+<tr class="separator:gadeb88db4f9ae0a87f98ec8acec9a54b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabf9307a5d5d23eeb4fc135d882b1e0a5"><td class="memItemLeft" align="right" valign="top"><a id="gabf9307a5d5d23eeb4fc135d882b1e0a5"></a>
+FERMAT_HOST_DEVICE FERMAT_FORCEINLINE <a class="el" href="structcugar_1_1_vector.html">cugar::Vector2f</a>&#160;</td><td class="memItemRight" valign="bottom"><b>diff_texture_lookup</b> (<a class="el" href="structcugar_1_1_vector.html">cugar::Vector4f</a> st, const <a class="el" href="struct_texture_reference.html">TextureReference</a> texture_ref, const <a class="el" href="struct_mip_map_view.html">MipMapView</a> *textures, const float2 default_value)</td></tr>
+<tr class="separator:gabf9307a5d5d23eeb4fc135d882b1e0a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ga1fe67133ba5fdedbf564aae35203f335"><td class="memItemLeft" align="right" valign="top"><a id="ga1fe67133ba5fdedbf564aae35203f335"></a>
+FERMAT_API_EXTERN template class FERMAT_API&#160;</td><td class="memItemRight" valign="bottom"><b>DomainBuffer&lt; HOST_BUFFER, TextureView &gt;</b></td></tr>
+<tr class="separator:ga1fe67133ba5fdedbf564aae35203f335"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5aece62a851f66d4b2c3236ab9658f16"><td class="memItemLeft" align="right" valign="top"><a id="ga5aece62a851f66d4b2c3236ab9658f16"></a>
+FERMAT_API_EXTERN template class FERMAT_API&#160;</td><td class="memItemRight" valign="bottom"><b>DomainBuffer&lt; CUDA_BUFFER, TextureView &gt;</b></td></tr>
+<tr class="separator:ga5aece62a851f66d4b2c3236ab9658f16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga28bacf6b37b17d33e0952230222a4507"><td class="memItemLeft" align="right" valign="top"><a id="ga28bacf6b37b17d33e0952230222a4507"></a>
+FERMAT_API_EXTERN template struct FERMAT_API&#160;</td><td class="memItemRight" valign="bottom"><b>TextureStorage&lt; HOST_BUFFER &gt;</b></td></tr>
+<tr class="separator:ga28bacf6b37b17d33e0952230222a4507"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa68fd3fb87aecadaede3a441f9347120"><td class="memItemLeft" align="right" valign="top"><a id="gaa68fd3fb87aecadaede3a441f9347120"></a>
+FERMAT_API_EXTERN template struct FERMAT_API&#160;</td><td class="memItemRight" valign="bottom"><b>TextureStorage&lt; CUDA_BUFFER &gt;</b></td></tr>
+<tr class="separator:gaa68fd3fb87aecadaede3a441f9347120"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa6144ece5b83804020fe97f01a01a71a"><td class="memItemLeft" align="right" valign="top"><a id="gaa6144ece5b83804020fe97f01a01a71a"></a>
+FERMAT_API_EXTERN template struct FERMAT_API&#160;</td><td class="memItemRight" valign="bottom"><b>MipMapStorage&lt; HOST_BUFFER &gt;</b></td></tr>
+<tr class="separator:gaa6144ece5b83804020fe97f01a01a71a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga87d3981e4857c3f7cceeae5cf43a1810"><td class="memItemLeft" align="right" valign="top"><a id="ga87d3981e4857c3f7cceeae5cf43a1810"></a>
+FERMAT_API_EXTERN template struct FERMAT_API&#160;</td><td class="memItemRight" valign="bottom"><b>MipMapStorage&lt; CUDA_BUFFER &gt;</b></td></tr>
+<tr class="separator:ga87d3981e4857c3f7cceeae5cf43a1810"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

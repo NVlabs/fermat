@@ -1,6 +1,8 @@
 var searchData=
 [
   ['abs_5fcosine_5ffunctor',['abs_cosine_functor',['../structcugar_1_1abs__cosine__functor.html',1,'cugar']]],
+  ['adaptiveclusteredrlstorage',['AdaptiveClusteredRLStorage',['../struct_adaptive_clustered_r_l_storage.html',1,'']]],
+  ['adaptiveclusteredrlview',['AdaptiveClusteredRLView',['../struct_adaptive_clustered_r_l_view.html',1,'']]],
   ['add',['add',['../structcugar_1_1add.html',1,'cugar']]],
   ['allocategroupsfunctor',['AllocateGroupsFunctor',['../struct_mesh_loader_1_1_allocate_groups_functor.html',1,'MeshLoader']]],
   ['apply',['Apply',['../structcugar_1_1_z_h__rotation_1_1_apply.html',1,'cugar::ZH_rotation']]],

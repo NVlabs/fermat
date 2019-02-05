@@ -8,8 +8,9 @@ var searchData=
   ['samplesinkbase',['SampleSinkBase',['../struct_sample_sink_base.html',1,'']]],
   ['scopedfile',['ScopedFile',['../struct_scoped_file.html',1,'']]],
   ['scopedlock',['ScopedLock',['../classcugar_1_1_scoped_lock.html',1,'cugar']]],
-  ['scopedtimer',['ScopedTimer',['../structcugar_1_1_scoped_timer.html',1,'cugar::ScopedTimer&lt; T &gt;'],['../structcugar_1_1cuda_1_1_scoped_timer.html',1,'cugar::cuda::ScopedTimer&lt; T &gt;']]],
+  ['scopedtimer',['ScopedTimer',['../structcugar_1_1cuda_1_1_scoped_timer.html',1,'cugar::cuda::ScopedTimer&lt; T &gt;'],['../structcugar_1_1_scoped_timer.html',1,'cugar::ScopedTimer&lt; T &gt;']]],
   ['sh_5fbasis',['SH_basis',['../structcugar_1_1_s_h__basis.html',1,'cugar']]],
+  ['shadowpayload',['ShadowPayload',['../struct_shadow_payload.html',1,'']]],
   ['sharedcount',['SharedCount',['../classcugar_1_1internals_1_1_shared_count.html',1,'cugar::internals']]],
   ['sharedcount_3c_20cugar_3a_3aatomicint_20_3e',['SharedCount&lt; cugar::AtomicInt &gt;',['../classcugar_1_1internals_1_1_shared_count.html',1,'cugar::internals']]],
   ['sharedpointer',['SharedPointer',['../classcugar_1_1_shared_pointer.html',1,'cugar']]],
@@ -33,11 +34,13 @@ var searchData=
   ['split_5ftask',['Split_task',['../structcugar_1_1bintree_1_1_split__task.html',1,'cugar::bintree::Split_task'],['../structcugar_1_1cuda_1_1_radixtree__context_1_1_split__task.html',1,'cugar::cuda::Radixtree_context::Split_task']]],
   ['sqr_5ffunctor',['sqr_functor',['../structcugar_1_1sqr__functor.html',1,'cugar']]],
   ['static_5fcast_5fmarker',['static_cast_marker',['../structcugar_1_1internals_1_1static__cast__marker.html',1,'cugar::internals']]],
+  ['static_5fmin',['static_min',['../structcugar_1_1static__min.html',1,'cugar']]],
   ['stats',['Stats',['../structcugar_1_1_bvh__sah__builder_1_1_stats.html',1,'cugar::Bvh_sah_builder::Stats'],['../structcugar_1_1deprecated_1_1_bvh__sah__builder_1_1_stats.html',1,'cugar::deprecated::Bvh_sah_builder::Stats']]],
   ['store_5fpointer',['store_pointer',['../structcugar_1_1cuda_1_1store__pointer.html',1,'cugar::cuda']]],
   ['store_5freference',['store_reference',['../structcugar_1_1cuda_1_1store__reference.html',1,'cugar::cuda']]],
   ['strided_5fiterator',['strided_iterator',['../structcugar_1_1strided__iterator.html',1,'cugar']]],
   ['strided_5fvec',['strided_vec',['../structstrided__vec.html',1,'']]],
   ['syncfreedoublekeyhashmap',['SyncFreeDoubleKeyHashMap',['../structcugar_1_1cuda_1_1_sync_free_double_key_hash_map.html',1,'cugar::cuda']]],
-  ['syncfreehashmap',['SyncFreeHashMap',['../structcugar_1_1cuda_1_1_sync_free_hash_map.html',1,'cugar::cuda']]]
+  ['syncfreehashmap',['SyncFreeHashMap',['../structcugar_1_1cuda_1_1_sync_free_hash_map.html',1,'cugar::cuda']]],
+  ['syncfreehashmap_3c_20uint64_2c_20uint32_2c_200xffffffffffffffffllu_20_3e',['SyncFreeHashMap&lt; uint64, uint32, 0xFFFFFFFFFFFFFFFFllu &gt;',['../structcugar_1_1cuda_1_1_sync_free_hash_map.html',1,'cugar::cuda']]]
 ];

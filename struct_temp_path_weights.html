@@ -71,27 +71,48 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Methods</a> &#124;
+<a href="#pub-static-methods">Static Public Methods</a> &#124;
 <a href="#pub-attribs">Public Members</a> &#124;
 <a href="struct_temp_path_weights-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">TempPathWeights Struct Reference<div class="ingroups"><a class="el" href="group___fermat.html">Fermat</a> &raquo; <a class="el" href="group___b_p_t_lib.html">BPTLib</a></div></div>  </div>
+<div class="title">TempPathWeights Struct Reference<div class="ingroups"><a class="el" href="group___fermat.html">Fermat</a> &raquo; <a class="el" href="group___b_p_t_lib.html">BPTLib</a> &raquo; <a class="el" href="group___b_p_t_lib_core.html">BPTLibCore</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
+<a name="details" id="details"></a><h2 class="groupheader">Detailed description</h2>
+<div class="textblock"><dl class="section user"><dt></dt><dd>A small utility class to track temporary path weights needed for internal MIS calculations </dd></dl>
+</div>
+<p><code>#include &lt;<a class="el" href="bpt__utils_8h_source.html">bpt_utils.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Methods</h2></td></tr>
+<tr class="memitem:a55788606cd767e45010356dcacf21373"><td class="memItemLeft" align="right" valign="top"><a id="a55788606cd767e45010356dcacf21373"></a>
+FERMAT_HOST_DEVICE&#160;</td><td class="memItemRight" valign="bottom"><b>TempPathWeights</b> (const <a class="el" href="struct_path_weights.html">PathWeights</a> _weights, const float _out_p, const float _out_cos_theta)</td></tr>
+<tr class="separator:a55788606cd767e45010356dcacf21373"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25913576f9e91f90b8d466a98834617c"><td class="memItemLeft" align="right" valign="top"><a id="a25913576f9e91f90b8d466a98834617c"></a>
 FERMAT_HOST_DEVICE&#160;</td><td class="memItemRight" valign="bottom"><b>TempPathWeights</b> (const float _pGp_sum, const float _pG, const float _out_p, const float _out_cos_theta)</td></tr>
 <tr class="separator:a25913576f9e91f90b8d466a98834617c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aead3a9feef123d9ef4bb3f6f818541e5"><td class="memItemLeft" align="right" valign="top"><a id="aead3a9feef123d9ef4bb3f6f818541e5"></a>
 FERMAT_HOST_DEVICE&#160;</td><td class="memItemRight" valign="bottom"><b>TempPathWeights</b> (const float4 f)</td></tr>
 <tr class="separator:aead3a9feef123d9ef4bb3f6f818541e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6ccc2514bc829cc80cdcdb4218f034d"><td class="memTemplParams" colspan="2"><a id="ac6ccc2514bc829cc80cdcdb4218f034d"></a>
+template&lt;typename EyeLightVertexType &gt; </td></tr>
+<tr class="memitem:ac6ccc2514bc829cc80cdcdb4218f034d"><td class="memTemplItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE&#160;</td><td class="memTemplItemRight" valign="bottom"><b>TempPathWeights</b> (const EyeLightVertexType _v, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> _out, const float _out_p)</td></tr>
+<tr class="separator:ac6ccc2514bc829cc80cdcdb4218f034d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac3263560f870db89c14779ad6c021798"><td class="memItemLeft" align="right" valign="top"><a id="ac3263560f870db89c14779ad6c021798"></a>
 FERMAT_HOST_DEVICE&#160;</td><td class="memItemRight" valign="bottom"><b>operator PathWeights</b> () const</td></tr>
 <tr class="separator:ac3263560f870db89c14779ad6c021798"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8adc8b080395236c5201b68155056a5c"><td class="memItemLeft" align="right" valign="top"><a id="a8adc8b080395236c5201b68155056a5c"></a>
 FERMAT_HOST_DEVICE&#160;</td><td class="memItemRight" valign="bottom"><b>operator float4</b> () const</td></tr>
 <tr class="separator:a8adc8b080395236c5201b68155056a5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Methods</h2></td></tr>
+<tr class="memitem:a8986881392b3c49e0056c4cb7eeccfb1"><td class="memItemLeft" align="right" valign="top"><a id="a8986881392b3c49e0056c4cb7eeccfb1"></a>
+static FERMAT_HOST_DEVICE <a class="el" href="struct_temp_path_weights.html">TempPathWeights</a>&#160;</td><td class="memItemRight" valign="bottom"><b>eye_vertex_1</b> (const float p_e, const float cos_theta_o, const float light_tracing_weight)</td></tr>
+<tr class="separator:a8986881392b3c49e0056c4cb7eeccfb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f9123ca71d52db9eaa2c6607aeef37f"><td class="memItemLeft" align="right" valign="top"><a id="a8f9123ca71d52db9eaa2c6607aeef37f"></a>
+static FERMAT_HOST_DEVICE <a class="el" href="struct_temp_path_weights.html">TempPathWeights</a>&#160;</td><td class="memItemRight" valign="bottom"><b>light_vertex_1</b> (const float p_A, const float p_proj, const float cos_theta_o)</td></tr>
+<tr class="separator:a8f9123ca71d52db9eaa2c6607aeef37f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Members</h2></td></tr>

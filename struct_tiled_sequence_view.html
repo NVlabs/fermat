@@ -79,7 +79,8 @@ $(function() {
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">Detailed description</h2>
 <div class="textblock"><p>A tiled sample sequence view.</p>
-<p>Basically, represents an tiled 2d grid of N-dimensional sample sequences, which can be conveniently "sliced" in 1d or 2d sections (each such slice representing a 2d grid of 1d or 2d samples). </p>
+<dl class="section user"><dt></dt><dd>Basically, represents a tiled 2d grid of N-dimensional sample sequences, which can be conveniently "sliced" in 1d or 2d sections (each such slice representing a 2d grid of 1d or 2d samples). The per-pixel sequences are constructed by "offsetting" a base, common sequence using a set of per-pixel N-dimensional shifts. The offsetting process is a regular Cranley-Patterson rotation, i.e. the <em>d</em>-th coordinate of the final sequence for pixel <em>p</em> is given by: <br />
+<div class="fragment"><div class="line">sequence(p,d) = <a class="code" href="group___basic.html#gaa6ea8810d6e0f5f42d49be632566378c">mod</a>( base_sequence[d] + shift[p][d], 1 );</div></div><!-- fragment --> </dd></dl>
 </div>
 <p><code>#include &lt;<a class="el" href="tiled__sequence_8h_source.html">tiled_sequence.h</a>&gt;</code></p>
 <table class="memberdecls">
@@ -94,6 +95,9 @@ FERMAT_HOST_DEVICE float&#160;</td><td class="memItemRight" valign="bottom"><b>s
 <tr class="memitem:ade3dac7c05205c7bd7d69fba750dfbab"><td class="memItemLeft" align="right" valign="top"><a id="ade3dac7c05205c7bd7d69fba750dfbab"></a>
 FERMAT_HOST_DEVICE FERMAT_FORCEINLINE float&#160;</td><td class="memItemRight" valign="bottom"><b>shift</b> (const uint32 idx, const uint32 dim) const</td></tr>
 <tr class="separator:ade3dac7c05205c7bd7d69fba750dfbab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab221bfbf4b7fc8eaa42a5b17281f182e"><td class="memItemLeft" align="right" valign="top"><a id="ab221bfbf4b7fc8eaa42a5b17281f182e"></a>
+FERMAT_HOST_DEVICE FERMAT_FORCEINLINE float&#160;</td><td class="memItemRight" valign="bottom"><b>shift</b> (const uint32 pixel_x, const uint32 pixel_y, const uint32 dim) const</td></tr>
+<tr class="separator:ab221bfbf4b7fc8eaa42a5b17281f182e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a67088ceab693ec7de0fcb7860efb5a14"><td class="memItemLeft" align="right" valign="top"><a id="a67088ceab693ec7de0fcb7860efb5a14"></a>
 FERMAT_HOST_DEVICE float&#160;</td><td class="memItemRight" valign="bottom"><b>sample_1d</b> (const uint32 tile_idx, const uint32 idx, const uint32 dim) const</td></tr>
 <tr class="separator:a67088ceab693ec7de0fcb7860efb5a14"><td class="memSeparator" colspan="2">&#160;</td></tr>

@@ -76,6 +76,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Methods</a> &#124;
+<a href="#pub-static-methods">Static Public Methods</a> &#124;
 <a href="#pub-attribs">Public Members</a> &#124;
 <a href="structcugar_1_1_bvh__node__3d-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -140,6 +141,11 @@ Public Methods</h2></td></tr>
 <tr class="separator:a0d997ffdc050ef2fd937a5805b3f06df inherit pub_methods_structcugar_1_1_bvh__node"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad368801b53b70ab0c54a810971a16968 inherit pub_methods_structcugar_1_1_bvh__node"><td class="memItemLeft" align="right" valign="top">CUGAR_HOST_DEVICE <a class="el" href="structcugar_1_1_bvh__node.html">Bvh_node</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcugar_1_1_bvh__node.html#ad368801b53b70ab0c54a810971a16968">operator=</a> (const <a class="el" href="structcugar_1_1_bintree__node.html">Bintree_node</a>&lt; <a class="el" href="structcugar_1_1leaf__range__tag.html">leaf_range_tag</a> &gt; &amp;base)</td></tr>
 <tr class="separator:ad368801b53b70ab0c54a810971a16968 inherit pub_methods_structcugar_1_1_bvh__node"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Methods</h2></td></tr>
+<tr class="memitem:a765171d7b76108e44d2ec4ff9684741c"><td class="memItemLeft" align="right" valign="top">static CUGAR_HOST_DEVICE <a class="el" href="structcugar_1_1_bvh__node__3d.html">Bvh_node_3d</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcugar_1_1_bvh__node__3d.html#a765171d7b76108e44d2ec4ff9684741c">load_ldg</a> (const <a class="el" href="structcugar_1_1_bvh__node__3d.html">Bvh_node_3d</a> *node)</td></tr>
+<tr class="separator:a765171d7b76108e44d2ec4ff9684741c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Members</h2></td></tr>
@@ -298,6 +304,33 @@ Public Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a765171d7b76108e44d2ec4ff9684741c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a765171d7b76108e44d2ec4ff9684741c">&#9670;&nbsp;</a></span>load_ldg()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static CUGAR_HOST_DEVICE <a class="el" href="structcugar_1_1_bvh__node__3d.html">Bvh_node_3d</a> cugar::Bvh_node_3d::load_ldg </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_bvh__node__3d.html">Bvh_node_3d</a> *&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>construct a node from two float4's </p>
+
+</div>
+</div>
 <a id="a23550a54c38a821438d5e7f34f863c21"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a23550a54c38a821438d5e7f34f863c21">&#9670;&nbsp;</a></span>operator=()</h2>
 

@@ -78,12 +78,22 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<dl class="section user"><dt></dt><dd>This module defines the basic classes used to represent and manipulate light paths throughout Fermat, particularly: </dd></dl>
+<dl class="section user"><dt></dt><dd><ul>
+<li><a class="el" href="struct_path.html">Path</a> : represent a light path in compact form, storing its vertex ids only</li>
+<li><a class="el" href="struct_bidir_path.html">BidirPath</a> : represent a bidirectional path in compact form, storing its vertex ids only </li>
+</ul>
+</dd></dl>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_path.html">Path</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_bidir_path.html">BidirPath</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_path_cache.html">PathCache&lt; T &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_bsdf_inverse.html">BsdfInverse</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
@@ -97,46 +107,340 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gabeb90d4a3b751cba774e5568f5e212f7"><td class="memTemplParams" colspan="2"><a id="gabeb90d4a3b751cba774e5568f5e212f7"></a>
+<tr class="memitem:ga172c19c44ec311215152416c563bf6e2"><td class="memTemplParams" colspan="2"><a id="ga172c19c44ec311215152416c563bf6e2"></a>
+template&lt;typename TRandomGenerator , typename BsdfComponent &gt; </td></tr>
+<tr class="memitem:ga172c19c44ec311215152416c563bf6e2"><td class="memTemplItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>invert_layer</b> (const BsdfComponent &amp;bsdf_comp, const <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> &amp;v_prev, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;in, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;out, TRandomGenerator &amp;<a class="el" href="group___sampling_module.html#gaec17bbbfd36295353081b7b4480d933d">random</a>, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;z, float &amp;p, float &amp;p_proj)</td></tr>
+<tr class="separator:ga172c19c44ec311215152416c563bf6e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8ec22d679711a82fbf1d5ef3725605e4"><td class="memTemplParams" colspan="2"><a id="ga8ec22d679711a82fbf1d5ef3725605e4"></a>
 template&lt;typename TRandomGenerator &gt; </td></tr>
-<tr class="memitem:gabeb90d4a3b751cba774e5568f5e212f7"><td class="memTemplItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>invert_diffuse</b> (const <a class="el" href="struct_bsdf.html">Bsdf</a> &amp;bsdf, const <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> &amp;v_prev, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;in, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;out, TRandomGenerator &amp;<a class="el" href="group___sampling_module.html#gaec17bbbfd36295353081b7b4480d933d">random</a>, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;z, float &amp;p, float &amp;p_proj)</td></tr>
-<tr class="separator:gabeb90d4a3b751cba774e5568f5e212f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae98101243e040bb75a1ba1820fd449a4"><td class="memTemplParams" colspan="2"><a id="gae98101243e040bb75a1ba1820fd449a4"></a>
-template&lt;typename TRandomGenerator &gt; </td></tr>
-<tr class="memitem:gae98101243e040bb75a1ba1820fd449a4"><td class="memTemplItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>invert_diffuse_trans</b> (const <a class="el" href="struct_bsdf.html">Bsdf</a> &amp;bsdf, const <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> &amp;v_prev, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;in, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;out, TRandomGenerator &amp;<a class="el" href="group___sampling_module.html#gaec17bbbfd36295353081b7b4480d933d">random</a>, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;z, float &amp;p, float &amp;p_proj)</td></tr>
-<tr class="separator:gae98101243e040bb75a1ba1820fd449a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga632504f1728164127222d34ad5ccad3e"><td class="memTemplParams" colspan="2"><a id="ga632504f1728164127222d34ad5ccad3e"></a>
-template&lt;typename TRandomGenerator &gt; </td></tr>
-<tr class="memitem:ga632504f1728164127222d34ad5ccad3e"><td class="memTemplItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>invert_glossy</b> (const <a class="el" href="struct_bsdf.html">Bsdf</a> &amp;bsdf, const <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> &amp;v_prev, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;in, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;out, TRandomGenerator &amp;<a class="el" href="group___sampling_module.html#gaec17bbbfd36295353081b7b4480d933d">random</a>, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;z, float &amp;p, float &amp;p_proj)</td></tr>
-<tr class="separator:ga632504f1728164127222d34ad5ccad3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga04dc45c80821b5d0fb47d03247ece0b0"><td class="memTemplParams" colspan="2"><a id="ga04dc45c80821b5d0fb47d03247ece0b0"></a>
-template&lt;typename TRandomGenerator &gt; </td></tr>
-<tr class="memitem:ga04dc45c80821b5d0fb47d03247ece0b0"><td class="memTemplItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>invert_glossy_trans</b> (const <a class="el" href="struct_bsdf.html">Bsdf</a> &amp;bsdf, const <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> &amp;v_prev, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;in, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;out, TRandomGenerator &amp;<a class="el" href="group___sampling_module.html#gaec17bbbfd36295353081b7b4480d933d">random</a>, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;z, float &amp;p, float &amp;p_proj)</td></tr>
-<tr class="separator:ga04dc45c80821b5d0fb47d03247ece0b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1d626fd578c237c10847dbb9f894eaad"><td class="memTemplParams" colspan="2"><a id="ga1d626fd578c237c10847dbb9f894eaad"></a>
-template&lt;typename TRandomGenerator &gt; </td></tr>
-<tr class="memitem:ga1d626fd578c237c10847dbb9f894eaad"><td class="memTemplItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>invert_bsdf</b> (const <a class="el" href="struct_bsdf.html">Bsdf</a> &amp;bsdf, const <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> &amp;v_prev, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;in, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;out, TRandomGenerator &amp;<a class="el" href="group___sampling_module.html#gaec17bbbfd36295353081b7b4480d933d">random</a>, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;z, float &amp;p, float &amp;p_proj)</td></tr>
-<tr class="separator:ga1d626fd578c237c10847dbb9f894eaad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8ec22d679711a82fbf1d5ef3725605e4"><td class="memTemplItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>invert_bsdf</b> (const <a class="el" href="struct_bsdf.html">Bsdf</a> &amp;bsdf, const <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> &amp;v_prev, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;in, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;out, TRandomGenerator &amp;<a class="el" href="group___sampling_module.html#gaec17bbbfd36295353081b7b4480d933d">random</a>, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;z, float &amp;p, float &amp;p_proj, bool RR=true)</td></tr>
+<tr class="separator:ga8ec22d679711a82fbf1d5ef3725605e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gae6f0e1995f4aba555cbe38d41ef1d44e"><td class="memItemLeft" align="right" valign="top"><a id="gae6f0e1995f4aba555cbe38d41ef1d44e"></a>
 FERMAT_HOST_DEVICE FERMAT_FORCEINLINE void&#160;</td><td class="memItemRight" valign="bottom"><b>inversion_pdf</b> (const <a class="el" href="struct_bsdf.html">Bsdf</a> &amp;bsdf, const <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> &amp;v_prev, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;in, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;out, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;z, float &amp;p, float &amp;p_proj)</td></tr>
 <tr class="separator:gae6f0e1995f4aba555cbe38d41ef1d44e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac9f5b285b60d4cbdc8ed6b6293d7c002"><td class="memTemplParams" colspan="2"><a id="gac9f5b285b60d4cbdc8ed6b6293d7c002"></a>
+<tr class="memitem:ga7f9ae29454dded68cdef487b1d35fd9a"><td class="memTemplParams" colspan="2"><a id="ga7f9ae29454dded68cdef487b1d35fd9a"></a>
 template&lt;typename PathType , typename TRandomGenerator &gt; </td></tr>
-<tr class="memitem:gac9f5b285b60d4cbdc8ed6b6293d7c002"><td class="memTemplItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>invert_eye_subpath</b> (const PathType &amp;path, const uint32 t, const uint32 t_ext, float *out_Z, float *out_pdf, const <a class="el" href="struct_renderer_view.html">RendererView</a> &amp;renderer, TRandomGenerator &amp;<a class="el" href="group___sampling_module.html#gaec17bbbfd36295353081b7b4480d933d">random</a>)</td></tr>
-<tr class="separator:gac9f5b285b60d4cbdc8ed6b6293d7c002"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga080528a38b1fc73e7d61311cc7cbbe97"><td class="memTemplParams" colspan="2"><a id="ga080528a38b1fc73e7d61311cc7cbbe97"></a>
+<tr class="memitem:ga7f9ae29454dded68cdef487b1d35fd9a"><td class="memTemplItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>invert_eye_subpath</b> (const PathType &amp;path, const uint32 t, const uint32 t_ext, float *out_Z, float *out_pdf, const <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> &amp;renderer, TRandomGenerator &amp;<a class="el" href="group___sampling_module.html#gaec17bbbfd36295353081b7b4480d933d">random</a>)</td></tr>
+<tr class="separator:ga7f9ae29454dded68cdef487b1d35fd9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga97619b3314cb048b9af4aed8b5724d91"><td class="memTemplParams" colspan="2"><a id="ga97619b3314cb048b9af4aed8b5724d91"></a>
 template&lt;typename PathType &gt; </td></tr>
-<tr class="memitem:ga080528a38b1fc73e7d61311cc7cbbe97"><td class="memTemplItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE float&#160;</td><td class="memTemplItemRight" valign="bottom"><b>eye_subpath_inversion_pdf</b> (const PathType &amp;path, const uint32 t, const uint32 t_ext, const float *out_Z, const <a class="el" href="struct_renderer_view.html">RendererView</a> &amp;renderer)</td></tr>
-<tr class="separator:ga080528a38b1fc73e7d61311cc7cbbe97"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9fc61f5f84792cf762774204ed52d163"><td class="memTemplParams" colspan="2"><a id="ga9fc61f5f84792cf762774204ed52d163"></a>
+<tr class="memitem:ga97619b3314cb048b9af4aed8b5724d91"><td class="memTemplItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE float&#160;</td><td class="memTemplItemRight" valign="bottom"><b>eye_subpath_inversion_pdf</b> (const PathType &amp;path, const uint32 t, const uint32 t_ext, const float *out_Z, const <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> &amp;renderer)</td></tr>
+<tr class="separator:ga97619b3314cb048b9af4aed8b5724d91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa53acb9062a624ae464a52c2b09b0c6a"><td class="memTemplParams" colspan="2"><a id="gaa53acb9062a624ae464a52c2b09b0c6a"></a>
 template&lt;typename PathType , typename TRandomGenerator &gt; </td></tr>
-<tr class="memitem:ga9fc61f5f84792cf762774204ed52d163"><td class="memTemplItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>invert_light_subpath</b> (const PathType &amp;path, const uint32 s, const uint32 s_ext, float *out_Z, float *out_pdf, const <a class="el" href="struct_renderer_view.html">RendererView</a> &amp;renderer, TRandomGenerator &amp;<a class="el" href="group___sampling_module.html#gaec17bbbfd36295353081b7b4480d933d">random</a>)</td></tr>
-<tr class="separator:ga9fc61f5f84792cf762774204ed52d163"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga531332fa5d2987c8e31e98e23864a04e"><td class="memTemplParams" colspan="2"><a id="ga531332fa5d2987c8e31e98e23864a04e"></a>
+<tr class="memitem:gaa53acb9062a624ae464a52c2b09b0c6a"><td class="memTemplItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>invert_light_subpath</b> (const PathType &amp;path, const uint32 s, const uint32 s_ext, float *out_Z, float *out_pdf, const <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> &amp;renderer, TRandomGenerator &amp;<a class="el" href="group___sampling_module.html#gaec17bbbfd36295353081b7b4480d933d">random</a>)</td></tr>
+<tr class="separator:gaa53acb9062a624ae464a52c2b09b0c6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9aba8aeaa8a07139583975ca21c06fad"><td class="memTemplParams" colspan="2"><a id="ga9aba8aeaa8a07139583975ca21c06fad"></a>
 template&lt;typename PathType &gt; </td></tr>
-<tr class="memitem:ga531332fa5d2987c8e31e98e23864a04e"><td class="memTemplItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE float&#160;</td><td class="memTemplItemRight" valign="bottom"><b>light_subpath_inversion_pdf</b> (const PathType &amp;path, const uint32 s, const uint32 s_ext, const float *out_Z, const <a class="el" href="struct_renderer_view.html">RendererView</a> &amp;renderer)</td></tr>
-<tr class="separator:ga531332fa5d2987c8e31e98e23864a04e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9aba8aeaa8a07139583975ca21c06fad"><td class="memTemplItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE float&#160;</td><td class="memTemplItemRight" valign="bottom"><b>light_subpath_inversion_pdf</b> (const PathType &amp;path, const uint32 s, const uint32 s_ext, const float *out_Z, const <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> &amp;renderer)</td></tr>
+<tr class="separator:ga9aba8aeaa8a07139583975ca21c06fad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaecfd88fd5ceeaef4df9d86387855e78c"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___path_module.html#gaecfd88fd5ceeaef4df9d86387855e78c">BsdfInverse::setup</a> (ComponentSelectionStrategy _strategy, const <a class="el" href="struct_bsdf.html">Bsdf</a> &amp;bsdf, const <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> &amp;geom, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;in, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;out, const bool _RR=false)</td></tr>
+<tr class="separator:gaecfd88fd5ceeaef4df9d86387855e78c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab22cbe7216d6907a8b28597edb789c45"><td class="memItemLeft" align="right" valign="top"><a id="gab22cbe7216d6907a8b28597edb789c45"></a>
+FERMAT_HOST_DEVICE FERMAT_FORCEINLINE bool&#160;</td><td class="memItemRight" valign="bottom"><b>BsdfInverse::precompute_component_selection_coefficients</b> ()</td></tr>
+<tr class="separator:gab22cbe7216d6907a8b28597edb789c45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab7b0d8544e315f99452e7798fe812be4"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE <a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">Bsdf::ComponentType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___path_module.html#gab7b0d8544e315f99452e7798fe812be4">BsdfInverse::sample_component</a> (const float v) const</td></tr>
+<tr class="separator:gab7b0d8544e315f99452e7798fe812be4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabf86c201c8bc8e874d935f3eeae66269"><td class="memTemplParams" colspan="2">template&lt;typename TRandomGenerator &gt; </td></tr>
+<tr class="memitem:gabf86c201c8bc8e874d935f3eeae66269"><td class="memTemplItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___path_module.html#gabf86c201c8bc8e874d935f3eeae66269">BsdfInverse::invert</a> (const <a class="el" href="struct_bsdf.html">Bsdf</a> &amp;bsdf, const <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> &amp;geom, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;in, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;out, TRandomGenerator &amp;<a class="el" href="group___sampling_module.html#gaec17bbbfd36295353081b7b4480d933d">random</a>, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;z, BsdfInverse::PdfType pdf_type=BsdfInverse::kDirectTransformPdf, float *p=NULL, float *p_proj=NULL)</td></tr>
+<tr class="separator:gabf86c201c8bc8e874d935f3eeae66269"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae150d5775f0c5c69fc21b8ab50680db6"><td class="memTemplParams" colspan="2">template&lt;typename TRandomGenerator &gt; </td></tr>
+<tr class="memitem:gae150d5775f0c5c69fc21b8ab50680db6"><td class="memTemplItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___path_module.html#gae150d5775f0c5c69fc21b8ab50680db6">BsdfInverse::invert_component</a> (const <a class="el" href="struct_bsdf.html">Bsdf</a> &amp;bsdf, const <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> &amp;geom, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;in, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;out, const <a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">Bsdf::ComponentType</a> out_comp, TRandomGenerator &amp;<a class="el" href="group___sampling_module.html#gaec17bbbfd36295353081b7b4480d933d">random</a>, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;z, const bool output_global_coordinates=true)</td></tr>
+<tr class="separator:gae150d5775f0c5c69fc21b8ab50680db6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae689ddf830059ea1ebe7a235c954b25f"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___path_module.html#gae689ddf830059ea1ebe7a235c954b25f">BsdfInverse::pdf</a> (const <a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">Bsdf::ComponentType</a> out_comp, cugar::SphericalMeasure measure=cugar::kProjectedSolidAngle, const bool weighted=false) const</td></tr>
+<tr class="separator:gae689ddf830059ea1ebe7a235c954b25f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaad6ea81c789229423f13731f4d7b1088"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___path_module.html#gaad6ea81c789229423f13731f4d7b1088">BsdfInverse::pdf_comp</a> (const <a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">Bsdf::ComponentType</a> out_comp) const</td></tr>
+<tr class="separator:gaad6ea81c789229423f13731f4d7b1088"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga26ab6168a450774594081beba929f9fa"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___path_module.html#ga26ab6168a450774594081beba929f9fa">BsdfInverse::weight</a> (const <a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">Bsdf::ComponentType</a> out_comp) const</td></tr>
+<tr class="separator:ga26ab6168a450774594081beba929f9fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="gabf86c201c8bc8e874d935f3eeae66269"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabf86c201c8bc8e874d935f3eeae66269">&#9670;&nbsp;</a></span>invert()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TRandomGenerator &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE bool BsdfInverse::invert </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_bsdf.html">Bsdf</a> &amp;&#160;</td>
+          <td class="paramname"><em>bsdf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> &amp;&#160;</td>
+          <td class="paramname"><em>geom</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TRandomGenerator &amp;&#160;</td>
+          <td class="paramname"><em>random</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;&#160;</td>
+          <td class="paramname"><em>z</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BsdfInverse::PdfType&#160;</td>
+          <td class="paramname"><em>pdf_type</em> = <code>BsdfInverse::kDirectTransformPdf</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>p</em> = <code>NULL</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>p_proj</em> = <code>NULL</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>invert a bsdf by randomly chosing a component </p>
+
+</div>
+</div>
+<a id="gae150d5775f0c5c69fc21b8ab50680db6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae150d5775f0c5c69fc21b8ab50680db6">&#9670;&nbsp;</a></span>invert_component()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TRandomGenerator &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE bool BsdfInverse::invert_component </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_bsdf.html">Bsdf</a> &amp;&#160;</td>
+          <td class="paramname"><em>bsdf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> &amp;&#160;</td>
+          <td class="paramname"><em>geom</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">Bsdf::ComponentType</a>&#160;</td>
+          <td class="paramname"><em>out_comp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TRandomGenerator &amp;&#160;</td>
+          <td class="paramname"><em>random</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;&#160;</td>
+          <td class="paramname"><em>z</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>output_global_coordinates</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>invert a given component of a bsdf </p>
+
+</div>
+</div>
+<a id="gae689ddf830059ea1ebe7a235c954b25f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae689ddf830059ea1ebe7a235c954b25f">&#9670;&nbsp;</a></span>pdf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE float BsdfInverse::pdf </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">Bsdf::ComponentType</a>&#160;</td>
+          <td class="paramname"><em>out_comp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">cugar::SphericalMeasure&#160;</td>
+          <td class="paramname"><em>measure</em> = <code>cugar::kProjectedSolidAngle</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>weighted</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>return the Jacobian determinant of the inverse transform for a given component; note that the returned Jacobian determinant is equal to the pdf of sampling that component, by definition of pdf of a transformed variable. In fact, if U is a uniform r.v. in the primary sample space, and X is the transformed path space variable, X = T(U), we have:</p>
+<p>P(X) = P(T_inv(X)) * |J[T_inv](X)| = P(U) * |J[T_inv](X)| = |J[T_inv](X)| </p>
+
+</div>
+</div>
+<a id="gaad6ea81c789229423f13731f4d7b1088"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaad6ea81c789229423f13731f4d7b1088">&#9670;&nbsp;</a></span>pdf_comp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE float BsdfInverse::pdf_comp </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">Bsdf::ComponentType</a>&#160;</td>
+          <td class="paramname"><em>out_comp</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>return the pdf with which a given component is selected by the inversion method. </p>
+
+</div>
+</div>
+<a id="gab7b0d8544e315f99452e7798fe812be4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab7b0d8544e315f99452e7798fe812be4">&#9670;&nbsp;</a></span>sample_component()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE <a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">Bsdf::ComponentType</a> BsdfInverse::sample_component </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>sample a component given a random number </p>
+
+</div>
+</div>
+<a id="gaecfd88fd5ceeaef4df9d86387855e78c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaecfd88fd5ceeaef4df9d86387855e78c">&#9670;&nbsp;</a></span>setup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE void BsdfInverse::setup </td>
+          <td>(</td>
+          <td class="paramtype">ComponentSelectionStrategy&#160;</td>
+          <td class="paramname"><em>_strategy</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_bsdf.html">Bsdf</a> &amp;&#160;</td>
+          <td class="paramname"><em>bsdf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> &amp;&#160;</td>
+          <td class="paramname"><em>geom</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>_RR</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>setup the inverter for a specific bsdf and geometry configuration: note that all subsequent calls to other methods of this class need to use the same configuration, unless <a class="el" href="group___path_module.html#gaecfd88fd5ceeaef4df9d86387855e78c">setup()</a> is called again with different parameters </p>
+
+</div>
+</div>
+<a id="ga26ab6168a450774594081beba929f9fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga26ab6168a450774594081beba929f9fa">&#9670;&nbsp;</a></span>weight()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE float BsdfInverse::weight </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">Bsdf::ComponentType</a>&#160;</td>
+          <td class="paramname"><em>out_comp</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>return the sampling weight applied to a given component. </p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

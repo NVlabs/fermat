@@ -84,17 +84,13 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Methods</h2></td></tr>
-<tr class="memitem:a4c56dec448dc48418f8e4dd47adc8e44"><td class="memItemLeft" align="right" valign="top"><a id="a4c56dec448dc48418f8e4dd47adc8e44"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>resize</b> (const uint32_t _res_x, const uint32_t _res_y)</td></tr>
+<tr class="memitem:a4c56dec448dc48418f8e4dd47adc8e44"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_g_buffer_storage.html#a4c56dec448dc48418f8e4dd47adc8e44">resize</a> (const uint32_t _res_x, const uint32_t _res_y)</td></tr>
 <tr class="separator:a4c56dec448dc48418f8e4dd47adc8e44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9fd298041c1d4f7b239c0242a8f8b5f"><td class="memItemLeft" align="right" valign="top"><a id="ad9fd298041c1d4f7b239c0242a8f8b5f"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> () const</td></tr>
+<tr class="memitem:ad9fd298041c1d4f7b239c0242a8f8b5f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_g_buffer_storage.html#ad9fd298041c1d4f7b239c0242a8f8b5f">size</a> () const</td></tr>
 <tr class="separator:ad9fd298041c1d4f7b239c0242a8f8b5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d8e6e8f1dc353833e1c18ae4304561e"><td class="memItemLeft" align="right" valign="top"><a id="a9d8e6e8f1dc353833e1c18ae4304561e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
+<tr class="memitem:a9d8e6e8f1dc353833e1c18ae4304561e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_g_buffer_storage.html#a9d8e6e8f1dc353833e1c18ae4304561e">clear</a> ()</td></tr>
 <tr class="separator:a9d8e6e8f1dc353833e1c18ae4304561e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade6d37a2dba46fe7b701634fe97fb7b9"><td class="memItemLeft" align="right" valign="top"><a id="ade6d37a2dba46fe7b701634fe97fb7b9"></a>
-<a class="el" href="struct_g_buffer_view.html">GBufferView</a>&#160;</td><td class="memItemRight" valign="bottom"><b>view</b> ()</td></tr>
+<tr class="memitem:ade6d37a2dba46fe7b701634fe97fb7b9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_g_buffer_view.html">GBufferView</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_g_buffer_storage.html#ade6d37a2dba46fe7b701634fe97fb7b9">view</a> ()</td></tr>
 <tr class="separator:ade6d37a2dba46fe7b701634fe97fb7b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -114,7 +110,129 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>res_y</b></td></t
 <tr class="memitem:acfc75e200a8e87d7463cbaa835c7d3ed"><td class="memItemLeft" align="right" valign="top"><a id="acfc75e200a8e87d7463cbaa835c7d3ed"></a>
 <a class="el" href="class_domain_buffer.html">DomainBuffer</a>&lt; CUDA_BUFFER, uint32 &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tri</b></td></tr>
 <tr class="separator:acfc75e200a8e87d7463cbaa835c7d3ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b31ff87d2a1b867447f4ce87762a1e1"><td class="memItemLeft" align="right" valign="top"><a id="a1b31ff87d2a1b867447f4ce87762a1e1"></a>
+<a class="el" href="class_domain_buffer.html">DomainBuffer</a>&lt; CUDA_BUFFER, float &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>depth</b></td></tr>
+<tr class="separator:a1b31ff87d2a1b867447f4ce87762a1e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7612491ec2c94cfb55f93e0778b247d7"><td class="memItemLeft" align="right" valign="top"><a id="a7612491ec2c94cfb55f93e0778b247d7"></a>
+<a class="el" href="class_domain_buffer.html">DomainBuffer</a>&lt; CUDA_BUFFER, uint4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>material</b></td></tr>
+<tr class="separator:a7612491ec2c94cfb55f93e0778b247d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a9d8e6e8f1dc353833e1c18ae4304561e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d8e6e8f1dc353833e1c18ae4304561e">&#9670;&nbsp;</a></span>clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GBufferStorage::clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>clear the G-buffer with invalid bits </p>
+
+</div>
+</div>
+<a id="a4c56dec448dc48418f8e4dd47adc8e44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c56dec448dc48418f8e4dd47adc8e44">&#9670;&nbsp;</a></span>resize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GBufferStorage::resize </td>
+          <td>(</td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>_res_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>_res_y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>set the resolution </p>
+
+</div>
+</div>
+<a id="ad9fd298041c1d4f7b239c0242a8f8b5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9fd298041c1d4f7b239c0242a8f8b5f">&#9670;&nbsp;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t GBufferStorage::size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>return the total number of pixels </p>
+
+</div>
+</div>
+<a id="ade6d37a2dba46fe7b701634fe97fb7b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade6d37a2dba46fe7b701634fe97fb7b9">&#9670;&nbsp;</a></span>view()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_g_buffer_view.html">GBufferView</a> GBufferStorage::view </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>return a view object </p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>C:/p4research/research/jpantaleoni/Fermat-Public/src/<a class="el" href="framebuffer_8h_source.html">framebuffer.h</a></li>
 </ul>

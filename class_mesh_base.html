@@ -224,12 +224,32 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setColorStride</b> (i
 <tr class="memitem:a85b5140f3641d28e2468f6547ba365c1"><td class="memItemLeft" align="right" valign="top"><a id="a85b5140f3641d28e2468f6547ba365c1"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setTextureCoordinateStride</b> (int texture_coordinate_stride)</td></tr>
 <tr class="separator:a85b5140f3641d28e2468f6547ba365c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ed368cf25b8c43ac18824c6dd980efa"><td class="memItemLeft" align="right" valign="top"><a id="a2ed368cf25b8c43ac18824c6dd980efa"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setVertexIndexStride</b> (int index_stride)</td></tr>
+<tr class="separator:a2ed368cf25b8c43ac18824c6dd980efa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3541f6e43c78bf78bada0aed22515e4"><td class="memItemLeft" align="right" valign="top"><a id="aa3541f6e43c78bf78bada0aed22515e4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setNormalIndexStride</b> (int index_stride)</td></tr>
+<tr class="separator:aa3541f6e43c78bf78bada0aed22515e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0f218a5d46a946dbd131321f3ecb6c5"><td class="memItemLeft" align="right" valign="top"><a id="ae0f218a5d46a946dbd131321f3ecb6c5"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setColorIndexStride</b> (int index_stride)</td></tr>
+<tr class="separator:ae0f218a5d46a946dbd131321f3ecb6c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9406f179533bc966d60ca7a0d8f124b9"><td class="memItemLeft" align="right" valign="top"><a id="a9406f179533bc966d60ca7a0d8f124b9"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setTextureIndexStride</b> (int index_stride)</td></tr>
+<tr class="separator:a9406f179533bc966d60ca7a0d8f124b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3be83f6c6a41e7b786c804eda9b9f247"><td class="memItemLeft" align="right" valign="top"><a id="a3be83f6c6a41e7b786c804eda9b9f247"></a>
 const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getFilename</b> () const</td></tr>
 <tr class="separator:a3be83f6c6a41e7b786c804eda9b9f247"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a91f01999b6fa0fe764db833fdf3b17b1"><td class="memItemLeft" align="right" valign="top"><a id="a91f01999b6fa0fe764db833fdf3b17b1"></a>
 const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getPathName</b> () const</td></tr>
 <tr class="separator:a91f01999b6fa0fe764db833fdf3b17b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a508fde807d380849192391f28465fee4"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mesh_base.html#a508fde807d380849192391f28465fee4">getVertexTriangleSize</a> () const =0</td></tr>
+<tr class="separator:a508fde807d380849192391f28465fee4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a249856ea8eb734ae36bdf51ea4bdbdd7"><td class="memItemLeft" align="right" valign="top"><a id="a249856ea8eb734ae36bdf51ea4bdbdd7"></a>
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>getNormalTriangleSize</b> () const =0</td></tr>
+<tr class="separator:a249856ea8eb734ae36bdf51ea4bdbdd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8b94fe22c0d261357d2386cf2b5624c"><td class="memItemLeft" align="right" valign="top"><a id="aa8b94fe22c0d261357d2386cf2b5624c"></a>
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>getTextureTriangleSize</b> () const =0</td></tr>
+<tr class="separator:aa8b94fe22c0d261357d2386cf2b5624c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25e192211e37cb69f9b5ce9aea25989a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mesh_base.html#a25e192211e37cb69f9b5ce9aea25989a">preProcess</a> ()=0</td></tr>
 <tr class="separator:a25e192211e37cb69f9b5ce9aea25989a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a30c0ef8b3faabc9b41520b85dd9413bb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mesh_base.html#a30c0ef8b3faabc9b41520b85dd9413bb">allocateData</a> ()=0</td></tr>
@@ -319,6 +339,34 @@ template&lt;class Functor &gt; </div>
       </table>
 </div><div class="memdoc">
 <p>Calls functor( group ) for each group in the mesh, where 'group' is of the type <a class="el" href="class_mesh_group.html">MeshGroup</a>. </p>
+
+</div>
+</div>
+<a id="a508fde807d380849192391f28465fee4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a508fde807d380849192391f28465fee4">&#9670;&nbsp;</a></span>getVertexTriangleSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual int MeshBase::getVertexTriangleSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>These pure virtual functions allow subclasses to control much about the loading behavior. </p>
+
+<p>Implemented in <a class="el" href="class_mesh_loader.html#a3e228f5e2fbb1261cd76871ee07e4f58">MeshLoader</a>.</p>
 
 </div>
 </div>
@@ -480,7 +528,7 @@ template&lt;class Functor &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>These pure virtual functions allow subclasses to control much about the loading behavior. An injection point for subclasses to do any prep before file info is loaded </p>
+<p>An injection point for subclasses to do any prep before file info is loaded </p>
 
 <p>Implemented in <a class="el" href="class_mesh_loader.html#ad9c636920b31629f1c271b20a5fdc29b">MeshLoader</a>.</p>
 

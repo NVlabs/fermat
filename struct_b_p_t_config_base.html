@@ -103,10 +103,12 @@ FERMAT_HOST_DEVICE FERMAT_FORCEINLINE&#160;</td><td class="memItemRight" valign=
 <tr class="separator:a546ae2aa2926db1702688da6c23aa3e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a333fa484bf5a9f4ad12f6a7ed48632d4"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_b_p_t_config_base.html#a333fa484bf5a9f4ad12f6a7ed48632d4">accumulate_emissive</a> (const uint32 eye_path_id, const uint32 t, const bool absorbed) const</td></tr>
 <tr class="separator:a333fa484bf5a9f4ad12f6a7ed48632d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade498070628c5539f2bd0ff7bbb2a587"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_b_p_t_config_base.html#ade498070628c5539f2bd0ff7bbb2a587">visit_light_vertex</a> (const uint32 light_path_id, const uint32 depth, const <a class="el" href="struct_vertex_geometry_id.html">VertexGeometryId</a> v_id, <a class="el" href="struct_b_p_t_context_base.html">BPTContextBase</a> &amp;context, <a class="el" href="struct_renderer_view.html">RendererView</a> &amp;renderer) const</td></tr>
-<tr class="separator:ade498070628c5539f2bd0ff7bbb2a587"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af953c5ead71b2f3b4431dd1875132da9"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_b_p_t_config_base.html#af953c5ead71b2f3b4431dd1875132da9">visit_eye_vertex</a> (const uint32 eye_path_id, const uint32 depth, const <a class="el" href="struct_vertex_geometry_id.html">VertexGeometryId</a> v_id, const <a class="el" href="struct_eye_vertex.html">EyeVertex</a> &amp;v, <a class="el" href="struct_b_p_t_context_base.html">BPTContextBase</a> &amp;context, <a class="el" href="struct_renderer_view.html">RendererView</a> &amp;renderer) const</td></tr>
-<tr class="separator:af953c5ead71b2f3b4431dd1875132da9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a948bffb4f173adc48f156d02d000bb"><td class="memTemplParams" colspan="2">template&lt;typename TBPTContext &gt; </td></tr>
+<tr class="memitem:a9a948bffb4f173adc48f156d02d000bb"><td class="memTemplItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_b_p_t_config_base.html#a9a948bffb4f173adc48f156d02d000bb">visit_light_vertex</a> (const uint32 light_path_id, const uint32 depth, const <a class="el" href="struct_vertex_geometry_id.html">VertexGeometryId</a> v_id, TBPTContext &amp;context, <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> &amp;renderer) const</td></tr>
+<tr class="separator:a9a948bffb4f173adc48f156d02d000bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1ecb6f3ef04718305291fedf76cec85"><td class="memTemplParams" colspan="2">template&lt;typename TBPTContext &gt; </td></tr>
+<tr class="memitem:ac1ecb6f3ef04718305291fedf76cec85"><td class="memTemplItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_b_p_t_config_base.html#ac1ecb6f3ef04718305291fedf76cec85">visit_eye_vertex</a> (const uint32 eye_path_id, const uint32 depth, const <a class="el" href="struct_vertex_geometry_id.html">VertexGeometryId</a> v_id, const <a class="el" href="struct_eye_vertex.html">EyeVertex</a> &amp;v, TBPTContext &amp;context, <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> &amp;renderer) const</td></tr>
+<tr class="separator:ac1ecb6f3ef04718305291fedf76cec85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Members</h2></td></tr>
@@ -388,11 +390,13 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>light_tracing</b></t
 
 </div>
 </div>
-<a id="af953c5ead71b2f3b4431dd1875132da9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af953c5ead71b2f3b4431dd1875132da9">&#9670;&nbsp;</a></span>visit_eye_vertex()</h2>
+<a id="ac1ecb6f3ef04718305291fedf76cec85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1ecb6f3ef04718305291fedf76cec85">&#9670;&nbsp;</a></span>visit_eye_vertex()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename TBPTContext &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -424,13 +428,13 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>light_tracing</b></t
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_b_p_t_context_base.html">BPTContextBase</a> &amp;&#160;</td>
+          <td class="paramtype">TBPTContext &amp;&#160;</td>
           <td class="paramname"><em>context</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_renderer_view.html">RendererView</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> &amp;&#160;</td>
           <td class="paramname"><em>renderer</em>&#160;</td>
         </tr>
         <tr>
@@ -449,11 +453,13 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>light_tracing</b></t
 
 </div>
 </div>
-<a id="ade498070628c5539f2bd0ff7bbb2a587"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade498070628c5539f2bd0ff7bbb2a587">&#9670;&nbsp;</a></span>visit_light_vertex()</h2>
+<a id="a9a948bffb4f173adc48f156d02d000bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a948bffb4f173adc48f156d02d000bb">&#9670;&nbsp;</a></span>visit_light_vertex()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename TBPTContext &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -479,13 +485,13 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>light_tracing</b></t
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_b_p_t_context_base.html">BPTContextBase</a> &amp;&#160;</td>
+          <td class="paramtype">TBPTContext &amp;&#160;</td>
           <td class="paramname"><em>context</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_renderer_view.html">RendererView</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> &amp;&#160;</td>
           <td class="paramname"><em>renderer</em>&#160;</td>
         </tr>
         <tr>

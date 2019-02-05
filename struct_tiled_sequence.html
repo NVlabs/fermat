@@ -79,7 +79,9 @@ $(function() {
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">Detailed description</h2>
 <div class="textblock"><p>A tiled sample sequence.</p>
-<p>Basically, represents an tiled 2d grid of N-dimensional sample sequences. </p>
+<dl class="section user"><dt></dt><dd>Basically, represents a tiled 2d grid of N-dimensional sample sequences, which can be conveniently "sliced" in 1d or 2d sections (each such slice representing a 2d grid of 1d or 2d samples). The per-pixel sequences are constructed by "offsetting" a base, common sequence using a set of per-pixel N-dimensional shifts. The offsetting process is a regular Cranley-Patterson rotation, i.e. the <em>d</em>-th coordinate of the final sequence for pixel <em>p</em> is given by: <br />
+<div class="fragment"><div class="line">sequence(p,d) = <a class="code" href="group___basic.html#gaa6ea8810d6e0f5f42d49be632566378c">mod</a>( base_sequence[d] + shift[p][d], 1 );</div></div><!-- fragment --> The sequence has a further <em>time</em> dimension that can be used for progressive rendering, which can be advanced calling the TiledSequence::set_instance() method. </dd></dl>
+<dl class="section user"><dt></dt><dd>Notice this is a host container for a device-side sequence. Once it is set up, the device-side view can be queried using the TiledSequence::view() method. </dd></dl>
 </div>
 <p><code>#include &lt;<a class="el" href="tiled__sequence_8h_source.html">tiled_sequence.h</a>&gt;</code></p>
 <table class="memberdecls">
@@ -115,9 +117,6 @@ uint32&#160;</td><td class="memItemRight" valign="bottom"><b>tile_size</b></td><
 <tr class="memitem:af9c60d31fcf96d55746961c588efa6b5"><td class="memItemLeft" align="right" valign="top"><a id="af9c60d31fcf96d55746961c588efa6b5"></a>
 <a class="el" href="class_domain_buffer.html">DomainBuffer</a>&lt; CUDA_BUFFER, float &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_sequence</b></td></tr>
 <tr class="separator:af9c60d31fcf96d55746961c588efa6b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ed2a28b937b45fc021e76960fa65116"><td class="memItemLeft" align="right" valign="top"><a id="a9ed2a28b937b45fc021e76960fa65116"></a>
-<a class="el" href="class_domain_buffer.html">DomainBuffer</a>&lt; HOST_BUFFER, float &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_sequence_samples</b></td></tr>
-<tr class="separator:a9ed2a28b937b45fc021e76960fa65116"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>C:/p4research/research/jpantaleoni/Fermat-Public/src/<a class="el" href="tiled__sequence_8h_source.html">tiled_sequence.h</a></li>

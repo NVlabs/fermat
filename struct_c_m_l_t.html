@@ -71,6 +71,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Methods</a> &#124;
+<a href="#pub-static-methods">Static Public Methods</a> &#124;
 <a href="#pub-attribs">Public Members</a> &#124;
 <a href="struct_c_m_l_t-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -78,7 +79,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">Detailed description</h2>
-<div class="textblock"><p>Charted MLT renderer </p>
+<div class="textblock"><p>Charted <a class="el" href="struct_m_l_t.html">MLT</a> renderer </p>
 </div>
 <p><code>#include &lt;<a class="el" href="cmlt_8h_source.html">cmlt.h</a>&gt;</code></p>
 <div class="dynheader">
@@ -93,19 +94,19 @@ Inheritance diagram for CMLT:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Methods</h2></td></tr>
-<tr class="memitem:a511a69c027f4044c5bd73a940299ad57"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_c_m_l_t.html#a511a69c027f4044c5bd73a940299ad57">init</a> (int argc, char **argv, <a class="el" href="struct_renderer.html">Renderer</a> &amp;renderer)</td></tr>
-<tr class="separator:a511a69c027f4044c5bd73a940299ad57"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a480e46fe8f84cb7bda6816e75a1c545c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_c_m_l_t.html#a480e46fe8f84cb7bda6816e75a1c545c">render</a> (const uint32 instance, <a class="el" href="struct_renderer.html">Renderer</a> &amp;renderer)</td></tr>
-<tr class="separator:a480e46fe8f84cb7bda6816e75a1c545c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16f9c8c63c6027478854528963cf4ccf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_c_m_l_t.html#a16f9c8c63c6027478854528963cf4ccf">init</a> (int argc, char **argv, <a class="el" href="struct_rendering_context.html">RenderingContext</a> &amp;renderer)</td></tr>
+<tr class="separator:a16f9c8c63c6027478854528963cf4ccf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8fe8b00cbe99184c726849da14a5ab2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_c_m_l_t.html#ad8fe8b00cbe99184c726849da14a5ab2">render</a> (const uint32 instance, <a class="el" href="struct_rendering_context.html">RenderingContext</a> &amp;renderer)</td></tr>
+<tr class="separator:ad8fe8b00cbe99184c726849da14a5ab2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6543dff92a861254148e223b0117741"><td class="memItemLeft" align="right" valign="top"><a id="ac6543dff92a861254148e223b0117741"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>sample_seeds</b> (const uint32 n_chains)</td></tr>
 <tr class="separator:ac6543dff92a861254148e223b0117741"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72fd786f4cb773e69b0e5586236abf32"><td class="memItemLeft" align="right" valign="top"><a id="a72fd786f4cb773e69b0e5586236abf32"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>build_st_norms_cdf</b> ()</td></tr>
 <tr class="separator:a72fd786f4cb773e69b0e5586236abf32"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafcec71a9a59183fbc4961be100394bd"><td class="memItemLeft" align="right" valign="top"><a id="aafcec71a9a59183fbc4961be100394bd"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>recover_primary_coordinates</b> (CMLTContext &amp;context, <a class="el" href="struct_renderer_view.html">RendererView</a> &amp;renderer_view)</td></tr>
-<tr class="separator:aafcec71a9a59183fbc4961be100394bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5740b19950843683b9c4ed03493badcf"><td class="memItemLeft" align="right" valign="top"><a id="a5740b19950843683b9c4ed03493badcf"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>recover_primary_coordinates</b> (CMLTContext &amp;context, <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> &amp;renderer_view)</td></tr>
+<tr class="separator:a5740b19950843683b9c4ed03493badcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa8558dad2db5508be7aa028f69af7308"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_c_m_l_t.html#aa8558dad2db5508be7aa028f69af7308">destroy</a> ()</td></tr>
 <tr class="separator:aa8558dad2db5508be7aa028f69af7308"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_struct_renderer_interface"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_renderer_interface')"><img src="closed.png" alt="-"/>&#160;Public Methods inherited from <a class="el" href="struct_renderer_interface.html">RendererInterface</a></td></tr>
@@ -113,12 +114,22 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>recover_primary_coord
 <tr class="separator:a0bedb16a0103c95dae460afef2a0fc2a inherit pub_methods_struct_renderer_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca2dd8b8b27e3e6f7fcf81c0d8d17ce5 inherit pub_methods_struct_renderer_interface"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_renderer_interface.html#aca2dd8b8b27e3e6f7fcf81c0d8d17ce5">register_auxiliary_channels</a> (<a class="el" href="struct_f_buffer_storage.html">FBufferStorage</a> &amp;fbuffer, const uint32 channel_offset)</td></tr>
 <tr class="separator:aca2dd8b8b27e3e6f7fcf81c0d8d17ce5 inherit pub_methods_struct_renderer_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a754143d3228c27eab32f1760217afe56 inherit pub_methods_struct_renderer_interface"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_renderer_interface.html#a754143d3228c27eab32f1760217afe56">update_scene</a> (<a class="el" href="struct_rendering_context.html">RenderingContext</a> &amp;renderer)</td></tr>
+<tr class="separator:a754143d3228c27eab32f1760217afe56 inherit pub_methods_struct_renderer_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f5afd3701d8d935a2ecf08fb9f5f604 inherit pub_methods_struct_renderer_interface"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_renderer_interface.html#a9f5afd3701d8d935a2ecf08fb9f5f604">keyboard</a> (unsigned char character, int x, int y, bool &amp;invalidate)</td></tr>
 <tr class="separator:a9f5afd3701d8d935a2ecf08fb9f5f604 inherit pub_methods_struct_renderer_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac870d788b0e1eda1078903d342b75ca6 inherit pub_methods_struct_renderer_interface"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_renderer_interface.html#ac870d788b0e1eda1078903d342b75ca6">mouse</a> (<a class="el" href="struct_renderer.html">Renderer</a> &amp;renderer, int button, int state, int x, int y)</td></tr>
-<tr class="separator:ac870d788b0e1eda1078903d342b75ca6 inherit pub_methods_struct_renderer_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f40675bbddb2efcef53d35964da76b2 inherit pub_methods_struct_renderer_interface"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_renderer_interface.html#a8f40675bbddb2efcef53d35964da76b2">draw</a> (<a class="el" href="struct_renderer.html">Renderer</a> &amp;renderer)</td></tr>
-<tr class="separator:a8f40675bbddb2efcef53d35964da76b2 inherit pub_methods_struct_renderer_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae7f55e0f8863e6a2ed3205d228ab306 inherit pub_methods_struct_renderer_interface"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_renderer_interface.html#aae7f55e0f8863e6a2ed3205d228ab306">mouse</a> (<a class="el" href="struct_rendering_context.html">RenderingContext</a> &amp;renderer, int button, int state, int x, int y)</td></tr>
+<tr class="separator:aae7f55e0f8863e6a2ed3205d228ab306 inherit pub_methods_struct_renderer_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44e91217896e95a3fd46b26eef51a6da inherit pub_methods_struct_renderer_interface"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_renderer_interface.html#a44e91217896e95a3fd46b26eef51a6da">draw</a> (<a class="el" href="struct_rendering_context.html">RenderingContext</a> &amp;renderer)</td></tr>
+<tr class="separator:a44e91217896e95a3fd46b26eef51a6da inherit pub_methods_struct_renderer_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a378df3aa18095da5ce8011fb25c8fb8e inherit pub_methods_struct_renderer_interface"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_renderer_interface.html#a378df3aa18095da5ce8011fb25c8fb8e">dump_speed_stats</a> (FILE *stats)</td></tr>
+<tr class="separator:a378df3aa18095da5ce8011fb25c8fb8e inherit pub_methods_struct_renderer_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Methods</h2></td></tr>
+<tr class="memitem:a548944cf739086aed1bb4feb56a1a081"><td class="memItemLeft" align="right" valign="top"><a id="a548944cf739086aed1bb4feb56a1a081"></a>
+static <a class="el" href="struct_renderer_interface.html">RendererInterface</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>factory</b> ()</td></tr>
+<tr class="separator:a548944cf739086aed1bb4feb56a1a081"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Members</h2></td></tr>
@@ -233,8 +244,8 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>m_time</b></td></tr>
 
 </div>
 </div>
-<a id="a511a69c027f4044c5bd73a940299ad57"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a511a69c027f4044c5bd73a940299ad57">&#9670;&nbsp;</a></span>init()</h2>
+<a id="a16f9c8c63c6027478854528963cf4ccf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16f9c8c63c6027478854528963cf4ccf">&#9670;&nbsp;</a></span>init()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -257,7 +268,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>m_time</b></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_renderer.html">Renderer</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_rendering_context.html">RenderingContext</a> &amp;&#160;</td>
           <td class="paramname"><em>renderer</em>&#160;</td>
         </tr>
         <tr>
@@ -274,12 +285,12 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>m_time</b></td></tr>
 </div><div class="memdoc">
 <p>this method is responsible for any command options parsing / initializations the renderer might need to perform </p>
 
-<p>Reimplemented from <a class="el" href="struct_renderer_interface.html#a9f067d69d562abf2d37fc22e6e194e0f">RendererInterface</a>.</p>
+<p>Reimplemented from <a class="el" href="struct_renderer_interface.html#a2ead9b943d6d48fcd32872e0005ebe63">RendererInterface</a>.</p>
 
 </div>
 </div>
-<a id="a480e46fe8f84cb7bda6816e75a1c545c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a480e46fe8f84cb7bda6816e75a1c545c">&#9670;&nbsp;</a></span>render()</h2>
+<a id="ad8fe8b00cbe99184c726849da14a5ab2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8fe8b00cbe99184c726849da14a5ab2">&#9670;&nbsp;</a></span>render()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -296,7 +307,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>m_time</b></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_renderer.html">Renderer</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_rendering_context.html">RenderingContext</a> &amp;&#160;</td>
           <td class="paramname"><em>renderer</em>&#160;</td>
         </tr>
         <tr>
@@ -311,7 +322,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>m_time</b></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p><a class="anchor" id="RendererInterfaceRenderMethod"></a> this method is responsible for rendering a given frame in a progressive rendering</p>
+<p>this method is responsible for rendering a given frame in a progressive rendering</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">instance</td><td>the frame instance </td></tr>
@@ -319,12 +330,12 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>m_time</b></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="struct_renderer_interface.html#a7b140cacf030a11fa563e9e2cf26e798">RendererInterface</a>.</p>
+<p>Reimplemented from <a class="el" href="struct_renderer_interface.html#aa64254dd44c94929b05092dc8d74f29d">RendererInterface</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>C:/p4research/research/jpantaleoni/Fermat-Public/src/<a class="el" href="cmlt_8h_source.html">cmlt.h</a></li>
+<li>C:/p4research/research/jpantaleoni/Fermat-Public/src/renderers/<a class="el" href="cmlt_8h_source.html">cmlt.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

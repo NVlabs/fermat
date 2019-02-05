@@ -80,9 +80,15 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Methods</h2></td></tr>
+<tr class="memitem:aeaf37e95f34be13ed3cdd15e9a44d552"><td class="memItemLeft" align="right" valign="top"><a id="aeaf37e95f34be13ed3cdd15e9a44d552"></a>
+<a class="el" href="struct_ray_queue.html">RayQueue</a>&#160;</td><td class="memItemRight" valign="bottom"><b>offset</b> (const uint32 _count, uint32 *_size) const</td></tr>
+<tr class="separator:aeaf37e95f34be13ed3cdd15e9a44d552"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02b9a40bbb796acf9b295a8f12db9c3a"><td class="memItemLeft" align="right" valign="top"><a id="a02b9a40bbb796acf9b295a8f12db9c3a"></a>
 FERMAT_HOST_DEVICE uint32&#160;</td><td class="memItemRight" valign="bottom"><b>append_slot</b> () const</td></tr>
 <tr class="separator:a02b9a40bbb796acf9b295a8f12db9c3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2c77fb7bee173caff4b72bc226b89b6"><td class="memItemLeft" align="right" valign="top"><a id="aa2c77fb7bee173caff4b72bc226b89b6"></a>
+FERMAT_DEVICE uint32&#160;</td><td class="memItemRight" valign="bottom"><b>warp_append_slot</b> () const</td></tr>
+<tr class="separator:aa2c77fb7bee173caff4b72bc226b89b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9a082ee79d0ab8d3d42387f3b2e6eb9"><td class="memItemLeft" align="right" valign="top"><a id="af9a082ee79d0ab8d3d42387f3b2e6eb9"></a>
 FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><b>append</b> (const <a class="el" href="union_pixel_info.html">PixelInfo</a> pixel, const <a class="el" href="struct_ray.html">Ray</a> &amp;ray, const float4 weight, const float p)</td></tr>
 <tr class="separator:af9a082ee79d0ab8d3d42387f3b2e6eb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -95,6 +101,9 @@ FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><b>ap
 <tr class="memitem:a82f55fe5142c62970ee6b6eceb66fe6c"><td class="memItemLeft" align="right" valign="top"><a id="a82f55fe5142c62970ee6b6eceb66fe6c"></a>
 FERMAT_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><b>warp_append</b> (const <a class="el" href="union_pixel_info.html">PixelInfo</a> pixel, const <a class="el" href="struct_ray.html">Ray</a> &amp;ray, const float4 weight, const float p, float4 path_w)</td></tr>
 <tr class="separator:a82f55fe5142c62970ee6b6eceb66fe6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4226fba4c9df54b6f46d4b6c2b07c1c7"><td class="memItemLeft" align="right" valign="top"><a id="a4226fba4c9df54b6f46d4b6c2b07c1c7"></a>
+FERMAT_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><b>warp_append</b> (const <a class="el" href="union_pixel_info.html">PixelInfo</a> pixel, const <a class="el" href="struct_ray.html">Ray</a> &amp;ray, const float4 weight, const uint32 path_id, float4 path_w)</td></tr>
+<tr class="separator:a4226fba4c9df54b6f46d4b6c2b07c1c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6831e6ea2631003184d190c06c62c370"><td class="memItemLeft" align="right" valign="top"><a id="a6831e6ea2631003184d190c06c62c370"></a>
 FERMAT_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><b>warp_append</b> (const <a class="el" href="union_pixel_info.html">PixelInfo</a> pixel, const <a class="el" href="struct_ray.html">Ray</a> &amp;ray, const float4 weight, const float p)</td></tr>
 <tr class="separator:a6831e6ea2631003184d190c06c62c370"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -113,16 +122,16 @@ Public Members</h2></td></tr>
 <tr class="memitem:ac2efa3e54c1e5da271b42568ae729c75"><td class="memItemLeft" align="right" valign="top"><a id="ac2efa3e54c1e5da271b42568ae729c75"></a>
 float4 *&#160;</td><td class="memItemRight" valign="bottom"><b>weights</b></td></tr>
 <tr class="separator:ac2efa3e54c1e5da271b42568ae729c75"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a452522a8dd06dffc7127c97cf3681998"><td class="memItemLeft" ><a id="a452522a8dd06dffc7127c97cf3681998"></a>
+<tr class="memitem:a432d6fa34e15c287c5a11f3a2502ea25"><td class="memItemLeft" ><a id="a432d6fa34e15c287c5a11f3a2502ea25"></a>
 union {</td></tr>
-<tr class="memitem:a9151b0ee51e87587b2ac732585e3a05b"><td class="memItemLeft" >
+<tr class="memitem:aeaa72764a0c79eb84de0eccf561e5299"><td class="memItemLeft" >
 &#160;&#160;&#160;float *&#160;&#160;&#160;<b>probs</b></td></tr>
-<tr class="separator:a9151b0ee51e87587b2ac732585e3a05b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a445ca4dad86599c4ea11eef776d7edc5"><td class="memItemLeft" >
+<tr class="separator:aeaa72764a0c79eb84de0eccf561e5299"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79bb199be15de0b168ec4c1c4e258ab5"><td class="memItemLeft" >
 &#160;&#160;&#160;uint32 *&#160;&#160;&#160;<b>light_path_id</b></td></tr>
-<tr class="separator:a445ca4dad86599c4ea11eef776d7edc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a452522a8dd06dffc7127c97cf3681998"><td class="memItemLeft" valign="top">};&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
-<tr class="separator:a452522a8dd06dffc7127c97cf3681998"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a79bb199be15de0b168ec4c1c4e258ab5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a432d6fa34e15c287c5a11f3a2502ea25"><td class="memItemLeft" valign="top">};&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:a432d6fa34e15c287c5a11f3a2502ea25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52d425734e9d815d1049ef42555a8cfa"><td class="memItemLeft" align="right" valign="top"><a id="a52d425734e9d815d1049ef42555a8cfa"></a>
 uint32 *&#160;</td><td class="memItemRight" valign="bottom"><b>pixels</b></td></tr>
 <tr class="separator:a52d425734e9d815d1049ef42555a8cfa"><td class="memSeparator" colspan="2">&#160;</td></tr>

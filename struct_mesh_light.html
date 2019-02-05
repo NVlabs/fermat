@@ -96,8 +96,8 @@ Public Methods</h2></td></tr>
 <tr class="memitem:a222612bad947072eea2d1f0936ef2828"><td class="memItemLeft" align="right" valign="top"><a id="a222612bad947072eea2d1f0936ef2828"></a>
 FERMAT_HOST_DEVICE&#160;</td><td class="memItemRight" valign="bottom"><b>MeshLight</b> (const uint32 _n_prims, const float *_prims_cdf, const float *_prims_inv_area, <a class="el" href="struct_mesh_view.html">MeshView</a> _mesh, const <a class="el" href="struct_mip_map_view.html">MipMapView</a> *_textures, const uint32 _n_vpls, const float *_vpls_cdf, const <a class="el" href="struct_v_p_l.html">VPL</a> *_vpls, const float _norm)</td></tr>
 <tr class="separator:a222612bad947072eea2d1f0936ef2828"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0d346330eb3b0560276dd8386dd5492"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_mesh_light.html#ab0d346330eb3b0560276dd8386dd5492">sample_impl</a> (const float *Z, uint32_t *prim_id, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector2f</a> *uv, <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> *geom, float *pdf, <a class="el" href="struct_edf.html">Edf</a> *edf) const</td></tr>
-<tr class="separator:ab0d346330eb3b0560276dd8386dd5492"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41958f4c2147ad55bb95ca8ba90ec39b"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_mesh_light.html#a41958f4c2147ad55bb95ca8ba90ec39b">sample_impl</a> (const float *Z, uint32_t *prim_id, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector2f</a> *uv, <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> *geom, float *pdf, <a class="el" href="struct_edf.html">Edf</a> *edf) const</td></tr>
+<tr class="separator:a41958f4c2147ad55bb95ca8ba90ec39b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86f0d4badaca1671063ce758bd04812f"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_mesh_light.html#a86f0d4badaca1671063ce758bd04812f">intersect_impl</a> (const <a class="el" href="struct_ray.html">Ray</a> ray, float2 *uv, float *t) const</td></tr>
 <tr class="separator:a86f0d4badaca1671063ce758bd04812f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad39eed77c5604446aef6dc7373ba80ce"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_mesh_light.html#ad39eed77c5604446aef6dc7373ba80ce">map_impl</a> (const uint32_t prim_id, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector2f</a> &amp;uv, <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> *geom, float *pdf, <a class="el" href="struct_edf.html">Edf</a> *edf) const</td></tr>
@@ -114,12 +114,16 @@ FERMAT_HOST_DEVICE uint32&#160;</td><td class="memItemRight" valign="bottom"><b>
 <tr class="memitem:a02d804cf3aa7a4c78bacfbc09703d2e4"><td class="memItemLeft" align="right" valign="top"><a id="a02d804cf3aa7a4c78bacfbc09703d2e4"></a>
 FERMAT_HOST_DEVICE <a class="el" href="struct_v_p_l.html">VPL</a>&#160;</td><td class="memItemRight" valign="bottom"><b>get_vpl</b> (const uint32 i) const</td></tr>
 <tr class="separator:a02d804cf3aa7a4c78bacfbc09703d2e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2282bb91c6d716231dbf81701fd6c05c"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_mesh_light.html#a2282bb91c6d716231dbf81701fd6c05c">map_vpl</a> (const uint32 vpl_idx, uint32_t *prim_id, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector2f</a> *uv, <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> *geom, float *pdf, <a class="el" href="struct_edf.html">Edf</a> *edf) const</td></tr>
+<tr class="separator:a2282bb91c6d716231dbf81701fd6c05c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_struct_light"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_light')"><img src="closed.png" alt="-"/>&#160;Public Methods inherited from <a class="el" href="struct_light.html">Light</a></td></tr>
 <tr class="memitem:af075d1d5e2a8d9449d0ba7f9c32f0e70 inherit pub_methods_struct_light"><td class="memItemLeft" align="right" valign="top"><a id="af075d1d5e2a8d9449d0ba7f9c32f0e70"></a>
 FERMAT_HOST_DEVICE&#160;</td><td class="memItemRight" valign="bottom"><b>Light</b> (LightType _type)</td></tr>
 <tr class="separator:af075d1d5e2a8d9449d0ba7f9c32f0e70 inherit pub_methods_struct_light"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab5a7805a4e9288e93fe3dc9d68adf2f2 inherit pub_methods_struct_light"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___lights_module.html#gab5a7805a4e9288e93fe3dc9d68adf2f2">sample</a> (const float *Z, uint32_t *prim_id, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector2f</a> *uv, <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> *geom, float *pdf, <a class="el" href="struct_edf.html">Edf</a> *edf) const</td></tr>
-<tr class="separator:gab5a7805a4e9288e93fe3dc9d68adf2f2 inherit pub_methods_struct_light"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga67cc240bcda4b08efd26c8727144bf16 inherit pub_methods_struct_light"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___lights_module.html#ga67cc240bcda4b08efd26c8727144bf16">sample</a> (const float *Z, uint32_t *prim_id, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector2f</a> *uv, <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> *geom, float *pdf, <a class="el" href="struct_edf.html">Edf</a> *edf) const</td></tr>
+<tr class="separator:ga67cc240bcda4b08efd26c8727144bf16 inherit pub_methods_struct_light"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa3cac39418d2c62c2faaa4cb7c380ff7 inherit pub_methods_struct_light"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___lights_module.html#gaa3cac39418d2c62c2faaa4cb7c380ff7">sample</a> (const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> p, const float *Z, uint32_t *prim_id, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector2f</a> *uv, <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> *geom, float *pdf, <a class="el" href="struct_edf.html">Edf</a> *edf) const</td></tr>
+<tr class="separator:gaa3cac39418d2c62c2faaa4cb7c380ff7 inherit pub_methods_struct_light"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga6a7452cab8b733d48174016b845f8d53 inherit pub_methods_struct_light"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___lights_module.html#ga6a7452cab8b733d48174016b845f8d53">intersect</a> (const <a class="el" href="struct_ray.html">Ray</a> ray, float2 *uv, float *t) const</td></tr>
 <tr class="separator:ga6a7452cab8b733d48174016b845f8d53 inherit pub_methods_struct_light"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaf14a70f7d23b422f8953bc55d1eade44 inherit pub_methods_struct_light"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___lights_module.html#gaf14a70f7d23b422f8953bc55d1eade44">map</a> (const uint32_t prim_id, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector2f</a> &amp;uv, <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> *geom, float *pdf, <a class="el" href="struct_edf.html">Edf</a> *edf) const</td></tr>
@@ -413,8 +417,8 @@ LightType&#160;</td><td class="memItemRight" valign="bottom"><b>type</b></td></t
 
 </div>
 </div>
-<a id="ab0d346330eb3b0560276dd8386dd5492"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab0d346330eb3b0560276dd8386dd5492">&#9670;&nbsp;</a></span>sample_impl()</h2>
+<a id="a2282bb91c6d716231dbf81701fd6c05c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2282bb91c6d716231dbf81701fd6c05c">&#9670;&nbsp;</a></span>map_vpl()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -423,7 +427,68 @@ LightType&#160;</td><td class="memItemRight" valign="bottom"><b>type</b></td></t
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">FERMAT_HOST_DEVICE void MeshLight::sample_impl </td>
+          <td class="memname">FERMAT_HOST_DEVICE void MeshLight::map_vpl </td>
+          <td>(</td>
+          <td class="paramtype">const uint32&#160;</td>
+          <td class="paramname"><em>vpl_idx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>prim_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structcugar_1_1_vector.html">cugar::Vector2f</a> *&#160;</td>
+          <td class="paramname"><em>uv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> *&#160;</td>
+          <td class="paramname"><em>geom</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>pdf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_edf.html">Edf</a> *&#160;</td>
+          <td class="paramname"><em>edf</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>map a given <a class="el" href="struct_v_p_l.html">VPL</a> to its surface and sampling info </p>
+
+</div>
+</div>
+<a id="a41958f4c2147ad55bb95ca8ba90ec39b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41958f4c2147ad55bb95ca8ba90ec39b">&#9670;&nbsp;</a></span>sample_impl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">FERMAT_HOST_DEVICE bool MeshLight::sample_impl </td>
           <td>(</td>
           <td class="paramtype">const float *&#160;</td>
           <td class="paramname"><em>Z</em>, </td>

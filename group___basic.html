@@ -74,7 +74,8 @@ $(function() {
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">Basic</div>  </div>
 </div><!--header-->
@@ -83,6 +84,8 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
 Modules</h2></td></tr>
+<tr class="memitem:group___auto_diff_module"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___auto_diff_module.html">Automatic-Differentiation</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:group___algorithms_module"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___algorithms_module.html">Algorithms</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:group___atomics"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___atomics.html">Atomics Module</a></td></tr>
@@ -100,6 +103,8 @@ Modules</h2></td></tr>
 <tr class="memitem:group___primitives"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___primitives.html">Parallel Primitives</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:group___priority_queues"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___priority_queues.html">Priority Queues</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___register_arrays_module"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___register_arrays_module.html">Register Arrays</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:group___threads"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___threads.html">Threads</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -379,6 +384,12 @@ typedef thrust::device_ptr&lt; T &gt;&#160;</td><td class="memItemRight" valign=
 <tr class="memitem:gaee10e06b1c7ca751acf69e8cc41c3c54"><td class="memItemLeft" align="right" valign="top"><a id="gaee10e06b1c7ca751acf69e8cc41c3c54"></a>
 typedef thrust::device_ptr&lt; const T &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>cugar::device_iterator_type&lt; const T * &gt;::type</b></td></tr>
 <tr class="separator:gaee10e06b1c7ca751acf69e8cc41c3c54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8ca00c965e35c225ff244024d8576fe5"><td class="memItemLeft" align="right" valign="top"><a id="ga8ca00c965e35c225ff244024d8576fe5"></a>
+typedef thrust::device_vector&lt; T &gt;::const_reference&#160;</td><td class="memItemRight" valign="bottom"><b>cugar::device_var&lt; T &gt;::const_reference</b></td></tr>
+<tr class="separator:ga8ca00c965e35c225ff244024d8576fe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1caf90bf3409a1cda2f71164d9df61e2"><td class="memItemLeft" align="right" valign="top"><a id="ga1caf90bf3409a1cda2f71164d9df61e2"></a>
+typedef thrust::device_vector&lt; T &gt;::reference&#160;</td><td class="memItemRight" valign="bottom"><b>cugar::device_var&lt; T &gt;::reference</b></td></tr>
+<tr class="separator:ga1caf90bf3409a1cda2f71164d9df61e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -467,6 +478,9 @@ Functions</h2></td></tr>
 <tr class="separator:gaa8137b4ffa803b854990ff46df30ef63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gacde218a6ddefd0151e099ff9dc2967f5"><td class="memItemLeft" align="right" valign="top">CUGAR_HOST_DEVICE uint32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___basic.html#gacde218a6ddefd0151e099ff9dc2967f5">cugar::log2</a> (uint32 n)</td></tr>
 <tr class="separator:gacde218a6ddefd0151e099ff9dc2967f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab5948e91b44e5ee613b1354140cd369f"><td class="memItemLeft" align="right" valign="top"><a id="gab5948e91b44e5ee613b1354140cd369f"></a>
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float&#160;</td><td class="memItemRight" valign="bottom"><b>cugar::saturate</b> (const float x)</td></tr>
+<tr class="separator:gab5948e91b44e5ee613b1354140cd369f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga4c88b92d7c3a2616868a11282da2be2f"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE uint32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___basic.html#ga4c88b92d7c3a2616868a11282da2be2f">cugar::hash</a> (uint32 a)</td></tr>
 <tr class="separator:ga4c88b92d7c3a2616868a11282da2be2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga52957987430d0e47da74bf0f6dd7fe71"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE uint32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___basic.html#ga52957987430d0e47da74bf0f6dd7fe71">cugar::hash2</a> (uint32 key)</td></tr>
@@ -652,6 +666,20 @@ template&lt;typename OtherAlloc &gt; </td></tr>
 <tr class="separator:ga88dd1949f9871da3aa4d4aefd0167c8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gacf7a82dbc75f3ff33d4cb3bc1cae2e2f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___basic.html#gacf7a82dbc75f3ff33d4cb3bc1cae2e2f">cugar::caching_device_vector&lt; T &gt;::operator const_plain_view_type</a> () const</td></tr>
 <tr class="separator:gacf7a82dbc75f3ff33d4cb3bc1cae2e2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga011df6d3d281ae52a529e835ba1aad8e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___basic.html#ga011df6d3d281ae52a529e835ba1aad8e">cugar::device_var&lt; T &gt;::device_var</a> (const T val=T())</td></tr>
+<tr class="separator:ga011df6d3d281ae52a529e835ba1aad8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga760fb65c25c56b5fa9f49144f1da3f9b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcugar_1_1device__var.html">device_var</a>&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___basic.html#ga760fb65c25c56b5fa9f49144f1da3f9b">cugar::device_var&lt; T &gt;::operator=</a> (const T &amp;val)</td></tr>
+<tr class="separator:ga760fb65c25c56b5fa9f49144f1da3f9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga95f15b09320e473fc50c4df310d535fe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcugar_1_1device__var.html">device_var</a>&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___basic.html#ga95f15b09320e473fc50c4df310d535fe">cugar::device_var&lt; T &gt;::operator+=</a> (const T &amp;val)</td></tr>
+<tr class="separator:ga95f15b09320e473fc50c4df310d535fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga882c904bab742504bd555bd688ddcd07"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcugar_1_1device__var.html">device_var</a>&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___basic.html#ga882c904bab742504bd555bd688ddcd07">cugar::device_var&lt; T &gt;::operator-=</a> (const T &amp;val)</td></tr>
+<tr class="separator:ga882c904bab742504bd555bd688ddcd07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga64fde1bca016dd1b07ef0e7d6ef853ab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___basic.html#ga64fde1bca016dd1b07ef0e7d6ef853ab">cugar::device_var&lt; T &gt;::operator T</a> () const</td></tr>
+<tr class="separator:ga64fde1bca016dd1b07ef0e7d6ef853ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7075a2df5b4208648b803def09b239d1"><td class="memItemLeft" align="right" valign="top">const T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___basic.html#ga7075a2df5b4208648b803def09b239d1">cugar::device_var&lt; T &gt;::ptr</a> () const</td></tr>
+<tr class="separator:ga7075a2df5b4208648b803def09b239d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2073bcba54a5c135aa6dae8f0efbf20e"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___basic.html#ga2073bcba54a5c135aa6dae8f0efbf20e">cugar::device_var&lt; T &gt;::ptr</a> ()</td></tr>
+<tr class="separator:ga2073bcba54a5c135aa6dae8f0efbf20e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga6a0f89325f62dc313d300e36f2a26b55"><td class="memTemplParams" colspan="2">template&lt;typename Iterator &gt; </td></tr>
 <tr class="memitem:ga6a0f89325f62dc313d300e36f2a26b55"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE uint32&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___basic.html#ga6a0f89325f62dc313d300e36f2a26b55">cugar::length</a> (const <a class="el" href="structcugar_1_1vector__view.html">vector_view</a>&lt; Iterator &gt; &amp;vec)</td></tr>
 <tr class="separator:ga6a0f89325f62dc313d300e36f2a26b55"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -682,6 +710,12 @@ template&lt;typename OtherAlloc &gt; </td></tr>
 <tr class="memitem:gab258fa2242425e638b3014c9ce667ed5"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:gab258fa2242425e638b3014c9ce667ed5"><td class="memTemplItemLeft" align="right" valign="top">const T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___basic.html#gab258fa2242425e638b3014c9ce667ed5">cugar::begin</a> (const T *vec)</td></tr>
 <tr class="separator:gab258fa2242425e638b3014c9ce667ed5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:gad554735037ac2baf007987f3bd884133"><td class="memItemLeft" align="right" valign="top"><a id="gad554735037ac2baf007987f3bd884133"></a>
+<a class="el" href="structcugar_1_1device__vector.html">device_vector</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>cugar::device_var&lt; T &gt;::x</b></td></tr>
+<tr class="separator:gad554735037ac2baf007987f3bd884133"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="gafc4cc49011584e022dbf9c13fa7b95ee"></a>
@@ -1234,13 +1268,42 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="ga011df6d3d281ae52a529e835ba1aad8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga011df6d3d281ae52a529e835ba1aad8e">&#9670;&nbsp;</a></span>device_var()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcugar_1_1device__var.html">cugar::device_var</a>&lt; T &gt;::<a class="el" href="structcugar_1_1device__var.html">device_var</a> </td>
+          <td>(</td>
+          <td class="paramtype">const T&#160;</td>
+          <td class="paramname"><em>val</em> = <code>T()</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>constructor </p>
+
+</div>
+</div>
 <a id="ga9a8d64513864f07fe5e576a13980fafe"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga9a8d64513864f07fe5e576a13980fafe">&#9670;&nbsp;</a></span>device_vector()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -2232,7 +2295,7 @@ template&lt;typename T &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -2372,7 +2435,7 @@ template&lt;typename T &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -2419,6 +2482,121 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 <p>conversion to plain_view_type </p>
+
+</div>
+</div>
+<a id="ga64fde1bca016dd1b07ef0e7d6ef853ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga64fde1bca016dd1b07ef0e7d6ef853ab">&#9670;&nbsp;</a></span>operator T()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcugar_1_1device__var.html">cugar::device_var</a>&lt; T &gt;::operator T </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>automatic conversion </p>
+
+</div>
+</div>
+<a id="ga95f15b09320e473fc50c4df310d535fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga95f15b09320e473fc50c4df310d535fe">&#9670;&nbsp;</a></span>operator+=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcugar_1_1device__var.html">device_var</a>&lt;T&gt;&amp; <a class="el" href="structcugar_1_1device__var.html">cugar::device_var</a>&lt; T &gt;::operator+= </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>assignment </p>
+
+</div>
+</div>
+<a id="ga882c904bab742504bd555bd688ddcd07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga882c904bab742504bd555bd688ddcd07">&#9670;&nbsp;</a></span>operator-=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcugar_1_1device__var.html">device_var</a>&lt;T&gt;&amp; <a class="el" href="structcugar_1_1device__var.html">cugar::device_var</a>&lt; T &gt;::operator-= </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>assignment </p>
+
+</div>
+</div>
+<a id="ga760fb65c25c56b5fa9f49144f1da3f9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga760fb65c25c56b5fa9f49144f1da3f9b">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcugar_1_1device__var.html">device_var</a>&lt;T&gt;&amp; <a class="el" href="structcugar_1_1device__var.html">cugar::device_var</a>&lt; T &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>assignment </p>
 
 </div>
 </div>
@@ -2496,6 +2674,62 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 <p>return the plain view of a std::vector </p>
+
+</div>
+</div>
+<a id="ga7075a2df5b4208648b803def09b239d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7075a2df5b4208648b803def09b239d1">&#9670;&nbsp;</a></span>ptr() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const T* <a class="el" href="structcugar_1_1device__var.html">cugar::device_var</a>&lt; T &gt;::ptr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>return the device pointer </p>
+
+</div>
+</div>
+<a id="ga2073bcba54a5c135aa6dae8f0efbf20e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2073bcba54a5c135aa6dae8f0efbf20e">&#9670;&nbsp;</a></span>ptr() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T* <a class="el" href="structcugar_1_1device__var.html">cugar::device_var</a>&lt; T &gt;::ptr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>return the device pointer </p>
 
 </div>
 </div>
@@ -2609,7 +2843,7 @@ template&lt;typename T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>an indexed random number generator (by Andrew Kensler)</p>
+<p>an indexed random number generator (see "Correlated Multi-Jittered Sampling", by Andrew Kensler)</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">i</td><td>the index in the random stream </td></tr>

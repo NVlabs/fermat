@@ -95,6 +95,14 @@ Functions</h2></td></tr>
 <tr class="separator:gae75ef450df309874ff133b4ec8daee40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaf091547e7d69c8125c7b037aa2d5bd5c"><td class="memItemLeft" align="right" valign="top">CUGAR_HOST CUGAR_DEVICE <a class="el" href="structcugar_1_1_vector.html">Vector2f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__spherical__mappings.html#gaf091547e7d69c8125c7b037aa2d5bd5c">cugar::uniform_sphere_to_square</a> (const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> &amp;vec)</td></tr>
 <tr class="separator:gaf091547e7d69c8125c7b037aa2d5bd5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga10f5d3f25177b94512dc15b59a0434bc"><td class="memItemLeft" align="right" valign="top">CUGAR_HOST CUGAR_DEVICE <a class="el" href="structcugar_1_1_vector.html">Vector2f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__spherical__mappings.html#ga10f5d3f25177b94512dc15b59a0434bc">cugar::hemisphere_to_hemioct</a> (<a class="el" href="structcugar_1_1_vector.html">Vector3f</a> v)</td></tr>
+<tr class="separator:ga10f5d3f25177b94512dc15b59a0434bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8acf5ad9380c558633e1aee500d87089"><td class="memItemLeft" align="right" valign="top">CUGAR_HOST CUGAR_DEVICE <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__spherical__mappings.html#ga8acf5ad9380c558633e1aee500d87089">cugar::hemioct_to_hemisphere</a> (<a class="el" href="structcugar_1_1_vector.html">Vector2f</a> e)</td></tr>
+<tr class="separator:ga8acf5ad9380c558633e1aee500d87089"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad4cb74d8c6a86fdaf44bce3961fde975"><td class="memItemLeft" align="right" valign="top">CUGAR_HOST CUGAR_DEVICE <a class="el" href="structcugar_1_1_vector.html">Vector2f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__spherical__mappings.html#gad4cb74d8c6a86fdaf44bce3961fde975">cugar::sphere_to_oct</a> (<a class="el" href="structcugar_1_1_vector.html">Vector3f</a> v)</td></tr>
+<tr class="separator:gad4cb74d8c6a86fdaf44bce3961fde975"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad2300cdc769dfa8bb11e2b8452895545"><td class="memItemLeft" align="right" valign="top">CUGAR_HOST CUGAR_DEVICE <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__spherical__mappings.html#gad2300cdc769dfa8bb11e2b8452895545">cugar::oct_to_sphere</a> (<a class="el" href="structcugar_1_1_vector.html">Vector2f</a> e)</td></tr>
+<tr class="separator:gad2300cdc769dfa8bb11e2b8452895545"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ga31615ccce21cd9f1161aaabf87f89b9b"></a>
@@ -160,6 +168,114 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="ga8acf5ad9380c558633e1aee500d87089"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8acf5ad9380c558633e1aee500d87089">&#9670;&nbsp;</a></span>hemioct_to_hemisphere()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_HOST CUGAR_DEVICE <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> cugar::hemioct_to_hemisphere </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structcugar_1_1_vector.html">Vector2f</a>&#160;</td>
+          <td class="paramname"><em>e</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>maps a 2d vector to a 3d vector on the +Z hemisphere, using the 2d hemioct representation described in "A Survey of Efficient Representations for Independent Unit Vectors" by Cigolle et al. </p>
+
+</div>
+</div>
+<a id="ga10f5d3f25177b94512dc15b59a0434bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga10f5d3f25177b94512dc15b59a0434bc">&#9670;&nbsp;</a></span>hemisphere_to_hemioct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_HOST CUGAR_DEVICE <a class="el" href="structcugar_1_1_vector.html">Vector2f</a> cugar::hemisphere_to_hemioct </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>maps normalized 3d input on +Z hemisphere to the 2d hemioct representation described in "A Survey of Efficient Representations for Independent Unit Vectors" by Cigolle et al. Output is on [-1, 1]^2. </p>
+
+</div>
+</div>
+<a id="gad2300cdc769dfa8bb11e2b8452895545"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad2300cdc769dfa8bb11e2b8452895545">&#9670;&nbsp;</a></span>oct_to_sphere()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_HOST CUGAR_DEVICE <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> cugar::oct_to_sphere </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structcugar_1_1_vector.html">Vector2f</a>&#160;</td>
+          <td class="paramname"><em>e</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>maps a 2d vector to a 3d vector on the sphere, using the 2d oct representation described in "A Survey of Efficient Representations for Independent Unit Vectors" by Cigolle et al. </p>
+
+</div>
+</div>
+<a id="gad4cb74d8c6a86fdaf44bce3961fde975"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad4cb74d8c6a86fdaf44bce3961fde975">&#9670;&nbsp;</a></span>sphere_to_oct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_HOST CUGAR_DEVICE <a class="el" href="structcugar_1_1_vector.html">Vector2f</a> cugar::sphere_to_oct </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>maps normalized 3d input to the 2d oct representation described in "A Survey of Efficient Representations for Independent Unit Vectors" by Cigolle et al. Output is on [-1, 1]^2. </p>
 
 </div>
 </div>

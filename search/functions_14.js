@@ -1,14 +1,14 @@
 var searchData=
 [
-  ['uniform_5fdistribution',['Uniform_distribution',['../structcugar_1_1_uniform__distribution.html#a73d0ee891f7c4ce135e039b9edeccfc2',1,'cugar::Uniform_distribution']]],
-  ['uniform_5fsphere_5fto_5fsquare',['uniform_sphere_to_square',['../group__spherical__mappings.html#gaf091547e7d69c8125c7b037aa2d5bd5c',1,'cugar']]],
-  ['uniform_5fsquare_5fto_5fsphere',['uniform_square_to_sphere',['../group__spherical__mappings.html#gae75ef450df309874ff133b4ec8daee40',1,'cugar']]],
-  ['unit_5fdisk_5fto_5fsquare',['unit_disk_to_square',['../group__spherical__mappings.html#ga76c7dc3d9379efe5b51c700e28edd8a6',1,'cugar']]],
-  ['unpack_5fdirection',['unpack_direction',['../group___vertex_geometry_module.html#gab56236f4d0e367a082d3dc83df137d79',1,'vertex.h']]],
-  ['unpack_5fhemispherical_5fdirection',['unpack_hemispherical_direction',['../group___vertex_geometry_module.html#gaf8adf4e00e9634afcd384e2e68eebd0a',1,'vertex.h']]],
-  ['unpack_5fvector',['unpack_vector',['../group___vectors_module.html#gafdac23f56276bd0a852d92a786723633',1,'cugar::Vector']]],
-  ['update_5fmodel',['update_model',['../struct_renderer.html#a7056024364d5f23df8c6350e4fb1ec08',1,'Renderer']]],
-  ['update_5fvariances',['update_variances',['../struct_renderer.html#a16d987b3115618f559ad3ce10511f3ec',1,'Renderer']]],
-  ['upper_5fbound',['upper_bound',['../structcugar_1_1priority__queue.html#a31cc4b1e4f45712ec454ef62052db97a',1,'cugar::priority_queue::upper_bound()'],['../group___algorithms_module.html#gafe7ee3a93350b3d2f7f7bb6266ee0425',1,'cugar::upper_bound(const Value x, Iterator begin, const index_type n)'],['../group___primitives.html#ga56b7c8a32a7a8a42afe413b087159230',1,'cugar::upper_bound(const uint32 n, ValueIterator values, const uint32 n_keys, KeyIterator keys, OutputIterator indices)']]],
-  ['upper_5fbound_5findex',['upper_bound_index',['../group___algorithms_module.html#ga8f544d88f3f11cd945933bfa50626375',1,'cugar']]]
+  ['terminate_5feye_5fsubpath',['terminate_eye_subpath',['../struct_b_p_t_config_base.html#a5cafb898a6535d4fee6d98df875fe1ae',1,'BPTConfigBase']]],
+  ['terminate_5flight_5fsubpath',['terminate_light_subpath',['../struct_b_p_t_config_base.html#a97c865fc0c241b22bece418e7a8574b4',1,'BPTConfigBase']]],
+  ['timer',['Timer',['../group___c_u_d_a_module.html#ga27675d4d89a40e592d9f85789d951604',1,'cugar::cuda::Timer::Timer()'],['../structcugar_1_1_timer.html#a79074c97cbaa5973d0045298dd2c0632',1,'cugar::Timer::Timer()']]],
+  ['timeseries',['TimeSeries',['../structcugar_1_1_time_series.html#aaf2e2067f2e771cb6d4540b4554fb86a',1,'cugar::TimeSeries']]],
+  ['to_5fspherical_5fcoords',['to_spherical_coords',['../group__spherical__mappings.html#ga180b90ffc2cc3cfcfe63e911ea51a1ab',1,'cugar']]],
+  ['top',['top',['../structcugar_1_1priority__queue.html#ae74971b0d5b9ed6d0822601ba8afc875',1,'cugar::priority_queue::top()'],['../structcugar_1_1priority__queue.html#a1c4ec8611f6fe2e6dbfdae408435b9cd',1,'cugar::priority_queue::top() const']]],
+  ['transform',['transform',['../group___primitives.html#gab584ee91ed39f9b1fec5aa0e7a0284a4',1,'cugar::transform(const uint32 n, const Iterator in, const Output out, const Functor functor)'],['../group___primitives.html#ga2c0c3bba686f00f120c68465c28f5259',1,'cugar::transform(const uint32 n, const Iterator1 in1, const Iterator2 in2, const Output out, const Functor functor)']]],
+  ['transform_5fgenerator',['Transform_generator',['../structcugar_1_1_transform__generator.html#a1ed65c84f620be6c7278948cb8ad92fc',1,'cugar::Transform_generator']]],
+  ['translate',['translate',['../group___matrices_module.html#ga85a3c0cf9bdf6ef3fc3f957499b875e1',1,'cugar']]],
+  ['tree_5freduce',['tree_reduce',['../group___trees_module.html#ga8044d04a72e3a0a2bf628bbfc237f954',1,'cugar::cuda::tree_reduce(const Tree_visitor tree, const Input_iterator in_values, Output_iterator node_values, const Operator op, const Value_type def_value)'],['../group___trees_module.html#gaf560f435723578e34050172fab671529',1,'cugar::cuda::tree_reduce(const Tree_visitor tree, Value_iterator values, const Operator op)'],['../group___trees_module.html#gaf7e2c5b8c843cd382db2d1b23c981694',1,'cugar::tree_reduce(const Tree_visitor tree, const Input_iterator in_values, Output_iterator node_values, const Operator op, const Value_type def_value)'],['../group___trees_module.html#ga808e7cb4b98d8dc0c3ef125ca457cb68',1,'cugar::tree_reduce(const Tree_visitor tree, Value_iterator values, const Operator op)']]],
+  ['try_5finsert',['try_insert',['../structcugar_1_1cuda_1_1_sync_free_hash_map.html#a2de3977000dd6f1c4912e0e17667f014',1,'cugar::cuda::SyncFreeHashMap']]]
 ];

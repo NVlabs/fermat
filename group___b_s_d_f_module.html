@@ -79,6 +79,18 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<dl class="section user"><dt></dt><dd>This module defines the Bidirectional Scattering Distribution Function employed throughout Fermat. At present time, this model is rather simple, and consists of four layered components only: </dd></dl>
+<dl class="section user"><dt></dt><dd><ul>
+<li>a diffuse reflection component</li>
+<li>a diffuse transmission component</li>
+<li>a glossy reflection component layered on top of the diffuse layer</li>
+<li>a glossy transmission component layered on top of the diffuse layer </li>
+</ul>
+</dd></dl>
+<dl class="section user"><dt></dt><dd>The diffuse model is purely Lambertian, while the glossy components are based on the GGX model with Smith's joint masking-shadowing function described in: <blockquote class="doxtable">
+<p>[Heitz 2014, "Understanding the Masking-Shadowing Function in Microfacet-Based BRDFs"]</p>
+</blockquote>
+</dd></dl>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
@@ -126,8 +138,15 @@ FERMAT_HOST_DEVICE FERMAT_FORCEINLINE float&#160;</td><td class="memItemRight" v
 <tr class="memitem:gad2e2716498c2e506ddb0346bcd76a577"><td class="memItemLeft" align="right" valign="top"><a id="gad2e2716498c2e506ddb0346bcd76a577"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>precompute_glossy_reflectance</b> (const uint32 S, float *tables)</td></tr>
 <tr class="separator:gad2e2716498c2e506ddb0346bcd76a577"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga406d45267a7c015d38cd6db45c8391fb"><td class="memItemLeft" align="right" valign="top"><a id="ga406d45267a7c015d38cd6db45c8391fb"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>cugar::bsdf_test</b> (uint32 test_index, const <a class="el" href="structcugar_1_1_g_g_x_smith_bsdf.html">GGXSmithBsdf</a> &amp;bsdf)</td></tr>
+<tr class="separator:ga406d45267a7c015d38cd6db45c8391fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6f553010172240343aa0890f04b7192c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___b_s_d_f_module.html#ga6f553010172240343aa0890f04b7192c">cugar::bsdf_test</a> ()</td></tr>
+<tr class="separator:ga6f553010172240343aa0890f04b7192c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gae47d332728711dde1d05b721b74267f7"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___b_s_d_f_module.html#gae47d332728711dde1d05b721b74267f7">cugar::microfacet</a> (const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> V, const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> L, const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> N, const float inv_eta)</td></tr>
 <tr class="separator:gae47d332728711dde1d05b721b74267f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa871796466d7998c178e28e2eccd7248"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___b_s_d_f_module.html#gaa871796466d7998c178e28e2eccd7248">cugar::vndf_microfacet</a> (const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> V, const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> L, const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> N, const float inv_eta)</td></tr>
+<tr class="separator:gaa871796466d7998c178e28e2eccd7248"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga985268a447aa898cd2f2e1c792d9ddff"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___b_s_d_f_module.html#ga985268a447aa898cd2f2e1c792d9ddff">cugar::hvd_ggx_eval</a> (const float2 &amp;inv_alpha, const float nh, const float ht, const float hb)</td></tr>
 <tr class="separator:ga985268a447aa898cd2f2e1c792d9ddff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga49eab615e64e73c409bb285fd95c56c3"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___b_s_d_f_module.html#ga49eab615e64e73c409bb285fd95c56c3">cugar::hvd_ggx_sample</a> (const float2 &amp;samples, const float inv_alpha)</td></tr>
@@ -138,6 +157,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>precompute_glossy_ref
 <tr class="separator:ga009dbdc5ba0035fc161335607c2b328d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaae32e76bc82f281f61485ea552aba53a"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___b_s_d_f_module.html#gaae32e76bc82f281f61485ea552aba53a">cugar::vndf_ggx_smith_sample</a> (const float2 samples, const float2 alpha, const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> _V)</td></tr>
 <tr class="separator:gaae32e76bc82f281f61485ea552aba53a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabe2116f566e70937f1abb126140afae8"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___b_s_d_f_module.html#gabe2116f566e70937f1abb126140afae8">cugar::vndf_ggx_smith_invert</a> (const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> _N, const float2 alpha, const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> _V)</td></tr>
+<tr class="separator:gabe2116f566e70937f1abb126140afae8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0ddbffc856042ea191e9ed868fe58ca9"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE uint32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___b_s_d_f_module.html#ga0ddbffc856042ea191e9ed868fe58ca9">cugar::clip_quad_to_horizon</a> (<a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> L[5])</td></tr>
 <tr class="separator:ga0ddbffc856042ea191e9ed868fe58ca9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -158,6 +179,32 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>precompute_glossy_ref
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="ga6f553010172240343aa0890f04b7192c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6f553010172240343aa0890f04b7192c">&#9670;&nbsp;</a></span>bsdf_test()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool cugar::bsdf_test </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>unit test </p>
+
+</div>
+</div>
 <a id="ga0ddbffc856042ea191e9ed868fe58ca9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga0ddbffc856042ea191e9ed868fe58ca9">&#9670;&nbsp;</a></span>clip_quad_to_horizon()</h2>
 
@@ -348,6 +395,41 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>precompute_glossy_ref
 
 </div>
 </div>
+<a id="gabe2116f566e70937f1abb126140afae8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabe2116f566e70937f1abb126140afae8">&#9670;&nbsp;</a></span>vndf_ggx_smith_invert()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float2 cugar::vndf_ggx_smith_invert </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td>
+          <td class="paramname"><em>_N</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float2&#160;</td>
+          <td class="paramname"><em>alpha</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td>
+          <td class="paramname"><em>_V</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Inversion function for "A Simpler and Exact Sampling Routine for the GGX Distribution of Visible Normals" <a href="https://hal.archives-ouvertes.fr/hal-01509746">https://hal.archives-ouvertes.fr/hal-01509746</a> </p>
+
+</div>
+</div>
 <a id="gaae32e76bc82f281f61485ea552aba53a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gaae32e76bc82f281f61485ea552aba53a">&#9670;&nbsp;</a></span>vndf_ggx_smith_sample()</h2>
 
@@ -380,6 +462,47 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>precompute_glossy_ref
       </table>
 </div><div class="memdoc">
 <p>A Simpler and Exact Sampling Routine for the GGX Distribution of Visible Normals <a href="https://hal.archives-ouvertes.fr/hal-01509746">https://hal.archives-ouvertes.fr/hal-01509746</a> </p>
+
+</div>
+</div>
+<a id="gaa871796466d7998c178e28e2eccd7248"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa871796466d7998c178e28e2eccd7248">&#9670;&nbsp;</a></span>vndf_microfacet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> cugar::vndf_microfacet </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td>
+          <td class="paramname"><em>V</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td>
+          <td class="paramname"><em>L</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td>
+          <td class="paramname"><em>N</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>inv_eta</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>return the microfacet normal for a given pair of incident and outgoing direction vectors </p>
 
 </div>
 </div>

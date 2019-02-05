@@ -135,6 +135,12 @@ SUTILAPI int *&#160;</td><td class="memItemRight" valign="bottom"><b>getTextureC
 <tr class="memitem:ad19eb08b6926e4b2da078aa3368f06c6"><td class="memItemLeft" align="right" valign="top"><a id="ad19eb08b6926e4b2da078aa3368f06c6"></a>
 SUTILAPI const int *&#160;</td><td class="memItemRight" valign="bottom"><b>getTextureCoordinateIndices</b> () const</td></tr>
 <tr class="separator:ad19eb08b6926e4b2da078aa3368f06c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a010ad802183570a9c24fa9686f415ed8"><td class="memItemLeft" align="right" valign="top"><a id="a010ad802183570a9c24fa9686f415ed8"></a>
+SUTILAPI int *&#160;</td><td class="memItemRight" valign="bottom"><b>getLightmapIndices</b> ()</td></tr>
+<tr class="separator:a010ad802183570a9c24fa9686f415ed8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1a1ab44d979a609cf0deafa09d5188f"><td class="memItemLeft" align="right" valign="top"><a id="ac1a1ab44d979a609cf0deafa09d5188f"></a>
+SUTILAPI const int *&#160;</td><td class="memItemRight" valign="bottom"><b>getLightmapIndices</b> () const</td></tr>
+<tr class="separator:ac1a1ab44d979a609cf0deafa09d5188f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47b325cf483f5f8941b3989badfaaf4d"><td class="memItemLeft" align="right" valign="top"><a id="a47b325cf483f5f8941b3989badfaaf4d"></a>
 SUTILAPI float *&#160;</td><td class="memItemRight" valign="bottom"><b>getVertexData</b> ()</td></tr>
 <tr class="separator:a47b325cf483f5f8941b3989badfaaf4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -186,21 +192,42 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>m_normal_stride</b></t
 <tr class="memitem:a5ed7ac11433776bbea06698897b30dbe"><td class="memItemLeft" align="right" valign="top"><a id="a5ed7ac11433776bbea06698897b30dbe"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>m_texture_stride</b></td></tr>
 <tr class="separator:a5ed7ac11433776bbea06698897b30dbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedde80e76f45c8266205c002868fc184"><td class="memItemLeft" align="right" valign="top"><a id="aedde80e76f45c8266205c002868fc184"></a>
+float2&#160;</td><td class="memItemRight" valign="bottom"><b>m_tex_bias</b></td></tr>
+<tr class="separator:aedde80e76f45c8266205c002868fc184"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27af8333811b06f13ce9cab6bd132474"><td class="memItemLeft" align="right" valign="top"><a id="a27af8333811b06f13ce9cab6bd132474"></a>
+float2&#160;</td><td class="memItemRight" valign="bottom"><b>m_tex_scale</b></td></tr>
+<tr class="separator:a27af8333811b06f13ce9cab6bd132474"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17696794ea9e5db8892ed811d1dcca99"><td class="memItemLeft" align="right" valign="top"><a id="a17696794ea9e5db8892ed811d1dcca99"></a>
+float2&#160;</td><td class="memItemRight" valign="bottom"><b>m_lm_bias</b></td></tr>
+<tr class="separator:a17696794ea9e5db8892ed811d1dcca99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a294c50b54ed48f7b19c0184ff8ba2a1c"><td class="memItemLeft" align="right" valign="top"><a id="a294c50b54ed48f7b19c0184ff8ba2a1c"></a>
+float2&#160;</td><td class="memItemRight" valign="bottom"><b>m_lm_scale</b></td></tr>
+<tr class="separator:a294c50b54ed48f7b19c0184ff8ba2a1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a775e7c8e6f70e38cfbaeade8654ec558"><td class="memItemLeft" align="right" valign="top"><a id="a775e7c8e6f70e38cfbaeade8654ec558"></a>
 <a class="el" href="class_domain_buffer.html">DomainBuffer</a>&lt; CUDA_BUFFER, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_vertex_indices</b></td></tr>
 <tr class="separator:a775e7c8e6f70e38cfbaeade8654ec558"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac17c11ead9316420565a31f1e021bcf4"><td class="memItemLeft" align="right" valign="top"><a id="ac17c11ead9316420565a31f1e021bcf4"></a>
 <a class="el" href="class_domain_buffer.html">DomainBuffer</a>&lt; CUDA_BUFFER, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_normal_indices</b></td></tr>
 <tr class="separator:ac17c11ead9316420565a31f1e021bcf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abffffc1986968e01b082dd1c386f798f"><td class="memItemLeft" align="right" valign="top"><a id="abffffc1986968e01b082dd1c386f798f"></a>
+<a class="el" href="class_domain_buffer.html">DomainBuffer</a>&lt; CUDA_BUFFER, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_normal_indices_comp</b></td></tr>
+<tr class="separator:abffffc1986968e01b082dd1c386f798f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79d1a5a4d3aff01dc0942ea804dc4f51"><td class="memItemLeft" align="right" valign="top"><a id="a79d1a5a4d3aff01dc0942ea804dc4f51"></a>
 <a class="el" href="class_domain_buffer.html">DomainBuffer</a>&lt; CUDA_BUFFER, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_material_indices</b></td></tr>
 <tr class="separator:a79d1a5a4d3aff01dc0942ea804dc4f51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c7e30214e463d8ba9f67c6cf0df11ee"><td class="memItemLeft" align="right" valign="top"><a id="a4c7e30214e463d8ba9f67c6cf0df11ee"></a>
 <a class="el" href="class_domain_buffer.html">DomainBuffer</a>&lt; CUDA_BUFFER, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_texture_indices</b></td></tr>
 <tr class="separator:a4c7e30214e463d8ba9f67c6cf0df11ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a684d54c92a49b680fd3077caadf109d7"><td class="memItemLeft" align="right" valign="top"><a id="a684d54c92a49b680fd3077caadf109d7"></a>
+<a class="el" href="class_domain_buffer.html">DomainBuffer</a>&lt; CUDA_BUFFER, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_texture_indices_comp</b></td></tr>
+<tr class="separator:a684d54c92a49b680fd3077caadf109d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07aeb81d730fbaff3f2400486ee8ab51"><td class="memItemLeft" align="right" valign="top"><a id="a07aeb81d730fbaff3f2400486ee8ab51"></a>
 <a class="el" href="class_domain_buffer.html">DomainBuffer</a>&lt; CUDA_BUFFER, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_lightmap_indices</b></td></tr>
 <tr class="separator:a07aeb81d730fbaff3f2400486ee8ab51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad29ad0dc19dff6f0621404d7e02e31c3"><td class="memItemLeft" align="right" valign="top"><a id="ad29ad0dc19dff6f0621404d7e02e31c3"></a>
+<a class="el" href="class_domain_buffer.html">DomainBuffer</a>&lt; CUDA_BUFFER, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_lightmap_indices_comp</b></td></tr>
+<tr class="separator:ad29ad0dc19dff6f0621404d7e02e31c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9cc7b55238244e49c3f9e9aeda79e52"><td class="memItemLeft" align="right" valign="top"><a id="ad9cc7b55238244e49c3f9e9aeda79e52"></a>
 <a class="el" href="class_domain_buffer.html">DomainBuffer</a>&lt; CUDA_BUFFER, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_group_offsets</b></td></tr>
 <tr class="separator:ad9cc7b55238244e49c3f9e9aeda79e52"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -210,6 +237,9 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>m_texture_stride</b></
 <tr class="memitem:aa9b07c98ab2fdc07b2402898e81bc27f"><td class="memItemLeft" align="right" valign="top"><a id="aa9b07c98ab2fdc07b2402898e81bc27f"></a>
 <a class="el" href="class_domain_buffer.html">DomainBuffer</a>&lt; CUDA_BUFFER, float &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_normal_data</b></td></tr>
 <tr class="separator:aa9b07c98ab2fdc07b2402898e81bc27f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ec75d5db93c98580f7337cde9dff56f"><td class="memItemLeft" align="right" valign="top"><a id="a3ec75d5db93c98580f7337cde9dff56f"></a>
+<a class="el" href="class_domain_buffer.html">DomainBuffer</a>&lt; CUDA_BUFFER, uint32 &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_normal_data_comp</b></td></tr>
+<tr class="separator:a3ec75d5db93c98580f7337cde9dff56f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:accca2e64f5d363bc23589953d8c5c10e"><td class="memItemLeft" align="right" valign="top"><a id="accca2e64f5d363bc23589953d8c5c10e"></a>
 <a class="el" href="class_domain_buffer.html">DomainBuffer</a>&lt; CUDA_BUFFER, float &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_texture_data</b></td></tr>
 <tr class="separator:accca2e64f5d363bc23589953d8c5c10e"><td class="memSeparator" colspan="2">&#160;</td></tr>

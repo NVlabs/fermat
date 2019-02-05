@@ -88,8 +88,9 @@ Inheritance diagram for Light:</div>
  <div class="center">
   <img src="struct_light.png" usemap="#Light_map" alt=""/>
   <map id="Light_map" name="Light_map">
-<area href="struct_disk_light.html" alt="DiskLight" shape="rect" coords="0,56,70,80"/>
-<area href="struct_mesh_light.html" alt="MeshLight" shape="rect" coords="80,56,150,80"/>
+<area href="struct_directional_light.html" alt="DirectionalLight" shape="rect" coords="0,56,100,80"/>
+<area href="struct_disk_light.html" alt="DiskLight" shape="rect" coords="110,56,210,80"/>
+<area href="struct_mesh_light.html" alt="MeshLight" shape="rect" coords="220,56,320,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -98,8 +99,10 @@ Public Methods</h2></td></tr>
 <tr class="memitem:af075d1d5e2a8d9449d0ba7f9c32f0e70"><td class="memItemLeft" align="right" valign="top"><a id="af075d1d5e2a8d9449d0ba7f9c32f0e70"></a>
 FERMAT_HOST_DEVICE&#160;</td><td class="memItemRight" valign="bottom"><b>Light</b> (LightType _type)</td></tr>
 <tr class="separator:af075d1d5e2a8d9449d0ba7f9c32f0e70"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab5a7805a4e9288e93fe3dc9d68adf2f2"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___lights_module.html#gab5a7805a4e9288e93fe3dc9d68adf2f2">sample</a> (const float *Z, uint32_t *prim_id, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector2f</a> *uv, <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> *geom, float *pdf, <a class="el" href="struct_edf.html">Edf</a> *edf) const</td></tr>
-<tr class="separator:gab5a7805a4e9288e93fe3dc9d68adf2f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga67cc240bcda4b08efd26c8727144bf16"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___lights_module.html#ga67cc240bcda4b08efd26c8727144bf16">sample</a> (const float *Z, uint32_t *prim_id, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector2f</a> *uv, <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> *geom, float *pdf, <a class="el" href="struct_edf.html">Edf</a> *edf) const</td></tr>
+<tr class="separator:ga67cc240bcda4b08efd26c8727144bf16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa3cac39418d2c62c2faaa4cb7c380ff7"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___lights_module.html#gaa3cac39418d2c62c2faaa4cb7c380ff7">sample</a> (const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> p, const float *Z, uint32_t *prim_id, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector2f</a> *uv, <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> *geom, float *pdf, <a class="el" href="struct_edf.html">Edf</a> *edf) const</td></tr>
+<tr class="separator:gaa3cac39418d2c62c2faaa4cb7c380ff7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga6a7452cab8b733d48174016b845f8d53"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___lights_module.html#ga6a7452cab8b733d48174016b845f8d53">intersect</a> (const <a class="el" href="struct_ray.html">Ray</a> ray, float2 *uv, float *t) const</td></tr>
 <tr class="separator:ga6a7452cab8b733d48174016b845f8d53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaf14a70f7d23b422f8953bc55d1eade44"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___lights_module.html#gaf14a70f7d23b422f8953bc55d1eade44">map</a> (const uint32_t prim_id, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector2f</a> &amp;uv, <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> *geom, float *pdf, <a class="el" href="struct_edf.html">Edf</a> *edf) const</td></tr>

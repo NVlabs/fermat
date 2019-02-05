@@ -74,15 +74,31 @@ $(function() {
 <a href="#pub-attribs">Public Members</a> &#124;
 <a href="struct_eye_vertex-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">EyeVertex Struct Reference<div class="ingroups"><a class="el" href="group___fermat.html">Fermat</a> &raquo; <a class="el" href="group___b_p_t_lib.html">BPTLib</a></div></div>  </div>
+<div class="title">EyeVertex Struct Reference<div class="ingroups"><a class="el" href="group___fermat.html">Fermat</a> &raquo; <a class="el" href="group___b_p_t_lib.html">BPTLib</a> &raquo; <a class="el" href="group___b_p_t_lib_core.html">BPTLibCore</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
+<a name="details" id="details"></a><h2 class="groupheader">Detailed description</h2>
+<div class="textblock"><dl class="section user"><dt></dt><dd>A utility class to encapsulate all important information for a eye subpath vertex </dd></dl>
+</div>
+<p><code>#include &lt;<a class="el" href="bpt__utils_8h_source.html">bpt_utils.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Methods</h2></td></tr>
-<tr class="memitem:a43828b7e9facd69c0a23e75c36f9cee8"><td class="memItemLeft" align="right" valign="top"><a id="a43828b7e9facd69c0a23e75c36f9cee8"></a>
-FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><b>setup</b> (const <a class="el" href="struct_ray.html">Ray</a> &amp;ray, const <a class="el" href="struct_hit.html">Hit</a> &amp;hit, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;_alpha, const <a class="el" href="struct_temp_path_weights.html">TempPathWeights</a> &amp;_weights, const uint32 _depth, const <a class="el" href="struct_renderer_view.html">RendererView</a> &amp;renderer)</td></tr>
-<tr class="separator:a43828b7e9facd69c0a23e75c36f9cee8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5788cce324807dd8bbc0f913ef3a777d"><td class="memTemplParams" colspan="2"><a id="a5788cce324807dd8bbc0f913ef3a777d"></a>
+template&lt;typename RayType &gt; </td></tr>
+<tr class="memitem:a5788cce324807dd8bbc0f913ef3a777d"><td class="memTemplItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>setup</b> (const RayType &amp;ray, const <a class="el" href="struct_hit.html">Hit</a> &amp;hit, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;_alpha, const <a class="el" href="struct_temp_path_weights.html">TempPathWeights</a> &amp;_weights, const uint32 _depth, const <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> &amp;renderer, const float min_roughness=0.0f)</td></tr>
+<tr class="separator:a5788cce324807dd8bbc0f913ef3a777d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa88f1c1bd1c6e1f8ae1f9df6f857f72f"><td class="memItemLeft" align="right" valign="top"><a id="aa88f1c1bd1c6e1f8ae1f9df6f857f72f"></a>
+FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><b>setup</b> (const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;_in, const <a class="el" href="struct_vertex_geometry_id.html">VertexGeometryId</a> &amp;_v, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;_alpha, const <a class="el" href="struct_temp_path_weights.html">TempPathWeights</a> &amp;_weights, const uint32 _depth, const <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> &amp;renderer)</td></tr>
+<tr class="separator:aa88f1c1bd1c6e1f8ae1f9df6f857f72f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a861d531288458ca4d465c2b93c65e1aa"><td class="memItemLeft" align="right" valign="top"><a id="a861d531288458ca4d465c2b93c65e1aa"></a>
+FERMAT_HOST_DEVICE&#160;</td><td class="memItemRight" valign="bottom"><b>EyeVertex</b> (const <a class="el" href="struct_ray.html">Ray</a> &amp;_ray, const <a class="el" href="struct_hit.html">Hit</a> &amp;_hit, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;_alpha, const <a class="el" href="struct_temp_path_weights.html">TempPathWeights</a> &amp;_weights, const uint32 _depth, const <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> &amp;renderer)</td></tr>
+<tr class="separator:a861d531288458ca4d465c2b93c65e1aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03db55c18029b0792be1843821f01d20"><td class="memItemLeft" align="right" valign="top"><a id="a03db55c18029b0792be1843821f01d20"></a>
+FERMAT_HOST_DEVICE&#160;</td><td class="memItemRight" valign="bottom"><b>EyeVertex</b> (const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;_in, const <a class="el" href="struct_vertex_geometry_id.html">VertexGeometryId</a> &amp;_v, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;_alpha, const <a class="el" href="struct_temp_path_weights.html">TempPathWeights</a> &amp;_weights, const uint32 _depth, const <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> &amp;renderer)</td></tr>
+<tr class="separator:a03db55c18029b0792be1843821f01d20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7664ec5102f1894a1cd55c324c0742ee"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_eye_vertex.html#a7664ec5102f1894a1cd55c324c0742ee">sample</a> (const float z[3], <a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">Bsdf::ComponentType</a> &amp;out_comp, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;out, float &amp;out_p, float &amp;out_p_proj, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;out_g, bool RR=true, bool evaluate_full_bsdf=false, const <a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">Bsdf::ComponentType</a> components=Bsdf::kAllComponents) const</td></tr>
+<tr class="separator:a7664ec5102f1894a1cd55c324c0742ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Members</h2></td></tr>
@@ -120,6 +136,100 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>prev_pG</b></td></tr
 float&#160;</td><td class="memItemRight" valign="bottom"><b>pGp_sum</b></td></tr>
 <tr class="separator:ac0ece106e60201d212d9c0ab082b2d81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a7664ec5102f1894a1cd55c324c0742ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7664ec5102f1894a1cd55c324c0742ee">&#9670;&nbsp;</a></span>sample()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE bool EyeVertex::sample </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>z</em>[3], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">Bsdf::ComponentType</a> &amp;&#160;</td>
+          <td class="paramname"><em>out_comp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float &amp;&#160;</td>
+          <td class="paramname"><em>out_p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float &amp;&#160;</td>
+          <td class="paramname"><em>out_p_proj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;&#160;</td>
+          <td class="paramname"><em>out_g</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>RR</em> = <code>true</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>evaluate_full_bsdf</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">Bsdf::ComponentType</a>&#160;</td>
+          <td class="paramname"><em>components</em> = <code>Bsdf::kAllComponents</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>sample an outgoing direction</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">z</td><td>the incoming direction </td></tr>
+    <tr><td class="paramname">out_comp</td><td>the output component </td></tr>
+    <tr><td class="paramname">out</td><td>the outgoing direction </td></tr>
+    <tr><td class="paramname">out_p</td><td>the output solid angle pdf </td></tr>
+    <tr><td class="paramname">out_p_proj</td><td>the output projected solid angle pdf </td></tr>
+    <tr><td class="paramname">out_g</td><td>the output sample value = f/p_proj </td></tr>
+    <tr><td class="paramname">RR</td><td>indicate whether to use Russian-Roulette or not </td></tr>
+    <tr><td class="paramname">evaluate_full_bsdf</td><td>ndicate whether to evaluate the full BSDF, or just an unbiased estimate </td></tr>
+    <tr><td class="paramname">components</td><td>the components to consider </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>C:/p4research/research/jpantaleoni/Fermat-Public/src/<a class="el" href="bpt__utils_8h_source.html">bpt_utils.h</a></li>
 </ul>

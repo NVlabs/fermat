@@ -74,12 +74,29 @@ $(function() {
 <a href="#pub-attribs">Public Members</a> &#124;
 <a href="union_pixel_info-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">PixelInfo Union Reference</div>  </div>
+<div class="title">PixelInfo Union Reference<div class="ingroups"><a class="el" href="group___fermat.html">Fermat</a> &raquo; <a class="el" href="group___p_t_lib.html">PTLib</a> &raquo; <a class="el" href="group___p_t_lib_core.html">PTLibCore</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
+<a name="details" id="details"></a><h2 class="groupheader">Detailed description</h2>
+<div class="textblock"><p>Store packed pixel information, including:</p><ul>
+<li>the pixel index</li>
+<li>the current path type (diffuse or glossy)</li>
+<li>a bit indicating whether the path went through a diffuse bounce </li>
+</ul>
+</div>
+<p><code>#include &lt;<a class="el" href="pathtracer__core_8h_source.html">pathtracer_core.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Methods</h2></td></tr>
+<tr class="memitem:a2808405cb466ebf0eeec02c5a6193f8a"><td class="memItemLeft" align="right" valign="top"><a id="a2808405cb466ebf0eeec02c5a6193f8a"></a>
+FERMAT_HOST_DEVICE&#160;</td><td class="memItemRight" valign="bottom"><b>PixelInfo</b> (const uint32 _packed)</td></tr>
+<tr class="separator:a2808405cb466ebf0eeec02c5a6193f8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d9e9bdd9d6e2cb960ef18b27e0ca2d0"><td class="memItemLeft" align="right" valign="top"><a id="a8d9e9bdd9d6e2cb960ef18b27e0ca2d0"></a>
+FERMAT_HOST_DEVICE&#160;</td><td class="memItemRight" valign="bottom"><b>PixelInfo</b> (const uint32 _pixel, const uint32 _comp, const uint32 _diffuse=0)</td></tr>
+<tr class="separator:a8d9e9bdd9d6e2cb960ef18b27e0ca2d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0c8785ed0f1f2e80fc4c6b245e9ba5a"><td class="memItemLeft" align="right" valign="top"><a id="ab0c8785ed0f1f2e80fc4c6b245e9ba5a"></a>
+FERMAT_HOST_DEVICE&#160;</td><td class="memItemRight" valign="bottom"><b>operator uint32</b> () const</td></tr>
+<tr class="separator:ab0c8785ed0f1f2e80fc4c6b245e9ba5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2808405cb466ebf0eeec02c5a6193f8a"><td class="memItemLeft" align="right" valign="top"><a id="a2808405cb466ebf0eeec02c5a6193f8a"></a>
 FERMAT_HOST_DEVICE&#160;</td><td class="memItemRight" valign="bottom"><b>PixelInfo</b> (const uint32 _packed)</td></tr>
 <tr class="separator:a2808405cb466ebf0eeec02c5a6193f8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -92,18 +109,32 @@ Public Members</h2></td></tr>
 <tr class="memitem:ab677c8b10c956d02631657ef7f28bf43"><td class="memItemLeft" align="right" valign="top"><a id="ab677c8b10c956d02631657ef7f28bf43"></a>
 uint32&#160;</td><td class="memItemRight" valign="bottom"><b>packed</b></td></tr>
 <tr class="separator:ab677c8b10c956d02631657ef7f28bf43"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a030ddc8fa01e13ccbd4f5b55090f5b6c"><td class="memItemLeft" ><a id="a030ddc8fa01e13ccbd4f5b55090f5b6c"></a>
+<tr class="memitem:a4b22838a8ee477577f2491da1de8914d"><td class="memItemLeft" ><a id="a4b22838a8ee477577f2491da1de8914d"></a>
 struct {</td></tr>
-<tr class="memitem:a998754c647d7330dbf80cc4f8bdfcecb"><td class="memItemLeft" >
+<tr class="memitem:acbefaa579c1907995ff19b2f289da36f"><td class="memItemLeft" >
+&#160;&#160;&#160;uint32&#160;&#160;&#160;<b>pixel</b>: 27</td></tr>
+<tr class="separator:acbefaa579c1907995ff19b2f289da36f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e92b3d238bf8ad744d790b29baf86d3"><td class="memItemLeft" >
+&#160;&#160;&#160;uint32&#160;&#160;&#160;<b>comp</b>: 4</td></tr>
+<tr class="separator:a3e92b3d238bf8ad744d790b29baf86d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1a55c7fba40bf11f123810c1a6ddd80"><td class="memItemLeft" >
+&#160;&#160;&#160;uint32&#160;&#160;&#160;<b>diffuse</b>: 1</td></tr>
+<tr class="separator:ae1a55c7fba40bf11f123810c1a6ddd80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b22838a8ee477577f2491da1de8914d"><td class="memItemLeft" valign="top">};&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:a4b22838a8ee477577f2491da1de8914d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c937a0d866bd704d1e863f19cd0dc97"><td class="memItemLeft" ><a id="a6c937a0d866bd704d1e863f19cd0dc97"></a>
+struct {</td></tr>
+<tr class="memitem:ac8a1a494a400e687f5465cf6360de568"><td class="memItemLeft" >
 &#160;&#160;&#160;uint32&#160;&#160;&#160;<b>pixel</b>: 28</td></tr>
-<tr class="separator:a998754c647d7330dbf80cc4f8bdfcecb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5939a54cea2b520b2a79b0d940b26c0f"><td class="memItemLeft" >
+<tr class="separator:ac8a1a494a400e687f5465cf6360de568"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95dd0a58c0007b9330055d8b7e900313"><td class="memItemLeft" >
 &#160;&#160;&#160;uint32&#160;&#160;&#160;<b>channel</b>: 4</td></tr>
-<tr class="separator:a5939a54cea2b520b2a79b0d940b26c0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a030ddc8fa01e13ccbd4f5b55090f5b6c"><td class="memItemLeft" valign="top">};&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
-<tr class="separator:a030ddc8fa01e13ccbd4f5b55090f5b6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a95dd0a58c0007b9330055d8b7e900313"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c937a0d866bd704d1e863f19cd0dc97"><td class="memItemLeft" valign="top">};&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:a6c937a0d866bd704d1e863f19cd0dc97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this union was generated from the following file:<ul>
+<hr/>The documentation for this union was generated from the following files:<ul>
+<li>C:/p4research/research/jpantaleoni/Fermat-Public/src/<a class="el" href="pathtracer__core_8h_source.html">pathtracer_core.h</a></li>
 <li>C:/p4research/research/jpantaleoni/Fermat-Public/src/<a class="el" href="ray__queues_8h_source.html">ray_queues.h</a></li>
 </ul>
 </div><!-- contents -->

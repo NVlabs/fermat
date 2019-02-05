@@ -70,7 +70,8 @@ $(function() {
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">CUDA Atomics<div class="ingroups"><a class="el" href="group___basic.html">Basic</a> &raquo; <a class="el" href="group___c_u_d_a_module.html">CUDA</a></div></div>  </div>
 </div><!--header-->
@@ -84,7 +85,32 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcugar_1_1cuda_1_1warp__atomic.html">cugar::cuda::warp_atomic</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:gafc8e36159201dad49d48ad3d2413f971"><td class="memItemLeft" align="right" valign="top">__device__ __forceinline__ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_u_d_a_atomics_module.html#gafc8e36159201dad49d48ad3d2413f971">cugar::cuda::warp_increment</a> (unsigned int *ptr)</td></tr>
+<tr class="separator:gafc8e36159201dad49d48ad3d2413f971"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="gafc8e36159201dad49d48ad3d2413f971"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafc8e36159201dad49d48ad3d2413f971">&#9670;&nbsp;</a></span>warp_increment()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">__device__ __forceinline__ unsigned int cugar::cuda::warp_increment </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>ptr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>increment the value at ptr by 1 and return the old value </p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -81,6 +81,15 @@ $(function() {
 <div class="textblock"><p><a class="el" href="struct_path.html">Path</a> tracer renderer options </p>
 </div>
 <p><code>#include &lt;<a class="el" href="pathtracer_8h_source.html">pathtracer.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for PTOptions:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="struct_p_t_options.png" usemap="#PTOptions_map" alt=""/>
+  <map id="PTOptions_map" name="PTOptions_map">
+<area href="struct_p_s_f_p_t_options.html" alt="PSFPTOptions" shape="rect" coords="0,56,94,80"/>
+</map>
+ </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Methods</h2></td></tr>
@@ -93,27 +102,45 @@ Public Members</h2></td></tr>
 <tr class="memitem:a3d37d7b8d1a4f1e34a6681f5f61998e3"><td class="memItemLeft" align="right" valign="top"><a id="a3d37d7b8d1a4f1e34a6681f5f61998e3"></a>
 uint32&#160;</td><td class="memItemRight" valign="bottom"><b>max_path_length</b></td></tr>
 <tr class="separator:a3d37d7b8d1a4f1e34a6681f5f61998e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a508e66f1af0ef4e262abfdaa87d12647"><td class="memItemLeft" align="right" valign="top"><a id="a508e66f1af0ef4e262abfdaa87d12647"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>direct_lighting_nee</b></td></tr>
-<tr class="separator:a508e66f1af0ef4e262abfdaa87d12647"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b7e2fe065867dc768d61f741a522482"><td class="memItemLeft" align="right" valign="top"><a id="a6b7e2fe065867dc768d61f741a522482"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>direct_lighting_bsdf</b></td></tr>
-<tr class="separator:a6b7e2fe065867dc768d61f741a522482"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a974fcef28f6e088b83288dd21878b5a8"><td class="memItemLeft" align="right" valign="top"><a id="a974fcef28f6e088b83288dd21878b5a8"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>indirect_lighting_nee</b></td></tr>
-<tr class="separator:a974fcef28f6e088b83288dd21878b5a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a162f99468ce114375190152ed0dfed8f"><td class="memItemLeft" align="right" valign="top"><a id="a162f99468ce114375190152ed0dfed8f"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>indirect_lighting_bsdf</b></td></tr>
-<tr class="separator:a162f99468ce114375190152ed0dfed8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9391f1412918213384aa81c3a3c193fb"><td class="memItemLeft" align="right" valign="top"><a id="a9391f1412918213384aa81c3a3c193fb"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>visible_lights</b></td></tr>
-<tr class="separator:a9391f1412918213384aa81c3a3c193fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac13212daa34d17317369243c63b65050"><td class="memItemLeft" align="right" valign="top"><a id="ac13212daa34d17317369243c63b65050"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>rr</b></td></tr>
-<tr class="separator:ac13212daa34d17317369243c63b65050"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fef4cb292f21c1d4edd25fe013e6b37"><td class="memItemLeft" align="right" valign="top"><a id="a8fef4cb292f21c1d4edd25fe013e6b37"></a>
+uint32&#160;</td><td class="memItemRight" valign="bottom"><b>direct_lighting</b>: 1</td></tr>
+<tr class="separator:a8fef4cb292f21c1d4edd25fe013e6b37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac123d37c0af7882dd81f0049ab53bd29"><td class="memItemLeft" align="right" valign="top"><a id="ac123d37c0af7882dd81f0049ab53bd29"></a>
+uint32&#160;</td><td class="memItemRight" valign="bottom"><b>direct_lighting_nee</b>: 1</td></tr>
+<tr class="separator:ac123d37c0af7882dd81f0049ab53bd29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9501deb6af7ca48010d0d2aba029e16"><td class="memItemLeft" align="right" valign="top"><a id="af9501deb6af7ca48010d0d2aba029e16"></a>
+uint32&#160;</td><td class="memItemRight" valign="bottom"><b>direct_lighting_bsdf</b>: 1</td></tr>
+<tr class="separator:af9501deb6af7ca48010d0d2aba029e16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a543db9fbe2c32c451cdbeb742ffcb4c9"><td class="memItemLeft" align="right" valign="top"><a id="a543db9fbe2c32c451cdbeb742ffcb4c9"></a>
+uint32&#160;</td><td class="memItemRight" valign="bottom"><b>indirect_lighting_nee</b>: 1</td></tr>
+<tr class="separator:a543db9fbe2c32c451cdbeb742ffcb4c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9287a9f09d42685a8e372085ff76af42"><td class="memItemLeft" align="right" valign="top"><a id="a9287a9f09d42685a8e372085ff76af42"></a>
+uint32&#160;</td><td class="memItemRight" valign="bottom"><b>indirect_lighting_bsdf</b>: 1</td></tr>
+<tr class="separator:a9287a9f09d42685a8e372085ff76af42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88a3d72431cf639e9951ed76a14ee7ce"><td class="memItemLeft" align="right" valign="top"><a id="a88a3d72431cf639e9951ed76a14ee7ce"></a>
+uint32&#160;</td><td class="memItemRight" valign="bottom"><b>visible_lights</b>: 1</td></tr>
+<tr class="separator:a88a3d72431cf639e9951ed76a14ee7ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39f407a0e7aad6d4d40926a91547f683"><td class="memItemLeft" align="right" valign="top"><a id="a39f407a0e7aad6d4d40926a91547f683"></a>
+uint32&#160;</td><td class="memItemRight" valign="bottom"><b>diffuse_scattering</b>: 1</td></tr>
+<tr class="separator:a39f407a0e7aad6d4d40926a91547f683"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a395036f1b033dd3d3c872f8f788e6e3d"><td class="memItemLeft" align="right" valign="top"><a id="a395036f1b033dd3d3c872f8f788e6e3d"></a>
+uint32&#160;</td><td class="memItemRight" valign="bottom"><b>glossy_scattering</b>: 1</td></tr>
+<tr class="separator:a395036f1b033dd3d3c872f8f788e6e3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c06a279aae8a80f240e26ffbe371866"><td class="memItemLeft" align="right" valign="top"><a id="a2c06a279aae8a80f240e26ffbe371866"></a>
+uint32&#160;</td><td class="memItemRight" valign="bottom"><b>indirect_glossy</b>: 1</td></tr>
+<tr class="separator:a2c06a279aae8a80f240e26ffbe371866"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad073e9c25b7c90c50d1c7c568abc2aa6"><td class="memItemLeft" align="right" valign="top"><a id="ad073e9c25b7c90c50d1c7c568abc2aa6"></a>
+uint32&#160;</td><td class="memItemRight" valign="bottom"><b>rr</b>: 1</td></tr>
+<tr class="separator:ad073e9c25b7c90c50d1c7c568abc2aa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8add8a2bb7f9203bcc7ed8bbccec241d"><td class="memItemLeft" align="right" valign="top"><a id="a8add8a2bb7f9203bcc7ed8bbccec241d"></a>
+uint32&#160;</td><td class="memItemRight" valign="bottom"><b>nee_type</b>: 2</td></tr>
+<tr class="separator:a8add8a2bb7f9203bcc7ed8bbccec241d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09e63fcdda25ce8812e4bc3221b04010"><td class="memItemLeft" align="right" valign="top"><a id="a09e63fcdda25ce8812e4bc3221b04010"></a>
+uint32&#160;</td><td class="memItemRight" valign="bottom"><b>backend</b></td></tr>
+<tr class="separator:a09e63fcdda25ce8812e4bc3221b04010"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>C:/p4research/research/jpantaleoni/Fermat-Public/src/<a class="el" href="pathtracer_8h_source.html">pathtracer.h</a></li>
+<li>C:/p4research/research/jpantaleoni/Fermat-Public/src/renderers/<a class="el" href="pathtracer_8h_source.html">pathtracer.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

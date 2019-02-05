@@ -70,7 +70,8 @@ $(function() {
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Multi-Jittering<div class="ingroups"><a class="el" href="group__sampling.html">Sampling</a></div></div>  </div>
 </div><!--header-->
@@ -80,9 +81,113 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcugar_1_1_correlated_m_j_sampler.html">cugar::CorrelatedMJSampler</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcugar_1_1_m_j_sampler.html">cugar::MJSampler</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:gaf3f4e367e2cdfe133eae518f82cda8b6"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__multijitter.html#gaf3f4e367e2cdfe133eae518f82cda8b6">cugar::correlated_multijitter</a> (uint32 s, const uint32 m, const uint32 n, const uint32 p, bool ordered=false)</td></tr>
+<tr class="separator:gaf3f4e367e2cdfe133eae518f82cda8b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga23bdc35923e1dc33a8d0c35f671b5554"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__multijitter.html#ga23bdc35923e1dc33a8d0c35f671b5554">cugar::correlated_multijitter_3d</a> (uint32 s, const uint32 X, const uint32 Y, const uint32 Z, const uint32 p)</td></tr>
+<tr class="separator:ga23bdc35923e1dc33a8d0c35f671b5554"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="gaf3f4e367e2cdfe133eae518f82cda8b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf3f4e367e2cdfe133eae518f82cda8b6">&#9670;&nbsp;</a></span>correlated_multijitter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float2 cugar::correlated_multijitter </td>
+          <td>(</td>
+          <td class="paramtype">uint32&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>ordered</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The repeatable correlated multi-jitter function described in: "Correlated Multi-Jittered Sampling", by Andrew Kensler </p>
+
+</div>
+</div>
+<a id="ga23bdc35923e1dc33a8d0c35f671b5554"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga23bdc35923e1dc33a8d0c35f671b5554">&#9670;&nbsp;</a></span>correlated_multijitter_3d()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float3 cugar::correlated_multijitter_3d </td>
+          <td>(</td>
+          <td class="paramtype">uint32&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32&#160;</td>
+          <td class="paramname"><em>X</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32&#160;</td>
+          <td class="paramname"><em>Y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32&#160;</td>
+          <td class="paramname"><em>Z</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32&#160;</td>
+          <td class="paramname"><em>p</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The repeatable correlated multi-jitter function described in: "Correlated Multi-Jittered Sampling", by Andrew Kensler extended to form a 3d stack of 3d points </p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

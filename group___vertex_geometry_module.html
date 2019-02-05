@@ -78,6 +78,12 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<dl class="section user"><dt></dt><dd>One of the tricks to high performance rendering is tightly packing all necessary information, so as to consume as little bandwith and on-chip memory as possible. This module introduces two structures to do so to represent path vertex geometry: </dd></dl>
+<dl class="section user"><dt></dt><dd><ul>
+<li><a class="el" href="struct_vertex_geometry_id.html">VertexGeometryId</a>: to encode the minimal amount of information needed to represent a point on a surface, or a <em>hit</em> in ray tracing parlance;</li>
+<li><a class="el" href="struct_vertex_geometry.html">VertexGeometry</a>: to encode a slightly expanded version on the local differential surface geometry at a point, including its tangent, binormal and normal, as well the local texture coordinates; </li>
+</ul>
+</dd></dl>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
@@ -107,10 +113,6 @@ Functions</h2></td></tr>
 <tr class="separator:ga36aaf2cd5d29c0fc2abe5d95f9739f95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gab56236f4d0e367a082d3dc83df137d79"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___vertex_geometry_module.html#gab56236f4d0e367a082d3dc83df137d79">unpack_direction</a> (const uint32 packed_dir)</td></tr>
 <tr class="separator:gab56236f4d0e367a082d3dc83df137d79"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga793b5be6152fde6d9ebe072b3a91ab19"><td class="memItemLeft" align="right" valign="top">FERMAT_DEVICE FERMAT_FORCEINLINE uint32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___vertex_geometry_module.html#ga793b5be6152fde6d9ebe072b3a91ab19">pack_hemispherical_direction</a> (const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;dir)</td></tr>
-<tr class="separator:ga793b5be6152fde6d9ebe072b3a91ab19"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf8adf4e00e9634afcd384e2e68eebd0a"><td class="memItemLeft" align="right" valign="top">FERMAT_DEVICE FERMAT_FORCEINLINE <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___vertex_geometry_module.html#gaf8adf4e00e9634afcd384e2e68eebd0a">unpack_hemispherical_direction</a> (const uint32 packed_dir)</td></tr>
-<tr class="separator:gaf8adf4e00e9634afcd384e2e68eebd0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ga36aaf2cd5d29c0fc2abe5d95f9739f95"></a>
@@ -132,25 +134,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga793b5be6152fde6d9ebe072b3a91ab19"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga793b5be6152fde6d9ebe072b3a91ab19">&#9670;&nbsp;</a></span>pack_hemispherical_direction()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">FERMAT_DEVICE FERMAT_FORCEINLINE uint32 pack_hemispherical_direction </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;&#160;</td>
-          <td class="paramname"><em>dir</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>pack a normalized direction vector in 32-bits </p>
-
-</div>
-</div>
 <a id="gab56236f4d0e367a082d3dc83df137d79"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gab56236f4d0e367a082d3dc83df137d79">&#9670;&nbsp;</a></span>unpack_direction()</h2>
 
@@ -159,25 +142,6 @@ Functions</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> unpack_direction </td>
-          <td>(</td>
-          <td class="paramtype">const uint32&#160;</td>
-          <td class="paramname"><em>packed_dir</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>unpack a 32-bits normalized direction vector </p>
-
-</div>
-</div>
-<a id="gaf8adf4e00e9634afcd384e2e68eebd0a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaf8adf4e00e9634afcd384e2e68eebd0a">&#9670;&nbsp;</a></span>unpack_hemispherical_direction()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">FERMAT_DEVICE FERMAT_FORCEINLINE <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> unpack_hemispherical_direction </td>
           <td>(</td>
           <td class="paramtype">const uint32&#160;</td>
           <td class="paramname"><em>packed_dir</em></td><td>)</td>

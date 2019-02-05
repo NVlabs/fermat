@@ -79,7 +79,8 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">Detailed description</h2>
-<div class="textblock"><p>Framebuffer storage class, to be used from the host to allocate framebuffer storage </p>
+<div class="textblock"><p>Framebuffer storage class, to be used from the host to allocate framebuffer storage <br />
+ A framebuffer can hold multiple named channels of the same size; currently, only float4 channels are supported - in the future multiple formats might be added. The framebuffer also holds a single G-buffer. </p>
 </div>
 <p><code>#include &lt;<a class="el" href="framebuffer_8h_source.html">framebuffer.h</a>&gt;</code></p>
 <table class="memberdecls">
@@ -91,23 +92,21 @@ typedef std::shared_ptr&lt; <a class="el" href="struct_f_buffer_channel_storage.
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Methods</h2></td></tr>
-<tr class="memitem:aa42c75b3dbc7cbe99d0ab6a9a49f179b"><td class="memItemLeft" align="right" valign="top"><a id="aa42c75b3dbc7cbe99d0ab6a9a49f179b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_channel_count</b> (const uint32 _n_channels)</td></tr>
+<tr class="memitem:a1d6dd4cf26b48a443630dc5bae600de8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_f_buffer_storage.html#a1d6dd4cf26b48a443630dc5bae600de8">FBufferStorage</a> ()</td></tr>
+<tr class="separator:a1d6dd4cf26b48a443630dc5bae600de8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aede7c430086652b41d3dddc9e86d4ac3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_f_buffer_storage.html#aede7c430086652b41d3dddc9e86d4ac3">~FBufferStorage</a> ()</td></tr>
+<tr class="separator:aede7c430086652b41d3dddc9e86d4ac3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa42c75b3dbc7cbe99d0ab6a9a49f179b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_f_buffer_storage.html#aa42c75b3dbc7cbe99d0ab6a9a49f179b">set_channel_count</a> (const uint32 _n_channels)</td></tr>
 <tr class="separator:aa42c75b3dbc7cbe99d0ab6a9a49f179b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6996d5c41b3201156b7fa6f845007bad"><td class="memItemLeft" align="right" valign="top"><a id="a6996d5c41b3201156b7fa6f845007bad"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_channel</b> (const uint32_t i, const char *name)</td></tr>
+<tr class="memitem:a6996d5c41b3201156b7fa6f845007bad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_f_buffer_storage.html#a6996d5c41b3201156b7fa6f845007bad">set_channel</a> (const uint32_t i, const char *name)</td></tr>
 <tr class="separator:a6996d5c41b3201156b7fa6f845007bad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a026cdc839ecd1ae6e63c390832e1290d"><td class="memItemLeft" align="right" valign="top"><a id="a026cdc839ecd1ae6e63c390832e1290d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>resize</b> (const uint32_t _res_x, const uint32_t _res_y)</td></tr>
+<tr class="memitem:a026cdc839ecd1ae6e63c390832e1290d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_f_buffer_storage.html#a026cdc839ecd1ae6e63c390832e1290d">resize</a> (const uint32_t _res_x, const uint32_t _res_y)</td></tr>
 <tr class="separator:a026cdc839ecd1ae6e63c390832e1290d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6aa8a384578e7e99acea4cfdd194e2a4"><td class="memItemLeft" align="right" valign="top"><a id="a6aa8a384578e7e99acea4cfdd194e2a4"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>channel_count</b> () const</td></tr>
+<tr class="memitem:a6aa8a384578e7e99acea4cfdd194e2a4"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_f_buffer_storage.html#a6aa8a384578e7e99acea4cfdd194e2a4">channel_count</a> () const</td></tr>
 <tr class="separator:a6aa8a384578e7e99acea4cfdd194e2a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b5a5c5f7aa80d8dc8e34f34cba1e6fc"><td class="memItemLeft" align="right" valign="top"><a id="a3b5a5c5f7aa80d8dc8e34f34cba1e6fc"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> () const</td></tr>
+<tr class="memitem:a3b5a5c5f7aa80d8dc8e34f34cba1e6fc"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_f_buffer_storage.html#a3b5a5c5f7aa80d8dc8e34f34cba1e6fc">size</a> () const</td></tr>
 <tr class="separator:a3b5a5c5f7aa80d8dc8e34f34cba1e6fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a68f01c04fecd7e6293cfafcf2cc0b719"><td class="memItemLeft" align="right" valign="top"><a id="a68f01c04fecd7e6293cfafcf2cc0b719"></a>
-<a class="el" href="struct_f_buffer_view.html">FBufferView</a>&#160;</td><td class="memItemRight" valign="bottom"><b>view</b> ()</td></tr>
+<tr class="memitem:a68f01c04fecd7e6293cfafcf2cc0b719"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_f_buffer_view.html">FBufferView</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_f_buffer_storage.html#a68f01c04fecd7e6293cfafcf2cc0b719">view</a> ()</td></tr>
 <tr class="separator:a68f01c04fecd7e6293cfafcf2cc0b719"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -134,6 +133,239 @@ std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bott
 <a class="el" href="class_domain_buffer.html">DomainBuffer</a>&lt; CUDA_BUFFER, <a class="el" href="struct_f_buffer_channel_view.html">FBufferChannelView</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>channel_views</b></td></tr>
 <tr class="separator:a8c984b76bf6154b92bc27aa718b03258"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a1d6dd4cf26b48a443630dc5bae600de8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d6dd4cf26b48a443630dc5bae600de8">&#9670;&nbsp;</a></span>FBufferStorage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">FBufferStorage::FBufferStorage </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>constructor </p>
+
+</div>
+</div>
+<a id="aede7c430086652b41d3dddc9e86d4ac3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aede7c430086652b41d3dddc9e86d4ac3">&#9670;&nbsp;</a></span>~FBufferStorage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">FBufferStorage::~FBufferStorage </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>destructor </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6aa8a384578e7e99acea4cfdd194e2a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6aa8a384578e7e99acea4cfdd194e2a4">&#9670;&nbsp;</a></span>channel_count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t FBufferStorage::channel_count </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>return the number of channels </p>
+
+</div>
+</div>
+<a id="a026cdc839ecd1ae6e63c390832e1290d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a026cdc839ecd1ae6e63c390832e1290d">&#9670;&nbsp;</a></span>resize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FBufferStorage::resize </td>
+          <td>(</td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>_res_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>_res_y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>set the resolution of the framebuffer </p>
+
+</div>
+</div>
+<a id="a6996d5c41b3201156b7fa6f845007bad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6996d5c41b3201156b7fa6f845007bad">&#9670;&nbsp;</a></span>set_channel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FBufferStorage::set_channel </td>
+          <td>(</td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>set the name of a channel </p>
+
+</div>
+</div>
+<a id="aa42c75b3dbc7cbe99d0ab6a9a49f179b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa42c75b3dbc7cbe99d0ab6a9a49f179b">&#9670;&nbsp;</a></span>set_channel_count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FBufferStorage::set_channel_count </td>
+          <td>(</td>
+          <td class="paramtype">const uint32&#160;</td>
+          <td class="paramname"><em>_n_channels</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>set the number of channels </p>
+
+</div>
+</div>
+<a id="a3b5a5c5f7aa80d8dc8e34f34cba1e6fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b5a5c5f7aa80d8dc8e34f34cba1e6fc">&#9670;&nbsp;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t FBufferStorage::size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>return the resolution of the framebuffer </p>
+
+</div>
+</div>
+<a id="a68f01c04fecd7e6293cfafcf2cc0b719"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68f01c04fecd7e6293cfafcf2cc0b719">&#9670;&nbsp;</a></span>view()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_f_buffer_view.html">FBufferView</a> FBufferStorage::view </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>return a view object </p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>C:/p4research/research/jpantaleoni/Fermat-Public/src/<a class="el" href="framebuffer_8h_source.html">framebuffer.h</a></li>
 </ul>

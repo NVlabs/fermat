@@ -93,8 +93,8 @@ struct cugar::Bintree_writer_context&lt; node_type, leaf_range_tag &gt;</h3>
 Public Methods</h2></td></tr>
 <tr class="memitem:a4c66b82eca04d8b387f561c7855215d5"><td class="memItemLeft" align="right" valign="top">CUGAR_HOST_DEVICE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcugar_1_1_bintree__writer__context_3_01node__type_00_01leaf__range__tag_01_4.html#a4c66b82eca04d8b387f561c7855215d5">Bintree_writer_context</a> ()</td></tr>
 <tr class="separator:a4c66b82eca04d8b387f561c7855215d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc6a6364bd14ce152ec44915c3ecffcf"><td class="memItemLeft" align="right" valign="top">CUGAR_HOST_DEVICE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcugar_1_1_bintree__writer__context_3_01node__type_00_01leaf__range__tag_01_4.html#abc6a6364bd14ce152ec44915c3ecffcf">Bintree_writer_context</a> (node_type *nodes, uint2 *leaf_ranges=NULL, uint32 *leaf_pointers=NULL, uint32 *parents=NULL, uint32 *skip_nodes=NULL)</td></tr>
-<tr class="separator:abc6a6364bd14ce152ec44915c3ecffcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5eb3bf7d79e7a2e16621cf73fe0c1e44"><td class="memItemLeft" align="right" valign="top">CUGAR_HOST_DEVICE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcugar_1_1_bintree__writer__context_3_01node__type_00_01leaf__range__tag_01_4.html#a5eb3bf7d79e7a2e16621cf73fe0c1e44">Bintree_writer_context</a> (node_type *nodes, uint2 *leaf_ranges=NULL, uint32 *leaf_pointers=NULL, uint32 *parents=NULL, uint32 *skip_nodes=NULL, uint2 *node_ranges=NULL)</td></tr>
+<tr class="separator:a5eb3bf7d79e7a2e16621cf73fe0c1e44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4516c47393197c70d5179c471917b01f"><td class="memItemLeft" align="right" valign="top">CUGAR_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcugar_1_1_bintree__writer__context_3_01node__type_00_01leaf__range__tag_01_4.html#a4516c47393197c70d5179c471917b01f">write_node</a> (const uint32 node, const uint32 parent, bool p1, bool p2, const uint32 offset, const uint32 skip_node, const uint32 level, const uint32 <a class="el" href="namespacecugar.html#a2121df08f967e232ea5fe0ee378dee67">begin</a>, const uint32 end, const uint32 split_index)</td></tr>
 <tr class="separator:a4516c47393197c70d5179c471917b01f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a344908507094f704f0de59b9050ca302"><td class="memItemLeft" align="right" valign="top">CUGAR_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcugar_1_1_bintree__writer__context_3_01node__type_00_01leaf__range__tag_01_4.html#a344908507094f704f0de59b9050ca302">write_leaf</a> (const uint32 leaf_index, const uint32 node_index, const uint32 <a class="el" href="namespacecugar.html#a2121df08f967e232ea5fe0ee378dee67">begin</a>, const uint32 end)</td></tr>
@@ -122,6 +122,10 @@ uint32 *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 uint32 *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcugar_1_1_bintree__writer__context_3_01node__type_00_01leaf__range__tag_01_4.html#a0b233f2ddc63063023a214e54e72f7f5">m_skip_nodes</a></td></tr>
 <tr class="memdesc:a0b233f2ddc63063023a214e54e72f7f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">skip nodes pointer <br /></td></tr>
 <tr class="separator:a0b233f2ddc63063023a214e54e72f7f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a683a9168a955696d6ca5bfd48cdd4ae5"><td class="memItemLeft" align="right" valign="top"><a id="a683a9168a955696d6ca5bfd48cdd4ae5"></a>
+uint2 *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcugar_1_1_bintree__writer__context_3_01node__type_00_01leaf__range__tag_01_4.html#a683a9168a955696d6ca5bfd48cdd4ae5">m_node_ranges</a></td></tr>
+<tr class="memdesc:a683a9168a955696d6ca5bfd48cdd4ae5"><td class="mdescLeft">&#160;</td><td class="mdescRight">node ranges <br /></td></tr>
+<tr class="separator:a683a9168a955696d6ca5bfd48cdd4ae5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a4c66b82eca04d8b387f561c7855215d5"></a>
@@ -152,8 +156,8 @@ template&lt;typename node_type &gt; </div>
 
 </div>
 </div>
-<a id="abc6a6364bd14ce152ec44915c3ecffcf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abc6a6364bd14ce152ec44915c3ecffcf">&#9670;&nbsp;</a></span>Bintree_writer_context() <span class="overload">[2/2]</span></h2>
+<a id="a5eb3bf7d79e7a2e16621cf73fe0c1e44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5eb3bf7d79e7a2e16621cf73fe0c1e44">&#9670;&nbsp;</a></span>Bintree_writer_context() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -191,7 +195,13 @@ template&lt;typename node_type &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">uint32 *&#160;</td>
-          <td class="paramname"><em>skip_nodes</em> = <code>NULL</code>&#160;</td>
+          <td class="paramname"><em>skip_nodes</em> = <code>NULL</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint2 *&#160;</td>
+          <td class="paramname"><em>node_ranges</em> = <code>NULL</code>&#160;</td>
         </tr>
         <tr>
           <td></td>

@@ -77,24 +77,29 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">Detailed description</h2>
-<div class="textblock"><p>Base class for sample sinks, a class specifying how to handle final samples produced by the bidirectional path tracing kernels</p>
+<div class="textblock"><p>[SampleSinkBaseBlock]</p>
+<p>Base class for sample sinks, a class specifying how to handle final samples produced by the bidirectional path tracing kernels</p>
 <p><a class="anchor" id="SampleSinkAnchor"></a></p>
 </div>
 <p><code>#include &lt;<a class="el" href="bpt__kernels_8h_source.html">bpt_kernels.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Methods</h2></td></tr>
-<tr class="memitem:a7ee4b8449b8e3aaf590af8a18b2f3fc3"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_sample_sink_base.html#a7ee4b8449b8e3aaf590af8a18b2f3fc3">sink</a> (const uint32 channel, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector4f</a> value, const uint32 light_path_id, const uint32 eye_path_id, const uint32 s, const uint32 t, <a class="el" href="struct_b_p_t_context_base.html">BPTContextBase</a> &amp;context, <a class="el" href="struct_renderer_view.html">RendererView</a> &amp;renderer)</td></tr>
-<tr class="separator:a7ee4b8449b8e3aaf590af8a18b2f3fc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abcac95b0206586909039c21fe726801d"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_sample_sink_base.html#abcac95b0206586909039c21fe726801d">sink_eye_scattering_event</a> (const <a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">Bsdf::ComponentType</a> component, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector4f</a> value, const uint32 eye_path_id, const uint32 t, <a class="el" href="struct_b_p_t_context_base.html">BPTContextBase</a> &amp;context, <a class="el" href="struct_renderer_view.html">RendererView</a> &amp;renderer)</td></tr>
-<tr class="separator:abcac95b0206586909039c21fe726801d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab34316c125cab0da36ea2ae41e67f98f"><td class="memTemplParams" colspan="2">template&lt;typename TBPTContext &gt; </td></tr>
+<tr class="memitem:ab34316c125cab0da36ea2ae41e67f98f"><td class="memTemplItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_sample_sink_base.html#ab34316c125cab0da36ea2ae41e67f98f">sink</a> (const uint32 channel, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector4f</a> value, const uint32 light_path_id, const uint32 eye_path_id, const uint32 s, const uint32 t, TBPTContext &amp;context, <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> &amp;renderer)</td></tr>
+<tr class="separator:ab34316c125cab0da36ea2ae41e67f98f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac96fd485e8196264c43115c68a0bbc25"><td class="memTemplParams" colspan="2">template&lt;typename TBPTContext &gt; </td></tr>
+<tr class="memitem:ac96fd485e8196264c43115c68a0bbc25"><td class="memTemplItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_sample_sink_base.html#ac96fd485e8196264c43115c68a0bbc25">sink_eye_scattering_event</a> (const <a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">Bsdf::ComponentType</a> component, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector4f</a> value, const uint32 eye_path_id, const uint32 t, TBPTContext &amp;context, <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> &amp;renderer)</td></tr>
+<tr class="separator:ac96fd485e8196264c43115c68a0bbc25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a7ee4b8449b8e3aaf590af8a18b2f3fc3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7ee4b8449b8e3aaf590af8a18b2f3fc3">&#9670;&nbsp;</a></span>sink()</h2>
+<a id="ab34316c125cab0da36ea2ae41e67f98f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab34316c125cab0da36ea2ae41e67f98f">&#9670;&nbsp;</a></span>sink()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename TBPTContext &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -138,13 +143,13 @@ Public Methods</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_b_p_t_context_base.html">BPTContextBase</a> &amp;&#160;</td>
+          <td class="paramtype">TBPTContext &amp;&#160;</td>
           <td class="paramname"><em>context</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_renderer_view.html">RendererView</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> &amp;&#160;</td>
           <td class="paramname"><em>renderer</em>&#160;</td>
         </tr>
         <tr>
@@ -163,11 +168,13 @@ Public Methods</h2></td></tr>
 
 </div>
 </div>
-<a id="abcac95b0206586909039c21fe726801d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abcac95b0206586909039c21fe726801d">&#9670;&nbsp;</a></span>sink_eye_scattering_event()</h2>
+<a id="ac96fd485e8196264c43115c68a0bbc25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac96fd485e8196264c43115c68a0bbc25">&#9670;&nbsp;</a></span>sink_eye_scattering_event()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename TBPTContext &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -199,13 +206,13 @@ Public Methods</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_b_p_t_context_base.html">BPTContextBase</a> &amp;&#160;</td>
+          <td class="paramtype">TBPTContext &amp;&#160;</td>
           <td class="paramname"><em>context</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_renderer_view.html">RendererView</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> &amp;&#160;</td>
           <td class="paramname"><em>renderer</em>&#160;</td>
         </tr>
         <tr>

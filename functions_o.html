@@ -80,7 +80,12 @@ $(function() {
 , <a class="el" href="group___basic.html#ga338f7b6f3de7b1dc36a125fd4704cff8">cugar::vector&lt; host_tag, T, Alloc &gt;</a>
 </li>
 <li>operator Iterator()
-: <a class="el" href="structcugar_1_1vector__view.html#a75d37990f826ddc16faa41424d2db89c">cugar::vector_view&lt; Iterator, IndexType &gt;</a>
+: <a class="el" href="structcugar_1_1register__array.html#a93d2f8025d49d09013ee5b4179cb8a3f">cugar::register_array&lt; Iterator, SIZE &gt;</a>
+, <a class="el" href="structcugar_1_1register__array_3_01_iterator_00_0116_01_4.html#a66d2f654e805522f74a8f14bb746aeea">cugar::register_array&lt; Iterator, 16 &gt;</a>
+, <a class="el" href="structcugar_1_1register__array_3_01_iterator_00_014_01_4.html#a1d5d60b8e15721cb25a866b36803fa4a">cugar::register_array&lt; Iterator, 4 &gt;</a>
+, <a class="el" href="structcugar_1_1register__array_3_01_iterator_00_015_01_4.html#a923543aa3170e9e96205d3cd12e1f889">cugar::register_array&lt; Iterator, 5 &gt;</a>
+, <a class="el" href="structcugar_1_1register__array_3_01_iterator_00_018_01_4.html#a0b6bfec019bb18d2e11d566b13b64bc2">cugar::register_array&lt; Iterator, 8 &gt;</a>
+, <a class="el" href="structcugar_1_1vector__view.html#a75d37990f826ddc16faa41424d2db89c">cugar::vector_view&lt; Iterator, IndexType &gt;</a>
 </li>
 <li>operator plain_view_type()
 : <a class="el" href="group___basic.html#ga88dd1949f9871da3aa4d4aefd0167c8b">cugar::caching_device_vector&lt; T &gt;</a>
@@ -89,8 +94,15 @@ $(function() {
 , <a class="el" href="group___basic.html#ga5cdeb00ca2a3ec211fe5ceccbc9b0a20">cugar::vector&lt; device_tag, T, Alloc &gt;</a>
 , <a class="el" href="group___basic.html#gae0a95fb635c4cf188b029a0dd5ca670e">cugar::vector&lt; host_tag, T, Alloc &gt;</a>
 </li>
+<li>operator T()
+: <a class="el" href="group___basic.html#ga64fde1bca016dd1b07ef0e7d6ef853ab">cugar::device_var&lt; T &gt;</a>
+</li>
 <li>operator value_type()
 : <a class="el" href="structcugar_1_1cuda_1_1store__reference.html#a7cd742e206cf9bbe7f4052e93d6ca45d">cugar::cuda::store_reference&lt; T, STORE_MOD, LOAD_MOD &gt;</a>
+, <a class="el" href="structcugar_1_1diff__var.html#a073bb39f8d7563a648e4fc8fc4056035">cugar::diff_var&lt; ValType, N, O &gt;</a>
+, <a class="el" href="structcugar_1_1diff__var_3_01_val_type_00_011_00_010_01_4.html#a2294c47229144fc0c7d180e0fad48320">cugar::diff_var&lt; ValType, 1, 0 &gt;</a>
+, <a class="el" href="structcugar_1_1diff__var_3_01_val_type_00_011_00_01_o_01_4.html#ace7b3845ff1b58f06b30e05dee3e83f5">cugar::diff_var&lt; ValType, 1, O &gt;</a>
+, <a class="el" href="structcugar_1_1diff__var_3_01_val_type_00_01_n_00_010_01_4.html#a459196a06c30439af04cbc2777d82618">cugar::diff_var&lt; ValType, N, 0 &gt;</a>
 </li>
 <li>operator!=()
 : <a class="el" href="group___vectors_module.html#ga7d5781e9d1c69c0520c733fd15a64c32">cugar::Vector&lt; T, DIM &gt;</a>
@@ -111,7 +123,7 @@ $(function() {
 , <a class="el" href="structcugar_1_1vector__view.html#a446be6811de588c4ab935cf3b85b81d2">cugar::vector_view&lt; Iterator, IndexType &gt;</a>
 </li>
 <li>operator*=()
-: <a class="el" href="group___vectors_module.html#ga382f555725b86158c670437a5a4d3043">cugar::Vector&lt; T, DIM &gt;</a>
+: <a class="el" href="group___vectors_module.html#ga533de6fa3d06d8337631ef848e63a1a5">cugar::Vector&lt; T, DIM &gt;</a>
 </li>
 <li>operator+()
 : <a class="el" href="structcugar_1_1block__strided__iterator.html#a864473fd53d2fea29614331eab808826">cugar::block_strided_iterator&lt; BLOCKSIZE, T, LAYOUT &gt;</a>
@@ -132,11 +144,12 @@ $(function() {
 , <a class="el" href="structcugar_1_1cuda_1_1load__pointer.html#ab010c8162c81964d682999df8475274c">cugar::cuda::load_pointer&lt; T, MOD &gt;</a>
 , <a class="el" href="structcugar_1_1cuda_1_1store__pointer.html#a64108b673ffc7922e87da39b76377216">cugar::cuda::store_pointer&lt; T, STORE_MOD, LOAD_MOD &gt;</a>
 , <a class="el" href="structcugar_1_1cuda_1_1store__reference.html#aee235f22969fe1e5ac1cefb19395b086">cugar::cuda::store_reference&lt; T, STORE_MOD, LOAD_MOD &gt;</a>
+, <a class="el" href="group___basic.html#ga95f15b09320e473fc50c4df310d535fe">cugar::device_var&lt; T &gt;</a>
 , <a class="el" href="group___vectors_module.html#gab459e58fcb21396fafa8f4a2d562a8e1">cugar::Vector&lt; T, DIM &gt;</a>
 </li>
 <li>operator-()
 : <a class="el" href="structcugar_1_1block__strided__iterator.html#aceb899ec2892dd99b842ef0551b65b30">cugar::block_strided_iterator&lt; BLOCKSIZE, T, LAYOUT &gt;</a>
-, <a class="el" href="structcugar_1_1cuda_1_1load__pointer.html#ac49a87d9735d0cfa86515294c55ca378">cugar::cuda::load_pointer&lt; T, MOD &gt;</a>
+, <a class="el" href="structcugar_1_1cuda_1_1load__pointer.html#aec49fd99699c175338bd322b9d2dc419">cugar::cuda::load_pointer&lt; T, MOD &gt;</a>
 , <a class="el" href="structcugar_1_1cuda_1_1store__pointer.html#a1fbc683ea1005fd2fdd61202aa3532cf">cugar::cuda::store_pointer&lt; T, STORE_MOD, LOAD_MOD &gt;</a>
 , <a class="el" href="structcugar_1_1strided__iterator.html#aeaf1a5c948f85a27d47739233ff896ef">cugar::strided_iterator&lt; T &gt;</a>
 , <a class="el" href="group___vectors_module.html#ga79019254703773ad3d352a503d3d820a">cugar::Vector&lt; T, DIM &gt;</a>
@@ -151,13 +164,14 @@ $(function() {
 , <a class="el" href="structcugar_1_1cuda_1_1load__pointer.html#a3f0eaa22c27c01573d432839c2210d83">cugar::cuda::load_pointer&lt; T, MOD &gt;</a>
 , <a class="el" href="structcugar_1_1cuda_1_1store__pointer.html#af80834aa861910066553de8f040f7bb2">cugar::cuda::store_pointer&lt; T, STORE_MOD, LOAD_MOD &gt;</a>
 , <a class="el" href="structcugar_1_1cuda_1_1store__reference.html#a76cbf538cd56f8d074db460eda0e2891">cugar::cuda::store_reference&lt; T, STORE_MOD, LOAD_MOD &gt;</a>
+, <a class="el" href="group___basic.html#ga882c904bab742504bd555bd688ddcd07">cugar::device_var&lt; T &gt;</a>
 , <a class="el" href="group___vectors_module.html#ga91cd021cf4fdca7eb4036efe1ea0798c">cugar::Vector&lt; T, DIM &gt;</a>
 </li>
 <li>operator/()
 : <a class="el" href="group___vectors_module.html#ga70b345927dd31af9708e03dbc2ebac67">cugar::Vector&lt; T, DIM &gt;</a>
 </li>
 <li>operator/=()
-: <a class="el" href="group___vectors_module.html#ga8b304f19895e1b31e9e736dcad94f019">cugar::Vector&lt; T, DIM &gt;</a>
+: <a class="el" href="group___vectors_module.html#ga8da7e747d2c0fc0217e1a63fbad736d7">cugar::Vector&lt; T, DIM &gt;</a>
 </li>
 <li>operator&lt;()
 : <a class="el" href="group___vectors_module.html#ga2f4af808d98e230aa470de34594eb210">cugar::Vector&lt; T, DIM &gt;</a>
@@ -172,6 +186,12 @@ $(function() {
 , <a class="el" href="structcugar_1_1cuda_1_1load__pointer.html#a93990ba2e43e2b4843b5f480c2881e53">cugar::cuda::load_pointer&lt; T, MOD &gt;</a>
 , <a class="el" href="structcugar_1_1cuda_1_1store__pointer.html#ad2149ae8bb302735b5a25ce73dd2f016">cugar::cuda::store_pointer&lt; T, STORE_MOD, LOAD_MOD &gt;</a>
 , <a class="el" href="structcugar_1_1cuda_1_1store__reference.html#a0e6edeb8418e39730eed64b7821e8fc8">cugar::cuda::store_reference&lt; T, STORE_MOD, LOAD_MOD &gt;</a>
+, <a class="el" href="group___basic.html#ga760fb65c25c56b5fa9f49144f1da3f9b">cugar::device_var&lt; T &gt;</a>
+, <a class="el" href="structcugar_1_1diff__var.html#a57e8d8d3aa5e039c93ebf2c165dd7516">cugar::diff_var&lt; ValType, N, O &gt;</a>
+, <a class="el" href="structcugar_1_1diff__var_3_01_val_type_00_011_00_010_01_4.html#a83d3b5f44b1feb4d68a89e8248638b4c">cugar::diff_var&lt; ValType, 1, 0 &gt;</a>
+, <a class="el" href="structcugar_1_1diff__var_3_01_val_type_00_011_00_01_o_01_4.html#a287e871a6b4be78523301a7586b8db45">cugar::diff_var&lt; ValType, 1, O &gt;</a>
+, <a class="el" href="structcugar_1_1diff__var_3_01_val_type_00_01_n_00_010_01_4.html#aed5199dc2a41d96e395e3dc1384afda5">cugar::diff_var&lt; ValType, N, 0 &gt;</a>
+, <a class="el" href="struct_f_buffer_channel_storage.html#a071ed06855db0e5fe595b6b7d8757fda">FBufferChannelStorage</a>
 </li>
 <li>operator==()
 : <a class="el" href="structcugar_1_1_atomic_int.html#ac29beff61e3ba39b7cdc29d5a641e1d1">cugar::AtomicInt&lt; intT &gt;</a>
@@ -184,13 +204,18 @@ $(function() {
 : <a class="el" href="group___vectors_module.html#ga5f00020bbec9b8d69dd1218a4ff7e78c">cugar::Vector&lt; T, DIM &gt;</a>
 </li>
 <li>operator[]()
-: <a class="el" href="structcugar_1_1_bbox.html#ae2c89d95f41ecc119b31e42defdccea4">cugar::Bbox&lt; Vector_t &gt;</a>
-, <a class="el" href="structcugar_1_1block__strided__iterator.html#ad652cb1f0468692a7145d113b749a525">cugar::block_strided_iterator&lt; BLOCKSIZE, T, LAYOUT &gt;</a>
+: <a class="el" href="structcugar_1_1_bbox.html#aca0124ac5cae61c1b3c8885a6e0eab47">cugar::Bbox&lt; Vector_t &gt;</a>
+, <a class="el" href="structcugar_1_1block__strided__iterator.html#a54df5dbe31b4bff8a60e7b42bcc51f7a">cugar::block_strided_iterator&lt; BLOCKSIZE, T, LAYOUT &gt;</a>
 , <a class="el" href="structcugar_1_1cuda_1_1load__pointer.html#a3620c30f2a6a81ece2a5e2cfcb3a994a">cugar::cuda::load_pointer&lt; T, MOD &gt;</a>
 , <a class="el" href="structcugar_1_1cuda_1_1store__pointer.html#a80f691a8ca17e20909b710581e29eac2">cugar::cuda::store_pointer&lt; T, STORE_MOD, LOAD_MOD &gt;</a>
 , <a class="el" href="structcugar_1_1priority__queue.html#aaa3d4e418725e5c5442382b007f4bc13">cugar::priority_queue&lt; Key, Container, Compare &gt;</a>
+, <a class="el" href="structcugar_1_1register__array.html#afb81e67899d46524ae21aee528c8c7e1">cugar::register_array&lt; Iterator, SIZE &gt;</a>
+, <a class="el" href="structcugar_1_1register__array_3_01_iterator_00_0116_01_4.html#af3438ad40ff2308ffd402514f9eb3982">cugar::register_array&lt; Iterator, 16 &gt;</a>
+, <a class="el" href="structcugar_1_1register__array_3_01_iterator_00_014_01_4.html#a6052ee3e8b0d78dbf3fbd531a7ee8297">cugar::register_array&lt; Iterator, 4 &gt;</a>
+, <a class="el" href="structcugar_1_1register__array_3_01_iterator_00_015_01_4.html#acc61dfdba6b95289c08165bbfe23a3f1">cugar::register_array&lt; Iterator, 5 &gt;</a>
+, <a class="el" href="structcugar_1_1register__array_3_01_iterator_00_018_01_4.html#ae6cf277b9a7bf0ac688103bb4f5bd5db">cugar::register_array&lt; Iterator, 8 &gt;</a>
 , <a class="el" href="structcugar_1_1strided__iterator.html#a136a837540ffa2511fc6923be7360071">cugar::strided_iterator&lt; T &gt;</a>
-, <a class="el" href="structcugar_1_1vector__view.html#a0fda103573e609c8c62592067806fc86">cugar::vector_view&lt; Iterator, IndexType &gt;</a>
+, <a class="el" href="structcugar_1_1vector__view.html#a3b474a8603160454c4de16fd506e0f61">cugar::vector_view&lt; Iterator, IndexType &gt;</a>
 </li>
 <li>orthogonal()
 : <a class="el" href="group___vectors_module.html#gadb782eb379c7b928c89790191e3bd692">cugar::Vector&lt; T, DIM &gt;</a>

@@ -70,6 +70,7 @@ $(function() {
 
 <div class="header">
   <div class="summary">
+<a href="#groups">Modules</a> &#124;
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a> &#124;
@@ -79,10 +80,16 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p>This module provides a flexible bidirectional path tracing library, thought to be as performant as possible and yet vastly configurable at compile-time. For more information, see the <a class="el" href="_b_p_t_lib_page.html">BPTLib</a> page. </p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
+Modules</h2></td></tr>
+<tr class="memitem:group___b_p_t_lib_core"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___b_p_t_lib_core.html">BPTLibCore</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_b_p_t_context_base.html">BPTContextBase</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_b_p_t_context_base.html">BPTContextBase&lt; TBPTOptions &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_b_p_t_config_base.html">BPTConfigBase</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -100,14 +107,6 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_perturbed_primary_coords.html">PerturbedPrimaryCoords</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_path_weights.html">PathWeights</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_temp_path_weights.html">TempPathWeights</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_light_vertex.html">LightVertex</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_eye_vertex.html">EyeVertex</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
@@ -123,149 +122,78 @@ Macros</h2></td></tr>
 <tr class="memitem:ga6571352dc82cb32b2f3e713f1da021a4"><td class="memItemLeft" align="right" valign="top"><a id="ga6571352dc82cb32b2f3e713f1da021a4"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>SECONDARY_LIGHT_VERTICES_CTA_BLOCKS</b>&#160;&#160;&#160;6</td></tr>
 <tr class="separator:ga6571352dc82cb32b2f3e713f1da021a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad52999b8f0e6bcdcb8eff92c83a9a6d0"><td class="memItemLeft" align="right" valign="top"><a id="gad52999b8f0e6bcdcb8eff92c83a9a6d0"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>DEBUG_S</b>&#160;&#160;&#160;-1</td></tr>
-<tr class="separator:gad52999b8f0e6bcdcb8eff92c83a9a6d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5d82fcdd390b5b6830570f45ed38d6fe"><td class="memItemLeft" align="right" valign="top"><a id="ga5d82fcdd390b5b6830570f45ed38d6fe"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>DEBUG_T</b>&#160;&#160;&#160;-1</td></tr>
-<tr class="separator:ga5d82fcdd390b5b6830570f45ed38d6fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae9f1ff1c13ba5d59483b6fe60d6ed7f0"><td class="memItemLeft" align="right" valign="top"><a id="gae9f1ff1c13ba5d59483b6fe60d6ed7f0"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>DEBUG_LENGTH</b>&#160;&#160;&#160;0</td></tr>
-<tr class="separator:gae9f1ff1c13ba5d59483b6fe60d6ed7f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0a83949d77b6abc018e6b073ca561324"><td class="memItemLeft" align="right" valign="top"><a id="ga0a83949d77b6abc018e6b073ca561324"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>BPT_FULL_BSDF_EVALUATION</b>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:ga0a83949d77b6abc018e6b073ca561324"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga09558cd591dca3662462dbebec8fc196"><td class="memTemplParams" colspan="2"><a id="ga09558cd591dca3662462dbebec8fc196"></a>
-template&lt;typename TPrimaryCoordinates , typename TBPTContext , typename TBPTConfig &gt; </td></tr>
-<tr class="memitem:ga09558cd591dca3662462dbebec8fc196"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bpt::sample_light_subpaths</b> (const uint32 n_light_paths, TPrimaryCoordinates primary_coords, TBPTContext &amp;context, const TBPTConfig &amp;config, <a class="el" href="struct_renderer.html">Renderer</a> &amp;renderer, <a class="el" href="struct_renderer_view.html">RendererView</a> &amp;renderer_view)</td></tr>
-<tr class="separator:ga09558cd591dca3662462dbebec8fc196"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0c628678c4df69f321b70b385e937efc"><td class="memTemplParams" colspan="2"><a id="ga0c628678c4df69f321b70b385e937efc"></a>
-template&lt;typename TSampleSink , typename TBPTContext &gt; </td></tr>
-<tr class="memitem:ga0c628678c4df69f321b70b385e937efc"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bpt::solve_shadows</b> (TSampleSink sample_sink, TBPTContext &amp;context, <a class="el" href="struct_renderer.html">Renderer</a> &amp;renderer, <a class="el" href="struct_renderer_view.html">RendererView</a> &amp;renderer_view)</td></tr>
-<tr class="separator:ga0c628678c4df69f321b70b385e937efc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf0d5f5f98da2a896d5721f45886cfc98"><td class="memTemplParams" colspan="2"><a id="gaf0d5f5f98da2a896d5721f45886cfc98"></a>
-template&lt;typename TPrimaryCoordinates , typename TSampleSink , typename TBPTContext , typename TBPTConfig &gt; </td></tr>
-<tr class="memitem:gaf0d5f5f98da2a896d5721f45886cfc98"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bpt::sample_eye_subpaths</b> (const uint32 n_eye_paths, const uint32 n_light_paths, TPrimaryCoordinates primary_coords, TSampleSink sample_sink, TBPTContext &amp;context, const TBPTConfig &amp;config, <a class="el" href="struct_renderer.html">Renderer</a> &amp;renderer, <a class="el" href="struct_renderer_view.html">RendererView</a> &amp;renderer_view, const bool lazy_shadows=false)</td></tr>
-<tr class="separator:gaf0d5f5f98da2a896d5721f45886cfc98"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa7930dc380635b05924be783e0122240"><td class="memTemplParams" colspan="2"><a id="gaa7930dc380635b05924be783e0122240"></a>
-template&lt;typename TEyePrimaryCoordinates , typename TLightPrimaryCoordinates , typename TSampleSink , typename TBPTContext , typename TBPTConfig &gt; </td></tr>
-<tr class="memitem:gaa7930dc380635b05924be783e0122240"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bpt::sample_paths</b> (const uint32 n_eye_paths, const uint32 n_light_paths, TEyePrimaryCoordinates eye_primary_coords, TLightPrimaryCoordinates light_primary_coords, TSampleSink sample_sink, TBPTContext &amp;context, const TBPTConfig &amp;config, <a class="el" href="struct_renderer.html">Renderer</a> &amp;renderer, <a class="el" href="struct_renderer_view.html">RendererView</a> &amp;renderer_view, const bool lazy_shadows=false)</td></tr>
-<tr class="separator:gaa7930dc380635b05924be783e0122240"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6ac3dc606b39ae6bf2982e12ab897149"><td class="memTemplParams" colspan="2"><a id="ga6ac3dc606b39ae6bf2982e12ab897149"></a>
-template&lt;typename TSampleSink , typename TBPTContext , typename TBPTConfig &gt; </td></tr>
-<tr class="memitem:ga6ac3dc606b39ae6bf2982e12ab897149"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bpt::light_tracing</b> (const uint32 n_light_paths, TSampleSink sample_sink, TBPTContext &amp;context, const TBPTConfig &amp;config, <a class="el" href="struct_renderer.html">Renderer</a> &amp;renderer, <a class="el" href="struct_renderer_view.html">RendererView</a> &amp;renderer_view)</td></tr>
-<tr class="separator:ga6ac3dc606b39ae6bf2982e12ab897149"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga935e0bca37c1d2369ae5eb35d8a426ae"><td class="memTemplParams" colspan="2">template&lt;typename TPrimaryCoordinates , typename TBPTContext , typename TBPTConfig &gt; </td></tr>
-<tr class="memitem:ga935e0bca37c1d2369ae5eb35d8a426ae"><td class="memTemplItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___b_p_t_lib.html#ga935e0bca37c1d2369ae5eb35d8a426ae">bpt::generate_primary_light_vertex</a> (const uint32 light_path_id, const uint32 n_light_paths, const TPrimaryCoordinates &amp;primary_coords, TBPTContext &amp;context, <a class="el" href="struct_renderer_view.html">RendererView</a> &amp;renderer, TBPTConfig &amp;config)</td></tr>
-<tr class="separator:ga935e0bca37c1d2369ae5eb35d8a426ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga46eaabcd65a4825050e25c37412a2b07"><td class="memTemplParams" colspan="2">template&lt;typename TPrimaryCoordinates , typename TBPTContext , typename TBPTConfig &gt; </td></tr>
-<tr class="memitem:ga46eaabcd65a4825050e25c37412a2b07"><td class="memTemplItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___b_p_t_lib.html#ga46eaabcd65a4825050e25c37412a2b07">bpt::process_secondary_light_vertex</a> (const uint32 queue_idx, const uint32 n_light_paths, const TPrimaryCoordinates &amp;primary_coords, TBPTContext &amp;context, <a class="el" href="struct_renderer_view.html">RendererView</a> &amp;renderer, TBPTConfig &amp;config)</td></tr>
-<tr class="separator:ga46eaabcd65a4825050e25c37412a2b07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1fa62eaa382c9072b834f4926d7631dc"><td class="memTemplParams" colspan="2">template&lt;typename TPrimaryCoordinates , typename TBPTContext , typename TBPTConfig &gt; </td></tr>
-<tr class="memitem:ga1fa62eaa382c9072b834f4926d7631dc"><td class="memTemplItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___b_p_t_lib.html#ga1fa62eaa382c9072b834f4926d7631dc">bpt::generate_primary_eye_vertex</a> (const uint32 idx, const uint32 n_eye_paths, const uint32 n_light_paths, const TPrimaryCoordinates &amp;primary_coords, TBPTContext &amp;context, const <a class="el" href="struct_renderer_view.html">RendererView</a> &amp;renderer, TBPTConfig &amp;config)</td></tr>
-<tr class="separator:ga1fa62eaa382c9072b834f4926d7631dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga97091c55379573c381dbc072274d0e6d"><td class="memTemplParams" colspan="2">template&lt;typename TSampleSink , typename TPrimaryCoordinates , typename TBPTContext , typename TBPTConfig &gt; </td></tr>
-<tr class="memitem:ga97091c55379573c381dbc072274d0e6d"><td class="memTemplItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___b_p_t_lib.html#ga97091c55379573c381dbc072274d0e6d">bpt::process_secondary_eye_vertex</a> (const uint32 queue_idx, const uint32 n_eye_paths, const uint32 n_light_paths, TSampleSink &amp;sample_sink, const TPrimaryCoordinates &amp;primary_coords, TBPTContext &amp;context, <a class="el" href="struct_renderer_view.html">RendererView</a> &amp;renderer, TBPTConfig &amp;config)</td></tr>
-<tr class="separator:ga97091c55379573c381dbc072274d0e6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2abe87c8a1243fbfe1fad3cc702ef4d7"><td class="memTemplParams" colspan="2">template&lt;typename TBPTContext , typename TBPTConfig &gt; </td></tr>
-<tr class="memitem:ga2abe87c8a1243fbfe1fad3cc702ef4d7"><td class="memTemplItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___b_p_t_lib.html#ga2abe87c8a1243fbfe1fad3cc702ef4d7">bpt::connect_to_camera</a> (const uint32 light_idx, const uint32 n_light_paths, TBPTContext &amp;context, <a class="el" href="struct_renderer_view.html">RendererView</a> &amp;renderer, const TBPTConfig &amp;config)</td></tr>
-<tr class="separator:ga2abe87c8a1243fbfe1fad3cc702ef4d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0a1dbffc98c93796aad75a681fed596f"><td class="memTemplParams" colspan="2">template&lt;typename TSampleSink , typename TBPTContext &gt; </td></tr>
-<tr class="memitem:ga0a1dbffc98c93796aad75a681fed596f"><td class="memTemplItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___b_p_t_lib.html#ga0a1dbffc98c93796aad75a681fed596f">bpt::solve_occlusion</a> (const uint32 queue_idx, TSampleSink &amp;sample_sink, TBPTContext &amp;context, <a class="el" href="struct_renderer_view.html">RendererView</a> &amp;renderer)</td></tr>
-<tr class="separator:ga0a1dbffc98c93796aad75a681fed596f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga92b98532848e30f0fd1564d607550353"><td class="memTemplParams" colspan="2"><a id="ga92b98532848e30f0fd1564d607550353"></a>
+<tr class="memitem:ga679afc8704a42ed1c8e6b57018cd676e"><td class="memTemplParams" colspan="2">template&lt;typename TPrimaryCoordinates , typename TBPTContext , typename TBPTConfig &gt; </td></tr>
+<tr class="memitem:ga679afc8704a42ed1c8e6b57018cd676e"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___b_p_t_lib.html#ga679afc8704a42ed1c8e6b57018cd676e">bpt::sample_light_subpaths</a> (const uint32 n_light_paths, TPrimaryCoordinates primary_coords, TBPTContext &amp;context, const TBPTConfig &amp;config, <a class="el" href="struct_rendering_context.html">RenderingContext</a> &amp;renderer, <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> &amp;renderer_view)</td></tr>
+<tr class="separator:ga679afc8704a42ed1c8e6b57018cd676e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga67c2c1dbc4ee8212daf3728fafe55969"><td class="memTemplParams" colspan="2">template&lt;typename TSampleSink , typename TBPTContext &gt; </td></tr>
+<tr class="memitem:ga67c2c1dbc4ee8212daf3728fafe55969"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___b_p_t_lib.html#ga67c2c1dbc4ee8212daf3728fafe55969">bpt::solve_shadows</a> (TSampleSink sample_sink, TBPTContext &amp;context, <a class="el" href="struct_rendering_context.html">RenderingContext</a> &amp;renderer, <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> &amp;renderer_view)</td></tr>
+<tr class="separator:ga67c2c1dbc4ee8212daf3728fafe55969"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5dcb245a5dfa3a0910069446d27aa8eb"><td class="memTemplParams" colspan="2">template&lt;typename TPrimaryCoordinates , typename TSampleSink , typename TBPTContext , typename TBPTConfig &gt; </td></tr>
+<tr class="memitem:ga5dcb245a5dfa3a0910069446d27aa8eb"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___b_p_t_lib.html#ga5dcb245a5dfa3a0910069446d27aa8eb">bpt::sample_eye_subpaths</a> (const uint32 n_eye_paths, const uint32 n_light_paths, TPrimaryCoordinates primary_coords, TSampleSink sample_sink, TBPTContext &amp;context, const TBPTConfig &amp;config, <a class="el" href="struct_rendering_context.html">RenderingContext</a> &amp;renderer, <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> &amp;renderer_view, const bool lazy_shadows=false)</td></tr>
+<tr class="separator:ga5dcb245a5dfa3a0910069446d27aa8eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4c1164d859ed146eb306e8b7b178c7e7"><td class="memTemplParams" colspan="2">template&lt;typename TEyePrimaryCoordinates , typename TLightPrimaryCoordinates , typename TSampleSink , typename TBPTContext , typename TBPTConfig &gt; </td></tr>
+<tr class="memitem:ga4c1164d859ed146eb306e8b7b178c7e7"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___b_p_t_lib.html#ga4c1164d859ed146eb306e8b7b178c7e7">bpt::sample_paths</a> (const uint32 n_eye_paths, const uint32 n_light_paths, TEyePrimaryCoordinates eye_primary_coords, TLightPrimaryCoordinates light_primary_coords, TSampleSink sample_sink, TBPTContext &amp;context, const TBPTConfig &amp;config, <a class="el" href="struct_rendering_context.html">RenderingContext</a> &amp;renderer, <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> &amp;renderer_view, const bool lazy_shadows=false)</td></tr>
+<tr class="separator:ga4c1164d859ed146eb306e8b7b178c7e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga497e0940986e5f948a9dcf42242d39c7"><td class="memTemplParams" colspan="2">template&lt;typename TSampleSink , typename TBPTContext , typename TBPTConfig &gt; </td></tr>
+<tr class="memitem:ga497e0940986e5f948a9dcf42242d39c7"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___b_p_t_lib.html#ga497e0940986e5f948a9dcf42242d39c7">bpt::light_tracing</a> (const uint32 n_light_paths, TSampleSink sample_sink, TBPTContext &amp;context, const TBPTConfig &amp;config, <a class="el" href="struct_rendering_context.html">RenderingContext</a> &amp;renderer, <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> &amp;renderer_view)</td></tr>
+<tr class="separator:ga497e0940986e5f948a9dcf42242d39c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga97d1d774b28d0420e8f84d68b9c17adb"><td class="memTemplParams" colspan="2"><a id="ga97d1d774b28d0420e8f84d68b9c17adb"></a>
 template&lt;typename TBPTContext , typename TBPTConfig &gt; </td></tr>
-<tr class="memitem:ga92b98532848e30f0fd1564d607550353"><td class="memTemplItemLeft" align="right" valign="top">__global__ void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bpt::light_tracing_kernel</b> (const uint32 n_light_paths, TBPTContext context, <a class="el" href="struct_renderer_view.html">RendererView</a> renderer, TBPTConfig config)</td></tr>
-<tr class="separator:ga92b98532848e30f0fd1564d607550353"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa4ba75a3b9cb3cf23e441a0f86bffd27"><td class="memTemplParams" colspan="2"><a id="gaa4ba75a3b9cb3cf23e441a0f86bffd27"></a>
+<tr class="memitem:ga97d1d774b28d0420e8f84d68b9c17adb"><td class="memTemplItemLeft" align="right" valign="top">__global__ void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bpt::light_tracing_kernel</b> (const uint32 n_light_paths, TBPTContext context, <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> renderer, TBPTConfig config)</td></tr>
+<tr class="separator:ga97d1d774b28d0420e8f84d68b9c17adb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad446148ae3c46cee02413d0e567fa666"><td class="memTemplParams" colspan="2"><a id="gad446148ae3c46cee02413d0e567fa666"></a>
 template&lt;typename TBPTContext , typename TBPTConfig &gt; </td></tr>
-<tr class="memitem:gaa4ba75a3b9cb3cf23e441a0f86bffd27"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bpt::light_tracing</b> (const uint32 n_light_paths, TBPTContext &amp;context, <a class="el" href="struct_renderer_view.html">RendererView</a> &amp;renderer, TBPTConfig &amp;config)</td></tr>
-<tr class="separator:gaa4ba75a3b9cb3cf23e441a0f86bffd27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaaf6d9cd9e3af365b7a91d6ccf249315a"><td class="memTemplParams" colspan="2"><a id="gaaf6d9cd9e3af365b7a91d6ccf249315a"></a>
+<tr class="memitem:gad446148ae3c46cee02413d0e567fa666"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bpt::light_tracing</b> (const uint32 n_light_paths, TBPTContext &amp;context, <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> &amp;renderer, TBPTConfig &amp;config)</td></tr>
+<tr class="separator:gad446148ae3c46cee02413d0e567fa666"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga323f0d4f0454ac39cd6355fdca67314c"><td class="memTemplParams" colspan="2"><a id="ga323f0d4f0454ac39cd6355fdca67314c"></a>
 template&lt;typename TSampleSink , typename TBPTContext &gt; </td></tr>
-<tr class="memitem:gaaf6d9cd9e3af365b7a91d6ccf249315a"><td class="memTemplItemLeft" align="right" valign="top">__global__ void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bpt::solve_occlusions_kernel</b> (const uint32 in_queue_size, TSampleSink sample_sink, TBPTContext context, <a class="el" href="struct_renderer_view.html">RendererView</a> renderer)</td></tr>
-<tr class="separator:gaaf6d9cd9e3af365b7a91d6ccf249315a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2379374401b9b82a5cf2f6b092997788"><td class="memTemplParams" colspan="2"><a id="ga2379374401b9b82a5cf2f6b092997788"></a>
+<tr class="memitem:ga323f0d4f0454ac39cd6355fdca67314c"><td class="memTemplItemLeft" align="right" valign="top">__global__ void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bpt::solve_occlusions_kernel</b> (const uint32 in_queue_size, TSampleSink sample_sink, TBPTContext context, <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> renderer)</td></tr>
+<tr class="separator:ga323f0d4f0454ac39cd6355fdca67314c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga15de63ef1e71caf7a59628ed1f6ba2e5"><td class="memTemplParams" colspan="2"><a id="ga15de63ef1e71caf7a59628ed1f6ba2e5"></a>
 template&lt;typename TSampleSink , typename TBPTContext &gt; </td></tr>
-<tr class="memitem:ga2379374401b9b82a5cf2f6b092997788"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bpt::solve_occlusions</b> (const uint32 in_queue_size, TSampleSink sample_sink, TBPTContext context, <a class="el" href="struct_renderer_view.html">RendererView</a> renderer)</td></tr>
-<tr class="separator:ga2379374401b9b82a5cf2f6b092997788"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga058f24c7773d8b2bb767bb200f4a66a2"><td class="memTemplParams" colspan="2"><a id="ga058f24c7773d8b2bb767bb200f4a66a2"></a>
+<tr class="memitem:ga15de63ef1e71caf7a59628ed1f6ba2e5"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bpt::solve_occlusions</b> (const uint32 in_queue_size, TSampleSink sample_sink, TBPTContext context, <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> renderer)</td></tr>
+<tr class="separator:ga15de63ef1e71caf7a59628ed1f6ba2e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5983a4562bb68a326810f2e12a7109d2"><td class="memTemplParams" colspan="2"><a id="ga5983a4562bb68a326810f2e12a7109d2"></a>
 template&lt;typename TPrimaryCoordinates , typename TBPTContext , typename TBPTConfig &gt; </td></tr>
-<tr class="memitem:ga058f24c7773d8b2bb767bb200f4a66a2"><td class="memTemplItemLeft" align="right" valign="top">__global__ void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bpt::generate_primary_light_vertices_kernel</b> (const uint32 n_light_paths, TPrimaryCoordinates primary_coords, TBPTContext context, <a class="el" href="struct_renderer_view.html">RendererView</a> renderer, const TBPTConfig config)</td></tr>
-<tr class="separator:ga058f24c7773d8b2bb767bb200f4a66a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga989cbb2e4e62fa34986febb8def6ad8f"><td class="memTemplParams" colspan="2"><a id="ga989cbb2e4e62fa34986febb8def6ad8f"></a>
+<tr class="memitem:ga5983a4562bb68a326810f2e12a7109d2"><td class="memTemplItemLeft" align="right" valign="top">__global__ void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bpt::generate_primary_light_vertices_kernel</b> (const uint32 n_light_paths, TPrimaryCoordinates primary_coords, TBPTContext context, <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> renderer, const TBPTConfig config)</td></tr>
+<tr class="separator:ga5983a4562bb68a326810f2e12a7109d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9bda9ac181c56dbf094b140e54e8e680"><td class="memTemplParams" colspan="2"><a id="ga9bda9ac181c56dbf094b140e54e8e680"></a>
 template&lt;typename TPrimaryCoordinates , typename TBPTContext , typename TBPTConfig &gt; </td></tr>
-<tr class="memitem:ga989cbb2e4e62fa34986febb8def6ad8f"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bpt::generate_primary_light_vertices</b> (const uint32 n_light_paths, TPrimaryCoordinates primary_coords, TBPTContext context, <a class="el" href="struct_renderer_view.html">RendererView</a> renderer, const TBPTConfig config)</td></tr>
-<tr class="separator:ga989cbb2e4e62fa34986febb8def6ad8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9bda9ac181c56dbf094b140e54e8e680"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bpt::generate_primary_light_vertices</b> (const uint32 n_light_paths, TPrimaryCoordinates primary_coords, TBPTContext context, <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> renderer, const TBPTConfig config)</td></tr>
+<tr class="separator:ga9bda9ac181c56dbf094b140e54e8e680"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa74f11861e08bbf114797dacfa20e528"><td class="memTemplParams" colspan="2"><a id="gaa74f11861e08bbf114797dacfa20e528"></a>
 template&lt;typename TPrimaryCoordinates , typename TBPTContext , typename TBPTConfig &gt; </td></tr>
 <tr class="memitem:gaa74f11861e08bbf114797dacfa20e528"><td class="memTemplItemLeft" align="right" valign="top">__global__&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bpt::__launch_bounds__</b> (SECONDARY_LIGHT_VERTICES_BLOCKSIZE, SECONDARY_LIGHT_VERTICES_CTA_BLOCKS) void process_secondary_light_vertices_kernel(const uint32 in_queue_size</td></tr>
 <tr class="separator:gaa74f11861e08bbf114797dacfa20e528"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga2bbfb4a4dfd24ddc1af3e6b4998f6755"><td class="memItemLeft" align="right" valign="top"><a id="ga2bbfb4a4dfd24ddc1af3e6b4998f6755"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>bpt::if</b> (thread_id&lt; in_queue_size) process_secondary_light_vertex(thread_id</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>bpt::if</b> (thread_id&lt; in_queue_size) <a class="el" href="group___b_p_t_lib_core.html#ga124952cd2917df181f6aa6f39cdeda1b">process_secondary_light_vertex</a>(thread_id</td></tr>
 <tr class="separator:ga2bbfb4a4dfd24ddc1af3e6b4998f6755"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5d726c6bddf61db73c84670edab16fd1"><td class="memTemplParams" colspan="2"><a id="ga5d726c6bddf61db73c84670edab16fd1"></a>
+<tr class="memitem:ga09acd5912961fb37e1d418f0b019dec4"><td class="memTemplParams" colspan="2"><a id="ga09acd5912961fb37e1d418f0b019dec4"></a>
 template&lt;typename TPrimaryCoordinates , typename TBPTContext , typename TBPTConfig &gt; </td></tr>
-<tr class="memitem:ga5d726c6bddf61db73c84670edab16fd1"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bpt::process_secondary_light_vertices</b> (const uint32 in_queue_size, const uint32 n_light_paths, TPrimaryCoordinates primary_coords, TBPTContext context, <a class="el" href="struct_renderer_view.html">RendererView</a> renderer, const TBPTConfig config)</td></tr>
-<tr class="separator:ga5d726c6bddf61db73c84670edab16fd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa56bfd4de7adc17c2bfd7e7a0826d7ce"><td class="memTemplParams" colspan="2"><a id="gaa56bfd4de7adc17c2bfd7e7a0826d7ce"></a>
+<tr class="memitem:ga09acd5912961fb37e1d418f0b019dec4"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bpt::process_secondary_light_vertices</b> (const uint32 in_queue_size, const uint32 n_light_paths, TPrimaryCoordinates primary_coords, TBPTContext context, <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> renderer, const TBPTConfig config)</td></tr>
+<tr class="separator:ga09acd5912961fb37e1d418f0b019dec4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4c020a309b7b89ec0752ffe6f9df1d3f"><td class="memTemplParams" colspan="2"><a id="ga4c020a309b7b89ec0752ffe6f9df1d3f"></a>
 template&lt;typename TPrimaryCoordinates , typename TBPTContext , typename TBPTConfig &gt; </td></tr>
-<tr class="memitem:gaa56bfd4de7adc17c2bfd7e7a0826d7ce"><td class="memTemplItemLeft" align="right" valign="top">__global__ void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bpt::generate_primary_eye_vertices_kernel</b> (const uint32 n_eye_paths, const uint32 n_light_paths, TPrimaryCoordinates primary_coords, TBPTContext context, <a class="el" href="struct_renderer_view.html">RendererView</a> renderer, const TBPTConfig config)</td></tr>
-<tr class="separator:gaa56bfd4de7adc17c2bfd7e7a0826d7ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0baf65027d9d4e6883ffec9255a66d92"><td class="memTemplParams" colspan="2"><a id="ga0baf65027d9d4e6883ffec9255a66d92"></a>
-template&lt;typename TPrimaryCoordinates , typename TBPTConfig &gt; </td></tr>
-<tr class="memitem:ga0baf65027d9d4e6883ffec9255a66d92"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bpt::generate_primary_eye_vertices</b> (const uint32 n_eye_paths, const uint32 n_light_paths, TPrimaryCoordinates primary_coords, <a class="el" href="struct_b_p_t_context_base.html">BPTContextBase</a> context, <a class="el" href="struct_renderer_view.html">RendererView</a> renderer, const TBPTConfig config)</td></tr>
-<tr class="separator:ga0baf65027d9d4e6883ffec9255a66d92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4c020a309b7b89ec0752ffe6f9df1d3f"><td class="memTemplItemLeft" align="right" valign="top">__global__ void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bpt::generate_primary_eye_vertices_kernel</b> (const uint32 n_eye_paths, const uint32 n_light_paths, TPrimaryCoordinates primary_coords, TBPTContext context, <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> renderer, const TBPTConfig config)</td></tr>
+<tr class="separator:ga4c020a309b7b89ec0752ffe6f9df1d3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga017a29e7b25bcd8fd7e1163ac5979be4"><td class="memTemplParams" colspan="2"><a id="ga017a29e7b25bcd8fd7e1163ac5979be4"></a>
+template&lt;typename TPrimaryCoordinates , typename TBPTConfig , typename TBPTContext &gt; </td></tr>
+<tr class="memitem:ga017a29e7b25bcd8fd7e1163ac5979be4"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bpt::generate_primary_eye_vertices</b> (const uint32 n_eye_paths, const uint32 n_light_paths, TPrimaryCoordinates primary_coords, TBPTContext context, <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> renderer, const TBPTConfig config)</td></tr>
+<tr class="separator:ga017a29e7b25bcd8fd7e1163ac5979be4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga39d8463562e9005f247179d9dfffa4c1"><td class="memTemplParams" colspan="2"><a id="ga39d8463562e9005f247179d9dfffa4c1"></a>
 template&lt;typename TSampleSink , typename TPrimaryCoordinates , typename TBPTContext , typename TBPTConfig &gt; </td></tr>
 <tr class="memitem:ga39d8463562e9005f247179d9dfffa4c1"><td class="memTemplItemLeft" align="right" valign="top">__global__&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bpt::__launch_bounds__</b> (SECONDARY_EYE_VERTICES_BLOCKSIZE, SECONDARY_EYE_VERTICES_CTA_BLOCKS) void process_secondary_eye_vertices_kernel(const uint32 in_queue_size</td></tr>
 <tr class="separator:ga39d8463562e9005f247179d9dfffa4c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae2641319acae81b379f235937bfcfe14"><td class="memTemplParams" colspan="2"><a id="gae2641319acae81b379f235937bfcfe14"></a>
+<tr class="memitem:gaf8a23de4970e1db67ceaf75beb775098"><td class="memTemplParams" colspan="2"><a id="gaf8a23de4970e1db67ceaf75beb775098"></a>
 template&lt;typename TSampleSink , typename TPrimaryCoordinates , typename TBPTContext , typename TBPTConfig &gt; </td></tr>
-<tr class="memitem:gae2641319acae81b379f235937bfcfe14"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bpt::process_secondary_eye_vertices</b> (const uint32 in_queue_size, const uint32 n_eye_paths, const uint32 n_light_paths, TSampleSink sink, TPrimaryCoordinates primary_coords, TBPTContext context, <a class="el" href="struct_renderer_view.html">RendererView</a> renderer, const TBPTConfig config)</td></tr>
-<tr class="separator:gae2641319acae81b379f235937bfcfe14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaefc1e6e64ff1fdc09195b98facf023fe"><td class="memItemLeft" align="right" valign="top"><a id="gaefc1e6e64ff1fdc09195b98facf023fe"></a>
-FERMAT_HOST_DEVICE FERMAT_FORCEINLINE float&#160;</td><td class="memItemRight" valign="bottom"><b>mis_selector</b> (const uint32 s, const uint32 t, const float w)</td></tr>
-<tr class="separator:gaefc1e6e64ff1fdc09195b98facf023fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaab2d16546a42205b009be794594ead61"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___b_p_t_lib.html#gaab2d16546a42205b009be794594ead61">mis_power</a> (const float w)</td></tr>
-<tr class="separator:gaab2d16546a42205b009be794594ead61"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6473afa8910469fdec791e033d19facb"><td class="memItemLeft" align="right" valign="top"><a id="ga6473afa8910469fdec791e033d19facb"></a>
-FERMAT_HOST_DEVICE FERMAT_FORCEINLINE float&#160;</td><td class="memItemRight" valign="bottom"><b>bpt_mis</b> (const float pGp, const float prev_pGp, const float next_pGp, const float pGp_sum)</td></tr>
-<tr class="separator:ga6473afa8910469fdec791e033d19facb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf967121c1d37c948098d2845ca434a6d"><td class="memItemLeft" align="right" valign="top"><a id="gaf967121c1d37c948098d2845ca434a6d"></a>
-FERMAT_HOST_DEVICE FERMAT_FORCEINLINE float&#160;</td><td class="memItemRight" valign="bottom"><b>bpt_mis</b> (const float pGp, const float other_pGp, const float pGp_sum)</td></tr>
-<tr class="separator:gaf967121c1d37c948098d2845ca434a6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6dccad51efe9f04afa22146e529150a8"><td class="memItemLeft" align="right" valign="top"><a id="ga6dccad51efe9f04afa22146e529150a8"></a>
-FERMAT_HOST_DEVICE FERMAT_FORCEINLINE uint32&#160;</td><td class="memItemRight" valign="bottom"><b>channel_selector</b> (const <a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">Bsdf::ComponentType</a> comp)</td></tr>
-<tr class="separator:ga6dccad51efe9f04afa22146e529150a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8d573ce2770a2613a1605ddc09154ffc"><td class="memItemLeft" align="right" valign="top"><a id="ga8d573ce2770a2613a1605ddc09154ffc"></a>
-FERMAT_HOST_DEVICE FERMAT_FORCEINLINE uint4&#160;</td><td class="memItemRight" valign="bottom"><b>pack_edf</b> (const <a class="el" href="struct_edf.html">Edf</a> &amp;edf)</td></tr>
-<tr class="separator:ga8d573ce2770a2613a1605ddc09154ffc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad4aa7704b646405fd0a0465ac8408e9d"><td class="memItemLeft" align="right" valign="top"><a id="gad4aa7704b646405fd0a0465ac8408e9d"></a>
-FERMAT_HOST_DEVICE FERMAT_FORCEINLINE uint4&#160;</td><td class="memItemRight" valign="bottom"><b>pack_edf</b> (const <a class="el" href="struct_mesh_material.html">MeshMaterial</a> &amp;material)</td></tr>
-<tr class="separator:gad4aa7704b646405fd0a0465ac8408e9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gafc4b6904df544dc81fd8ced4434a6213"><td class="memItemLeft" align="right" valign="top"><a id="gafc4b6904df544dc81fd8ced4434a6213"></a>
-FERMAT_HOST_DEVICE FERMAT_FORCEINLINE uint4&#160;</td><td class="memItemRight" valign="bottom"><b>pack_bsdf</b> (const <a class="el" href="struct_mesh_material.html">MeshMaterial</a> &amp;material)</td></tr>
-<tr class="separator:gafc4b6904df544dc81fd8ced4434a6213"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1d22946cfb852e33bf79b6e145eb10f9"><td class="memItemLeft" align="right" valign="top"><a id="ga1d22946cfb852e33bf79b6e145eb10f9"></a>
-FERMAT_HOST_DEVICE FERMAT_FORCEINLINE <a class="el" href="struct_edf.html">Edf</a>&#160;</td><td class="memItemRight" valign="bottom"><b>unpack_edf</b> (const uint4 packed_info)</td></tr>
-<tr class="separator:ga1d22946cfb852e33bf79b6e145eb10f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga72a89c9448797c861e0ca4eebb5f5eec"><td class="memItemLeft" align="right" valign="top"><a id="ga72a89c9448797c861e0ca4eebb5f5eec"></a>
-FERMAT_HOST_DEVICE FERMAT_FORCEINLINE <a class="el" href="struct_bsdf.html">Bsdf</a>&#160;</td><td class="memItemRight" valign="bottom"><b>unpack_bsdf</b> (const <a class="el" href="struct_renderer_view.html">RendererView</a> &amp;renderer, const uint4 packed_info, const <a class="el" href="group___b_s_d_f_module.html#gaca1e72535e7f260e54ed8bbf984dade9">TransportType</a> transport=kParticleTransport)</td></tr>
-<tr class="separator:ga72a89c9448797c861e0ca4eebb5f5eec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab2057368defff97d2e5a217450c9ec9b"><td class="memItemLeft" align="right" valign="top"><a id="gab2057368defff97d2e5a217450c9ec9b"></a>
-FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><b>eval_connection_terms</b> (const <a class="el" href="struct_eye_vertex.html">EyeVertex</a> ev, const <a class="el" href="struct_light_vertex.html">LightVertex</a> &amp;lv, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;out, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;f_conn, float &amp;G, float &amp;d)</td></tr>
-<tr class="separator:gab2057368defff97d2e5a217450c9ec9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae60b78f9de82f098e74de5a59fc06985"><td class="memItemLeft" align="right" valign="top"><a id="gae60b78f9de82f098e74de5a59fc06985"></a>
-FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><b>eval_connection</b> (const <a class="el" href="struct_eye_vertex.html">EyeVertex</a> ev, const <a class="el" href="struct_light_vertex.html">LightVertex</a> &amp;lv, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;out, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;out_w, float &amp;d, bool RR=true, bool direct_lighting_nee=true, bool direct_lighting_bsdf=true)</td></tr>
-<tr class="separator:gae60b78f9de82f098e74de5a59fc06985"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga73eebe17951fa3d6535f193930eed181"><td class="memItemLeft" align="right" valign="top"><a id="ga73eebe17951fa3d6535f193930eed181"></a>
-FERMAT_HOST_DEVICE <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td><td class="memItemRight" valign="bottom"><b>eval_incoming_emission</b> (const <a class="el" href="struct_eye_vertex.html">EyeVertex</a> &amp;ev, const <a class="el" href="struct_renderer_view.html">RendererView</a> &amp;renderer, bool direct_lighting_nee, bool indirect_lighting_nee, bool use_vpls)</td></tr>
-<tr class="separator:ga73eebe17951fa3d6535f193930eed181"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga161551b8c343e47e329703e71e0aaeca"><td class="memTemplParams" colspan="2"><a id="ga161551b8c343e47e329703e71e0aaeca"></a>
-template&lt;typename VertexType &gt; </td></tr>
-<tr class="memitem:ga161551b8c343e47e329703e71e0aaeca"><td class="memTemplItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>scatter</b> (const VertexType &amp;v, const float z[3], <a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">Bsdf::ComponentType</a> &amp;out_component, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;out, float &amp;out_p, float &amp;out_p_proj, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;out_w, bool RR=true, bool output_alpha=true, bool evaluate_full_bsdf=false, <a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">Bsdf::ComponentType</a> components=Bsdf::kAllComponents)</td></tr>
-<tr class="separator:ga161551b8c343e47e329703e71e0aaeca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf8a23de4970e1db67ceaf75beb775098"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bpt::process_secondary_eye_vertices</b> (const uint32 in_queue_size, const uint32 n_eye_paths, const uint32 n_light_paths, TSampleSink sink, TPrimaryCoordinates primary_coords, TBPTContext context, <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> renderer, const TBPTConfig config)</td></tr>
+<tr class="separator:gaf8a23de4970e1db67ceaf75beb775098"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -278,11 +206,11 @@ __global__ const uint32 TPrimaryCoordinates&#160;</td><td class="memItemRight" v
 <tr class="memitem:ga7ea19b5d4341b06f9ff95a43be57e53c"><td class="memItemLeft" align="right" valign="top"><a id="ga7ea19b5d4341b06f9ff95a43be57e53c"></a>
 __global__ const uint32 TPrimaryCoordinates TBPTContext&#160;</td><td class="memItemRight" valign="bottom"><b>bpt::context</b></td></tr>
 <tr class="separator:ga7ea19b5d4341b06f9ff95a43be57e53c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6e05f7b77162b9d2bad543cb75621cfd"><td class="memItemLeft" align="right" valign="top"><a id="ga6e05f7b77162b9d2bad543cb75621cfd"></a>
-__global__ const uint32 TPrimaryCoordinates TBPTContext <a class="el" href="struct_renderer_view.html">RendererView</a>&#160;</td><td class="memItemRight" valign="bottom"><b>bpt::renderer</b></td></tr>
-<tr class="separator:ga6e05f7b77162b9d2bad543cb75621cfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga41973067b0d630e9d882364ad57d9cad"><td class="memItemLeft" align="right" valign="top">__global__ const uint32 TPrimaryCoordinates TBPTContext <a class="el" href="struct_renderer_view.html">RendererView</a> const TBPTConfig&#160;</td><td class="memItemRight" valign="bottom"><b>bpt::config</b></td></tr>
-<tr class="separator:ga41973067b0d630e9d882364ad57d9cad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1b15f6ec6f47d69cfaba14d3896458b5"><td class="memItemLeft" align="right" valign="top"><a id="ga1b15f6ec6f47d69cfaba14d3896458b5"></a>
+__global__ const uint32 TPrimaryCoordinates TBPTContext <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a>&#160;</td><td class="memItemRight" valign="bottom"><b>bpt::renderer</b></td></tr>
+<tr class="separator:ga1b15f6ec6f47d69cfaba14d3896458b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4acc93dc19749d0de9da560b4347dec3"><td class="memItemLeft" align="right" valign="top">__global__ const uint32 TPrimaryCoordinates TBPTContext <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> const TBPTConfig&#160;</td><td class="memItemRight" valign="bottom"><b>bpt::config</b></td></tr>
+<tr class="separator:ga4acc93dc19749d0de9da560b4347dec3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gafdacf591e051455127691fc7bb25c02b"><td class="memItemLeft" align="right" valign="top"><a id="gafdacf591e051455127691fc7bb25c02b"></a>
 __global__ const uint32&#160;</td><td class="memItemRight" valign="bottom"><b>bpt::n_eye_paths</b></td></tr>
 <tr class="separator:gafdacf591e051455127691fc7bb25c02b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -291,277 +219,49 @@ __global__ const uint32 const uint32 TSampleSink&#160;</td><td class="memItemRig
 <tr class="separator:ga1a5a48bee5847f8520a9800dfca4acad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ga2abe87c8a1243fbfe1fad3cc702ef4d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga2abe87c8a1243fbfe1fad3cc702ef4d7">&#9670;&nbsp;</a></span>connect_to_camera()</h2>
+<a id="ga497e0940986e5f948a9dcf42242d39c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga497e0940986e5f948a9dcf42242d39c7">&#9670;&nbsp;</a></span>light_tracing()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename TBPTContext , typename TBPTConfig &gt; </div>
+template&lt;typename TSampleSink , typename TBPTContext , typename TBPTConfig &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">FERMAT_HOST_DEVICE void bpt::connect_to_camera </td>
+          <td class="memname">void bpt::light_tracing </td>
           <td>(</td>
-          <td class="paramtype">const uint32&#160;</td>
-          <td class="paramname"><em>light_idx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">const uint32&#160;</td>
           <td class="paramname"><em>n_light_paths</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TBPTContext &amp;&#160;</td>
-          <td class="paramname"><em>context</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_renderer_view.html">RendererView</a> &amp;&#160;</td>
-          <td class="paramname"><em>renderer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const TBPTConfig &amp;&#160;</td>
-          <td class="paramname"><em>config</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>This function connects the given light vertex to the camera. Valid connections with non-zero contribution get enqueued in the shadow queue for occlusion testing.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">light_idx</td><td>the index of the light vertex in context.light_vertices </td></tr>
-    <tr><td class="paramname">n_light_paths</td><td>the total number of generated light subpaths </td></tr>
-    <tr><td class="paramname">context</td><td>the bidirectional path tracing context </td></tr>
-    <tr><td class="paramname">renderer</td><td>the rendering context </td></tr>
-    <tr><td class="paramname">config</td><td>the bidirectional path tracing configuration policy </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ga1fa62eaa382c9072b834f4926d7631dc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga1fa62eaa382c9072b834f4926d7631dc">&#9670;&nbsp;</a></span>generate_primary_eye_vertex()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename TPrimaryCoordinates , typename TBPTContext , typename TBPTConfig &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">FERMAT_HOST_DEVICE void bpt::generate_primary_eye_vertex </td>
-          <td>(</td>
-          <td class="paramtype">const uint32&#160;</td>
-          <td class="paramname"><em>idx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const uint32&#160;</td>
-          <td class="paramname"><em>n_eye_paths</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const uint32&#160;</td>
-          <td class="paramname"><em>n_light_paths</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const TPrimaryCoordinates &amp;&#160;</td>
-          <td class="paramname"><em>primary_coords</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">TBPTContext &amp;&#160;</td>
-          <td class="paramname"><em>context</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="struct_renderer_view.html">RendererView</a> &amp;&#160;</td>
-          <td class="paramname"><em>renderer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">TBPTConfig &amp;&#160;</td>
-          <td class="paramname"><em>config</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>This function generates the primary eye vertex for a given path, expressed by the path id, and its primary sample space coordinates.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">light_path_id</td><td>the id of the light subpath </td></tr>
-    <tr><td class="paramname">n_light_paths</td><td>the total number of generated light subpaths </td></tr>
-    <tr><td class="paramname">primary_coords</td><td>the primary sample space coordinates generator </td></tr>
-    <tr><td class="paramname">context</td><td>the bidirectional path tracing context </td></tr>
-    <tr><td class="paramname">renderer</td><td>the rendering context </td></tr>
-    <tr><td class="paramname">config</td><td>the bidirectional path tracing configuration policy </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ga935e0bca37c1d2369ae5eb35d8a426ae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga935e0bca37c1d2369ae5eb35d8a426ae">&#9670;&nbsp;</a></span>generate_primary_light_vertex()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename TPrimaryCoordinates , typename TBPTContext , typename TBPTConfig &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">FERMAT_HOST_DEVICE void bpt::generate_primary_light_vertex </td>
-          <td>(</td>
-          <td class="paramtype">const uint32&#160;</td>
-          <td class="paramname"><em>light_path_id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const uint32&#160;</td>
-          <td class="paramname"><em>n_light_paths</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const TPrimaryCoordinates &amp;&#160;</td>
-          <td class="paramname"><em>primary_coords</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">TBPTContext &amp;&#160;</td>
-          <td class="paramname"><em>context</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_renderer_view.html">RendererView</a> &amp;&#160;</td>
-          <td class="paramname"><em>renderer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">TBPTConfig &amp;&#160;</td>
-          <td class="paramname"><em>config</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>This function generates the primary light vertex for a given path, expressed by the path id, and its primary sample space coordinates.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">light_path_id</td><td>the id of the light subpath </td></tr>
-    <tr><td class="paramname">n_light_paths</td><td>the total number of generated light subpaths </td></tr>
-    <tr><td class="paramname">primary_coords</td><td>the primary sample space coordinates generator </td></tr>
-    <tr><td class="paramname">context</td><td>the bidirectional path tracing context </td></tr>
-    <tr><td class="paramname">renderer</td><td>the rendering context </td></tr>
-    <tr><td class="paramname">config</td><td>the bidirectional path tracing configuration policy </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="gaab2d16546a42205b009be794594ead61"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaab2d16546a42205b009be794594ead61">&#9670;&nbsp;</a></span>mis_power()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE float mis_power </td>
-          <td>(</td>
-          <td class="paramtype">const float&#160;</td>
-          <td class="paramname"><em>w</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>w </p>
-
-</div>
-</div>
-<a id="ga97091c55379573c381dbc072274d0e6d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga97091c55379573c381dbc072274d0e6d">&#9670;&nbsp;</a></span>process_secondary_eye_vertex()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename TSampleSink , typename TPrimaryCoordinates , typename TBPTContext , typename TBPTConfig &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">FERMAT_HOST_DEVICE void bpt::process_secondary_eye_vertex </td>
-          <td>(</td>
-          <td class="paramtype">const uint32&#160;</td>
-          <td class="paramname"><em>queue_idx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const uint32&#160;</td>
-          <td class="paramname"><em>n_eye_paths</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const uint32&#160;</td>
-          <td class="paramname"><em>n_light_paths</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">TSampleSink &amp;&#160;</td>
+          <td class="paramtype">TSampleSink&#160;</td>
           <td class="paramname"><em>sample_sink</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const TPrimaryCoordinates &amp;&#160;</td>
-          <td class="paramname"><em>primary_coords</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">TBPTContext &amp;&#160;</td>
           <td class="paramname"><em>context</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_renderer_view.html">RendererView</a> &amp;&#160;</td>
+          <td class="paramtype">const TBPTConfig &amp;&#160;</td>
+          <td class="paramname"><em>config</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_rendering_context.html">RenderingContext</a> &amp;&#160;</td>
           <td class="paramname"><em>renderer</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TBPTConfig &amp;&#160;</td>
-          <td class="paramname"><em>config</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> &amp;&#160;</td>
+          <td class="paramname"><em>renderer_view</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -570,45 +270,37 @@ template&lt;typename TSampleSink , typename TPrimaryCoordinates , typename TBPTC
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This function processes the secondary eye vertex corresponding to a given entry in the path tracing queue, stored in the bidirectional path tracing context.</p>
-<p>Specifically, processing a queue entry means performing the following operations:</p>
+<dl class="section user"><dt></dt><dd>A host function dispatching a series of kernels to process pure light tracing paths. Specifically, this function executes the following two functions: <br />
 <ul>
-<li>fetching the corresponding ray and hit (or miss) information from the queue</li>
-<li>interpolating the local geometry of the hit (or that of the environment on a miss)</li>
-<li>reconstructing the local BSDF</li>
-<li>performing Next-Event Estimation, if enabled, and handing the resulting sample (a full path) to the output sample sink</li>
-<li>computing the local emission at the hit towards the incoming direction, i.e. forming a full path through pure forward path tracing, and passing the resulting sample to the output sample sink</li>
-<li>sampling another scattering/absorption event</li>
+<li><a class="el" href="group___b_p_t_lib.html#ga497e0940986e5f948a9dcf42242d39c7">light_tracing()</a></li>
+<li><a class="el" href="group___b_p_t_lib.html#ga67c2c1dbc4ee8212daf3728fafe55969">solve_shadows()</a> </li>
 </ul>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">queue_idx</td><td>the index of the queue entry </td></tr>
-    <tr><td class="paramname">n_eye_paths</td><td>the total number of generated eye subpaths </td></tr>
-    <tr><td class="paramname">n_light_paths</td><td>the total number of generated light subpaths </td></tr>
-    <tr><td class="paramname">sample_sink</td><td>the output sample sink, processing all bidirectional paths formed processing this vertex </td></tr>
-    <tr><td class="paramname">primary_coords</td><td>the primary sample space coordinates generator </td></tr>
-    <tr><td class="paramname">context</td><td>the bidirectional path tracing context </td></tr>
-    <tr><td class="paramname">renderer</td><td>the rendering context </td></tr>
-    <tr><td class="paramname">config</td><td>the bidirectional path tracing configuration policy </td></tr>
+</dd></dl>
+<dl class="section user"><dt></dt><dd>This function needs to be called <em>after</em> a previous call to generate_light_subpaths(), as it assumes a set of light subpaths have already been sampled and it is possible to connect them to the camera.</dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">TSampleSink</td><td>a sample sink, specifying what to do with each generated path sample, see <a class="el" href="struct_sample_sink_base.html#SampleSinkAnchor">SampleSinkAnchor</a> </td></tr>
+    <tr><td class="paramname">TBPTContext</td><td>a bidirectional path tracing context class, see <a class="el" href="struct_b_p_t_context_base.html">BPTContextBase</a> </td></tr>
+    <tr><td class="paramname">TBPTConfig</td><td>a policy class controlling the behaviour of the path sampling process, see <a class="el" href="struct_b_p_t_config_base.html">BPTConfigBase</a> </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="ga46eaabcd65a4825050e25c37412a2b07"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga46eaabcd65a4825050e25c37412a2b07">&#9670;&nbsp;</a></span>process_secondary_light_vertex()</h2>
+<a id="ga5dcb245a5dfa3a0910069446d27aa8eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5dcb245a5dfa3a0910069446d27aa8eb">&#9670;&nbsp;</a></span>sample_eye_subpaths()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename TPrimaryCoordinates , typename TBPTContext , typename TBPTConfig &gt; </div>
+template&lt;typename TPrimaryCoordinates , typename TSampleSink , typename TBPTContext , typename TBPTConfig &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">FERMAT_HOST_DEVICE void bpt::process_secondary_light_vertex </td>
+          <td class="memname">void bpt::sample_eye_subpaths </td>
           <td>(</td>
           <td class="paramtype">const uint32&#160;</td>
-          <td class="paramname"><em>queue_idx</em>, </td>
+          <td class="paramname"><em>n_eye_paths</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -619,7 +311,91 @@ template&lt;typename TPrimaryCoordinates , typename TBPTContext , typename TBPTC
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const TPrimaryCoordinates &amp;&#160;</td>
+          <td class="paramtype">TPrimaryCoordinates&#160;</td>
+          <td class="paramname"><em>primary_coords</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TSampleSink&#160;</td>
+          <td class="paramname"><em>sample_sink</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TBPTContext &amp;&#160;</td>
+          <td class="paramname"><em>context</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const TBPTConfig &amp;&#160;</td>
+          <td class="paramname"><em>config</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_rendering_context.html">RenderingContext</a> &amp;&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> &amp;&#160;</td>
+          <td class="paramname"><em>renderer_view</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>lazy_shadows</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section user"><dt></dt><dd>A host function dispatching a series of kernels to sample a given number of eye subpaths. The generated subpaths are controlled by a user-defined set of primary space coordinates. Specifically, this function executes a pipeline comprised of the following kernels: <br />
+<ul>
+<li>generate_primary_eye_vertices()</li>
+<li>RTContext::trace()</li>
+<li>process_secondary_eye_vertices()</li>
+<li><a class="el" href="group___b_p_t_lib.html#ga67c2c1dbc4ee8212daf3728fafe55969">solve_shadows()</a> </li>
+</ul>
+</dd></dl>
+<dl class="section user"><dt></dt><dd>This function needs to be called <em>after</em> a previous call to generate_light_subpaths(), as it assumes a set of light subpaths have already been sampled and it is possible to sample and perform connections between the pre-existing light vertices and each new eye vertex. A templated sample sink class specifies what to do with the full light path samples generated in this phase (i.e. the paths hitting an emissive surface), while the generated "connection" samples are stored in a queue controlled by the templated policy config class. These connections are processed by the <a class="el" href="group___b_p_t_lib.html#ga67c2c1dbc4ee8212daf3728fafe55969">solve_shadows()</a> function.</dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">TPrimaryCoordinates</td><td>a set of primary space coordinates, TPrimaryCoordinatesAnchor </td></tr>
+    <tr><td class="paramname">TSampleSink</td><td>a sample sink, specifying what to do with each generated path sample, see <a class="el" href="struct_sample_sink_base.html#SampleSinkAnchor">SampleSinkAnchor</a> </td></tr>
+    <tr><td class="paramname">TBPTContext</td><td>a bidirectional path tracing context class, see <a class="el" href="struct_b_p_t_context_base.html">BPTContextBase</a> </td></tr>
+    <tr><td class="paramname">TBPTConfig</td><td>a policy class controlling the behaviour of the path sampling process, see <a class="el" href="struct_b_p_t_config_base.html">BPTConfigBase</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga679afc8704a42ed1c8e6b57018cd676e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga679afc8704a42ed1c8e6b57018cd676e">&#9670;&nbsp;</a></span>sample_light_subpaths()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TPrimaryCoordinates , typename TBPTContext , typename TBPTConfig &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void bpt::sample_light_subpaths </td>
+          <td>(</td>
+          <td class="paramtype">const uint32&#160;</td>
+          <td class="paramname"><em>n_light_paths</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TPrimaryCoordinates&#160;</td>
           <td class="paramname"><em>primary_coords</em>, </td>
         </tr>
         <tr>
@@ -631,14 +407,20 @@ template&lt;typename TPrimaryCoordinates , typename TBPTContext , typename TBPTC
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_renderer_view.html">RendererView</a> &amp;&#160;</td>
+          <td class="paramtype">const TBPTConfig &amp;&#160;</td>
+          <td class="paramname"><em>config</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_rendering_context.html">RenderingContext</a> &amp;&#160;</td>
           <td class="paramname"><em>renderer</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TBPTConfig &amp;&#160;</td>
-          <td class="paramname"><em>config</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> &amp;&#160;</td>
+          <td class="paramname"><em>renderer_view</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -647,31 +429,121 @@ template&lt;typename TPrimaryCoordinates , typename TBPTContext , typename TBPTC
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This function processes the secondary light vertex corresponding to a given entry in the path tracing queue, stored in the bidirectional path tracing context.</p>
-<p>Specifically, processing a queue entry means performing the following operations:</p>
+<dl class="section user"><dt></dt><dd>A host function dispatching a series of kernels to sample a given number of light subpaths. The generated subpaths are controlled by a user-defined set of primary space coordinates. Specifically, this function executes a pipeline comprised of the following kernels: <br />
 <ul>
-<li>fetching the corresponding ray and hit (or miss) information from the queue</li>
-<li>interpolating the local geometry of the hit (or that of the environment on a miss)</li>
-<li>reconstructing the local BSDF</li>
-<li>potentially storing the resulting light vertex, based on the passed configuration/policy</li>
-<li>sampling another scattering/absorption event</li>
+<li>generate_primary_light_vertices()</li>
+<li>RTContext::trace()</li>
+<li>process_secondary_light_vertices() </li>
 </ul>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">queue_idx</td><td>the index of the queue entry </td></tr>
-    <tr><td class="paramname">n_light_paths</td><td>the total number of generated light subpaths </td></tr>
-    <tr><td class="paramname">primary_coords</td><td>the primary sample space coordinates generator </td></tr>
-    <tr><td class="paramname">context</td><td>the bidirectional path tracing context </td></tr>
-    <tr><td class="paramname">renderer</td><td>the rendering context </td></tr>
-    <tr><td class="paramname">config</td><td>the bidirectional path tracing configuration policy </td></tr>
+</dd></dl>
+<dl class="section user"><dt></dt><dd>A templated policy config class specifies what to do with the generated light vertices.</dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">TPrimaryCoordinates</td><td>a set of primary space coordinates, TPrimaryCoordinatesAnchor </td></tr>
+    <tr><td class="paramname">TBPTContext</td><td>a bidirectional path tracing context class, see <a class="el" href="struct_b_p_t_context_base.html">BPTContextBase</a> </td></tr>
+    <tr><td class="paramname">TBPTConfig</td><td>a policy class controlling the behaviour of the path sampling process, see <a class="el" href="struct_b_p_t_config_base.html">BPTConfigBase</a> </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="ga0a1dbffc98c93796aad75a681fed596f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga0a1dbffc98c93796aad75a681fed596f">&#9670;&nbsp;</a></span>solve_occlusion()</h2>
+<a id="ga4c1164d859ed146eb306e8b7b178c7e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4c1164d859ed146eb306e8b7b178c7e7">&#9670;&nbsp;</a></span>sample_paths()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TEyePrimaryCoordinates , typename TLightPrimaryCoordinates , typename TSampleSink , typename TBPTContext , typename TBPTConfig &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void bpt::sample_paths </td>
+          <td>(</td>
+          <td class="paramtype">const uint32&#160;</td>
+          <td class="paramname"><em>n_eye_paths</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32&#160;</td>
+          <td class="paramname"><em>n_light_paths</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TEyePrimaryCoordinates&#160;</td>
+          <td class="paramname"><em>eye_primary_coords</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TLightPrimaryCoordinates&#160;</td>
+          <td class="paramname"><em>light_primary_coords</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TSampleSink&#160;</td>
+          <td class="paramname"><em>sample_sink</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TBPTContext &amp;&#160;</td>
+          <td class="paramname"><em>context</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const TBPTConfig &amp;&#160;</td>
+          <td class="paramname"><em>config</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_rendering_context.html">RenderingContext</a> &amp;&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> &amp;&#160;</td>
+          <td class="paramname"><em>renderer_view</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>lazy_shadows</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section user"><dt></dt><dd>A host function dispatching a series of kernels to sample a given number of full paths. The generated paths are controlled by two user-defined sets of primary space coordinates, one for eye and light subpaths sampling. Specifically, this function executes the following two functions: <br />
+<ul>
+<li><a class="el" href="group___b_p_t_lib.html#ga679afc8704a42ed1c8e6b57018cd676e">sample_light_subpaths()</a></li>
+<li><a class="el" href="group___b_p_t_lib.html#ga5dcb245a5dfa3a0910069446d27aa8eb">sample_eye_subpaths()</a></li>
+</ul>
+</dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">TEyePrimaryCoordinates</td><td>a set of primary space coordinates, TPrimaryCoordinatesAnchor </td></tr>
+    <tr><td class="paramname">TLightPrimaryCoordinates</td><td>a set of primary space coordinates, TPrimaryCoordinatesAnchor </td></tr>
+    <tr><td class="paramname">TSampleSink</td><td>a sample sink, specifying what to do with each generated path sample, see <a class="el" href="struct_sample_sink_base.html#SampleSinkAnchor">SampleSinkAnchor</a> </td></tr>
+    <tr><td class="paramname">TBPTContext</td><td>a bidirectional path tracing context class, see <a class="el" href="struct_b_p_t_context_base.html">BPTContextBase</a> </td></tr>
+    <tr><td class="paramname">TBPTConfig</td><td>a policy class controlling the behaviour of the path sampling process, see <a class="el" href="struct_b_p_t_config_base.html">BPTConfigBase</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga67c2c1dbc4ee8212daf3728fafe55969"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga67c2c1dbc4ee8212daf3728fafe55969">&#9670;&nbsp;</a></span>solve_shadows()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -679,15 +551,9 @@ template&lt;typename TPrimaryCoordinates , typename TBPTContext , typename TBPTC
 template&lt;typename TSampleSink , typename TBPTContext &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">FERMAT_HOST_DEVICE void bpt::solve_occlusion </td>
+          <td class="memname">void bpt::solve_shadows </td>
           <td>(</td>
-          <td class="paramtype">const uint32&#160;</td>
-          <td class="paramname"><em>queue_idx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">TSampleSink &amp;&#160;</td>
+          <td class="paramtype">TSampleSink&#160;</td>
           <td class="paramname"><em>sample_sink</em>, </td>
         </tr>
         <tr>
@@ -699,8 +565,14 @@ template&lt;typename TSampleSink , typename TBPTContext &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_renderer_view.html">RendererView</a> &amp;&#160;</td>
-          <td class="paramname"><em>renderer</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_rendering_context.html">RenderingContext</a> &amp;&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> &amp;&#160;</td>
+          <td class="paramname"><em>renderer_view</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -709,13 +581,11 @@ template&lt;typename TSampleSink , typename TBPTContext &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Resolve the occlusion for the specified entry in the shadow queue, and pass the resulting sample to the sink. Specifically, if the queue entry contains a (ray tracing) hit, the sample will be considered shadowed and its contribution will be set to zero. Otherwise, the sample's contribution will be left unmodified.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">queue_idx</td><td>the index of the queue entry </td></tr>
-    <tr><td class="paramname">sample_sink</td><td>the output sample sink, processing all bidirectional paths formed processing this vertex </td></tr>
-    <tr><td class="paramname">context</td><td>the bidirectional path tracing context </td></tr>
-    <tr><td class="paramname">renderer</td><td>the rendering context </td></tr>
+<dl class="section user"><dt></dt><dd>A host function dispatching a series of kernels to resolve shadows / occlusion of the queued bidirectional connection samples generated by the <a class="el" href="group___b_p_t_lib.html#ga5dcb245a5dfa3a0910069446d27aa8eb">sample_eye_subpaths</a> function.</dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">TSampleSink</td><td>a sample sink, specifying what to do with each generated path sample, see <a class="el" href="struct_sample_sink_base.html#SampleSinkAnchor">SampleSinkAnchor</a> </td></tr>
+    <tr><td class="paramname">TBPTContext</td><td>a bidirectional path tracing context class, see <a class="el" href="struct_b_p_t_context_base.html">BPTContextBase</a> </td></tr>
   </table>
   </dd>
 </dl>
@@ -723,14 +593,14 @@ template&lt;typename TSampleSink , typename TBPTContext &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="ga41973067b0d630e9d882364ad57d9cad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga41973067b0d630e9d882364ad57d9cad">&#9670;&nbsp;</a></span>config</h2>
+<a id="ga4acc93dc19749d0de9da560b4347dec3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4acc93dc19749d0de9da560b4347dec3">&#9670;&nbsp;</a></span>config</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">__global__ const uint32 const uint32 TSampleSink TPrimaryCoordinates TBPTContext <a class="el" href="struct_renderer_view.html">RendererView</a> const TBPTConfig bpt::config</td>
+          <td class="memname">__global__ const uint32 const uint32 TSampleSink TPrimaryCoordinates TBPTContext <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> const TBPTConfig bpt::config</td>
         </tr>
       </table>
 </div><div class="memdoc">

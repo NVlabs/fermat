@@ -87,22 +87,33 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disk_light.html">DiskLight</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_directional_light.html">DirectionalLight</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_mesh_light.html">MeshLight</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_v_t_l.html">VTL</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:gadc3ec8293e6a97ebe43f0196b9a7f638"><td class="memItemLeft" align="right" valign="top"><a id="gadc3ec8293e6a97ebe43f0196b9a7f638"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>LightType</b> { <b>kPoint</b> = 0, 
+<tr class="memitem:gadc3ec8293e6a97ebe43f0196b9a7f638"><td class="memItemLeft" align="right" valign="top"><a id="gadc3ec8293e6a97ebe43f0196b9a7f638"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>LightType</b> { <br />
+&#160;&#160;<b>kPoint</b> = 0, 
 <b>kDisk</b> = 1, 
 <b>kRectangle</b> = 2, 
-<b>kMesh</b> = 3
+<b>kDirectional</b> = 3, 
+<br />
+&#160;&#160;<b>kMesh</b> = 4, 
+<b>kVTL</b> = 5
+<br />
  }</td></tr>
 <tr class="separator:gadc3ec8293e6a97ebe43f0196b9a7f638"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gab5a7805a4e9288e93fe3dc9d68adf2f2"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___lights_module.html#gab5a7805a4e9288e93fe3dc9d68adf2f2">Light::sample</a> (const float *Z, uint32_t *prim_id, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector2f</a> *uv, <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> *geom, float *pdf, <a class="el" href="struct_edf.html">Edf</a> *edf) const</td></tr>
-<tr class="separator:gab5a7805a4e9288e93fe3dc9d68adf2f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga67cc240bcda4b08efd26c8727144bf16"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___lights_module.html#ga67cc240bcda4b08efd26c8727144bf16">Light::sample</a> (const float *Z, uint32_t *prim_id, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector2f</a> *uv, <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> *geom, float *pdf, <a class="el" href="struct_edf.html">Edf</a> *edf) const</td></tr>
+<tr class="separator:ga67cc240bcda4b08efd26c8727144bf16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa3cac39418d2c62c2faaa4cb7c380ff7"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___lights_module.html#gaa3cac39418d2c62c2faaa4cb7c380ff7">Light::sample</a> (const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> p, const float *Z, uint32_t *prim_id, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector2f</a> *uv, <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> *geom, float *pdf, <a class="el" href="struct_edf.html">Edf</a> *edf) const</td></tr>
+<tr class="separator:gaa3cac39418d2c62c2faaa4cb7c380ff7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga6a7452cab8b733d48174016b845f8d53"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___lights_module.html#ga6a7452cab8b733d48174016b845f8d53">Light::intersect</a> (const <a class="el" href="struct_ray.html">Ray</a> ray, float2 *uv, float *t) const</td></tr>
 <tr class="separator:ga6a7452cab8b733d48174016b845f8d53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaf14a70f7d23b422f8953bc55d1eade44"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___lights_module.html#gaf14a70f7d23b422f8953bc55d1eade44">Light::map</a> (const uint32_t prim_id, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector2f</a> &amp;uv, <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> *geom, float *pdf, <a class="el" href="struct_edf.html">Edf</a> *edf) const</td></tr>
@@ -150,7 +161,15 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>intersect the given ray with the light source </p>
+<p>intersect the given ray with the light source</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ray</td><td>the input ray </td></tr>
+    <tr><td class="paramname">uv</td><td>the output uv coordinates on the sampled primitive </td></tr>
+    <tr><td class="paramname">t</td><td>the output ray intersection distance </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -205,7 +224,17 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>map a (prim,uv) pair to a surface element </p>
+<p>map a (prim,uv) pair to a surface element</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">prim_id</td><td>the input primitive index, in case the light is made of a mesh </td></tr>
+    <tr><td class="paramname">uv</td><td>the input uv coordinates on the sampled primitive </td></tr>
+    <tr><td class="paramname">geom</td><td>the output sample's differential geometry </td></tr>
+    <tr><td class="paramname">pdf</td><td>the output sample's area pdf </td></tr>
+    <tr><td class="paramname">edf</td><td>the output sample's EDF </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -260,12 +289,22 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>map a (prim,uv) pair and a surface element to the corresponding edf/pdf </p>
+<p>map a (prim,uv) pair and a (precomputed) surface element to the corresponding edf/pdf</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">prim_id</td><td>the input primitive index, in case the light is made of a mesh </td></tr>
+    <tr><td class="paramname">uv</td><td>the input uv coordinates on the sampled primitive </td></tr>
+    <tr><td class="paramname">geom</td><td>the input sample's differential geometry </td></tr>
+    <tr><td class="paramname">pdf</td><td>the output sample's area pdf </td></tr>
+    <tr><td class="paramname">edf</td><td>the output sample's EDF </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
-<a id="gab5a7805a4e9288e93fe3dc9d68adf2f2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab5a7805a4e9288e93fe3dc9d68adf2f2">&#9670;&nbsp;</a></span>sample()</h2>
+<a id="ga67cc240bcda4b08efd26c8727144bf16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga67cc240bcda4b08efd26c8727144bf16">&#9670;&nbsp;</a></span>sample() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -274,7 +313,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">FERMAT_HOST_DEVICE void Light::sample </td>
+          <td class="memname">FERMAT_HOST_DEVICE bool Light::sample </td>
           <td>(</td>
           <td class="paramtype">const float *&#160;</td>
           <td class="paramname"><em>Z</em>, </td>
@@ -321,7 +360,99 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>sample a point on the light source </p>
+<p>sample a point on the light source</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Z</td><td>the input random numbers </td></tr>
+    <tr><td class="paramname">prim_id</td><td>the output primitive index, in case the light is made of a mesh </td></tr>
+    <tr><td class="paramname">uv</td><td>the output uv coordinates on the sampled primitive </td></tr>
+    <tr><td class="paramname">geom</td><td>the output sample's differential geometry </td></tr>
+    <tr><td class="paramname">pdf</td><td>the output sample's area pdf </td></tr>
+    <tr><td class="paramname">edf</td><td>the output sample's EDF</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true iff the pdf is singular </dd></dl>
+
+</div>
+</div>
+<a id="gaa3cac39418d2c62c2faaa4cb7c380ff7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa3cac39418d2c62c2faaa4cb7c380ff7">&#9670;&nbsp;</a></span>sample() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">FERMAT_HOST_DEVICE bool Light::sample </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float *&#160;</td>
+          <td class="paramname"><em>Z</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>prim_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structcugar_1_1_vector.html">cugar::Vector2f</a> *&#160;</td>
+          <td class="paramname"><em>uv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> *&#160;</td>
+          <td class="paramname"><em>geom</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>pdf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_edf.html">Edf</a> *&#160;</td>
+          <td class="paramname"><em>edf</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>sample a point on the light source given a shading point (or <em>receiver</em>)</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>the input shading point </td></tr>
+    <tr><td class="paramname">Z</td><td>the input random numbers </td></tr>
+    <tr><td class="paramname">prim_id</td><td>the output primitive index, in case the light is made of a mesh </td></tr>
+    <tr><td class="paramname">uv</td><td>the output uv coordinates on the sampled primitive </td></tr>
+    <tr><td class="paramname">geom</td><td>the output sample's differential geometry </td></tr>
+    <tr><td class="paramname">pdf</td><td>the output sample's area pdf </td></tr>
+    <tr><td class="paramname">edf</td><td>the output sample's EDF</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true iff the pdf is singular </dd></dl>
 
 </div>
 </div>
