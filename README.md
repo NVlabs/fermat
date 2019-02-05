@@ -16,6 +16,9 @@ sphericals harmonics, sampling, and so on and so on.
 While packaged together, CUGAR can be thought of a separate educational project by itself.
 More information can be found in the relevant Doxygen documentation.
 
+The official project page can be found here:
+https://nvlabs.github.io/fermat/
+
 DEPENDENCIES:
 
 Fermat has the following dependencies:
