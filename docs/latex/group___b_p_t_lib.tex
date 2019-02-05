@@ -1,0 +1,272 @@
+\hypertarget{group___b_p_t_lib}{}\section{B\+P\+T\+Lib}
+\label{group___b_p_t_lib}\index{B\+P\+T\+Lib@{B\+P\+T\+Lib}}
+
+
+\subsection{Detailed Description}
+This module provides a flexible bidirectional path tracing library, thought to be as performant as possible and yet vastly configurable at compile-\/time. For more information, see the \hyperlink{_b_p_t_lib_page}{B\+P\+T\+Lib} page. \subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group___b_p_t_lib_core}{B\+P\+T\+Lib\+Core}
+\end{DoxyCompactItemize}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_b_p_t_context_base}{B\+P\+T\+Context\+Base$<$ T\+B\+P\+T\+Options $>$}
+\item 
+struct \hyperlink{struct_b_p_t_config_base}{B\+P\+T\+Config\+Base}
+\item 
+struct \hyperlink{struct_sample_sink_base}{Sample\+Sink\+Base}
+\item 
+struct \hyperlink{struct_b_p_t_options_base}{B\+P\+T\+Options\+Base}
+\item 
+struct \hyperlink{struct_b_p_t_queues_view}{B\+P\+T\+Queues\+View}
+\item 
+struct \hyperlink{struct_b_p_t_queues_storage}{B\+P\+T\+Queues\+Storage}
+\item 
+struct \hyperlink{struct_tiled_light_subpath_primary_coords}{Tiled\+Light\+Subpath\+Primary\+Coords}
+\item 
+struct \hyperlink{struct_per_pixel_eye_subpath_primary_coords}{Per\+Pixel\+Eye\+Subpath\+Primary\+Coords}
+\item 
+struct \hyperlink{struct_perturbed_primary_coords}{Perturbed\+Primary\+Coords}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_ga71f970985c5da77d78f06f6e7d5d8197}\label{group___b_p_t_lib_ga71f970985c5da77d78f06f6e7d5d8197}} 
+\#define {\bfseries S\+E\+C\+O\+N\+D\+A\+R\+Y\+\_\+\+E\+Y\+E\+\_\+\+V\+E\+R\+T\+I\+C\+E\+S\+\_\+\+B\+L\+O\+C\+K\+S\+I\+ZE}~128
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_gaaa91d7549a1af1ea8509dce2f22f47ba}\label{group___b_p_t_lib_gaaa91d7549a1af1ea8509dce2f22f47ba}} 
+\#define {\bfseries S\+E\+C\+O\+N\+D\+A\+R\+Y\+\_\+\+E\+Y\+E\+\_\+\+V\+E\+R\+T\+I\+C\+E\+S\+\_\+\+C\+T\+A\+\_\+\+B\+L\+O\+C\+KS}~6
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_gaa759d91a72dc1a035e5a6bfaeafb9631}\label{group___b_p_t_lib_gaa759d91a72dc1a035e5a6bfaeafb9631}} 
+\#define {\bfseries S\+E\+C\+O\+N\+D\+A\+R\+Y\+\_\+\+L\+I\+G\+H\+T\+\_\+\+V\+E\+R\+T\+I\+C\+E\+S\+\_\+\+B\+L\+O\+C\+K\+S\+I\+ZE}~128
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_ga6571352dc82cb32b2f3e713f1da021a4}\label{group___b_p_t_lib_ga6571352dc82cb32b2f3e713f1da021a4}} 
+\#define {\bfseries S\+E\+C\+O\+N\+D\+A\+R\+Y\+\_\+\+L\+I\+G\+H\+T\+\_\+\+V\+E\+R\+T\+I\+C\+E\+S\+\_\+\+C\+T\+A\+\_\+\+B\+L\+O\+C\+KS}~6
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_ga0a83949d77b6abc018e6b073ca561324}\label{group___b_p_t_lib_ga0a83949d77b6abc018e6b073ca561324}} 
+\#define {\bfseries B\+P\+T\+\_\+\+F\+U\+L\+L\+\_\+\+B\+S\+D\+F\+\_\+\+E\+V\+A\+L\+U\+A\+T\+I\+ON}~1
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T\+Primary\+Coordinates , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\void \hyperlink{group___b_p_t_lib_ga679afc8704a42ed1c8e6b57018cd676e}{bpt\+::sample\+\_\+light\+\_\+subpaths} (const uint32 n\+\_\+light\+\_\+paths, T\+Primary\+Coordinates primary\+\_\+coords, T\+B\+P\+T\+Context \&context, const T\+B\+P\+T\+Config \&config, \hyperlink{struct_rendering_context}{Rendering\+Context} \&renderer, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer\+\_\+view)
+\item 
+{\footnotesize template$<$typename T\+Sample\+Sink , typename T\+B\+P\+T\+Context $>$ }\\void \hyperlink{group___b_p_t_lib_ga67c2c1dbc4ee8212daf3728fafe55969}{bpt\+::solve\+\_\+shadows} (T\+Sample\+Sink sample\+\_\+sink, T\+B\+P\+T\+Context \&context, \hyperlink{struct_rendering_context}{Rendering\+Context} \&renderer, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer\+\_\+view)
+\item 
+{\footnotesize template$<$typename T\+Primary\+Coordinates , typename T\+Sample\+Sink , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\void \hyperlink{group___b_p_t_lib_ga5dcb245a5dfa3a0910069446d27aa8eb}{bpt\+::sample\+\_\+eye\+\_\+subpaths} (const uint32 n\+\_\+eye\+\_\+paths, const uint32 n\+\_\+light\+\_\+paths, T\+Primary\+Coordinates primary\+\_\+coords, T\+Sample\+Sink sample\+\_\+sink, T\+B\+P\+T\+Context \&context, const T\+B\+P\+T\+Config \&config, \hyperlink{struct_rendering_context}{Rendering\+Context} \&renderer, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer\+\_\+view, const bool lazy\+\_\+shadows=false)
+\item 
+{\footnotesize template$<$typename T\+Eye\+Primary\+Coordinates , typename T\+Light\+Primary\+Coordinates , typename T\+Sample\+Sink , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\void \hyperlink{group___b_p_t_lib_ga4c1164d859ed146eb306e8b7b178c7e7}{bpt\+::sample\+\_\+paths} (const uint32 n\+\_\+eye\+\_\+paths, const uint32 n\+\_\+light\+\_\+paths, T\+Eye\+Primary\+Coordinates eye\+\_\+primary\+\_\+coords, T\+Light\+Primary\+Coordinates light\+\_\+primary\+\_\+coords, T\+Sample\+Sink sample\+\_\+sink, T\+B\+P\+T\+Context \&context, const T\+B\+P\+T\+Config \&config, \hyperlink{struct_rendering_context}{Rendering\+Context} \&renderer, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer\+\_\+view, const bool lazy\+\_\+shadows=false)
+\item 
+{\footnotesize template$<$typename T\+Sample\+Sink , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\void \hyperlink{group___b_p_t_lib_ga497e0940986e5f948a9dcf42242d39c7}{bpt\+::light\+\_\+tracing} (const uint32 n\+\_\+light\+\_\+paths, T\+Sample\+Sink sample\+\_\+sink, T\+B\+P\+T\+Context \&context, const T\+B\+P\+T\+Config \&config, \hyperlink{struct_rendering_context}{Rendering\+Context} \&renderer, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer\+\_\+view)
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_ga97d1d774b28d0420e8f84d68b9c17adb}\label{group___b_p_t_lib_ga97d1d774b28d0420e8f84d68b9c17adb}} 
+{\footnotesize template$<$typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\\+\_\+\+\_\+global\+\_\+\+\_\+ void {\bfseries bpt\+::light\+\_\+tracing\+\_\+kernel} (const uint32 n\+\_\+light\+\_\+paths, T\+B\+P\+T\+Context context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} renderer, T\+B\+P\+T\+Config config)
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_gad446148ae3c46cee02413d0e567fa666}\label{group___b_p_t_lib_gad446148ae3c46cee02413d0e567fa666}} 
+{\footnotesize template$<$typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\void {\bfseries bpt\+::light\+\_\+tracing} (const uint32 n\+\_\+light\+\_\+paths, T\+B\+P\+T\+Context \&context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer, T\+B\+P\+T\+Config \&config)
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_ga323f0d4f0454ac39cd6355fdca67314c}\label{group___b_p_t_lib_ga323f0d4f0454ac39cd6355fdca67314c}} 
+{\footnotesize template$<$typename T\+Sample\+Sink , typename T\+B\+P\+T\+Context $>$ }\\\+\_\+\+\_\+global\+\_\+\+\_\+ void {\bfseries bpt\+::solve\+\_\+occlusions\+\_\+kernel} (const uint32 in\+\_\+queue\+\_\+size, T\+Sample\+Sink sample\+\_\+sink, T\+B\+P\+T\+Context context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} renderer)
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_ga15de63ef1e71caf7a59628ed1f6ba2e5}\label{group___b_p_t_lib_ga15de63ef1e71caf7a59628ed1f6ba2e5}} 
+{\footnotesize template$<$typename T\+Sample\+Sink , typename T\+B\+P\+T\+Context $>$ }\\void {\bfseries bpt\+::solve\+\_\+occlusions} (const uint32 in\+\_\+queue\+\_\+size, T\+Sample\+Sink sample\+\_\+sink, T\+B\+P\+T\+Context context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} renderer)
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_ga5983a4562bb68a326810f2e12a7109d2}\label{group___b_p_t_lib_ga5983a4562bb68a326810f2e12a7109d2}} 
+{\footnotesize template$<$typename T\+Primary\+Coordinates , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\\+\_\+\+\_\+global\+\_\+\+\_\+ void {\bfseries bpt\+::generate\+\_\+primary\+\_\+light\+\_\+vertices\+\_\+kernel} (const uint32 n\+\_\+light\+\_\+paths, T\+Primary\+Coordinates primary\+\_\+coords, T\+B\+P\+T\+Context context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} renderer, const T\+B\+P\+T\+Config config)
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_ga9bda9ac181c56dbf094b140e54e8e680}\label{group___b_p_t_lib_ga9bda9ac181c56dbf094b140e54e8e680}} 
+{\footnotesize template$<$typename T\+Primary\+Coordinates , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\void {\bfseries bpt\+::generate\+\_\+primary\+\_\+light\+\_\+vertices} (const uint32 n\+\_\+light\+\_\+paths, T\+Primary\+Coordinates primary\+\_\+coords, T\+B\+P\+T\+Context context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} renderer, const T\+B\+P\+T\+Config config)
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_gaa74f11861e08bbf114797dacfa20e528}\label{group___b_p_t_lib_gaa74f11861e08bbf114797dacfa20e528}} 
+{\footnotesize template$<$typename T\+Primary\+Coordinates , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\\+\_\+\+\_\+global\+\_\+\+\_\+ {\bfseries bpt\+::\+\_\+\+\_\+launch\+\_\+bounds\+\_\+\+\_\+} (S\+E\+C\+O\+N\+D\+A\+R\+Y\+\_\+\+L\+I\+G\+H\+T\+\_\+\+V\+E\+R\+T\+I\+C\+E\+S\+\_\+\+B\+L\+O\+C\+K\+S\+I\+ZE, S\+E\+C\+O\+N\+D\+A\+R\+Y\+\_\+\+L\+I\+G\+H\+T\+\_\+\+V\+E\+R\+T\+I\+C\+E\+S\+\_\+\+C\+T\+A\+\_\+\+B\+L\+O\+C\+KS) void process\+\_\+secondary\+\_\+light\+\_\+vertices\+\_\+kernel(const uint32 in\+\_\+queue\+\_\+size
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_ga2bbfb4a4dfd24ddc1af3e6b4998f6755}\label{group___b_p_t_lib_ga2bbfb4a4dfd24ddc1af3e6b4998f6755}} 
+{\bfseries bpt\+::if} (thread\+\_\+id$<$ in\+\_\+queue\+\_\+size) \hyperlink{group___b_p_t_lib_core_ga124952cd2917df181f6aa6f39cdeda1b}{process\+\_\+secondary\+\_\+light\+\_\+vertex}(thread\+\_\+id
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_ga09acd5912961fb37e1d418f0b019dec4}\label{group___b_p_t_lib_ga09acd5912961fb37e1d418f0b019dec4}} 
+{\footnotesize template$<$typename T\+Primary\+Coordinates , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\void {\bfseries bpt\+::process\+\_\+secondary\+\_\+light\+\_\+vertices} (const uint32 in\+\_\+queue\+\_\+size, const uint32 n\+\_\+light\+\_\+paths, T\+Primary\+Coordinates primary\+\_\+coords, T\+B\+P\+T\+Context context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} renderer, const T\+B\+P\+T\+Config config)
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_ga4c020a309b7b89ec0752ffe6f9df1d3f}\label{group___b_p_t_lib_ga4c020a309b7b89ec0752ffe6f9df1d3f}} 
+{\footnotesize template$<$typename T\+Primary\+Coordinates , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\\+\_\+\+\_\+global\+\_\+\+\_\+ void {\bfseries bpt\+::generate\+\_\+primary\+\_\+eye\+\_\+vertices\+\_\+kernel} (const uint32 n\+\_\+eye\+\_\+paths, const uint32 n\+\_\+light\+\_\+paths, T\+Primary\+Coordinates primary\+\_\+coords, T\+B\+P\+T\+Context context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} renderer, const T\+B\+P\+T\+Config config)
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_ga017a29e7b25bcd8fd7e1163ac5979be4}\label{group___b_p_t_lib_ga017a29e7b25bcd8fd7e1163ac5979be4}} 
+{\footnotesize template$<$typename T\+Primary\+Coordinates , typename T\+B\+P\+T\+Config , typename T\+B\+P\+T\+Context $>$ }\\void {\bfseries bpt\+::generate\+\_\+primary\+\_\+eye\+\_\+vertices} (const uint32 n\+\_\+eye\+\_\+paths, const uint32 n\+\_\+light\+\_\+paths, T\+Primary\+Coordinates primary\+\_\+coords, T\+B\+P\+T\+Context context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} renderer, const T\+B\+P\+T\+Config config)
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_ga39d8463562e9005f247179d9dfffa4c1}\label{group___b_p_t_lib_ga39d8463562e9005f247179d9dfffa4c1}} 
+{\footnotesize template$<$typename T\+Sample\+Sink , typename T\+Primary\+Coordinates , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\\+\_\+\+\_\+global\+\_\+\+\_\+ {\bfseries bpt\+::\+\_\+\+\_\+launch\+\_\+bounds\+\_\+\+\_\+} (S\+E\+C\+O\+N\+D\+A\+R\+Y\+\_\+\+E\+Y\+E\+\_\+\+V\+E\+R\+T\+I\+C\+E\+S\+\_\+\+B\+L\+O\+C\+K\+S\+I\+ZE, S\+E\+C\+O\+N\+D\+A\+R\+Y\+\_\+\+E\+Y\+E\+\_\+\+V\+E\+R\+T\+I\+C\+E\+S\+\_\+\+C\+T\+A\+\_\+\+B\+L\+O\+C\+KS) void process\+\_\+secondary\+\_\+eye\+\_\+vertices\+\_\+kernel(const uint32 in\+\_\+queue\+\_\+size
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_gaf8a23de4970e1db67ceaf75beb775098}\label{group___b_p_t_lib_gaf8a23de4970e1db67ceaf75beb775098}} 
+{\footnotesize template$<$typename T\+Sample\+Sink , typename T\+Primary\+Coordinates , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\void {\bfseries bpt\+::process\+\_\+secondary\+\_\+eye\+\_\+vertices} (const uint32 in\+\_\+queue\+\_\+size, const uint32 n\+\_\+eye\+\_\+paths, const uint32 n\+\_\+light\+\_\+paths, T\+Sample\+Sink sink, T\+Primary\+Coordinates primary\+\_\+coords, T\+B\+P\+T\+Context context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} renderer, const T\+B\+P\+T\+Config config)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_ga5bbf5f0ae07fbe07701dbe59c7d4aa54}\label{group___b_p_t_lib_ga5bbf5f0ae07fbe07701dbe59c7d4aa54}} 
+\+\_\+\+\_\+global\+\_\+\+\_\+ const uint32 {\bfseries bpt\+::n\+\_\+light\+\_\+paths}
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_gad5d08701b2a61de51bd59919339d80e7}\label{group___b_p_t_lib_gad5d08701b2a61de51bd59919339d80e7}} 
+\+\_\+\+\_\+global\+\_\+\+\_\+ const uint32 T\+Primary\+Coordinates {\bfseries bpt\+::primary\+\_\+coords}
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_ga7ea19b5d4341b06f9ff95a43be57e53c}\label{group___b_p_t_lib_ga7ea19b5d4341b06f9ff95a43be57e53c}} 
+\+\_\+\+\_\+global\+\_\+\+\_\+ const uint32 T\+Primary\+Coordinates T\+B\+P\+T\+Context {\bfseries bpt\+::context}
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_ga1b15f6ec6f47d69cfaba14d3896458b5}\label{group___b_p_t_lib_ga1b15f6ec6f47d69cfaba14d3896458b5}} 
+\+\_\+\+\_\+global\+\_\+\+\_\+ const uint32 T\+Primary\+Coordinates T\+B\+P\+T\+Context \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} {\bfseries bpt\+::renderer}
+\item 
+\+\_\+\+\_\+global\+\_\+\+\_\+ const uint32 T\+Primary\+Coordinates T\+B\+P\+T\+Context \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} const T\+B\+P\+T\+Config {\bfseries bpt\+::config}
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_gafdacf591e051455127691fc7bb25c02b}\label{group___b_p_t_lib_gafdacf591e051455127691fc7bb25c02b}} 
+\+\_\+\+\_\+global\+\_\+\+\_\+ const uint32 {\bfseries bpt\+::n\+\_\+eye\+\_\+paths}
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_ga1a5a48bee5847f8520a9800dfca4acad}\label{group___b_p_t_lib_ga1a5a48bee5847f8520a9800dfca4acad}} 
+\+\_\+\+\_\+global\+\_\+\+\_\+ const uint32 const uint32 T\+Sample\+Sink {\bfseries bpt\+::sink}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___b_p_t_lib_ga497e0940986e5f948a9dcf42242d39c7}\label{group___b_p_t_lib_ga497e0940986e5f948a9dcf42242d39c7}} 
+\index{B\+P\+T\+Lib@{B\+P\+T\+Lib}!light\+\_\+tracing@{light\+\_\+tracing}}
+\index{light\+\_\+tracing@{light\+\_\+tracing}!B\+P\+T\+Lib@{B\+P\+T\+Lib}}
+\subsubsection{\texorpdfstring{light\+\_\+tracing()}{light\_tracing()}}
+{\footnotesize\ttfamily template$<$typename T\+Sample\+Sink , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ \\
+void bpt\+::light\+\_\+tracing (\begin{DoxyParamCaption}\item[{const uint32}]{n\+\_\+light\+\_\+paths,  }\item[{T\+Sample\+Sink}]{sample\+\_\+sink,  }\item[{T\+B\+P\+T\+Context \&}]{context,  }\item[{const T\+B\+P\+T\+Config \&}]{config,  }\item[{\hyperlink{struct_rendering_context}{Rendering\+Context} \&}]{renderer,  }\item[{\hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&}]{renderer\+\_\+view }\end{DoxyParamCaption})}
+
+\begin{DoxyParagraph}{}
+A host function dispatching a series of kernels to process pure light tracing paths. Specifically, this function executes the following two functions\+: ~\newline
+
+\begin{DoxyItemize}
+\item \hyperlink{group___b_p_t_lib_ga497e0940986e5f948a9dcf42242d39c7}{light\+\_\+tracing()}
+\item \hyperlink{group___b_p_t_lib_ga67c2c1dbc4ee8212daf3728fafe55969}{solve\+\_\+shadows()} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+This function needs to be called {\itshape after} a previous call to generate\+\_\+light\+\_\+subpaths(), as it assumes a set of light subpaths have already been sampled and it is possible to connect them to the camera.
+\end{DoxyParagraph}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T\+Sample\+Sink} & a sample sink, specifying what to do with each generated path sample, see \hyperlink{struct_sample_sink_base_SampleSinkAnchor}{Sample\+Sink\+Anchor} \\
+\hline
+{\em T\+B\+P\+T\+Context} & a bidirectional path tracing context class, see \hyperlink{struct_b_p_t_context_base}{B\+P\+T\+Context\+Base} \\
+\hline
+{\em T\+B\+P\+T\+Config} & a policy class controlling the behaviour of the path sampling process, see \hyperlink{struct_b_p_t_config_base}{B\+P\+T\+Config\+Base} \\
+\hline
+\end{DoxyTemplParams}
+\mbox{\Hypertarget{group___b_p_t_lib_ga5dcb245a5dfa3a0910069446d27aa8eb}\label{group___b_p_t_lib_ga5dcb245a5dfa3a0910069446d27aa8eb}} 
+\index{B\+P\+T\+Lib@{B\+P\+T\+Lib}!sample\+\_\+eye\+\_\+subpaths@{sample\+\_\+eye\+\_\+subpaths}}
+\index{sample\+\_\+eye\+\_\+subpaths@{sample\+\_\+eye\+\_\+subpaths}!B\+P\+T\+Lib@{B\+P\+T\+Lib}}
+\subsubsection{\texorpdfstring{sample\+\_\+eye\+\_\+subpaths()}{sample\_eye\_subpaths()}}
+{\footnotesize\ttfamily template$<$typename T\+Primary\+Coordinates , typename T\+Sample\+Sink , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ \\
+void bpt\+::sample\+\_\+eye\+\_\+subpaths (\begin{DoxyParamCaption}\item[{const uint32}]{n\+\_\+eye\+\_\+paths,  }\item[{const uint32}]{n\+\_\+light\+\_\+paths,  }\item[{T\+Primary\+Coordinates}]{primary\+\_\+coords,  }\item[{T\+Sample\+Sink}]{sample\+\_\+sink,  }\item[{T\+B\+P\+T\+Context \&}]{context,  }\item[{const T\+B\+P\+T\+Config \&}]{config,  }\item[{\hyperlink{struct_rendering_context}{Rendering\+Context} \&}]{renderer,  }\item[{\hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&}]{renderer\+\_\+view,  }\item[{const bool}]{lazy\+\_\+shadows = {\ttfamily false} }\end{DoxyParamCaption})}
+
+\begin{DoxyParagraph}{}
+A host function dispatching a series of kernels to sample a given number of eye subpaths. The generated subpaths are controlled by a user-\/defined set of primary space coordinates. Specifically, this function executes a pipeline comprised of the following kernels\+: ~\newline
+
+\begin{DoxyItemize}
+\item generate\+\_\+primary\+\_\+eye\+\_\+vertices()
+\item R\+T\+Context\+::trace()
+\item process\+\_\+secondary\+\_\+eye\+\_\+vertices()
+\item \hyperlink{group___b_p_t_lib_ga67c2c1dbc4ee8212daf3728fafe55969}{solve\+\_\+shadows()} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+This function needs to be called {\itshape after} a previous call to generate\+\_\+light\+\_\+subpaths(), as it assumes a set of light subpaths have already been sampled and it is possible to sample and perform connections between the pre-\/existing light vertices and each new eye vertex. A templated sample sink class specifies what to do with the full light path samples generated in this phase (i.\+e. the paths hitting an emissive surface), while the generated \char`\"{}connection\char`\"{} samples are stored in a queue controlled by the templated policy config class. These connections are processed by the \hyperlink{group___b_p_t_lib_ga67c2c1dbc4ee8212daf3728fafe55969}{solve\+\_\+shadows()} function.
+\end{DoxyParagraph}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T\+Primary\+Coordinates} & a set of primary space coordinates, T\+Primary\+Coordinates\+Anchor \\
+\hline
+{\em T\+Sample\+Sink} & a sample sink, specifying what to do with each generated path sample, see \hyperlink{struct_sample_sink_base_SampleSinkAnchor}{Sample\+Sink\+Anchor} \\
+\hline
+{\em T\+B\+P\+T\+Context} & a bidirectional path tracing context class, see \hyperlink{struct_b_p_t_context_base}{B\+P\+T\+Context\+Base} \\
+\hline
+{\em T\+B\+P\+T\+Config} & a policy class controlling the behaviour of the path sampling process, see \hyperlink{struct_b_p_t_config_base}{B\+P\+T\+Config\+Base} \\
+\hline
+\end{DoxyTemplParams}
+\mbox{\Hypertarget{group___b_p_t_lib_ga679afc8704a42ed1c8e6b57018cd676e}\label{group___b_p_t_lib_ga679afc8704a42ed1c8e6b57018cd676e}} 
+\index{B\+P\+T\+Lib@{B\+P\+T\+Lib}!sample\+\_\+light\+\_\+subpaths@{sample\+\_\+light\+\_\+subpaths}}
+\index{sample\+\_\+light\+\_\+subpaths@{sample\+\_\+light\+\_\+subpaths}!B\+P\+T\+Lib@{B\+P\+T\+Lib}}
+\subsubsection{\texorpdfstring{sample\+\_\+light\+\_\+subpaths()}{sample\_light\_subpaths()}}
+{\footnotesize\ttfamily template$<$typename T\+Primary\+Coordinates , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ \\
+void bpt\+::sample\+\_\+light\+\_\+subpaths (\begin{DoxyParamCaption}\item[{const uint32}]{n\+\_\+light\+\_\+paths,  }\item[{T\+Primary\+Coordinates}]{primary\+\_\+coords,  }\item[{T\+B\+P\+T\+Context \&}]{context,  }\item[{const T\+B\+P\+T\+Config \&}]{config,  }\item[{\hyperlink{struct_rendering_context}{Rendering\+Context} \&}]{renderer,  }\item[{\hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&}]{renderer\+\_\+view }\end{DoxyParamCaption})}
+
+\begin{DoxyParagraph}{}
+A host function dispatching a series of kernels to sample a given number of light subpaths. The generated subpaths are controlled by a user-\/defined set of primary space coordinates. Specifically, this function executes a pipeline comprised of the following kernels\+: ~\newline
+
+\begin{DoxyItemize}
+\item generate\+\_\+primary\+\_\+light\+\_\+vertices()
+\item R\+T\+Context\+::trace()
+\item process\+\_\+secondary\+\_\+light\+\_\+vertices() 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+A templated policy config class specifies what to do with the generated light vertices.
+\end{DoxyParagraph}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T\+Primary\+Coordinates} & a set of primary space coordinates, T\+Primary\+Coordinates\+Anchor \\
+\hline
+{\em T\+B\+P\+T\+Context} & a bidirectional path tracing context class, see \hyperlink{struct_b_p_t_context_base}{B\+P\+T\+Context\+Base} \\
+\hline
+{\em T\+B\+P\+T\+Config} & a policy class controlling the behaviour of the path sampling process, see \hyperlink{struct_b_p_t_config_base}{B\+P\+T\+Config\+Base} \\
+\hline
+\end{DoxyTemplParams}
+\mbox{\Hypertarget{group___b_p_t_lib_ga4c1164d859ed146eb306e8b7b178c7e7}\label{group___b_p_t_lib_ga4c1164d859ed146eb306e8b7b178c7e7}} 
+\index{B\+P\+T\+Lib@{B\+P\+T\+Lib}!sample\+\_\+paths@{sample\+\_\+paths}}
+\index{sample\+\_\+paths@{sample\+\_\+paths}!B\+P\+T\+Lib@{B\+P\+T\+Lib}}
+\subsubsection{\texorpdfstring{sample\+\_\+paths()}{sample\_paths()}}
+{\footnotesize\ttfamily template$<$typename T\+Eye\+Primary\+Coordinates , typename T\+Light\+Primary\+Coordinates , typename T\+Sample\+Sink , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ \\
+void bpt\+::sample\+\_\+paths (\begin{DoxyParamCaption}\item[{const uint32}]{n\+\_\+eye\+\_\+paths,  }\item[{const uint32}]{n\+\_\+light\+\_\+paths,  }\item[{T\+Eye\+Primary\+Coordinates}]{eye\+\_\+primary\+\_\+coords,  }\item[{T\+Light\+Primary\+Coordinates}]{light\+\_\+primary\+\_\+coords,  }\item[{T\+Sample\+Sink}]{sample\+\_\+sink,  }\item[{T\+B\+P\+T\+Context \&}]{context,  }\item[{const T\+B\+P\+T\+Config \&}]{config,  }\item[{\hyperlink{struct_rendering_context}{Rendering\+Context} \&}]{renderer,  }\item[{\hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&}]{renderer\+\_\+view,  }\item[{const bool}]{lazy\+\_\+shadows = {\ttfamily false} }\end{DoxyParamCaption})}
+
+\begin{DoxyParagraph}{}
+A host function dispatching a series of kernels to sample a given number of full paths. The generated paths are controlled by two user-\/defined sets of primary space coordinates, one for eye and light subpaths sampling. Specifically, this function executes the following two functions\+: ~\newline
+
+\begin{DoxyItemize}
+\item \hyperlink{group___b_p_t_lib_ga679afc8704a42ed1c8e6b57018cd676e}{sample\+\_\+light\+\_\+subpaths()}
+\item \hyperlink{group___b_p_t_lib_ga5dcb245a5dfa3a0910069446d27aa8eb}{sample\+\_\+eye\+\_\+subpaths()}
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T\+Eye\+Primary\+Coordinates} & a set of primary space coordinates, T\+Primary\+Coordinates\+Anchor \\
+\hline
+{\em T\+Light\+Primary\+Coordinates} & a set of primary space coordinates, T\+Primary\+Coordinates\+Anchor \\
+\hline
+{\em T\+Sample\+Sink} & a sample sink, specifying what to do with each generated path sample, see \hyperlink{struct_sample_sink_base_SampleSinkAnchor}{Sample\+Sink\+Anchor} \\
+\hline
+{\em T\+B\+P\+T\+Context} & a bidirectional path tracing context class, see \hyperlink{struct_b_p_t_context_base}{B\+P\+T\+Context\+Base} \\
+\hline
+{\em T\+B\+P\+T\+Config} & a policy class controlling the behaviour of the path sampling process, see \hyperlink{struct_b_p_t_config_base}{B\+P\+T\+Config\+Base} \\
+\hline
+\end{DoxyTemplParams}
+\mbox{\Hypertarget{group___b_p_t_lib_ga67c2c1dbc4ee8212daf3728fafe55969}\label{group___b_p_t_lib_ga67c2c1dbc4ee8212daf3728fafe55969}} 
+\index{B\+P\+T\+Lib@{B\+P\+T\+Lib}!solve\+\_\+shadows@{solve\+\_\+shadows}}
+\index{solve\+\_\+shadows@{solve\+\_\+shadows}!B\+P\+T\+Lib@{B\+P\+T\+Lib}}
+\subsubsection{\texorpdfstring{solve\+\_\+shadows()}{solve\_shadows()}}
+{\footnotesize\ttfamily template$<$typename T\+Sample\+Sink , typename T\+B\+P\+T\+Context $>$ \\
+void bpt\+::solve\+\_\+shadows (\begin{DoxyParamCaption}\item[{T\+Sample\+Sink}]{sample\+\_\+sink,  }\item[{T\+B\+P\+T\+Context \&}]{context,  }\item[{\hyperlink{struct_rendering_context}{Rendering\+Context} \&}]{renderer,  }\item[{\hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&}]{renderer\+\_\+view }\end{DoxyParamCaption})}
+
+\begin{DoxyParagraph}{}
+A host function dispatching a series of kernels to resolve shadows / occlusion of the queued bidirectional connection samples generated by the \hyperlink{group___b_p_t_lib_ga5dcb245a5dfa3a0910069446d27aa8eb}{sample\+\_\+eye\+\_\+subpaths} function.
+\end{DoxyParagraph}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T\+Sample\+Sink} & a sample sink, specifying what to do with each generated path sample, see \hyperlink{struct_sample_sink_base_SampleSinkAnchor}{Sample\+Sink\+Anchor} \\
+\hline
+{\em T\+B\+P\+T\+Context} & a bidirectional path tracing context class, see \hyperlink{struct_b_p_t_context_base}{B\+P\+T\+Context\+Base} \\
+\hline
+\end{DoxyTemplParams}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{group___b_p_t_lib_ga4acc93dc19749d0de9da560b4347dec3}\label{group___b_p_t_lib_ga4acc93dc19749d0de9da560b4347dec3}} 
+\index{B\+P\+T\+Lib@{B\+P\+T\+Lib}!config@{config}}
+\index{config@{config}!B\+P\+T\+Lib@{B\+P\+T\+Lib}}
+\subsubsection{\texorpdfstring{config}{config}}
+{\footnotesize\ttfamily \+\_\+\+\_\+global\+\_\+\+\_\+ const uint32 const uint32 T\+Sample\+Sink T\+Primary\+Coordinates T\+B\+P\+T\+Context \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} const T\+B\+P\+T\+Config bpt\+::config}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+\{
+    \textcolor{keyword}{const} uint32 thread\_id = threadIdx.x + blockIdx.x * blockDim.x
+\end{DoxyCode}

@@ -1,0 +1,78 @@
+\hypertarget{structcugar_1_1_transform__generator}{}\section{cugar\+:\+:Transform\+\_\+generator$<$ Generator, Distribution $>$ Struct Template Reference}
+\label{structcugar_1_1_transform__generator}\index{cugar\+::\+Transform\+\_\+generator$<$ Generator, Distribution $>$@{cugar\+::\+Transform\+\_\+generator$<$ Generator, Distribution $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$typename Generator, typename Distribution$>$\newline
+struct cugar\+::\+Transform\+\_\+generator$<$ Generator, Distribution $>$}
+
+Wrapper class to transform a random number generator with a given distribution 
+
+{\ttfamily \#include $<$distributions.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_transform__generator_a1ed65c84f620be6c7278948cb8ad92fc}{Transform\+\_\+generator} (Generator \&gen, const Distribution \&dist)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_transform__generator_af61d4278e069e046a62a58c7d538ac22}{next} () const
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_transform__generator_a8bf089696f88138fba2636a6215adf33}{density} (const float x) const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_transform__generator_a93c8f4589af565f5800a184cf5ec1356}\label{structcugar_1_1_transform__generator_a93c8f4589af565f5800a184cf5ec1356}} 
+Generator \& {\bfseries m\+\_\+gen}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_transform__generator_a1800ec321ee7b08e7bd33f3b94f002f2}\label{structcugar_1_1_transform__generator_a1800ec321ee7b08e7bd33f3b94f002f2}} 
+Distribution {\bfseries m\+\_\+dist}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcugar_1_1_transform__generator_a1ed65c84f620be6c7278948cb8ad92fc}\label{structcugar_1_1_transform__generator_a1ed65c84f620be6c7278948cb8ad92fc}} 
+\index{cugar\+::\+Transform\+\_\+generator@{cugar\+::\+Transform\+\_\+generator}!Transform\+\_\+generator@{Transform\+\_\+generator}}
+\index{Transform\+\_\+generator@{Transform\+\_\+generator}!cugar\+::\+Transform\+\_\+generator@{cugar\+::\+Transform\+\_\+generator}}
+\subsubsection{\texorpdfstring{Transform\+\_\+generator()}{Transform\_generator()}}
+{\footnotesize\ttfamily template$<$typename Generator , typename Distribution $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_transform__generator}{cugar\+::\+Transform\+\_\+generator}$<$ Generator, Distribution $>$\+::\hyperlink{structcugar_1_1_transform__generator}{Transform\+\_\+generator} (\begin{DoxyParamCaption}\item[{Generator \&}]{gen,  }\item[{const Distribution \&}]{dist }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em gen} & generator to wrap \\
+\hline
+{\em dist} & transforming distribution \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1_transform__generator_a8bf089696f88138fba2636a6215adf33}\label{structcugar_1_1_transform__generator_a8bf089696f88138fba2636a6215adf33}} 
+\index{cugar\+::\+Transform\+\_\+generator@{cugar\+::\+Transform\+\_\+generator}!density@{density}}
+\index{density@{density}!cugar\+::\+Transform\+\_\+generator@{cugar\+::\+Transform\+\_\+generator}}
+\subsubsection{\texorpdfstring{density()}{density()}}
+{\footnotesize\ttfamily template$<$typename Generator , typename Distribution $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_transform__generator}{cugar\+::\+Transform\+\_\+generator}$<$ Generator, Distribution $>$\+::density (\begin{DoxyParamCaption}\item[{const float}]{x }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+probability density function
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & sample location \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1_transform__generator_af61d4278e069e046a62a58c7d538ac22}\label{structcugar_1_1_transform__generator_af61d4278e069e046a62a58c7d538ac22}} 
+\index{cugar\+::\+Transform\+\_\+generator@{cugar\+::\+Transform\+\_\+generator}!next@{next}}
+\index{next@{next}!cugar\+::\+Transform\+\_\+generator@{cugar\+::\+Transform\+\_\+generator}}
+\subsubsection{\texorpdfstring{next()}{next()}}
+{\footnotesize\ttfamily template$<$typename Generator , typename Distribution $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_transform__generator}{cugar\+::\+Transform\+\_\+generator}$<$ Generator, Distribution $>$\+::next (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the next number in the sequence 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/sampling/\hyperlink{distributions_8h}{distributions.\+h}\end{DoxyCompactItemize}

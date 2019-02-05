@@ -1,0 +1,163 @@
+\hypertarget{group___lights_module}{}\section{Lights\+Module}
+\label{group___lights_module}\index{Lights\+Module@{Lights\+Module}}
+
+
+\subsection{Detailed Description}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_v_p_l}{V\+PL}
+\item 
+struct \hyperlink{struct_light}{Light}
+\item 
+struct \hyperlink{struct_disk_light}{Disk\+Light}
+\item 
+struct \hyperlink{struct_directional_light}{Directional\+Light}
+\item 
+struct \hyperlink{struct_mesh_light}{Mesh\+Light}
+\item 
+struct \hyperlink{struct_v_t_l}{V\+TL}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___lights_module_gadc3ec8293e6a97ebe43f0196b9a7f638}\label{group___lights_module_gadc3ec8293e6a97ebe43f0196b9a7f638}} 
+enum {\bfseries Light\+Type} \{ \newline
+{\bfseries k\+Point} = 0, 
+{\bfseries k\+Disk} = 1, 
+{\bfseries k\+Rectangle} = 2, 
+{\bfseries k\+Directional} = 3, 
+\newline
+{\bfseries k\+Mesh} = 4, 
+{\bfseries k\+V\+TL} = 5
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{group___lights_module_ga67cc240bcda4b08efd26c8727144bf16}{Light\+::sample} (const float $\ast$Z, uint32\+\_\+t $\ast$prim\+\_\+id, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} $\ast$uv, \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} $\ast$geom, float $\ast$pdf, \hyperlink{struct_edf}{Edf} $\ast$edf) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{group___lights_module_gaa3cac39418d2c62c2faaa4cb7c380ff7}{Light\+::sample} (const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} p, const float $\ast$Z, uint32\+\_\+t $\ast$prim\+\_\+id, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} $\ast$uv, \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} $\ast$geom, float $\ast$pdf, \hyperlink{struct_edf}{Edf} $\ast$edf) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___lights_module_ga6a7452cab8b733d48174016b845f8d53}{Light\+::intersect} (const \hyperlink{struct_ray}{Ray} ray, float2 $\ast$uv, float $\ast$t) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___lights_module_gaf14a70f7d23b422f8953bc55d1eade44}{Light\+::map} (const uint32\+\_\+t prim\+\_\+id, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} \&uv, \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} $\ast$geom, float $\ast$pdf, \hyperlink{struct_edf}{Edf} $\ast$edf) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___lights_module_ga96c94d76b5464c0433e8e071645cfe48}{Light\+::map} (const uint32\+\_\+t prim\+\_\+id, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} \&uv, const \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} \&geom, float $\ast$pdf, \hyperlink{struct_edf}{Edf} $\ast$edf) const
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___lights_module_ga6a7452cab8b733d48174016b845f8d53}\label{group___lights_module_ga6a7452cab8b733d48174016b845f8d53}} 
+\index{Lights\+Module@{Lights\+Module}!intersect@{intersect}}
+\index{intersect@{intersect}!Lights\+Module@{Lights\+Module}}
+\subsubsection{\texorpdfstring{intersect()}{intersect()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void Light\+::intersect (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_ray}{Ray}}]{ray,  }\item[{float2 $\ast$}]{uv,  }\item[{float $\ast$}]{t }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+intersect the given ray with the light source
+
+
+\begin{DoxyParams}{Parameters}
+{\em ray} & the input ray \\
+\hline
+{\em uv} & the output uv coordinates on the sampled primitive \\
+\hline
+{\em t} & the output ray intersection distance \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___lights_module_gaf14a70f7d23b422f8953bc55d1eade44}\label{group___lights_module_gaf14a70f7d23b422f8953bc55d1eade44}} 
+\index{Lights\+Module@{Lights\+Module}!map@{map}}
+\index{map@{map}!Lights\+Module@{Lights\+Module}}
+\subsubsection{\texorpdfstring{map()}{map()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void Light\+::map (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{prim\+\_\+id,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} \&}]{uv,  }\item[{\hyperlink{struct_vertex_geometry}{Vertex\+Geometry} $\ast$}]{geom,  }\item[{float $\ast$}]{pdf,  }\item[{\hyperlink{struct_edf}{Edf} $\ast$}]{edf }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+map a (prim,uv) pair to a surface element
+
+
+\begin{DoxyParams}{Parameters}
+{\em prim\+\_\+id} & the input primitive index, in case the light is made of a mesh \\
+\hline
+{\em uv} & the input uv coordinates on the sampled primitive \\
+\hline
+{\em geom} & the output sample\textquotesingle{}s differential geometry \\
+\hline
+{\em pdf} & the output sample\textquotesingle{}s area pdf \\
+\hline
+{\em edf} & the output sample\textquotesingle{}s E\+DF \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___lights_module_ga96c94d76b5464c0433e8e071645cfe48}\label{group___lights_module_ga96c94d76b5464c0433e8e071645cfe48}} 
+\index{Lights\+Module@{Lights\+Module}!map@{map}}
+\index{map@{map}!Lights\+Module@{Lights\+Module}}
+\subsubsection{\texorpdfstring{map()}{map()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void Light\+::map (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{prim\+\_\+id,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} \&}]{uv,  }\item[{const \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} \&}]{geom,  }\item[{float $\ast$}]{pdf,  }\item[{\hyperlink{struct_edf}{Edf} $\ast$}]{edf }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+map a (prim,uv) pair and a (precomputed) surface element to the corresponding edf/pdf
+
+
+\begin{DoxyParams}{Parameters}
+{\em prim\+\_\+id} & the input primitive index, in case the light is made of a mesh \\
+\hline
+{\em uv} & the input uv coordinates on the sampled primitive \\
+\hline
+{\em geom} & the input sample\textquotesingle{}s differential geometry \\
+\hline
+{\em pdf} & the output sample\textquotesingle{}s area pdf \\
+\hline
+{\em edf} & the output sample\textquotesingle{}s E\+DF \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___lights_module_ga67cc240bcda4b08efd26c8727144bf16}\label{group___lights_module_ga67cc240bcda4b08efd26c8727144bf16}} 
+\index{Lights\+Module@{Lights\+Module}!sample@{sample}}
+\index{sample@{sample}!Lights\+Module@{Lights\+Module}}
+\subsubsection{\texorpdfstring{sample()}{sample()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool Light\+::sample (\begin{DoxyParamCaption}\item[{const float $\ast$}]{Z,  }\item[{uint32\+\_\+t $\ast$}]{prim\+\_\+id,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} $\ast$}]{uv,  }\item[{\hyperlink{struct_vertex_geometry}{Vertex\+Geometry} $\ast$}]{geom,  }\item[{float $\ast$}]{pdf,  }\item[{\hyperlink{struct_edf}{Edf} $\ast$}]{edf }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+sample a point on the light source
+
+
+\begin{DoxyParams}{Parameters}
+{\em Z} & the input random numbers \\
+\hline
+{\em prim\+\_\+id} & the output primitive index, in case the light is made of a mesh \\
+\hline
+{\em uv} & the output uv coordinates on the sampled primitive \\
+\hline
+{\em geom} & the output sample\textquotesingle{}s differential geometry \\
+\hline
+{\em pdf} & the output sample\textquotesingle{}s area pdf \\
+\hline
+{\em edf} & the output sample\textquotesingle{}s E\+DF\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true iff the pdf is singular 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___lights_module_gaa3cac39418d2c62c2faaa4cb7c380ff7}\label{group___lights_module_gaa3cac39418d2c62c2faaa4cb7c380ff7}} 
+\index{Lights\+Module@{Lights\+Module}!sample@{sample}}
+\index{sample@{sample}!Lights\+Module@{Lights\+Module}}
+\subsubsection{\texorpdfstring{sample()}{sample()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool Light\+::sample (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{p,  }\item[{const float $\ast$}]{Z,  }\item[{uint32\+\_\+t $\ast$}]{prim\+\_\+id,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} $\ast$}]{uv,  }\item[{\hyperlink{struct_vertex_geometry}{Vertex\+Geometry} $\ast$}]{geom,  }\item[{float $\ast$}]{pdf,  }\item[{\hyperlink{struct_edf}{Edf} $\ast$}]{edf }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+sample a point on the light source given a shading point (or {\itshape receiver})
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & the input shading point \\
+\hline
+{\em Z} & the input random numbers \\
+\hline
+{\em prim\+\_\+id} & the output primitive index, in case the light is made of a mesh \\
+\hline
+{\em uv} & the output uv coordinates on the sampled primitive \\
+\hline
+{\em geom} & the output sample\textquotesingle{}s differential geometry \\
+\hline
+{\em pdf} & the output sample\textquotesingle{}s area pdf \\
+\hline
+{\em edf} & the output sample\textquotesingle{}s E\+DF\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true iff the pdf is singular 
+\end{DoxyReturn}

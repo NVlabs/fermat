@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -29,26 +29,15 @@
 #pragma once
 
 #include "framebuffer.h"
+#include "filters.h"
 
 ///@addtogroup Fermat
 ///@{
 
-///@addtogroup FilteringModule
+///@defgroup FilteringModule
+///\par
+/// This module defines a set of image-space filters useful for denoising.
 ///@{
-
-enum EAWOp
-{
-	kEAWOpNone				= 0x0u,
-
-	kEAWOpModulateInput		= 0x1u,
-	kEAWOpDemodulateInput	= 0x2u,
-
-	kEAWOpModulateOutput	= 0x4u,
-	kEAWOpDemodulateOutput	= 0x8u,
-
-	kEAWOpAddMode			= 0x10u,
-	kEAWOpReplaceMode		= 0x20u
-};
 
 /// Edge A-trous Wavelet filtering parameters
 ///
@@ -57,6 +46,11 @@ struct EAWParams
 	float phi_normal;
 	float phi_position;	// must take into account the scene size
 	float phi_color;	// must take into account the maximum intensity
+
+	cugar::Vector3f E;
+	cugar::Vector3f U;
+	cugar::Vector3f V;
+	cugar::Vector3f W;
 };
 
 /// perform a step of Edge A-trous Wavelet filtering
@@ -67,7 +61,7 @@ void EAW(FBufferChannelView dst, const FBufferChannelView img, const GBufferView
 ///
 ///   dst += w_img * eaw(img)
 ///
-void EAW(FBufferChannelView dst, const EAWOp op, const FBufferChannelView w_img, const float w_min, const FBufferChannelView img, const GBufferView gb, const float* var, const EAWParams params, const uint32 step_size);
+void EAW(FBufferChannelView dst, const FilterOp op, const FBufferChannelView w_img, const float w_min, const FBufferChannelView img, const GBufferView gb, const float* var, const EAWParams params, const uint32 step_size);
 
 /// perform several iterations of Edge A-trous Wavelet filtering
 ///
@@ -81,26 +75,6 @@ void EAW(const uint32 n_iterations, FBufferChannelView dst, const FBufferChannel
 ///
 void EAW(const uint32 n_iterations, FBufferChannelView dst, const FBufferChannelView w_img, const FBufferChannelView img, const GBufferView gb, const float* var, const EAWParams params, FBufferChannelView pingpong[2]);
 
-//-------------------------------------------------------------------------------
-//   helper functions
-//-------------------------------------------------------------------------------
-
-FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
-cugar::Vector3f demodulate(const cugar::Vector3f f, const cugar::Vector3f c)
-{
-	return f / cugar::max(c, 1.0e-4f);
-}
-
-FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
-cugar::Vector3f modulate(const cugar::Vector3f f, const cugar::Vector3f c)
-{
-	return f * cugar::max(c, 1.0e-4f);
-}
-FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
-cugar::Vector4f modulate(const cugar::Vector4f f, const cugar::Vector4f c)
-{
-	return f * cugar::max(c, 1.0e-4f);
-}
 
 ///@} FilteringModule
 ///@} Fermat

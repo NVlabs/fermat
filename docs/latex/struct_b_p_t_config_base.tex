@@ -1,0 +1,175 @@
+\hypertarget{struct_b_p_t_config_base}{}\section{B\+P\+T\+Config\+Base Struct Reference}
+\label{struct_b_p_t_config_base}\index{B\+P\+T\+Config\+Base@{B\+P\+T\+Config\+Base}}
+
+
+\subsection{Detailed description}
+This class implements a \char`\"{}policy\char`\"{} template for bidirectional path tracing\+: all bidirectional path tracing kernels are templated over a T\+B\+P\+T\+Config class that must implement this interface. In order to change the policy, it is sufficient to inherit from this class and override the methods. Note that the methods are not virtual, but the code is written so as to use the implementation of the last class that overrides them, mantaining the inlining efficiency. 
+
+{\ttfamily \#include $<$bpt\+\_\+kernels.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_b_p_t_config_base_a6da0cfdd37861bf94d41537ab1337180}\label{struct_b_p_t_config_base_a6da0cfdd37861bf94d41537ab1337180}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE {\bfseries B\+P\+T\+Config\+Base} (const \hyperlink{struct_b_p_t_options_base}{B\+P\+T\+Options\+Base} \&\+\_\+options, Vertex\+Sampling \+\_\+light\+\_\+sampling=Vertex\+Sampling\+::k\+All, Vertex\+Ordering \+\_\+light\+\_\+ordering=Vertex\+Ordering\+::k\+Random\+Ordering, Vertex\+Sampling \+\_\+eye\+\_\+sampling=Vertex\+Sampling\+::k\+All, bool \+\_\+use\+\_\+rr=true)
+\item 
+\mbox{\Hypertarget{struct_b_p_t_config_base_a78f72ec36314c94dffba798bac520e11}\label{struct_b_p_t_config_base_a78f72ec36314c94dffba798bac520e11}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE {\bfseries B\+P\+T\+Config\+Base} (uint32 \+\_\+max\+\_\+path\+\_\+length=6, Vertex\+Sampling \+\_\+light\+\_\+sampling=Vertex\+Sampling\+::k\+All, Vertex\+Ordering \+\_\+light\+\_\+ordering=Vertex\+Ordering\+::k\+Random\+Ordering, Vertex\+Sampling \+\_\+eye\+\_\+sampling=Vertex\+Sampling\+::k\+All, bool \+\_\+use\+\_\+vpls=true, bool \+\_\+use\+\_\+rr=true, float \+\_\+light\+\_\+tracing=0.\+0f, bool \+\_\+direct\+\_\+lighting\+\_\+nee=true, bool \+\_\+direct\+\_\+lighting\+\_\+bsdf=true, bool \+\_\+indirect\+\_\+lighting\+\_\+nee=true, bool \+\_\+indirect\+\_\+lighting\+\_\+bsdf=true, bool \+\_\+visible\+\_\+lights=true)
+\item 
+\mbox{\Hypertarget{struct_b_p_t_config_base_a594b18c9ff1e7f63158d0821ddac776e}\label{struct_b_p_t_config_base_a594b18c9ff1e7f63158d0821ddac776e}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE {\bfseries B\+P\+T\+Config\+Base} (const \hyperlink{struct_b_p_t_config_base}{B\+P\+T\+Config\+Base} \&other)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool \hyperlink{struct_b_p_t_config_base_a97c865fc0c241b22bece418e7a8574b4}{terminate\+\_\+light\+\_\+subpath} (const uint32 path\+\_\+id, const uint32 s) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool \hyperlink{struct_b_p_t_config_base_a5cafb898a6535d4fee6d98df875fe1ae}{terminate\+\_\+eye\+\_\+subpath} (const uint32 path\+\_\+id, const uint32 t) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool \hyperlink{struct_b_p_t_config_base_afa468245a9b87bcc49abc7132de7a58c}{store\+\_\+light\+\_\+vertex} (const uint32 path\+\_\+id, const uint32 s, const bool absorbed) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool \hyperlink{struct_b_p_t_config_base_a546ae2aa2926db1702688da6c23aa3e7}{perform\+\_\+connection} (const uint32 eye\+\_\+path\+\_\+id, const uint32 t, const bool absorbed) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool \hyperlink{struct_b_p_t_config_base_a333fa484bf5a9f4ad12f6a7ed48632d4}{accumulate\+\_\+emissive} (const uint32 eye\+\_\+path\+\_\+id, const uint32 t, const bool absorbed) const
+\item 
+{\footnotesize template$<$typename T\+B\+P\+T\+Context $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE void \hyperlink{struct_b_p_t_config_base_a9a948bffb4f173adc48f156d02d000bb}{visit\+\_\+light\+\_\+vertex} (const uint32 light\+\_\+path\+\_\+id, const uint32 depth, const \hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id} v\+\_\+id, T\+B\+P\+T\+Context \&context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer) const
+\item 
+{\footnotesize template$<$typename T\+B\+P\+T\+Context $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE void \hyperlink{struct_b_p_t_config_base_ac1ecb6f3ef04718305291fedf76cec85}{visit\+\_\+eye\+\_\+vertex} (const uint32 eye\+\_\+path\+\_\+id, const uint32 depth, const \hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id} v\+\_\+id, const \hyperlink{struct_eye_vertex}{Eye\+Vertex} \&v, T\+B\+P\+T\+Context \&context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer) const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_b_p_t_config_base_ae58489f7a2cf917768ad47f5f5e19358}\label{struct_b_p_t_config_base_ae58489f7a2cf917768ad47f5f5e19358}} 
+uint32 {\bfseries max\+\_\+path\+\_\+length}\+: 10
+\item 
+\mbox{\Hypertarget{struct_b_p_t_config_base_a927ed5520109fbed3a7e42f192024114}\label{struct_b_p_t_config_base_a927ed5520109fbed3a7e42f192024114}} 
+uint32 {\bfseries light\+\_\+sampling}\+: 1
+\item 
+\mbox{\Hypertarget{struct_b_p_t_config_base_a8ff39329d349eda2d345e0c7e67f3a56}\label{struct_b_p_t_config_base_a8ff39329d349eda2d345e0c7e67f3a56}} 
+uint32 {\bfseries light\+\_\+ordering}\+: 1
+\item 
+\mbox{\Hypertarget{struct_b_p_t_config_base_a89146d78a312017e25affa01d338f996}\label{struct_b_p_t_config_base_a89146d78a312017e25affa01d338f996}} 
+uint32 {\bfseries eye\+\_\+sampling}\+: 1
+\item 
+\mbox{\Hypertarget{struct_b_p_t_config_base_aef2b33f32bb1fed2e8647d91248458c1}\label{struct_b_p_t_config_base_aef2b33f32bb1fed2e8647d91248458c1}} 
+uint32 {\bfseries use\+\_\+vpls}\+: 1
+\item 
+\mbox{\Hypertarget{struct_b_p_t_config_base_a20d5ea3f8982567db3d7a266203d8c72}\label{struct_b_p_t_config_base_a20d5ea3f8982567db3d7a266203d8c72}} 
+uint32 {\bfseries use\+\_\+rr}\+: 1
+\item 
+\mbox{\Hypertarget{struct_b_p_t_config_base_a8e03d7079115558f022bd7da731a9784}\label{struct_b_p_t_config_base_a8e03d7079115558f022bd7da731a9784}} 
+uint32 {\bfseries direct\+\_\+lighting\+\_\+nee}\+: 1
+\item 
+\mbox{\Hypertarget{struct_b_p_t_config_base_afd785870da53910b9f8cb0d20d1f06f4}\label{struct_b_p_t_config_base_afd785870da53910b9f8cb0d20d1f06f4}} 
+uint32 {\bfseries direct\+\_\+lighting\+\_\+bsdf}\+: 1
+\item 
+\mbox{\Hypertarget{struct_b_p_t_config_base_a517c494b0f4f21d0fa40ae070bc186fd}\label{struct_b_p_t_config_base_a517c494b0f4f21d0fa40ae070bc186fd}} 
+uint32 {\bfseries indirect\+\_\+lighting\+\_\+nee}\+: 1
+\item 
+\mbox{\Hypertarget{struct_b_p_t_config_base_a93e0f12a3403028f1ae32615ff854f05}\label{struct_b_p_t_config_base_a93e0f12a3403028f1ae32615ff854f05}} 
+uint32 {\bfseries indirect\+\_\+lighting\+\_\+bsdf}\+: 1
+\item 
+\mbox{\Hypertarget{struct_b_p_t_config_base_aa65ce47d5ee4044ac6143c67a2546fd1}\label{struct_b_p_t_config_base_aa65ce47d5ee4044ac6143c67a2546fd1}} 
+uint32 {\bfseries visible\+\_\+lights}\+: 1
+\item 
+\mbox{\Hypertarget{struct_b_p_t_config_base_a7dac0c8dc0125ae0e44e2fb61b8e3e2f}\label{struct_b_p_t_config_base_a7dac0c8dc0125ae0e44e2fb61b8e3e2f}} 
+float {\bfseries light\+\_\+tracing}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{struct_b_p_t_config_base_a333fa484bf5a9f4ad12f6a7ed48632d4}\label{struct_b_p_t_config_base_a333fa484bf5a9f4ad12f6a7ed48632d4}} 
+\index{B\+P\+T\+Config\+Base@{B\+P\+T\+Config\+Base}!accumulate\+\_\+emissive@{accumulate\+\_\+emissive}}
+\index{accumulate\+\_\+emissive@{accumulate\+\_\+emissive}!B\+P\+T\+Config\+Base@{B\+P\+T\+Config\+Base}}
+\subsubsection{\texorpdfstring{accumulate\+\_\+emissive()}{accumulate\_emissive()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool B\+P\+T\+Config\+Base\+::accumulate\+\_\+emissive (\begin{DoxyParamCaption}\item[{const uint32}]{eye\+\_\+path\+\_\+id,  }\item[{const uint32}]{t,  }\item[{const bool}]{absorbed }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+decide whether to accumulate an emissive sample from a pure (eye) path tracing estimator
+
+
+\begin{DoxyParams}{Parameters}
+{\em eye\+\_\+path\+\_\+id} & index of the eye subpath \\
+\hline
+{\em t} & vertex number along the eye subpath \\
+\hline
+{\em absorbed} & true if the eye subpath has been absorbed/terminated here \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{struct_b_p_t_config_base_a546ae2aa2926db1702688da6c23aa3e7}\label{struct_b_p_t_config_base_a546ae2aa2926db1702688da6c23aa3e7}} 
+\index{B\+P\+T\+Config\+Base@{B\+P\+T\+Config\+Base}!perform\+\_\+connection@{perform\+\_\+connection}}
+\index{perform\+\_\+connection@{perform\+\_\+connection}!B\+P\+T\+Config\+Base@{B\+P\+T\+Config\+Base}}
+\subsubsection{\texorpdfstring{perform\+\_\+connection()}{perform\_connection()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool B\+P\+T\+Config\+Base\+::perform\+\_\+connection (\begin{DoxyParamCaption}\item[{const uint32}]{eye\+\_\+path\+\_\+id,  }\item[{const uint32}]{t,  }\item[{const bool}]{absorbed }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+decide whether to perform a bidirectional connection
+
+
+\begin{DoxyParams}{Parameters}
+{\em eye\+\_\+path\+\_\+id} & index of the eye subpath \\
+\hline
+{\em t} & vertex number along the eye subpath \\
+\hline
+{\em absorbed} & true if the eye subpath has been absorbed/terminated here \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{struct_b_p_t_config_base_afa468245a9b87bcc49abc7132de7a58c}\label{struct_b_p_t_config_base_afa468245a9b87bcc49abc7132de7a58c}} 
+\index{B\+P\+T\+Config\+Base@{B\+P\+T\+Config\+Base}!store\+\_\+light\+\_\+vertex@{store\+\_\+light\+\_\+vertex}}
+\index{store\+\_\+light\+\_\+vertex@{store\+\_\+light\+\_\+vertex}!B\+P\+T\+Config\+Base@{B\+P\+T\+Config\+Base}}
+\subsubsection{\texorpdfstring{store\+\_\+light\+\_\+vertex()}{store\_light\_vertex()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool B\+P\+T\+Config\+Base\+::store\+\_\+light\+\_\+vertex (\begin{DoxyParamCaption}\item[{const uint32}]{path\+\_\+id,  }\item[{const uint32}]{s,  }\item[{const bool}]{absorbed }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+decide whether to store a given light vertex
+
+
+\begin{DoxyParams}{Parameters}
+{\em path\+\_\+id} & index of the light subpath \\
+\hline
+{\em s} & vertex number along the light subpath \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{struct_b_p_t_config_base_a5cafb898a6535d4fee6d98df875fe1ae}\label{struct_b_p_t_config_base_a5cafb898a6535d4fee6d98df875fe1ae}} 
+\index{B\+P\+T\+Config\+Base@{B\+P\+T\+Config\+Base}!terminate\+\_\+eye\+\_\+subpath@{terminate\+\_\+eye\+\_\+subpath}}
+\index{terminate\+\_\+eye\+\_\+subpath@{terminate\+\_\+eye\+\_\+subpath}!B\+P\+T\+Config\+Base@{B\+P\+T\+Config\+Base}}
+\subsubsection{\texorpdfstring{terminate\+\_\+eye\+\_\+subpath()}{terminate\_eye\_subpath()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool B\+P\+T\+Config\+Base\+::terminate\+\_\+eye\+\_\+subpath (\begin{DoxyParamCaption}\item[{const uint32}]{path\+\_\+id,  }\item[{const uint32}]{t }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+decide whether to terminate a given eye subpath
+
+
+\begin{DoxyParams}{Parameters}
+{\em path\+\_\+id} & index of the eye subpath \\
+\hline
+{\em s} & vertex number along the eye subpath \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{struct_b_p_t_config_base_a97c865fc0c241b22bece418e7a8574b4}\label{struct_b_p_t_config_base_a97c865fc0c241b22bece418e7a8574b4}} 
+\index{B\+P\+T\+Config\+Base@{B\+P\+T\+Config\+Base}!terminate\+\_\+light\+\_\+subpath@{terminate\+\_\+light\+\_\+subpath}}
+\index{terminate\+\_\+light\+\_\+subpath@{terminate\+\_\+light\+\_\+subpath}!B\+P\+T\+Config\+Base@{B\+P\+T\+Config\+Base}}
+\subsubsection{\texorpdfstring{terminate\+\_\+light\+\_\+subpath()}{terminate\_light\_subpath()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool B\+P\+T\+Config\+Base\+::terminate\+\_\+light\+\_\+subpath (\begin{DoxyParamCaption}\item[{const uint32}]{path\+\_\+id,  }\item[{const uint32}]{s }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+decide whether to terminate a given light subpath
+
+
+\begin{DoxyParams}{Parameters}
+{\em path\+\_\+id} & index of the light subpath \\
+\hline
+{\em s} & vertex number along the light subpath \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{struct_b_p_t_config_base_ac1ecb6f3ef04718305291fedf76cec85}\label{struct_b_p_t_config_base_ac1ecb6f3ef04718305291fedf76cec85}} 
+\index{B\+P\+T\+Config\+Base@{B\+P\+T\+Config\+Base}!visit\+\_\+eye\+\_\+vertex@{visit\+\_\+eye\+\_\+vertex}}
+\index{visit\+\_\+eye\+\_\+vertex@{visit\+\_\+eye\+\_\+vertex}!B\+P\+T\+Config\+Base@{B\+P\+T\+Config\+Base}}
+\subsubsection{\texorpdfstring{visit\+\_\+eye\+\_\+vertex()}{visit\_eye\_vertex()}}
+{\footnotesize\ttfamily template$<$typename T\+B\+P\+T\+Context $>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE void B\+P\+T\+Config\+Base\+::visit\+\_\+eye\+\_\+vertex (\begin{DoxyParamCaption}\item[{const uint32}]{eye\+\_\+path\+\_\+id,  }\item[{const uint32}]{depth,  }\item[{const \hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id}}]{v\+\_\+id,  }\item[{const \hyperlink{struct_eye_vertex}{Eye\+Vertex} \&}]{v,  }\item[{T\+B\+P\+T\+Context \&}]{context,  }\item[{\hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&}]{renderer }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+allow to process/store the given eye vertex \mbox{\Hypertarget{struct_b_p_t_config_base_a9a948bffb4f173adc48f156d02d000bb}\label{struct_b_p_t_config_base_a9a948bffb4f173adc48f156d02d000bb}} 
+\index{B\+P\+T\+Config\+Base@{B\+P\+T\+Config\+Base}!visit\+\_\+light\+\_\+vertex@{visit\+\_\+light\+\_\+vertex}}
+\index{visit\+\_\+light\+\_\+vertex@{visit\+\_\+light\+\_\+vertex}!B\+P\+T\+Config\+Base@{B\+P\+T\+Config\+Base}}
+\subsubsection{\texorpdfstring{visit\+\_\+light\+\_\+vertex()}{visit\_light\_vertex()}}
+{\footnotesize\ttfamily template$<$typename T\+B\+P\+T\+Context $>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE void B\+P\+T\+Config\+Base\+::visit\+\_\+light\+\_\+vertex (\begin{DoxyParamCaption}\item[{const uint32}]{light\+\_\+path\+\_\+id,  }\item[{const uint32}]{depth,  }\item[{const \hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id}}]{v\+\_\+id,  }\item[{T\+B\+P\+T\+Context \&}]{context,  }\item[{\hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&}]{renderer }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+allow to process/store the given light vertex 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/bpt\+\_\+kernels.\+h\end{DoxyCompactItemize}

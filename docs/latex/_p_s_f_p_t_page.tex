@@ -1,0 +1,630 @@
+Top\+: \hyperlink{_overture_contents_page}{Contents}
+
+\begin{DoxyParagraph}{}
+In order to highlight the flexibility of our \hyperlink{group___p_t_lib}{P\+T\+Lib} library, we will now describe an implementation of the \href{https://dl.acm.org/citation.cfm?id=3214806}{\tt Fast path space filtering by jittered spatial hashing} algorithm by Binder et al. built on top of this framework. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The main idea behind this algorithm is that rather than utilizing the sampled paths directly and splatting them to their single originating pixel only, they are cut somewhere in the middle (the original paper was doing this at the first bounce, we extend this to an arbitrary vertex), and the contributions at the specified vertex are merged and averaged (or \char`\"{}filtered\char`\"{}) into a discrete spatial hash. This way, the filtered value averaged into a single cell will be virtually \char`\"{}splat\char`\"{} to all paths incident to that cell, and consequently to all the corresponding pixels (dramatically decreasing variance at the expense of some bias, or error). The whole process is illustrated for two paths in the following figure\+:  
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Now, taking a look at Fermat\textquotesingle{}s implementation in \hyperlink{_p_s_f_p_t_page_code}{psfpt\+\_\+impl.\+h}, you\textquotesingle{}ll notice that the overall structure is pretty similar to that of our \hyperlink{_hello_renderer_page}{Hello World} prototype path-\/tracer, and even more to that of the \hyperlink{_p_t_page}{P\+T\+Lib-\/based Path Tracer}. Skipping some details, you\textquotesingle{}ll notice there is again a context class definition\+: ~\newline
+
+\begin{DoxyCode}
+\textcolor{keyword}{template} <\textcolor{keyword}{typename} TDirectLightingSampler>
+\textcolor{keyword}{struct }PSFPTContext : \hyperlink{struct_p_t_context_base}{PTContextBase}<PSFPTOptions>, \hyperlink{struct_p_t_context_queues}{PTContextQueues}
+\{
+   PSFRefQueue ref\_queue;      \textcolor{comment}{// a queue of PSF references}
+
+   HashMap     psf\_hashmap;    \textcolor{comment}{// the PSF hashmap}
+   float4*     psf\_values;     \textcolor{comment}{// the PSF values}
+
+   TDirectLightingSampler dl;  \textcolor{comment}{// the direct-lighting sampler}
+\};
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The main news here is the fact we inherited it from \hyperlink{struct_p_t_context_base}{P\+T\+Context\+Base} and \hyperlink{struct_p_t_context_queues}{P\+T\+Context\+Queues}, and added a few fields\+: ~\newline
+
+\begin{DoxyItemize}
+\item an additional \char`\"{}references queue\char`\"{}
+\item a hashmap and the corresponding values
+\item and a direct lighting sampler. 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The additional queue is needed to store references to the hashmap cells. These references represent forward paths sampled from the camera that land on some cell, with their corresponding path weight (i.\+e. the throughput the path was carrying until it hit the cell, properly divided by its sampling pdf). We need to keep these references around because we are going to employ a two pass algorithm\+: a first one in which full paths are sampled and cut at the specified vertex, inserting their outgoing radiance into the corresponding hash cell, and a final one in which all the cell references created in the first pass are looked up and splat on screen. This two-\/stage separation is needed to make sure that {\itshape all} samples are filtered together {\itshape before} we actually splat them.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The beginning of the \hyperlink{struct_p_s_f_p_t_aac923cb36f8f1d8ad27f01becef44fd9}{P\+S\+F\+P\+T\+::render()} method should also look fairly familiar\+:
+\end{DoxyParagraph}
+
+\begin{DoxyCodeInclude}
+    \textcolor{keyword}{const} uint2 res = renderer.res();
+    \textcolor{keyword}{const} uint32 n\_pixels = res.x * res.y;
+    
+    \textcolor{comment}{// carve an arena out of the pre-allocated memory pool}
+    \hyperlink{structcugar_1_1memory__arena}{cugar::memory\_arena} arena( m\_memory\_pool.ptr() );
+
+    \textcolor{comment}{// alloc all the queues}
+    \hyperlink{struct_p_t_ray_queue}{PTRayQueue}  input\_queue;
+    \hyperlink{struct_p_t_ray_queue}{PTRayQueue}  scatter\_queue;
+    \hyperlink{struct_p_t_ray_queue}{PTRayQueue}  shadow\_queue;
+    PSFRefQueue ref\_queue;
+
+    \hyperlink{group___p_t_lib_gaf8daef8b815f7712ff692edbaa628881}{alloc\_queues}(
+        m\_options,
+        n\_pixels,
+        input\_queue,
+        scatter\_queue,
+        shadow\_queue,
+        ref\_queue,
+        arena );
+
+    \textcolor{comment}{// fetch a view of the renderer}
+    \hyperlink{struct_rendering_context_view}{RenderingContextView} renderer\_view = renderer.view(instance);
+
+    \textcolor{comment}{// instantiate our vertex processor}
+    \hyperlink{struct_p_s_f_p_t_vertex_processor}{PSFPTVertexProcessor} vertex\_processor( m\_options.firefly\_filter );
+\end{DoxyCodeInclude}
+ \begin{DoxyParagraph}{}
+In fact, the only news here should be the very last two lines\+:
+\end{DoxyParagraph}
+
+\begin{DoxyCodeInclude}
+    \textcolor{comment}{// instantiate our vertex processor}
+    \hyperlink{struct_p_s_f_p_t_vertex_processor}{PSFPTVertexProcessor} vertex\_processor( m\_options.firefly\_filter );
+\end{DoxyCodeInclude}
+ i.\+e. the instantiation of a custom \hyperlink{_p_t_lib_page_TPTVertexProcessor}{T\+P\+T\+Vertex\+Processor} -\/ in this case the \hyperlink{struct_p_s_f_p_t_vertex_processor}{P\+S\+F\+P\+T\+Vertex\+Processor}. After that, the body of the render method is almost trivial\+:
+
+
+\begin{DoxyCodeInclude}
+            PSFPTContext<DirectLightingMesh> context;
+            context.options         = m\_options;
+            context.in\_bounce       = 0;
+            context.in\_queue        = input\_queue;
+            context.scatter\_queue   = scatter\_queue;
+            context.shadow\_queue    = shadow\_queue;
+            context.sequence        = m\_sequence.view();
+            context.frame\_weight    = 1.0f / float(renderer\_view.instance + 1);
+            context.device\_timers   = device\_timers;
+            context.bbox            = m\_bbox;
+            context.dl              = \hyperlink{struct_direct_lighting_mesh}{DirectLightingMesh}( mesh\_light );
+            context.ref\_queue       = ref\_queue;
+            context.psf\_hashmap     = HashMap(
+                HASH\_SIZE,
+                m\_psf\_hash.m\_keys.ptr(),
+                m\_psf\_hash.m\_unique.ptr(),
+                m\_psf\_hash.m\_slots.ptr(),
+                m\_psf\_hash.m\_size.ptr()
+            );
+            context.psf\_values = m\_psf\_values.ptr();
+
+            \textcolor{comment}{// initialize the shading cache}
+            \textcolor{keywordflow}{if} ((instance % m\_options.psf\_temporal\_reuse) == 0)
+                m\_psf\_hash.clear();
+
+            \textcolor{comment}{// reset the reference queue size}
+            cudaMemset(context.ref\_queue.size, 0x00, \textcolor{keyword}{sizeof}(uint32));
+            CUDA\_CHECK(cugar::cuda::sync\_and\_check\_error(\textcolor{stringliteral}{"clear reference queue"}));
+
+            \textcolor{comment}{// perform the actual path tracing}
+            \hyperlink{group___p_t_lib_gadbd6e824e2ecdd07fae235bddebcd1d8}{path\_trace\_loop}( context, vertex\_processor, renderer, renderer\_view, stats );
+
+            \textcolor{comment}{// blend-in the PSF references}
+            \textcolor{keywordflow}{if} (pass\_type == PSFPT::kFinalPass)
+            \{
+                uint32 ref\_queue\_size;
+                cudaMemcpy(&ref\_queue\_size, context.ref\_queue.size, \textcolor{keyword}{sizeof}(uint32), cudaMemcpyDeviceToHost)
+      ;
+
+                psf\_blending(ref\_queue\_size, context, renderer\_view);
+                CUDA\_CHECK(cugar::cuda::sync\_and\_check\_error(\textcolor{stringliteral}{"psf blending"}));
+            \}
+\end{DoxyCodeInclude}
+ \begin{DoxyParagraph}{}
+All path tracing and kernel dispatch complexity has been absorbed into \hyperlink{_p_t_lib_page}{P\+T\+Lib}! Particularly, it has been absorbed in the \hyperlink{_p_t_lib_page_path_trace_loop_anchor}{path\+\_\+trace\+\_\+loop()} method.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+All of it, except for some crucial details. The details specified by our \hyperlink{struct_p_s_f_p_t_vertex_processor}{P\+S\+F\+P\+T\+Vertex\+Processor} policy class, the class saying what exactly needs to be done with the path vertices generated by \hyperlink{_p_t_lib_page}{P\+T\+Lib} itself.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The first method this class is responsible for implementing is the preprocess\+\_\+vertex() method, which is called each time a new path vertex is created, before anything is actually done at that very vertex. Here, we use this to perform our jittered spatial hashing of the vertex position and normal coordinates, and retrieve the corresponding hash cell\+:
+\end{DoxyParagraph}
+
+\begin{DoxyCode}
+\textcolor{comment}{// preprocess a vertex and return some packed vertex info}
+\textcolor{comment}{//}
+\textcolor{keyword}{template} <\textcolor{keyword}{typename} TPTContext>
+FERMAT\_DEVICE
+uint32 preprocess\_vertex(
+         TPTContext&           context,            \textcolor{comment}{// the current context}
+   \textcolor{keyword}{const} \hyperlink{struct_rendering_context_view}{RenderingContextView}& renderer,           \textcolor{comment}{// the current renderer}
+   \textcolor{keyword}{const} \hyperlink{union_pixel_info}{PixelInfo}             pixel\_info,         \textcolor{comment}{// packed pixel info}
+   \textcolor{keyword}{const} \hyperlink{struct_eye_vertex}{EyeVertex}&            ev,                 \textcolor{comment}{// the local vertex}
+   \textcolor{keyword}{const} \textcolor{keywordtype}{float}                 cone\_radius,        \textcolor{comment}{// the current cone radius}
+   \textcolor{keyword}{const} \hyperlink{structcugar_1_1_bbox}{cugar::Bbox3f}         scene\_bbox,         \textcolor{comment}{// the scene bounding box}
+   \textcolor{keyword}{const} uint32                prev\_vertex\_info,   \textcolor{comment}{// the packed vertex info at the previous vertex}
+   \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}       w,                  \textcolor{comment}{// the current path weight}
+   \textcolor{keyword}{const} \textcolor{keywordtype}{float}                 p\_prev)             \textcolor{comment}{// the scattering solid angle probability at the
+       previous vertex}
+\{
+   \textcolor{comment}{// access the vertex info we returned at the previous vertex along this path (sampled from the eye)}
+   CacheInfo prev\_cache\_info(prev\_vertex\_info);
+
+   \textcolor{comment}{// determine the cache slot}
+   uint32 new\_cache\_slot = prev\_cache\_info.pixel;
+   \textcolor{keywordtype}{bool}   new\_cache\_entry = \textcolor{keyword}{false};
+   
+   \textcolor{comment}{// We should create a new cache entry if and only if:}
+   \textcolor{comment}{//  1. none has been created so far along this path}
+   \textcolor{comment}{//  2. the depth is sufficient}
+   \textcolor{comment}{//  3. other conditions like the hit being at a minimum distance and the sampling probability being low
+       enough (indicating a rough-enough interaction) hold}
+   \textcolor{keywordflow}{if} (prev\_cache\_info.is\_invalid() &&
+       context.in\_bounce >= context.options.psf\_depth &&
+       p\_prev < context.options.psf\_max\_prob)
+   \{
+       << Compute per-pixel jittering coordinates >>
+       << Compute a spatial hashkey >>
+       << Insert key into the hashmap >>
+       << Append references to the PSF queue >>
+       << Finalize >>
+   \}
+   \textcolor{keywordflow}{return} CacheInfo(new\_cache\_slot, 0, new\_cache\_entry);
+\}
+\end{DoxyCode}
+
+
+\begin{DoxyParagraph}{}
+The first step is computing some random numbers to jitter the spatial hashing itself\+:
+\end{DoxyParagraph}
+\label{_p_s_f_p_t_page_Compute_per-pixel_jittering_coordinates_anchor}%
+\Hypertarget{_p_s_f_p_t_page_Compute_per-pixel_jittering_coordinates_anchor}%
+\begin{quote}
+{\itshape  $<$$<$ Compute per-\/pixel jittering coordinates $>$$>$ \+:= }
+
+\end{quote}
+
+\begin{DoxyCodeInclude}
+            \textcolor{keyword}{const} uint32 pixel\_hash = pixel\_info.pixel + renderer.instance * renderer.res\_x * renderer.
+      res\_y;
+
+            \textcolor{keyword}{const} \textcolor{keywordtype}{float} jitter[6] = \{
+                \hyperlink{group___basic_ga215e28e8a87955931f3cdb9b9797ff68}{cugar::randfloat}( 0u, pixel\_hash ),
+                \hyperlink{group___basic_ga215e28e8a87955931f3cdb9b9797ff68}{cugar::randfloat}( 1u, pixel\_hash ),
+                \hyperlink{group___basic_ga215e28e8a87955931f3cdb9b9797ff68}{cugar::randfloat}( 2u, pixel\_hash ),
+                \hyperlink{group___basic_ga215e28e8a87955931f3cdb9b9797ff68}{cugar::randfloat}( 3u, pixel\_hash ),
+                \hyperlink{group___basic_ga215e28e8a87955931f3cdb9b9797ff68}{cugar::randfloat}( 4u, pixel\_hash ),
+                \hyperlink{group___basic_ga215e28e8a87955931f3cdb9b9797ff68}{cugar::randfloat}( 5u, pixel\_hash ),
+            \};
+\end{DoxyCodeInclude}
+ \begin{DoxyParagraph}{}
+After that, computing the hash key is fairly straightforward\+:
+\end{DoxyParagraph}
+\label{_p_s_f_p_t_page_Compute_a_spatial_hashkey_anchor}%
+\Hypertarget{_p_s_f_p_t_page_Compute_a_spatial_hashkey_anchor}%
+\begin{quote}
+{\itshape  $<$$<$ Compute a spatial hash key $>$$>$ \+:= }
+
+\end{quote}
+
+\begin{DoxyCodeInclude}
+            \textcolor{comment}{// compute a spatial hash}
+            \textcolor{keyword}{const} \textcolor{keywordtype}{float} cone\_scale   = context.options.psf\_width;
+            \textcolor{keyword}{const} \textcolor{keywordtype}{float} filter\_scale = (context.in\_bounce == 0.0f ? 2.0f : 1.0f);
+
+            \textcolor{comment}{// compute a hash key based on jittered hashing of the position and normal coordinates}
+            \textcolor{keyword}{const} uint64 shading\_key = \hyperlink{group___spatial_hash_module_ga04c40211588f9601e16bc99d3bef70ed}{spatial\_hash}(
+                pixel\_info.pixel,
+                ev.geom.position,
+                \hyperlink{group___vectors_module_gab7854923b97b44405c7335f0df540fd3}{dot}(ev.in, ev.geom.normal\_s) > 0.0f ? ev.geom.normal\_s : -ev.geom.normal\_s,
+                ev.geom.tangent,
+                ev.geom.binormal,
+                context.bbox,
+                jitter,
+                cone\_radius * cone\_scale,
+                filter\_scale);
+\end{DoxyCodeInclude}
+ \begin{DoxyParagraph}{}
+and so is insertion into the hashmap\+:
+\end{DoxyParagraph}
+\label{_p_s_f_p_t_page_Insert_key_into_the_hashmap_anchor}%
+\Hypertarget{_p_s_f_p_t_page_Insert_key_into_the_hashmap_anchor}%
+\begin{quote}
+{\itshape  $<$$<$ Insert key into the hashmap $>$$>$ \+:= }
+
+\end{quote}
+
+\begin{DoxyCodeInclude}
+            \textcolor{comment}{// insert into the hashmap using the computed hash key}
+            \textcolor{keywordflow}{if} (context.psf\_hashmap.insert(shading\_key, \hyperlink{group___basic_ga4c88b92d7c3a2616868a11282da2be2f}{cugar::hash}(shading\_key), &
+      new\_cache\_slot) == \textcolor{keyword}{true})
+            \{
+                FERMAT\_ASSERT(new\_cache\_slot < cugar::cuda::load<cugar::cuda::LOAD\_VOLATILE>(context.
+      psf\_hashmap.count));
+                \textcolor{comment}{// initialize the cache entry}
+                context.psf\_values[new\_cache\_slot] = make\_float4(0.0f, 0.0f, 0.0f, 0.0f);
+            \}
+            FERMAT\_ASSERT(new\_cache\_slot < cugar::cuda::load<cugar::cuda::LOAD\_VOLATILE>(context.
+      psf\_hashmap.count));
+
+            \textcolor{comment}{// increment the sample counter}
+            \hyperlink{group___atomics_ga0c9d949be7ac5b6f27a232c7cd27a05c}{cugar::atomic\_add}(&context.psf\_values[new\_cache\_slot].w, 1.0f);
+\end{DoxyCodeInclude}
+ \begin{DoxyParagraph}{}
+Finally, we need to append a reference to this newly created cell into the P\+SF splatting queue, and finalize, marking our cell as new\+:
+\end{DoxyParagraph}
+\label{_p_s_f_p_t_page_Append_references_to_the_PSF_queue_anchor}%
+\Hypertarget{_p_s_f_p_t_page_Append_references_to_the_PSF_queue_anchor}%
+\begin{quote}
+{\itshape  $<$$<$ Append references to the P\+SF queue $>$$>$ \+:= }
+
+\end{quote}
+
+\begin{DoxyCodeInclude}
+            \textcolor{comment}{// add two "references" to this sample, weighted by modulate( w, ev.bsdf.diffuse )}
+            \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector4f} w\_mod = modulate(
+      \hyperlink{structcugar_1_1_vector}{cugar::Vector4f}(w,0.0f), ev.material.diffuse);
+
+            context.ref\_queue.warp\_append(
+                pixel\_info,
+                CacheInfo(new\_cache\_slot, ALL\_COMPS, 0),
+                (pixel\_info.comp & Bsdf::kDiffuseMask)                     ? w\_mod : 
+      \hyperlink{structcugar_1_1_vector}{cugar::Vector4f}(0.0f),
+                (pixel\_info.comp & Bsdf::kGlossyMask) && context.in\_bounce ? w\_mod : 
+      \hyperlink{structcugar_1_1_vector}{cugar::Vector4f}(0.0f)
+                    \textcolor{comment}{// at the first bounce, cache entries are only accumulated into the diffuse channel}
+            );
+\end{DoxyCodeInclude}
+ \label{_p_s_f_p_t_page_Finalize_anchor}%
+\Hypertarget{_p_s_f_p_t_page_Finalize_anchor}%
+\begin{quote}
+{\itshape  $<$$<$ Finalize $>$$>$ \+:= }
+
+\end{quote}
+
+\begin{DoxyCodeInclude}
+            new\_cache\_entry = \textcolor{keyword}{true};
+\end{DoxyCodeInclude}
+ \begin{DoxyParagraph}{}
+Notice that the method returns an integer, which is later passed to all other methods as {\itshape vertex\+\_\+info}. Here we use this integer to pack all the information we\textquotesingle{}ll need later on, that is to say\+: the hash cell index, a bit flag indicating whether this hash cell has been newly created, i.\+e. this is {\bfseries the first diffuse vertex} along the path where filtering is performed, or whether the cell was already looked-\/up by some previous vertex, and some extra flags indicating the components this path is sampling (e.\+g. diffuse or glossy). For convenience, we use a simple helper class to wrap this information in an easily accessible bit field\+:
+\end{DoxyParagraph}
+
+\begin{DoxyCodeInclude}
+    \textcolor{keyword}{union }CacheInfo
+    \{
+        \textcolor{keyword}{const} \textcolor{keyword}{static} uint32 INVALID = 0xFFFFFFFFu;
+        \textcolor{keyword}{const} \textcolor{keyword}{static} uint32 INVALID\_SLOT = 0xFFFFFFFFu & ((1u << 29) - 1u);
+
+        FERMAT\_HOST\_DEVICE CacheInfo() : packed(INVALID) \{\}
+        FERMAT\_HOST\_DEVICE CacheInfo(\textcolor{keyword}{const} uint32 \_packed) : packed(\_packed) \{\}
+        FERMAT\_HOST\_DEVICE CacheInfo(\textcolor{keyword}{const} uint32 \_pixel, \textcolor{keyword}{const} uint32 \_comp, \textcolor{keyword}{const} uint32 \_new\_entry) : 
+      pixel(\_pixel), \hyperlink{group___basic_gae73662ac7ace330f8b3f726381785f28}{comp}(\_comp), new\_entry(\_new\_entry)\{\}
+
+        FERMAT\_HOST\_DEVICE
+        \textcolor{keywordtype}{bool} is\_invalid()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} pixel == INVALID\_SLOT; \}
+
+        FERMAT\_HOST\_DEVICE
+        \textcolor{keywordtype}{bool} is\_valid()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} pixel != INVALID\_SLOT; \}
+
+        uint32  packed;
+        \textcolor{keyword}{struct}
+        \{
+            uint32 pixel        : 29;
+            uint32 \hyperlink{group___basic_gae73662ac7ace330f8b3f726381785f28}{comp}         : 2;
+            uint32 new\_entry    : 1;
+        \};
+
+        FERMAT\_HOST\_DEVICE \textcolor{keyword}{operator} uint32()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} packed; \}
+    \};
+\end{DoxyCodeInclude}
+ \begin{DoxyParagraph}{}
+The next method specifies how to compute the Next-\/\+Event Estimation weights, separately for diffuse and glossy interactions. Here we have to distinguish a few cases\+:
+\begin{DoxyItemize}
+\item the case where this path vertex comes {\bfseries before} any hashing is done (as seen from the eye/camera)\+: in this case we\textquotesingle{}ll do business as usual, compute the weights as one would normally do and simply accumulate the resulting samples directly to the framebuffer (though this is done in a separate method)
+\item the case where this path vertex is {\bfseries the vertex} where hashing/filtering is done\+: in this case, we want to accumulate its {\itshape demodulated} diffuse contribution to the hashmap (where by demodulated we mean that we\textquotesingle{}ll remove any high frequency details introduced by the diffuse texture), while we\textquotesingle{}ll accumulate its glossy contribution directly to the framebuffer (as glossy reflections are generally too high-\/frequency to be cached and filtered in path space)
+\item the case where this path vertex comes {\bfseries after} the vertex where caching is done\+: in this case again we\textquotesingle{}ll do business as usual in terms of weight calculation, except we\textquotesingle{}ll add both contributions to the corresponding hash cell. 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Again, this method only takes care of computing the weights, while the actual sample accumulations are done in a different method we\textquotesingle{}ll see in a moment. So in practice, as the first and last case result in the same exact weights and only the central case is different, we can group them into two cases only\+:
+\end{DoxyParagraph}
+
+\begin{DoxyCodeInclude}
+    \textcolor{keyword}{template} <\textcolor{keyword}{typename} TPTContext>
+    FERMAT\_DEVICE
+    \textcolor{keywordtype}{void} compute\_nee\_weights(
+        \textcolor{keyword}{const} TPTContext&           context,
+        \textcolor{keyword}{const} \hyperlink{struct_rendering_context_view}{RenderingContextView}& renderer,
+        \textcolor{keyword}{const} \hyperlink{union_pixel_info}{PixelInfo}                pixel\_info,
+        \textcolor{keyword}{const} uint32                prev\_vertex\_info,
+        \textcolor{keyword}{const} uint32                vertex\_info,
+        \textcolor{keyword}{const} \hyperlink{struct_eye_vertex}{EyeVertex}&           ev,
+        \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&       f\_d,
+        \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&       f\_g,
+        \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&       w,
+        \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&       f\_L,
+              \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&       out\_w\_d,
+              \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&       out\_w\_g,
+              uint32&               out\_vertex\_info)
+    \{
+        \textcolor{keyword}{const} CacheInfo new\_cache\_info(vertex\_info);
+
+        \textcolor{keyword}{const} \textcolor{keywordtype}{bool} new\_cache\_entry = new\_cache\_info.new\_entry;
+
+        \textcolor{keyword}{const} CacheInfo out\_cache\_info = context.in\_bounce < context.options.psf\_depth ? CacheInfo(
+      CacheInfo::INVALID) :
+            new\_cache\_entry ?
+                CacheInfo(new\_cache\_info.pixel, DIFFUSE\_COMP, 0) :  \textcolor{comment}{// cache the diffuse component only}
+                CacheInfo(new\_cache\_info.pixel, ALL\_COMPS, 0);      \textcolor{comment}{// cache both diffuse and glossy
+       components}
+
+        out\_vertex\_info = out\_cache\_info;
+
+        \textcolor{comment}{// Three cases:}
+        \textcolor{comment}{//   1. we are not doing any caching:}
+        \textcolor{comment}{//      1.a: bounce = 0: we will accumulate the diffuse and glossy components separately to the
+       frame-buffer}
+        \textcolor{comment}{//      1.b: bounce > 0: we will accumulate the sum of the components to a single channel of the
+       frame-buffer}
+        \textcolor{comment}{//   2. this is a new cache entry (i.e. this is the first D vertex along a path), we demodulate the
+       diffuse BSDF:}
+        \textcolor{comment}{//          out\_w\_d = f\_d * f\_L * G * mis\_w}
+        \textcolor{comment}{//      and accumulate the glossy component to the glossy framebuffer}
+        \textcolor{comment}{//   3. we are caching both the diffuse and glossy components:}
+        \textcolor{comment}{//          out\_w\_d = w * f\_d * f\_L * G * mis\_w,}
+        \textcolor{comment}{//          out\_w\_g = w * f\_g * f\_L * G * mis\_w;}
+        \textcolor{comment}{//      or rather, we could perform a single accumulation using (out\_w\_d + out\_w\_g) * f\_L * G *
+       mis\_w}
+        \textcolor{comment}{//}
+        \textcolor{comment}{// Since in practice 1. and 3. end up in the same weights, this reduces to two cases:}
+        \textcolor{comment}{//   1. this is a new and valid cache entry}
+        \textcolor{comment}{//   2. all of the others}
+        \textcolor{keywordflow}{if} (new\_cache\_entry && out\_cache\_info.is\_valid())
+        \{
+            out\_w\_d = demodulate( f\_d, \hyperlink{structcugar_1_1_vector}{cugar::Vector4f}(ev.material.diffuse).xyz() ) * f\_L;
+            out\_w\_g = f\_g * w.xyz() * f\_L;
+        \}
+        \textcolor{keywordflow}{else}
+        \{
+            out\_w\_d = f\_d * w.xyz() * f\_L;
+            out\_w\_g = f\_g * w.xyz() * f\_L;
+        \}
+    \}
+\end{DoxyCodeInclude}
+ \begin{DoxyParagraph}{}
+The actual sample accumulation follows from the above mentioned logic. Conceptually, it would be even simpler than it ends up being, except this renderer also keeps track of separate diffuse and glossy channels, which requires some extra special casing based on the path type.
+\end{DoxyParagraph}
+
+\begin{DoxyCode}
+\textcolor{keyword}{template} <\textcolor{keyword}{typename} TPTContext>
+FERMAT\_DEVICE
+\textcolor{keywordtype}{void} accumulate\_nee(
+   \textcolor{keyword}{const} TPTContext&           context,
+         \hyperlink{struct_rendering_context_view}{RenderingContextView}& renderer,
+   \textcolor{keyword}{const} \hyperlink{union_pixel_info}{PixelInfo}             pixel\_info,
+   \textcolor{keyword}{const} uint32                vertex\_info,
+   \textcolor{keyword}{const} \textcolor{keywordtype}{bool}                  shadow\_hit,
+   \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&      w\_d,
+   \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&      w\_g)
+\{
+   \hyperlink{struct_f_buffer_view}{FBufferView}& fb = renderer.fb;
+   \hyperlink{struct_f_buffer_channel_view}{FBufferChannelView}& composited\_channel = fb(FBufferDesc::COMPOSITED\_C);
+   \hyperlink{struct_f_buffer_channel_view}{FBufferChannelView}& direct\_channel     = fb(FBufferDesc::DIRECT\_C);
+   \hyperlink{struct_f_buffer_channel_view}{FBufferChannelView}& diffuse\_channel    = fb(FBufferDesc::DIFFUSE\_C);
+   \hyperlink{struct_f_buffer_channel_view}{FBufferChannelView}& specular\_channel   = fb(FBufferDesc::SPECULAR\_C);
+
+       \textcolor{comment}{// unpack the pixel index & sampling component}
+   \textcolor{keyword}{const} uint32 pixel\_index = pixel\_info.pixel;
+   \textcolor{keyword}{const} uint32 pixel\_comp  = pixel\_info.comp;
+   \textcolor{keyword}{const} \textcolor{keywordtype}{float} frame\_weight = context.frame\_weight;
+
+   \textcolor{comment}{// access the packed vertex info}
+   \textcolor{keyword}{const} CacheInfo cache\_info(vertex\_info);
+
+   \textcolor{keywordflow}{if} (shadow\_hit == \textcolor{keyword}{false})
+   \{       
+       \textcolor{comment}{// check if the cache cell is valid}
+       \textcolor{keywordflow}{if} (cache\_info.is\_valid())
+       \{
+           << Accumulate selected components to the cache cell >>
+           << Accumulate remainder to the framebuffer >>
+       \}
+       \textcolor{keywordflow}{else}
+       \{
+           << Accumulate every component to the framebuffer >>
+       \}
+   \}
+\}
+\end{DoxyCode}
+
+
+\begin{DoxyParagraph}{}
+You can see that there are again basically two cases\+: the case there is a valid {\itshape cache\+\_\+info}, specifying a hash cell to accumulate the sample to, and the opposite case, in which the sample has to be accumulated directly to the framebuffer (which might happen if no diffuse vertex has been found along the path, or the required number of bounces for path-\/space filtering has not yet been reached). In the first case, we need to first determine which components to add the cache -\/ as specified by {\itshape cache\+\_\+info.\+comp} -\/ and then issue an atomic for each of the sample value\textquotesingle{}s components. The atomics are needed to make sure conflicting writes to the same cell are appropriately resolved\+:
+\end{DoxyParagraph}
+\label{_p_s_f_p_t_page_Accumulate_selected_components_to_the_cache_cell_anchor}%
+\Hypertarget{_p_s_f_p_t_page_Accumulate_selected_components_to_the_cache_cell_anchor}%
+\begin{quote}
+{\itshape  $<$$<$ Accumulate selected components to the cache cell $>$$>$ \+:= }
+
+\end{quote}
+
+\begin{DoxyCodeInclude}
+                \textcolor{keyword}{const} uint32 cache\_slot = cache\_info.pixel;
+
+                \textcolor{comment}{// check whether to add both components to the cache or just the diffuse one}
+                \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f} w = (cache\_info.comp == DIFFUSE\_COMP) ? w\_d : w\_d + 
+      w\_g;
+
+                \hyperlink{group___atomics_ga0c9d949be7ac5b6f27a232c7cd27a05c}{cugar::atomic\_add}(&context.psf\_values[cache\_slot].x, w.x);
+                \hyperlink{group___atomics_ga0c9d949be7ac5b6f27a232c7cd27a05c}{cugar::atomic\_add}(&context.psf\_values[cache\_slot].y, w.y);
+                \hyperlink{group___atomics_ga0c9d949be7ac5b6f27a232c7cd27a05c}{cugar::atomic\_add}(&context.psf\_values[cache\_slot].z, w.z);
+\end{DoxyCodeInclude}
+ \begin{DoxyParagraph}{}
+In case only the diffuse component was accumulated to the cache cell, we need to add the remaining glossy component to the framebuffer, concluding the treatment of the first case\+:
+\end{DoxyParagraph}
+\label{_p_s_f_p_t_page_Accumulate_remainder_to_the_framebuffer_anchor}%
+\Hypertarget{_p_s_f_p_t_page_Accumulate_remainder_to_the_framebuffer_anchor}%
+\begin{quote}
+{\itshape  $<$$<$ Accumulate remainder to the framebuffer $>$$>$ \+:= }
+
+\end{quote}
+
+\begin{DoxyCodeInclude}
+                \textcolor{comment}{// if the glossy component was left out, we need to add it to the framebuffer}
+                \textcolor{keywordflow}{if} (cache\_info.comp == DIFFUSE\_COMP)
+                \{
+                    add\_in<false>(composited\_channel, pixel\_index, clamp\_sample( w\_g ), frame\_weight);
+
+                    \textcolor{comment}{// select the right channel}
+                    \hyperlink{struct_f_buffer_channel_view}{FBufferChannelView}& fb\_channel = context.in\_bounce == 0 || (
+      pixel\_comp & Bsdf::kGlossyMask) ?
+                        specular\_channel :
+                        diffuse\_channel;
+
+                    add\_in<true>(fb\_channel, pixel\_index, clamp\_sample( w\_g ), context.frame\_weight);
+                \}
+\end{DoxyCodeInclude}
+ \begin{DoxyParagraph}{}
+The second case is conceptually simpler, and more or less the same of what we did in the standard path tracer\+:
+\end{DoxyParagraph}
+\label{_p_s_f_p_t_page_Accumulate_every_component_to_the_framebuffer_anchor}%
+\Hypertarget{_p_s_f_p_t_page_Accumulate_every_component_to_the_framebuffer_anchor}%
+\begin{quote}
+{\itshape  $<$$<$ Accumulate every component to the framebuffer $>$$>$ \+:= }
+
+\end{quote}
+
+\begin{DoxyCodeInclude}
+                add\_in<false>(composited\_channel, pixel\_index, clamp\_sample( w\_d + w\_g ), frame\_weight);
+
+                \textcolor{keywordflow}{if} (context.in\_bounce == 0)
+                \{
+                    \textcolor{comment}{// accumulate the per-component values to the respective output channels}
+                    add\_in<true>(diffuse\_channel,  pixel\_index, clamp\_sample( w\_d ), context.frame\_weight);
+                    add\_in<true>(specular\_channel, pixel\_index, clamp\_sample( w\_g ), context.frame\_weight);
+                \}
+                \textcolor{keywordflow}{else}
+                \{
+                    \textcolor{comment}{// accumulate the aggregate value to the proper output channel (only one will be true)}
+                    \textcolor{keywordflow}{if} (pixel\_comp & Bsdf::kDiffuseMask) add\_in<true>(diffuse\_channel,  pixel\_index, 
+      clamp\_sample( w\_d + w\_g ), frame\_weight);
+                    \textcolor{keywordflow}{if} (pixel\_comp & Bsdf::kGlossyMask)  add\_in<true>(specular\_channel, pixel\_index, 
+      clamp\_sample( w\_d + w\_g ), frame\_weight);
+                \}
+\end{DoxyCodeInclude}
+ \begin{DoxyParagraph}{}
+Similar logic applies to the calculation of scattering weights; basically, everything\textquotesingle{}s done as usual in a path tracer, except if we are filtering at the current vertex, in which case we demodulate the weight in order to filter the {\itshape demodulated} path contribution\+:
+\end{DoxyParagraph}
+
+\begin{DoxyCodeInclude}
+    \textcolor{keyword}{template} <\textcolor{keyword}{typename} TPTContext>
+    FERMAT\_DEVICE
+    \textcolor{keywordtype}{void} compute\_scattering\_weights(
+        \textcolor{keyword}{const} TPTContext&           context,
+        \textcolor{keyword}{const} \hyperlink{struct_rendering_context_view}{RenderingContextView}& renderer,
+        \textcolor{keyword}{const} \hyperlink{union_pixel_info}{PixelInfo}                pixel\_info,
+        \textcolor{keyword}{const} uint32                prev\_vertex\_info,
+        \textcolor{keyword}{const} uint32                vertex\_info,
+        \textcolor{keyword}{const} \hyperlink{struct_eye_vertex}{EyeVertex}&           ev,
+        \textcolor{keyword}{const} uint32                out\_comp,
+        \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&       g,
+        \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&       w,
+              \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&       out\_w,
+              uint32&               out\_vertex\_info)
+    \{
+        \textcolor{keyword}{const} CacheInfo prev\_cache\_info(prev\_vertex\_info);
+        \textcolor{keyword}{const} CacheInfo new\_cache\_info(vertex\_info);
+
+        \textcolor{keyword}{const} uint32 new\_cache\_slot  = new\_cache\_info.pixel;
+        \textcolor{keyword}{const} \textcolor{keywordtype}{bool}   new\_cache\_entry = new\_cache\_info.new\_entry;
+
+        \textcolor{keyword}{const} CacheInfo out\_cache\_info = prev\_cache\_info.is\_invalid() && (out\_comp & Bsdf::kGlossyMask) ?
+            prev\_cache\_info :                           \textcolor{comment}{// retain the invalid cache location}
+            CacheInfo(new\_cache\_slot, ALL\_COMPS, 0);    \textcolor{comment}{// cache both diffuse and glossy components}
+
+        out\_vertex\_info = out\_cache\_info;
+
+        \textcolor{comment}{// if this is a new "diffuse cache ray", i.e. if new\_cache\_entry && (out\_comp &
+       Bsdf::kDiffuseMask),}
+        \textcolor{comment}{// we have to demodulate the BSDF weight. This will be compensated by a correctly weighted
+       reference to the queue entry.}
+        \textcolor{comment}{// The proper solution would be to use SH to encode incoming radiance.}
+        \textcolor{keywordflow}{if} (new\_cache\_entry && (out\_comp & Bsdf::kDiffuseMask))
+            out\_w = demodulate(g, \hyperlink{structcugar_1_1_vector}{cugar::Vector4f}(ev.material.diffuse).xyz());
+        \textcolor{keywordflow}{else}
+            out\_w = g * w.xyz();
+    \}
+\end{DoxyCodeInclude}
+ \begin{DoxyParagraph}{}
+Finally, the last method prescribes what to do with emissive path vertices, and again we apply a logic similar to the above\+: if the hash cell computed at the {\itshape previous} path vertex is invalid, we splat the sample directly to the framebuffer, otherwise we splat the sample into the hashmap. The reason why we here look at the previous path vertex is that we are looking at emission at the current vertex towards the previous one, sampling what is basically direct lighting at the previous vertex along the path\+:
+\end{DoxyParagraph}
+
+\begin{DoxyCodeInclude}
+    \textcolor{keyword}{template} <\textcolor{keyword}{typename} TPTContext>
+    FERMAT\_DEVICE
+    \textcolor{keywordtype}{void} accumulate\_emissive(
+        \textcolor{keyword}{const} TPTContext&           context,
+              \hyperlink{struct_rendering_context_view}{RenderingContextView}& renderer,
+        \textcolor{keyword}{const} \hyperlink{union_pixel_info}{PixelInfo}                pixel\_info,
+        \textcolor{keyword}{const} uint32                prev\_vertex\_info,
+        \textcolor{keyword}{const} uint32                vertex\_info,
+        \textcolor{keyword}{const} \hyperlink{struct_eye_vertex}{EyeVertex}&           ev,
+        \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&       out\_w)
+    \{
+        \hyperlink{struct_f_buffer_view}{FBufferView}& fb = renderer.fb;
+        \hyperlink{struct_f_buffer_channel_view}{FBufferChannelView}& composited\_channel = fb(FBufferDesc::COMPOSITED\_C);
+        \hyperlink{struct_f_buffer_channel_view}{FBufferChannelView}& direct\_channel     = fb(FBufferDesc::DIRECT\_C);
+        \hyperlink{struct_f_buffer_channel_view}{FBufferChannelView}& diffuse\_channel    = fb(FBufferDesc::DIFFUSE\_C);
+        \hyperlink{struct_f_buffer_channel_view}{FBufferChannelView}& specular\_channel   = fb(FBufferDesc::SPECULAR\_C);
+
+        \textcolor{comment}{// access the vertex info from the previous vertex}
+        \textcolor{keyword}{const} CacheInfo prev\_cache\_info(prev\_vertex\_info);
+
+        \textcolor{comment}{// clamp the sample value to avoid extreme fire-flies}
+        \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f} clamped\_out\_w = clamp\_sample( out\_w );
+
+        \textcolor{comment}{// unpack the pixel index & sampling component}
+        \textcolor{keyword}{const} uint32 pixel\_index = pixel\_info.pixel;
+        \textcolor{keyword}{const} uint32 pixel\_comp  = pixel\_info.comp;
+        \textcolor{keyword}{const} \textcolor{keywordtype}{float} frame\_weight = context.frame\_weight;
+
+        \textcolor{comment}{// accumulate to the image only if prev\_cache\_info is invalid}
+        \textcolor{keywordflow}{if} (prev\_cache\_info.is\_invalid())
+        \{
+            add\_in<false>(composited\_channel, pixel\_index, clamped\_out\_w, frame\_weight);
+
+            \textcolor{comment}{// accumulate the per-component value to the proper output channel}
+            \textcolor{keywordflow}{if} (context.in\_bounce == 0)
+                add\_in<false>(direct\_channel, pixel\_index, clamped\_out\_w, frame\_weight);
+            \textcolor{keywordflow}{else}
+            \{
+                \textcolor{keywordflow}{if} (pixel\_comp & Bsdf::kDiffuseMask) add\_in<true>(diffuse\_channel,  pixel\_index, 
+      clamped\_out\_w, frame\_weight);
+                \textcolor{keywordflow}{if} (pixel\_comp & Bsdf::kGlossyMask)  add\_in<true>(specular\_channel, pixel\_index, 
+      clamped\_out\_w, frame\_weight);
+            \}
+        \}
+        \textcolor{keywordflow}{else} 
+        \{
+            \textcolor{comment}{// accumulate to the cache entry}
+            \hyperlink{group___atomics_ga0c9d949be7ac5b6f27a232c7cd27a05c}{cugar::atomic\_add}(&context.psf\_values[prev\_cache\_info.pixel].x, clamped\_out\_w.
+      x);
+            \hyperlink{group___atomics_ga0c9d949be7ac5b6f27a232c7cd27a05c}{cugar::atomic\_add}(&context.psf\_values[prev\_cache\_info.pixel].y, clamped\_out\_w.
+      y);
+            \hyperlink{group___atomics_ga0c9d949be7ac5b6f27a232c7cd27a05c}{cugar::atomic\_add}(&context.psf\_values[prev\_cache\_info.pixel].z, clamped\_out\_w.
+      z);
+        \}
+    \}
+\end{DoxyCodeInclude}
+ \begin{DoxyParagraph}{}
+Here we go, this is pretty much all the magic needed to perform path space filtering within our \hyperlink{group___p_t_lib}{P\+T\+Lib} framework. Hopefully, this speaks to its flexibility... ~\newline
+ Of course, there\textquotesingle{}s many important details we just skimmed over, like the actual implementation of the massively parallel hashmap, but thankfully this is all provided by the underlying \hyperlink{cugar_page}{C\+U\+G\+AR} library.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+So here\textquotesingle{}s a comparison of what you get with standard path tracing (top), and path-\/space filtering (bottom) at 32 samples per pixel. Ideally, you should also think this coding excercise was worth the effort.  ~\newline
+  ~\newline
+
+\end{DoxyParagraph}
+Next\+: \hyperlink{_b_p_t_lib_page}{B\+P\+T\+Lib} 

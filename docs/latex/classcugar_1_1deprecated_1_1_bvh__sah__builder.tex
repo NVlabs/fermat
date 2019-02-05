@@ -1,0 +1,86 @@
+\hypertarget{classcugar_1_1deprecated_1_1_bvh__sah__builder}{}\section{cugar\+:\+:deprecated\+:\+:Bvh\+\_\+sah\+\_\+builder Class Reference}
+\label{classcugar_1_1deprecated_1_1_bvh__sah__builder}\index{cugar\+::deprecated\+::\+Bvh\+\_\+sah\+\_\+builder@{cugar\+::deprecated\+::\+Bvh\+\_\+sah\+\_\+builder}}
+
+
+\subsection{Detailed description}
+An S\+A\+H-\/based bvh builder for 3d bboxes 
+
+{\ttfamily \#include $<$bvh\+\_\+sah\+\_\+builder.\+h$>$}
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classcugar_1_1deprecated_1_1_bvh__sah__builder_1_1_predicate}{Predicate}
+\item 
+struct \hyperlink{structcugar_1_1deprecated_1_1_bvh__sah__builder_1_1_stats}{Stats}
+\end{DoxyCompactItemize}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcugar_1_1deprecated_1_1_bvh__sah__builder_aaf68c19b94d2be268030b3bd2c8d3d81}\label{classcugar_1_1deprecated_1_1_bvh__sah__builder_aaf68c19b94d2be268030b3bd2c8d3d81}} 
+typedef \hyperlink{structcugar_1_1_vector}{Vector3f} {\bfseries vector\+\_\+type}
+\item 
+\mbox{\Hypertarget{classcugar_1_1deprecated_1_1_bvh__sah__builder_a525c2db97b1487a333440226eb3ed5ac}\label{classcugar_1_1deprecated_1_1_bvh__sah__builder_a525c2db97b1487a333440226eb3ed5ac}} 
+typedef \hyperlink{structcugar_1_1_bbox}{Bbox3f} {\bfseries bbox\+\_\+type}
+\item 
+\mbox{\Hypertarget{classcugar_1_1deprecated_1_1_bvh__sah__builder_aa93001869027086f1149cf877174a510}\label{classcugar_1_1deprecated_1_1_bvh__sah__builder_aa93001869027086f1149cf877174a510}} 
+typedef \hyperlink{structcugar_1_1_bvh}{Bvh}$<$ 3u $>$ {\bfseries bvh\+\_\+type}
+\item 
+\mbox{\Hypertarget{classcugar_1_1deprecated_1_1_bvh__sah__builder_a82ddece4c77ba4019a41aefafc2fca77}\label{classcugar_1_1deprecated_1_1_bvh__sah__builder_a82ddece4c77ba4019a41aefafc2fca77}} 
+typedef \hyperlink{structcugar_1_1_bvh__node}{Bvh\+\_\+node} {\bfseries bvh\+\_\+node\+\_\+type}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcugar_1_1deprecated_1_1_bvh__sah__builder_aa5fdf97afb1c4cca39a80f0a115ba2f0}\label{classcugar_1_1deprecated_1_1_bvh__sah__builder_aa5fdf97afb1c4cca39a80f0a115ba2f0}} 
+\hyperlink{classcugar_1_1deprecated_1_1_bvh__sah__builder_aa5fdf97afb1c4cca39a80f0a115ba2f0}{Bvh\+\_\+sah\+\_\+builder} ()
+\begin{DoxyCompactList}\small\item\em constructor \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcugar_1_1deprecated_1_1_bvh__sah__builder_a32133e57e327a095abc813f631707e16}\label{classcugar_1_1deprecated_1_1_bvh__sah__builder_a32133e57e327a095abc813f631707e16}} 
+void \hyperlink{classcugar_1_1deprecated_1_1_bvh__sah__builder_a32133e57e327a095abc813f631707e16}{set\+\_\+max\+\_\+leaf\+\_\+size} (const uint32 max\+\_\+leaf\+\_\+size)
+\begin{DoxyCompactList}\small\item\em set bvh parameters \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcugar_1_1deprecated_1_1_bvh__sah__builder_aa6a733904080f3eb8c72f4834dbaf095}\label{classcugar_1_1deprecated_1_1_bvh__sah__builder_aa6a733904080f3eb8c72f4834dbaf095}} 
+void \hyperlink{classcugar_1_1deprecated_1_1_bvh__sah__builder_aa6a733904080f3eb8c72f4834dbaf095}{set\+\_\+force\+\_\+splitting} (const bool flag)
+\begin{DoxyCompactList}\small\item\em set force splitting \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcugar_1_1deprecated_1_1_bvh__sah__builder_a7c573483142a10f96dff93700a4aff27}\label{classcugar_1_1deprecated_1_1_bvh__sah__builder_a7c573483142a10f96dff93700a4aff27}} 
+void \hyperlink{classcugar_1_1deprecated_1_1_bvh__sah__builder_a7c573483142a10f96dff93700a4aff27}{set\+\_\+force\+\_\+alignment} (const bool flag)
+\begin{DoxyCompactList}\small\item\em set force \textquotesingle{}max leaf size\textquotesingle{}-\/aligned splits \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcugar_1_1deprecated_1_1_bvh__sah__builder_abe5a365a98236865d987fb144b65723f}\label{classcugar_1_1deprecated_1_1_bvh__sah__builder_abe5a365a98236865d987fb144b65723f}} 
+void \hyperlink{classcugar_1_1deprecated_1_1_bvh__sah__builder_abe5a365a98236865d987fb144b65723f}{set\+\_\+partial\+\_\+build} (const bool flag)
+\begin{DoxyCompactList}\small\item\em set partial build \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcugar_1_1deprecated_1_1_bvh__sah__builder_ae57d3b98374b68b877bb495e65a90d5b}\label{classcugar_1_1deprecated_1_1_bvh__sah__builder_ae57d3b98374b68b877bb495e65a90d5b}} 
+void \hyperlink{classcugar_1_1deprecated_1_1_bvh__sah__builder_ae57d3b98374b68b877bb495e65a90d5b}{set\+\_\+single\+\_\+axis\+\_\+threshold} (const uint32 v)
+\begin{DoxyCompactList}\small\item\em set single axis test threshold \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Iterator $>$ }\\void \hyperlink{classcugar_1_1deprecated_1_1_bvh__sah__builder_ac6e60f83f5b49e6a2b169e1e8d2a5a35}{build} (Iterator \hyperlink{namespacecugar_a2121df08f967e232ea5fe0ee378dee67}{begin}, Iterator end, Bvh\+\_\+type $\ast$bvh)
+\item 
+\mbox{\Hypertarget{classcugar_1_1deprecated_1_1_bvh__sah__builder_a260f4eeafd2786157beb37a3bb3734af}\label{classcugar_1_1deprecated_1_1_bvh__sah__builder_a260f4eeafd2786157beb37a3bb3734af}} 
+uint32 \hyperlink{classcugar_1_1deprecated_1_1_bvh__sah__builder_a260f4eeafd2786157beb37a3bb3734af}{index} (const uint32 i) const
+\begin{DoxyCompactList}\small\item\em remapped point index \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcugar_1_1deprecated_1_1_bvh__sah__builder_ac6e60f83f5b49e6a2b169e1e8d2a5a35}\label{classcugar_1_1deprecated_1_1_bvh__sah__builder_ac6e60f83f5b49e6a2b169e1e8d2a5a35}} 
+\index{cugar\+::deprecated\+::\+Bvh\+\_\+sah\+\_\+builder@{cugar\+::deprecated\+::\+Bvh\+\_\+sah\+\_\+builder}!build@{build}}
+\index{build@{build}!cugar\+::deprecated\+::\+Bvh\+\_\+sah\+\_\+builder@{cugar\+::deprecated\+::\+Bvh\+\_\+sah\+\_\+builder}}
+\subsubsection{\texorpdfstring{build()}{build()}}
+{\footnotesize\ttfamily template$<$typename Iterator $>$ \\
+void cugar\+::deprecated\+::\+Bvh\+\_\+sah\+\_\+builder\+::build (\begin{DoxyParamCaption}\item[{Iterator}]{begin,  }\item[{Iterator}]{end,  }\item[{Bvh\+\_\+type $\ast$}]{bvh }\end{DoxyParamCaption})}
+
+build
+
+Iterator is supposed to dereference to a Bbox3f
+
+
+\begin{DoxyParams}{Parameters}
+{\em begin} & first point \\
+\hline
+{\em end} & last point \\
+\hline
+{\em bvh} & output bvh \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bvh/bvh\+\_\+sah\+\_\+builder.\+h\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bvh/bvh\+\_\+sah\+\_\+builder\+\_\+inline.\+h\end{DoxyCompactItemize}

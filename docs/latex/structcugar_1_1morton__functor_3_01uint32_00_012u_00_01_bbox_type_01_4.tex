@@ -1,0 +1,60 @@
+\hypertarget{structcugar_1_1morton__functor_3_01uint32_00_012u_00_01_bbox_type_01_4}{}\section{cugar\+:\+:morton\+\_\+functor$<$ uint32, 2u, Bbox\+Type $>$ Struct Template Reference}
+\label{structcugar_1_1morton__functor_3_01uint32_00_012u_00_01_bbox_type_01_4}\index{cugar\+::morton\+\_\+functor$<$ uint32, 2u, Bbox\+Type $>$@{cugar\+::morton\+\_\+functor$<$ uint32, 2u, Bbox\+Type $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$typename Bbox\+Type$>$\newline
+struct cugar\+::morton\+\_\+functor$<$ uint32, 2u, Bbox\+Type $>$}
+
+a convenience functor to compute the Morton code of a point sequences relative to a given bounding box 
+
+{\ttfamily \#include $<$morton.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1morton__functor_3_01uint32_00_012u_00_01_bbox_type_01_4_a745fd0a7750f5c4f4b2c69bb4ffb0c35}\label{structcugar_1_1morton__functor_3_01uint32_00_012u_00_01_bbox_type_01_4_a745fd0a7750f5c4f4b2c69bb4ffb0c35}} 
+typedef Bbox\+Type\+::value\+\_\+type {\bfseries value\+\_\+type}
+\item 
+\mbox{\Hypertarget{structcugar_1_1morton__functor_3_01uint32_00_012u_00_01_bbox_type_01_4_a005e75c1506a4240601b699fc387857b}\label{structcugar_1_1morton__functor_3_01uint32_00_012u_00_01_bbox_type_01_4_a005e75c1506a4240601b699fc387857b}} 
+typedef Bbox\+Type\+::vector\+\_\+type {\bfseries vector\+\_\+type}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1morton__functor_3_01uint32_00_012u_00_01_bbox_type_01_4_a22f7d67d7676d39c3cf6b58b27115c6e}{morton\+\_\+functor} (const \hyperlink{structcugar_1_1_bbox}{Bbox2f} \&bbox)
+\item 
+\mbox{\Hypertarget{structcugar_1_1morton__functor_3_01uint32_00_012u_00_01_bbox_type_01_4_adddd67e8bcb38ffbc1369e93350612df}\label{structcugar_1_1morton__functor_3_01uint32_00_012u_00_01_bbox_type_01_4_adddd67e8bcb38ffbc1369e93350612df}} 
+{\footnotesize template$<$typename Point\+\_\+type $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 {\bfseries operator()} (const Point\+\_\+type point) const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1morton__functor_3_01uint32_00_012u_00_01_bbox_type_01_4_a39c01ec883cd0686fd9fe4749095671b}\label{structcugar_1_1morton__functor_3_01uint32_00_012u_00_01_bbox_type_01_4_a39c01ec883cd0686fd9fe4749095671b}} 
+const vector\+\_\+type {\bfseries m\+\_\+base}
+\item 
+\mbox{\Hypertarget{structcugar_1_1morton__functor_3_01uint32_00_012u_00_01_bbox_type_01_4_aacec74ca715221f55a44ab0ddba3579d}\label{structcugar_1_1morton__functor_3_01uint32_00_012u_00_01_bbox_type_01_4_aacec74ca715221f55a44ab0ddba3579d}} 
+const vector\+\_\+type {\bfseries m\+\_\+inv}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcugar_1_1morton__functor_3_01uint32_00_012u_00_01_bbox_type_01_4_a22f7d67d7676d39c3cf6b58b27115c6e}\label{structcugar_1_1morton__functor_3_01uint32_00_012u_00_01_bbox_type_01_4_a22f7d67d7676d39c3cf6b58b27115c6e}} 
+\index{cugar\+::morton\+\_\+functor$<$ uint32, 2u, Bbox\+Type $>$@{cugar\+::morton\+\_\+functor$<$ uint32, 2u, Bbox\+Type $>$}!morton\+\_\+functor@{morton\+\_\+functor}}
+\index{morton\+\_\+functor@{morton\+\_\+functor}!cugar\+::morton\+\_\+functor$<$ uint32, 2u, Bbox\+Type $>$@{cugar\+::morton\+\_\+functor$<$ uint32, 2u, Bbox\+Type $>$}}
+\subsubsection{\texorpdfstring{morton\+\_\+functor()}{morton\_functor()}}
+{\footnotesize\ttfamily template$<$typename Bbox\+Type $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1morton__functor}{cugar\+::morton\+\_\+functor}$<$ uint32, 2u, Bbox\+Type $>$\+::morton\+\_\+functor (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_bbox}{Bbox2f} \&}]{bbox }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em bbox} & global bounding box \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bits/\hyperlink{morton_8h}{morton.\+h}\end{DoxyCompactItemize}

@@ -1,0 +1,42 @@
+\hypertarget{classcugar_1_1_l_f_s_r_generator_matrix}{}\section{cugar\+:\+:L\+F\+S\+R\+Generator\+Matrix Class Reference}
+\label{classcugar_1_1_l_f_s_r_generator_matrix}\index{cugar\+::\+L\+F\+S\+R\+Generator\+Matrix@{cugar\+::\+L\+F\+S\+R\+Generator\+Matrix}}
+
+
+\subsection{Detailed description}
+An implementation of the small linear feedback shift registers (L\+F\+SR) for use in a Markov chain quasi-\/\+Monte Carlo context, as described in S. Chen, M. Matsumoto, T. Nishimura, and A. Owen\+: \char`\"{}\+New inputs and methods for Markov
+chain quasi-\/\+Monte Carlo\char`\"{}, and S. Chen\+: \char`\"{}\+Consistence and convergence rate of
+\+Markov chain quasi-\/\+Monte Carlo with examples\char`\"{}. Apart from the matrix that describes the recurrence, this class is stateless, and can therefore be easily shared in a multi-\/threaded context.
+
+\href{https://en.wikipedia.org/wiki/Linear-feedback_shift_register}{\tt https\+://en.\+wikipedia.\+org/wiki/\+Linear-\/feedback\+\_\+shift\+\_\+register} 
+
+{\ttfamily \#include $<$lfsr.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcugar_1_1_l_f_s_r_generator_matrix_a1e210b57aecc9bddd4fd7e3c99bae0d5}\label{classcugar_1_1_l_f_s_r_generator_matrix_a1e210b57aecc9bddd4fd7e3c99bae0d5}} 
+enum {\bfseries Offset\+\_\+type} \{ {\bfseries O\+R\+I\+G\+I\+N\+AL}, 
+{\bfseries G\+O\+O\+D\+\_\+\+P\+R\+O\+J\+E\+C\+T\+I\+O\+NS}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE {\bfseries L\+F\+S\+R\+Generator\+Matrix} (uint32 m, Offset\+\_\+type offset\+\_\+type=G\+O\+O\+D\+\_\+\+P\+R\+O\+J\+E\+C\+T\+I\+O\+NS)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float {\bfseries next} (uint32 scramble, uint32 $\ast$state) const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcugar_1_1_l_f_s_r_generator_matrix_a80ce08a8b13499ad66eb1733ee3d35d2}\label{classcugar_1_1_l_f_s_r_generator_matrix_a80ce08a8b13499ad66eb1733ee3d35d2}} 
+uint32 {\bfseries m\+\_\+m}
+\item 
+\mbox{\Hypertarget{classcugar_1_1_l_f_s_r_generator_matrix_a007507bbdc265c1f3e4042d2bc7005cf}\label{classcugar_1_1_l_f_s_r_generator_matrix_a007507bbdc265c1f3e4042d2bc7005cf}} 
+uint32 {\bfseries m\+\_\+f} \mbox{[}32\mbox{]}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/sampling/\hyperlink{lfsr_8h}{lfsr.\+h}\end{DoxyCompactItemize}

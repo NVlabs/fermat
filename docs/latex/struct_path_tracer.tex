@@ -1,0 +1,100 @@
+\hypertarget{struct_path_tracer}{}\section{Path\+Tracer Struct Reference}
+\label{struct_path_tracer}\index{Path\+Tracer@{Path\+Tracer}}
+
+
+\subsection{Detailed description}
+\hyperlink{struct_path}{Path} tracer 
+
+{\ttfamily \#include $<$pathtracer.\+h$>$}
+
+Inheritance diagram for Path\+Tracer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{struct_path_tracer}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_path_tracer_aaa15005f9a89caaff352d3872168376b}\label{struct_path_tracer_aaa15005f9a89caaff352d3872168376b}} 
+typedef \hyperlink{struct_adaptive_clustered_r_l_storage}{Adaptive\+Clustered\+R\+L\+Storage} {\bfseries V\+T\+L\+R\+L\+Storage}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group___p_t_module_details_ga923b8d146b23f93356f6c74971c4d6f7}{init} (int argc, char $\ast$$\ast$argv, \hyperlink{struct_rendering_context}{Rendering\+Context} \&renderer)
+\item 
+void \hyperlink{group___p_t_module_details_ga3e6317495ea6c761968a893b3a54824e}{render} (const uint32 instance, \hyperlink{struct_rendering_context}{Rendering\+Context} \&renderer)
+\item 
+\mbox{\Hypertarget{struct_path_tracer_a84595cdac7e983b4dcfa72677f4e7a87}\label{struct_path_tracer_a84595cdac7e983b4dcfa72677f4e7a87}} 
+void {\bfseries setup\+\_\+samples} (const uint32 instance)
+\item 
+void \hyperlink{group___p_t_module_details_gad08f55d7ba075e0b71a4aa729c07986d}{keyboard} (unsigned char character, int x, int y, bool \&invalidate)
+\item 
+void \hyperlink{struct_path_tracer_a3c4e7e9eb10e92c6a6d5cc94bbf93ee7}{destroy} ()
+\item 
+void \hyperlink{group___p_t_module_details_gaae1782405577d0072ff78570ec0025cc}{dump\+\_\+speed\+\_\+stats} (F\+I\+LE $\ast$stats)
+\item 
+void {\bfseries update\+\_\+vtls\+\_\+rl} (const uint32 instance)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_path_tracer_a8b333c7f699b163f647af81a016cf83f}\label{struct_path_tracer_a8b333c7f699b163f647af81a016cf83f}} 
+static \hyperlink{struct_renderer_interface}{Renderer\+Interface} $\ast$ {\bfseries factory} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_path_tracer_ab4e4e4cad2b4b894c8f117dac5a809b7}\label{struct_path_tracer_ab4e4e4cad2b4b894c8f117dac5a809b7}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, uint8 $>$ {\bfseries m\+\_\+memory\+\_\+pool}
+\item 
+\mbox{\Hypertarget{struct_path_tracer_a4e4eedcd2f916a248f87f2ba240a2e16}\label{struct_path_tracer_a4e4eedcd2f916a248f87f2ba240a2e16}} 
+\hyperlink{struct_p_t_options}{P\+T\+Options} {\bfseries m\+\_\+options}
+\item 
+\mbox{\Hypertarget{struct_path_tracer_a6fd9814f780b9773cf09ffeb7b0f113e}\label{struct_path_tracer_a6fd9814f780b9773cf09ffeb7b0f113e}} 
+\hyperlink{struct_tiled_sequence}{Tiled\+Sequence} {\bfseries m\+\_\+sequence}
+\item 
+\mbox{\Hypertarget{struct_path_tracer_a57eb13d57e9081b3831e3933c2c924f9}\label{struct_path_tracer_a57eb13d57e9081b3831e3933c2c924f9}} 
+\hyperlink{classcugar_1_1_l_f_s_r_generator_matrix}{cugar\+::\+L\+F\+S\+R\+Generator\+Matrix} {\bfseries m\+\_\+generator}
+\item 
+\mbox{\Hypertarget{struct_path_tracer_abaed20bfd304377069f9c5f8b740a175}\label{struct_path_tracer_abaed20bfd304377069f9c5f8b740a175}} 
+\hyperlink{structcugar_1_1_l_f_s_r_random_stream}{cugar\+::\+L\+F\+S\+R\+Random\+Stream} {\bfseries m\+\_\+random}
+\item 
+\mbox{\Hypertarget{struct_path_tracer_a1dc439c9f458b3fee5e07edfb1bc1a12}\label{struct_path_tracer_a1dc439c9f458b3fee5e07edfb1bc1a12}} 
+\hyperlink{struct_mesh_v_t_l_storage}{Mesh\+V\+T\+L\+Storage} $\ast$ {\bfseries m\+\_\+mesh\+\_\+vtls}
+\item 
+\mbox{\Hypertarget{struct_path_tracer_af1f0df6e130041e52ae03411ef0b85a2}\label{struct_path_tracer_af1f0df6e130041e52ae03411ef0b85a2}} 
+\hyperlink{struct_adaptive_clustered_r_l_storage}{V\+T\+L\+R\+L\+Storage} $\ast$ {\bfseries m\+\_\+vtls\+\_\+rl}
+\item 
+\mbox{\Hypertarget{struct_path_tracer_a34ee633b20d75d2f00d36c8c0cbee2eb}\label{struct_path_tracer_a34ee633b20d75d2f00d36c8c0cbee2eb}} 
+\hyperlink{structcugar_1_1_bbox}{cugar\+::\+Bbox3f} {\bfseries m\+\_\+bbox}
+\item 
+\mbox{\Hypertarget{struct_path_tracer_a08787bb830c6a9f883ce428fc3fb80af}\label{struct_path_tracer_a08787bb830c6a9f883ce428fc3fb80af}} 
+float {\bfseries m\+\_\+time}
+\item 
+\mbox{\Hypertarget{struct_path_tracer_a7561a9680a0b3435e89b218a9b369694}\label{struct_path_tracer_a7561a9680a0b3435e89b218a9b369694}} 
+uint32 {\bfseries m\+\_\+pathtracer\+\_\+raygen}
+\item 
+\mbox{\Hypertarget{struct_path_tracer_a354c091ed28190973b8f589ab5867b60}\label{struct_path_tracer_a354c091ed28190973b8f589ab5867b60}} 
+\hyperlink{struct_p_t_stats}{P\+T\+Stats} {\bfseries m\+\_\+stats}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{struct_path_tracer_a3c4e7e9eb10e92c6a6d5cc94bbf93ee7}\label{struct_path_tracer_a3c4e7e9eb10e92c6a6d5cc94bbf93ee7}} 
+\index{Path\+Tracer@{Path\+Tracer}!destroy@{destroy}}
+\index{destroy@{destroy}!Path\+Tracer@{Path\+Tracer}}
+\subsubsection{\texorpdfstring{destroy()}{destroy()}}
+{\footnotesize\ttfamily void Path\+Tracer\+::destroy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+this method is responsible for destroying the object itself 
+
+Reimplemented from \hyperlink{struct_renderer_interface_a7469218aafa029a3e22bac2c00dca9f5}{Renderer\+Interface}.
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/renderers/pathtracer.\+h\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/renderers/pathtracer\+\_\+impl.\+h\end{DoxyCompactItemize}

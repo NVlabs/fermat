@@ -1,0 +1,74 @@
+\hypertarget{struct_b_p_t_context_base}{}\section{B\+P\+T\+Context\+Base$<$ T\+B\+P\+T\+Options $>$ Struct Template Reference}
+\label{struct_b_p_t_context_base}\index{B\+P\+T\+Context\+Base$<$ T\+B\+P\+T\+Options $>$@{B\+P\+T\+Context\+Base$<$ T\+B\+P\+T\+Options $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$typename T\+B\+P\+T\+Options$>$\newline
+struct B\+P\+T\+Context\+Base$<$ T\+B\+P\+T\+Options $>$}
+
+\mbox{[}B\+P\+T\+Context\+Base\+Block\mbox{]} \begin{DoxyParagraph}{}
+Basic context for bidirectional path tracing 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+This context class is responsible for storing\+: ~\newline
+
+\begin{DoxyItemize}
+\item a set of light vertices, generated throughout the light subpath sampling phase
+\item a set of ray queues used throughout the wavefront scheduling process of the entire bidirectional path tracing pipeline
+\item an options member, deriving from \hyperlink{struct_b_p_t_options_base}{B\+P\+T\+Options\+Base} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+{\ttfamily \#include $<$bpt\+\_\+context.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_b_p_t_context_base_a99d21412e9d03211d4bb7e39f36f4da2}\label{struct_b_p_t_context_base_a99d21412e9d03211d4bb7e39f36f4da2}} 
+{\bfseries B\+P\+T\+Context\+Base} (const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&\+\_\+renderer, const \hyperlink{struct_vertex_storage_view}{Vertex\+Storage\+View} \&\+\_\+light\+\_\+vertices, const \hyperlink{struct_b_p_t_queues_view}{B\+P\+T\+Queues\+View} \&\+\_\+queues, const T\+B\+P\+T\+Options \+\_\+options=T\+B\+P\+T\+Options())
+\item 
+\mbox{\Hypertarget{struct_b_p_t_context_base_aa1a101747cbf03fcb7681a43519601c4}\label{struct_b_p_t_context_base_aa1a101747cbf03fcb7681a43519601c4}} 
+void {\bfseries set\+\_\+camera} (const \hyperlink{struct_camera}{Camera} \&camera, const uint32 res\+\_\+x, const uint32 res\+\_\+y, const float aspect\+\_\+ratio)
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_b_p_t_context_base_aa09a6dc8959a83d81486c9bd6280f8d6}\label{struct_b_p_t_context_base_aa09a6dc8959a83d81486c9bd6280f8d6}} 
+uint32 {\bfseries in\+\_\+bounce}
+\item 
+\mbox{\Hypertarget{struct_b_p_t_context_base_ac6082ad7d9678a8e5e6173673ff92a3d}\label{struct_b_p_t_context_base_ac6082ad7d9678a8e5e6173673ff92a3d}} 
+\hyperlink{struct_ray_queue}{Ray\+Queue} {\bfseries in\+\_\+queue}
+\item 
+\mbox{\Hypertarget{struct_b_p_t_context_base_aa57f6964ab4852b1ffba8cabedac4fd7}\label{struct_b_p_t_context_base_aa57f6964ab4852b1ffba8cabedac4fd7}} 
+\hyperlink{struct_ray_queue}{Ray\+Queue} {\bfseries shadow\+\_\+queue}
+\item 
+\mbox{\Hypertarget{struct_b_p_t_context_base_aac6319a84f2a87b7f6813e9f36d6492e}\label{struct_b_p_t_context_base_aac6319a84f2a87b7f6813e9f36d6492e}} 
+\hyperlink{struct_ray_queue}{Ray\+Queue} {\bfseries scatter\+\_\+queue}
+\item 
+\mbox{\Hypertarget{struct_b_p_t_context_base_a04326acccfec76676b2d07f2ca9de7dc}\label{struct_b_p_t_context_base_a04326acccfec76676b2d07f2ca9de7dc}} 
+\hyperlink{struct_vertex_storage_view}{Vertex\+Storage\+View} {\bfseries light\+\_\+vertices}
+\item 
+\mbox{\Hypertarget{struct_b_p_t_context_base_a15c5f6e58e807ff9c7153b714fd89cf7}\label{struct_b_p_t_context_base_a15c5f6e58e807ff9c7153b714fd89cf7}} 
+\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} {\bfseries camera\+\_\+U}
+\item 
+\mbox{\Hypertarget{struct_b_p_t_context_base_a00ad2326f04c69ba6f7f4560d868a6ac}\label{struct_b_p_t_context_base_a00ad2326f04c69ba6f7f4560d868a6ac}} 
+\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} {\bfseries camera\+\_\+V}
+\item 
+\mbox{\Hypertarget{struct_b_p_t_context_base_a0cb8ff154aad0ff71b7f277a159cc2b3}\label{struct_b_p_t_context_base_a0cb8ff154aad0ff71b7f277a159cc2b3}} 
+\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} {\bfseries camera\+\_\+W}
+\item 
+\mbox{\Hypertarget{struct_b_p_t_context_base_a212f84e9da36ed87d8c7b08ae3f05d75}\label{struct_b_p_t_context_base_a212f84e9da36ed87d8c7b08ae3f05d75}} 
+float {\bfseries camera\+\_\+\+W\+\_\+len}
+\item 
+\mbox{\Hypertarget{struct_b_p_t_context_base_ac2ad3ee44e3095e8f201b1d38cf22696}\label{struct_b_p_t_context_base_ac2ad3ee44e3095e8f201b1d38cf22696}} 
+float {\bfseries camera\+\_\+square\+\_\+focal\+\_\+length}
+\item 
+\mbox{\Hypertarget{struct_b_p_t_context_base_adf209d0d6204b44ac0f57878dcb18a8a}\label{struct_b_p_t_context_base_adf209d0d6204b44ac0f57878dcb18a8a}} 
+T\+B\+P\+T\+Options {\bfseries options}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/bpt\+\_\+context.\+h\end{DoxyCompactItemize}

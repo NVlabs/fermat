@@ -1,0 +1,92 @@
+\hypertarget{structcugar_1_1_c_p__rotator}{}\section{cugar\+:\+:C\+P\+\_\+rotator$<$ Generator, Iterator $>$ Struct Template Reference}
+\label{structcugar_1_1_c_p__rotator}\index{cugar\+::\+C\+P\+\_\+rotator$<$ Generator, Iterator $>$@{cugar\+::\+C\+P\+\_\+rotator$<$ Generator, Iterator $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$typename Generator, typename Iterator = const float$\ast$$>$\newline
+struct cugar\+::\+C\+P\+\_\+rotator$<$ Generator, Iterator $>$}
+
+Wrapper class to rotate the samples coming from a generator with a set of Cranley-\/\+Patterson rotations.
+
+Given a point-\/set P = \{p\+\_\+i\}\+\_\+\{ i = 1,...,n \} in\mbox{[}0, 1\mbox{]}$^\wedge$d, a CP rotation is the application of a constant shift s to all points, modulo 1\+: C\+P(\+P, s) = \{ p\+\_\+i + s $\vert$ mod 1 \}.
+
+R.\+Cranley and T.\+Patterson.\+Randomization of number theoretic methods for multiple integration.\+S\+I\+AM Journal on Numerical Analysis, 13 \+: 904–914, 1976. 3 
+
+{\ttfamily \#include $<$cp\+\_\+rotations.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_c_p__rotator_a0ae82f8622f5b3ec56d473671f362953}{C\+P\+\_\+rotator} (Generator \&gen, Iterator rot, uint32 size, uint32 dim=0)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_c_p__rotator_adab9c93a549593fdf4753ac753ea59da}{next} ()
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_c_p__rotator_ad534cd9e5a2c888ec0fe7d6adf904013}{density} (const float x) const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_c_p__rotator_abfbedb0f66eac6ae0b1fabca14f1f3c3}\label{structcugar_1_1_c_p__rotator_abfbedb0f66eac6ae0b1fabca14f1f3c3}} 
+Generator \& {\bfseries m\+\_\+gen}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_c_p__rotator_a9833f3720bdfc0396e81e4eb05151e52}\label{structcugar_1_1_c_p__rotator_a9833f3720bdfc0396e81e4eb05151e52}} 
+Iterator {\bfseries m\+\_\+rot}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_c_p__rotator_a7fec490f4e740f3fda0d6256d99470f9}\label{structcugar_1_1_c_p__rotator_a7fec490f4e740f3fda0d6256d99470f9}} 
+uint32 {\bfseries m\+\_\+size}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_c_p__rotator_a9411ac46a5e961a7602508f94e8793fa}\label{structcugar_1_1_c_p__rotator_a9411ac46a5e961a7602508f94e8793fa}} 
+uint32 {\bfseries m\+\_\+dim}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcugar_1_1_c_p__rotator_a0ae82f8622f5b3ec56d473671f362953}\label{structcugar_1_1_c_p__rotator_a0ae82f8622f5b3ec56d473671f362953}} 
+\index{cugar\+::\+C\+P\+\_\+rotator@{cugar\+::\+C\+P\+\_\+rotator}!C\+P\+\_\+rotator@{C\+P\+\_\+rotator}}
+\index{C\+P\+\_\+rotator@{C\+P\+\_\+rotator}!cugar\+::\+C\+P\+\_\+rotator@{cugar\+::\+C\+P\+\_\+rotator}}
+\subsubsection{\texorpdfstring{C\+P\+\_\+rotator()}{CP\_rotator()}}
+{\footnotesize\ttfamily template$<$typename Generator , typename Iterator  = const float$\ast$$>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_c_p__rotator}{cugar\+::\+C\+P\+\_\+rotator}$<$ Generator, Iterator $>$\+::\hyperlink{structcugar_1_1_c_p__rotator}{C\+P\+\_\+rotator} (\begin{DoxyParamCaption}\item[{Generator \&}]{gen,  }\item[{Iterator}]{rot,  }\item[{uint32}]{size,  }\item[{uint32}]{dim = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em gen} & generator \\
+\hline
+{\em rot} & sequence of rotations \\
+\hline
+{\em size} & number of rotations \\
+\hline
+{\em dim} & initial dimension \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1_c_p__rotator_ad534cd9e5a2c888ec0fe7d6adf904013}\label{structcugar_1_1_c_p__rotator_ad534cd9e5a2c888ec0fe7d6adf904013}} 
+\index{cugar\+::\+C\+P\+\_\+rotator@{cugar\+::\+C\+P\+\_\+rotator}!density@{density}}
+\index{density@{density}!cugar\+::\+C\+P\+\_\+rotator@{cugar\+::\+C\+P\+\_\+rotator}}
+\subsubsection{\texorpdfstring{density()}{density()}}
+{\footnotesize\ttfamily template$<$typename Generator , typename Iterator  = const float$\ast$$>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_c_p__rotator}{cugar\+::\+C\+P\+\_\+rotator}$<$ Generator, Iterator $>$\+::density (\begin{DoxyParamCaption}\item[{const float}]{x }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+probability density function
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & sample location \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1_c_p__rotator_adab9c93a549593fdf4753ac753ea59da}\label{structcugar_1_1_c_p__rotator_adab9c93a549593fdf4753ac753ea59da}} 
+\index{cugar\+::\+C\+P\+\_\+rotator@{cugar\+::\+C\+P\+\_\+rotator}!next@{next}}
+\index{next@{next}!cugar\+::\+C\+P\+\_\+rotator@{cugar\+::\+C\+P\+\_\+rotator}}
+\subsubsection{\texorpdfstring{next()}{next()}}
+{\footnotesize\ttfamily template$<$typename Generator , typename Iterator  = const float$\ast$$>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_c_p__rotator}{cugar\+::\+C\+P\+\_\+rotator}$<$ Generator, Iterator $>$\+::next (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+get the next sample 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/sampling/\hyperlink{cp__rotations_8h}{cp\+\_\+rotations.\+h}\end{DoxyCompactItemize}

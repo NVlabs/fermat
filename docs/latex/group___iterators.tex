@@ -1,0 +1,108 @@
+\hypertarget{group___iterators}{}\section{Iterators}
+\label{group___iterators}\index{Iterators@{Iterators}}
+
+
+\subsection{Detailed Description}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcugar_1_1strided__iterator}{cugar\+::strided\+\_\+iterator$<$ T $>$}
+\item 
+struct \hyperlink{structcugar_1_1block__strided__iterator}{cugar\+::block\+\_\+strided\+\_\+iterator$<$ B\+L\+O\+C\+K\+S\+I\+Z\+E, T, L\+A\+Y\+O\+U\+T $>$}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterators_ga3d26fe53e476a0d79cd2f2e23310ea32}\label{group___iterators_ga3d26fe53e476a0d79cd2f2e23310ea32}} 
+enum {\bfseries block\+\_\+strided\+\_\+layout} \{ {\bfseries R\+O\+W\+\_\+\+M\+A\+J\+O\+R\+\_\+\+L\+A\+Y\+O\+UT} = 0u, 
+{\bfseries C\+O\+L\+U\+M\+N\+\_\+\+M\+A\+J\+O\+R\+\_\+\+L\+A\+Y\+O\+UT} = 1u
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1strided__iterator}{strided\+\_\+iterator}$<$ T $>$ \hyperlink{group___iterators_ga18b4b42492eb7224bb23b6d7703d59d3}{cugar\+::make\+\_\+strided\+\_\+iterator} (T it, const uint32 stride)
+\item 
+{\footnotesize template$<$typename T $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{group___iterators_ga72e24473e98fc1cd1bd45b9e55e154ec}{cugar\+::operator==} (const \hyperlink{structcugar_1_1strided__iterator}{strided\+\_\+iterator}$<$ T $>$ it1, const \hyperlink{structcugar_1_1strided__iterator}{strided\+\_\+iterator}$<$ T $>$ it2)
+\item 
+{\footnotesize template$<$typename T $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{group___iterators_ga716fb525ff65fc5c8224b1e46979e8a8}{cugar\+::operator!=} (const \hyperlink{structcugar_1_1strided__iterator}{strided\+\_\+iterator}$<$ T $>$ it1, const \hyperlink{structcugar_1_1strided__iterator}{strided\+\_\+iterator}$<$ T $>$ it2)
+\item 
+{\footnotesize template$<$typename T $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{group___iterators_ga7e34173347793a8a35add6b79d2b1c2b}{cugar\+::operator$<$} (const \hyperlink{structcugar_1_1strided__iterator}{strided\+\_\+iterator}$<$ T $>$ it1, const \hyperlink{structcugar_1_1strided__iterator}{strided\+\_\+iterator}$<$ T $>$ it2)
+\item 
+{\footnotesize template$<$typename T $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{group___iterators_ga863ca4b5ec73bff722711892c9468f44}{cugar\+::operator$<$=} (const \hyperlink{structcugar_1_1strided__iterator}{strided\+\_\+iterator}$<$ T $>$ it1, const \hyperlink{structcugar_1_1strided__iterator}{strided\+\_\+iterator}$<$ T $>$ it2)
+\item 
+{\footnotesize template$<$typename T $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{group___iterators_ga1e9e6257c01330e7b3620c9f3a81ee8f}{cugar\+::operator$>$} (const \hyperlink{structcugar_1_1strided__iterator}{strided\+\_\+iterator}$<$ T $>$ it1, const \hyperlink{structcugar_1_1strided__iterator}{strided\+\_\+iterator}$<$ T $>$ it2)
+\item 
+{\footnotesize template$<$typename T $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{group___iterators_ga9e4c4ee0e4663d9e1c671a22056c9533}{cugar\+::operator$>$=} (const \hyperlink{structcugar_1_1strided__iterator}{strided\+\_\+iterator}$<$ T $>$ it1, const \hyperlink{structcugar_1_1strided__iterator}{strided\+\_\+iterator}$<$ T $>$ it2)
+\item 
+{\footnotesize template$<$uint32 B\+L\+O\+C\+K\+S\+I\+ZE, typename T , block\+\_\+strided\+\_\+layout L\+A\+Y\+O\+UT$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{group___iterators_ga465edad50b0d8fadcb83a0eb90255327}{cugar\+::operator==} (const \hyperlink{structcugar_1_1block__strided__iterator}{block\+\_\+strided\+\_\+iterator}$<$ B\+L\+O\+C\+K\+S\+I\+ZE, T, L\+A\+Y\+O\+UT $>$ it1, const \hyperlink{structcugar_1_1block__strided__iterator}{block\+\_\+strided\+\_\+iterator}$<$ B\+L\+O\+C\+K\+S\+I\+ZE, T, L\+A\+Y\+O\+UT $>$ it2)
+\item 
+{\footnotesize template$<$uint32 B\+L\+O\+C\+K\+S\+I\+ZE, typename T , block\+\_\+strided\+\_\+layout L\+A\+Y\+O\+UT$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{group___iterators_gae35c875eb7c9a47d37f677f1df67f7f9}{cugar\+::operator!=} (const \hyperlink{structcugar_1_1block__strided__iterator}{block\+\_\+strided\+\_\+iterator}$<$ B\+L\+O\+C\+K\+S\+I\+ZE, T, L\+A\+Y\+O\+UT $>$ it1, const \hyperlink{structcugar_1_1block__strided__iterator}{block\+\_\+strided\+\_\+iterator}$<$ B\+L\+O\+C\+K\+S\+I\+ZE, T, L\+A\+Y\+O\+UT $>$ it2)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___iterators_ga18b4b42492eb7224bb23b6d7703d59d3}\label{group___iterators_ga18b4b42492eb7224bb23b6d7703d59d3}} 
+\index{Iterators@{Iterators}!make\+\_\+strided\+\_\+iterator@{make\+\_\+strided\+\_\+iterator}}
+\index{make\+\_\+strided\+\_\+iterator@{make\+\_\+strided\+\_\+iterator}!Iterators@{Iterators}}
+\subsubsection{\texorpdfstring{make\+\_\+strided\+\_\+iterator()}{make\_strided\_iterator()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1strided__iterator}{strided\+\_\+iterator}$<$T$>$ cugar\+::make\+\_\+strided\+\_\+iterator (\begin{DoxyParamCaption}\item[{T}]{it,  }\item[{const uint32}]{stride }\end{DoxyParamCaption})}
+
+build a strided iterator \mbox{\Hypertarget{group___iterators_ga716fb525ff65fc5c8224b1e46979e8a8}\label{group___iterators_ga716fb525ff65fc5c8224b1e46979e8a8}} 
+\index{Iterators@{Iterators}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!Iterators@{Iterators}}
+\subsubsection{\texorpdfstring{operator"!=()}{operator!=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool cugar\+::operator!= (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1strided__iterator}{strided\+\_\+iterator}$<$ T $>$}]{it1,  }\item[{const \hyperlink{structcugar_1_1strided__iterator}{strided\+\_\+iterator}$<$ T $>$}]{it2 }\end{DoxyParamCaption})}
+
+operator != \mbox{\Hypertarget{group___iterators_gae35c875eb7c9a47d37f677f1df67f7f9}\label{group___iterators_gae35c875eb7c9a47d37f677f1df67f7f9}} 
+\index{Iterators@{Iterators}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!Iterators@{Iterators}}
+\subsubsection{\texorpdfstring{operator"!=()}{operator!=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$uint32 B\+L\+O\+C\+K\+S\+I\+ZE, typename T , block\+\_\+strided\+\_\+layout L\+A\+Y\+O\+UT$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool cugar\+::operator!= (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1block__strided__iterator}{block\+\_\+strided\+\_\+iterator}$<$ B\+L\+O\+C\+K\+S\+I\+ZE, T, L\+A\+Y\+O\+UT $>$}]{it1,  }\item[{const \hyperlink{structcugar_1_1block__strided__iterator}{block\+\_\+strided\+\_\+iterator}$<$ B\+L\+O\+C\+K\+S\+I\+ZE, T, L\+A\+Y\+O\+UT $>$}]{it2 }\end{DoxyParamCaption})}
+
+operator != \mbox{\Hypertarget{group___iterators_ga7e34173347793a8a35add6b79d2b1c2b}\label{group___iterators_ga7e34173347793a8a35add6b79d2b1c2b}} 
+\index{Iterators@{Iterators}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!Iterators@{Iterators}}
+\subsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool cugar\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1strided__iterator}{strided\+\_\+iterator}$<$ T $>$}]{it1,  }\item[{const \hyperlink{structcugar_1_1strided__iterator}{strided\+\_\+iterator}$<$ T $>$}]{it2 }\end{DoxyParamCaption})}
+
+operator $<$ \mbox{\Hypertarget{group___iterators_ga863ca4b5ec73bff722711892c9468f44}\label{group___iterators_ga863ca4b5ec73bff722711892c9468f44}} 
+\index{Iterators@{Iterators}!operator$<$=@{operator$<$=}}
+\index{operator$<$=@{operator$<$=}!Iterators@{Iterators}}
+\subsubsection{\texorpdfstring{operator$<$=()}{operator<=()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool cugar\+::operator$<$= (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1strided__iterator}{strided\+\_\+iterator}$<$ T $>$}]{it1,  }\item[{const \hyperlink{structcugar_1_1strided__iterator}{strided\+\_\+iterator}$<$ T $>$}]{it2 }\end{DoxyParamCaption})}
+
+operator $<$= \mbox{\Hypertarget{group___iterators_ga72e24473e98fc1cd1bd45b9e55e154ec}\label{group___iterators_ga72e24473e98fc1cd1bd45b9e55e154ec}} 
+\index{Iterators@{Iterators}!operator==@{operator==}}
+\index{operator==@{operator==}!Iterators@{Iterators}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool cugar\+::operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1strided__iterator}{strided\+\_\+iterator}$<$ T $>$}]{it1,  }\item[{const \hyperlink{structcugar_1_1strided__iterator}{strided\+\_\+iterator}$<$ T $>$}]{it2 }\end{DoxyParamCaption})}
+
+operator == \mbox{\Hypertarget{group___iterators_ga465edad50b0d8fadcb83a0eb90255327}\label{group___iterators_ga465edad50b0d8fadcb83a0eb90255327}} 
+\index{Iterators@{Iterators}!operator==@{operator==}}
+\index{operator==@{operator==}!Iterators@{Iterators}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$uint32 B\+L\+O\+C\+K\+S\+I\+ZE, typename T , block\+\_\+strided\+\_\+layout L\+A\+Y\+O\+UT$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool cugar\+::operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1block__strided__iterator}{block\+\_\+strided\+\_\+iterator}$<$ B\+L\+O\+C\+K\+S\+I\+ZE, T, L\+A\+Y\+O\+UT $>$}]{it1,  }\item[{const \hyperlink{structcugar_1_1block__strided__iterator}{block\+\_\+strided\+\_\+iterator}$<$ B\+L\+O\+C\+K\+S\+I\+ZE, T, L\+A\+Y\+O\+UT $>$}]{it2 }\end{DoxyParamCaption})}
+
+operator == \mbox{\Hypertarget{group___iterators_ga1e9e6257c01330e7b3620c9f3a81ee8f}\label{group___iterators_ga1e9e6257c01330e7b3620c9f3a81ee8f}} 
+\index{Iterators@{Iterators}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!Iterators@{Iterators}}
+\subsubsection{\texorpdfstring{operator$>$()}{operator>()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool cugar\+::operator$>$ (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1strided__iterator}{strided\+\_\+iterator}$<$ T $>$}]{it1,  }\item[{const \hyperlink{structcugar_1_1strided__iterator}{strided\+\_\+iterator}$<$ T $>$}]{it2 }\end{DoxyParamCaption})}
+
+operator $>$ \mbox{\Hypertarget{group___iterators_ga9e4c4ee0e4663d9e1c671a22056c9533}\label{group___iterators_ga9e4c4ee0e4663d9e1c671a22056c9533}} 
+\index{Iterators@{Iterators}!operator$>$=@{operator$>$=}}
+\index{operator$>$=@{operator$>$=}!Iterators@{Iterators}}
+\subsubsection{\texorpdfstring{operator$>$=()}{operator>=()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool cugar\+::operator$>$= (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1strided__iterator}{strided\+\_\+iterator}$<$ T $>$}]{it1,  }\item[{const \hyperlink{structcugar_1_1strided__iterator}{strided\+\_\+iterator}$<$ T $>$}]{it2 }\end{DoxyParamCaption})}
+
+operator $>$= 

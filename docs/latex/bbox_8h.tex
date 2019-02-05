@@ -1,0 +1,73 @@
+\hypertarget{bbox_8h}{}\section{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/linalg/bbox.h File Reference}
+\label{bbox_8h}\index{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/linalg/bbox.\+h@{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/linalg/bbox.\+h}}
+
+
+Defines an axis-\/aligned bounding box class.  
+
+
+{\ttfamily \#include $<$cugar/basic/numbers.\+h$>$}\newline
+{\ttfamily \#include $<$cugar/linalg/vector.\+h$>$}\newline
+{\ttfamily \#include $<$limits$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$cugar/linalg/bbox\+\_\+inline.\+h$>$}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcugar_1_1_bbox}{cugar\+::\+Bbox$<$ Vector\+\_\+t $>$}
+\item 
+struct \hyperlink{structcugar_1_1bbox__area__functor}{cugar\+::bbox\+\_\+area\+\_\+functor$<$ D\+I\+M $>$}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespacecugar}{cugar}
+\begin{DoxyCompactList}\small\item\em Define a \hyperlink{structcugar_1_1vector__view}{vector\+\_\+view} P\+OD type and \hyperlink{namespacecugar_a347f91de482f0cb8dcba21c086b0aa46}{plain\+\_\+view()} for std\+::vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef Bbox$<$ Vector2f $>$ {\bfseries cugar\+::\+Bbox2f}
+\item 
+typedef Bbox$<$ Vector3f $>$ {\bfseries cugar\+::\+Bbox3f}
+\item 
+typedef Bbox$<$ Vector4f $>$ {\bfseries cugar\+::\+Bbox4f}
+\item 
+typedef Bbox$<$ Vector2d $>$ {\bfseries cugar\+::\+Bbox2d}
+\item 
+typedef Bbox$<$ Vector3d $>$ {\bfseries cugar\+::\+Bbox3d}
+\item 
+typedef Bbox$<$ Vector4d $>$ {\bfseries cugar\+::\+Bbox4d}
+\item 
+typedef Bbox$<$ Vector2i $>$ {\bfseries cugar\+::\+Bbox2i}
+\item 
+typedef Bbox$<$ Vector3i $>$ {\bfseries cugar\+::\+Bbox3i}
+\item 
+typedef Bbox$<$ Vector4i $>$ {\bfseries cugar\+::\+Bbox4i}
+\item 
+typedef Bbox$<$ Vector2u $>$ {\bfseries cugar\+::\+Bbox2u}
+\item 
+typedef Bbox$<$ Vector3u $>$ {\bfseries cugar\+::\+Bbox3u}
+\item 
+typedef Bbox$<$ Vector4u $>$ {\bfseries cugar\+::\+Bbox4u}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{group___bbox_module_ga9bac92087484f436dd7eb6f20cb0b15a}{cugar\+::area} (const Bbox2f \&bbox)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{group___bbox_module_gae06f9ebe0da53f175c2d35b0ef604b1a}{cugar\+::area} (const Bbox3f \&bbox)
+\item 
+{\footnotesize template$<$typename Vector\+\_\+t $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{group___bbox_module_ga997d14f97dd4c3c80e1896796170ea60}{cugar\+::contains} (const Bbox$<$ Vector\+\_\+t $>$ \&bbox, const Vector\+\_\+t \&p)
+\item 
+{\footnotesize template$<$typename Vector\+\_\+t $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{group___bbox_module_gaeb563052dce95e32012796563ea7f611}{cugar\+::contains} (const Bbox$<$ Vector\+\_\+t $>$ \&bbox, const Bbox$<$ Vector\+\_\+t $>$ \&candidate)
+\item 
+{\footnotesize template$<$typename Vector\+\_\+t $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{group___bbox_module_ga771255b0f67e5f421e1cbb5b2fa367e0}{cugar\+::sq\+\_\+distance} (const Bbox$<$ Vector\+\_\+t $>$ \&bbox, const Vector\+\_\+t \&p)
+\item 
+{\footnotesize template$<$typename Vector\+\_\+t $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE size\+\_\+t \hyperlink{group___bbox_module_ga45c74efdebfc6b9233fecb19aa268e45}{cugar\+::largest\+\_\+axis} (const Bbox$<$ Vector\+\_\+t $>$ \&bbox)
+\item 
+{\footnotesize template$<$typename Vector\+\_\+t $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Vector\+\_\+t \hyperlink{group___bbox_module_ga4f5184c6a804324810a86f4e6ccd29f4}{cugar\+::extents} (const Bbox$<$ Vector\+\_\+t $>$ \&bbox)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Defines an axis-\/aligned bounding box class. 
+

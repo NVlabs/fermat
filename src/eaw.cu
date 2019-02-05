@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -59,6 +59,10 @@ void EAW_kernel(FBufferChannelView dst, const FBufferChannelView img, const GBuf
 	const cugar::Vector3f  normalCenter		= GBufferView::unpack_normal(packed_geo);
 	const cugar::Vector3f  positionCenter	= GBufferView::unpack_pos(packed_geo);
 
+	const float posRadius = 20 * cugar::min(
+		cugar::length(params.U) / img.res_x,
+		cugar::length(params.V) / img.res_y) * dot( positionCenter - params.E, params.W ) / cugar::square_length(params.W);
+
 	// check whether this pixel represents a miss (TODO: for stochastic effects, we might want to do some filtering in this case too...)
 	if (GBufferView::is_miss(packed_geo))
 	{
@@ -68,8 +72,8 @@ void EAW_kernel(FBufferChannelView dst, const FBufferChannelView img, const GBuf
 
 	const float variance	= var ? var[x + y * img.res_x] : 1.0f;
 	const float phiNormal	= params.phi_normal * step_size * step_size;
-	const float phiPosition	= params.phi_position;
-	const float phiColor	= params.phi_color / cugar::max(1.0e-3f, variance );
+	const float phiPosition	= params.phi_position / (posRadius*posRadius);
+	const float phiColor	= params.phi_color / cugar::max( 1.0e-3f, cugar::sqr(variance) );
 
 	float			sumWeight	= 0.0;
 	cugar::Vector3f	sumColor	= cugar::Vector3f(0.0f);
@@ -149,8 +153,8 @@ void EAW_mad_kernel(
 	const cugar::Vector4f  imgCenter		= img(x, y);
 
 	const cugar::Vector4f  colorCenter		=
-		(op & kEAWOpModulateInput)   ? imgCenter * weightCenter :
-		(op & kEAWOpDemodulateInput) ? imgCenter / weightCenter :
+		(op & kFilterOpModulateInput)   ? imgCenter * weightCenter :
+		(op & kFilterOpDemodulateInput) ? imgCenter / weightCenter :
 		imgCenter;
 
 	const cugar::Vector4f  packed_geo		= gb.geo(x, y);
@@ -160,21 +164,25 @@ void EAW_mad_kernel(
 	// check whether this pixel represents a miss (TODO: for stochastic effects, we might want to do some filtering in this case too...)
 	if (GBufferView::is_miss(packed_geo))
 	{
-		cugar::Vector4f r  = (op & kEAWOpAddMode) ? dst(x, y) : cugar::Vector4f(0.0f);
+		cugar::Vector4f r  = (op & kFilterOpAddMode) ? dst(x, y) : cugar::Vector4f(0.0f);
 
 		r +=
-			(op & kEAWOpModulateOutput)		? colorCenter * weightCenter :
-			(op & kEAWOpDemodulateOutput)	? colorCenter / weightCenter :
-											  colorCenter;
+			(op & kFilterOpModulateOutput)		? colorCenter * weightCenter :
+			(op & kFilterOpDemodulateOutput)	? colorCenter / weightCenter :
+												  colorCenter;
 
 		dst(x, y) = r;
 		return;
 	}
 
+	const float posRadius = 20 * cugar::min(
+		cugar::length(params.U) / img.res_x,
+		cugar::length(params.V) / img.res_y) * dot( positionCenter, params.W ) / cugar::square_length(params.W);
+
 	const float variance	= var ? var[x + y * img.res_x] : 1.0f;
 	const float phiNormal	= params.phi_normal * step_size * step_size;
-	const float phiPosition	= params.phi_position;
-	const float phiColor	= params.phi_color / cugar::max(1.0e-3f, variance );
+	const float phiPosition	= params.phi_position / (posRadius*posRadius);
+	const float phiColor	= params.phi_color / cugar::max( 1.0e-3f, cugar::sqr(variance) );
 
 	float			sumWeight = 0.0;
 	cugar::Vector3f	sumColor = cugar::Vector3f(0.0f);
@@ -196,8 +204,8 @@ void EAW_mad_kernel(
 				const cugar::Vector4f  imgP	   = img(p);
 
 				const cugar::Vector4f  colorP =
-					(op & kEAWOpModulateInput)		? imgP * weightP :
-					(op & kEAWOpDemodulateInput)	? imgP / weightP :
+					(op & kFilterOpModulateInput)	? imgP * weightP :
+					(op & kFilterOpDemodulateInput)	? imgP / weightP :
 					imgP;
 
 				const cugar::Vector4f  geoP = gb.geo(p);
@@ -230,13 +238,13 @@ void EAW_mad_kernel(
 		}
 	}
 
-	cugar::Vector4f r  = (op & kEAWOpAddMode) ? dst(x, y) : cugar::Vector4f(0.0f);
+	cugar::Vector4f r  = (op & kFilterOpAddMode) ? dst(x, y) : cugar::Vector4f(0.0f);
 
 	cugar::Vector4f c = (sumWeight ? cugar::Vector4f(sumColor / sumWeight, colorCenter.w) : colorCenter);
 
 	r +=
-		(op & kEAWOpModulateOutput)		? c * weightCenter :
-		(op & kEAWOpDemodulateOutput)	? c / weightCenter :
+		(op & kFilterOpModulateOutput)		? c * weightCenter :
+		(op & kFilterOpDemodulateOutput)	? c / weightCenter :
 		c;
 
 	dst(x, y) = r;
@@ -257,7 +265,7 @@ void EAW(FBufferChannelView dst, const FBufferChannelView img, const GBufferView
 //
 //   dst += w_img * eaw(img)
 //
-void EAW(FBufferChannelView dst, const EAWOp op, const FBufferChannelView w_img, const float w_min, const FBufferChannelView img, const GBufferView gb, const float* var, const EAWParams params, const uint32 step_size)
+void EAW(FBufferChannelView dst, const FilterOp op, const FBufferChannelView w_img, const float w_min, const FBufferChannelView img, const GBufferView gb, const float* var, const EAWParams params, const uint32 step_size)
 {
 	dim3 blockSize(32, 4);
 	dim3 gridSize(cugar::divide_ri(dst.res_x, blockSize.x), cugar::divide_ri(dst.res_y, blockSize.y));
@@ -322,7 +330,7 @@ void EAW(const uint32 n_iterations, FBufferChannelView dst, const FBufferChannel
 		{
 			EAW(
 				dst,
-				EAWOp(kEAWOpModulateOutput | kEAWOpAddMode),
+				FilterOp(kFilterOpModulateOutput | kFilterOpAddMode),
 				w_img,
 				1.0e-4f,
 				i == 0 ? img : pingpong[in_buffer],
@@ -335,7 +343,7 @@ void EAW(const uint32 n_iterations, FBufferChannelView dst, const FBufferChannel
 		{
 			EAW(
 				pingpong[out_buffer],
-				EAWOp(kEAWOpDemodulateInput | kEAWOpReplaceMode),
+				FilterOp(kFilterOpDemodulateInput | kFilterOpReplaceMode),
 				w_img,
 				1.0e-4f,
 				img,

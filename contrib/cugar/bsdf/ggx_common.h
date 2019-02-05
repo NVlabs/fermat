@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2016, NVIDIA Corporation
+ * Copyright (c) 2010-2019, NVIDIA Corporation
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -64,6 +64,26 @@ Vector3f microfacet(const Vector3f V, const Vector3f L, const Vector3f N, const 
 	return normalize(H);
 }
 
+/// return the microfacet normal for a given pair of incident and outgoing direction vectors
+///
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+Vector3f vndf_microfacet(const Vector3f V, const Vector3f L, const Vector3f N, const float inv_eta)
+{
+	Vector3f H = (dot(V, N)*dot(L, N) >= 0.0f) ?
+		V + L :
+		V + L*inv_eta;
+
+	// when in doubt, return N
+	if (dot(H,H) < 1.0e-12f)
+		return N;
+
+	// make sure H points in the same direction as V
+	if (dot(V, H) < 0.0f)
+		H = -H;
+
+	return normalize(H);
+}
+
 /// evaluate anisotropic GGX / Trowbridge-Reitz distribution on the non-projected hemisphere
 ///
 /// [Walter et al. 2007, "Microfacet models for refraction through rough surfaces"]
@@ -107,7 +127,7 @@ float3 hvd_ggx_sample(
 	const float cp2 = sp;
 
 	const float tantheta2 = samples.y / ((1.0f - samples.y) * ia2);
-	const float sintheta = sqrtf(tantheta2 / (1.0f + tantheta2));
+	const float sintheta = ::sqrtf(tantheta2 / (1.0f + tantheta2));
 
 	return make_float3(
 		cp2 * sintheta,
@@ -251,7 +271,7 @@ float3 vndf_ggx_smith_sample(
 	Vector3f V = normalize(Vector3f(alpha.x * _V.x, alpha.y * _V.y, _V.z));
 
 	// orthonormal basis
-	Vector3f T1 = orthogonal(V);
+	Vector3f T1 = (V.z < 0.9999f) ? normalize(cross(V, Vector3f(0,0,1))) : Vector3f(1,0,0);
 	Vector3f T2 = cross(T1, V);
 
 	// sample point with polar coordinates (r, phi)
@@ -259,7 +279,7 @@ float3 vndf_ggx_smith_sample(
 	float r = sqrtf(samples.x);
 	float phi = (samples.y < a) ? samples.y / a * M_PIf : M_PIf + (samples.y - a) / (1.0f - a) * M_PIf;
 	float P1 = r*cosf(phi);
-	float P2 = r*sinf(phi)*((samples.y < a) ? 1.0f : V.z);
+	float P2 = r*sinf(phi) * ((samples.y < a) ? 1.0f : V.z);
 
 	// compute normal
 	Vector3f N = P1*T1 + P2*T2 + sqrtf(max(0.0f, 1.0f - P1*P1 - P2*P2))*V;
@@ -267,6 +287,109 @@ float3 vndf_ggx_smith_sample(
 	// unstretch
 	N = normalize(Vector3f(alpha.x*N.x, alpha.y*N.y, max(0.0f, N.z)));
 	return N;
+}
+
+/// Inversion function for "A Simpler and Exact Sampling Routine for the GGX Distribution of Visible Normals"
+/// https://hal.archives-ouvertes.fr/hal-01509746
+///
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+float2 vndf_ggx_smith_invert(
+	const Vector3f	_N,
+	const float2	alpha,
+	const Vector3f	_V)
+{
+	// stretch view
+	Vector3f V = normalize(Vector3f(alpha.x * _V.x, alpha.y * _V.y, _V.z));
+
+	// orthonormal basis
+	Vector3f T1 = (V.z < 0.9999f) ? normalize(cross(V, Vector3f(0,0,1))) : Vector3f(1,0,0);
+	Vector3f T2 = cross(T1, V);
+
+	// solve for (X,Y,Z) the system:
+	//
+	// N = normalize(Vector3f(ax*X, ay*Y, max(0.0f, Z)));
+	//
+	// <=> N = (ax*X, ay*Y, max(0.0f, Z) / sqrt(ax*X, ay*Y, max(0.0f, Z)^2
+	//
+	// <=> Nx^2 = (ax*X)^2 / (ax*X, ay*Y, max(0.0f, Z)^2
+	//     Ny^2 = (ay*Y)^2 / (ax*X, ay*Y, max(0.0f, Z)^2
+	//     Nz^2 = Z^2 / (ax*X, ay*Y, max(0.0f, Z)^2
+	//
+	// <=> a0 * XX + b0 * YY + c0 * ZZ = 0
+	//     a1 * XX + b1 * YY + c1 * ZZ = 0
+	//     a2 * XX + b2 * YY + c2 * ZZ = 0
+	// 
+	// => a linear system in XX, YY, ZZ
+	// => solve for (XX,YY,ZZ)
+	//
+	// M * (XX,YY,ZZ) = 0 with the constraint (XX + YY + ZZ) = 1
+	//
+	// => find the solution space kernel(M), and find a point of that space satisfying the constraint
+	//
+	// Geometrically: given the 1d vector space spanned by < N > (i.e. the kernel of the normalization),
+	// we need to find the point in that space with (ax X)^2 + (ax Y)^2 + Z^2 = 1.
+	// In other words, we need to intersect the ray < N > with an ellipsoid.
+	//
+	// Given M = (ax, ay, 1) * I and setting v' = M^(-1) v, we need to solve for t^2 |v'| ^2 = 1,
+	// obtaining t = |v'|^2.
+	//
+	Vector3f N = normalize( Vector3f( _N.x / alpha.x, _N.y / alpha.y, _N.z ) );
+
+	// solve for (P1, P2)
+	const float P1 = dot( N, T1 );
+	const float P2 = dot( N, T2 );
+
+	const float a = 1.0f / (1.0f + V.z);
+
+	float2 samples;
+
+	// two cases:
+	// 1. N projects along V to the tangent half disk (on the tangent plane)   (green disk in the paper)
+	// 2. N projects along V to the half disk orthogonal to V				   (blue disk in the paper)
+	Vector3f PN = N - dot(N,V) * V;
+
+	if (PN.z > 0.0f)
+	{	// case 2: samples.y < a	(blue disk :  phi in [0,PI))
+		const float r2 = min( P1*P1 + P2*P2, 1.0f );
+		const float r  = sqrtf(r2);
+
+		float phi = r > 1.0e-6f ? atan2f( P2 / r, P1 / r ) : 0.0f;
+		if (phi < 0.0f)
+			phi += M_TWO_PIf;
+
+		// solve for samples.x : r = sqrtf(samples.x);
+		samples.x = r2;
+
+		// solve for samples.y : phi = samples.y / a * M_PIf;
+		samples.y = phi * a / M_PIf;
+		if (phi < M_PIf)
+		{
+			assert(is_finite(samples.x) && is_finite(samples.y));
+			assert(samples.y >= 0.0f && samples.y <= 1.0f);
+			return samples;
+		}
+	}
+	//else // stay on the safe side: if the first case didn't work, try the second
+	{
+		// case 1: samples.y >= a	(green disk :  phi in [PI,2*PI))
+		const float r2 = min( P1*P1 + P2*P2 / (V.z*V.z), 1.0f );
+		const float r  = sqrtf(r2);
+
+		float phi = r > 1.0e-6f && V.z > 1.0e-6f ? atan2f( P2 / (r * V.z), P1 / r ) : 0.0f;
+		if (phi < 0.0f)
+			phi += M_TWO_PIf;
+
+		// solve for samples.x : r = sqrtf(samples.x);
+		samples.x = r2;
+
+		// solve for samples.y : phi = M_PIf + (samples.y - a) / (1.0f - a) * M_PIf;
+		// => phi - M_PIf = (samples.y - a) / (1.0f - a) * M_PIf;
+		// => (phi - M_PIf) * (1.0f - a) / M_PIf; = (samples.y - a);
+		samples.y = (phi - M_PIf) * (1.0f - a) / M_PIf + a;
+		assert(is_finite(samples.x) && is_finite(samples.y));
+		assert(samples.y >= 0.0f && samples.y <= 1.0f);
+	}
+	return samples;
 }
 
 /*! \}

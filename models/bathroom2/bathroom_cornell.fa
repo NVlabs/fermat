@@ -1,0 +1,203 @@
+Camera persp eye -2.520284 15.735250 32.335594 aim -1.976656 14.700628 -2.417851 up 0 1 0 fov 1.768946
+
+LoadScene bathroom4.obj
+
+DirectionalLight direction 1.0 -0.5 1.0 color 88 84 72
+
+Begin
+	# a large box in the middle of the floor
+	RotateY -2.86
+	Scale 3 3 3
+	Translate 0 0.2 0
+	LoadScene ../CornellBox/CornellBox-Glossy.obj
+End
+
+Begin
+	# a box inside the right shelf
+	Scale 1.475 1.475 1.0
+	Translate 8.75 9.9 -20.1
+#	LoadScene ../CornellBox/CornellBox-Waldo.obj
+End
+
+Begin
+	# a box inside the left shelf
+	Scale 1.485 1.524 1.4
+	Translate -11.55 9.86 -20.4
+	LoadScene ../CornellBox/CornellBox-JP.obj
+End
+
+Begin
+	# a box on top of the left column
+	Scale 1.4 1.4 1.4
+	Translate -11.5 27.8 -20
+#	LoadScene ../CornellBox/CornellBox-JP.obj
+End
+
+Begin
+	# a box in the middle of the left column
+	Scale 1.475 1.4 1.4
+	Scale 1 2.5 1
+	#Scale 1 5 1
+	Translate -11.6 13.35 -20.4
+#	LoadScene ../CornellBox/CornellBox-JP.obj
+End
+
+Begin
+	RotateY -15
+	Scale 1.95 1.95 1.95
+	Translate -4.5 0.2 -5.45
+#	LoadScene ../CornellBox/CornellBox-JP.obj
+End
+
+Begin
+	Scale 0.8 0.8 0.8
+	Translate -7 8.04 17
+#	LoadScene ../CornellBox/CornellBox-JP.obj
+End
+
+Begin
+	RotateY 4
+	Scale 2.6 2.6 2.6
+	Translate 8.5 0.2 -1.8
+#	LoadScene ../CornellBox/CornellBox-Waldo.obj
+End
+
+Begin
+	RotateY -52
+
+	Translate 0 0 0
+	Begin
+		Translate 13.5  5.4  4.75
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+	End
+
+	Translate 0 1.8 0
+	Begin
+		Translate 13.5  5.4  4.75
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+	End
+
+	Translate 0 1.8 0
+	Begin
+		Translate 13.5  5.4  4.75
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+	End
+	
+	Translate 0 1.8 0
+	Begin
+		Translate 13.5  5.4  4.75
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+	End
+	
+	Translate 0 1.8 0
+	Begin
+		Translate 13.5  5.4  4.75
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+
+		Translate 0.1  0  2.5
+		LoadScene ../CornellBox/CornellBox-Glossy.obj
+	End
+	
+End

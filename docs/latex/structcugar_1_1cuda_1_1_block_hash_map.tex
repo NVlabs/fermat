@@ -1,0 +1,90 @@
+\hypertarget{structcugar_1_1cuda_1_1_block_hash_map}{}\section{cugar\+:\+:cuda\+:\+:Block\+Hash\+Map$<$ KeyT, HashT, C\+T\+A\+\_\+\+S\+I\+ZE, T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY $>$ Struct Template Reference}
+\label{structcugar_1_1cuda_1_1_block_hash_map}\index{cugar\+::cuda\+::\+Block\+Hash\+Map$<$ Key\+T, Hash\+T, C\+T\+A\+\_\+\+S\+I\+Z\+E, T\+A\+B\+L\+E\+\_\+\+S\+I\+Z\+E, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+E\+Y $>$@{cugar\+::cuda\+::\+Block\+Hash\+Map$<$ Key\+T, Hash\+T, C\+T\+A\+\_\+\+S\+I\+Z\+E, T\+A\+B\+L\+E\+\_\+\+S\+I\+Z\+E, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+E\+Y $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$typename KeyT, typename HashT, uint32 C\+T\+A\+\_\+\+S\+I\+ZE, uint32 T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE, KeyT I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY = 0x\+F\+F\+F\+F\+F\+F\+FF$>$\newline
+struct cugar\+::cuda\+::\+Block\+Hash\+Map$<$ Key\+T, Hash\+T, C\+T\+A\+\_\+\+S\+I\+Z\+E, T\+A\+B\+L\+E\+\_\+\+S\+I\+Z\+E, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+E\+Y $>$}
+
+This class implements a cuda block-\/wide Hash Set, allowing arbitrary threads from the same C\+TA to add new entries at the same time.
+
+
+\begin{DoxyCode}
+\_\_global\_\_ \textcolor{keywordtype}{void} kernel()
+\{
+   \textcolor{keyword}{typedef} BlockHashMap<uint32,uint32,128,512> hash\_map\_type;
+
+   \textcolor{comment}{// allocate the temporary storage of the hash map in shared memory}
+   \_\_shared\_\_ \textcolor{keyword}{typename} hash\_map\_type::TempStorage     hash\_map\_storage;
+
+   hash\_map\_type hash\_map( hash\_map\_storage );
+
+   hash\_map.insert( threadIdx.x/2, hash(threadIdx.x/2) );
+
+   \textcolor{comment}{// allocate some storage for the hash map values}
+   \_\_shared\_\_ uint32 hash\_map\_values[512];
+
+   \textcolor{comment}{// initialize the hash map values to zero}
+   \textcolor{keywordflow}{for} (uint32 i = threadIdx.x; i < 512; i += 128)
+        hash\_map\_values[i] = 0;
+
+   \_\_syncthreads();
+
+   \textcolor{comment}{// add 1 to each entry sharing the same slot in the hash map}
+   \textcolor{keyword}{const} uint32 slot = hash\_map.find( threadIdx.x/2 );
+
+   \hyperlink{group___atomics_ga0c9d949be7ac5b6f27a232c7cd27a05c}{atomic\_add}( &hash\_map\_values[ slot ], 1u );
+\}
+\end{DoxyCode}
+ 
+
+{\ttfamily \#include $<$hash.\+h$>$}
+
+Inheritance diagram for cugar\+:\+:cuda\+:\+:Block\+Hash\+Map$<$ KeyT, HashT, C\+T\+A\+\_\+\+S\+I\+ZE, T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{structcugar_1_1cuda_1_1_block_hash_map}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcugar_1_1cuda_1_1_block_hash_map_1_1_temp_storage}{Temp\+Storage}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1_block_hash_map_aaac2f72bcf6fd716470f4502b0dbcb4d}{Block\+Hash\+Map} ()
+\item 
+C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1_block_hash_map_abf5f1d2196ccc4cba94c0d4bb7d11265}{Block\+Hash\+Map} (\hyperlink{structcugar_1_1cuda_1_1_block_hash_map_1_1_temp_storage}{Temp\+Storage} \&\+\_\+storage)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_block_hash_map_aaac2f72bcf6fd716470f4502b0dbcb4d}\label{structcugar_1_1cuda_1_1_block_hash_map_aaac2f72bcf6fd716470f4502b0dbcb4d}} 
+\index{cugar\+::cuda\+::\+Block\+Hash\+Map@{cugar\+::cuda\+::\+Block\+Hash\+Map}!Block\+Hash\+Map@{Block\+Hash\+Map}}
+\index{Block\+Hash\+Map@{Block\+Hash\+Map}!cugar\+::cuda\+::\+Block\+Hash\+Map@{cugar\+::cuda\+::\+Block\+Hash\+Map}}
+\subsubsection{\texorpdfstring{Block\+Hash\+Map()}{BlockHashMap()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename KeyT , typename HashT , uint32 C\+T\+A\+\_\+\+S\+I\+ZE, uint32 T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE, KeyT I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY = 0x\+F\+F\+F\+F\+F\+F\+FF$>$ \\
+C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1_block_hash_map}{cugar\+::cuda\+::\+Block\+Hash\+Map}$<$ KeyT, HashT, C\+T\+A\+\_\+\+S\+I\+ZE, T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY $>$\+::\hyperlink{structcugar_1_1cuda_1_1_block_hash_map}{Block\+Hash\+Map} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+empty constructor \mbox{\Hypertarget{structcugar_1_1cuda_1_1_block_hash_map_abf5f1d2196ccc4cba94c0d4bb7d11265}\label{structcugar_1_1cuda_1_1_block_hash_map_abf5f1d2196ccc4cba94c0d4bb7d11265}} 
+\index{cugar\+::cuda\+::\+Block\+Hash\+Map@{cugar\+::cuda\+::\+Block\+Hash\+Map}!Block\+Hash\+Map@{Block\+Hash\+Map}}
+\index{Block\+Hash\+Map@{Block\+Hash\+Map}!cugar\+::cuda\+::\+Block\+Hash\+Map@{cugar\+::cuda\+::\+Block\+Hash\+Map}}
+\subsubsection{\texorpdfstring{Block\+Hash\+Map()}{BlockHashMap()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename KeyT , typename HashT , uint32 C\+T\+A\+\_\+\+S\+I\+ZE, uint32 T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE, KeyT I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY = 0x\+F\+F\+F\+F\+F\+F\+FF$>$ \\
+C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1_block_hash_map}{cugar\+::cuda\+::\+Block\+Hash\+Map}$<$ KeyT, HashT, C\+T\+A\+\_\+\+S\+I\+ZE, T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY $>$\+::\hyperlink{structcugar_1_1cuda_1_1_block_hash_map}{Block\+Hash\+Map} (\begin{DoxyParamCaption}\item[{\hyperlink{structcugar_1_1cuda_1_1_block_hash_map_1_1_temp_storage}{Temp\+Storage} \&}]{\+\_\+storage }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+storage} & the per-\/\+C\+TA storage backing this container \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/cuda/hash.\+h\end{DoxyCompactItemize}

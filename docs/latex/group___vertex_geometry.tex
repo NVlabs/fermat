@@ -1,0 +1,68 @@
+\hypertarget{group___vertex_geometry}{}\section{Vertex\+Geometry}
+\label{group___vertex_geometry}\index{Vertex\+Geometry@{Vertex\+Geometry}}
+
+
+\subsection{Detailed Description}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_vertex_geometry}{Vertex\+Geometry}
+\item 
+struct \hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id}
+\item 
+struct \hyperlink{struct_vertex_storage_view}{Vertex\+Storage\+View}
+\item 
+struct \hyperlink{struct_vertex_storage}{Vertex\+Storage}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___vertex_geometry_gae2642a40e812bd7932491151c40a1592}\label{group___vertex_geometry_gae2642a40e812bd7932491151c40a1592}} 
+enum {\bfseries Vertex\+Sampling} \{ {\bfseries k\+All} = 0, 
+{\bfseries k\+End} = 1
+ \}
+\item 
+\mbox{\Hypertarget{group___vertex_geometry_ga6f628f5a47e70cc7301899aa1bd333da}\label{group___vertex_geometry_ga6f628f5a47e70cc7301899aa1bd333da}} 
+enum {\bfseries Vertex\+Ordering} \{ {\bfseries k\+Random\+Ordering} = 0, 
+{\bfseries k\+Path\+Ordering} = 1
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE uint32 \hyperlink{group___vertex_geometry_ga36aaf2cd5d29c0fc2abe5d95f9739f95}{pack\+\_\+direction} (const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&dir)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \hyperlink{group___vertex_geometry_gab56236f4d0e367a082d3dc83df137d79}{unpack\+\_\+direction} (const uint32 packed\+\_\+dir)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE uint32 \hyperlink{group___vertex_geometry_ga793b5be6152fde6d9ebe072b3a91ab19}{pack\+\_\+hemispherical\+\_\+direction} (const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&dir)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \hyperlink{group___vertex_geometry_gaf8adf4e00e9634afcd384e2e68eebd0a}{unpack\+\_\+hemispherical\+\_\+direction} (const uint32 packed\+\_\+dir)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___vertex_geometry_ga36aaf2cd5d29c0fc2abe5d95f9739f95}\label{group___vertex_geometry_ga36aaf2cd5d29c0fc2abe5d95f9739f95}} 
+\index{Vertex\+Geometry@{Vertex\+Geometry}!pack\+\_\+direction@{pack\+\_\+direction}}
+\index{pack\+\_\+direction@{pack\+\_\+direction}!Vertex\+Geometry@{Vertex\+Geometry}}
+\subsubsection{\texorpdfstring{pack\+\_\+direction()}{pack\_direction()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE uint32 pack\+\_\+direction (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{dir }\end{DoxyParamCaption})}
+
+pack a normalized direction vector in 32-\/bits \mbox{\Hypertarget{group___vertex_geometry_ga793b5be6152fde6d9ebe072b3a91ab19}\label{group___vertex_geometry_ga793b5be6152fde6d9ebe072b3a91ab19}} 
+\index{Vertex\+Geometry@{Vertex\+Geometry}!pack\+\_\+hemispherical\+\_\+direction@{pack\+\_\+hemispherical\+\_\+direction}}
+\index{pack\+\_\+hemispherical\+\_\+direction@{pack\+\_\+hemispherical\+\_\+direction}!Vertex\+Geometry@{Vertex\+Geometry}}
+\subsubsection{\texorpdfstring{pack\+\_\+hemispherical\+\_\+direction()}{pack\_hemispherical\_direction()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE uint32 pack\+\_\+hemispherical\+\_\+direction (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{dir }\end{DoxyParamCaption})}
+
+pack a normalized direction vector in 32-\/bits \mbox{\Hypertarget{group___vertex_geometry_gab56236f4d0e367a082d3dc83df137d79}\label{group___vertex_geometry_gab56236f4d0e367a082d3dc83df137d79}} 
+\index{Vertex\+Geometry@{Vertex\+Geometry}!unpack\+\_\+direction@{unpack\+\_\+direction}}
+\index{unpack\+\_\+direction@{unpack\+\_\+direction}!Vertex\+Geometry@{Vertex\+Geometry}}
+\subsubsection{\texorpdfstring{unpack\+\_\+direction()}{unpack\_direction()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} unpack\+\_\+direction (\begin{DoxyParamCaption}\item[{const uint32}]{packed\+\_\+dir }\end{DoxyParamCaption})}
+
+unpack a 32-\/bits normalized direction vector \mbox{\Hypertarget{group___vertex_geometry_gaf8adf4e00e9634afcd384e2e68eebd0a}\label{group___vertex_geometry_gaf8adf4e00e9634afcd384e2e68eebd0a}} 
+\index{Vertex\+Geometry@{Vertex\+Geometry}!unpack\+\_\+hemispherical\+\_\+direction@{unpack\+\_\+hemispherical\+\_\+direction}}
+\index{unpack\+\_\+hemispherical\+\_\+direction@{unpack\+\_\+hemispherical\+\_\+direction}!Vertex\+Geometry@{Vertex\+Geometry}}
+\subsubsection{\texorpdfstring{unpack\+\_\+hemispherical\+\_\+direction()}{unpack\_hemispherical\_direction()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} unpack\+\_\+hemispherical\+\_\+direction (\begin{DoxyParamCaption}\item[{const uint32}]{packed\+\_\+dir }\end{DoxyParamCaption})}
+
+unpack a 32-\/bits normalized direction vector 

@@ -1,0 +1,65 @@
+\hypertarget{struct_temp_path_weights}{}\section{Temp\+Path\+Weights Struct Reference}
+\label{struct_temp_path_weights}\index{Temp\+Path\+Weights@{Temp\+Path\+Weights}}
+
+
+\subsection{Detailed description}
+\begin{DoxyParagraph}{}
+A small utility class to track temporary path weights needed for internal M\+IS calculations 
+\end{DoxyParagraph}
+
+
+{\ttfamily \#include $<$bpt\+\_\+utils.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_temp_path_weights_a55788606cd767e45010356dcacf21373}\label{struct_temp_path_weights_a55788606cd767e45010356dcacf21373}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries Temp\+Path\+Weights} (const \hyperlink{struct_path_weights}{Path\+Weights} \+\_\+weights, const float \+\_\+out\+\_\+p, const float \+\_\+out\+\_\+cos\+\_\+theta)
+\item 
+\mbox{\Hypertarget{struct_temp_path_weights_a25913576f9e91f90b8d466a98834617c}\label{struct_temp_path_weights_a25913576f9e91f90b8d466a98834617c}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries Temp\+Path\+Weights} (const float \+\_\+p\+Gp\+\_\+sum, const float \+\_\+pG, const float \+\_\+out\+\_\+p, const float \+\_\+out\+\_\+cos\+\_\+theta)
+\item 
+\mbox{\Hypertarget{struct_temp_path_weights_aead3a9feef123d9ef4bb3f6f818541e5}\label{struct_temp_path_weights_aead3a9feef123d9ef4bb3f6f818541e5}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries Temp\+Path\+Weights} (const float4 f)
+\item 
+\mbox{\Hypertarget{struct_temp_path_weights_ac6ccc2514bc829cc80cdcdb4218f034d}\label{struct_temp_path_weights_ac6ccc2514bc829cc80cdcdb4218f034d}} 
+{\footnotesize template$<$typename Eye\+Light\+Vertex\+Type $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries Temp\+Path\+Weights} (const Eye\+Light\+Vertex\+Type \+\_\+v, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \+\_\+out, const float \+\_\+out\+\_\+p)
+\item 
+\mbox{\Hypertarget{struct_temp_path_weights_ac3263560f870db89c14779ad6c021798}\label{struct_temp_path_weights_ac3263560f870db89c14779ad6c021798}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries operator Path\+Weights} () const
+\item 
+\mbox{\Hypertarget{struct_temp_path_weights_a8adc8b080395236c5201b68155056a5c}\label{struct_temp_path_weights_a8adc8b080395236c5201b68155056a5c}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries operator float4} () const
+\end{DoxyCompactItemize}
+\subsection*{Static Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_temp_path_weights_a8986881392b3c49e0056c4cb7eeccfb1}\label{struct_temp_path_weights_a8986881392b3c49e0056c4cb7eeccfb1}} 
+static F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{struct_temp_path_weights}{Temp\+Path\+Weights} {\bfseries eye\+\_\+vertex\+\_\+1} (const float p\+\_\+e, const float cos\+\_\+theta\+\_\+o, const float light\+\_\+tracing\+\_\+weight)
+\item 
+\mbox{\Hypertarget{struct_temp_path_weights_a8f9123ca71d52db9eaa2c6607aeef37f}\label{struct_temp_path_weights_a8f9123ca71d52db9eaa2c6607aeef37f}} 
+static F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{struct_temp_path_weights}{Temp\+Path\+Weights} {\bfseries light\+\_\+vertex\+\_\+1} (const float p\+\_\+A, const float p\+\_\+proj, const float cos\+\_\+theta\+\_\+o)
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_temp_path_weights_aed60d91d4a65e151c25f82bf66c37fcd}\label{struct_temp_path_weights_aed60d91d4a65e151c25f82bf66c37fcd}} 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\>float4 {\bfseries vector\_storage}\\
+\mbox{\Hypertarget{union_temp_path_weights_1_1_0D4_a71014dbca75953413527e4fb4b43c383}\label{union_temp_path_weights_1_1_0D4_a71014dbca75953413527e4fb4b43c383}} 
+\>struct \{\\
+\>\>float {\bfseries pGp\_sum}\\
+\>\>float {\bfseries pG}\\
+\>\>float {\bfseries out\_p}\\
+\>\>float {\bfseries out\_cos\_theta}\\
+\>\} \\
+\}; \\
+
+\end{tabbing}\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/bpt\+\_\+utils.\+h\end{DoxyCompactItemize}

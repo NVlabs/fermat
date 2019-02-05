@@ -1,0 +1,72 @@
+\hypertarget{group___p_t_module_details}{}\section{P\+T\+Module\+Details}
+\label{group___p_t_module_details}\index{P\+T\+Module\+Details@{P\+T\+Module\+Details}}
+
+
+\subsection{Detailed Description}
+This module defines a path tracing renderer implemented on top of the \hyperlink{group___p_t_lib}{P\+T\+Lib} library. \subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group___p_t_module_details_ga923b8d146b23f93356f6c74971c4d6f7}{Path\+Tracer\+::init} (int argc, char $\ast$$\ast$argv, \hyperlink{struct_rendering_context}{Rendering\+Context} \&renderer)
+\item 
+\mbox{\Hypertarget{group___p_t_module_details_ga8151931a9569e9854eeabad851ea383d}\label{group___p_t_module_details_ga8151931a9569e9854eeabad851ea383d}} 
+void {\bfseries Path\+Tracer\+::update\+\_\+vtls\+\_\+rl} (const uint32 instance)
+\item 
+void \hyperlink{group___p_t_module_details_ga3e6317495ea6c761968a893b3a54824e}{Path\+Tracer\+::render} (const uint32 instance, \hyperlink{struct_rendering_context}{Rendering\+Context} \&renderer)
+\item 
+void \hyperlink{group___p_t_module_details_gad08f55d7ba075e0b71a4aa729c07986d}{Path\+Tracer\+::keyboard} (unsigned char character, int x, int y, bool \&invalidate)
+\item 
+void \hyperlink{group___p_t_module_details_gaae1782405577d0072ff78570ec0025cc}{Path\+Tracer\+::dump\+\_\+speed\+\_\+stats} (F\+I\+LE $\ast$stats)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___p_t_module_details_gaae1782405577d0072ff78570ec0025cc}\label{group___p_t_module_details_gaae1782405577d0072ff78570ec0025cc}} 
+\index{P\+T\+Module\+Details@{P\+T\+Module\+Details}!dump\+\_\+speed\+\_\+stats@{dump\+\_\+speed\+\_\+stats}}
+\index{dump\+\_\+speed\+\_\+stats@{dump\+\_\+speed\+\_\+stats}!P\+T\+Module\+Details@{P\+T\+Module\+Details}}
+\subsubsection{\texorpdfstring{dump\+\_\+speed\+\_\+stats()}{dump\_speed\_stats()}}
+{\footnotesize\ttfamily void Path\+Tracer\+::dump\+\_\+speed\+\_\+stats (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{stats }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+dump some speed stats 
+
+Reimplemented from \hyperlink{struct_renderer_interface_a378df3aa18095da5ce8011fb25c8fb8e}{Renderer\+Interface}.
+
+\mbox{\Hypertarget{group___p_t_module_details_ga923b8d146b23f93356f6c74971c4d6f7}\label{group___p_t_module_details_ga923b8d146b23f93356f6c74971c4d6f7}} 
+\index{P\+T\+Module\+Details@{P\+T\+Module\+Details}!init@{init}}
+\index{init@{init}!P\+T\+Module\+Details@{P\+T\+Module\+Details}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void Path\+Tracer\+::init (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv,  }\item[{\hyperlink{struct_rendering_context}{Rendering\+Context} \&}]{renderer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+this method is responsible for any command options parsing / initializations the renderer might need to perform 
+
+Reimplemented from \hyperlink{struct_renderer_interface_a2ead9b943d6d48fcd32872e0005ebe63}{Renderer\+Interface}.
+
+\mbox{\Hypertarget{group___p_t_module_details_gad08f55d7ba075e0b71a4aa729c07986d}\label{group___p_t_module_details_gad08f55d7ba075e0b71a4aa729c07986d}} 
+\index{P\+T\+Module\+Details@{P\+T\+Module\+Details}!keyboard@{keyboard}}
+\index{keyboard@{keyboard}!P\+T\+Module\+Details@{P\+T\+Module\+Details}}
+\subsubsection{\texorpdfstring{keyboard()}{keyboard()}}
+{\footnotesize\ttfamily void Path\+Tracer\+::keyboard (\begin{DoxyParamCaption}\item[{unsigned char}]{character,  }\item[{int}]{x,  }\item[{int}]{y,  }\item[{bool \&}]{invalidate }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+this method is responsible for handling keyboard events 
+
+Reimplemented from \hyperlink{struct_renderer_interface_a9f5afd3701d8d935a2ecf08fb9f5f604}{Renderer\+Interface}.
+
+\mbox{\Hypertarget{group___p_t_module_details_ga3e6317495ea6c761968a893b3a54824e}\label{group___p_t_module_details_ga3e6317495ea6c761968a893b3a54824e}} 
+\index{P\+T\+Module\+Details@{P\+T\+Module\+Details}!render@{render}}
+\index{render@{render}!P\+T\+Module\+Details@{P\+T\+Module\+Details}}
+\subsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void Path\+Tracer\+::render (\begin{DoxyParamCaption}\item[{const uint32}]{instance,  }\item[{\hyperlink{struct_rendering_context}{Rendering\+Context} \&}]{renderer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+\label{group___p_t_module_details_PathTracer}%
+\Hypertarget{group___p_t_module_details_PathTracer}%
+\+::render\+\_\+impl \mbox{[}P\+T\+::render-\/1\mbox{]}
+
+\mbox{[}P\+T\+::instantiate\+\_\+vertex\+\_\+processor\mbox{]}
+
+\mbox{[}P\+T\+::instantiate\+\_\+vertex\+\_\+processor\mbox{]} \mbox{[}P\+T\+::render-\/1\mbox{]}
+
+\mbox{[}P\+T\+::render-\/2\mbox{]}
+
+\mbox{[}P\+T\+::render-\/2\mbox{]} 
+
+Reimplemented from \hyperlink{struct_renderer_interface_aa64254dd44c94929b05092dc8d74f29d}{Renderer\+Interface}.
+

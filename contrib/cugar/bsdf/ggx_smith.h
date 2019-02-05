@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2016, NVIDIA Corporation
+ * Copyright (c) 2010-2019, NVIDIA Corporation
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -162,14 +162,14 @@ struct GGXSmithBsdf
 	GGXSmithBsdf(const float _roughness, bool _transmission = false, float _int_ior = 1.0f, float _ext_ior = 1.0f) :
 		roughness(_roughness),
 		inv_roughness(1.0f / _roughness),
-		int_ior(_transmission ? _int_ior : 0.0f),
-		ext_ior(_transmission ? _ext_ior : 0.0f) {}
+		int_ior(_transmission ? _int_ior : -1.0f),
+		ext_ior(_transmission ? _ext_ior : -1.0f) {}
 
 	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
-	bool is_transmissive() const { return int_ior != 0.0f; }
+	bool is_transmissive() const { return int_ior > 0.0f; }
 
 	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
-	bool is_reflective() const { return int_ior == 0.0f; }
+	bool is_reflective() const { return int_ior < 0.0f; }
 
 	/// fetch the exterior/interior IOR ratio
 	///
@@ -182,7 +182,7 @@ struct GGXSmithBsdf
 	float get_inv_eta(const float NoV) const { return NoV >= 0.0f ? int_ior / ext_ior : ext_ior / int_ior; }
 
 	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
-	static float clamp_inf(const float p) { return (!isfinite(p) || isnan(p)) ? 1.0e8f : p; }
+	static float clamp_inf(const float p) { return (!isfinite(p) || isnan(p)) ? 1.0e8f : max( p, 0.0f ); } // also clamp negative values
 
 	// Appoximation of joint Smith term for GGX, pre-divided by the BRDF denominator (4 * NoV * NoL)
 	// [Heitz 2014, "Understanding the Masking-Shadowing Function in Microfacet-Based BRDFs"]
@@ -260,6 +260,27 @@ struct GGXSmithBsdf
 		return 2.0f / (1.0f + sqrtf(1.0f + R2));
 	}
 
+	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+	float dwo_dh_transmission_factor(const float VoH, const float LoH, const float eta, const float inv_eta) const
+	{
+		// compute whether this is a ray for which we have total internal reflection,
+		// i.e. if cos_theta_t2 <= 0, and in that case return zero.
+		const float cos_theta_i = fabsf(VoH);
+		const float cos_theta_t2 = 1.f - eta * eta * (1.f - cos_theta_i * cos_theta_i);
+		if (cos_theta_t2 < 0.0f)
+			return 0.0f;
+
+		// compute dwo_dh: equation 17 in Microfacet Models for Refraction through Rough Surfaces, Walter et al.
+		const float sqrtDenom = VoH + inv_eta * LoH;
+		const float factor = 4 * inv_eta * inv_eta
+			* fabsf( VoH * LoH ) /
+			(sqrtDenom * sqrtDenom);
+			// NOTE: the actual formula has no 4 factor at the numerator, but it contains NoV * NoL at
+			// the denominator, which is already included in our G term above. The additional multiplication
+			// by 4 is needed to account for the predivision.
+		return factor;
+	}
+
 	/// evaluate the BRDF f(V,L)
 	///
 	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
@@ -275,7 +296,7 @@ struct GGXSmithBsdf
 		const float eta     = get_eta(NoV);
 		const float inv_eta = get_inv_eta(NoV);
 
-		const Vector3f H = microfacet(V,L,N,inv_eta);
+		const Vector3f H = vndf_microfacet(V,L,N,inv_eta);
 
 		const float NoH = dot(N, H);
 
@@ -302,20 +323,10 @@ struct GGXSmithBsdf
 			// i.e. if cos_theta_t2 <= 0, and in that case return zero.
 			const float VoH = dot(V, H);
 			const float LoH = dot(L, H);
-			const float cos_theta_i = fabsf(VoH);
-			const float cos_theta_t2 = 1.f - eta * eta * (1.f - cos_theta_i * cos_theta_i);
-			if (cos_theta_t2 < 0.0f)
-				return 0.0f;
 
-			// compute dwo_dh: equation 17 in Microfacet Models for Refraction through Rough Surfaces, Walter et al.
-			const float sqrtDenom = VoH + inv_eta * LoH;
-			const float factor = 4 * inv_eta * inv_eta
-				* VoH * LoH /
-				(sqrtDenom * sqrtDenom);
-				// NOTE: the actual formula has no 4 factor at the numerator, but it contains NoV * NoL at
-				// the denominator, which is already included in our G term above. The additional multiplication
-				// by 4 is needed to account for the predivision.
-			return clamp_inf(factor * G * D);
+			const float transmission_factor = dwo_dh_transmission_factor(VoH, LoH, eta, inv_eta);
+
+			return clamp_inf( G * D * transmission_factor );
 		}
 	}
 
@@ -331,7 +342,7 @@ struct GGXSmithBsdf
 
 		const float inv_eta = get_inv_eta(NoV);
 
-		const Vector3f H = microfacet(V,L,N,inv_eta);
+		const Vector3f H = vndf_microfacet(V,L,N,inv_eta);
 
 		const float NoH = dot(N, H);
 
@@ -368,7 +379,7 @@ struct GGXSmithBsdf
 		const float eta     = get_eta(NoV);
 		const float inv_eta = get_inv_eta(NoV);
 
-		const Vector3f H = microfacet(V,L,N,inv_eta);
+		const Vector3f H = vndf_microfacet(V,L,N,inv_eta);
 
 		const float NoH = dot(N, H);
 
@@ -392,35 +403,17 @@ struct GGXSmithBsdf
 
 		const float G1 = PredividedSmithG1V(fabsf(NoV), fabsf(NoL));
 
-		f = clamp_inf( G * D );
-		p = clamp_inf( G1 * D );
-
+		float transmission_factor = 1.0f;
 		if (is_transmissive())
 		{
-			// compute whether this is a ray for which we have total internal reflection,
-			// i.e. if cos_theta_t2 <= 0, and in that case return zero.
 			const float VoH = dot(V, H);
 			const float LoH = dot(L, H);
-			const float cos_theta_i = fabsf(VoH);
-			const float cos_theta_t2 = 1.f - eta * eta * (1.f - cos_theta_i * cos_theta_i);
-			if (cos_theta_t2 < 0.0f)
-			{
-				p = 0.0f;
-				f = Vector3f(0.0f);
-				return;
-			}
 
-			// compute dwo_dh: equation 17 in Microfacet Models for Refraction through Rough Surfaces, Walter et al.
-			const float sqrtDenom = VoH + inv_eta * LoH;
-			const float factor = 4 * inv_eta * inv_eta
-				* VoH * LoH /
-				(sqrtDenom * sqrtDenom);
-				// NOTE: the actual formula has no 4 factor at the numerator, but it contains NoV * NoL at
-				// the denominator, which is already included in our G term above. The additional multiplication
-				// by 4 is needed to account for the predivision.
-			f *= clamp_inf(factor);
-			p *= clamp_inf(factor);
+			transmission_factor = dwo_dh_transmission_factor(VoH, LoH, eta, inv_eta);
 		}
+
+		f = clamp_inf( G * D * transmission_factor );
+		p = clamp_inf( G1 * D * transmission_factor );
 
 		if (measure == kSolidAngle)
 			p *= fabsf( NoL );
@@ -441,7 +434,7 @@ struct GGXSmithBsdf
 		const float eta     = get_eta(NoV);
 		const float inv_eta = get_inv_eta(NoV);
 
-		const Vector3f H = microfacet(V,L,N,inv_eta);
+		const Vector3f H = vndf_microfacet(V,L,N,inv_eta);
 
 		const float NoH = dot(N, H);
 
@@ -454,29 +447,16 @@ struct GGXSmithBsdf
 		const float D = hvd_ggx_eval(inv_alpha, fabsf( NoH ), dot(geometry.tangent, H), dot(geometry.binormal, H));
 		const float G1 = PredividedSmithG1V(fabsf(NoV), fabsf(NoL));
 		
-		float p = clamp_inf( G1 * D );
-
+		float transmission_factor = 1.0f;
 		if (is_transmissive())
 		{
-			// compute whether this is a ray for which we have total internal reflection,
-			// i.e. if cos_theta_t2 <= 0, and in that case return zero.
 			const float VoH = dot(V, H);
 			const float LoH = dot(L, H);
-			const float cos_theta_i = fabsf(VoH);
-			const float cos_theta_t2 = 1.f - eta * eta * (1.f - cos_theta_i * cos_theta_i);
-			if (cos_theta_t2 < 0.0f)
-				return 0.0f;
 
-			// compute dwo_dh: equation 17 in Microfacet Models for Refraction through Rough Surfaces, Walter et al.
-			const float sqrtDenom = VoH + inv_eta * LoH;
-			const float factor = 4 * inv_eta * inv_eta
-				* VoH * LoH /
-				(sqrtDenom * sqrtDenom);
-				// NOTE: the actual formula has no 4 factor at the numerator, but it contains NoV * NoL at
-				// the denominator, which is already included in our G term above. The additional multiplication
-				// by 4 is needed to account for the predivision.
-			p *= clamp_inf(factor);
+			transmission_factor = dwo_dh_transmission_factor(VoH, LoH, eta, inv_eta);
 		}
+
+		float p = clamp_inf( G1 * D * transmission_factor );
 
 		if (measure == kSolidAngle)
 			p *= fabsf( NoL );
@@ -502,7 +482,9 @@ struct GGXSmithBsdf
 		const Vector3f N = geometry.normal_s;
 
 		const float NoV = dot(N, V);
-		const float eta = get_eta(NoV);
+
+		const float eta		= get_eta(NoV);
+		const float inv_eta	= get_inv_eta(NoV);
 
 		const float sgn_V = NoV > 0.0f ? 1.0f : -1.0f;
 
@@ -511,7 +493,16 @@ struct GGXSmithBsdf
 			dot(V, geometry.binormal),
 			sgn_V * NoV );
 
-		Vector3f H = vndf_ggx_smith_sample( make_float2(u.x,u.y), alpha, V_local);
+		if (NoV == 0.0f)
+		{
+			p		= 0.0f;
+			p_proj	= 0.0f;
+			g		= Vector3f(0.0f);
+			return;
+		}
+
+		Vector3f H = vndf_ggx_smith_sample( make_float2(u.x,u.y), alpha, V_local );
+		//assert(is_finite(H.x) && is_finite(H.y) && is_finite(H.z));
 
 		H =
 			H.x * geometry.tangent +
@@ -532,6 +523,7 @@ struct GGXSmithBsdf
 			const float cos_theta_t2 = 1.f - eta * eta * (1.f - cos_theta_i * cos_theta_i);
 			if (cos_theta_t2 < 0.0f)
 			{
+				L		= 2 * dot(V, H) * H - V; // initialize to reflection
 				p		= 0.0f;
 				p_proj	= 0.0f;
 				g		= Vector3f(0.0f);
@@ -567,9 +559,19 @@ struct GGXSmithBsdf
 
 			const float G1 = PredividedSmithG1V(fabsf(NoV), fabsf(NoL));
 
-			p_proj	= clamp_inf( G1 * D );
+			float transmission_factor = 1.0f;
+			if (is_transmissive())
+			{
+				const float VoH = dot(V, H);
+				const float LoH = dot(L, H);
+
+				transmission_factor = dwo_dh_transmission_factor(VoH, LoH, eta, inv_eta);
+			}
+
+			p_proj	= clamp_inf( G1 * D * transmission_factor );
 			p		= p_proj * fabsf(NoL);
 			g		= clamp_inf( G / G1 );
+			assert(is_finite(g.x) && is_finite(g.y) && is_finite(g.z));
 		}
 	}
 
@@ -586,8 +588,76 @@ struct GGXSmithBsdf
 		float&						p,
 		float&						p_proj) const
 	{
-		// TODO!
-		return false;
+		const float2 alpha     = make_float2(roughness, roughness);
+		const float2 inv_alpha = make_float2(inv_roughness, inv_roughness);
+
+		const Vector3f N = geometry.normal_s;
+
+		const float NoV = dot(N, V);
+		const float NoL = dot(N, L);
+
+		const float eta     = get_eta(NoV);
+		const float inv_eta = get_inv_eta(NoV);
+
+		const float sgn_N = NoV > 0.0f ? 1.0f : -1.0f;
+
+		const Vector3f V_local(
+			dot(V, geometry.tangent),
+			dot(V, geometry.binormal),
+			sgn_N * NoV );
+
+		const Vector3f H = vndf_microfacet(V,L,N,inv_eta);
+
+		const float NoH = dot(N, H);
+
+		const Vector3f H_local = Vector3f(
+			dot(H, geometry.tangent),
+			dot(H, geometry.binormal),
+			sgn_N * NoH );
+
+		Vector2f uv = vndf_ggx_smith_invert( H_local, alpha, V_local );
+
+		z.x = uv.x;
+		z.y = uv.y;
+		z.z = random.next();
+
+		const float transmission_sign = is_transmissive() ? -1.0f : 1.0f;
+
+		// check whether there is energy exchange between different sides of the surface
+		if (transmission_sign * NoL * NoV <= 0.0f || NoH == 0.0f)
+		{
+			p		= 0.0f;
+			p_proj	= 0.0f;
+		}
+		else
+		{
+			const float D = hvd_ggx_eval(inv_alpha, fabsf( NoH ), H_local.x, H_local.y);
+
+		  #if defined(USE_APPROX_SMITH)
+			const float G = PredividedSmithJointApprox(fabsf(NoV), fabsf(NoL));
+		  #else
+			const float G = PredividedSmithJoint(fabsf(NoV), fabsf(NoL));
+		  #endif
+
+			const float G1 = PredividedSmithG1V(fabsf(NoV), fabsf(NoL));
+
+			float transmission_factor = 1.0f;
+			if (is_transmissive())
+			{
+				const float VoH = dot(V, H);
+				const float LoH = dot(L, H);
+
+				transmission_factor = dwo_dh_transmission_factor(VoH, LoH, eta, inv_eta);
+			}
+
+			p_proj	= clamp_inf( G1 * D * transmission_factor );
+			p		= p_proj * fabsf(NoL);
+		}
+
+		// and take the reciprocals
+		p_proj = clamp_inf( 1.0f / p_proj );
+		p      = clamp_inf( 1.0f / p );
+		return true;
 	}
 
 	/// given V and L and u, compute the probability of sampling u by inversion of V and L

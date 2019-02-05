@@ -37,7 +37,7 @@
 
 namespace cugar {
 
-#if WIN32
+#if defined(WIN32)
 #include <float.h>
 
 #ifndef M_PI
@@ -89,6 +89,24 @@ CUGAR_HOST_DEVICE inline bool is_nan(const float x)
 	return _isnan(x) != 0;
   #endif
 }
+
+#else
+
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+
+#ifndef M_TWO_PI
+#define M_TWO_PI 6.28318530717958647693
+#endif
+
+#ifndef M_PIf
+#define M_PIf 3.14159265358979323846f
+#endif
+
+#ifndef M_TWO_PIf
+#define M_TWO_PIf 6.28318530717958647693f
+#endif
 
 #endif
 
@@ -343,6 +361,44 @@ typedef  longlong4  int64_4;
 template <typename T, uint32 DIM>
 struct vector_type {};
 
+template <typename T>
+struct vector1_storage
+{
+	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE vector1_storage() {}
+	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE vector1_storage(T _x) : x(_x) {}
+
+	T x;
+};
+template <typename T>
+struct vector2_storage
+{
+	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE vector2_storage() {}
+	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE vector2_storage(T _x, T _y) : x(_x), y(_y) {}
+
+	T x, y;
+};
+template <typename T>
+struct vector3_storage
+{
+	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE vector3_storage() {}
+	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE vector3_storage(T _x, T _y, T _z) : x(_x), y(_y), z(_z) {}
+
+	T x, y, z;
+};
+template <typename T>
+struct vector4_storage
+{
+	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE vector4_storage() {}
+	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE vector4_storage(T _x, T _y, T _z, T _w) : x(_x), y(_y), z(_z), w(_w) {}
+
+	T x, y, z, w;
+};
+
+template <typename T> struct vector_type<T,1> { typedef vector1_storage<T> type; static type make(const T i1) { return type(i1); } };
+template <typename T> struct vector_type<T,2> { typedef vector2_storage<T> type; static type make(const T i1, const T i2) { return type(i1,i2); } };
+template <typename T> struct vector_type<T,3> { typedef vector3_storage<T> type; static type make(const T i1, const T i2, const T i3) { return type(i1,i2,i3); } };
+template <typename T> struct vector_type<T,4> { typedef vector4_storage<T> type; static type make(const T i1, const T i2, const T i3, const T i4) { return type(i1,i2,i3,4); } };
+
 template <> struct vector_type<char,1> { typedef char  type; CUGAR_FORCEINLINE CUGAR_HOST_DEVICE static type make(const char i1)                { return i1; } };
 template <> struct vector_type<char,2> { typedef char2 type; CUGAR_FORCEINLINE CUGAR_HOST_DEVICE static type make(const char i1, const char i2) { return make_char2(i1,i2); } };
 template <> struct vector_type<char,3> { typedef char3 type; CUGAR_FORCEINLINE CUGAR_HOST_DEVICE static type make(const char i1, const char i2, const char i3) { return make_char3(i1,i2,i3); }  };
@@ -390,6 +446,8 @@ template <> struct vector_type<float,4> { typedef float4 type; CUGAR_FORCEINLINE
 
 template <> struct vector_type<double,1> { typedef double  type; CUGAR_FORCEINLINE CUGAR_HOST_DEVICE static type make(const double i1)                 { return i1; } };
 template <> struct vector_type<double,2> { typedef double2 type; CUGAR_FORCEINLINE CUGAR_HOST_DEVICE static type make(const double i1, const double i2) { return make_double2(i1,i2); } };
+template <> struct vector_type<double,3> { typedef double3 type; CUGAR_FORCEINLINE CUGAR_HOST_DEVICE static type make(const double i1, const double i2, const double i3) { return make_double3(i1,i2,i3); } };
+template <> struct vector_type<double,4> { typedef double4 type; CUGAR_FORCEINLINE CUGAR_HOST_DEVICE static type make(const double i1, const double i2, const double i3, const double i4) { return make_double4(i1,i2,i3,i4); } };
 
 template <typename T> CUGAR_FORCEINLINE CUGAR_HOST_DEVICE typename vector_type<T,1>::type make_vector(const T i1)                                     { return vector_type<T,1>::make( i1 ); }
 template <typename T> CUGAR_FORCEINLINE CUGAR_HOST_DEVICE typename vector_type<T,2>::type make_vector(const T i1, const T i2)                         { return vector_type<T,2>::make( i1, i2 ); }
@@ -567,6 +625,16 @@ inline CUGAR_HOST_DEVICE uint32 log2(uint32 n)
         m++;
     }
     return m-1;*/
+}
+
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+float saturate(const float x)
+{
+#ifdef CUGAR_DEVICE_COMPILATION
+	return ::saturate(x);
+#else
+	return max( min( x, 1.0f ), 0.0f );
+#endif
 }
 
 /// compute a simple 32-bit hash
@@ -769,16 +837,17 @@ uint32 permute(uint32 i, uint32 l, uint32 p)
 	w |= w >> 16;
 	do {
 		i ^= p;					i *= 0xe170893d;
+		i ^= p			>> 16;
 		i ^= (i & w)	>> 4;
-		i ^= p			>> 8;	i *= 0x0929eb3;
+		i ^= p			>> 8;	i *= 0x0929eb3f;
 		i ^= p			>> 23;
 		i ^= (i & w)	>> 1;	i *= 1 | p >> 27;
 								i *= 0x6935fa69;
 		i ^= (i & w)	>> 11;	i *= 0x74dcb303;
 		i ^= (i & w)	>> 2;	i *= 0x9e501cc3;
 		i ^= (i & w)	>> 2;	i *= 0xc860a3df;
-		i ^= i			>> 5;
 		i &= w;
+		i ^= i			>> 5;
 	} while (i >= l);
 
 	return (i + p) % l;
@@ -1034,6 +1103,17 @@ struct field_traits<uint64>
     CUGAR_HOST_DEVICE static uint64 max() { return uint64(-1); }
 };
 #endif
+
+using ::sinf;
+using ::sin;
+using ::cosf;
+using ::cos;
+using ::sqrtf;
+using ::sqrt;
+using ::expf;
+using ::exp;
+using ::logf;
+using ::log;
 
 ///@} BasicUtils
 ///@} Basic

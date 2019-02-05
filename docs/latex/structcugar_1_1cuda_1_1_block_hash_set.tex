@@ -1,0 +1,60 @@
+\hypertarget{structcugar_1_1cuda_1_1_block_hash_set}{}\section{cugar\+:\+:cuda\+:\+:Block\+Hash\+Set$<$ KeyT, HashT, C\+T\+A\+\_\+\+S\+I\+ZE, T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY $>$ Struct Template Reference}
+\label{structcugar_1_1cuda_1_1_block_hash_set}\index{cugar\+::cuda\+::\+Block\+Hash\+Set$<$ Key\+T, Hash\+T, C\+T\+A\+\_\+\+S\+I\+Z\+E, T\+A\+B\+L\+E\+\_\+\+S\+I\+Z\+E, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+E\+Y $>$@{cugar\+::cuda\+::\+Block\+Hash\+Set$<$ Key\+T, Hash\+T, C\+T\+A\+\_\+\+S\+I\+Z\+E, T\+A\+B\+L\+E\+\_\+\+S\+I\+Z\+E, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+E\+Y $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$typename KeyT, typename HashT, uint32 C\+T\+A\+\_\+\+S\+I\+ZE, uint32 T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE, KeyT I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY = 0x\+F\+F\+F\+F\+F\+F\+FF$>$\newline
+struct cugar\+::cuda\+::\+Block\+Hash\+Set$<$ Key\+T, Hash\+T, C\+T\+A\+\_\+\+S\+I\+Z\+E, T\+A\+B\+L\+E\+\_\+\+S\+I\+Z\+E, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+E\+Y $>$}
+
+This class implements a cuda block-\/wide Hash Set, allowing arbitrary threads from the same C\+TA to add new entries at the same time. 
+
+{\ttfamily \#include $<$hash.\+h$>$}
+
+Inheritance diagram for cugar\+:\+:cuda\+:\+:Block\+Hash\+Set$<$ KeyT, HashT, C\+T\+A\+\_\+\+S\+I\+ZE, T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{structcugar_1_1cuda_1_1_block_hash_set}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcugar_1_1cuda_1_1_block_hash_set_1_1_temp_storage}{Temp\+Storage}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1_block_hash_set_a139df69fc33e2c5818d6be5722cb2077}{Block\+Hash\+Set} ()
+\item 
+C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1_block_hash_set_aa5ebb1fcc80e0f7e097a383237160587}{Block\+Hash\+Set} (\hyperlink{structcugar_1_1cuda_1_1_block_hash_set_1_1_temp_storage}{Temp\+Storage} \&\+\_\+storage)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_block_hash_set_a139df69fc33e2c5818d6be5722cb2077}\label{structcugar_1_1cuda_1_1_block_hash_set_a139df69fc33e2c5818d6be5722cb2077}} 
+\index{cugar\+::cuda\+::\+Block\+Hash\+Set@{cugar\+::cuda\+::\+Block\+Hash\+Set}!Block\+Hash\+Set@{Block\+Hash\+Set}}
+\index{Block\+Hash\+Set@{Block\+Hash\+Set}!cugar\+::cuda\+::\+Block\+Hash\+Set@{cugar\+::cuda\+::\+Block\+Hash\+Set}}
+\subsubsection{\texorpdfstring{Block\+Hash\+Set()}{BlockHashSet()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename KeyT , typename HashT , uint32 C\+T\+A\+\_\+\+S\+I\+ZE, uint32 T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE, KeyT I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY = 0x\+F\+F\+F\+F\+F\+F\+FF$>$ \\
+C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1_block_hash_set}{cugar\+::cuda\+::\+Block\+Hash\+Set}$<$ KeyT, HashT, C\+T\+A\+\_\+\+S\+I\+ZE, T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY $>$\+::\hyperlink{structcugar_1_1cuda_1_1_block_hash_set}{Block\+Hash\+Set} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+emptry constructor \mbox{\Hypertarget{structcugar_1_1cuda_1_1_block_hash_set_aa5ebb1fcc80e0f7e097a383237160587}\label{structcugar_1_1cuda_1_1_block_hash_set_aa5ebb1fcc80e0f7e097a383237160587}} 
+\index{cugar\+::cuda\+::\+Block\+Hash\+Set@{cugar\+::cuda\+::\+Block\+Hash\+Set}!Block\+Hash\+Set@{Block\+Hash\+Set}}
+\index{Block\+Hash\+Set@{Block\+Hash\+Set}!cugar\+::cuda\+::\+Block\+Hash\+Set@{cugar\+::cuda\+::\+Block\+Hash\+Set}}
+\subsubsection{\texorpdfstring{Block\+Hash\+Set()}{BlockHashSet()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename KeyT , typename HashT , uint32 C\+T\+A\+\_\+\+S\+I\+ZE, uint32 T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE, KeyT I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY = 0x\+F\+F\+F\+F\+F\+F\+FF$>$ \\
+C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1_block_hash_set}{cugar\+::cuda\+::\+Block\+Hash\+Set}$<$ KeyT, HashT, C\+T\+A\+\_\+\+S\+I\+ZE, T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY $>$\+::\hyperlink{structcugar_1_1cuda_1_1_block_hash_set}{Block\+Hash\+Set} (\begin{DoxyParamCaption}\item[{\hyperlink{structcugar_1_1cuda_1_1_block_hash_set_1_1_temp_storage}{Temp\+Storage} \&}]{\+\_\+storage }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+storage} & the per-\/\+C\+TA storage backing this container \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/cuda/hash.\+h\end{DoxyCompactItemize}

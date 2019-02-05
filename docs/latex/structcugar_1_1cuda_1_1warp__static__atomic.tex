@@ -1,0 +1,176 @@
+\hypertarget{structcugar_1_1cuda_1_1warp__static__atomic}{}\section{cugar\+:\+:cuda\+:\+:warp\+\_\+static\+\_\+atomic Struct Reference}
+\label{structcugar_1_1cuda_1_1warp__static__atomic}\index{cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic@{cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic}}
+
+
+\subsection{Detailed description}
+An efficient warp-\/synchronous atomic adder, to add or subtract compile-\/time constants to a shared integer.
+
+Given a pointer to an integer (e.\+g. representing a \char`\"{}pool\char`\"{}), this class allows the threads in a warp to add (allocate) or subtract (deallocate) a compile-\/time constant to that integer in a predicated fashion. 
+
+{\ttfamily \#include $<$warp\+\_\+atomics.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\+\_\+\+\_\+device\+\_\+\+\_\+ \+\_\+\+\_\+forceinline\+\_\+\+\_\+ \hyperlink{structcugar_1_1cuda_1_1warp__static__atomic_a75857fc958928db43b9f4c402fdbbfe8}{warp\+\_\+static\+\_\+atomic} (uint32 $\ast$pool)
+\item 
+{\footnotesize template$<$uint32 N$>$ }\\\+\_\+\+\_\+device\+\_\+\+\_\+ \+\_\+\+\_\+forceinline\+\_\+\+\_\+ void \hyperlink{structcugar_1_1cuda_1_1warp__static__atomic_a513882c6d2adc46e4f5f3c71ba48b8b8}{add} (bool p)
+\item 
+{\footnotesize template$<$uint32 N$>$ }\\\+\_\+\+\_\+device\+\_\+\+\_\+ \+\_\+\+\_\+forceinline\+\_\+\+\_\+ void \hyperlink{structcugar_1_1cuda_1_1warp__static__atomic_ade9ab486b4b61d7e2d95f5818a3698ab}{sub} (bool p)
+\item 
+{\footnotesize template$<$uint32 N$>$ }\\\+\_\+\+\_\+device\+\_\+\+\_\+ \+\_\+\+\_\+forceinline\+\_\+\+\_\+ void \hyperlink{structcugar_1_1cuda_1_1warp__static__atomic_a8acc0f476745c3457b52d22fa684432f}{add} (bool p, uint32 $\ast$result)
+\item 
+{\footnotesize template$<$uint32 N$>$ }\\\+\_\+\+\_\+device\+\_\+\+\_\+ \+\_\+\+\_\+forceinline\+\_\+\+\_\+ void \hyperlink{structcugar_1_1cuda_1_1warp__static__atomic_a1e90e3667c88ca0de2e7ca854d9c79d2}{sub} (bool p, uint32 $\ast$result)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$uint32 N$>$ }\\\+\_\+\+\_\+device\+\_\+\+\_\+ static \+\_\+\+\_\+forceinline\+\_\+\+\_\+ void \hyperlink{structcugar_1_1cuda_1_1warp__static__atomic_a2e8efd252f9f489e242e6724b41ed67a}{static\+\_\+add} (bool p, uint32 $\ast$dest)
+\item 
+{\footnotesize template$<$uint32 N$>$ }\\\+\_\+\+\_\+device\+\_\+\+\_\+ static \+\_\+\+\_\+forceinline\+\_\+\+\_\+ void \hyperlink{structcugar_1_1cuda_1_1warp__static__atomic_aa11c59ce620f79ebc846bf9844cc98a6}{static\+\_\+sub} (bool p, uint32 $\ast$dest)
+\item 
+{\footnotesize template$<$uint32 N$>$ }\\\+\_\+\+\_\+device\+\_\+\+\_\+ static \+\_\+\+\_\+forceinline\+\_\+\+\_\+ void \hyperlink{structcugar_1_1cuda_1_1warp__static__atomic_aeba3edd9b324231a90e45675e46a565d}{static\+\_\+add} (bool p, uint32 $\ast$dest, uint32 $\ast$result)
+\item 
+{\footnotesize template$<$uint32 N$>$ }\\\+\_\+\+\_\+device\+\_\+\+\_\+ static \+\_\+\+\_\+forceinline\+\_\+\+\_\+ void \hyperlink{structcugar_1_1cuda_1_1warp__static__atomic_aa413c0a7545f07ac43aa5731d733318b}{static\+\_\+sub} (bool p, uint32 $\ast$dest, uint32 $\ast$result)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1warp__static__atomic_a75857fc958928db43b9f4c402fdbbfe8}\label{structcugar_1_1cuda_1_1warp__static__atomic_a75857fc958928db43b9f4c402fdbbfe8}} 
+\index{cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic@{cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic}!warp\+\_\+static\+\_\+atomic@{warp\+\_\+static\+\_\+atomic}}
+\index{warp\+\_\+static\+\_\+atomic@{warp\+\_\+static\+\_\+atomic}!cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic@{cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic}}
+\subsubsection{\texorpdfstring{warp\+\_\+static\+\_\+atomic()}{warp\_static\_atomic()}}
+{\footnotesize\ttfamily \+\_\+\+\_\+device\+\_\+\+\_\+ \+\_\+\+\_\+forceinline\+\_\+\+\_\+ cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic\+::warp\+\_\+static\+\_\+atomic (\begin{DoxyParamCaption}\item[{uint32 $\ast$}]{pool }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+stateful constructor 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1warp__static__atomic_a513882c6d2adc46e4f5f3c71ba48b8b8}\label{structcugar_1_1cuda_1_1warp__static__atomic_a513882c6d2adc46e4f5f3c71ba48b8b8}} 
+\index{cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic@{cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic}!add@{add}}
+\index{add@{add}!cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic@{cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic}}
+\subsubsection{\texorpdfstring{add()}{add()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$uint32 N$>$ \\
+\+\_\+\+\_\+device\+\_\+\+\_\+ \+\_\+\+\_\+forceinline\+\_\+\+\_\+ void cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic\+::add (\begin{DoxyParamCaption}\item[{bool}]{p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+add zero or exactly N per thread to a shared value without waiting for the result\+: useful to alloc N entries from a common pool
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & number of elements to alloc \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1warp__static__atomic_a8acc0f476745c3457b52d22fa684432f}\label{structcugar_1_1cuda_1_1warp__static__atomic_a8acc0f476745c3457b52d22fa684432f}} 
+\index{cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic@{cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic}!add@{add}}
+\index{add@{add}!cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic@{cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic}}
+\subsubsection{\texorpdfstring{add()}{add()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$uint32 N$>$ \\
+\+\_\+\+\_\+device\+\_\+\+\_\+ \+\_\+\+\_\+forceinline\+\_\+\+\_\+ void cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic\+::add (\begin{DoxyParamCaption}\item[{bool}]{p,  }\item[{uint32 $\ast$}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+add zero or exactly N per thread to a shared value\+: useful to alloc N entries from a common pool
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & number of elements to alloc \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1warp__static__atomic_a2e8efd252f9f489e242e6724b41ed67a}\label{structcugar_1_1cuda_1_1warp__static__atomic_a2e8efd252f9f489e242e6724b41ed67a}} 
+\index{cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic@{cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic}!static\+\_\+add@{static\+\_\+add}}
+\index{static\+\_\+add@{static\+\_\+add}!cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic@{cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic}}
+\subsubsection{\texorpdfstring{static\+\_\+add()}{static\_add()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$uint32 N$>$ \\
+\+\_\+\+\_\+device\+\_\+\+\_\+ static \+\_\+\+\_\+forceinline\+\_\+\+\_\+ void cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic\+::static\+\_\+add (\begin{DoxyParamCaption}\item[{bool}]{p,  }\item[{uint32 $\ast$}]{dest }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+add zero or exactly N per thread to a shared value without waiting for the result\+: useful to alloc N entries from a common pool
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & allocation predicate \\
+\hline
+{\em dest} & the destination of the atomic \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1warp__static__atomic_aeba3edd9b324231a90e45675e46a565d}\label{structcugar_1_1cuda_1_1warp__static__atomic_aeba3edd9b324231a90e45675e46a565d}} 
+\index{cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic@{cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic}!static\+\_\+add@{static\+\_\+add}}
+\index{static\+\_\+add@{static\+\_\+add}!cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic@{cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic}}
+\subsubsection{\texorpdfstring{static\+\_\+add()}{static\_add()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$uint32 N$>$ \\
+\+\_\+\+\_\+device\+\_\+\+\_\+ static \+\_\+\+\_\+forceinline\+\_\+\+\_\+ void cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic\+::static\+\_\+add (\begin{DoxyParamCaption}\item[{bool}]{p,  }\item[{uint32 $\ast$}]{dest,  }\item[{uint32 $\ast$}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+add zero or exactly N per thread to a shared value\+: useful to alloc N entries from a common pool
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & allocation predicate \\
+\hline
+{\em dest} & the destination of the atomic \\
+\hline
+{\em result} & output result \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1warp__static__atomic_aa11c59ce620f79ebc846bf9844cc98a6}\label{structcugar_1_1cuda_1_1warp__static__atomic_aa11c59ce620f79ebc846bf9844cc98a6}} 
+\index{cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic@{cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic}!static\+\_\+sub@{static\+\_\+sub}}
+\index{static\+\_\+sub@{static\+\_\+sub}!cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic@{cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic}}
+\subsubsection{\texorpdfstring{static\+\_\+sub()}{static\_sub()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$uint32 N$>$ \\
+\+\_\+\+\_\+device\+\_\+\+\_\+ static \+\_\+\+\_\+forceinline\+\_\+\+\_\+ void cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic\+::static\+\_\+sub (\begin{DoxyParamCaption}\item[{bool}]{p,  }\item[{uint32 $\ast$}]{dest }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+subtract zero or exactly N per thread to a shared value without waiting for the result\+: useful to dealloc N entries from a common pool
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & allocation predicate \\
+\hline
+{\em dest} & the destination of the atomic \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1warp__static__atomic_aa413c0a7545f07ac43aa5731d733318b}\label{structcugar_1_1cuda_1_1warp__static__atomic_aa413c0a7545f07ac43aa5731d733318b}} 
+\index{cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic@{cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic}!static\+\_\+sub@{static\+\_\+sub}}
+\index{static\+\_\+sub@{static\+\_\+sub}!cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic@{cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic}}
+\subsubsection{\texorpdfstring{static\+\_\+sub()}{static\_sub()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$uint32 N$>$ \\
+\+\_\+\+\_\+device\+\_\+\+\_\+ static \+\_\+\+\_\+forceinline\+\_\+\+\_\+ void cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic\+::static\+\_\+sub (\begin{DoxyParamCaption}\item[{bool}]{p,  }\item[{uint32 $\ast$}]{dest,  }\item[{uint32 $\ast$}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+subtract zero or exactly N per thread to a shared value\+: useful to dealloc N entries from a common pool
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & allocation predicate \\
+\hline
+{\em dest} & the destination of the atomic \\
+\hline
+{\em result} & output result \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1warp__static__atomic_ade9ab486b4b61d7e2d95f5818a3698ab}\label{structcugar_1_1cuda_1_1warp__static__atomic_ade9ab486b4b61d7e2d95f5818a3698ab}} 
+\index{cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic@{cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic}!sub@{sub}}
+\index{sub@{sub}!cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic@{cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic}}
+\subsubsection{\texorpdfstring{sub()}{sub()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$uint32 N$>$ \\
+\+\_\+\+\_\+device\+\_\+\+\_\+ \+\_\+\+\_\+forceinline\+\_\+\+\_\+ void cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic\+::sub (\begin{DoxyParamCaption}\item[{bool}]{p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+subtract zero or exactly N per thread to a shared value without waiting for the result\+: useful to alloc N entries from a common pool
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & allocation predicate \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1warp__static__atomic_a1e90e3667c88ca0de2e7ca854d9c79d2}\label{structcugar_1_1cuda_1_1warp__static__atomic_a1e90e3667c88ca0de2e7ca854d9c79d2}} 
+\index{cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic@{cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic}!sub@{sub}}
+\index{sub@{sub}!cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic@{cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic}}
+\subsubsection{\texorpdfstring{sub()}{sub()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$uint32 N$>$ \\
+\+\_\+\+\_\+device\+\_\+\+\_\+ \+\_\+\+\_\+forceinline\+\_\+\+\_\+ void cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic\+::sub (\begin{DoxyParamCaption}\item[{bool}]{p,  }\item[{uint32 $\ast$}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+subtract zero or exactly N per thread to a shared value\+: useful to alloc N entries from a common pool
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & allocation predicate \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/cuda/\hyperlink{warp__atomics_8h}{warp\+\_\+atomics.\+h}\end{DoxyCompactItemize}

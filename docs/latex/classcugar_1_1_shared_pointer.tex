@@ -1,0 +1,97 @@
+\hypertarget{classcugar_1_1_shared_pointer}{}\section{cugar\+:\+:Shared\+Pointer$<$ T, CounterT $>$ Class Template Reference}
+\label{classcugar_1_1_shared_pointer}\index{cugar\+::\+Shared\+Pointer$<$ T, Counter\+T $>$@{cugar\+::\+Shared\+Pointer$<$ T, Counter\+T $>$}}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcugar_1_1_shared_pointer_a8f3e37213f9d09720091110443287ea8}\label{classcugar_1_1_shared_pointer_a8f3e37213f9d09720091110443287ea8}} 
+typedef T {\bfseries element\+\_\+type}
+\item 
+\mbox{\Hypertarget{classcugar_1_1_shared_pointer_aca70d3a86f503f7669e8441da4afaba3}\label{classcugar_1_1_shared_pointer_aca70d3a86f503f7669e8441da4afaba3}} 
+typedef \hyperlink{classcugar_1_1internals_1_1_shared_count}{internals\+::\+Shared\+Count}$<$ CounterT $>$\+::Counter\+\_\+\+Type {\bfseries Counter\+\_\+\+Type}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcugar_1_1_shared_pointer_a8e2fbfd17ca253521d71c00b34264b0a}\label{classcugar_1_1_shared_pointer_a8e2fbfd17ca253521d71c00b34264b0a}} 
+{\footnotesize template$<$typename U $>$ }\\{\bfseries Shared\+Pointer} (U $\ast$p)
+\item 
+\mbox{\Hypertarget{classcugar_1_1_shared_pointer_ac378704338c476ed091acbf1f04b6338}\label{classcugar_1_1_shared_pointer_ac378704338c476ed091acbf1f04b6338}} 
+{\footnotesize template$<$typename U , typename DeleterT $>$ }\\{\bfseries Shared\+Pointer} (U $\ast$p, DeleterT d)
+\item 
+\mbox{\Hypertarget{classcugar_1_1_shared_pointer_a4865b2c772f97b77ac979c21c18924b8}\label{classcugar_1_1_shared_pointer_a4865b2c772f97b77ac979c21c18924b8}} 
+{\footnotesize template$<$typename U $>$ }\\{\bfseries Shared\+Pointer} (const \hyperlink{classcugar_1_1_shared_pointer}{Shared\+Pointer}$<$ U $>$ \&other)
+\item 
+\mbox{\Hypertarget{classcugar_1_1_shared_pointer_ac391fbe7fe830fe0774fa8ae16d5b4a5}\label{classcugar_1_1_shared_pointer_ac391fbe7fe830fe0774fa8ae16d5b4a5}} 
+{\footnotesize template$<$typename U $>$ }\\{\bfseries Shared\+Pointer} (const \hyperlink{classcugar_1_1_weak_pointer}{Weak\+Pointer}$<$ U, CounterT $>$ \&other)
+\item 
+\mbox{\Hypertarget{classcugar_1_1_shared_pointer_a2c60eed962f176862a3e99f313a5aa7a}\label{classcugar_1_1_shared_pointer_a2c60eed962f176862a3e99f313a5aa7a}} 
+{\footnotesize template$<$typename U $>$ }\\{\bfseries Shared\+Pointer} (const \hyperlink{classcugar_1_1_shared_pointer}{Shared\+Pointer}$<$ U $>$ \&other, \hyperlink{structcugar_1_1internals_1_1static__cast__marker}{internals\+::static\+\_\+cast\+\_\+marker})
+\item 
+\mbox{\Hypertarget{classcugar_1_1_shared_pointer_af0183b3aed5976299907b60249413691}\label{classcugar_1_1_shared_pointer_af0183b3aed5976299907b60249413691}} 
+{\footnotesize template$<$typename U $>$ }\\{\bfseries Shared\+Pointer} (const \hyperlink{classcugar_1_1_shared_pointer}{Shared\+Pointer}$<$ U $>$ \&other, \hyperlink{structcugar_1_1internals_1_1const__cast__marker}{internals\+::const\+\_\+cast\+\_\+marker})
+\item 
+\mbox{\Hypertarget{classcugar_1_1_shared_pointer_a1d0fc9369ba397276c57be3fdc33549b}\label{classcugar_1_1_shared_pointer_a1d0fc9369ba397276c57be3fdc33549b}} 
+{\footnotesize template$<$typename U $>$ }\\{\bfseries Shared\+Pointer} (const \hyperlink{classcugar_1_1_shared_pointer}{Shared\+Pointer}$<$ U $>$ \&other, \hyperlink{structcugar_1_1internals_1_1dynamic__cast__marker}{internals\+::dynamic\+\_\+cast\+\_\+marker})
+\item 
+\mbox{\Hypertarget{classcugar_1_1_shared_pointer_af5f2a38e1711ceff08f8327a66b867ad}\label{classcugar_1_1_shared_pointer_af5f2a38e1711ceff08f8327a66b867ad}} 
+{\footnotesize template$<$typename U $>$ }\\\hyperlink{classcugar_1_1_shared_pointer}{Shared\+Pointer} \& {\bfseries operator=} (const \hyperlink{classcugar_1_1_shared_pointer}{Shared\+Pointer}$<$ U $>$ \&other)
+\item 
+\mbox{\Hypertarget{classcugar_1_1_shared_pointer_a5527a4da891f071d98e3ed3b1e9902cc}\label{classcugar_1_1_shared_pointer_a5527a4da891f071d98e3ed3b1e9902cc}} 
+{\footnotesize template$<$typename U $>$ }\\\hyperlink{classcugar_1_1_shared_pointer}{Shared\+Pointer} \& {\bfseries operator=} (U $\ast$p)
+\item 
+\mbox{\Hypertarget{classcugar_1_1_shared_pointer_aff36ba2fb54d5b19b8628b4864f1ee7c}\label{classcugar_1_1_shared_pointer_aff36ba2fb54d5b19b8628b4864f1ee7c}} 
+void {\bfseries reset} ()
+\item 
+\mbox{\Hypertarget{classcugar_1_1_shared_pointer_a46ba620d9febfbaee3a1931b0489af3e}\label{classcugar_1_1_shared_pointer_a46ba620d9febfbaee3a1931b0489af3e}} 
+{\footnotesize template$<$typename U $>$ }\\void {\bfseries reset} (U $\ast$p)
+\item 
+\mbox{\Hypertarget{classcugar_1_1_shared_pointer_a23a1a458eaea0b89ba3a78b88486eeb1}\label{classcugar_1_1_shared_pointer_a23a1a458eaea0b89ba3a78b88486eeb1}} 
+{\footnotesize template$<$typename U , typename U\+DeleterT $>$ }\\void {\bfseries reset} (U $\ast$p, U\+DeleterT d)
+\item 
+\mbox{\Hypertarget{classcugar_1_1_shared_pointer_a96add72413d2b2db8338b349a9ccadf5}\label{classcugar_1_1_shared_pointer_a96add72413d2b2db8338b349a9ccadf5}} 
+\+\_\+\+Reference {\bfseries operator$\ast$} () const
+\item 
+\mbox{\Hypertarget{classcugar_1_1_shared_pointer_ac0d959947db03ef245422558775ff8d7}\label{classcugar_1_1_shared_pointer_ac0d959947db03ef245422558775ff8d7}} 
+element\+\_\+type $\ast$ {\bfseries operator-\/$>$} () const
+\item 
+\mbox{\Hypertarget{classcugar_1_1_shared_pointer_ac7020fab95a8607a685bbcf0d52d4948}\label{classcugar_1_1_shared_pointer_ac7020fab95a8607a685bbcf0d52d4948}} 
+element\+\_\+type $\ast$ {\bfseries get} () const
+\item 
+\mbox{\Hypertarget{classcugar_1_1_shared_pointer_a7231377cbf65e31eda14f801a011cadc}\label{classcugar_1_1_shared_pointer_a7231377cbf65e31eda14f801a011cadc}} 
+{\bfseries operator Boolean\+Type} () const
+\item 
+\mbox{\Hypertarget{classcugar_1_1_shared_pointer_a5cee5059b6d44e7e6f812db3569a5eee}\label{classcugar_1_1_shared_pointer_a5cee5059b6d44e7e6f812db3569a5eee}} 
+bool {\bfseries unique} () const
+\item 
+\mbox{\Hypertarget{classcugar_1_1_shared_pointer_ae2a4648b8571dd9049c06ada69613c70}\label{classcugar_1_1_shared_pointer_ae2a4648b8571dd9049c06ada69613c70}} 
+Counter\+\_\+\+Type {\bfseries use\+\_\+count} () const
+\item 
+\mbox{\Hypertarget{classcugar_1_1_shared_pointer_a4f73d65657c59c39935c76ee532d33b6}\label{classcugar_1_1_shared_pointer_a4f73d65657c59c39935c76ee532d33b6}} 
+void {\bfseries swap} (\hyperlink{classcugar_1_1_shared_pointer}{Shared\+Pointer}$<$ element\+\_\+type, CounterT $>$ \&other)
+\item 
+\mbox{\Hypertarget{classcugar_1_1_shared_pointer_ae6570a56bfbba28fbf573dc12ec57594}\label{classcugar_1_1_shared_pointer_ae6570a56bfbba28fbf573dc12ec57594}} 
+void $\ast$ {\bfseries \+\_\+\+M\+\_\+get\+\_\+deleter} (const std\+::type\+\_\+info \&ti) const
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcugar_1_1_shared_pointer_a59e9c78b2bbf73f285138119bff21311}\label{classcugar_1_1_shared_pointer_a59e9c78b2bbf73f285138119bff21311}} 
+{\footnotesize template$<$typename U , typename U\+CounterT $>$ }\\class {\bfseries Shared\+Pointer}
+\item 
+\mbox{\Hypertarget{classcugar_1_1_shared_pointer_a43397458ccacac480f107a9680e1e7dd}\label{classcugar_1_1_shared_pointer_a43397458ccacac480f107a9680e1e7dd}} 
+{\footnotesize template$<$typename U , typename U\+CounterT $>$ }\\class {\bfseries Weak\+Pointer}
+\item 
+\mbox{\Hypertarget{classcugar_1_1_shared_pointer_ac09ec64a76fcadd55b09c31dffe529c8}\label{classcugar_1_1_shared_pointer_ac09ec64a76fcadd55b09c31dffe529c8}} 
+{\footnotesize template$<$typename U $>$ }\\bool {\bfseries operator==} (const \hyperlink{classcugar_1_1_shared_pointer}{Shared\+Pointer} \&a, const \hyperlink{classcugar_1_1_shared_pointer}{Shared\+Pointer}$<$ U $>$ \&b)
+\item 
+\mbox{\Hypertarget{classcugar_1_1_shared_pointer_a59d3995aed3c372e97e3b59da7233a0c}\label{classcugar_1_1_shared_pointer_a59d3995aed3c372e97e3b59da7233a0c}} 
+{\footnotesize template$<$typename U $>$ }\\bool {\bfseries operator!=} (const \hyperlink{classcugar_1_1_shared_pointer}{Shared\+Pointer} \&a, const \hyperlink{classcugar_1_1_shared_pointer}{Shared\+Pointer}$<$ U $>$ \&b)
+\item 
+\mbox{\Hypertarget{classcugar_1_1_shared_pointer_adc901fa7c828e27ec20d72fe408d6118}\label{classcugar_1_1_shared_pointer_adc901fa7c828e27ec20d72fe408d6118}} 
+{\footnotesize template$<$typename U $>$ }\\bool {\bfseries operator$<$} (const \hyperlink{classcugar_1_1_shared_pointer}{Shared\+Pointer} \&a, const \hyperlink{classcugar_1_1_shared_pointer}{Shared\+Pointer}$<$ U $>$ \&b)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/shared\+\_\+pointer.\+h\end{DoxyCompactItemize}

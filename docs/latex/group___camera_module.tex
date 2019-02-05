@@ -1,0 +1,67 @@
+\hypertarget{group___camera_module}{}\section{Camera\+Module}
+\label{group___camera_module}\index{Camera\+Module@{Camera\+Module}}
+
+
+\subsection{Detailed Description}
+This module defines a basic camera model \subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_camera}{Camera}
+\item 
+struct \hyperlink{struct_camera_sampler}{Camera\+Sampler}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___camera_module_gaac6a57c4883a499e09399d5f617eccaf}{camera\+\_\+frame} (\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} eye, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} lookat, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} up, float hfov, float aspect\+\_\+ratio, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&U, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&V, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&W)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___camera_module_gae03035f4349487f47612fdccf6644826}{camera\+\_\+frame} (const \hyperlink{struct_camera}{Camera} camera, float aspect\+\_\+ratio, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&U, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&V, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&W)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \hyperlink{group___camera_module_ga74952c76421084e0c5b86cac3c0522c3}{sample\+\_\+camera\+\_\+direction} (const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} ndc, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} U, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} V, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} W)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} \hyperlink{group___camera_module_gab65ffc1b980d9f84bd7170e9e3b6941e}{invert\+\_\+camera\+\_\+sampler} (const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&U, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&V, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&W, const float W\+\_\+len, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} out)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{group___camera_module_ga68d204cd13420430192f50fa6b0db5c2}{camera\+\_\+direction\+\_\+pdf} (const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&U, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&V, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&W, const float W\+\_\+len, const float square\+\_\+focal\+\_\+length, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} out, float $\ast$out\+\_\+x=0, float $\ast$out\+\_\+y=0)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{group___camera_module_gadec496beaacfcaa8c49eea4217ee4476}{camera\+\_\+direction\+\_\+pdf} (const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&U, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&V, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&W, const float W\+\_\+len, const float square\+\_\+focal\+\_\+length, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} out, bool projected=false)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___camera_module_ga68d204cd13420430192f50fa6b0db5c2}\label{group___camera_module_ga68d204cd13420430192f50fa6b0db5c2}} 
+\index{Camera\+Module@{Camera\+Module}!camera\+\_\+direction\+\_\+pdf@{camera\+\_\+direction\+\_\+pdf}}
+\index{camera\+\_\+direction\+\_\+pdf@{camera\+\_\+direction\+\_\+pdf}!Camera\+Module@{Camera\+Module}}
+\subsubsection{\texorpdfstring{camera\+\_\+direction\+\_\+pdf()}{camera\_direction\_pdf()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float camera\+\_\+direction\+\_\+pdf (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{U,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{V,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{W,  }\item[{const float}]{W\+\_\+len,  }\item[{const float}]{square\+\_\+focal\+\_\+length,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{out,  }\item[{float $\ast$}]{out\+\_\+x = {\ttfamily 0},  }\item[{float $\ast$}]{out\+\_\+y = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Compute the solid angle pdf of the camera direction sampler \mbox{\Hypertarget{group___camera_module_gadec496beaacfcaa8c49eea4217ee4476}\label{group___camera_module_gadec496beaacfcaa8c49eea4217ee4476}} 
+\index{Camera\+Module@{Camera\+Module}!camera\+\_\+direction\+\_\+pdf@{camera\+\_\+direction\+\_\+pdf}}
+\index{camera\+\_\+direction\+\_\+pdf@{camera\+\_\+direction\+\_\+pdf}!Camera\+Module@{Camera\+Module}}
+\subsubsection{\texorpdfstring{camera\+\_\+direction\+\_\+pdf()}{camera\_direction\_pdf()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float camera\+\_\+direction\+\_\+pdf (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{U,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{V,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{W,  }\item[{const float}]{W\+\_\+len,  }\item[{const float}]{square\+\_\+focal\+\_\+length,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{out,  }\item[{bool}]{projected = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Compute the solid angle pdf of the camera direction sampler \mbox{\Hypertarget{group___camera_module_gaac6a57c4883a499e09399d5f617eccaf}\label{group___camera_module_gaac6a57c4883a499e09399d5f617eccaf}} 
+\index{Camera\+Module@{Camera\+Module}!camera\+\_\+frame@{camera\+\_\+frame}}
+\index{camera\+\_\+frame@{camera\+\_\+frame}!Camera\+Module@{Camera\+Module}}
+\subsubsection{\texorpdfstring{camera\+\_\+frame()}{camera\_frame()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void camera\+\_\+frame (\begin{DoxyParamCaption}\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{eye,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{lookat,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{up,  }\item[{float}]{hfov,  }\item[{float}]{aspect\+\_\+ratio,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{U,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{V,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{W }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Compute the camera frame \mbox{\Hypertarget{group___camera_module_gae03035f4349487f47612fdccf6644826}\label{group___camera_module_gae03035f4349487f47612fdccf6644826}} 
+\index{Camera\+Module@{Camera\+Module}!camera\+\_\+frame@{camera\+\_\+frame}}
+\index{camera\+\_\+frame@{camera\+\_\+frame}!Camera\+Module@{Camera\+Module}}
+\subsubsection{\texorpdfstring{camera\+\_\+frame()}{camera\_frame()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void camera\+\_\+frame (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_camera}{Camera}}]{camera,  }\item[{float}]{aspect\+\_\+ratio,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{U,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{V,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{W }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Compute the camera frame \mbox{\Hypertarget{group___camera_module_gab65ffc1b980d9f84bd7170e9e3b6941e}\label{group___camera_module_gab65ffc1b980d9f84bd7170e9e3b6941e}} 
+\index{Camera\+Module@{Camera\+Module}!invert\+\_\+camera\+\_\+sampler@{invert\+\_\+camera\+\_\+sampler}}
+\index{invert\+\_\+camera\+\_\+sampler@{invert\+\_\+camera\+\_\+sampler}!Camera\+Module@{Camera\+Module}}
+\subsubsection{\texorpdfstring{invert\+\_\+camera\+\_\+sampler()}{invert\_camera\_sampler()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} invert\+\_\+camera\+\_\+sampler (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{U,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{V,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{W,  }\item[{const float}]{W\+\_\+len,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{out }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Invert the camera direction sampler \mbox{\Hypertarget{group___camera_module_ga74952c76421084e0c5b86cac3c0522c3}\label{group___camera_module_ga74952c76421084e0c5b86cac3c0522c3}} 
+\index{Camera\+Module@{Camera\+Module}!sample\+\_\+camera\+\_\+direction@{sample\+\_\+camera\+\_\+direction}}
+\index{sample\+\_\+camera\+\_\+direction@{sample\+\_\+camera\+\_\+direction}!Camera\+Module@{Camera\+Module}}
+\subsubsection{\texorpdfstring{sample\+\_\+camera\+\_\+direction()}{sample\_camera\_direction()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} sample\+\_\+camera\+\_\+direction (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f}}]{ndc,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{U,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{V,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{W }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Sample a direction from the camera frame 

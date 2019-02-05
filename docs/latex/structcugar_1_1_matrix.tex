@@ -1,0 +1,141 @@
+\hypertarget{structcugar_1_1_matrix}{}\section{cugar\+:\+:Matrix$<$ T, N, M $>$ Struct Template Reference}
+\label{structcugar_1_1_matrix}\index{cugar\+::\+Matrix$<$ T, N, M $>$@{cugar\+::\+Matrix$<$ T, N, M $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$typename T, int N, int M$>$\newline
+struct cugar\+::\+Matrix$<$ T, N, M $>$}
+
+A dense N x M matrix class over a templated type T. 
+
+{\ttfamily \#include $<$matrix.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_a0ec419ed1a1ae2989cb39a9a060aa850}\label{structcugar_1_1_matrix_a0ec419ed1a1ae2989cb39a9a060aa850}} 
+typedef T {\bfseries value\+\_\+type}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_acc5c830b148636a3e3326f08c7174779}\label{structcugar_1_1_matrix_acc5c830b148636a3e3326f08c7174779}} 
+typedef T {\bfseries Field\+\_\+type}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_a2b689b1bc5deff43a5294a00f0a46045}\label{structcugar_1_1_matrix_a2b689b1bc5deff43a5294a00f0a46045}} 
+typedef \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, M $>$ {\bfseries row\+\_\+vector}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_a3dac399315d7b57b7d725143bdd1fc91}\label{structcugar_1_1_matrix_a3dac399315d7b57b7d725143bdd1fc91}} 
+typedef \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, N $>$ {\bfseries column\+\_\+vector}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_a64822d2159dfbd975d49ab12a30bb050}\label{structcugar_1_1_matrix_a64822d2159dfbd975d49ab12a30bb050}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries Matrix} (const T s)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_a5bf857fa3003b30b1c03d7f8308f030d}\label{structcugar_1_1_matrix_a5bf857fa3003b30b1c03d7f8308f030d}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries Matrix} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, M $>$ \&v)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_aeb00a033bbd62d91fda2e5770377a9b8}\label{structcugar_1_1_matrix_aeb00a033bbd62d91fda2e5770377a9b8}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries Matrix} (const \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, M $>$ \&)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_a1bcb80ab86f56a153b0707b829889eea}\label{structcugar_1_1_matrix_a1bcb80ab86f56a153b0707b829889eea}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries Matrix} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, M $>$ $\ast$v)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_ad2959725a2fc40b253277d4c0ac2816d}\label{structcugar_1_1_matrix_ad2959725a2fc40b253277d4c0ac2816d}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries Matrix} (const T $\ast$v)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_af9e28a918f23ad79a549b813df3991fa}\label{structcugar_1_1_matrix_af9e28a918f23ad79a549b813df3991fa}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries Matrix} (const T $\ast$$\ast$v)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_a9b5d06bac4b31e63b1d94a5b864307b1}\label{structcugar_1_1_matrix_a9b5d06bac4b31e63b1d94a5b864307b1}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, M $>$ \& {\bfseries operator=} (const \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, M $>$ \&)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_ac3507370816b194da09ce5de4f8f7e91}\label{structcugar_1_1_matrix_ac3507370816b194da09ce5de4f8f7e91}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, M $>$ \& {\bfseries operator+=} (const \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, M $>$ \&)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_af1c6911615176275eb22549be66754e8}\label{structcugar_1_1_matrix_af1c6911615176275eb22549be66754e8}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, M $>$ \& {\bfseries operator-\/=} (const \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, M $>$ \&)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_af1369088396c5b265110c18e5d129fa5}\label{structcugar_1_1_matrix_af1369088396c5b265110c18e5d129fa5}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, M $>$ \& {\bfseries operator$\ast$=} (T)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_acf150a1abb93b50d50167b1bb6596177}\label{structcugar_1_1_matrix_acf150a1abb93b50d50167b1bb6596177}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, M $>$ \& {\bfseries operator/=} (T)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_a8255f847c015574cc712a89c9ee2a8dc}\label{structcugar_1_1_matrix_a8255f847c015574cc712a89c9ee2a8dc}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, M $>$ \& {\bfseries operator\mbox{[}$\,$\mbox{]}} (int) const
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_a2407d0a8391d156331d7ebd3d8220e8f}\label{structcugar_1_1_matrix_a2407d0a8391d156331d7ebd3d8220e8f}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, M $>$ \& {\bfseries operator\mbox{[}$\,$\mbox{]}} (int)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_afff34c720d4d4329e62d8fdb3f1f9645}\label{structcugar_1_1_matrix_afff34c720d4d4329e62d8fdb3f1f9645}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, M $>$ \& {\bfseries get} (int) const
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_a573e8a34e999abdc4cd115aef030e916}\label{structcugar_1_1_matrix_a573e8a34e999abdc4cd115aef030e916}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void {\bfseries set} (int, const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, M $>$ \&)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_aa84fed7a392a4ad317594e66f5513fac}\label{structcugar_1_1_matrix_aa84fed7a392a4ad317594e66f5513fac}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const T \& {\bfseries operator()} (int i, int j) const
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_a5260427c5da3735e8eca89010380fb72}\label{structcugar_1_1_matrix_a5260427c5da3735e8eca89010380fb72}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE T \& {\bfseries operator()} (int i, int j)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_a2c758b8dd18e7dc288b9980eaa901f44}\label{structcugar_1_1_matrix_a2c758b8dd18e7dc288b9980eaa901f44}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE T {\bfseries det} () const
+\end{DoxyCompactItemize}
+\subsection*{Static Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_a4c3155dee229fd1611885036aa5d9275}\label{structcugar_1_1_matrix_a4c3155dee229fd1611885036aa5d9275}} 
+static C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, M $>$ {\bfseries one} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_aa3d63fd409763c71c028436f29b12c08}\label{structcugar_1_1_matrix_aa3d63fd409763c71c028436f29b12c08}} 
+\hyperlink{structcugar_1_1_vector}{Vector}$<$ T, M $>$ {\bfseries r} \mbox{[}N\mbox{]}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_aabd280629b89d1ac6c86a1272d69c290}\label{structcugar_1_1_matrix_aabd280629b89d1ac6c86a1272d69c290}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE int {\bfseries operator==} (const \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, M $>$ \&, const \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, M $>$ \&)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_aedc8c7d7a6c756d81fa516d6d81ae15c}\label{structcugar_1_1_matrix_aedc8c7d7a6c756d81fa516d6d81ae15c}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE int {\bfseries operator!=} (const \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, M $>$ \&, const \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, M $>$ \&)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_a2c4801e2ac2ee9aca9ae52565f58ed5c}\label{structcugar_1_1_matrix_a2c4801e2ac2ee9aca9ae52565f58ed5c}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, M $>$ {\bfseries operator-\/} (const \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, M $>$ \&)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_a8a84070b5ee31d7e69040b5a50028d2d}\label{structcugar_1_1_matrix_a8a84070b5ee31d7e69040b5a50028d2d}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, M $>$ {\bfseries operator+} (const \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, M $>$ \&, const \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, M $>$ \&)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_a9a5b0c44298ee963a8e85e3b5dd62de0}\label{structcugar_1_1_matrix_a9a5b0c44298ee963a8e85e3b5dd62de0}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, M $>$ {\bfseries operator-\/} (const \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, M $>$ \&, const \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, M $>$ \&)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_af7e04aaef884c2cad0ed25f97e8ed8c7}\label{structcugar_1_1_matrix_af7e04aaef884c2cad0ed25f97e8ed8c7}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, M $>$ {\bfseries operator$\ast$} (const \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, M $>$ \&, T)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_a1c5548e31c112dc489103960476615cf}\label{structcugar_1_1_matrix_a1c5548e31c112dc489103960476615cf}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, M $>$ {\bfseries operator$\ast$} (T, const \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, M $>$ \&)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_a07cb4751e9def1fa05a8e44f13bd6f55}\label{structcugar_1_1_matrix_a07cb4751e9def1fa05a8e44f13bd6f55}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, M $>$ {\bfseries operator$\ast$} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, N $>$ \&, const \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, M $>$ \&)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_afaf0e623fd02091ad2373ac929f1b457}\label{structcugar_1_1_matrix_afaf0e623fd02091ad2373ac929f1b457}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, N $>$ {\bfseries operator$\ast$} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, N $>$ \&, const \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, N $>$ \&)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_a06c94cf407b260fef0ada3165edf408c}\label{structcugar_1_1_matrix_a06c94cf407b260fef0ada3165edf408c}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, N $>$ {\bfseries operator$\ast$} (const \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, M $>$ \&, const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, M $>$ \&)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_ab3bf9be2cfb34fb34d9e61c4f0988be2}\label{structcugar_1_1_matrix_ab3bf9be2cfb34fb34d9e61c4f0988be2}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, N $>$ {\bfseries operator$\ast$} (const \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, N $>$ \&, const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, N $>$ \&)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_matrix_a0986e82b9a1ee2e0acf80b5f2f1e6714}\label{structcugar_1_1_matrix_a0986e82b9a1ee2e0acf80b5f2f1e6714}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, M $>$ {\bfseries operator/} (const \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ T, N, M $>$ \&, T)
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/linalg/matrix.\+h\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/linalg/matrix\+\_\+inline.\+h\end{DoxyCompactItemize}

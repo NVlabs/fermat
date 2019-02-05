@@ -1,0 +1,52 @@
+\hypertarget{classcugar_1_1internals_1_1_shared_count}{}\section{cugar\+:\+:internals\+:\+:Shared\+Count$<$ CounterT $>$ Class Template Reference}
+\label{classcugar_1_1internals_1_1_shared_count}\index{cugar\+::internals\+::\+Shared\+Count$<$ Counter\+T $>$@{cugar\+::internals\+::\+Shared\+Count$<$ Counter\+T $>$}}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_shared_count_ac76264b3a20dbfabd86f71243f12bced}\label{classcugar_1_1internals_1_1_shared_count_ac76264b3a20dbfabd86f71243f12bced}} 
+typedef \hyperlink{classcugar_1_1internals_1_1_counted_base}{Counted\+Base}$<$ CounterT $>$\+::Counter\+\_\+\+Type {\bfseries Counter\+\_\+\+Type}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_shared_count_a50c2b0a21fa72d090324b86eeb80b893}\label{classcugar_1_1internals_1_1_shared_count_a50c2b0a21fa72d090324b86eeb80b893}} 
+{\footnotesize template$<$typename PtrT , typename DeleterT $>$ }\\{\bfseries Shared\+Count} (PtrT p, DeleterT d)
+\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_shared_count_a292f13e3f149574d88ecd8e63b28650d}\label{classcugar_1_1internals_1_1_shared_count_a292f13e3f149574d88ecd8e63b28650d}} 
+{\bfseries Shared\+Count} (const \hyperlink{classcugar_1_1internals_1_1_weak_count}{Weak\+Count}$<$ CounterT $>$ \&wc)
+\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_shared_count_af4405588eab5a6807daeb79a95385854}\label{classcugar_1_1internals_1_1_shared_count_af4405588eab5a6807daeb79a95385854}} 
+{\bfseries Shared\+Count} (const \hyperlink{classcugar_1_1internals_1_1_shared_count}{Shared\+Count} \&sc)
+\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_shared_count_a3e276c9c8e31e362f673362ec215db13}\label{classcugar_1_1internals_1_1_shared_count_a3e276c9c8e31e362f673362ec215db13}} 
+\hyperlink{classcugar_1_1internals_1_1_shared_count}{Shared\+Count} \& {\bfseries operator=} (const \hyperlink{classcugar_1_1internals_1_1_shared_count}{Shared\+Count} \&sc)
+\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_shared_count_ae6f676bcca4a0fb3aab08b90c6732c73}\label{classcugar_1_1internals_1_1_shared_count_ae6f676bcca4a0fb3aab08b90c6732c73}} 
+void {\bfseries swap} (\hyperlink{classcugar_1_1internals_1_1_shared_count}{Shared\+Count} \&sc)
+\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_shared_count_a1786236a0e31493180162fc7527a97a0}\label{classcugar_1_1internals_1_1_shared_count_a1786236a0e31493180162fc7527a97a0}} 
+Counter\+\_\+\+Type {\bfseries use\+\_\+count} () const
+\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_shared_count_a4c9c11d2ae4915320151a62f54d3c912}\label{classcugar_1_1internals_1_1_shared_count_a4c9c11d2ae4915320151a62f54d3c912}} 
+bool {\bfseries unique} () const
+\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_shared_count_a49ade43d593df14b17c71ddf96091e87}\label{classcugar_1_1internals_1_1_shared_count_a49ade43d593df14b17c71ddf96091e87}} 
+void $\ast$ {\bfseries get\+\_\+deleter} (const std\+::type\+\_\+info \&ti) const
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_shared_count_a3fe0176358dcda4a5e4afc36ad0134e9}\label{classcugar_1_1internals_1_1_shared_count_a3fe0176358dcda4a5e4afc36ad0134e9}} 
+class {\bfseries Weak\+Count$<$ Counter\+T $>$}
+\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_shared_count_a2b979bc7691a5441774ebb2da938b9b2}\label{classcugar_1_1internals_1_1_shared_count_a2b979bc7691a5441774ebb2da938b9b2}} 
+bool {\bfseries operator==} (const \hyperlink{classcugar_1_1internals_1_1_shared_count}{Shared\+Count} \&a, const \hyperlink{classcugar_1_1internals_1_1_shared_count}{Shared\+Count} \&b)
+\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_shared_count_a5ebb3c5c640d0cf2447bed1d7f5ba907}\label{classcugar_1_1internals_1_1_shared_count_a5ebb3c5c640d0cf2447bed1d7f5ba907}} 
+bool {\bfseries operator$<$} (const \hyperlink{classcugar_1_1internals_1_1_shared_count}{Shared\+Count} \&a, const \hyperlink{classcugar_1_1internals_1_1_shared_count}{Shared\+Count} \&b)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/shared\+\_\+pointer.\+h\end{DoxyCompactItemize}

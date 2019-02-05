@@ -1,0 +1,84 @@
+\hypertarget{structcugar_1_1_lambert_edf}{}\section{cugar\+:\+:Lambert\+Edf Struct Reference}
+\label{structcugar_1_1_lambert_edf}\index{cugar\+::\+Lambert\+Edf@{cugar\+::\+Lambert\+Edf}}
+
+
+\subsection{Detailed description}
+Implements a Lambertian edf. 
+
+{\ttfamily \#include $<$lambert\+\_\+edf.\+h$>$}
+
+Inheritance diagram for cugar\+:\+:Lambert\+Edf\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{structcugar_1_1_lambert_edf}
+\end{center}
+\end{figure}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_lambert_edf_aed8c1031d0470a4885de9e2d73d6b3a6}\label{structcugar_1_1_lambert_edf_aed8c1031d0470a4885de9e2d73d6b3a6}} 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries Lambert\+Edf} (const \hyperlink{structcugar_1_1_vector}{Vector3f} \+\_\+color)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector3f} \hyperlink{structcugar_1_1_lambert_edf_aed2fed71aa6a7ad98e05714a0fd5f316}{f} (const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&geometry, const \hyperlink{structcugar_1_1_vector}{Vector3f} in, const \hyperlink{structcugar_1_1_vector}{Vector3f} out) const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector3f} \hyperlink{structcugar_1_1_lambert_edf_a22dec6f632492c998702dc6f1f4c62c0}{f\+\_\+over\+\_\+p} (const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&geometry, const \hyperlink{structcugar_1_1_vector}{Vector3f} in, const \hyperlink{structcugar_1_1_vector}{Vector3f} out) const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_lambert_edf_a388560f22fa74fe55678388ea0ae7f69}{p} (const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&geometry, const \hyperlink{structcugar_1_1_vector}{Vector3f} in, const \hyperlink{structcugar_1_1_vector}{Vector3f} out, const Spherical\+Measure measure=k\+Projected\+Solid\+Angle) const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1_lambert_edf_ae860824e138c2d39c17e2d8d7bac5557}{sample} (const \hyperlink{structcugar_1_1_vector}{Vector2f} u, const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&geometry, const \hyperlink{structcugar_1_1_vector}{Vector3f} in, \hyperlink{structcugar_1_1_vector}{Vector3f} \&out, \hyperlink{structcugar_1_1_vector}{Vector3f} \&g, float \&\hyperlink{structcugar_1_1_lambert_edf_a388560f22fa74fe55678388ea0ae7f69}{p}, float \&p\+\_\+proj) const
+\item 
+{\footnotesize template$<$typename Random\+GeneratorT $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{structcugar_1_1_lambert_edf_ae3d6b75902074a76f918a8d8d2bba24e}{invert} (const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&geometry, const \hyperlink{structcugar_1_1_vector}{Vector3f} V, const \hyperlink{structcugar_1_1_vector}{Vector3f} L, Random\+GeneratorT \&\hyperlink{group___sampling_module_gaec17bbbfd36295353081b7b4480d933d}{random}, \hyperlink{structcugar_1_1_vector}{Vector3f} \&z, float \&\hyperlink{structcugar_1_1_lambert_edf_a388560f22fa74fe55678388ea0ae7f69}{p}, float \&p\+\_\+proj) const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1_lambert_edf_acc3121156681c4433b1e85ae2de74605}{inverse\+\_\+pdf} (const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&geometry, const \hyperlink{structcugar_1_1_vector}{Vector3f} V, const \hyperlink{structcugar_1_1_vector}{Vector3f} L, const \hyperlink{structcugar_1_1_vector}{Vector3f} u, float \&\hyperlink{structcugar_1_1_lambert_edf_a388560f22fa74fe55678388ea0ae7f69}{p}, float \&p\+\_\+proj) const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_lambert_edf_a7b02006203dafed67b6ae7edb6293a66}\label{structcugar_1_1_lambert_edf_a7b02006203dafed67b6ae7edb6293a66}} 
+\hyperlink{structcugar_1_1_vector}{Vector3f} {\bfseries color}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1_lambert_edf_aed2fed71aa6a7ad98e05714a0fd5f316}\label{structcugar_1_1_lambert_edf_aed2fed71aa6a7ad98e05714a0fd5f316}} 
+\index{cugar\+::\+Lambert\+Edf@{cugar\+::\+Lambert\+Edf}!f@{f}}
+\index{f@{f}!cugar\+::\+Lambert\+Edf@{cugar\+::\+Lambert\+Edf}}
+\subsubsection{\texorpdfstring{f()}{f()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector3f} cugar\+::\+Lambert\+Edf\+::f (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&}]{geometry,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{in,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{out }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+evaluate the E\+DF f(in,out) \mbox{\Hypertarget{structcugar_1_1_lambert_edf_a22dec6f632492c998702dc6f1f4c62c0}\label{structcugar_1_1_lambert_edf_a22dec6f632492c998702dc6f1f4c62c0}} 
+\index{cugar\+::\+Lambert\+Edf@{cugar\+::\+Lambert\+Edf}!f\+\_\+over\+\_\+p@{f\+\_\+over\+\_\+p}}
+\index{f\+\_\+over\+\_\+p@{f\+\_\+over\+\_\+p}!cugar\+::\+Lambert\+Edf@{cugar\+::\+Lambert\+Edf}}
+\subsubsection{\texorpdfstring{f\+\_\+over\+\_\+p()}{f\_over\_p()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector3f} cugar\+::\+Lambert\+Edf\+::f\+\_\+over\+\_\+p (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&}]{geometry,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{in,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{out }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+evaluate the E\+D\+F/pdf ratio f(in,out)/p(in,out) wrt projected solid angle \mbox{\Hypertarget{structcugar_1_1_lambert_edf_acc3121156681c4433b1e85ae2de74605}\label{structcugar_1_1_lambert_edf_acc3121156681c4433b1e85ae2de74605}} 
+\index{cugar\+::\+Lambert\+Edf@{cugar\+::\+Lambert\+Edf}!inverse\+\_\+pdf@{inverse\+\_\+pdf}}
+\index{inverse\+\_\+pdf@{inverse\+\_\+pdf}!cugar\+::\+Lambert\+Edf@{cugar\+::\+Lambert\+Edf}}
+\subsubsection{\texorpdfstring{inverse\+\_\+pdf()}{inverse\_pdf()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void cugar\+::\+Lambert\+Edf\+::inverse\+\_\+pdf (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&}]{geometry,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{V,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{L,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{u,  }\item[{float \&}]{p,  }\item[{float \&}]{p\+\_\+proj }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+given V and L and u, compute the probability of sampling u by inversion of V and L \mbox{\Hypertarget{structcugar_1_1_lambert_edf_ae3d6b75902074a76f918a8d8d2bba24e}\label{structcugar_1_1_lambert_edf_ae3d6b75902074a76f918a8d8d2bba24e}} 
+\index{cugar\+::\+Lambert\+Edf@{cugar\+::\+Lambert\+Edf}!invert@{invert}}
+\index{invert@{invert}!cugar\+::\+Lambert\+Edf@{cugar\+::\+Lambert\+Edf}}
+\subsubsection{\texorpdfstring{invert()}{invert()}}
+{\footnotesize\ttfamily template$<$typename Random\+GeneratorT $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool cugar\+::\+Lambert\+Edf\+::invert (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&}]{geometry,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{V,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{L,  }\item[{Random\+GeneratorT \&}]{random,  }\item[{\hyperlink{structcugar_1_1_vector}{Vector3f} \&}]{z,  }\item[{float \&}]{p,  }\item[{float \&}]{p\+\_\+proj }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+given V and L, invert the sampling functions used to generate L from V \mbox{\Hypertarget{structcugar_1_1_lambert_edf_a388560f22fa74fe55678388ea0ae7f69}\label{structcugar_1_1_lambert_edf_a388560f22fa74fe55678388ea0ae7f69}} 
+\index{cugar\+::\+Lambert\+Edf@{cugar\+::\+Lambert\+Edf}!p@{p}}
+\index{p@{p}!cugar\+::\+Lambert\+Edf@{cugar\+::\+Lambert\+Edf}}
+\subsubsection{\texorpdfstring{p()}{p()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float cugar\+::\+Lambert\+Edf\+::p (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&}]{geometry,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{in,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{out,  }\item[{const Spherical\+Measure}]{measure = {\ttfamily kProjectedSolidAngle} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+evaluate the pdf of sampling L given V, p(L$\vert$V) = p(\+V,\+L) \mbox{\Hypertarget{structcugar_1_1_lambert_edf_ae860824e138c2d39c17e2d8d7bac5557}\label{structcugar_1_1_lambert_edf_ae860824e138c2d39c17e2d8d7bac5557}} 
+\index{cugar\+::\+Lambert\+Edf@{cugar\+::\+Lambert\+Edf}!sample@{sample}}
+\index{sample@{sample}!cugar\+::\+Lambert\+Edf@{cugar\+::\+Lambert\+Edf}}
+\subsubsection{\texorpdfstring{sample()}{sample()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void cugar\+::\+Lambert\+Edf\+::sample (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector2f}}]{u,  }\item[{const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&}]{geometry,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{in,  }\item[{\hyperlink{structcugar_1_1_vector}{Vector3f} \&}]{out,  }\item[{\hyperlink{structcugar_1_1_vector}{Vector3f} \&}]{g,  }\item[{float \&}]{p,  }\item[{float \&}]{p\+\_\+proj }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+sample out given in and return both the pdf p and the value g = f/p, wrt projected solid angle 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bsdf/lambert\+\_\+edf.\+h\end{DoxyCompactItemize}

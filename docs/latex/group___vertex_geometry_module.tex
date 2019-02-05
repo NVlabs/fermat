@@ -1,0 +1,62 @@
+\hypertarget{group___vertex_geometry_module}{}\section{Vertex\+Geometry\+Module}
+\label{group___vertex_geometry_module}\index{Vertex\+Geometry\+Module@{Vertex\+Geometry\+Module}}
+
+
+\subsection{Detailed Description}
+\begin{DoxyParagraph}{}
+One of the tricks to high performance rendering is tightly packing all necessary information, so as to consume as little bandwith and on-\/chip memory as possible. This module introduces two structures to do so to represent path vertex geometry\+: 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+
+\begin{DoxyItemize}
+\item \hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id}\+: to encode the minimal amount of information needed to represent a point on a surface, or a {\itshape hit} in ray tracing parlance;
+\item \hyperlink{struct_vertex_geometry}{Vertex\+Geometry}\+: to encode a slightly expanded version on the local differential surface geometry at a point, including its tangent, binormal and normal, as well the local texture coordinates; 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_vertex_geometry}{Vertex\+Geometry}
+\item 
+struct \hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id}
+\item 
+struct \hyperlink{struct_vertex_storage_view}{Vertex\+Storage\+View}
+\item 
+struct \hyperlink{struct_vertex_storage}{Vertex\+Storage}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___vertex_geometry_module_gae2642a40e812bd7932491151c40a1592}\label{group___vertex_geometry_module_gae2642a40e812bd7932491151c40a1592}} 
+enum {\bfseries Vertex\+Sampling} \{ {\bfseries k\+All} = 0, 
+{\bfseries k\+End} = 1
+ \}
+\item 
+\mbox{\Hypertarget{group___vertex_geometry_module_ga6f628f5a47e70cc7301899aa1bd333da}\label{group___vertex_geometry_module_ga6f628f5a47e70cc7301899aa1bd333da}} 
+enum {\bfseries Vertex\+Ordering} \{ {\bfseries k\+Random\+Ordering} = 0, 
+{\bfseries k\+Path\+Ordering} = 1
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE uint32 \hyperlink{group___vertex_geometry_module_ga36aaf2cd5d29c0fc2abe5d95f9739f95}{pack\+\_\+direction} (const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&dir)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \hyperlink{group___vertex_geometry_module_gab56236f4d0e367a082d3dc83df137d79}{unpack\+\_\+direction} (const uint32 packed\+\_\+dir)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___vertex_geometry_module_ga36aaf2cd5d29c0fc2abe5d95f9739f95}\label{group___vertex_geometry_module_ga36aaf2cd5d29c0fc2abe5d95f9739f95}} 
+\index{Vertex\+Geometry\+Module@{Vertex\+Geometry\+Module}!pack\+\_\+direction@{pack\+\_\+direction}}
+\index{pack\+\_\+direction@{pack\+\_\+direction}!Vertex\+Geometry\+Module@{Vertex\+Geometry\+Module}}
+\subsubsection{\texorpdfstring{pack\+\_\+direction()}{pack\_direction()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE uint32 pack\+\_\+direction (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{dir }\end{DoxyParamCaption})}
+
+pack a normalized direction vector in 32-\/bits \mbox{\Hypertarget{group___vertex_geometry_module_gab56236f4d0e367a082d3dc83df137d79}\label{group___vertex_geometry_module_gab56236f4d0e367a082d3dc83df137d79}} 
+\index{Vertex\+Geometry\+Module@{Vertex\+Geometry\+Module}!unpack\+\_\+direction@{unpack\+\_\+direction}}
+\index{unpack\+\_\+direction@{unpack\+\_\+direction}!Vertex\+Geometry\+Module@{Vertex\+Geometry\+Module}}
+\subsubsection{\texorpdfstring{unpack\+\_\+direction()}{unpack\_direction()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} unpack\+\_\+direction (\begin{DoxyParamCaption}\item[{const uint32}]{packed\+\_\+dir }\end{DoxyParamCaption})}
+
+unpack a 32-\/bits normalized direction vector 

@@ -1,0 +1,133 @@
+\hypertarget{struct_renderer_interface}{}\section{Renderer\+Interface Struct Reference}
+\label{struct_renderer_interface}\index{Renderer\+Interface@{Renderer\+Interface}}
+
+
+\subsection{Detailed description}
+The abstract renderer / solver interface 
+
+{\ttfamily \#include $<$renderer\+\_\+interface.\+h$>$}
+
+Inheritance diagram for Renderer\+Interface\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=9.000000cm]{struct_renderer_interface}
+\end{center}
+\end{figure}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+virtual uint32 \hyperlink{struct_renderer_interface_a0bedb16a0103c95dae460afef2a0fc2a}{auxiliary\+\_\+channel\+\_\+count} ()
+\item 
+virtual void \hyperlink{struct_renderer_interface_aca2dd8b8b27e3e6f7fcf81c0d8d17ce5}{register\+\_\+auxiliary\+\_\+channels} (\hyperlink{struct_f_buffer_storage}{F\+Buffer\+Storage} \&fbuffer, const uint32 channel\+\_\+offset)
+\item 
+virtual void \hyperlink{struct_renderer_interface_a2ead9b943d6d48fcd32872e0005ebe63}{init} (int argc, char $\ast$$\ast$argv, \hyperlink{struct_rendering_context}{Rendering\+Context} \&renderer)
+\item 
+virtual void \hyperlink{struct_renderer_interface_a754143d3228c27eab32f1760217afe56}{update\+\_\+scene} (\hyperlink{struct_rendering_context}{Rendering\+Context} \&renderer)
+\item 
+virtual void \hyperlink{struct_renderer_interface_aa64254dd44c94929b05092dc8d74f29d}{render} (const uint32 instance, \hyperlink{struct_rendering_context}{Rendering\+Context} \&renderer)
+\item 
+virtual void \hyperlink{struct_renderer_interface_a9f5afd3701d8d935a2ecf08fb9f5f604}{keyboard} (unsigned char character, int x, int y, bool \&invalidate)
+\item 
+virtual void \hyperlink{struct_renderer_interface_a7469218aafa029a3e22bac2c00dca9f5}{destroy} ()
+\item 
+virtual void \hyperlink{struct_renderer_interface_aae7f55e0f8863e6a2ed3205d228ab306}{mouse} (\hyperlink{struct_rendering_context}{Rendering\+Context} \&renderer, int button, int state, int x, int y)
+\item 
+virtual void \hyperlink{struct_renderer_interface_a44e91217896e95a3fd46b26eef51a6da}{draw} (\hyperlink{struct_rendering_context}{Rendering\+Context} \&renderer)
+\item 
+virtual void \hyperlink{struct_renderer_interface_a378df3aa18095da5ce8011fb25c8fb8e}{dump\+\_\+speed\+\_\+stats} (F\+I\+LE $\ast$stats)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{struct_renderer_interface_a0bedb16a0103c95dae460afef2a0fc2a}\label{struct_renderer_interface_a0bedb16a0103c95dae460afef2a0fc2a}} 
+\index{Renderer\+Interface@{Renderer\+Interface}!auxiliary\+\_\+channel\+\_\+count@{auxiliary\+\_\+channel\+\_\+count}}
+\index{auxiliary\+\_\+channel\+\_\+count@{auxiliary\+\_\+channel\+\_\+count}!Renderer\+Interface@{Renderer\+Interface}}
+\subsubsection{\texorpdfstring{auxiliary\+\_\+channel\+\_\+count()}{auxiliary\_channel\_count()}}
+{\footnotesize\ttfamily virtual uint32 Renderer\+Interface\+::auxiliary\+\_\+channel\+\_\+count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+this method is responsible for returning the number of auxiliary framebuffer channels needed by the renderer \mbox{\Hypertarget{struct_renderer_interface_a7469218aafa029a3e22bac2c00dca9f5}\label{struct_renderer_interface_a7469218aafa029a3e22bac2c00dca9f5}} 
+\index{Renderer\+Interface@{Renderer\+Interface}!destroy@{destroy}}
+\index{destroy@{destroy}!Renderer\+Interface@{Renderer\+Interface}}
+\subsubsection{\texorpdfstring{destroy()}{destroy()}}
+{\footnotesize\ttfamily virtual void Renderer\+Interface\+::destroy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+this method is responsible for destroying the object itself 
+
+Reimplemented in \hyperlink{struct_p_s_f_p_t_ad22588eeea40701d2af23513262a08bd}{P\+S\+F\+PT}, \hyperlink{struct_path_tracer_a3c4e7e9eb10e92c6a6d5cc94bbf93ee7}{Path\+Tracer}, \hyperlink{struct_r_p_t_a201a475612d2fa357ff9fa6d75ad5dfe}{R\+PT}, \hyperlink{struct_m_l_t_adb75fd53b62131575a9f739953eeac67}{M\+LT}, \hyperlink{struct_c_m_l_t_aa8558dad2db5508be7aa028f69af7308}{C\+M\+LT}, \hyperlink{struct_p_s_s_m_l_t_a3dea533efa6d4ffd79e336131e83ba34}{P\+S\+S\+M\+LT}, \hyperlink{struct_b_p_t_aef80ec5312cbbf38e5dc9e6c37058825}{B\+PT}, and \hyperlink{struct_hello_p_t_ac81e09dcfb28dffc85aa6c4df06a4426}{Hello\+PT}.
+
+\mbox{\Hypertarget{struct_renderer_interface_a44e91217896e95a3fd46b26eef51a6da}\label{struct_renderer_interface_a44e91217896e95a3fd46b26eef51a6da}} 
+\index{Renderer\+Interface@{Renderer\+Interface}!draw@{draw}}
+\index{draw@{draw}!Renderer\+Interface@{Renderer\+Interface}}
+\subsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily virtual void Renderer\+Interface\+::draw (\begin{DoxyParamCaption}\item[{\hyperlink{struct_rendering_context}{Rendering\+Context} \&}]{renderer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+this method is responsible for any additional U\+I/\+Open\+GL drawing on screen \mbox{\Hypertarget{struct_renderer_interface_a378df3aa18095da5ce8011fb25c8fb8e}\label{struct_renderer_interface_a378df3aa18095da5ce8011fb25c8fb8e}} 
+\index{Renderer\+Interface@{Renderer\+Interface}!dump\+\_\+speed\+\_\+stats@{dump\+\_\+speed\+\_\+stats}}
+\index{dump\+\_\+speed\+\_\+stats@{dump\+\_\+speed\+\_\+stats}!Renderer\+Interface@{Renderer\+Interface}}
+\subsubsection{\texorpdfstring{dump\+\_\+speed\+\_\+stats()}{dump\_speed\_stats()}}
+{\footnotesize\ttfamily virtual void Renderer\+Interface\+::dump\+\_\+speed\+\_\+stats (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{stats }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+dump some speed stats 
+
+Reimplemented in \hyperlink{group___p_t_module_details_gaae1782405577d0072ff78570ec0025cc}{Path\+Tracer}.
+
+\mbox{\Hypertarget{struct_renderer_interface_a2ead9b943d6d48fcd32872e0005ebe63}\label{struct_renderer_interface_a2ead9b943d6d48fcd32872e0005ebe63}} 
+\index{Renderer\+Interface@{Renderer\+Interface}!init@{init}}
+\index{init@{init}!Renderer\+Interface@{Renderer\+Interface}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily virtual void Renderer\+Interface\+::init (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv,  }\item[{\hyperlink{struct_rendering_context}{Rendering\+Context} \&}]{renderer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+this method is responsible for any command options parsing / initializations the renderer might need to perform 
+
+Reimplemented in \hyperlink{struct_p_s_f_p_t_ad44f7f2769bcae6881eebf04a99f57ef}{P\+S\+F\+PT}, \hyperlink{group___p_t_module_details_ga923b8d146b23f93356f6c74971c4d6f7}{Path\+Tracer}, \hyperlink{struct_r_p_t_ae840ee9e9ef3939729ef0bb653c19f9e}{R\+PT}, \hyperlink{struct_m_l_t_a3e5f5dc01f80a3c599384660163ad3d7}{M\+LT}, \hyperlink{struct_c_m_l_t_a16f9c8c63c6027478854528963cf4ccf}{C\+M\+LT}, \hyperlink{struct_p_s_s_m_l_t_a77d66c7cc0d195f62cedb29c15f845bd}{P\+S\+S\+M\+LT}, \hyperlink{struct_b_p_t_a45040344b72bde12d338c2b1969fba64}{B\+PT}, and \hyperlink{struct_hello_p_t_a8ec59e3fac8eff801cecdd3220cd8d41}{Hello\+PT}.
+
+\mbox{\Hypertarget{struct_renderer_interface_a9f5afd3701d8d935a2ecf08fb9f5f604}\label{struct_renderer_interface_a9f5afd3701d8d935a2ecf08fb9f5f604}} 
+\index{Renderer\+Interface@{Renderer\+Interface}!keyboard@{keyboard}}
+\index{keyboard@{keyboard}!Renderer\+Interface@{Renderer\+Interface}}
+\subsubsection{\texorpdfstring{keyboard()}{keyboard()}}
+{\footnotesize\ttfamily virtual void Renderer\+Interface\+::keyboard (\begin{DoxyParamCaption}\item[{unsigned char}]{character,  }\item[{int}]{x,  }\item[{int}]{y,  }\item[{bool \&}]{invalidate }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+this method is responsible for handling keyboard events 
+
+Reimplemented in \hyperlink{struct_p_s_f_p_t_a361baa29c599173c9517464bc534c886}{P\+S\+F\+PT}, and \hyperlink{group___p_t_module_details_gad08f55d7ba075e0b71a4aa729c07986d}{Path\+Tracer}.
+
+\mbox{\Hypertarget{struct_renderer_interface_aae7f55e0f8863e6a2ed3205d228ab306}\label{struct_renderer_interface_aae7f55e0f8863e6a2ed3205d228ab306}} 
+\index{Renderer\+Interface@{Renderer\+Interface}!mouse@{mouse}}
+\index{mouse@{mouse}!Renderer\+Interface@{Renderer\+Interface}}
+\subsubsection{\texorpdfstring{mouse()}{mouse()}}
+{\footnotesize\ttfamily virtual void Renderer\+Interface\+::mouse (\begin{DoxyParamCaption}\item[{\hyperlink{struct_rendering_context}{Rendering\+Context} \&}]{renderer,  }\item[{int}]{button,  }\item[{int}]{state,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+this method is responsible for handling mouse events \mbox{\Hypertarget{struct_renderer_interface_aca2dd8b8b27e3e6f7fcf81c0d8d17ce5}\label{struct_renderer_interface_aca2dd8b8b27e3e6f7fcf81c0d8d17ce5}} 
+\index{Renderer\+Interface@{Renderer\+Interface}!register\+\_\+auxiliary\+\_\+channels@{register\+\_\+auxiliary\+\_\+channels}}
+\index{register\+\_\+auxiliary\+\_\+channels@{register\+\_\+auxiliary\+\_\+channels}!Renderer\+Interface@{Renderer\+Interface}}
+\subsubsection{\texorpdfstring{register\+\_\+auxiliary\+\_\+channels()}{register\_auxiliary\_channels()}}
+{\footnotesize\ttfamily virtual void Renderer\+Interface\+::register\+\_\+auxiliary\+\_\+channels (\begin{DoxyParamCaption}\item[{\hyperlink{struct_f_buffer_storage}{F\+Buffer\+Storage} \&}]{fbuffer,  }\item[{const uint32}]{channel\+\_\+offset }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+this method is responsible for registering the auxiliary framebuffer channels needed by the renderer, starting at the specified offset \mbox{\Hypertarget{struct_renderer_interface_aa64254dd44c94929b05092dc8d74f29d}\label{struct_renderer_interface_aa64254dd44c94929b05092dc8d74f29d}} 
+\index{Renderer\+Interface@{Renderer\+Interface}!render@{render}}
+\index{render@{render}!Renderer\+Interface@{Renderer\+Interface}}
+\subsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily virtual void Renderer\+Interface\+::render (\begin{DoxyParamCaption}\item[{const uint32}]{instance,  }\item[{\hyperlink{struct_rendering_context}{Rendering\+Context} \&}]{renderer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+this method is responsible for rendering a given frame in a progressive rendering
+
+
+\begin{DoxyParams}{Parameters}
+{\em instance} & the frame instance \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \hyperlink{struct_p_s_f_p_t_aac923cb36f8f1d8ad27f01becef44fd9}{P\+S\+F\+PT}, \hyperlink{group___p_t_module_details_ga3e6317495ea6c761968a893b3a54824e}{Path\+Tracer}, \hyperlink{struct_r_p_t_a03e6ba660d7750e633ec69de179e48e7}{R\+PT}, \hyperlink{struct_m_l_t_ac7f187ec2fdd67baedb0cf1d74060b89}{M\+LT}, \hyperlink{struct_c_m_l_t_ad8fe8b00cbe99184c726849da14a5ab2}{C\+M\+LT}, \hyperlink{struct_p_s_s_m_l_t_a0eddc0de7c6a6120153f9be25b8b3a22}{P\+S\+S\+M\+LT}, \hyperlink{struct_b_p_t_af9e940aca306f186cadfabc095590d88}{B\+PT}, and \hyperlink{struct_hello_p_t_af772aac0d80118742450fd8b6b3c58c2}{Hello\+PT}.
+
+\mbox{\Hypertarget{struct_renderer_interface_a754143d3228c27eab32f1760217afe56}\label{struct_renderer_interface_a754143d3228c27eab32f1760217afe56}} 
+\index{Renderer\+Interface@{Renderer\+Interface}!update\+\_\+scene@{update\+\_\+scene}}
+\index{update\+\_\+scene@{update\+\_\+scene}!Renderer\+Interface@{Renderer\+Interface}}
+\subsubsection{\texorpdfstring{update\+\_\+scene()}{update\_scene()}}
+{\footnotesize\ttfamily virtual void Renderer\+Interface\+::update\+\_\+scene (\begin{DoxyParamCaption}\item[{\hyperlink{struct_rendering_context}{Rendering\+Context} \&}]{renderer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+flag a scene geometry update 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/renderer\+\_\+interface.\+h\end{DoxyCompactItemize}

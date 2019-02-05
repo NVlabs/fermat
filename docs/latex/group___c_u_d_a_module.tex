@@ -1,0 +1,284 @@
+\hypertarget{group___c_u_d_a_module}{}\section{C\+U\+DA}
+\label{group___c_u_d_a_module}\index{C\+U\+DA@{C\+U\+DA}}
+
+
+\subsection{Detailed Description}
+This module implements C\+U\+DA specific data-\/structures and functions \subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group___c_u_d_a_allocators_modules}{C\+U\+D\+A Allocators}
+\item 
+\hyperlink{group___hash_maps_module}{Hash Maps}
+\item 
+\hyperlink{group___c_u_d_a_primitives}{Parallel Primitives}
+\item 
+\hyperlink{group___sort_enactors}{Sort Enactors}
+\item 
+\hyperlink{group___c_u_d_a_atomics_module}{C\+U\+D\+A Atomics}
+\end{DoxyCompactItemize}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcugar_1_1cuda_1_1arch}{cugar\+::cuda\+::arch}
+\item 
+struct \hyperlink{structcugar_1_1cuda_1_1cuda__devices}{cugar\+::cuda\+::cuda\+\_\+devices}
+\item 
+struct \hyperlink{structcugar_1_1cuda_1_1load__pointer}{cugar\+::cuda\+::load\+\_\+pointer$<$ T, M\+O\+D $>$}
+\item 
+struct \hyperlink{structcugar_1_1cuda_1_1store__reference}{cugar\+::cuda\+::store\+\_\+reference$<$ T, S\+T\+O\+R\+E\+\_\+\+M\+O\+D, L\+O\+A\+D\+\_\+\+M\+O\+D $>$}
+\item 
+struct \hyperlink{structcugar_1_1cuda_1_1store__pointer}{cugar\+::cuda\+::store\+\_\+pointer$<$ T, S\+T\+O\+R\+E\+\_\+\+M\+O\+D, L\+O\+A\+D\+\_\+\+M\+O\+D $>$}
+\item 
+struct \hyperlink{structcugar_1_1cuda_1_1_timer}{cugar\+::cuda\+::\+Timer}
+\item 
+struct \hyperlink{structcugar_1_1cuda_1_1_scoped_timer}{cugar\+::cuda\+::\+Scoped\+Timer$<$ T $>$}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{group___c_u_d_a_module_ga6dd203ab0e1210c1f65dffe2427a8278}{cugar\+::cuda\+::\+Cache\+Load\+Modifier} \{ \newline
+\hyperlink{group___c_u_d_a_module_gga6dd203ab0e1210c1f65dffe2427a8278a9fb064ccfa9e17ec57f6499e8f694244}{cugar\+::cuda\+::\+L\+O\+A\+D\+\_\+\+D\+E\+F\+A\+U\+LT}, 
+\hyperlink{group___c_u_d_a_module_gga6dd203ab0e1210c1f65dffe2427a8278a479d804fcf98ca3b2dd434f18fc23f2b}{cugar\+::cuda\+::\+L\+O\+A\+D\+\_\+\+CA}, 
+\hyperlink{group___c_u_d_a_module_gga6dd203ab0e1210c1f65dffe2427a8278ad0a3247417bd1a28c69ec4b8a929f266}{cugar\+::cuda\+::\+L\+O\+A\+D\+\_\+\+CG}, 
+\hyperlink{group___c_u_d_a_module_gga6dd203ab0e1210c1f65dffe2427a8278aaa03240beed4535c68a00e26980fce93}{cugar\+::cuda\+::\+L\+O\+A\+D\+\_\+\+CS}, 
+\newline
+\hyperlink{group___c_u_d_a_module_gga6dd203ab0e1210c1f65dffe2427a8278a28473aba30784b79e03f14cc8a5a0ea2}{cugar\+::cuda\+::\+L\+O\+A\+D\+\_\+\+CV}, 
+\hyperlink{group___c_u_d_a_module_gga6dd203ab0e1210c1f65dffe2427a8278a94ad6ec0148ed162df83ea7b6499ecea}{cugar\+::cuda\+::\+L\+O\+A\+D\+\_\+\+L\+DG}, 
+\hyperlink{group___c_u_d_a_module_gga6dd203ab0e1210c1f65dffe2427a8278abc7e98479e284450d4853b9f74349b04}{cugar\+::cuda\+::\+L\+O\+A\+D\+\_\+\+V\+O\+L\+A\+T\+I\+LE}
+ \}\begin{DoxyCompactList}\small\item\em Enumeration of cache modifiers for memory load operations. \end{DoxyCompactList}
+\item 
+enum \hyperlink{group___c_u_d_a_module_ga66c87645c20c37932d6a02fcb57eebea}{cugar\+::cuda\+::\+Cache\+Store\+Modifier} \{ \newline
+\hyperlink{group___c_u_d_a_module_gga66c87645c20c37932d6a02fcb57eebeaac5849707f20e889247a639bc0d044fb4}{cugar\+::cuda\+::\+S\+T\+O\+R\+E\+\_\+\+D\+E\+F\+A\+U\+LT}, 
+\hyperlink{group___c_u_d_a_module_gga66c87645c20c37932d6a02fcb57eebeaa46d83271d0278d18d62e1aeace08b708}{cugar\+::cuda\+::\+S\+T\+O\+R\+E\+\_\+\+WB}, 
+\hyperlink{group___c_u_d_a_module_gga66c87645c20c37932d6a02fcb57eebeaa2b116f50bd3fb867e2415dc1bb9b9372}{cugar\+::cuda\+::\+S\+T\+O\+R\+E\+\_\+\+CG}, 
+\hyperlink{group___c_u_d_a_module_gga66c87645c20c37932d6a02fcb57eebeaa32ccc51c7222b2934223725205626801}{cugar\+::cuda\+::\+S\+T\+O\+R\+E\+\_\+\+CS}, 
+\newline
+\hyperlink{group___c_u_d_a_module_gga66c87645c20c37932d6a02fcb57eebeaac9e9673aa392e6201825fb78f1dc338d}{cugar\+::cuda\+::\+S\+T\+O\+R\+E\+\_\+\+WT}, 
+\hyperlink{group___c_u_d_a_module_gga66c87645c20c37932d6a02fcb57eebeaa3e5003613374672c2dd6956dab94972b}{cugar\+::cuda\+::\+S\+T\+O\+R\+E\+\_\+\+V\+O\+L\+A\+T\+I\+LE}
+ \}\begin{DoxyCompactList}\small\item\em Enumeration of cache modifiers for memory load operations. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___c_u_d_a_module_ga46be51409e924bbc69c991d2779afd26}\label{group___c_u_d_a_module_ga46be51409e924bbc69c991d2779afd26}} 
+cuda\+Device\+Prop {\bfseries cugar\+::cuda\+::get\+\_\+device\+\_\+properties} ()
+\item 
+\mbox{\Hypertarget{group___c_u_d_a_module_gaf7c77b8498ef4a41014b9a88f5627e4a}\label{group___c_u_d_a_module_gaf7c77b8498ef4a41014b9a88f5627e4a}} 
+void {\bfseries cugar\+::cuda\+::device\+\_\+arch} (uint32 \&major, uint32 \&minor)
+\item 
+\mbox{\Hypertarget{group___c_u_d_a_module_ga94d7cfde2abde49447c13d635c945ea4}\label{group___c_u_d_a_module_ga94d7cfde2abde49447c13d635c945ea4}} 
+uint32 {\bfseries cugar\+::cuda\+::max\+\_\+grid\+\_\+size} ()
+\item 
+\mbox{\Hypertarget{group___c_u_d_a_module_gaf8a91a0844fc1cf3f404ce19695b9ce7}\label{group___c_u_d_a_module_gaf8a91a0844fc1cf3f404ce19695b9ce7}} 
+size\+\_\+t {\bfseries cugar\+::cuda\+::multiprocessor\+\_\+count} ()
+\item 
+\mbox{\Hypertarget{group___c_u_d_a_module_gae6b175b9b52df10747d3710f40ab3951}\label{group___c_u_d_a_module_gae6b175b9b52df10747d3710f40ab3951}} 
+size\+\_\+t {\bfseries cugar\+::cuda\+::smem\+\_\+allocation\+\_\+unit} (const cuda\+Device\+Prop \&properties)
+\item 
+\mbox{\Hypertarget{group___c_u_d_a_module_ga69a91eacb9ae895482f6bc7af687ac99}\label{group___c_u_d_a_module_ga69a91eacb9ae895482f6bc7af687ac99}} 
+size\+\_\+t {\bfseries cugar\+::cuda\+::reg\+\_\+allocation\+\_\+unit} (const cuda\+Device\+Prop \&properties, const size\+\_\+t regs\+Per\+Thread)
+\item 
+\mbox{\Hypertarget{group___c_u_d_a_module_ga6455fbfae7c05e49dfcfe2e59d38c9ca}\label{group___c_u_d_a_module_ga6455fbfae7c05e49dfcfe2e59d38c9ca}} 
+size\+\_\+t {\bfseries cugar\+::cuda\+::warp\+\_\+allocation\+\_\+multiple} (const cuda\+Device\+Prop \&properties)
+\item 
+\mbox{\Hypertarget{group___c_u_d_a_module_gabfd449e2fe09e7fbd3e98b975d3eb419}\label{group___c_u_d_a_module_gabfd449e2fe09e7fbd3e98b975d3eb419}} 
+size\+\_\+t {\bfseries cugar\+::cuda\+::num\+\_\+sides\+\_\+per\+\_\+multiprocessor} (const cuda\+Device\+Prop \&properties)
+\item 
+\mbox{\Hypertarget{group___c_u_d_a_module_ga2c9e3ad9b68b00b0e578b347d822710a}\label{group___c_u_d_a_module_ga2c9e3ad9b68b00b0e578b347d822710a}} 
+size\+\_\+t {\bfseries cugar\+::cuda\+::max\+\_\+blocks\+\_\+per\+\_\+multiprocessor} (const cuda\+Device\+Prop \&properties)
+\item 
+\mbox{\Hypertarget{group___c_u_d_a_module_ga4491a8494830e42c9bdbd914dfbfd9e6}\label{group___c_u_d_a_module_ga4491a8494830e42c9bdbd914dfbfd9e6}} 
+size\+\_\+t {\bfseries cugar\+::cuda\+::num\+\_\+regs\+\_\+per\+\_\+block} (const cuda\+Device\+Prop \&properties, const cuda\+Func\+Attributes \&attributes, const size\+\_\+t C\+T\+A\+\_\+\+S\+I\+ZE)
+\item 
+\mbox{\Hypertarget{group___c_u_d_a_module_gae5cde2abeb5ac035d280d54208681157}\label{group___c_u_d_a_module_gae5cde2abeb5ac035d280d54208681157}} 
+{\footnotesize template$<$typename Kernel\+Function $>$ }\\cuda\+Func\+Attributes {\bfseries cugar\+::cuda\+::function\+\_\+attributes} (Kernel\+Function kernel)
+\item 
+\mbox{\Hypertarget{group___c_u_d_a_module_ga3f3b8cc86202f26fb2f0c0ffe769cf46}\label{group___c_u_d_a_module_ga3f3b8cc86202f26fb2f0c0ffe769cf46}} 
+{\footnotesize template$<$typename Kernel\+Function $>$ }\\size\+\_\+t {\bfseries cugar\+::cuda\+::max\+\_\+active\+\_\+blocks\+\_\+per\+\_\+multiprocessor} (Kernel\+Function kernel, const size\+\_\+t C\+T\+A\+\_\+\+S\+I\+ZE, const size\+\_\+t dynamic\+\_\+smem\+\_\+bytes)
+\item 
+\mbox{\Hypertarget{group___c_u_d_a_module_ga46f163975d7b7d95ad728c2b223186a4}\label{group___c_u_d_a_module_ga46f163975d7b7d95ad728c2b223186a4}} 
+{\footnotesize template$<$typename Kernel\+Function $>$ }\\size\+\_\+t {\bfseries cugar\+::cuda\+::max\+\_\+active\+\_\+blocks} (Kernel\+Function kernel, const size\+\_\+t C\+T\+A\+\_\+\+S\+I\+ZE, const size\+\_\+t dynamic\+\_\+smem\+\_\+bytes)
+\item 
+\mbox{\Hypertarget{group___c_u_d_a_module_ga8e38d01050b405397c77b5dac6bedf98}\label{group___c_u_d_a_module_ga8e38d01050b405397c77b5dac6bedf98}} 
+{\footnotesize template$<$typename Kernel\+Function $>$ }\\size\+\_\+t {\bfseries cugar\+::cuda\+::num\+\_\+registers} (Kernel\+Function kernel)
+\item 
+\mbox{\Hypertarget{group___c_u_d_a_module_ga2df5802920495ea1503bc5ba19dc6634}\label{group___c_u_d_a_module_ga2df5802920495ea1503bc5ba19dc6634}} 
+{\footnotesize template$<$typename Kernel\+Function $>$ }\\size\+\_\+t {\bfseries cugar\+::cuda\+::max\+\_\+blocksize\+\_\+with\+\_\+highest\+\_\+occupancy} (Kernel\+Function kernel, size\+\_\+t dynamic\+\_\+smem\+\_\+bytes\+\_\+per\+\_\+thread)
+\item 
+\mbox{\Hypertarget{group___c_u_d_a_module_ga1d8a68a3ac2a40d4bae0c5660dcc9f71}\label{group___c_u_d_a_module_ga1d8a68a3ac2a40d4bae0c5660dcc9f71}} 
+bool {\bfseries cugar\+::cuda\+::is\+\_\+tcc\+\_\+enabled} ()
+\item 
+\mbox{\Hypertarget{group___c_u_d_a_module_ga724d6ebb15325362de7766252ac944a3}\label{group___c_u_d_a_module_ga724d6ebb15325362de7766252ac944a3}} 
+void {\bfseries cugar\+::cuda\+::check\+\_\+error} (const char $\ast$message)
+\item 
+\mbox{\Hypertarget{group___c_u_d_a_module_gadd534b6563f35f723ceb20912f2357f1}\label{group___c_u_d_a_module_gadd534b6563f35f723ceb20912f2357f1}} 
+void {\bfseries cugar\+::cuda\+::check\+\_\+error} (cuda\+Error\+\_\+t, const char $\ast$message)
+\item 
+{\footnotesize template$<$uint32 N$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___c_u_d_a_module_ga7cd39b01cdfc18283bcd4bee3fabcaf9}{cugar\+::cuda\+::syncthreads} ()
+\item 
+{\footnotesize template$<$Cache\+Load\+Modifier L\+O\+A\+D\+\_\+\+M\+OD, typename T $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE T \hyperlink{group___c_u_d_a_module_ga2786ba75af2a254c03f272b6211b6379}{cugar\+::cuda\+::load} (const T $\ast$ptr)
+\item 
+{\footnotesize template$<$Cache\+Store\+Modifier S\+T\+O\+R\+E\+\_\+\+M\+OD, typename T $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___c_u_d_a_module_ga472f45d1a143f42df19bab271121f481}{cugar\+::cuda\+::store} (T $\ast$ptr, const T \&value)
+\item 
+{\footnotesize template$<$Cache\+Load\+Modifier M\+OD, typename T $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1load__pointer}{load\+\_\+pointer}$<$ T, M\+OD $>$ \hyperlink{group___c_u_d_a_module_ga985b1000130fbe4bc8fdc5191499f69e}{cugar\+::cuda\+::make\+\_\+load\+\_\+pointer} (const T $\ast$it)
+\item 
+{\footnotesize template$<$Cache\+Store\+Modifier S\+T\+O\+R\+E\+\_\+\+M\+OD, Cache\+Load\+Modifier L\+O\+A\+D\+\_\+\+M\+OD, typename T $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1store__pointer}{store\+\_\+pointer}$<$ T, S\+T\+O\+R\+E\+\_\+\+M\+OD, L\+O\+A\+D\+\_\+\+M\+OD $>$ \hyperlink{group___c_u_d_a_module_gac33a192d849e90b34a7011346c76e3f6}{cugar\+::cuda\+::make\+\_\+store\+\_\+pointer} (const T $\ast$it)
+\item 
+\hyperlink{group___c_u_d_a_module_ga27675d4d89a40e592d9f85789d951604}{cugar\+::cuda\+::\+Timer\+::\+Timer} ()
+\item 
+\hyperlink{group___c_u_d_a_module_gae7e683c7100a98ed350987e39e221c67}{cugar\+::cuda\+::\+Timer\+::$\sim$\+Timer} ()
+\item 
+void \hyperlink{group___c_u_d_a_module_ga01d05872296e3fde547ec5f57b092038}{cugar\+::cuda\+::\+Timer\+::start} ()
+\item 
+void \hyperlink{group___c_u_d_a_module_gaa3d28081d1d907e01ad0533197189009}{cugar\+::cuda\+::\+Timer\+::stop} ()
+\item 
+float \hyperlink{group___c_u_d_a_module_ga86d41374527206653bad805dd13adfbc}{cugar\+::cuda\+::\+Timer\+::seconds} () const
+\end{DoxyCompactItemize}
+
+
+\subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{group___c_u_d_a_module_ga6dd203ab0e1210c1f65dffe2427a8278}\label{group___c_u_d_a_module_ga6dd203ab0e1210c1f65dffe2427a8278}} 
+\index{C\+U\+DA@{C\+U\+DA}!Cache\+Load\+Modifier@{Cache\+Load\+Modifier}}
+\index{Cache\+Load\+Modifier@{Cache\+Load\+Modifier}!C\+U\+DA@{C\+U\+DA}}
+\subsubsection{\texorpdfstring{Cache\+Load\+Modifier}{CacheLoadModifier}}
+{\footnotesize\ttfamily enum \hyperlink{group___c_u_d_a_module_ga6dd203ab0e1210c1f65dffe2427a8278}{cugar\+::cuda\+::\+Cache\+Load\+Modifier}}
+
+
+
+Enumeration of cache modifiers for memory load operations. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{L\+O\+A\+D\+\_\+\+D\+E\+F\+A\+U\+LT@{L\+O\+A\+D\+\_\+\+D\+E\+F\+A\+U\+LT}!C\+U\+DA@{C\+U\+DA}}\index{C\+U\+DA@{C\+U\+DA}!L\+O\+A\+D\+\_\+\+D\+E\+F\+A\+U\+LT@{L\+O\+A\+D\+\_\+\+D\+E\+F\+A\+U\+LT}}}\mbox{\Hypertarget{group___c_u_d_a_module_gga6dd203ab0e1210c1f65dffe2427a8278a9fb064ccfa9e17ec57f6499e8f694244}\label{group___c_u_d_a_module_gga6dd203ab0e1210c1f65dffe2427a8278a9fb064ccfa9e17ec57f6499e8f694244}} 
+L\+O\+A\+D\+\_\+\+D\+E\+F\+A\+U\+LT&Default (no modifier) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{L\+O\+A\+D\+\_\+\+CA@{L\+O\+A\+D\+\_\+\+CA}!C\+U\+DA@{C\+U\+DA}}\index{C\+U\+DA@{C\+U\+DA}!L\+O\+A\+D\+\_\+\+CA@{L\+O\+A\+D\+\_\+\+CA}}}\mbox{\Hypertarget{group___c_u_d_a_module_gga6dd203ab0e1210c1f65dffe2427a8278a479d804fcf98ca3b2dd434f18fc23f2b}\label{group___c_u_d_a_module_gga6dd203ab0e1210c1f65dffe2427a8278a479d804fcf98ca3b2dd434f18fc23f2b}} 
+L\+O\+A\+D\+\_\+\+CA&Cache at all levels. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{L\+O\+A\+D\+\_\+\+CG@{L\+O\+A\+D\+\_\+\+CG}!C\+U\+DA@{C\+U\+DA}}\index{C\+U\+DA@{C\+U\+DA}!L\+O\+A\+D\+\_\+\+CG@{L\+O\+A\+D\+\_\+\+CG}}}\mbox{\Hypertarget{group___c_u_d_a_module_gga6dd203ab0e1210c1f65dffe2427a8278ad0a3247417bd1a28c69ec4b8a929f266}\label{group___c_u_d_a_module_gga6dd203ab0e1210c1f65dffe2427a8278ad0a3247417bd1a28c69ec4b8a929f266}} 
+L\+O\+A\+D\+\_\+\+CG&Cache at global level. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{L\+O\+A\+D\+\_\+\+CS@{L\+O\+A\+D\+\_\+\+CS}!C\+U\+DA@{C\+U\+DA}}\index{C\+U\+DA@{C\+U\+DA}!L\+O\+A\+D\+\_\+\+CS@{L\+O\+A\+D\+\_\+\+CS}}}\mbox{\Hypertarget{group___c_u_d_a_module_gga6dd203ab0e1210c1f65dffe2427a8278aaa03240beed4535c68a00e26980fce93}\label{group___c_u_d_a_module_gga6dd203ab0e1210c1f65dffe2427a8278aaa03240beed4535c68a00e26980fce93}} 
+L\+O\+A\+D\+\_\+\+CS&Cache streaming (likely to be accessed once) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{L\+O\+A\+D\+\_\+\+CV@{L\+O\+A\+D\+\_\+\+CV}!C\+U\+DA@{C\+U\+DA}}\index{C\+U\+DA@{C\+U\+DA}!L\+O\+A\+D\+\_\+\+CV@{L\+O\+A\+D\+\_\+\+CV}}}\mbox{\Hypertarget{group___c_u_d_a_module_gga6dd203ab0e1210c1f65dffe2427a8278a28473aba30784b79e03f14cc8a5a0ea2}\label{group___c_u_d_a_module_gga6dd203ab0e1210c1f65dffe2427a8278a28473aba30784b79e03f14cc8a5a0ea2}} 
+L\+O\+A\+D\+\_\+\+CV&Cache as volatile (including cached system lines) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{L\+O\+A\+D\+\_\+\+L\+DG@{L\+O\+A\+D\+\_\+\+L\+DG}!C\+U\+DA@{C\+U\+DA}}\index{C\+U\+DA@{C\+U\+DA}!L\+O\+A\+D\+\_\+\+L\+DG@{L\+O\+A\+D\+\_\+\+L\+DG}}}\mbox{\Hypertarget{group___c_u_d_a_module_gga6dd203ab0e1210c1f65dffe2427a8278a94ad6ec0148ed162df83ea7b6499ecea}\label{group___c_u_d_a_module_gga6dd203ab0e1210c1f65dffe2427a8278a94ad6ec0148ed162df83ea7b6499ecea}} 
+L\+O\+A\+D\+\_\+\+L\+DG&Cache as texture. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{L\+O\+A\+D\+\_\+\+V\+O\+L\+A\+T\+I\+LE@{L\+O\+A\+D\+\_\+\+V\+O\+L\+A\+T\+I\+LE}!C\+U\+DA@{C\+U\+DA}}\index{C\+U\+DA@{C\+U\+DA}!L\+O\+A\+D\+\_\+\+V\+O\+L\+A\+T\+I\+LE@{L\+O\+A\+D\+\_\+\+V\+O\+L\+A\+T\+I\+LE}}}\mbox{\Hypertarget{group___c_u_d_a_module_gga6dd203ab0e1210c1f65dffe2427a8278abc7e98479e284450d4853b9f74349b04}\label{group___c_u_d_a_module_gga6dd203ab0e1210c1f65dffe2427a8278abc7e98479e284450d4853b9f74349b04}} 
+L\+O\+A\+D\+\_\+\+V\+O\+L\+A\+T\+I\+LE&Volatile (any memory space) \\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{group___c_u_d_a_module_ga66c87645c20c37932d6a02fcb57eebea}\label{group___c_u_d_a_module_ga66c87645c20c37932d6a02fcb57eebea}} 
+\index{C\+U\+DA@{C\+U\+DA}!Cache\+Store\+Modifier@{Cache\+Store\+Modifier}}
+\index{Cache\+Store\+Modifier@{Cache\+Store\+Modifier}!C\+U\+DA@{C\+U\+DA}}
+\subsubsection{\texorpdfstring{Cache\+Store\+Modifier}{CacheStoreModifier}}
+{\footnotesize\ttfamily enum \hyperlink{group___c_u_d_a_module_ga66c87645c20c37932d6a02fcb57eebea}{cugar\+::cuda\+::\+Cache\+Store\+Modifier}}
+
+
+
+Enumeration of cache modifiers for memory load operations. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+T\+O\+R\+E\+\_\+\+D\+E\+F\+A\+U\+LT@{S\+T\+O\+R\+E\+\_\+\+D\+E\+F\+A\+U\+LT}!C\+U\+DA@{C\+U\+DA}}\index{C\+U\+DA@{C\+U\+DA}!S\+T\+O\+R\+E\+\_\+\+D\+E\+F\+A\+U\+LT@{S\+T\+O\+R\+E\+\_\+\+D\+E\+F\+A\+U\+LT}}}\mbox{\Hypertarget{group___c_u_d_a_module_gga66c87645c20c37932d6a02fcb57eebeaac5849707f20e889247a639bc0d044fb4}\label{group___c_u_d_a_module_gga66c87645c20c37932d6a02fcb57eebeaac5849707f20e889247a639bc0d044fb4}} 
+S\+T\+O\+R\+E\+\_\+\+D\+E\+F\+A\+U\+LT&Default (no modifier) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+T\+O\+R\+E\+\_\+\+WB@{S\+T\+O\+R\+E\+\_\+\+WB}!C\+U\+DA@{C\+U\+DA}}\index{C\+U\+DA@{C\+U\+DA}!S\+T\+O\+R\+E\+\_\+\+WB@{S\+T\+O\+R\+E\+\_\+\+WB}}}\mbox{\Hypertarget{group___c_u_d_a_module_gga66c87645c20c37932d6a02fcb57eebeaa46d83271d0278d18d62e1aeace08b708}\label{group___c_u_d_a_module_gga66c87645c20c37932d6a02fcb57eebeaa46d83271d0278d18d62e1aeace08b708}} 
+S\+T\+O\+R\+E\+\_\+\+WB&Cache write-\/back all coherent levels. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+T\+O\+R\+E\+\_\+\+CG@{S\+T\+O\+R\+E\+\_\+\+CG}!C\+U\+DA@{C\+U\+DA}}\index{C\+U\+DA@{C\+U\+DA}!S\+T\+O\+R\+E\+\_\+\+CG@{S\+T\+O\+R\+E\+\_\+\+CG}}}\mbox{\Hypertarget{group___c_u_d_a_module_gga66c87645c20c37932d6a02fcb57eebeaa2b116f50bd3fb867e2415dc1bb9b9372}\label{group___c_u_d_a_module_gga66c87645c20c37932d6a02fcb57eebeaa2b116f50bd3fb867e2415dc1bb9b9372}} 
+S\+T\+O\+R\+E\+\_\+\+CG&Cache at global level. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+T\+O\+R\+E\+\_\+\+CS@{S\+T\+O\+R\+E\+\_\+\+CS}!C\+U\+DA@{C\+U\+DA}}\index{C\+U\+DA@{C\+U\+DA}!S\+T\+O\+R\+E\+\_\+\+CS@{S\+T\+O\+R\+E\+\_\+\+CS}}}\mbox{\Hypertarget{group___c_u_d_a_module_gga66c87645c20c37932d6a02fcb57eebeaa32ccc51c7222b2934223725205626801}\label{group___c_u_d_a_module_gga66c87645c20c37932d6a02fcb57eebeaa32ccc51c7222b2934223725205626801}} 
+S\+T\+O\+R\+E\+\_\+\+CS&Cache streaming (likely to be accessed once) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+T\+O\+R\+E\+\_\+\+WT@{S\+T\+O\+R\+E\+\_\+\+WT}!C\+U\+DA@{C\+U\+DA}}\index{C\+U\+DA@{C\+U\+DA}!S\+T\+O\+R\+E\+\_\+\+WT@{S\+T\+O\+R\+E\+\_\+\+WT}}}\mbox{\Hypertarget{group___c_u_d_a_module_gga66c87645c20c37932d6a02fcb57eebeaac9e9673aa392e6201825fb78f1dc338d}\label{group___c_u_d_a_module_gga66c87645c20c37932d6a02fcb57eebeaac9e9673aa392e6201825fb78f1dc338d}} 
+S\+T\+O\+R\+E\+\_\+\+WT&Cache write-\/through (to system memory) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+T\+O\+R\+E\+\_\+\+V\+O\+L\+A\+T\+I\+LE@{S\+T\+O\+R\+E\+\_\+\+V\+O\+L\+A\+T\+I\+LE}!C\+U\+DA@{C\+U\+DA}}\index{C\+U\+DA@{C\+U\+DA}!S\+T\+O\+R\+E\+\_\+\+V\+O\+L\+A\+T\+I\+LE@{S\+T\+O\+R\+E\+\_\+\+V\+O\+L\+A\+T\+I\+LE}}}\mbox{\Hypertarget{group___c_u_d_a_module_gga66c87645c20c37932d6a02fcb57eebeaa3e5003613374672c2dd6956dab94972b}\label{group___c_u_d_a_module_gga66c87645c20c37932d6a02fcb57eebeaa3e5003613374672c2dd6956dab94972b}} 
+S\+T\+O\+R\+E\+\_\+\+V\+O\+L\+A\+T\+I\+LE&Volatile shared (any memory space) \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___c_u_d_a_module_ga2786ba75af2a254c03f272b6211b6379}\label{group___c_u_d_a_module_ga2786ba75af2a254c03f272b6211b6379}} 
+\index{C\+U\+DA@{C\+U\+DA}!load@{load}}
+\index{load@{load}!C\+U\+DA@{C\+U\+DA}}
+\subsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily template$<$Cache\+Load\+Modifier L\+O\+A\+D\+\_\+\+M\+OD, typename T $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE T cugar\+::cuda\+::load (\begin{DoxyParamCaption}\item[{const T $\ast$}]{ptr }\end{DoxyParamCaption})}
+
+issue a load \mbox{\Hypertarget{group___c_u_d_a_module_ga985b1000130fbe4bc8fdc5191499f69e}\label{group___c_u_d_a_module_ga985b1000130fbe4bc8fdc5191499f69e}} 
+\index{C\+U\+DA@{C\+U\+DA}!make\+\_\+load\+\_\+pointer@{make\+\_\+load\+\_\+pointer}}
+\index{make\+\_\+load\+\_\+pointer@{make\+\_\+load\+\_\+pointer}!C\+U\+DA@{C\+U\+DA}}
+\subsubsection{\texorpdfstring{make\+\_\+load\+\_\+pointer()}{make\_load\_pointer()}}
+{\footnotesize\ttfamily template$<$Cache\+Load\+Modifier M\+OD, typename T $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1load__pointer}{load\+\_\+pointer}$<$T,M\+OD$>$ cugar\+::cuda\+::make\+\_\+load\+\_\+pointer (\begin{DoxyParamCaption}\item[{const T $\ast$}]{it }\end{DoxyParamCaption})}
+
+make a \hyperlink{structcugar_1_1cuda_1_1load__pointer}{load\+\_\+pointer} \mbox{\Hypertarget{group___c_u_d_a_module_gac33a192d849e90b34a7011346c76e3f6}\label{group___c_u_d_a_module_gac33a192d849e90b34a7011346c76e3f6}} 
+\index{C\+U\+DA@{C\+U\+DA}!make\+\_\+store\+\_\+pointer@{make\+\_\+store\+\_\+pointer}}
+\index{make\+\_\+store\+\_\+pointer@{make\+\_\+store\+\_\+pointer}!C\+U\+DA@{C\+U\+DA}}
+\subsubsection{\texorpdfstring{make\+\_\+store\+\_\+pointer()}{make\_store\_pointer()}}
+{\footnotesize\ttfamily template$<$Cache\+Store\+Modifier S\+T\+O\+R\+E\+\_\+\+M\+OD, Cache\+Load\+Modifier L\+O\+A\+D\+\_\+\+M\+OD, typename T $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1store__pointer}{store\+\_\+pointer}$<$T,S\+T\+O\+R\+E\+\_\+\+M\+OD,L\+O\+A\+D\+\_\+\+M\+OD$>$ cugar\+::cuda\+::make\+\_\+store\+\_\+pointer (\begin{DoxyParamCaption}\item[{const T $\ast$}]{it }\end{DoxyParamCaption})}
+
+make a \hyperlink{structcugar_1_1cuda_1_1store__pointer}{store\+\_\+pointer} \mbox{\Hypertarget{group___c_u_d_a_module_ga86d41374527206653bad805dd13adfbc}\label{group___c_u_d_a_module_ga86d41374527206653bad805dd13adfbc}} 
+\index{C\+U\+DA@{C\+U\+DA}!seconds@{seconds}}
+\index{seconds@{seconds}!C\+U\+DA@{C\+U\+DA}}
+\subsubsection{\texorpdfstring{seconds()}{seconds()}}
+{\footnotesize\ttfamily float cugar\+::cuda\+::\+Timer\+::seconds (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+elapsed seconds \mbox{\Hypertarget{group___c_u_d_a_module_ga01d05872296e3fde547ec5f57b092038}\label{group___c_u_d_a_module_ga01d05872296e3fde547ec5f57b092038}} 
+\index{C\+U\+DA@{C\+U\+DA}!start@{start}}
+\index{start@{start}!C\+U\+DA@{C\+U\+DA}}
+\subsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily void cugar\+::cuda\+::\+Timer\+::start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+start timing \mbox{\Hypertarget{group___c_u_d_a_module_gaa3d28081d1d907e01ad0533197189009}\label{group___c_u_d_a_module_gaa3d28081d1d907e01ad0533197189009}} 
+\index{C\+U\+DA@{C\+U\+DA}!stop@{stop}}
+\index{stop@{stop}!C\+U\+DA@{C\+U\+DA}}
+\subsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily void cugar\+::cuda\+::\+Timer\+::stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+stop timing \mbox{\Hypertarget{group___c_u_d_a_module_ga472f45d1a143f42df19bab271121f481}\label{group___c_u_d_a_module_ga472f45d1a143f42df19bab271121f481}} 
+\index{C\+U\+DA@{C\+U\+DA}!store@{store}}
+\index{store@{store}!C\+U\+DA@{C\+U\+DA}}
+\subsubsection{\texorpdfstring{store()}{store()}}
+{\footnotesize\ttfamily template$<$Cache\+Store\+Modifier S\+T\+O\+R\+E\+\_\+\+M\+OD, typename T $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void cugar\+::cuda\+::store (\begin{DoxyParamCaption}\item[{T $\ast$}]{ptr,  }\item[{const T \&}]{value }\end{DoxyParamCaption})}
+
+issue a store \mbox{\Hypertarget{group___c_u_d_a_module_ga7cd39b01cdfc18283bcd4bee3fabcaf9}\label{group___c_u_d_a_module_ga7cd39b01cdfc18283bcd4bee3fabcaf9}} 
+\index{C\+U\+DA@{C\+U\+DA}!syncthreads@{syncthreads}}
+\index{syncthreads@{syncthreads}!C\+U\+DA@{C\+U\+DA}}
+\subsubsection{\texorpdfstring{syncthreads()}{syncthreads()}}
+{\footnotesize\ttfamily template$<$uint32 N$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void cugar\+::cuda\+::syncthreads (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+a generic \hyperlink{group___c_u_d_a_module_ga7cd39b01cdfc18283bcd4bee3fabcaf9}{syncthreads()} implementation to synchronize contiguous blocks of N threads at a time \mbox{\Hypertarget{group___c_u_d_a_module_ga27675d4d89a40e592d9f85789d951604}\label{group___c_u_d_a_module_ga27675d4d89a40e592d9f85789d951604}} 
+\index{C\+U\+DA@{C\+U\+DA}!Timer@{Timer}}
+\index{Timer@{Timer}!C\+U\+DA@{C\+U\+DA}}
+\subsubsection{\texorpdfstring{Timer()}{Timer()}}
+{\footnotesize\ttfamily cugar\+::cuda\+::\+Timer\+::\+Timer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor \mbox{\Hypertarget{group___c_u_d_a_module_gae7e683c7100a98ed350987e39e221c67}\label{group___c_u_d_a_module_gae7e683c7100a98ed350987e39e221c67}} 
+\index{C\+U\+DA@{C\+U\+DA}!````~Timer@{$\sim$\+Timer}}
+\index{````~Timer@{$\sim$\+Timer}!C\+U\+DA@{C\+U\+DA}}
+\subsubsection{\texorpdfstring{$\sim$\+Timer()}{~Timer()}}
+{\footnotesize\ttfamily cugar\+::cuda\+::\+Timer\+::$\sim$\+Timer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+destructor 

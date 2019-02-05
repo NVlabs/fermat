@@ -1,0 +1,140 @@
+\hypertarget{structcugar_1_1_gaussian__distribution__2d}{}\section{cugar\+:\+:Gaussian\+\_\+distribution\+\_\+2d Struct Reference}
+\label{structcugar_1_1_gaussian__distribution__2d}\index{cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d@{cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d}}
+
+
+\subsection{Detailed description}
+2d Gaussian distribution with fully prescribed covariance matrix 
+
+{\ttfamily \#include $<$distributions.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_gaussian__distribution__2d_aedb48159ce020cd2ba08fb0b9cb98b67}\label{structcugar_1_1_gaussian__distribution__2d_aedb48159ce020cd2ba08fb0b9cb98b67}} 
+enum {\bfseries Matrix\+Type} \{ {\bfseries C\+O\+V\+A\+R\+I\+A\+N\+C\+E\+\_\+\+M\+A\+T\+R\+IX}, 
+{\bfseries P\+R\+E\+C\+I\+S\+I\+O\+N\+\_\+\+M\+A\+T\+R\+IX}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_gaussian__distribution__2d_a291aa81b6b608aeca5a532ecdbdef68c}{Gaussian\+\_\+distribution\+\_\+2d} ()
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_gaussian__distribution__2d_aad832a2b320dccb09161bd79a33e19fb}{Gaussian\+\_\+distribution\+\_\+2d} (const \hyperlink{structcugar_1_1_vector}{Vector2f} mu, const \hyperlink{structcugar_1_1_matrix}{Matrix2x2f} matrix, const Matrix\+Type matrix\+\_\+type=C\+O\+V\+A\+R\+I\+A\+N\+C\+E\+\_\+\+M\+A\+T\+R\+IX)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_gaussian__distribution__2d_aad6906acd6d313a1a880d178438b9ff3}{Gaussian\+\_\+distribution\+\_\+2d} (const \hyperlink{structcugar_1_1_vector}{Vector2f} mu, const \hyperlink{structcugar_1_1_matrix}{Matrix2x2f} sigma, const \hyperlink{structcugar_1_1_matrix}{Matrix2x2f} prec)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector2f} \hyperlink{structcugar_1_1_gaussian__distribution__2d_a2a225669b7d1f39a0d946a551561f26f}{map} (const \hyperlink{structcugar_1_1_vector}{Vector2f} uv) const
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_gaussian__distribution__2d_a001503b87c988e4cfddbf8814f83a93b}{density} (const \hyperlink{structcugar_1_1_vector}{Vector2f} x) const
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector2f} \hyperlink{structcugar_1_1_gaussian__distribution__2d_a76ef27708f0faf2dc05df010ac7a832c}{mean} () const
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const \hyperlink{structcugar_1_1_matrix}{Matrix2x2f} \& \hyperlink{structcugar_1_1_gaussian__distribution__2d_a8791393607fd2cd1a35e61a3656216e5}{precision} () const
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const \hyperlink{structcugar_1_1_matrix}{Matrix2x2f} \hyperlink{structcugar_1_1_gaussian__distribution__2d_adb453934ce1db8c170a2e783449241c1}{covariance} () const
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcugar_1_1_gaussian__distribution__2d_a291aa81b6b608aeca5a532ecdbdef68c}\label{structcugar_1_1_gaussian__distribution__2d_a291aa81b6b608aeca5a532ecdbdef68c}} 
+\index{cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d@{cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d}!Gaussian\+\_\+distribution\+\_\+2d@{Gaussian\+\_\+distribution\+\_\+2d}}
+\index{Gaussian\+\_\+distribution\+\_\+2d@{Gaussian\+\_\+distribution\+\_\+2d}!cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d@{cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d}}
+\subsubsection{\texorpdfstring{Gaussian\+\_\+distribution\+\_\+2d()}{Gaussian\_distribution\_2d()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d\+::\+Gaussian\+\_\+distribution\+\_\+2d (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em mu} & mean \\
+\hline
+{\em matrix} & covariance $\vert$ precision matrix \\
+\hline
+{\em matrix\+\_\+type} & specify which matrix is passed \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1_gaussian__distribution__2d_aad832a2b320dccb09161bd79a33e19fb}\label{structcugar_1_1_gaussian__distribution__2d_aad832a2b320dccb09161bd79a33e19fb}} 
+\index{cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d@{cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d}!Gaussian\+\_\+distribution\+\_\+2d@{Gaussian\+\_\+distribution\+\_\+2d}}
+\index{Gaussian\+\_\+distribution\+\_\+2d@{Gaussian\+\_\+distribution\+\_\+2d}!cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d@{cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d}}
+\subsubsection{\texorpdfstring{Gaussian\+\_\+distribution\+\_\+2d()}{Gaussian\_distribution\_2d()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d\+::\+Gaussian\+\_\+distribution\+\_\+2d (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector2f}}]{mu,  }\item[{const \hyperlink{structcugar_1_1_matrix}{Matrix2x2f}}]{matrix,  }\item[{const Matrix\+Type}]{matrix\+\_\+type = {\ttfamily COVARIANCE\+\_\+MATRIX} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em mu} & mean \\
+\hline
+{\em matrix} & covariance $\vert$ precision matrix \\
+\hline
+{\em matrix\+\_\+type} & specify which matrix is passed \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1_gaussian__distribution__2d_aad6906acd6d313a1a880d178438b9ff3}\label{structcugar_1_1_gaussian__distribution__2d_aad6906acd6d313a1a880d178438b9ff3}} 
+\index{cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d@{cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d}!Gaussian\+\_\+distribution\+\_\+2d@{Gaussian\+\_\+distribution\+\_\+2d}}
+\index{Gaussian\+\_\+distribution\+\_\+2d@{Gaussian\+\_\+distribution\+\_\+2d}!cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d@{cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d}}
+\subsubsection{\texorpdfstring{Gaussian\+\_\+distribution\+\_\+2d()}{Gaussian\_distribution\_2d()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d\+::\+Gaussian\+\_\+distribution\+\_\+2d (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector2f}}]{mu,  }\item[{const \hyperlink{structcugar_1_1_matrix}{Matrix2x2f}}]{sigma,  }\item[{const \hyperlink{structcugar_1_1_matrix}{Matrix2x2f}}]{prec }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em sigma} & covariance matrix \\
+\hline
+{\em prec} & precision matrix \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1_gaussian__distribution__2d_adb453934ce1db8c170a2e783449241c1}\label{structcugar_1_1_gaussian__distribution__2d_adb453934ce1db8c170a2e783449241c1}} 
+\index{cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d@{cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d}!covariance@{covariance}}
+\index{covariance@{covariance}!cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d@{cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d}}
+\subsubsection{\texorpdfstring{covariance()}{covariance()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const \hyperlink{structcugar_1_1_matrix}{Matrix2x2f} cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d\+::covariance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the covariance matrix \mbox{\Hypertarget{structcugar_1_1_gaussian__distribution__2d_a001503b87c988e4cfddbf8814f83a93b}\label{structcugar_1_1_gaussian__distribution__2d_a001503b87c988e4cfddbf8814f83a93b}} 
+\index{cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d@{cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d}!density@{density}}
+\index{density@{density}!cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d@{cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d}}
+\subsubsection{\texorpdfstring{density()}{density()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d\+::density (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector2f}}]{x }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+probability density function
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & sample location \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1_gaussian__distribution__2d_a2a225669b7d1f39a0d946a551561f26f}\label{structcugar_1_1_gaussian__distribution__2d_a2a225669b7d1f39a0d946a551561f26f}} 
+\index{cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d@{cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d}!map@{map}}
+\index{map@{map}!cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d@{cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d}}
+\subsubsection{\texorpdfstring{map()}{map()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector2f} cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d\+::map (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector2f}}]{uv }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+transform a uniformly distributed vector through the distribution
+
+
+\begin{DoxyParams}{Parameters}
+{\em uv} & real numbers to transform \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1_gaussian__distribution__2d_a76ef27708f0faf2dc05df010ac7a832c}\label{structcugar_1_1_gaussian__distribution__2d_a76ef27708f0faf2dc05df010ac7a832c}} 
+\index{cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d@{cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d}!mean@{mean}}
+\index{mean@{mean}!cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d@{cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d}}
+\subsubsection{\texorpdfstring{mean()}{mean()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector2f} cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d\+::mean (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the mean vector \mbox{\Hypertarget{structcugar_1_1_gaussian__distribution__2d_a8791393607fd2cd1a35e61a3656216e5}\label{structcugar_1_1_gaussian__distribution__2d_a8791393607fd2cd1a35e61a3656216e5}} 
+\index{cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d@{cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d}!precision@{precision}}
+\index{precision@{precision}!cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d@{cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d}}
+\subsubsection{\texorpdfstring{precision()}{precision()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const \hyperlink{structcugar_1_1_matrix}{Matrix2x2f}\& cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d\+::precision (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the precision matrix 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/sampling/\hyperlink{distributions_8h}{distributions.\+h}\end{DoxyCompactItemize}

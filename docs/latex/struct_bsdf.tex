@@ -1,0 +1,414 @@
+\hypertarget{struct_bsdf}{}\section{Bsdf Struct Reference}
+\label{struct_bsdf}\index{Bsdf@{Bsdf}}
+
+
+\subsection{Detailed description}
+Composite B\+S\+DF class \begin{DoxyParagraph}{}
+This class defines the Bidirectional Scattering Distribution Function employed throughout Fermat. At present time, this model is rather simple, and consists of four layered components only\+: 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+
+\begin{DoxyItemize}
+\item a diffuse reflection component
+\item a diffuse transmission component
+\item a glossy reflection component layered on top of the diffuse layer
+\item a glossy transmission component layered on top of the diffuse layer 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The B\+S\+DF uses Fresnel coefficients to determine how much light undergoes glossy reflection, and how much undergoes transmission. Part of the radiance transmitted from the upper glossy layer undergoes diffuse scattering. The interaction between the glossy layer and the underlying diffuse layer is modeled in a simplified manner, as if the layer was infinitely thin and the diffusely reflected particles were not interacting again with the upper layer. 
+\end{DoxyParagraph}
+
+
+{\ttfamily \#include $<$bsdf.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{struct_bsdf_acaa87fb810c0f7957db85bf41843f70c}{Component\+Index} \{ \newline
+{\bfseries k\+Diffuse\+Reflection\+Index} = 0u, 
+{\bfseries k\+Diffuse\+Transmission\+Index} = 1u, 
+{\bfseries k\+Glossy\+Reflection\+Index} = 2u, 
+{\bfseries k\+Glossy\+Transmission\+Index} = 3u, 
+\newline
+{\bfseries k\+Num\+Components} = 4u
+ \}
+\item 
+enum \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Component\+Type} \{ \newline
+{\bfseries k\+Absorption} = 0u, 
+{\bfseries k\+Diffuse\+Reflection} = 0x1u, 
+{\bfseries k\+Diffuse\+Transmission} = 0x2u, 
+{\bfseries k\+Glossy\+Reflection} = 0x4u, 
+\newline
+{\bfseries k\+Glossy\+Transmission} = 0x8u, 
+{\bfseries k\+Diffuse\+Mask} = 0x3u, 
+{\bfseries k\+Glossy\+Mask} = 0x\+Cu, 
+{\bfseries k\+Reflection\+Mask} = 0x5u, 
+\newline
+{\bfseries k\+Transmission\+Mask} = 0x\+Au, 
+{\bfseries k\+All\+Components} = 0x\+F\+Fu
+ \}
+\item 
+\mbox{\Hypertarget{struct_bsdf_a8fff78b20fe6a520fff1c38d1fcaf076}\label{struct_bsdf_a8fff78b20fe6a520fff1c38d1fcaf076}} 
+typedef \hyperlink{structcugar_1_1_lambert_trans_bsdf}{cugar\+::\+Lambert\+Trans\+Bsdf} {\bfseries diffuse\+\_\+trans\+\_\+component}
+\item 
+\mbox{\Hypertarget{struct_bsdf_aa53ce614ace7c6ddf9978eeb5220742d}\label{struct_bsdf_aa53ce614ace7c6ddf9978eeb5220742d}} 
+typedef \hyperlink{structcugar_1_1_lambert_bsdf}{cugar\+::\+Lambert\+Bsdf} {\bfseries diffuse\+\_\+component}
+\item 
+\mbox{\Hypertarget{struct_bsdf_a3def52151a6e63eac581255adb247e13}\label{struct_bsdf_a3def52151a6e63eac581255adb247e13}} 
+typedef \hyperlink{structcugar_1_1_g_g_x_smith_bsdf}{cugar\+::\+G\+G\+X\+Smith\+Bsdf} {\bfseries glossy\+\_\+component}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{struct_bsdf_acaba8d34bd0941ee5f693dfd1332192c}{Bsdf} ()
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{struct_bsdf_afab2b86b817583efe5d2e66b51fce894}{Bsdf} (const \hyperlink{struct_bsdf}{Bsdf} \&bsdf)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{struct_bsdf_ae7c0dd3d4267fa567067e4e2218c6a2b}{Bsdf} (const \hyperlink{group___b_s_d_f_module_gaca1e72535e7f260e54ed8bbf984dade9}{Transport\+Type} transport, const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} renderer, const \hyperlink{struct_mesh_material}{Mesh\+Material} material, const float mollification\+\_\+factor=1.\+0f, const float mollification\+\_\+bias=0.\+0f, const float min\+\_\+roughness=0.\+0f)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{struct_bsdf_a53df9a2f9d7cf9384ce29d2fe061a383}{Bsdf} (const \hyperlink{group___b_s_d_f_module_gaca1e72535e7f260e54ed8bbf984dade9}{Transport\+Type} transport, const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} renderer, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \hyperlink{struct_bsdf_a2c8d6de3e2d2a7d282d9cd510b8f96aa}{diffuse}, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} specular, const float roughness, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \hyperlink{struct_bsdf_a12d8619f56cc6b28b1e1bc6a4ae9d954}{diffuse\+\_\+trans}, const float opacity=1.\+0f, const float ior=1.\+0f)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const \hyperlink{structcugar_1_1_lambert_trans_bsdf}{diffuse\+\_\+trans\+\_\+component} \& \hyperlink{struct_bsdf_a12d8619f56cc6b28b1e1bc6a4ae9d954}{diffuse\+\_\+trans} () const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const \hyperlink{structcugar_1_1_lambert_bsdf}{diffuse\+\_\+component} \& \hyperlink{struct_bsdf_a2c8d6de3e2d2a7d282d9cd510b8f96aa}{diffuse} () const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const \hyperlink{structcugar_1_1_g_g_x_smith_bsdf}{glossy\+\_\+component} \& \hyperlink{struct_bsdf_a7ab1bdf476d9f79b66b32f27d8b99536}{glossy} () const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const \hyperlink{structcugar_1_1_g_g_x_smith_bsdf}{glossy\+\_\+component} \& \hyperlink{struct_bsdf_a40f0038a911021c5f3748ce8f51ac14c}{glossy\+\_\+trans} () const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{struct_bsdf_ac8350cc0e45d5cc5e1eb4720200eb472}{get\+\_\+eta} (const float NoV) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{struct_bsdf_a7b87e71a26d0a87080be653929e52cd5}{get\+\_\+inv\+\_\+eta} (const float NoV) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \hyperlink{struct_bsdf_a58f402b71508cb422ebe3f0e628fd2fd}{f} (const \hyperlink{structcugar_1_1_differential_geometry}{cugar\+::\+Differential\+Geometry} \&geometry, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} V, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} L, const \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Component\+Type} components=k\+All\+Components) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{struct_bsdf_a6b91ccd2463e6461f2c758be5b1e35b8}{f} (const \hyperlink{structcugar_1_1_differential_geometry}{cugar\+::\+Differential\+Geometry} \&geometry, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} V, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} L, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} $\ast$f) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{struct_bsdf_af1ad14ad4a31c7604581a551c3fb1901}{f\+\_\+and\+\_\+p} (const \hyperlink{structcugar_1_1_differential_geometry}{cugar\+::\+Differential\+Geometry} \&geometry, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} V, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} L, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} $\ast$\hyperlink{struct_bsdf_a58f402b71508cb422ebe3f0e628fd2fd}{f}, float $\ast$\hyperlink{struct_bsdf_a88c3b1f89a3248d4b2684fd402a59ced}{p}, const cugar\+::\+Spherical\+Measure measure=cugar\+::k\+Projected\+Solid\+Angle, bool RR=true) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{struct_bsdf_a67523c8158f74a07a6ed0b32b97f6bb2}{f\+\_\+and\+\_\+p} (const \hyperlink{structcugar_1_1_differential_geometry}{cugar\+::\+Differential\+Geometry} \&geometry, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} V, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} L, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&\hyperlink{struct_bsdf_a58f402b71508cb422ebe3f0e628fd2fd}{f}, float \&\hyperlink{struct_bsdf_a88c3b1f89a3248d4b2684fd402a59ced}{p}, const cugar\+::\+Spherical\+Measure measure=cugar\+::k\+Projected\+Solid\+Angle, const bool RR=true, const \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Component\+Type} components=k\+All\+Components) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{struct_bsdf_a88c3b1f89a3248d4b2684fd402a59ced}{p} (const \hyperlink{structcugar_1_1_differential_geometry}{cugar\+::\+Differential\+Geometry} \&geometry, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} V, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} L, const cugar\+::\+Spherical\+Measure measure=cugar\+::k\+Projected\+Solid\+Angle, const bool RR=true, const \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Component\+Type} components=k\+All\+Components) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{struct_bsdf_a6484768a455903e0bc0946d3d9722940}{sampling\+\_\+weights} (const \hyperlink{structcugar_1_1_differential_geometry}{cugar\+::\+Differential\+Geometry} \&geometry, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} V, float \&diffuse\+\_\+refl\+\_\+prob, float \&diffuse\+\_\+trans\+\_\+prob, float \&glossy\+\_\+refl\+\_\+prob, float \&glossy\+\_\+trans\+\_\+prob) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{struct_bsdf_aa3382a14f577b359f61cca760a7d1296}{sampling\+\_\+weights} (const \hyperlink{structcugar_1_1_differential_geometry}{cugar\+::\+Differential\+Geometry} \&geometry, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} V, float $\ast$w) const
+\item 
+\mbox{\Hypertarget{struct_bsdf_af572e3b9da16737eeb585fefb56c62ef}\label{struct_bsdf_af572e3b9da16737eeb585fefb56c62ef}} 
+F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void {\bfseries weights} (const \hyperlink{structcugar_1_1_differential_geometry}{cugar\+::\+Differential\+Geometry} \&geometry, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} V, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} L, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&r\+\_\+coeff, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&t\+\_\+coeff) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{struct_bsdf_a474750a7281cd4945bc40ca5c9ea3ffd}{component\+\_\+weights} (const \hyperlink{structcugar_1_1_differential_geometry}{cugar\+::\+Differential\+Geometry} \&geometry, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} V, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} L, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&diffuse\+\_\+refl\+\_\+coeff, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&diffuse\+\_\+trans\+\_\+coeff, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&glossy\+\_\+refl\+\_\+coeff, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&glossy\+\_\+trans\+\_\+coeff) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{struct_bsdf_a8390c41355fe415ebd71d3243266c6a9}{component\+\_\+weights} (const \hyperlink{structcugar_1_1_differential_geometry}{cugar\+::\+Differential\+Geometry} \&geometry, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} V, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} L, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} $\ast$w) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool \hyperlink{struct_bsdf_a99fc011c47e622f99dbbc78dc7a930a1}{sample\+\_\+component} (const \hyperlink{structcugar_1_1_differential_geometry}{cugar\+::\+Differential\+Geometry} \&geometry, const float z\mbox{[}3\mbox{]}, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} in, const \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Component\+Type} out\+\_\+comp, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&out, float \&out\+\_\+p, float \&out\+\_\+p\+\_\+proj, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&out\+\_\+g, const bool evaluate\+\_\+full\+\_\+bsdf=false) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool \hyperlink{struct_bsdf_ac4ce2cad14795e1ff7f82ed10990ba3e}{sample} (const \hyperlink{structcugar_1_1_differential_geometry}{cugar\+::\+Differential\+Geometry} \&geometry, const float z\mbox{[}3\mbox{]}, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} in, \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Component\+Type} \&out\+\_\+comp, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&out, float \&out\+\_\+p, float \&out\+\_\+p\+\_\+proj, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&out\+\_\+g, bool RR=true, bool evaluate\+\_\+full\+\_\+bsdf=false, const \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Component\+Type} components=k\+All\+Components) const
+\end{DoxyCompactItemize}
+\subsection*{Static Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+static F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{struct_bsdf_a121bc781731366b8846d9a7b36eb7767}{component\+\_\+count} ()
+\item 
+static F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{struct_bsdf_a0eccbf03af0e1d86cee1d7ebd1d5e752}{component\+\_\+index} (const \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Component\+Type} comp)
+\item 
+static F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Component\+Type} \hyperlink{struct_bsdf_a6f95cfb6e2c6988cef49c8dcaefda5e6}{component\+\_\+mask} (const \hyperlink{struct_bsdf_acaa87fb810c0f7957db85bf41843f70c}{Component\+Index} comp)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE static F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \hyperlink{struct_bsdf_aa35356849fd5563fe53584fa45ca3714}{Fresnel} (const \hyperlink{structcugar_1_1_differential_geometry}{cugar\+::\+Differential\+Geometry} \&geometry, const float VoH, const float eta, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} fresnel\+\_\+base)
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_bsdf_a07cbf725e97463d0a33d88aca41e4e99}\label{struct_bsdf_a07cbf725e97463d0a33d88aca41e4e99}} 
+\hyperlink{structcugar_1_1_lambert_bsdf}{diffuse\+\_\+component} {\bfseries m\+\_\+diffuse}
+\item 
+\mbox{\Hypertarget{struct_bsdf_adabef4ad1d3d36d28fcc917d9f4fe3de}\label{struct_bsdf_adabef4ad1d3d36d28fcc917d9f4fe3de}} 
+\hyperlink{structcugar_1_1_lambert_trans_bsdf}{diffuse\+\_\+trans\+\_\+component} {\bfseries m\+\_\+diffuse\+\_\+trans}
+\item 
+\mbox{\Hypertarget{struct_bsdf_a486681b36b7838e4e29af1ab7727aa12}\label{struct_bsdf_a486681b36b7838e4e29af1ab7727aa12}} 
+\hyperlink{structcugar_1_1_g_g_x_smith_bsdf}{glossy\+\_\+component} {\bfseries m\+\_\+glossy}
+\item 
+\mbox{\Hypertarget{struct_bsdf_a48195915bd4bdbed355ccb6cd6921cf5}\label{struct_bsdf_a48195915bd4bdbed355ccb6cd6921cf5}} 
+\hyperlink{structcugar_1_1_g_g_x_smith_bsdf}{glossy\+\_\+component} {\bfseries m\+\_\+glossy\+\_\+trans}
+\item 
+\mbox{\Hypertarget{struct_bsdf_a1fef34fd64df70b96e39d368efc66dc6}\label{struct_bsdf_a1fef34fd64df70b96e39d368efc66dc6}} 
+\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} {\bfseries m\+\_\+fresnel}
+\item 
+\mbox{\Hypertarget{struct_bsdf_a6be949f0571a3f7f854b0fd4b5f8708e}\label{struct_bsdf_a6be949f0571a3f7f854b0fd4b5f8708e}} 
+float {\bfseries m\+\_\+ior}
+\item 
+\mbox{\Hypertarget{struct_bsdf_adc6015bf971d0de0745116dd3d343f53}\label{struct_bsdf_adc6015bf971d0de0745116dd3d343f53}} 
+float {\bfseries m\+\_\+opacity}
+\item 
+\mbox{\Hypertarget{struct_bsdf_a0c4968259fa76abd54fc31021a413bb5}\label{struct_bsdf_a0c4968259fa76abd54fc31021a413bb5}} 
+const float $\ast$ {\bfseries m\+\_\+glossy\+\_\+reflectance}
+\item 
+\mbox{\Hypertarget{struct_bsdf_a4be56c3587da98009cdaa6e7732856dd}\label{struct_bsdf_a4be56c3587da98009cdaa6e7732856dd}} 
+\hyperlink{group___b_s_d_f_module_gaca1e72535e7f260e54ed8bbf984dade9}{Transport\+Type} {\bfseries m\+\_\+transport}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{struct_bsdf_acaa87fb810c0f7957db85bf41843f70c}\label{struct_bsdf_acaa87fb810c0f7957db85bf41843f70c}} 
+\index{Bsdf@{Bsdf}!Component\+Index@{Component\+Index}}
+\index{Component\+Index@{Component\+Index}!Bsdf@{Bsdf}}
+\subsubsection{\texorpdfstring{Component\+Index}{ComponentIndex}}
+{\footnotesize\ttfamily enum \hyperlink{struct_bsdf_acaa87fb810c0f7957db85bf41843f70c}{Bsdf\+::\+Component\+Index}}
+
+component type indices \mbox{\Hypertarget{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}\label{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}} 
+\index{Bsdf@{Bsdf}!Component\+Type@{Component\+Type}}
+\index{Component\+Type@{Component\+Type}!Bsdf@{Bsdf}}
+\subsubsection{\texorpdfstring{Component\+Type}{ComponentType}}
+{\footnotesize\ttfamily enum \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type}}
+
+component type bitmasks 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{struct_bsdf_acaba8d34bd0941ee5f693dfd1332192c}\label{struct_bsdf_acaba8d34bd0941ee5f693dfd1332192c}} 
+\index{Bsdf@{Bsdf}!Bsdf@{Bsdf}}
+\index{Bsdf@{Bsdf}!Bsdf@{Bsdf}}
+\subsubsection{\texorpdfstring{Bsdf()}{Bsdf()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Bsdf\+::\+Bsdf (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor \mbox{\Hypertarget{struct_bsdf_afab2b86b817583efe5d2e66b51fce894}\label{struct_bsdf_afab2b86b817583efe5d2e66b51fce894}} 
+\index{Bsdf@{Bsdf}!Bsdf@{Bsdf}}
+\index{Bsdf@{Bsdf}!Bsdf@{Bsdf}}
+\subsubsection{\texorpdfstring{Bsdf()}{Bsdf()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Bsdf\+::\+Bsdf (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_bsdf}{Bsdf} \&}]{bsdf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+copy constructor \mbox{\Hypertarget{struct_bsdf_ae7c0dd3d4267fa567067e4e2218c6a2b}\label{struct_bsdf_ae7c0dd3d4267fa567067e4e2218c6a2b}} 
+\index{Bsdf@{Bsdf}!Bsdf@{Bsdf}}
+\index{Bsdf@{Bsdf}!Bsdf@{Bsdf}}
+\subsubsection{\texorpdfstring{Bsdf()}{Bsdf()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Bsdf\+::\+Bsdf (\begin{DoxyParamCaption}\item[{const \hyperlink{group___b_s_d_f_module_gaca1e72535e7f260e54ed8bbf984dade9}{Transport\+Type}}]{transport,  }\item[{const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View}}]{renderer,  }\item[{const \hyperlink{struct_mesh_material}{Mesh\+Material}}]{material,  }\item[{const float}]{mollification\+\_\+factor = {\ttfamily 1.0f},  }\item[{const float}]{mollification\+\_\+bias = {\ttfamily 0.0f},  }\item[{const float}]{min\+\_\+roughness = {\ttfamily 0.0f} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor \mbox{\Hypertarget{struct_bsdf_a53df9a2f9d7cf9384ce29d2fe061a383}\label{struct_bsdf_a53df9a2f9d7cf9384ce29d2fe061a383}} 
+\index{Bsdf@{Bsdf}!Bsdf@{Bsdf}}
+\index{Bsdf@{Bsdf}!Bsdf@{Bsdf}}
+\subsubsection{\texorpdfstring{Bsdf()}{Bsdf()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Bsdf\+::\+Bsdf (\begin{DoxyParamCaption}\item[{const \hyperlink{group___b_s_d_f_module_gaca1e72535e7f260e54ed8bbf984dade9}{Transport\+Type}}]{transport,  }\item[{const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View}}]{renderer,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{diffuse,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{specular,  }\item[{const float}]{roughness,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{diffuse\+\_\+trans,  }\item[{const float}]{opacity = {\ttfamily 1.0f},  }\item[{const float}]{ior = {\ttfamily 1.0f} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{struct_bsdf_a121bc781731366b8846d9a7b36eb7767}\label{struct_bsdf_a121bc781731366b8846d9a7b36eb7767}} 
+\index{Bsdf@{Bsdf}!component\+\_\+count@{component\+\_\+count}}
+\index{component\+\_\+count@{component\+\_\+count}!Bsdf@{Bsdf}}
+\subsubsection{\texorpdfstring{component\+\_\+count()}{component\_count()}}
+{\footnotesize\ttfamily static F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 Bsdf\+::component\+\_\+count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+return the number of components \mbox{\Hypertarget{struct_bsdf_a0eccbf03af0e1d86cee1d7ebd1d5e752}\label{struct_bsdf_a0eccbf03af0e1d86cee1d7ebd1d5e752}} 
+\index{Bsdf@{Bsdf}!component\+\_\+index@{component\+\_\+index}}
+\index{component\+\_\+index@{component\+\_\+index}!Bsdf@{Bsdf}}
+\subsubsection{\texorpdfstring{component\+\_\+index()}{component\_index()}}
+{\footnotesize\ttfamily static F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 Bsdf\+::component\+\_\+index (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Component\+Type}}]{comp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+return the 0-\/based index corresponding to a given component \mbox{\Hypertarget{struct_bsdf_a6f95cfb6e2c6988cef49c8dcaefda5e6}\label{struct_bsdf_a6f95cfb6e2c6988cef49c8dcaefda5e6}} 
+\index{Bsdf@{Bsdf}!component\+\_\+mask@{component\+\_\+mask}}
+\index{component\+\_\+mask@{component\+\_\+mask}!Bsdf@{Bsdf}}
+\subsubsection{\texorpdfstring{component\+\_\+mask()}{component\_mask()}}
+{\footnotesize\ttfamily static F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Component\+Type} Bsdf\+::component\+\_\+mask (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_bsdf_acaa87fb810c0f7957db85bf41843f70c}{Component\+Index}}]{comp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+return the bitmask corresponding to a given component \mbox{\Hypertarget{struct_bsdf_a474750a7281cd4945bc40ca5c9ea3ffd}\label{struct_bsdf_a474750a7281cd4945bc40ca5c9ea3ffd}} 
+\index{Bsdf@{Bsdf}!component\+\_\+weights@{component\+\_\+weights}}
+\index{component\+\_\+weights@{component\+\_\+weights}!Bsdf@{Bsdf}}
+\subsubsection{\texorpdfstring{component\+\_\+weights()}{component\_weights()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void Bsdf\+::component\+\_\+weights (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_differential_geometry}{cugar\+::\+Differential\+Geometry} \&}]{geometry,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{V,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{L,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{diffuse\+\_\+refl\+\_\+coeff,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{diffuse\+\_\+trans\+\_\+coeff,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{glossy\+\_\+refl\+\_\+coeff,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{glossy\+\_\+trans\+\_\+coeff }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+evaluate the Fresnel weight for the glossy component \mbox{\Hypertarget{struct_bsdf_a8390c41355fe415ebd71d3243266c6a9}\label{struct_bsdf_a8390c41355fe415ebd71d3243266c6a9}} 
+\index{Bsdf@{Bsdf}!component\+\_\+weights@{component\+\_\+weights}}
+\index{component\+\_\+weights@{component\+\_\+weights}!Bsdf@{Bsdf}}
+\subsubsection{\texorpdfstring{component\+\_\+weights()}{component\_weights()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void Bsdf\+::component\+\_\+weights (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_differential_geometry}{cugar\+::\+Differential\+Geometry} \&}]{geometry,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{V,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{L,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} $\ast$}]{w }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+evaluate the component weights \mbox{\Hypertarget{struct_bsdf_a2c8d6de3e2d2a7d282d9cd510b8f96aa}\label{struct_bsdf_a2c8d6de3e2d2a7d282d9cd510b8f96aa}} 
+\index{Bsdf@{Bsdf}!diffuse@{diffuse}}
+\index{diffuse@{diffuse}!Bsdf@{Bsdf}}
+\subsubsection{\texorpdfstring{diffuse()}{diffuse()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const \hyperlink{structcugar_1_1_lambert_bsdf}{diffuse\+\_\+component}\& Bsdf\+::diffuse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the diffuse reflection component \mbox{\Hypertarget{struct_bsdf_a12d8619f56cc6b28b1e1bc6a4ae9d954}\label{struct_bsdf_a12d8619f56cc6b28b1e1bc6a4ae9d954}} 
+\index{Bsdf@{Bsdf}!diffuse\+\_\+trans@{diffuse\+\_\+trans}}
+\index{diffuse\+\_\+trans@{diffuse\+\_\+trans}!Bsdf@{Bsdf}}
+\subsubsection{\texorpdfstring{diffuse\+\_\+trans()}{diffuse\_trans()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const \hyperlink{structcugar_1_1_lambert_trans_bsdf}{diffuse\+\_\+trans\+\_\+component}\& Bsdf\+::diffuse\+\_\+trans (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the diffuse transmission component \mbox{\Hypertarget{struct_bsdf_a58f402b71508cb422ebe3f0e628fd2fd}\label{struct_bsdf_a58f402b71508cb422ebe3f0e628fd2fd}} 
+\index{Bsdf@{Bsdf}!f@{f}}
+\index{f@{f}!Bsdf@{Bsdf}}
+\subsubsection{\texorpdfstring{f()}{f()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} Bsdf\+::f (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_differential_geometry}{cugar\+::\+Differential\+Geometry} \&}]{geometry,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{V,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{L,  }\item[{const \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Component\+Type}}]{components = {\ttfamily kAllComponents} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+evaluate the B\+S\+DF f(\+V,\+L)
+
+
+\begin{DoxyParams}{Parameters}
+{\em geometry} & the local differential geometry \\
+\hline
+{\em in} & the incoming direction \\
+\hline
+{\em out} & the outgoing direction \\
+\hline
+{\em components} & the components to consider \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{struct_bsdf_a6b91ccd2463e6461f2c758be5b1e35b8}\label{struct_bsdf_a6b91ccd2463e6461f2c758be5b1e35b8}} 
+\index{Bsdf@{Bsdf}!f@{f}}
+\index{f@{f}!Bsdf@{Bsdf}}
+\subsubsection{\texorpdfstring{f()}{f()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void Bsdf\+::f (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_differential_geometry}{cugar\+::\+Differential\+Geometry} \&}]{geometry,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{V,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{L,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} $\ast$}]{f }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+evaluate the B\+S\+DF f(\+V,\+L) separately for all components \mbox{\Hypertarget{struct_bsdf_af1ad14ad4a31c7604581a551c3fb1901}\label{struct_bsdf_af1ad14ad4a31c7604581a551c3fb1901}} 
+\index{Bsdf@{Bsdf}!f\+\_\+and\+\_\+p@{f\+\_\+and\+\_\+p}}
+\index{f\+\_\+and\+\_\+p@{f\+\_\+and\+\_\+p}!Bsdf@{Bsdf}}
+\subsubsection{\texorpdfstring{f\+\_\+and\+\_\+p()}{f\_and\_p()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void Bsdf\+::f\+\_\+and\+\_\+p (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_differential_geometry}{cugar\+::\+Differential\+Geometry} \&}]{geometry,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{V,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{L,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} $\ast$}]{f,  }\item[{float $\ast$}]{p,  }\item[{const cugar\+::\+Spherical\+Measure}]{measure = {\ttfamily cugar\+:\+:kProjectedSolidAngle},  }\item[{bool}]{RR = {\ttfamily true} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+evaluate the B\+S\+DF f(\+V,\+L) and its pdf p(\+V,\+L) in a single call \mbox{\Hypertarget{struct_bsdf_a67523c8158f74a07a6ed0b32b97f6bb2}\label{struct_bsdf_a67523c8158f74a07a6ed0b32b97f6bb2}} 
+\index{Bsdf@{Bsdf}!f\+\_\+and\+\_\+p@{f\+\_\+and\+\_\+p}}
+\index{f\+\_\+and\+\_\+p@{f\+\_\+and\+\_\+p}!Bsdf@{Bsdf}}
+\subsubsection{\texorpdfstring{f\+\_\+and\+\_\+p()}{f\_and\_p()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void Bsdf\+::f\+\_\+and\+\_\+p (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_differential_geometry}{cugar\+::\+Differential\+Geometry} \&}]{geometry,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{V,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{L,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{f,  }\item[{float \&}]{p,  }\item[{const cugar\+::\+Spherical\+Measure}]{measure = {\ttfamily cugar\+:\+:kProjectedSolidAngle},  }\item[{const bool}]{RR = {\ttfamily true},  }\item[{const \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Component\+Type}}]{components = {\ttfamily kAllComponents} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+evaluate the B\+S\+DF f(\+V,\+L) and its p(\+V,\+L) in a single call \mbox{\Hypertarget{struct_bsdf_aa35356849fd5563fe53584fa45ca3714}\label{struct_bsdf_aa35356849fd5563fe53584fa45ca3714}} 
+\index{Bsdf@{Bsdf}!Fresnel@{Fresnel}}
+\index{Fresnel@{Fresnel}!Bsdf@{Bsdf}}
+\subsubsection{\texorpdfstring{Fresnel()}{Fresnel()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE static F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} Bsdf\+::\+Fresnel (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_differential_geometry}{cugar\+::\+Differential\+Geometry} \&}]{geometry,  }\item[{const float}]{VoH,  }\item[{const float}]{eta,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{fresnel\+\_\+base }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+evaluate the Fresnel weight
+
+
+\begin{DoxyParams}{Parameters}
+{\em eta} & incoming I\+OR / outgoing I\+OR \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{struct_bsdf_ac8350cc0e45d5cc5e1eb4720200eb472}\label{struct_bsdf_ac8350cc0e45d5cc5e1eb4720200eb472}} 
+\index{Bsdf@{Bsdf}!get\+\_\+eta@{get\+\_\+eta}}
+\index{get\+\_\+eta@{get\+\_\+eta}!Bsdf@{Bsdf}}
+\subsubsection{\texorpdfstring{get\+\_\+eta()}{get\_eta()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float Bsdf\+::get\+\_\+eta (\begin{DoxyParamCaption}\item[{const float}]{NoV }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the incident ior ratio \mbox{\Hypertarget{struct_bsdf_a7b87e71a26d0a87080be653929e52cd5}\label{struct_bsdf_a7b87e71a26d0a87080be653929e52cd5}} 
+\index{Bsdf@{Bsdf}!get\+\_\+inv\+\_\+eta@{get\+\_\+inv\+\_\+eta}}
+\index{get\+\_\+inv\+\_\+eta@{get\+\_\+inv\+\_\+eta}!Bsdf@{Bsdf}}
+\subsubsection{\texorpdfstring{get\+\_\+inv\+\_\+eta()}{get\_inv\_eta()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float Bsdf\+::get\+\_\+inv\+\_\+eta (\begin{DoxyParamCaption}\item[{const float}]{NoV }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the incident inverse ior ratio \mbox{\Hypertarget{struct_bsdf_a7ab1bdf476d9f79b66b32f27d8b99536}\label{struct_bsdf_a7ab1bdf476d9f79b66b32f27d8b99536}} 
+\index{Bsdf@{Bsdf}!glossy@{glossy}}
+\index{glossy@{glossy}!Bsdf@{Bsdf}}
+\subsubsection{\texorpdfstring{glossy()}{glossy()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const \hyperlink{structcugar_1_1_g_g_x_smith_bsdf}{glossy\+\_\+component}\& Bsdf\+::glossy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the glossy reflection component \mbox{\Hypertarget{struct_bsdf_a40f0038a911021c5f3748ce8f51ac14c}\label{struct_bsdf_a40f0038a911021c5f3748ce8f51ac14c}} 
+\index{Bsdf@{Bsdf}!glossy\+\_\+trans@{glossy\+\_\+trans}}
+\index{glossy\+\_\+trans@{glossy\+\_\+trans}!Bsdf@{Bsdf}}
+\subsubsection{\texorpdfstring{glossy\+\_\+trans()}{glossy\_trans()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const \hyperlink{structcugar_1_1_g_g_x_smith_bsdf}{glossy\+\_\+component}\& Bsdf\+::glossy\+\_\+trans (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the glossy transmission component \mbox{\Hypertarget{struct_bsdf_a88c3b1f89a3248d4b2684fd402a59ced}\label{struct_bsdf_a88c3b1f89a3248d4b2684fd402a59ced}} 
+\index{Bsdf@{Bsdf}!p@{p}}
+\index{p@{p}!Bsdf@{Bsdf}}
+\subsubsection{\texorpdfstring{p()}{p()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float Bsdf\+::p (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_differential_geometry}{cugar\+::\+Differential\+Geometry} \&}]{geometry,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{V,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{L,  }\item[{const cugar\+::\+Spherical\+Measure}]{measure = {\ttfamily cugar\+:\+:kProjectedSolidAngle},  }\item[{const bool}]{RR = {\ttfamily true},  }\item[{const \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Component\+Type}}]{components = {\ttfamily kAllComponents} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+evaluate the total projected probability p(\+V,\+L) = p(L$\vert$V)
+
+
+\begin{DoxyParams}{Parameters}
+{\em geometry} & the local differential geometry \\
+\hline
+{\em in} & the incoming direction \\
+\hline
+{\em out} & the outgoing direction \\
+\hline
+{\em measure} & the spherical measure to use \\
+\hline
+{\em RR} & indicate whether to use Russian-\/\+Roulette or not \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{struct_bsdf_ac4ce2cad14795e1ff7f82ed10990ba3e}\label{struct_bsdf_ac4ce2cad14795e1ff7f82ed10990ba3e}} 
+\index{Bsdf@{Bsdf}!sample@{sample}}
+\index{sample@{sample}!Bsdf@{Bsdf}}
+\subsubsection{\texorpdfstring{sample()}{sample()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool Bsdf\+::sample (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_differential_geometry}{cugar\+::\+Differential\+Geometry} \&}]{geometry,  }\item[{const float}]{z\mbox{[}3\mbox{]},  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{in,  }\item[{\hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Component\+Type} \&}]{out\+\_\+comp,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{out,  }\item[{float \&}]{out\+\_\+p,  }\item[{float \&}]{out\+\_\+p\+\_\+proj,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{out\+\_\+g,  }\item[{bool}]{RR = {\ttfamily true},  }\item[{bool}]{evaluate\+\_\+full\+\_\+bsdf = {\ttfamily false},  }\item[{const \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Component\+Type}}]{components = {\ttfamily kAllComponents} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+sample an outgoing direction
+
+
+\begin{DoxyParams}{Parameters}
+{\em geometry} & the local differential geometry \\
+\hline
+{\em z} & the incoming direction \\
+\hline
+{\em in} & the incoming direction \\
+\hline
+{\em out\+\_\+comp} & the output component \\
+\hline
+{\em out} & the outgoing direction \\
+\hline
+{\em out\+\_\+p} & the output solid angle pdf \\
+\hline
+{\em out\+\_\+p\+\_\+proj} & the output projected solid angle pdf \\
+\hline
+{\em out\+\_\+g} & the output sample value = f/p\+\_\+proj \\
+\hline
+{\em RR} & indicate whether to use Russian-\/\+Roulette or not \\
+\hline
+{\em evaluate\+\_\+full\+\_\+bsdf} & ndicate whether to evaluate the full B\+S\+DF, or just an unbiased estimate \\
+\hline
+{\em components} & the components to consider \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{struct_bsdf_a99fc011c47e622f99dbbc78dc7a930a1}\label{struct_bsdf_a99fc011c47e622f99dbbc78dc7a930a1}} 
+\index{Bsdf@{Bsdf}!sample\+\_\+component@{sample\+\_\+component}}
+\index{sample\+\_\+component@{sample\+\_\+component}!Bsdf@{Bsdf}}
+\subsubsection{\texorpdfstring{sample\+\_\+component()}{sample\_component()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool Bsdf\+::sample\+\_\+component (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_differential_geometry}{cugar\+::\+Differential\+Geometry} \&}]{geometry,  }\item[{const float}]{z\mbox{[}3\mbox{]},  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{in,  }\item[{const \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Component\+Type}}]{out\+\_\+comp,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{out,  }\item[{float \&}]{out\+\_\+p,  }\item[{float \&}]{out\+\_\+p\+\_\+proj,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{out\+\_\+g,  }\item[{const bool}]{evaluate\+\_\+full\+\_\+bsdf = {\ttfamily false} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+sample a given component
+
+
+\begin{DoxyParams}{Parameters}
+{\em geometry} & the local differential geometry \\
+\hline
+{\em z} & the input random numbers, relative to the given component \\
+\hline
+{\em in} & the incoming direction \\
+\hline
+{\em out\+\_\+comp} & the given component \\
+\hline
+{\em out} & the outgoing direction \\
+\hline
+{\em out\+\_\+p} & the output solid angle pdf \\
+\hline
+{\em out\+\_\+p\+\_\+proj} & the output projected solid angle pdf \\
+\hline
+{\em out\+\_\+g} & the output sample value = f/p\+\_\+proj \\
+\hline
+{\em RR} & indicate whether to use Russian-\/\+Roulette or not \\
+\hline
+{\em evaluate\+\_\+full\+\_\+bsdf} & ndicate whether to evaluate the full B\+S\+DF, or just an unbiased estimate \\
+\hline
+{\em components} & the components to consider \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{struct_bsdf_a6484768a455903e0bc0946d3d9722940}\label{struct_bsdf_a6484768a455903e0bc0946d3d9722940}} 
+\index{Bsdf@{Bsdf}!sampling\+\_\+weights@{sampling\+\_\+weights}}
+\index{sampling\+\_\+weights@{sampling\+\_\+weights}!Bsdf@{Bsdf}}
+\subsubsection{\texorpdfstring{sampling\+\_\+weights()}{sampling\_weights()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void Bsdf\+::sampling\+\_\+weights (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_differential_geometry}{cugar\+::\+Differential\+Geometry} \&}]{geometry,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{V,  }\item[{float \&}]{diffuse\+\_\+refl\+\_\+prob,  }\item[{float \&}]{diffuse\+\_\+trans\+\_\+prob,  }\item[{float \&}]{glossy\+\_\+refl\+\_\+prob,  }\item[{float \&}]{glossy\+\_\+trans\+\_\+prob }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+evaluate the Fresnel weight for the glossy component \mbox{\Hypertarget{struct_bsdf_aa3382a14f577b359f61cca760a7d1296}\label{struct_bsdf_aa3382a14f577b359f61cca760a7d1296}} 
+\index{Bsdf@{Bsdf}!sampling\+\_\+weights@{sampling\+\_\+weights}}
+\index{sampling\+\_\+weights@{sampling\+\_\+weights}!Bsdf@{Bsdf}}
+\subsubsection{\texorpdfstring{sampling\+\_\+weights()}{sampling\_weights()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void Bsdf\+::sampling\+\_\+weights (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_differential_geometry}{cugar\+::\+Differential\+Geometry} \&}]{geometry,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{V,  }\item[{float $\ast$}]{w }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+evaluate the Fresnel weight for the glossy component 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/bsdf.\+h\end{DoxyCompactItemize}

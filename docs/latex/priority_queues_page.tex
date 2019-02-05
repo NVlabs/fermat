@@ -1,0 +1,33 @@
+This module implements a priority queue adaptor, supporting O(log(\+N)) push/pop operations. Unlike std\+::priority\+\_\+queue, this class can be used both in host and device C\+U\+DA code\+:
+
+
+\begin{DoxyItemize}
+\item \hyperlink{structcugar_1_1priority__queue}{priority\+\_\+queue}
+\end{DoxyItemize}\hypertarget{priority_queues_page_ExampleSection}{}\section{Example}\label{priority_queues_page_ExampleSection}
+
+\begin{DoxyCode}
+\textcolor{comment}{// build a simple priority\_queue over 4 integers}
+\textcolor{keyword}{typedef} vector\_view<uint32*>                vector\_type;
+\textcolor{keyword}{typedef} priority\_queue<uint32, vector\_type> queue\_type;
+
+uint32 queue\_storage[4];
+
+\textcolor{comment}{// construct the queue}
+queue\_type queue( vector\_type( 0u, queue\_storage ) );
+
+\textcolor{comment}{// push a few items}
+queue.push( 3 );
+queue.push( 8 );
+queue.push( 1 );
+queue.push( 5 );
+
+\textcolor{comment}{// pop from the top}
+printf( \textcolor{stringliteral}{"%u\(\backslash\)n"}, queue.top() );      \textcolor{comment}{// -> 8}
+queue.pop();
+printf( \textcolor{stringliteral}{"%u\(\backslash\)n"}, queue.top() );      \textcolor{comment}{// -> 5}
+queue.pop();
+printf( \textcolor{stringliteral}{"%u\(\backslash\)n"}, queue.top() );      \textcolor{comment}{// -> 3}
+queue.pop();
+printf( \textcolor{stringliteral}{"%u\(\backslash\)n"}, queue.top() );      \textcolor{comment}{// -> 1}
+\end{DoxyCode}
+ 

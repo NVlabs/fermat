@@ -1,0 +1,56 @@
+\hypertarget{structcugar_1_1_l_h_sampler}{}\section{cugar\+:\+:L\+H\+Sampler Struct Reference}
+\label{structcugar_1_1_l_h_sampler}\index{cugar\+::\+L\+H\+Sampler@{cugar\+::\+L\+H\+Sampler}}
+
+
+\subsection{Detailed description}
+Latin-\/\+Hypercube Sampler 
+
+{\ttfamily \#include $<$latin\+\_\+hypercube.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structcugar_1_1_l_h_sampler_a8453aa1db9cae158d609cbb9e5843f5b}{L\+H\+Sampler} (const uint32 seed=0)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\void \hyperlink{structcugar_1_1_l_h_sampler_a834984a5429b711dc3be799b927905d1}{sample} (const uint32 n\+\_\+samples, \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ $\ast$samples)
+\item 
+{\footnotesize template$<$bool S\+OA, typename T $>$ }\\void \hyperlink{structcugar_1_1_l_h_sampler_ab3422ecf79d29b9327cda1633f01caae}{sample} (const uint32 n\+\_\+samples, const uint32 n\+\_\+dims, T $\ast$samples)
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_l_h_sampler_a34b6dfc455feb895c9f227032f88e398}\label{structcugar_1_1_l_h_sampler_a34b6dfc455feb895c9f227032f88e398}} 
+\hyperlink{structcugar_1_1_random}{Random} {\bfseries m\+\_\+random}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcugar_1_1_l_h_sampler_a8453aa1db9cae158d609cbb9e5843f5b}\label{structcugar_1_1_l_h_sampler_a8453aa1db9cae158d609cbb9e5843f5b}} 
+\index{cugar\+::\+L\+H\+Sampler@{cugar\+::\+L\+H\+Sampler}!L\+H\+Sampler@{L\+H\+Sampler}}
+\index{L\+H\+Sampler@{L\+H\+Sampler}!cugar\+::\+L\+H\+Sampler@{cugar\+::\+L\+H\+Sampler}}
+\subsubsection{\texorpdfstring{L\+H\+Sampler()}{LHSampler()}}
+{\footnotesize\ttfamily cugar\+::\+L\+H\+Sampler\+::\+L\+H\+Sampler (\begin{DoxyParamCaption}\item[{const uint32}]{seed = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1_l_h_sampler_a834984a5429b711dc3be799b927905d1}\label{structcugar_1_1_l_h_sampler_a834984a5429b711dc3be799b927905d1}} 
+\index{cugar\+::\+L\+H\+Sampler@{cugar\+::\+L\+H\+Sampler}!sample@{sample}}
+\index{sample@{sample}!cugar\+::\+L\+H\+Sampler@{cugar\+::\+L\+H\+Sampler}}
+\subsubsection{\texorpdfstring{sample()}{sample()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+void cugar\+::\+L\+H\+Sampler\+::sample (\begin{DoxyParamCaption}\item[{const uint32}]{n\+\_\+samples,  }\item[{\hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ $\ast$}]{samples }\end{DoxyParamCaption})}
+
+get a set of stratified samples \mbox{\Hypertarget{structcugar_1_1_l_h_sampler_ab3422ecf79d29b9327cda1633f01caae}\label{structcugar_1_1_l_h_sampler_ab3422ecf79d29b9327cda1633f01caae}} 
+\index{cugar\+::\+L\+H\+Sampler@{cugar\+::\+L\+H\+Sampler}!sample@{sample}}
+\index{sample@{sample}!cugar\+::\+L\+H\+Sampler@{cugar\+::\+L\+H\+Sampler}}
+\subsubsection{\texorpdfstring{sample()}{sample()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$bool S\+OA, typename T$>$ \\
+void cugar\+::\+L\+H\+Sampler\+::sample (\begin{DoxyParamCaption}\item[{const uint32}]{n\+\_\+samples,  }\item[{const uint32}]{n\+\_\+dims,  }\item[{T $\ast$}]{samples }\end{DoxyParamCaption})}
+
+get a set of stratified d-\/dimensional samples the output vectors can be stored either in A\+OS or S\+OA layout, if the latter, the j-\/th coordinate of the i-\/th point is stored in samples\mbox{[}i + j $\ast$ n\+\_\+samples\mbox{]} 
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/sampling/latin\+\_\+hypercube.\+h\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/sampling/latin\+\_\+hypercube\+\_\+inline.\+h\end{DoxyCompactItemize}

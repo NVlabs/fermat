@@ -1,0 +1,227 @@
+\hypertarget{struct_renderer}{}\section{Renderer Struct Reference}
+\label{struct_renderer}\index{Renderer@{Renderer}}
+
+
+\subsection{Detailed description}
+A class encpasulating the entire rendering context 
+
+{\ttfamily \#include $<$renderer.\+h$>$}
+
+Inheritance diagram for Renderer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{struct_renderer}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_renderer_afc41ed01b6c4027ea9c772f7e6e50a1f}\label{struct_renderer_afc41ed01b6c4027ea9c772f7e6e50a1f}} 
+typedef std\+::shared\+\_\+ptr$<$ \hyperlink{struct_mip_map_storage}{Mip\+Map\+Storage}$<$ H\+O\+S\+T\+\_\+\+B\+U\+F\+F\+ER $>$ $>$ {\bfseries Host\+Mip\+Map\+Storage\+Ptr}
+\item 
+\mbox{\Hypertarget{struct_renderer_a67d95bc675ee40e773051fb24fb4470e}\label{struct_renderer_a67d95bc675ee40e773051fb24fb4470e}} 
+typedef std\+::shared\+\_\+ptr$<$ \hyperlink{struct_mip_map_storage}{Mip\+Map\+Storage}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER $>$ $>$ {\bfseries Device\+Mip\+Map\+Storage\+Ptr}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{struct_renderer_a6d1211c5c08f587f0a3dde83cf6749e0}{init} (int argc, char $\ast$$\ast$argv)
+\item 
+void \hyperlink{struct_renderer_a1c07882208a3b4a37c5d19d2367cfa19}{render} (const uint32 instance)
+\item 
+void \hyperlink{struct_renderer_ac46720b3fc0dbb2fc37674766490a8c4}{clear} ()
+\item 
+void \hyperlink{struct_renderer_ada44128e95feff3d6525ed641c092de0}{multiply\+\_\+frame} (const float scale)
+\item 
+void \hyperlink{struct_renderer_aea918ac9f9dd97326243016369d82598}{rescale\+\_\+frame} (const uint32 instance)
+\item 
+void \hyperlink{struct_renderer_a16d987b3115618f559ad3ce10511f3ec}{update\+\_\+variances} (const uint32 instance)
+\item 
+void \hyperlink{struct_renderer_a7056024364d5f23df8c6350e4fb1ec08}{update\+\_\+model} ()
+\item 
+void \hyperlink{struct_renderer_a6d93cf5fc9b7e96d3d52e98e03c436e1}{filter} (const uint32 instance)
+\item 
+uint2 \hyperlink{struct_renderer_a8279a55b932cc24163fda7ed636b3380}{res} () const
+\item 
+\hyperlink{struct_renderer_view}{Renderer\+View} \hyperlink{struct_renderer_abf4fa769e2ab796aa38791cf0e6d826c}{view} (const uint32 instance)
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_renderer_a9b8b0362f8c366ae9f67b40199eb2c6e}\label{struct_renderer_a9b8b0362f8c366ae9f67b40199eb2c6e}} 
+unsigned int \hyperlink{struct_renderer_a9b8b0362f8c366ae9f67b40199eb2c6e}{m\+\_\+res\+\_\+x}
+\begin{DoxyCompactList}\small\item\em X resolution. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_renderer_aad9849b2409c7fb7b7d08a2a1049378a}\label{struct_renderer_aad9849b2409c7fb7b7d08a2a1049378a}} 
+unsigned int \hyperlink{struct_renderer_aad9849b2409c7fb7b7d08a2a1049378a}{m\+\_\+res\+\_\+y}
+\begin{DoxyCompactList}\small\item\em Y resolution. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_renderer_a94c99fab239c345d919adcf323361c3d}\label{struct_renderer_a94c99fab239c345d919adcf323361c3d}} 
+float \hyperlink{struct_renderer_a94c99fab239c345d919adcf323361c3d}{m\+\_\+aspect}
+\begin{DoxyCompactList}\small\item\em aspect ratio \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_renderer_a456ae00ef324f23f1a696773b472686d}\label{struct_renderer_a456ae00ef324f23f1a696773b472686d}} 
+float \hyperlink{struct_renderer_a456ae00ef324f23f1a696773b472686d}{m\+\_\+exposure}
+\begin{DoxyCompactList}\small\item\em exposure \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_renderer_a297351d0480754e2c3001f039363260c}\label{struct_renderer_a297351d0480754e2c3001f039363260c}} 
+float \hyperlink{struct_renderer_a297351d0480754e2c3001f039363260c}{m\+\_\+shading\+\_\+rate}
+\begin{DoxyCompactList}\small\item\em shading rate \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_renderer_a505a988770747b7e991b994d135e3bcd}\label{struct_renderer_a505a988770747b7e991b994d135e3bcd}} 
+Shading\+Mode \hyperlink{struct_renderer_a505a988770747b7e991b994d135e3bcd}{m\+\_\+shading\+\_\+mode}
+\begin{DoxyCompactList}\small\item\em shading mode \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_renderer_a011514929ead356fc9f9885b1a2bffcf}\label{struct_renderer_a011514929ead356fc9f9885b1a2bffcf}} 
+optix\+::prime\+::\+Context \hyperlink{struct_renderer_a011514929ead356fc9f9885b1a2bffcf}{m\+\_\+context}
+\begin{DoxyCompactList}\small\item\em internal ray tracing context \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_renderer_a58b6fae9ed856a7af9e8c7268f20b107}\label{struct_renderer_a58b6fae9ed856a7af9e8c7268f20b107}} 
+\hyperlink{class_mesh_storage}{Mesh\+Storage} \hyperlink{struct_renderer_a58b6fae9ed856a7af9e8c7268f20b107}{m\+\_\+mesh}
+\begin{DoxyCompactList}\small\item\em host-\/side scene mesh representation \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_renderer_ad13d954d7313399f690cddb2a94c6556}\label{struct_renderer_ad13d954d7313399f690cddb2a94c6556}} 
+\hyperlink{class_device_mesh_storage}{Device\+Mesh\+Storage} \hyperlink{struct_renderer_ad13d954d7313399f690cddb2a94c6556}{m\+\_\+mesh\+\_\+d}
+\begin{DoxyCompactList}\small\item\em device-\/side scene mesh representation \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_renderer_a33388f7743b9926669e6d9af1f06b280}\label{struct_renderer_a33388f7743b9926669e6d9af1f06b280}} 
+\hyperlink{struct_mesh_lights_storage}{Mesh\+Lights\+Storage} \hyperlink{struct_renderer_a33388f7743b9926669e6d9af1f06b280}{m\+\_\+mesh\+\_\+lights}
+\begin{DoxyCompactList}\small\item\em mesh lights \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_renderer_aa5e13a11d09b3703312c33741e7b506c}\label{struct_renderer_aa5e13a11d09b3703312c33741e7b506c}} 
+optix\+::prime\+::\+Model \hyperlink{struct_renderer_aa5e13a11d09b3703312c33741e7b506c}{m\+\_\+model}
+\begin{DoxyCompactList}\small\item\em internal ray tracing model \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_renderer_a2df1e635ecdcb423766b70eb29154a4f}\label{struct_renderer_a2df1e635ecdcb423766b70eb29154a4f}} 
+\hyperlink{struct_camera}{Camera} \hyperlink{struct_renderer_a2df1e635ecdcb423766b70eb29154a4f}{m\+\_\+camera}
+\begin{DoxyCompactList}\small\item\em camera \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_renderer_ac75e08409f209f179325321c6f2598fd}\label{struct_renderer_ac75e08409f209f179325321c6f2598fd}} 
+\hyperlink{struct_disk_light}{Disk\+Light} {\bfseries m\+\_\+light}
+\item 
+\mbox{\Hypertarget{struct_renderer_a9c3c0f10d3afd31a1a1984cdc7d219eb}\label{struct_renderer_a9c3c0f10d3afd31a1a1984cdc7d219eb}} 
+Renderer\+Type \hyperlink{struct_renderer_a9c3c0f10d3afd31a1a1984cdc7d219eb}{m\+\_\+renderer\+\_\+type}
+\begin{DoxyCompactList}\small\item\em rendering engine type \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_renderer_a9dcf9f8890e95fac4b8a5e7b543ed2d0}\label{struct_renderer_a9dcf9f8890e95fac4b8a5e7b543ed2d0}} 
+\hyperlink{struct_renderer_interface}{Renderer\+Interface} $\ast$ \hyperlink{struct_renderer_a9dcf9f8890e95fac4b8a5e7b543ed2d0}{m\+\_\+renderer}
+\begin{DoxyCompactList}\small\item\em rendering engine \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_renderer_a361738bfb8bae7037abe0cd4d4b9cd1c}\label{struct_renderer_a361738bfb8bae7037abe0cd4d4b9cd1c}} 
+std\+::vector$<$ Host\+Mip\+Map\+Storage\+Ptr $>$ \hyperlink{struct_renderer_a361738bfb8bae7037abe0cd4d4b9cd1c}{m\+\_\+textures\+\_\+h}
+\begin{DoxyCompactList}\small\item\em host-\/side textures \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_renderer_a011679da0b623ca4300b66df88156361}\label{struct_renderer_a011679da0b623ca4300b66df88156361}} 
+std\+::vector$<$ Device\+Mip\+Map\+Storage\+Ptr $>$ \hyperlink{struct_renderer_a011679da0b623ca4300b66df88156361}{m\+\_\+textures\+\_\+d}
+\begin{DoxyCompactList}\small\item\em device-\/side textures \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_renderer_a8881860168e01a2c02e42beec853581b}\label{struct_renderer_a8881860168e01a2c02e42beec853581b}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ H\+O\+S\+T\+\_\+\+B\+U\+F\+F\+ER, \hyperlink{struct_mip_map_view}{Mip\+Map\+View} $>$ \hyperlink{struct_renderer_a8881860168e01a2c02e42beec853581b}{m\+\_\+texture\+\_\+views\+\_\+h}
+\begin{DoxyCompactList}\small\item\em host-\/side texture views \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_renderer_a50109e103180c6d6201c3ab227fbb3c5}\label{struct_renderer_a50109e103180c6d6201c3ab227fbb3c5}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, \hyperlink{struct_mip_map_view}{Mip\+Map\+View} $>$ \hyperlink{struct_renderer_a50109e103180c6d6201c3ab227fbb3c5}{m\+\_\+texture\+\_\+views\+\_\+d}
+\begin{DoxyCompactList}\small\item\em device-\/side texture views \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_renderer_ae7b0a4daddc36649b0e93b4801e787bb}\label{struct_renderer_ae7b0a4daddc36649b0e93b4801e787bb}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float4 $>$ \hyperlink{struct_renderer_ae7b0a4daddc36649b0e93b4801e787bb}{m\+\_\+ltc\+\_\+M}
+\begin{DoxyCompactList}\small\item\em L\+TC coefficients. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_renderer_a097b611aa8f418c9d75ff867d37d498c}\label{struct_renderer_a097b611aa8f418c9d75ff867d37d498c}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float4 $>$ \hyperlink{struct_renderer_a097b611aa8f418c9d75ff867d37d498c}{m\+\_\+ltc\+\_\+\+Minv}
+\begin{DoxyCompactList}\small\item\em L\+TC coefficients. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_renderer_a00f5beedfa7d1587067dc320d1ffec43}\label{struct_renderer_a00f5beedfa7d1587067dc320d1ffec43}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float $>$ \hyperlink{struct_renderer_a00f5beedfa7d1587067dc320d1ffec43}{m\+\_\+ltc\+\_\+A}
+\begin{DoxyCompactList}\small\item\em L\+TC coefficients. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_renderer_a3a91347458db5c4dd22a76c31b25a4b5}\label{struct_renderer_a3a91347458db5c4dd22a76c31b25a4b5}} 
+uint32 \hyperlink{struct_renderer_a3a91347458db5c4dd22a76c31b25a4b5}{m\+\_\+ltc\+\_\+size}
+\begin{DoxyCompactList}\small\item\em L\+TC coefficients. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_renderer_a5d0765cca876a604a920f7ab1c529f4d}\label{struct_renderer_a5d0765cca876a604a920f7ab1c529f4d}} 
+\hyperlink{struct_f_buffer_storage}{F\+Buffer\+Storage} \hyperlink{struct_renderer_a5d0765cca876a604a920f7ab1c529f4d}{m\+\_\+fb}
+\begin{DoxyCompactList}\small\item\em output framebuffer storage \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_renderer_a317f4023bd228a22e9d0b1acd5b27f88}\label{struct_renderer_a317f4023bd228a22e9d0b1acd5b27f88}} 
+\hyperlink{struct_f_buffer_channel_storage}{F\+Buffer\+Channel\+Storage} \hyperlink{struct_renderer_a317f4023bd228a22e9d0b1acd5b27f88}{m\+\_\+fb\+\_\+temp} \mbox{[}2\mbox{]}
+\begin{DoxyCompactList}\small\item\em temporary framebuffer storage \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_renderer_aaca64366dcfc296fb22bb08c3ee33b99}\label{struct_renderer_aaca64366dcfc296fb22bb08c3ee33b99}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float $>$ \hyperlink{struct_renderer_aaca64366dcfc296fb22bb08c3ee33b99}{m\+\_\+var}
+\begin{DoxyCompactList}\small\item\em variance framebuffer storage \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_renderer_a61d53d8197cf2755727e50ff5f67d1a0}\label{struct_renderer_a61d53d8197cf2755727e50ff5f67d1a0}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, uint8 $>$ \hyperlink{struct_renderer_a61d53d8197cf2755727e50ff5f67d1a0}{m\+\_\+rgba}
+\begin{DoxyCompactList}\small\item\em output 8-\/bit rgba storage \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{struct_renderer_ac46720b3fc0dbb2fc37674766490a8c4}\label{struct_renderer_ac46720b3fc0dbb2fc37674766490a8c4}} 
+\index{Renderer@{Renderer}!clear@{clear}}
+\index{clear@{clear}!Renderer@{Renderer}}
+\subsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily void Renderer\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+clear all framebuffers \mbox{\Hypertarget{struct_renderer_a6d93cf5fc9b7e96d3d52e98e03c436e1}\label{struct_renderer_a6d93cf5fc9b7e96d3d52e98e03c436e1}} 
+\index{Renderer@{Renderer}!filter@{filter}}
+\index{filter@{filter}!Renderer@{Renderer}}
+\subsubsection{\texorpdfstring{filter()}{filter()}}
+{\footnotesize\ttfamily void Renderer\+::filter (\begin{DoxyParamCaption}\item[{const uint32}]{instance }\end{DoxyParamCaption})}
+
+perform filtering
+
+
+\begin{DoxyParams}{Parameters}
+{\em instance} & the sequence instance / frame number in a progressive render \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{struct_renderer_a6d1211c5c08f587f0a3dde83cf6749e0}\label{struct_renderer_a6d1211c5c08f587f0a3dde83cf6749e0}} 
+\index{Renderer@{Renderer}!init@{init}}
+\index{init@{init}!Renderer@{Renderer}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void Renderer\+::init (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+initialize the renderer \mbox{\Hypertarget{struct_renderer_ada44128e95feff3d6525ed641c092de0}\label{struct_renderer_ada44128e95feff3d6525ed641c092de0}} 
+\index{Renderer@{Renderer}!multiply\+\_\+frame@{multiply\+\_\+frame}}
+\index{multiply\+\_\+frame@{multiply\+\_\+frame}!Renderer@{Renderer}}
+\subsubsection{\texorpdfstring{multiply\+\_\+frame()}{multiply\_frame()}}
+{\footnotesize\ttfamily void Renderer\+::multiply\+\_\+frame (\begin{DoxyParamCaption}\item[{const float}]{scale }\end{DoxyParamCaption})}
+
+rescale the output framebuffer by a constant \mbox{\Hypertarget{struct_renderer_a1c07882208a3b4a37c5d19d2367cfa19}\label{struct_renderer_a1c07882208a3b4a37c5d19d2367cfa19}} 
+\index{Renderer@{Renderer}!render@{render}}
+\index{render@{render}!Renderer@{Renderer}}
+\subsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void Renderer\+::render (\begin{DoxyParamCaption}\item[{const uint32}]{instance }\end{DoxyParamCaption})}
+
+render a frame
+
+
+\begin{DoxyParams}{Parameters}
+{\em instance} & the sequence instance / frame number in a progressive render \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{struct_renderer_a8279a55b932cc24163fda7ed636b3380}\label{struct_renderer_a8279a55b932cc24163fda7ed636b3380}} 
+\index{Renderer@{Renderer}!res@{res}}
+\index{res@{res}!Renderer@{Renderer}}
+\subsubsection{\texorpdfstring{res()}{res()}}
+{\footnotesize\ttfamily uint2 Renderer\+::res (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the current output resolution \mbox{\Hypertarget{struct_renderer_aea918ac9f9dd97326243016369d82598}\label{struct_renderer_aea918ac9f9dd97326243016369d82598}} 
+\index{Renderer@{Renderer}!rescale\+\_\+frame@{rescale\+\_\+frame}}
+\index{rescale\+\_\+frame@{rescale\+\_\+frame}!Renderer@{Renderer}}
+\subsubsection{\texorpdfstring{rescale\+\_\+frame()}{rescale\_frame()}}
+{\footnotesize\ttfamily void Renderer\+::rescale\+\_\+frame (\begin{DoxyParamCaption}\item[{const uint32}]{instance }\end{DoxyParamCaption})}
+
+rescale the output framebuffer by n/(n-\/1)
+
+
+\begin{DoxyParams}{Parameters}
+{\em instance} & the sequence instance / frame number in a progressive render, used for rescaling \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{struct_renderer_a7056024364d5f23df8c6350e4fb1ec08}\label{struct_renderer_a7056024364d5f23df8c6350e4fb1ec08}} 
+\index{Renderer@{Renderer}!update\+\_\+model@{update\+\_\+model}}
+\index{update\+\_\+model@{update\+\_\+model}!Renderer@{Renderer}}
+\subsubsection{\texorpdfstring{update\+\_\+model()}{update\_model()}}
+{\footnotesize\ttfamily void Renderer\+::update\+\_\+model (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+update the internal data-\/structures (e.\+g. B\+V\+Hs) associated to the geometry \mbox{\Hypertarget{struct_renderer_a16d987b3115618f559ad3ce10511f3ec}\label{struct_renderer_a16d987b3115618f559ad3ce10511f3ec}} 
+\index{Renderer@{Renderer}!update\+\_\+variances@{update\+\_\+variances}}
+\index{update\+\_\+variances@{update\+\_\+variances}!Renderer@{Renderer}}
+\subsubsection{\texorpdfstring{update\+\_\+variances()}{update\_variances()}}
+{\footnotesize\ttfamily void Renderer\+::update\+\_\+variances (\begin{DoxyParamCaption}\item[{const uint32}]{instance }\end{DoxyParamCaption})}
+
+update the variance estimates
+
+
+\begin{DoxyParams}{Parameters}
+{\em instance} & the sequence instance / frame number in a progressive render, used for rescaling \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{struct_renderer_abf4fa769e2ab796aa38791cf0e6d826c}\label{struct_renderer_abf4fa769e2ab796aa38791cf0e6d826c}} 
+\index{Renderer@{Renderer}!view@{view}}
+\index{view@{view}!Renderer@{Renderer}}
+\subsubsection{\texorpdfstring{view()}{view()}}
+{\footnotesize\ttfamily \hyperlink{struct_renderer_view}{Renderer\+View} Renderer\+::view (\begin{DoxyParamCaption}\item[{const uint32}]{instance }\end{DoxyParamCaption})}
+
+return a view of the renderer 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/renderer.\+h\end{DoxyCompactItemize}

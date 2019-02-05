@@ -1,0 +1,81 @@
+\hypertarget{group__bvh}{}\section{Bounding Volume Hierarchies}
+\label{group__bvh}\index{Bounding Volume Hierarchies@{Bounding Volume Hierarchies}}
+
+
+\subsection{Detailed Description}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcugar_1_1_bvh}{cugar\+::\+Bvh$<$ D\+I\+M $>$}
+\item 
+class \hyperlink{classcugar_1_1_bvh__builder}{cugar\+::\+Bvh\+\_\+builder$<$ D\+I\+M $>$}
+\item 
+struct \hyperlink{structcugar_1_1_bvh__node__3d__bbox__iterator}{cugar\+::\+Bvh\+\_\+node\+\_\+3d\+\_\+bbox\+\_\+iterator}
+\item 
+struct \hyperlink{structcugar_1_1_bvh__node}{cugar\+::\+Bvh\+\_\+node}
+\item 
+struct \hyperlink{structcugar_1_1_bvh__node__3d}{cugar\+::\+Bvh\+\_\+node\+\_\+3d}
+\item 
+class \hyperlink{classcugar_1_1_bvh__sah__builder}{cugar\+::\+Bvh\+\_\+sah\+\_\+builder}
+\item 
+struct \hyperlink{structnih_1_1cuda_1_1_binned__sah__builder}{nih\+::cuda\+::\+Binned\+\_\+sah\+\_\+builder}
+\item 
+struct \hyperlink{structcugar_1_1cuda_1_1_l_b_v_h__builder__stats}{cugar\+::cuda\+::\+L\+B\+V\+H\+\_\+builder\+\_\+stats}
+\item 
+struct \hyperlink{structcugar_1_1cuda_1_1_l_b_v_h__builder}{cugar\+::cuda\+::\+L\+B\+V\+H\+\_\+builder$<$ integer, bvh\+\_\+node\+\_\+type, node\+\_\+vector, range\+\_\+vector, index\+\_\+vector $>$}
+\item 
+struct \hyperlink{structcugar_1_1cuda_1_1bvh__packing__functor}{cugar\+::cuda\+::bvh\+\_\+packing\+\_\+functor}
+\item 
+struct \hyperlink{structnih_1_1cuda_1_1_sah__builder}{nih\+::cuda\+::\+Sah\+\_\+builder}
+\begin{DoxyCompactList}\small\item\em G\+P\+U-\/based S\+AH B\+VH builder. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group__bvh_ga3f50a853dcace7bd0d1a8503f0ef00fe}\label{group__bvh_ga3f50a853dcace7bd0d1a8503f0ef00fe}} 
+float \hyperlink{group__bvh_ga3f50a853dcace7bd0d1a8503f0ef00fe}{cugar\+::compute\+\_\+sah\+\_\+cost} (const \hyperlink{structcugar_1_1_bvh}{Bvh}$<$ 3 $>$ \&bvh, uint32 node\+\_\+index=0)
+\begin{DoxyCompactList}\small\item\em compute S\+AH cost of a subtree \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group__bvh_ga0b0f275e25ece0b073a2b866a31cf9e2}\label{group__bvh_ga0b0f275e25ece0b073a2b866a31cf9e2}} 
+void \hyperlink{group__bvh_ga0b0f275e25ece0b073a2b866a31cf9e2}{cugar\+::build\+\_\+skip\+\_\+nodes} (const \hyperlink{structcugar_1_1_bvh__node}{Bvh\+\_\+node} $\ast$nodes, uint32 $\ast$skip\+\_\+nodes)
+\begin{DoxyCompactList}\small\item\em build skip nodes for a tree \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Node\+\_\+iterator , typename Bbox\+\_\+iterator , typename Output\+\_\+iterator $>$ }\\void \hyperlink{group__bvh_ga5cb2a6a87d661a3ffe43c31ab025b9fa}{cugar\+::cuda\+::pack} (const uint32 n\+\_\+nodes, Node\+\_\+iterator nodes, Bbox\+\_\+iterator bboxes, Output\+\_\+iterator packed\+\_\+nodes)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__bvh_ga5cb2a6a87d661a3ffe43c31ab025b9fa}\label{group__bvh_ga5cb2a6a87d661a3ffe43c31ab025b9fa}} 
+\index{Bounding Volume Hierarchies@{Bounding Volume Hierarchies}!pack@{pack}}
+\index{pack@{pack}!Bounding Volume Hierarchies@{Bounding Volume Hierarchies}}
+\subsubsection{\texorpdfstring{pack()}{pack()}}
+{\footnotesize\ttfamily template$<$typename Node\+\_\+iterator , typename Bbox\+\_\+iterator , typename Output\+\_\+iterator $>$ \\
+void cugar\+::cuda\+::pack (\begin{DoxyParamCaption}\item[{const uint32}]{n\+\_\+nodes,  }\item[{Node\+\_\+iterator}]{nodes,  }\item[{Bbox\+\_\+iterator}]{bboxes,  }\item[{Output\+\_\+iterator}]{packed\+\_\+nodes }\end{DoxyParamCaption})}
+
+Pack a set of 3d bvh nodes and their bboxes into a single set of (4d) bboxes, where the 3rd components of the bbox min and max are used to pack the tree topology. The input and output bbox arrays can be the same.
+
+
+\begin{DoxyParams}{Parameters}
+{\em n\+\_\+nodes} & node count \\
+\hline
+{\em nodes} & input nodes \\
+\hline
+{\em bboxes} & input bboxes \\
+\hline
+{\em packed\+\_\+nodes} & output bboxes\\
+\hline
+\end{DoxyParams}
+The following code snipped illustrates an example usage\+:
+
+
+\begin{DoxyCode}
+thrust::device\_vector<Bvh\_node> bvh\_nodes;
+thrust::device\_vector<Bbox4f>   bvh\_bboxes;
+uint32 node\_count;
+... \textcolor{comment}{// build a bvh and compute its bboxes here}
+
+\textcolor{comment}{// pack the bvh}
+\hyperlink{group__bvh_ga5cb2a6a87d661a3ffe43c31ab025b9fa}{cuda::pack}(
+    node\_count,
+    bvh\_nodes.begin(),
+    bvh\_bboxes.begin(),
+    bvh\_bboxes.begin() );
+\end{DoxyCode}
+ 

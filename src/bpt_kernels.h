@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -43,6 +43,8 @@
 
 #define SECONDARY_LIGHT_VERTICES_BLOCKSIZE		128
 #define SECONDARY_LIGHT_VERTICES_CTA_BLOCKS		6
+
+#define BPT_FULL_BSDF_EVALUATION				1
 
 ///
 /// This class implements a "policy" template for bidirectional path tracing: all bidirectional path tracing kernels are templated over a TBPTConfig class
@@ -180,28 +182,31 @@ struct BPTConfigBase
 
 	/// allow to process/store the given light vertex
 	///
+	template <typename TBPTContext>
 	FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
 	void visit_light_vertex(
 		const uint32			light_path_id,
 		const uint32			depth,
 		const VertexGeometryId	v_id,
-		BPTContextBase&			context,
-		RendererView&			renderer) const
+		TBPTContext&			context,
+		RenderingContextView&	renderer) const
 	{}
 
 	/// allow to process/store the given eye vertex
 	///
+	template <typename TBPTContext>
 	FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
 	void visit_eye_vertex(
 		const uint32			eye_path_id,
 		const uint32			depth,
 		const VertexGeometryId	v_id,
 		const EyeVertex&		v,
-		BPTContextBase&			context,
-		RendererView&			renderer) const
+		TBPTContext&			context,
+		RenderingContextView&	renderer) const
 	{}
 };
 
+//! [SampleSinkBaseBlock]
 ///
 /// Base class for sample sinks, a class specifying how to handle final samples produced by the bidirectional path tracing kernels
 ///
@@ -212,6 +217,7 @@ struct SampleSinkBase
 	///
 	/// Sink a full path sample
 	///
+	template <typename TBPTContext>
 	FERMAT_HOST_DEVICE
 	void sink(
 		const uint32			channel,
@@ -220,23 +226,25 @@ struct SampleSinkBase
 		const uint32			eye_path_id,
 		const uint32			s,
 		const uint32			t,
-		BPTContextBase&			context,
-		RendererView&			renderer)
+		TBPTContext&			context,
+		RenderingContextView&	renderer)
 	{}
 
 	///
 	/// record an eye scattering event
 	///
+	template <typename TBPTContext>
 	FERMAT_HOST_DEVICE
 	void sink_eye_scattering_event(
 		const Bsdf::ComponentType	component,
 		const cugar::Vector4f		value,
 		const uint32				eye_path_id,
 		const uint32				t,
-		BPTContextBase&				context,
-		RendererView&				renderer)
+		TBPTContext&				context,
+		RenderingContextView&		renderer)
 	{}
 };
+//! [SampleSinkBaseBlock]
 
 ///@} BPTLib
 ///@} Fermat
@@ -249,7 +257,11 @@ namespace bpt {
 ///@addtogroup BPTLib
 ///@{
 
-///
+///@defgroup BPTLibCore
+/// This module provides the core device functions available in \ref BPTLibPage.
+///@{
+
+///\par
 /// This function generates the primary light vertex for a given path, expressed by the path id, and its primary sample space coordinates.
 ///
 /// \param light_path_id		the id of the light subpath
@@ -266,7 +278,7 @@ void generate_primary_light_vertex(
 	const uint32				n_light_paths,
 	const TPrimaryCoordinates&	primary_coords,
 	TBPTContext&				context,
-	RendererView&				renderer,
+	RenderingContextView&		renderer,
 	TBPTConfig&					config)
 {
 	//if (light_path_id == 0)
@@ -370,28 +382,23 @@ void generate_primary_light_vertex(
 		out_ray.tmax	= 1.0e8f;
 
 		// fetch the output slot
-		const uint32 slot = context.scatter_queue.append_slot();
+		const uint32 slot = context.scatter_queue.warp_append_slot();
 
 		// write the output ray/info
 		context.scatter_queue.rays[slot]			= out_ray;
 		context.scatter_queue.weights[slot]			= cugar::Vector4f(g, 0.0f);
 		context.scatter_queue.probs[slot]			= p; // we need to track the solid angle probability of the last vertex
 		context.scatter_queue.pixels[slot]			= PixelInfo(light_path_id, FBufferDesc::DIFFUSE_C).packed;
-		context.scatter_queue.path_weights[slot]	= TempPathWeights(
-			0.0f,								// p(-2)g(-2)p(-1)
-			1.0f * pdf,							// p(-1)g(-1) = 1			: we want p(-1)g(-1)p(0) = p(0) - which will happen because we are setting p(0) = p(0) and g(-1) = pdf
-			p_proj,								// p(0)
-			fabsf(dot(geom.normal_s, out)));	// cos(theta_0)
+		context.scatter_queue.path_weights[slot]	= TempPathWeights::light_vertex_1( pdf, p_proj, fabsf(dot(geom.normal_s, out)) );
 	}
 }
 
-///
+///\par
 /// This function processes the secondary light vertex corresponding to a given entry in the path tracing queue,
 /// stored in the bidirectional path tracing context.
-///
 /// Specifically, processing a queue entry means performing the following operations:
-///
-///	- fetching the corresponding ray and hit (or miss) information from the queue
+///\n
+/// - fetching the corresponding ray and hit (or miss) information from the queue
 /// - interpolating the local geometry of the hit (or that of the environment on a miss)
 /// - reconstructing the local BSDF
 /// - potentially storing the resulting light vertex, based on the passed configuration/policy
@@ -411,7 +418,7 @@ void process_secondary_light_vertex(
 	const uint32				n_light_paths,
 	const TPrimaryCoordinates&	primary_coords,
 	TBPTContext&				context,
-	RendererView&				renderer,
+	RenderingContextView&		renderer,
 	TBPTConfig&					config)
 {
 	const PixelInfo		  pixel_info	= context.in_queue.pixels[queue_idx];
@@ -454,7 +461,7 @@ void process_secondary_light_vertex(
 			float				p_proj(0.0f);
 			Bsdf::ComponentType out_comp(Bsdf::kAbsorption);
 
-			scatter(lv, z, out_comp, out, p, p_proj, out_w, config.use_rr, true, true);
+			scatter(lv, z, out_comp, out, p, p_proj, out_w, config.use_rr, true, BPT_FULL_BSDF_EVALUATION);
 
 			if (cugar::max_comp(out_w) > 0.0f)
 			{
@@ -467,16 +474,12 @@ void process_secondary_light_vertex(
 
 				const PixelInfo out_pixel = pixel_info;
 
-				context.scatter_queue.append(
+				context.scatter_queue.warp_append(
 					out_pixel,
 					out_ray,
 					cugar::Vector4f(out_w, w.w),
 					0.0f,
-					TempPathWeights(
-						lv.pGp_sum,									// p(i-2)g(i-2)p(i-1)
-						lv.prev_pG,									// p(i-1)g(i-1)
-						p_proj,										// p(i)
-						fabsf(dot(lv.geom.normal_s, out))));		// cos(theta_i)
+					TempPathWeights( lv, out, p_proj ));
 
 				absorbed = false;
 			}
@@ -514,7 +517,7 @@ void process_secondary_light_vertex(
 	}
 }
 
-///
+///\par
 /// This function generates the primary eye vertex for a given path, expressed by the path id, and its primary sample space coordinates.
 ///
 /// \param light_path_id		the id of the light subpath
@@ -527,19 +530,29 @@ void process_secondary_light_vertex(
 template <typename TPrimaryCoordinates, typename TBPTContext, typename TBPTConfig>
 FERMAT_HOST_DEVICE
 void generate_primary_eye_vertex(
-	const uint32				idx,
-	const uint32				n_eye_paths,
-	const uint32				n_light_paths,
-	const TPrimaryCoordinates&	primary_coords,
-	TBPTContext&				context,
-	const RendererView&			renderer,
-	TBPTConfig&					config)
+	const uint32					idx,
+	const uint32					n_eye_paths,
+	const uint32					n_light_paths,
+	const TPrimaryCoordinates&		primary_coords,
+	TBPTContext&					context,
+	RenderingContextView&			renderer,
+	TBPTConfig&						config)
 {
 	const cugar::Vector2f uv(
 		primary_coords.sample(idx, 1, 0),
 		primary_coords.sample(idx, 1, 1));
 
 	const cugar::Vector2f d = uv * 2.f - cugar::Vector2f(1.f);
+
+	EyeVertex ev;
+
+	config.visit_eye_vertex(
+		idx,
+		0u,
+		VertexGeometryId(0, uv), // store uv's in vertex 0 (even if one day these coordinates should be dedicated to lens uv's...)
+		ev,
+		context,
+		renderer );
 
 	// write the pixel index
 	context.in_queue.pixels[idx] = idx;
@@ -557,30 +570,27 @@ void generate_primary_eye_vertex(
 	const float cos_theta	= dot(cugar::normalize(ray_direction), context.camera_W) / context.camera_W_len;
 
 	// write the path weights
-	context.in_queue.path_weights[idx] = TempPathWeights(
-		0.0f,		// 1.0 / p(-2)g(-2)p(-1)
-		1.0e8f,		// p(-1)g(-1)		= +inf : hitting the camera is impossible
-		config.light_tracing ? p_e / (/*n_light_paths * */config.light_tracing)	: 1.0f,		// out_p = p(0)
-		config.light_tracing ? cos_theta									: 1.0e8f);	// out_cos_theta : so that the term f_0 g_0 f_1 (i.e. connection to the lens) gets the proper weight
-																						//			+inf : so that the term f_0 g_0 f_1(i.e.connection to the lens) gets zero weight
+	context.in_queue.path_weights[idx] = TempPathWeights::eye_vertex_1( p_e, cos_theta, config.light_tracing );
 
 	if (idx == 0)
 		*context.in_queue.size = n_eye_paths;
 }
 
-///
+///\par
 /// This function processes the secondary eye vertex corresponding to a given entry in the path tracing queue,
 /// stored in the bidirectional path tracing context.
-///
 /// Specifically, processing a queue entry means performing the following operations:
-///
-///	- fetching the corresponding ray and hit (or miss) information from the queue
+///\n
+/// - fetching the corresponding ray and hit (or miss) information from the queue
 /// - interpolating the local geometry of the hit (or that of the environment on a miss)
 /// - reconstructing the local BSDF
 /// - performing Next-Event Estimation, if enabled, and handing the resulting sample (a full path) to the output sample sink
-/// - computing the local emission at the hit towards the incoming direction, i.e. forming a full path through pure forward path tracing,
-///   and passing the resulting sample to the output sample sink
+/// - computing the local emission at the hit towards the incoming direction, i.e. forming a full path through pure forward path tracing, and passing the resulting sample to the output sample sink
 /// - sampling another scattering/absorption event
+///\par
+/// This function assumes a set of light subpaths have already been sampled and it is possible to sample and perform connections between
+/// the pre-existing light vertices and each new eye vertex.
+/// The light vertices are assumed to be stored in a TBPTContext::light_vertices member, see \ref BPTContextBase.
 ///
 /// \param queue_idx			the index of the queue entry
 /// \param n_eye_paths			the total number of generated eye subpaths
@@ -600,7 +610,7 @@ void process_secondary_eye_vertex(
 	TSampleSink&				sample_sink,
 	const TPrimaryCoordinates&	primary_coords,
 	TBPTContext&				context,
-	RendererView&				renderer,
+	RenderingContextView&		renderer,
 	TBPTConfig&					config)
 {
 	const PixelInfo		  pixel_info	= context.in_queue.pixels[queue_idx];
@@ -645,7 +655,7 @@ void process_secondary_eye_vertex(
 			float				p_proj(0.0f);
 			Bsdf::ComponentType out_comp(Bsdf::kAbsorption);
 
-			scatter(ev, z, out_comp, out, p, p_proj, out_w, config.use_rr, true, true);
+			scatter(ev, z, out_comp, out, p, p_proj, out_w, config.use_rr, true, BPT_FULL_BSDF_EVALUATION);
 
 			if (cugar::max_comp(out_w) > 0.0f)
 			{
@@ -671,15 +681,11 @@ void process_secondary_eye_vertex(
 					pixel_info :												// if this sample is a secondary bounce, use the previously selected channel
 					PixelInfo(pixel_info.pixel, channel_selector(out_comp));	// otherwise (i.e. this is the first bounce) choose the output channel for the rest of the path
 
-				context.scatter_queue.append(
+				context.scatter_queue.warp_append(
 					out_pixel, out_ray,
 					cugar::Vector4f(out_w, w.w),
 					out_p,
-					TempPathWeights(
-						ev.pGp_sum,																// p_(i-2)g_(i-2)p_(i-1)
-						ev.prev_pG,																// p_(i-1)g_(i-1)
-						p_proj,																	// p_(i)
-						fabsf(dot(ev.geom.normal_s, out))));									// cos(theta_i)
+					TempPathWeights( ev, out, p_proj ));
 
 				//sinked_path = true;
 				absorbed = false;
@@ -777,7 +783,7 @@ void process_secondary_eye_vertex(
 							pixel_info :										// if this sample is a secondary bounce, use the previously selected channel
 							PixelInfo(pixel_info.pixel, FBufferDesc::DIRECT_C);	// otherwise (i.e. this is the first bounce) choose the direct-lighting output channel
 
-						const uint32 slot = context.shadow_queue.append_slot();
+						const uint32 slot = context.shadow_queue.warp_append_slot();
 
 						context.shadow_queue.pixels[slot]		 = out_pixel.packed;
 						context.shadow_queue.rays[slot]			 = out_ray;
@@ -848,7 +854,7 @@ void process_secondary_eye_vertex(
 							pixel_info :										// if this sample is a secondary bounce, use the previously selected channel
 							PixelInfo(pixel_info.pixel, FBufferDesc::DIRECT_C);	// otherwise (i.e. this is the first bounce) choose the direct-lighting output channel
 
-						const uint32 slot = context.shadow_queue.append_slot();
+						const uint32 slot = context.shadow_queue.warp_append_slot();
 
 						context.shadow_queue.pixels[slot]			= out_pixel.packed;
 						context.shadow_queue.rays[slot]				= out_ray;
@@ -891,7 +897,7 @@ void process_secondary_eye_vertex(
 	//	sample_sink.null_path(eye_path_id, context, renderer);
 }
 
-///
+///\par
 /// This function connects the given light vertex to the camera.
 /// Valid connections with non-zero contribution get enqueued in the shadow queue for occlusion testing.
 ///
@@ -903,7 +909,7 @@ void process_secondary_eye_vertex(
 ///
 template <typename TBPTContext, typename TBPTConfig>
 FERMAT_HOST_DEVICE
-void connect_to_camera(const uint32 light_idx, const uint32 n_light_paths, TBPTContext& context, RendererView& renderer, const TBPTConfig& config)
+void connect_to_camera(const uint32 light_idx, const uint32 n_light_paths, TBPTContext& context, RenderingContextView& renderer, const TBPTConfig& config)
 {
 	// pure light tracing: connect with a light vertex chosen at random
 	{
@@ -1007,10 +1013,17 @@ void connect_to_camera(const uint32 light_idx, const uint32 n_light_paths, TBPTC
 			{
 				// enqueue the output ray
 				Ray out_ray;
+			#if 0
 				out_ray.origin = renderer.camera.eye;
 				out_ray.dir = out;
 				out_ray.tmin = SHADOW_TMIN;
 				out_ray.tmax = d * 0.9999f;
+			#else
+				out_ray.origin = light_vertex_geom.position + light_in_dir * SHADOW_BIAS;
+				out_ray.dir = renderer.camera.eye - out_ray.origin;
+				out_ray.tmin = SHADOW_TMIN;
+				out_ray.tmax = 0.9999f;
+			#endif
 
 				// compute the pixel index
 				const PixelInfo out_pixel = PixelInfo(
@@ -1018,13 +1031,13 @@ void connect_to_camera(const uint32 light_idx, const uint32 n_light_paths, TBPTC
 					cugar::quantize(out_y*0.5f + 0.5f, renderer.res_y) * renderer.res_x,
 					FBufferDesc::DIRECT_C);
 
-				context.shadow_queue.append(out_pixel, out_ray, out_w, 1.0f);
+				context.shadow_queue.warp_append(out_pixel, out_ray, out_w, 1.0f);
 			}
 		}
 	}
 }
 
-///
+///\par
 /// Resolve the occlusion for the specified entry in the shadow queue, and pass the resulting sample to the sink.
 /// Specifically, if the queue entry contains a (ray tracing) hit, the sample will be considered shadowed and its contribution will be set to zero.
 /// Otherwise, the sample's contribution will be left unmodified.
@@ -1036,7 +1049,7 @@ void connect_to_camera(const uint32 light_idx, const uint32 n_light_paths, TBPTC
 ///
 template <typename TSampleSink, typename TBPTContext>
 FERMAT_HOST_DEVICE
-void solve_occlusion(const uint32 queue_idx, TSampleSink& sample_sink, TBPTContext& context, RendererView& renderer)
+void solve_occlusion(const uint32 queue_idx, TSampleSink& sample_sink, TBPTContext& context, RenderingContextView& renderer)
 {
 	const PixelInfo		  pixel_info	= context.shadow_queue.pixels[queue_idx];
 	const Hit			  hit			= context.shadow_queue.hits[queue_idx];
@@ -1052,9 +1065,11 @@ void solve_occlusion(const uint32 queue_idx, TSampleSink& sample_sink, TBPTConte
 	sample_sink.sink(pixel_info.channel, w * vis, light_path_id & 0xFFFFFF, pixel_info.pixel, s, t, context, renderer);
 }
 
+///@} BPTLibCore
+
 template <typename TBPTContext, typename TBPTConfig>
 __global__
-void light_tracing_kernel(const uint32 n_light_paths, TBPTContext context, RendererView renderer, TBPTConfig config)
+void light_tracing_kernel(const uint32 n_light_paths, TBPTContext context, RenderingContextView renderer, TBPTConfig config)
 {
 	const uint32 thread_id = threadIdx.x + blockIdx.x * blockDim.x;
 
@@ -1084,7 +1099,7 @@ void light_tracing_kernel(const uint32 n_light_paths, TBPTContext context, Rende
 }
 
 template <typename TBPTContext, typename TBPTConfig>
-void light_tracing(const uint32 n_light_paths, TBPTContext& context, RendererView& renderer, TBPTConfig& config)
+void light_tracing(const uint32 n_light_paths, TBPTContext& context, RenderingContextView& renderer, TBPTConfig& config)
 {
 	uint32 n_threads;
 
@@ -1106,7 +1121,7 @@ void light_tracing(const uint32 n_light_paths, TBPTContext& context, RendererVie
 
 template <typename TSampleSink, typename TBPTContext>
 __global__
-void solve_occlusions_kernel(const uint32 in_queue_size, TSampleSink sample_sink, TBPTContext context, RendererView renderer)
+void solve_occlusions_kernel(const uint32 in_queue_size, TSampleSink sample_sink, TBPTContext context, RenderingContextView renderer)
 {
 	const uint32 thread_id = threadIdx.x + blockIdx.x * blockDim.x;
 
@@ -1115,7 +1130,7 @@ void solve_occlusions_kernel(const uint32 in_queue_size, TSampleSink sample_sink
 }
 
 template <typename TSampleSink, typename TBPTContext>
-void solve_occlusions(const uint32 in_queue_size, TSampleSink sample_sink, TBPTContext context, RendererView renderer)
+void solve_occlusions(const uint32 in_queue_size, TSampleSink sample_sink, TBPTContext context, RenderingContextView renderer)
 {
 	const uint32 blockSize(128);
 	const dim3 gridSize(cugar::divide_ri(in_queue_size, blockSize));
@@ -1124,7 +1139,7 @@ void solve_occlusions(const uint32 in_queue_size, TSampleSink sample_sink, TBPTC
 
 template <typename TPrimaryCoordinates, typename TBPTContext, typename TBPTConfig>
 __global__
-void generate_primary_light_vertices_kernel(const uint32 n_light_paths, TPrimaryCoordinates primary_coords, TBPTContext context, RendererView renderer, const TBPTConfig config)
+void generate_primary_light_vertices_kernel(const uint32 n_light_paths, TPrimaryCoordinates primary_coords, TBPTContext context, RenderingContextView renderer, const TBPTConfig config)
 {
 	const uint32 light_path_id = threadIdx.x + blockIdx.x * blockDim.x;
 
@@ -1133,7 +1148,7 @@ void generate_primary_light_vertices_kernel(const uint32 n_light_paths, TPrimary
 }
 
 template <typename TPrimaryCoordinates, typename TBPTContext, typename TBPTConfig>
-void generate_primary_light_vertices(const uint32 n_light_paths, TPrimaryCoordinates primary_coords, TBPTContext context, RendererView renderer, const TBPTConfig config)
+void generate_primary_light_vertices(const uint32 n_light_paths, TPrimaryCoordinates primary_coords, TBPTContext context, RenderingContextView renderer, const TBPTConfig config)
 {
 	const uint32 blockSize(128);
 	const dim3 gridSize(cugar::divide_ri(n_light_paths, blockSize));
@@ -1148,7 +1163,7 @@ void generate_primary_light_vertices(const uint32 n_light_paths, TPrimaryCoordin
 template <typename TPrimaryCoordinates, typename TBPTContext, typename TBPTConfig>
 __global__
 __launch_bounds__(SECONDARY_LIGHT_VERTICES_BLOCKSIZE, SECONDARY_LIGHT_VERTICES_CTA_BLOCKS)
-void process_secondary_light_vertices_kernel(const uint32 in_queue_size, const uint32 n_light_paths, TPrimaryCoordinates primary_coords, TBPTContext context, RendererView renderer, const TBPTConfig config)
+void process_secondary_light_vertices_kernel(const uint32 in_queue_size, const uint32 n_light_paths, TPrimaryCoordinates primary_coords, TBPTContext context, RenderingContextView renderer, const TBPTConfig config)
 {
 	const uint32 thread_id = threadIdx.x + blockIdx.x * blockDim.x;
 
@@ -1157,7 +1172,7 @@ void process_secondary_light_vertices_kernel(const uint32 in_queue_size, const u
 }
 
 template <typename TPrimaryCoordinates, typename TBPTContext, typename TBPTConfig>
-void process_secondary_light_vertices(const uint32 in_queue_size, const uint32 n_light_paths, TPrimaryCoordinates primary_coords, TBPTContext context, RendererView renderer, const TBPTConfig config)
+void process_secondary_light_vertices(const uint32 in_queue_size, const uint32 n_light_paths, TPrimaryCoordinates primary_coords, TBPTContext context, RenderingContextView renderer, const TBPTConfig config)
 {
 	const uint32 blockSize(SECONDARY_LIGHT_VERTICES_BLOCKSIZE);
 	const dim3 gridSize(cugar::divide_ri(in_queue_size, blockSize));
@@ -1171,7 +1186,7 @@ void process_secondary_light_vertices(const uint32 in_queue_size, const uint32 n
 
 template <typename TPrimaryCoordinates, typename TBPTContext, typename TBPTConfig>
 __global__
-void generate_primary_eye_vertices_kernel(const uint32 n_eye_paths, const uint32 n_light_paths, TPrimaryCoordinates primary_coords, TBPTContext context, RendererView renderer, const TBPTConfig config)
+void generate_primary_eye_vertices_kernel(const uint32 n_eye_paths, const uint32 n_light_paths, TPrimaryCoordinates primary_coords, TBPTContext context, RenderingContextView renderer, const TBPTConfig config)
 {
 	const uint32 eye_path_id = threadIdx.x + blockIdx.x * blockDim.x;
 
@@ -1179,8 +1194,8 @@ void generate_primary_eye_vertices_kernel(const uint32 n_eye_paths, const uint32
 		generate_primary_eye_vertex(eye_path_id, n_eye_paths, n_light_paths, primary_coords, context, renderer, config);
 }
 
-template <typename TPrimaryCoordinates, typename TBPTConfig>
-void generate_primary_eye_vertices(const uint32 n_eye_paths, const uint32 n_light_paths, TPrimaryCoordinates primary_coords, BPTContextBase context, RendererView renderer, const TBPTConfig config)
+template <typename TPrimaryCoordinates, typename TBPTConfig, typename TBPTContext>
+void generate_primary_eye_vertices(const uint32 n_eye_paths, const uint32 n_light_paths, TPrimaryCoordinates primary_coords, TBPTContext context, RenderingContextView renderer, const TBPTConfig config)
 {
 	const uint32 blockSize(128);
 	const dim3 gridSize(cugar::divide_ri(n_eye_paths, blockSize));
@@ -1190,7 +1205,7 @@ void generate_primary_eye_vertices(const uint32 n_eye_paths, const uint32 n_ligh
 template <typename TSampleSink, typename TPrimaryCoordinates, typename TBPTContext, typename TBPTConfig>
 __global__
 __launch_bounds__(SECONDARY_EYE_VERTICES_BLOCKSIZE, SECONDARY_EYE_VERTICES_CTA_BLOCKS)
-void process_secondary_eye_vertices_kernel(const uint32 in_queue_size, const uint32 n_eye_paths, const uint32 n_light_paths, TSampleSink sink, TPrimaryCoordinates primary_coords, TBPTContext context, RendererView renderer, const TBPTConfig config)
+void process_secondary_eye_vertices_kernel(const uint32 in_queue_size, const uint32 n_eye_paths, const uint32 n_light_paths, TSampleSink sink, TPrimaryCoordinates primary_coords, TBPTContext context, RenderingContextView renderer, const TBPTConfig config)
 {
 	const uint32 thread_id = threadIdx.x + blockIdx.x * blockDim.x;
 
@@ -1199,7 +1214,7 @@ void process_secondary_eye_vertices_kernel(const uint32 in_queue_size, const uin
 }
 
 template <typename TSampleSink, typename TPrimaryCoordinates, typename TBPTContext, typename TBPTConfig>
-void process_secondary_eye_vertices(const uint32 in_queue_size, const uint32 n_eye_paths, const uint32 n_light_paths, TSampleSink sink, TPrimaryCoordinates primary_coords, TBPTContext context, RendererView renderer, const TBPTConfig config)
+void process_secondary_eye_vertices(const uint32 in_queue_size, const uint32 n_eye_paths, const uint32 n_light_paths, TSampleSink sink, TPrimaryCoordinates primary_coords, TBPTContext context, RenderingContextView renderer, const TBPTConfig config)
 {
 	const uint32 blockSize(SECONDARY_EYE_VERTICES_BLOCKSIZE);
 	const dim3 gridSize(cugar::divide_ri(in_queue_size, blockSize));

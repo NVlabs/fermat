@@ -1,0 +1,64 @@
+Top\+: \hyperlink{_overture_contents_page}{Contents}
+
+\begin{DoxyParagraph}{}
+Writing a renderer is now as simple as inheriting from this interface and implementing some of its methods\+: ~\newline
+
+\begin{DoxyCode}
+\textcolor{comment}{// The abstract renderer / solver interface}
+\textcolor{comment}{//}
+\textcolor{keyword}{struct }\hyperlink{struct_renderer_interface}{RendererInterface}
+\{
+   \textcolor{comment}{// this method is responsible for returning the number of auxiliary framebuffer channels needed}
+   \textcolor{comment}{// by the renderer}
+   \textcolor{comment}{//}
+   \textcolor{keyword}{virtual} uint32 \hyperlink{struct_renderer_interface_a0bedb16a0103c95dae460afef2a0fc2a}{auxiliary\_channel\_count}() \{ \textcolor{keywordflow}{return} 0; \}
+
+   \textcolor{comment}{// this method is responsible for registering the auxiliary framebuffer channels needed by the}
+   \textcolor{comment}{// renderer, starting at the specified offset}
+   \textcolor{comment}{//}
+   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{struct_renderer_interface_aca2dd8b8b27e3e6f7fcf81c0d8d17ce5}{register\_auxiliary\_channels}(
+      \hyperlink{struct_f_buffer_storage}{FBufferStorage}& fbuffer, \textcolor{keyword}{const} uint32 channel\_offset) \{\}
+
+   \textcolor{comment}{// this method is responsible for any command options parsing / initializations the renderer might}
+   \textcolor{comment}{// need to perform}
+   \textcolor{comment}{//}
+   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{struct_renderer_interface_a2ead9b943d6d48fcd32872e0005ebe63}{init}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}** argv, \hyperlink{struct_rendering_context}{RenderingContext}& renderer) \{\}
+
+   \textcolor{comment}{// flag a scene geometry update}
+   \textcolor{comment}{//}
+   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{struct_renderer_interface_a754143d3228c27eab32f1760217afe56}{update\_scene}(\hyperlink{struct_rendering_context}{RenderingContext}& renderer) \{\}
+
+   \textcolor{comment}{// this method is responsible for rendering a given frame in a progressive rendering}
+   \textcolor{comment}{//}
+   \textcolor{comment}{// \(\backslash\)param   instance        the frame instance}
+   \textcolor{comment}{//}
+   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{struct_renderer_interface_aa64254dd44c94929b05092dc8d74f29d}{render}(\textcolor{keyword}{const} uint32 instance, \hyperlink{struct_rendering_context}{RenderingContext}& renderer) \{\}
+
+   \textcolor{comment}{// this method is responsible for handling keyboard events}
+   \textcolor{comment}{//}
+   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{struct_renderer_interface_a9f5afd3701d8d935a2ecf08fb9f5f604}{keyboard}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} character, \textcolor{keywordtype}{int} x, \textcolor{keywordtype}{int} y, \textcolor{keywordtype}{bool}& invalidate) \{\}
+
+   \textcolor{comment}{// this method is responsible for handling mouse events}
+   \textcolor{comment}{//}
+   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{struct_renderer_interface_aae7f55e0f8863e6a2ed3205d228ab306}{mouse}(\hyperlink{struct_rendering_context}{RenderingContext}& renderer, \textcolor{keywordtype}{int} button, \textcolor{keywordtype}{int} state, \textcolor{keywordtype}{int} x, \textcolor{keywordtype}{int} y)
+       \{\}
+
+   \textcolor{comment}{// this method is responsible for any additional UI/OpenGL drawing on screen}
+   \textcolor{comment}{//}
+   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{struct_renderer_interface_a44e91217896e95a3fd46b26eef51a6da}{draw}(\hyperlink{struct_rendering_context}{RenderingContext}& renderer) \{\}
+
+   \textcolor{comment}{// dump some speed stats}
+   \textcolor{comment}{//}
+   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{struct_renderer_interface_a378df3aa18095da5ce8011fb25c8fb8e}{dump\_speed\_stats}(FILE* stats) \{\}
+
+   \textcolor{comment}{// this method is responsible for destroying the object itself}
+   \textcolor{comment}{//}
+   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{struct_renderer_interface_a7469218aafa029a3e22bac2c00dca9f5}{destroy}() \{\}
+\};
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+In practice, it\textquotesingle{}s often not even necessary to implement anything except for the \hyperlink{struct_renderer_interface_a2ead9b943d6d48fcd32872e0005ebe63}{Renderer\+Interface\+::init()}, \hyperlink{struct_renderer_interface_a7469218aafa029a3e22bac2c00dca9f5}{Renderer\+Interface\+::destroy()} and the \hyperlink{struct_renderer_interface_aa64254dd44c94929b05092dc8d74f29d}{Renderer\+Interface\+::render()} methods. All the others are optional methods to handle events (e.\+g. mouse, keyboard), inform the context that the renderer might output some custom framebuffer channels, or getting informed that the geometry of the scene has been updated, in case we need to know.
+\end{DoxyParagraph}
+Next\+: \hyperlink{_plugins_page}{Plugins} 

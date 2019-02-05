@@ -1,0 +1,49 @@
+\hypertarget{classcugar_1_1internals_1_1_counted_base}{}\section{cugar\+:\+:internals\+:\+:Counted\+Base$<$ CounterT $>$ Class Template Reference}
+\label{classcugar_1_1internals_1_1_counted_base}\index{cugar\+::internals\+::\+Counted\+Base$<$ Counter\+T $>$@{cugar\+::internals\+::\+Counted\+Base$<$ Counter\+T $>$}}
+Inheritance diagram for cugar\+:\+:internals\+:\+:Counted\+Base$<$ CounterT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcugar_1_1internals_1_1_counted_base}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_counted_base_a813feea4989204df059f1e57eb296661}\label{classcugar_1_1internals_1_1_counted_base_a813feea4989204df059f1e57eb296661}} 
+typedef CounterT {\bfseries Counter\+\_\+\+Type}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_counted_base_a0136f9f7bac652b751f55c3fd3c0b9c0}\label{classcugar_1_1internals_1_1_counted_base_a0136f9f7bac652b751f55c3fd3c0b9c0}} 
+virtual void \hyperlink{classcugar_1_1internals_1_1_counted_base_a0136f9f7bac652b751f55c3fd3c0b9c0}{dispose} ()=0
+\begin{DoxyCompactList}\small\item\em called when m\+\_\+shcount goes to 0 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_counted_base_a8d50ddc2bea77d1593b35cc5824209af}\label{classcugar_1_1internals_1_1_counted_base_a8d50ddc2bea77d1593b35cc5824209af}} 
+virtual void \hyperlink{classcugar_1_1internals_1_1_counted_base_a8d50ddc2bea77d1593b35cc5824209af}{destroy} ()
+\begin{DoxyCompactList}\small\item\em called when m\+\_\+wkcount goes to 0 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_counted_base_a2663fb7f1277adc6e78e5ef3837193a9}\label{classcugar_1_1internals_1_1_counted_base_a2663fb7f1277adc6e78e5ef3837193a9}} 
+virtual void $\ast$ {\bfseries get\+\_\+deleter} (const std\+::type\+\_\+info \&)=0
+\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_counted_base_ad42bcdc01fd577f3a5a773ab31d87703}\label{classcugar_1_1internals_1_1_counted_base_ad42bcdc01fd577f3a5a773ab31d87703}} 
+void {\bfseries add\+\_\+ref\+\_\+copy} ()
+\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_counted_base_a4e1334553d5dd0eb613458934ec1b7dc}\label{classcugar_1_1internals_1_1_counted_base_a4e1334553d5dd0eb613458934ec1b7dc}} 
+void {\bfseries add\+\_\+ref\+\_\+lock} ()
+\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_counted_base_a5a7753e0b4f9a4bfa04bdac9deba9551}\label{classcugar_1_1internals_1_1_counted_base_a5a7753e0b4f9a4bfa04bdac9deba9551}} 
+void {\bfseries release} ()
+\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_counted_base_add70ea2da8983c02438c56be9bdb9156}\label{classcugar_1_1internals_1_1_counted_base_add70ea2da8983c02438c56be9bdb9156}} 
+void {\bfseries weak\+\_\+add\+\_\+ref} ()
+\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_counted_base_a968071f8e4891a792dd68a185f852359}\label{classcugar_1_1internals_1_1_counted_base_a968071f8e4891a792dd68a185f852359}} 
+void {\bfseries weak\+\_\+release} ()
+\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_counted_base_a63ccdbc5b6fa3e45e3191429309eb66f}\label{classcugar_1_1internals_1_1_counted_base_a63ccdbc5b6fa3e45e3191429309eb66f}} 
+Counter\+\_\+\+Type {\bfseries use\+\_\+count} () const
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/shared\+\_\+pointer.\+h\end{DoxyCompactItemize}

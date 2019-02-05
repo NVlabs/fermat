@@ -1,0 +1,102 @@
+\hypertarget{struct_eye_vertex}{}\section{Eye\+Vertex Struct Reference}
+\label{struct_eye_vertex}\index{Eye\+Vertex@{Eye\+Vertex}}
+
+
+\subsection{Detailed description}
+\begin{DoxyParagraph}{}
+A utility class to encapsulate all important information for a eye subpath vertex 
+\end{DoxyParagraph}
+
+
+{\ttfamily \#include $<$bpt\+\_\+utils.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_eye_vertex_a5788cce324807dd8bbc0f913ef3a777d}\label{struct_eye_vertex_a5788cce324807dd8bbc0f913ef3a777d}} 
+{\footnotesize template$<$typename Ray\+Type $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void {\bfseries setup} (const Ray\+Type \&ray, const \hyperlink{struct_hit}{Hit} \&hit, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&\+\_\+alpha, const \hyperlink{struct_temp_path_weights}{Temp\+Path\+Weights} \&\+\_\+weights, const uint32 \+\_\+depth, const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer, const float min\+\_\+roughness=0.\+0f)
+\item 
+\mbox{\Hypertarget{struct_eye_vertex_aa88f1c1bd1c6e1f8ae1f9df6f857f72f}\label{struct_eye_vertex_aa88f1c1bd1c6e1f8ae1f9df6f857f72f}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void {\bfseries setup} (const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&\+\_\+in, const \hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id} \&\+\_\+v, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&\+\_\+alpha, const \hyperlink{struct_temp_path_weights}{Temp\+Path\+Weights} \&\+\_\+weights, const uint32 \+\_\+depth, const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer)
+\item 
+\mbox{\Hypertarget{struct_eye_vertex_a861d531288458ca4d465c2b93c65e1aa}\label{struct_eye_vertex_a861d531288458ca4d465c2b93c65e1aa}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries Eye\+Vertex} (const \hyperlink{struct_ray}{Ray} \&\+\_\+ray, const \hyperlink{struct_hit}{Hit} \&\+\_\+hit, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&\+\_\+alpha, const \hyperlink{struct_temp_path_weights}{Temp\+Path\+Weights} \&\+\_\+weights, const uint32 \+\_\+depth, const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer)
+\item 
+\mbox{\Hypertarget{struct_eye_vertex_a03db55c18029b0792be1843821f01d20}\label{struct_eye_vertex_a03db55c18029b0792be1843821f01d20}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries Eye\+Vertex} (const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&\+\_\+in, const \hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id} \&\+\_\+v, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&\+\_\+alpha, const \hyperlink{struct_temp_path_weights}{Temp\+Path\+Weights} \&\+\_\+weights, const uint32 \+\_\+depth, const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool \hyperlink{struct_eye_vertex_a7664ec5102f1894a1cd55c324c0742ee}{sample} (const float z\mbox{[}3\mbox{]}, \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type} \&out\+\_\+comp, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&out, float \&out\+\_\+p, float \&out\+\_\+p\+\_\+proj, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&out\+\_\+g, bool RR=true, bool evaluate\+\_\+full\+\_\+bsdf=false, const \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type} components=Bsdf\+::k\+All\+Components) const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_eye_vertex_a52e6212e480d4cab3efdccc98ebea913}\label{struct_eye_vertex_a52e6212e480d4cab3efdccc98ebea913}} 
+\hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id} {\bfseries geom\+\_\+id}
+\item 
+\mbox{\Hypertarget{struct_eye_vertex_ab1b42b63a7e9daeb9fa5b3557a0a7f6a}\label{struct_eye_vertex_ab1b42b63a7e9daeb9fa5b3557a0a7f6a}} 
+\hyperlink{struct_vertex_geometry}{Vertex\+Geometry} {\bfseries geom}
+\item 
+\mbox{\Hypertarget{struct_eye_vertex_a5cccc691e6e2eddd5dff10950d34c85c}\label{struct_eye_vertex_a5cccc691e6e2eddd5dff10950d34c85c}} 
+\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} {\bfseries in}
+\item 
+\mbox{\Hypertarget{struct_eye_vertex_a8c99479110de6457d40dd4ddf4f85df5}\label{struct_eye_vertex_a8c99479110de6457d40dd4ddf4f85df5}} 
+\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} {\bfseries alpha}
+\item 
+\mbox{\Hypertarget{struct_eye_vertex_ac9f43974b9afd495ad333da6d3233067}\label{struct_eye_vertex_ac9f43974b9afd495ad333da6d3233067}} 
+\hyperlink{struct_temp_path_weights}{Temp\+Path\+Weights} {\bfseries weights}
+\item 
+\mbox{\Hypertarget{struct_eye_vertex_ae141b6cf0d021eea9fb7d2b1fe3e5105}\label{struct_eye_vertex_ae141b6cf0d021eea9fb7d2b1fe3e5105}} 
+uint32 {\bfseries depth}
+\item 
+\mbox{\Hypertarget{struct_eye_vertex_a3cbea0a0b50e42fa39947122c15138c3}\label{struct_eye_vertex_a3cbea0a0b50e42fa39947122c15138c3}} 
+\hyperlink{struct_mesh_material}{Mesh\+Material} {\bfseries material}
+\item 
+\mbox{\Hypertarget{struct_eye_vertex_a1de7132c5682503c202e251162aaa96c}\label{struct_eye_vertex_a1de7132c5682503c202e251162aaa96c}} 
+\hyperlink{struct_bsdf}{Bsdf} {\bfseries bsdf}
+\item 
+\mbox{\Hypertarget{struct_eye_vertex_aa9f190a1fafa32114d27e0ad5de9827a}\label{struct_eye_vertex_aa9f190a1fafa32114d27e0ad5de9827a}} 
+float {\bfseries prev\+\_\+\+G\+\_\+prime}
+\item 
+\mbox{\Hypertarget{struct_eye_vertex_a530f31d442fc23ee8c16fd951fa0a0ea}\label{struct_eye_vertex_a530f31d442fc23ee8c16fd951fa0a0ea}} 
+float {\bfseries prev\+\_\+pG}
+\item 
+\mbox{\Hypertarget{struct_eye_vertex_ac0ece106e60201d212d9c0ab082b2d81}\label{struct_eye_vertex_ac0ece106e60201d212d9c0ab082b2d81}} 
+float {\bfseries p\+Gp\+\_\+sum}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{struct_eye_vertex_a7664ec5102f1894a1cd55c324c0742ee}\label{struct_eye_vertex_a7664ec5102f1894a1cd55c324c0742ee}} 
+\index{Eye\+Vertex@{Eye\+Vertex}!sample@{sample}}
+\index{sample@{sample}!Eye\+Vertex@{Eye\+Vertex}}
+\subsubsection{\texorpdfstring{sample()}{sample()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool Eye\+Vertex\+::sample (\begin{DoxyParamCaption}\item[{const float}]{z\mbox{[}3\mbox{]},  }\item[{\hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type} \&}]{out\+\_\+comp,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{out,  }\item[{float \&}]{out\+\_\+p,  }\item[{float \&}]{out\+\_\+p\+\_\+proj,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{out\+\_\+g,  }\item[{bool}]{RR = {\ttfamily true},  }\item[{bool}]{evaluate\+\_\+full\+\_\+bsdf = {\ttfamily false},  }\item[{const \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type}}]{components = {\ttfamily Bsdf\+:\+:kAllComponents} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+sample an outgoing direction
+
+
+\begin{DoxyParams}{Parameters}
+{\em z} & the incoming direction \\
+\hline
+{\em out\+\_\+comp} & the output component \\
+\hline
+{\em out} & the outgoing direction \\
+\hline
+{\em out\+\_\+p} & the output solid angle pdf \\
+\hline
+{\em out\+\_\+p\+\_\+proj} & the output projected solid angle pdf \\
+\hline
+{\em out\+\_\+g} & the output sample value = f/p\+\_\+proj \\
+\hline
+{\em RR} & indicate whether to use Russian-\/\+Roulette or not \\
+\hline
+{\em evaluate\+\_\+full\+\_\+bsdf} & ndicate whether to evaluate the full B\+S\+DF, or just an unbiased estimate \\
+\hline
+{\em components} & the components to consider \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/bpt\+\_\+utils.\+h\end{DoxyCompactItemize}

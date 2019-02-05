@@ -1,0 +1,77 @@
+\hypertarget{struct_adaptive_clustered_r_l_storage}{}\section{Adaptive\+Clustered\+R\+L\+Storage Struct Reference}
+\label{struct_adaptive_clustered_r_l_storage}\index{Adaptive\+Clustered\+R\+L\+Storage@{Adaptive\+Clustered\+R\+L\+Storage}}
+
+
+\subsection{Detailed description}
+Host-\/side class to handle the storage of an Adaptively Clustered Reinforcement Learning sampler (\hyperlink{group___clustered_r_l_module}{Clustered RL}). 
+
+{\ttfamily \#include $<$clustered\+\_\+rl.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_adaptive_clustered_r_l_storage_a4c7593874d92f994b70b2f663fdb4d1c}\label{struct_adaptive_clustered_r_l_storage_a4c7593874d92f994b70b2f663fdb4d1c}} 
+typedef \hyperlink{struct_adaptive_clustered_r_l_view}{Adaptive\+Clustered\+R\+L\+View} {\bfseries view\+\_\+type}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_adaptive_clustered_r_l_storage_aa2a2ef87123b23bad7b6d11408e7a5bc}\label{struct_adaptive_clustered_r_l_storage_aa2a2ef87123b23bad7b6d11408e7a5bc}} 
+uint64 {\bfseries needed\+\_\+bytes} (const uint32 \+\_\+hash\+\_\+size, const uint32 \+\_\+n\+\_\+clusters) const
+\item 
+\mbox{\Hypertarget{struct_adaptive_clustered_r_l_storage_a806d0a4640ff52c18765e0a120886b7d}\label{struct_adaptive_clustered_r_l_storage_a806d0a4640ff52c18765e0a120886b7d}} 
+void {\bfseries init} (const uint32 \+\_\+hash\+\_\+size, const \hyperlink{structcugar_1_1_bvh__node__3d}{cugar\+::\+Bvh\+\_\+node\+\_\+3d} $\ast$\+\_\+nodes, const uint32 $\ast$\+\_\+parents, const uint2 $\ast$\+\_\+ranges, const uint32 \+\_\+n\+\_\+clusters, const uint32 $\ast$\+\_\+cluster\+\_\+indices, const uint32 $\ast$\+\_\+cluster\+\_\+offsets)
+\item 
+\mbox{\Hypertarget{struct_adaptive_clustered_r_l_storage_a39e65513aa00ef304e6dc4c05f452f47}\label{struct_adaptive_clustered_r_l_storage_a39e65513aa00ef304e6dc4c05f452f47}} 
+void {\bfseries update} (bool adaptive=true)
+\item 
+\mbox{\Hypertarget{struct_adaptive_clustered_r_l_storage_a2231734e64a1c347519607ca5b075438}\label{struct_adaptive_clustered_r_l_storage_a2231734e64a1c347519607ca5b075438}} 
+void {\bfseries clear} ()
+\item 
+\mbox{\Hypertarget{struct_adaptive_clustered_r_l_storage_a20b7819230c7eb2ff2c7fbbfeb52387a}\label{struct_adaptive_clustered_r_l_storage_a20b7819230c7eb2ff2c7fbbfeb52387a}} 
+uint32 {\bfseries size} () const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_adaptive_clustered_r_l_storage_adf22a8c93389d05ec4d40c95ee6bc30c}\label{struct_adaptive_clustered_r_l_storage_adf22a8c93389d05ec4d40c95ee6bc30c}} 
+\hyperlink{struct_device_hash_table}{Device\+Hash\+Table} {\bfseries hashmap}
+\item 
+\mbox{\Hypertarget{struct_adaptive_clustered_r_l_storage_aee79c4cc301d560c11d26021f8749890}\label{struct_adaptive_clustered_r_l_storage_aee79c4cc301d560c11d26021f8749890}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float $>$ {\bfseries values}
+\item 
+\mbox{\Hypertarget{struct_adaptive_clustered_r_l_storage_acf55d559910053dc3911f7e8b6efebba}\label{struct_adaptive_clustered_r_l_storage_acf55d559910053dc3911f7e8b6efebba}} 
+const \hyperlink{structcugar_1_1_bvh__node__3d}{cugar\+::\+Bvh\+\_\+node\+\_\+3d} $\ast$ {\bfseries nodes}
+\item 
+\mbox{\Hypertarget{struct_adaptive_clustered_r_l_storage_a2c387808743c18bf40852b11643c6575}\label{struct_adaptive_clustered_r_l_storage_a2c387808743c18bf40852b11643c6575}} 
+const uint32 $\ast$ {\bfseries parents}
+\item 
+\mbox{\Hypertarget{struct_adaptive_clustered_r_l_storage_a3917c73323fcb3a7d604a17a3fa22c50}\label{struct_adaptive_clustered_r_l_storage_a3917c73323fcb3a7d604a17a3fa22c50}} 
+const uint2 $\ast$ {\bfseries ranges}
+\item 
+\mbox{\Hypertarget{struct_adaptive_clustered_r_l_storage_a5272dad0e83b87bc2fc2c8ee61d510a2}\label{struct_adaptive_clustered_r_l_storage_a5272dad0e83b87bc2fc2c8ee61d510a2}} 
+uint32 {\bfseries hash\+\_\+size}
+\item 
+\mbox{\Hypertarget{struct_adaptive_clustered_r_l_storage_ae0623f5fc45e0c073d08f8578593f344}\label{struct_adaptive_clustered_r_l_storage_ae0623f5fc45e0c073d08f8578593f344}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, uint32 $>$ {\bfseries cluster\+\_\+counts}
+\item 
+\mbox{\Hypertarget{struct_adaptive_clustered_r_l_storage_a149684fd556c6b7e7a8c92ea89a0a5b1}\label{struct_adaptive_clustered_r_l_storage_a149684fd556c6b7e7a8c92ea89a0a5b1}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, uint32 $>$ {\bfseries cluster\+\_\+indices}
+\item 
+\mbox{\Hypertarget{struct_adaptive_clustered_r_l_storage_a77cd5964440b31b95a4d696591a9532a}\label{struct_adaptive_clustered_r_l_storage_a77cd5964440b31b95a4d696591a9532a}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, uint32 $>$ {\bfseries cluster\+\_\+ends}
+\item 
+\mbox{\Hypertarget{struct_adaptive_clustered_r_l_storage_aa4dbeb8928b896b46c71ad5781f8c654}\label{struct_adaptive_clustered_r_l_storage_aa4dbeb8928b896b46c71ad5781f8c654}} 
+uint32 {\bfseries init\+\_\+cluster\+\_\+count}
+\item 
+\mbox{\Hypertarget{struct_adaptive_clustered_r_l_storage_a4a16d1da9e965f29aa0f3be69c1e0c99}\label{struct_adaptive_clustered_r_l_storage_a4a16d1da9e965f29aa0f3be69c1e0c99}} 
+const uint32 $\ast$ {\bfseries init\+\_\+cluster\+\_\+indices}
+\item 
+\mbox{\Hypertarget{struct_adaptive_clustered_r_l_storage_acda4a136b198abcdbad80751e9ab3bfe}\label{struct_adaptive_clustered_r_l_storage_acda4a136b198abcdbad80751e9ab3bfe}} 
+const uint32 $\ast$ {\bfseries init\+\_\+cluster\+\_\+offsets}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/clustered\+\_\+rl.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,285 @@
+\hypertarget{class_mesh_storage}{}\section{Mesh\+Storage Class Reference}
+\label{class_mesh_storage}\index{Mesh\+Storage@{Mesh\+Storage}}
+
+
+\subsection{Detailed description}
+This class provides basic Mesh storage for either the host or device 
+
+{\ttfamily \#include $<$Mesh\+Storage.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_aafa910e5048de2c56366f4a75990a270}\label{class_mesh_storage_aafa910e5048de2c56366f4a75990a270}} 
+typedef Mesh\+View\+::vertex\+\_\+triangle {\bfseries vertex\+\_\+triangle}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_aa5b88deb578cba5e63db24f83a818cff}\label{class_mesh_storage_aa5b88deb578cba5e63db24f83a818cff}} 
+typedef Mesh\+View\+::normal\+\_\+triangle {\bfseries normal\+\_\+triangle}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a2dea37a55a3e83ea6b387ca879c885ff}\label{class_mesh_storage_a2dea37a55a3e83ea6b387ca879c885ff}} 
+typedef Mesh\+View\+::texture\+\_\+triangle {\bfseries texture\+\_\+triangle}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_aa8db0d591fb575e006a93970d971e8e1}\label{class_mesh_storage_aa8db0d591fb575e006a93970d971e8e1}} 
+typedef Mesh\+View\+::lightmap\+\_\+triangle {\bfseries lightmap\+\_\+triangle}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a2a26bf8ce12c14b3a3c638d01b5db0ba}\label{class_mesh_storage_a2a26bf8ce12c14b3a3c638d01b5db0ba}} 
+void {\bfseries alloc} (const int num\+\_\+triangles, const int num\+\_\+vertices, const int num\+\_\+normals, const int num\+\_\+texture\+\_\+coordinates, const int num\+\_\+groups)
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a81ebc7a6397f8e83d10e7242b5ab7a30}\label{class_mesh_storage_a81ebc7a6397f8e83d10e7242b5ab7a30}} 
+void {\bfseries alloc\+\_\+lightmap} (const int num\+\_\+lightmap\+\_\+coordinates)
+\item 
+\mbox{\Hypertarget{class_mesh_storage_aacf7203fecfad1d3d15959bc053628dd}\label{class_mesh_storage_aacf7203fecfad1d3d15959bc053628dd}} 
+void {\bfseries compress\+\_\+normals} ()
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a85773c6742a20d10d7291d7c3f571b37}\label{class_mesh_storage_a85773c6742a20d10d7291d7c3f571b37}} 
+void {\bfseries compress\+\_\+tex} ()
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a289b45038006451780fdb87d72782745}\label{class_mesh_storage_a289b45038006451780fdb87d72782745}} 
+S\+U\+T\+I\+L\+A\+PI \hyperlink{struct_mesh_material}{Mesh\+Material} $\ast$ {\bfseries alloc\+\_\+materials} (const size\+\_\+t n)
+\item 
+\mbox{\Hypertarget{class_mesh_storage_abd714f1144efe9069e352dc07cb85a89}\label{class_mesh_storage_abd714f1144efe9069e352dc07cb85a89}} 
+S\+U\+T\+I\+L\+A\+PI char $\ast$ {\bfseries alloc\+\_\+material\+\_\+names} (const size\+\_\+t n\+\_\+chars)
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a2ffe68e15e5634c64e884996b9d09220}\label{class_mesh_storage_a2ffe68e15e5634c64e884996b9d09220}} 
+S\+U\+T\+I\+L\+A\+PI int {\bfseries get\+Num\+Vertices} () const
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a68ec29f17951ca0f3bbedc47e2ecc6ae}\label{class_mesh_storage_a68ec29f17951ca0f3bbedc47e2ecc6ae}} 
+S\+U\+T\+I\+L\+A\+PI int {\bfseries get\+Num\+Normals} () const
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a0f3825d3e327565f1f48b81bcb947d02}\label{class_mesh_storage_a0f3825d3e327565f1f48b81bcb947d02}} 
+S\+U\+T\+I\+L\+A\+PI int {\bfseries get\+Num\+Texture\+Coordinates} () const
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a77554ba82dbadb8447bf5b720300fd6b}\label{class_mesh_storage_a77554ba82dbadb8447bf5b720300fd6b}} 
+S\+U\+T\+I\+L\+A\+PI int {\bfseries get\+Num\+Triangles} () const
+\item 
+\mbox{\Hypertarget{class_mesh_storage_abbd69f6731422beb9729c4050fe6162d}\label{class_mesh_storage_abbd69f6731422beb9729c4050fe6162d}} 
+S\+U\+T\+I\+L\+A\+PI int {\bfseries get\+Num\+Groups} () const
+\item 
+\mbox{\Hypertarget{class_mesh_storage_ab9197e26cf1711403237811ff0f81338}\label{class_mesh_storage_ab9197e26cf1711403237811ff0f81338}} 
+S\+U\+T\+I\+L\+A\+PI int {\bfseries get\+Num\+Materials} () const
+\item 
+\mbox{\Hypertarget{class_mesh_storage_ab7419e400e0e7d2d7637900d9b22113b}\label{class_mesh_storage_ab7419e400e0e7d2d7637900d9b22113b}} 
+S\+U\+T\+I\+L\+A\+PI int {\bfseries get\+Num\+Textures} () const
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a3e3d17b0f1a6484b5cbe02979fbc7ad9}\label{class_mesh_storage_a3e3d17b0f1a6484b5cbe02979fbc7ad9}} 
+S\+U\+T\+I\+L\+A\+PI int {\bfseries get\+Vertex\+Stride} () const
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a55fe3f7c803af6cac3026422e5334616}\label{class_mesh_storage_a55fe3f7c803af6cac3026422e5334616}} 
+S\+U\+T\+I\+L\+A\+PI int {\bfseries get\+Normal\+Stride} () const
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a2412634420e6a9ba066acdc4a45585b6}\label{class_mesh_storage_a2412634420e6a9ba066acdc4a45585b6}} 
+S\+U\+T\+I\+L\+A\+PI int {\bfseries get\+Texture\+Coordinate\+Stride} () const
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a4cea4eb20a81a39bd8ecc7c07fb08c64}\label{class_mesh_storage_a4cea4eb20a81a39bd8ecc7c07fb08c64}} 
+S\+U\+T\+I\+L\+A\+PI int $\ast$ {\bfseries get\+Vertex\+Indices} ()
+\item 
+\mbox{\Hypertarget{class_mesh_storage_aa45260149381a38d28f54ff4b435b210}\label{class_mesh_storage_aa45260149381a38d28f54ff4b435b210}} 
+S\+U\+T\+I\+L\+A\+PI const int $\ast$ {\bfseries get\+Vertex\+Indices} () const
+\item 
+\mbox{\Hypertarget{class_mesh_storage_abd202c7c97a0726557eaec35b5751a36}\label{class_mesh_storage_abd202c7c97a0726557eaec35b5751a36}} 
+S\+U\+T\+I\+L\+A\+PI int $\ast$ {\bfseries get\+Normal\+Indices} ()
+\item 
+\mbox{\Hypertarget{class_mesh_storage_ad0c612c3550ee75581a34fe4fb5c6614}\label{class_mesh_storage_ad0c612c3550ee75581a34fe4fb5c6614}} 
+S\+U\+T\+I\+L\+A\+PI const int $\ast$ {\bfseries get\+Normal\+Indices} () const
+\item 
+\mbox{\Hypertarget{class_mesh_storage_aae43a9990be7da98e37c06b6ef226ae8}\label{class_mesh_storage_aae43a9990be7da98e37c06b6ef226ae8}} 
+S\+U\+T\+I\+L\+A\+PI int $\ast$ {\bfseries get\+Material\+Indices} ()
+\item 
+\mbox{\Hypertarget{class_mesh_storage_ac2f7c46c4d409b662b97e9ac5767dc17}\label{class_mesh_storage_ac2f7c46c4d409b662b97e9ac5767dc17}} 
+S\+U\+T\+I\+L\+A\+PI const int $\ast$ {\bfseries get\+Material\+Indices} () const
+\item 
+\mbox{\Hypertarget{class_mesh_storage_aaee63194bf9b7813f35084f1bd2005c6}\label{class_mesh_storage_aaee63194bf9b7813f35084f1bd2005c6}} 
+S\+U\+T\+I\+L\+A\+PI int $\ast$ {\bfseries get\+Texture\+Coordinate\+Indices} ()
+\item 
+\mbox{\Hypertarget{class_mesh_storage_abfff683a09c90bc58aa8524dcbce657b}\label{class_mesh_storage_abfff683a09c90bc58aa8524dcbce657b}} 
+S\+U\+T\+I\+L\+A\+PI const int $\ast$ {\bfseries get\+Texture\+Coordinate\+Indices} () const
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a7f5845ea5527951bc5c2062f0948f026}\label{class_mesh_storage_a7f5845ea5527951bc5c2062f0948f026}} 
+S\+U\+T\+I\+L\+A\+PI int $\ast$ {\bfseries get\+Lightmap\+Indices} ()
+\item 
+\mbox{\Hypertarget{class_mesh_storage_ab4e198c8518b693e973c0bef8e88b817}\label{class_mesh_storage_ab4e198c8518b693e973c0bef8e88b817}} 
+S\+U\+T\+I\+L\+A\+PI const int $\ast$ {\bfseries get\+Lightmap\+Indices} () const
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a1fcc998e705dfdd40fa58c82a4db5ab4}\label{class_mesh_storage_a1fcc998e705dfdd40fa58c82a4db5ab4}} 
+S\+U\+T\+I\+L\+A\+PI int $\ast$ {\bfseries get\+Group\+Offsets} ()
+\item 
+\mbox{\Hypertarget{class_mesh_storage_aa60755752fd6f937c237d2df1deb9333}\label{class_mesh_storage_aa60755752fd6f937c237d2df1deb9333}} 
+S\+U\+T\+I\+L\+A\+PI const int $\ast$ {\bfseries get\+Group\+Offsets} () const
+\item 
+\mbox{\Hypertarget{class_mesh_storage_ac0715938903b63734a8069ce5bf0cc1c}\label{class_mesh_storage_ac0715938903b63734a8069ce5bf0cc1c}} 
+S\+U\+T\+I\+L\+A\+PI float $\ast$ {\bfseries get\+Vertex\+Data} ()
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a369d2d1159c17331f71e10eb6535b793}\label{class_mesh_storage_a369d2d1159c17331f71e10eb6535b793}} 
+S\+U\+T\+I\+L\+A\+PI const float $\ast$ {\bfseries get\+Vertex\+Data} () const
+\item 
+\mbox{\Hypertarget{class_mesh_storage_ab0195d352b038ae46910d087d588aa6f}\label{class_mesh_storage_ab0195d352b038ae46910d087d588aa6f}} 
+S\+U\+T\+I\+L\+A\+PI float $\ast$ {\bfseries get\+Normal\+Data} ()
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a5c97d63355af753a016d7e0886c04c76}\label{class_mesh_storage_a5c97d63355af753a016d7e0886c04c76}} 
+S\+U\+T\+I\+L\+A\+PI const float $\ast$ {\bfseries get\+Normal\+Data} () const
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a85cf3d134f3dc755f37d61561904c0d2}\label{class_mesh_storage_a85cf3d134f3dc755f37d61561904c0d2}} 
+S\+U\+T\+I\+L\+A\+PI float $\ast$ {\bfseries get\+Texture\+Coordinate\+Data} ()
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a61c4b007a1fba002b52fa2dc1fb171a4}\label{class_mesh_storage_a61c4b007a1fba002b52fa2dc1fb171a4}} 
+S\+U\+T\+I\+L\+A\+PI const float $\ast$ {\bfseries get\+Texture\+Coordinate\+Data} () const
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a340297ea20ebad9231f825973a2a86d5}\label{class_mesh_storage_a340297ea20ebad9231f825973a2a86d5}} 
+S\+U\+T\+I\+L\+A\+PI std\+::string \& {\bfseries get\+Group\+Name} (const uint32 i)
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a37b402692f3b8c0feea707dd3c15dbdb}\label{class_mesh_storage_a37b402692f3b8c0feea707dd3c15dbdb}} 
+S\+U\+T\+I\+L\+A\+PI const std\+::string \& {\bfseries get\+Group\+Name} (const uint32 i) const
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a63bd6f162262f27ff06ace0150c6f269}\label{class_mesh_storage_a63bd6f162262f27ff06ace0150c6f269}} 
+S\+U\+T\+I\+L\+A\+PI const char $\ast$ {\bfseries get\+Material\+Name} (const uint32 i) const
+\item 
+\mbox{\Hypertarget{class_mesh_storage_ae44c4a1c30fa1c326b568e010e24240d}\label{class_mesh_storage_ae44c4a1c30fa1c326b568e010e24240d}} 
+S\+U\+T\+I\+L\+A\+PI uint32 {\bfseries insert\+\_\+texture} (const std\+::string \&tex\+\_\+name)
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a3a1e2a2e159141f17f968b9959d1633d}\label{class_mesh_storage_a3a1e2a2e159141f17f968b9959d1633d}} 
+S\+U\+T\+I\+L\+A\+PI \hyperlink{struct_mesh_view}{Mesh\+View} {\bfseries view} ()
+\item 
+\mbox{\Hypertarget{class_mesh_storage_aa0829a5be9b4435fd3e1f39b6ca647d0}\label{class_mesh_storage_aa0829a5be9b4435fd3e1f39b6ca647d0}} 
+void {\bfseries reorder\+\_\+triangles} (const int $\ast$index)
+\item 
+\mbox{\Hypertarget{class_mesh_storage_abd5651d50723c558ad0b10e237e3dd37}\label{class_mesh_storage_abd5651d50723c558ad0b10e237e3dd37}} 
+void {\bfseries reset\+\_\+groups} (const int num\+\_\+groups, const int $\ast$group\+\_\+offsets)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a8b3a51cebf14fe1b3e852c04be1c03e2}\label{class_mesh_storage_a8b3a51cebf14fe1b3e852c04be1c03e2}} 
+static normal\+\_\+triangle {\bfseries make\+\_\+normal\+\_\+triangle} (const int32 x, const int32 y, const int32 z)
+\item 
+\mbox{\Hypertarget{class_mesh_storage_abf200c9ddb32cd972865fbc94dc44a75}\label{class_mesh_storage_abf200c9ddb32cd972865fbc94dc44a75}} 
+static texture\+\_\+triangle {\bfseries make\+\_\+texture\+\_\+triangle} (const int32 x, const int32 y, const int32 z)
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a7fd484d69f35f79c2e1f8920df57b335}\label{class_mesh_storage_a7fd484d69f35f79c2e1f8920df57b335}} 
+static lightmap\+\_\+triangle {\bfseries make\+\_\+lightmap\+\_\+triangle} (const int32 x, const int32 y, const int32 z)
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a92a2e2703b83efaf32d6f00a21f7c101}\label{class_mesh_storage_a92a2e2703b83efaf32d6f00a21f7c101}} 
+int {\bfseries m\+\_\+num\+\_\+vertices}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a003cc5d14f49f31b7ae6938798de65b0}\label{class_mesh_storage_a003cc5d14f49f31b7ae6938798de65b0}} 
+int {\bfseries m\+\_\+num\+\_\+normals}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a8ebb85369d9e472dc37750840c4cb20e}\label{class_mesh_storage_a8ebb85369d9e472dc37750840c4cb20e}} 
+int {\bfseries m\+\_\+num\+\_\+texture\+\_\+coordinates}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_ab1e7eaa97d95a8bd72b5909ef0d5d8be}\label{class_mesh_storage_ab1e7eaa97d95a8bd72b5909ef0d5d8be}} 
+int {\bfseries m\+\_\+num\+\_\+lightmap\+\_\+coordinates}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_af53b7e7afad2f128b3785cec5ca1ce59}\label{class_mesh_storage_af53b7e7afad2f128b3785cec5ca1ce59}} 
+int {\bfseries m\+\_\+num\+\_\+triangles}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_ad2074d66d8639403eb78dfd8b9ac2594}\label{class_mesh_storage_ad2074d66d8639403eb78dfd8b9ac2594}} 
+int {\bfseries m\+\_\+num\+\_\+groups}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a31c59cf0e57653f8de5ae14e27f00b82}\label{class_mesh_storage_a31c59cf0e57653f8de5ae14e27f00b82}} 
+int {\bfseries m\+\_\+vertex\+\_\+stride}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_af9d9d6be5e6eb06d4ef5cd25a66532b0}\label{class_mesh_storage_af9d9d6be5e6eb06d4ef5cd25a66532b0}} 
+int {\bfseries m\+\_\+normal\+\_\+stride}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_af90392c634ac0525cfdf2c22a5739239}\label{class_mesh_storage_af90392c634ac0525cfdf2c22a5739239}} 
+int {\bfseries m\+\_\+texture\+\_\+stride}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_af00c0cb8ae8b107d2c162b255b95578b}\label{class_mesh_storage_af00c0cb8ae8b107d2c162b255b95578b}} 
+float2 {\bfseries m\+\_\+tex\+\_\+bias}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a12e894bf77e27e754e93500e39145126}\label{class_mesh_storage_a12e894bf77e27e754e93500e39145126}} 
+float2 {\bfseries m\+\_\+tex\+\_\+scale}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a8d3dc84e7724b954ba11895aeafc0e6f}\label{class_mesh_storage_a8d3dc84e7724b954ba11895aeafc0e6f}} 
+float2 {\bfseries m\+\_\+lm\+\_\+bias}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_ab5e805db0a321e1c5f1b8fc8c07254d3}\label{class_mesh_storage_ab5e805db0a321e1c5f1b8fc8c07254d3}} 
+float2 {\bfseries m\+\_\+lm\+\_\+scale}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a88e308718df7fdbecd7289d3970effc2}\label{class_mesh_storage_a88e308718df7fdbecd7289d3970effc2}} 
+std\+::map$<$ std\+::string, uint32 $>$ {\bfseries m\+\_\+textures\+\_\+map}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a537f80e9f36be23eae3c58b6e5a54b2e}\label{class_mesh_storage_a537f80e9f36be23eae3c58b6e5a54b2e}} 
+std\+::vector$<$ std\+::string $>$ {\bfseries m\+\_\+textures}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a2fe89492e0a32a3b1f238029e1edde59}\label{class_mesh_storage_a2fe89492e0a32a3b1f238029e1edde59}} 
+std\+::vector$<$ std\+::string $>$ {\bfseries m\+\_\+group\+\_\+names}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a47b675d399d9b76bdadf77be6db0d137}\label{class_mesh_storage_a47b675d399d9b76bdadf77be6db0d137}} 
+\hyperlink{class_buffer}{Buffer}$<$ int $>$ {\bfseries m\+\_\+vertex\+\_\+indices}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_ab75ce7f9d3f2b16ece26fb373ec55fc6}\label{class_mesh_storage_ab75ce7f9d3f2b16ece26fb373ec55fc6}} 
+\hyperlink{class_buffer}{Buffer}$<$ int $>$ {\bfseries m\+\_\+normal\+\_\+indices}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a78dba9a85aa9951ff76e953a8c69a473}\label{class_mesh_storage_a78dba9a85aa9951ff76e953a8c69a473}} 
+\hyperlink{class_buffer}{Buffer}$<$ int $>$ {\bfseries m\+\_\+normal\+\_\+indices\+\_\+comp}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a8e342b358331e03b2034d07bbfda1d5a}\label{class_mesh_storage_a8e342b358331e03b2034d07bbfda1d5a}} 
+\hyperlink{class_buffer}{Buffer}$<$ int $>$ {\bfseries m\+\_\+material\+\_\+indices}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_afd73be39c45e23b884e1dded4db7eebb}\label{class_mesh_storage_afd73be39c45e23b884e1dded4db7eebb}} 
+\hyperlink{class_buffer}{Buffer}$<$ int $>$ {\bfseries m\+\_\+texture\+\_\+indices}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_aa349c97d83413b84c2ea14bf65450143}\label{class_mesh_storage_aa349c97d83413b84c2ea14bf65450143}} 
+\hyperlink{class_buffer}{Buffer}$<$ int $>$ {\bfseries m\+\_\+texture\+\_\+indices\+\_\+comp}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a0bae9d6ef97476c97d9934e167c9d99e}\label{class_mesh_storage_a0bae9d6ef97476c97d9934e167c9d99e}} 
+\hyperlink{class_buffer}{Buffer}$<$ int $>$ {\bfseries m\+\_\+lightmap\+\_\+indices}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_acee04ce1f4504e2b33cbfce6875b3e97}\label{class_mesh_storage_acee04ce1f4504e2b33cbfce6875b3e97}} 
+\hyperlink{class_buffer}{Buffer}$<$ int $>$ {\bfseries m\+\_\+lightmap\+\_\+indices\+\_\+comp}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_ac41ae9724d14ad0cf35686a723e97a08}\label{class_mesh_storage_ac41ae9724d14ad0cf35686a723e97a08}} 
+\hyperlink{class_buffer}{Buffer}$<$ int $>$ {\bfseries m\+\_\+group\+\_\+offsets}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a5be05e6be65ed1d142ead76255f7272b}\label{class_mesh_storage_a5be05e6be65ed1d142ead76255f7272b}} 
+\hyperlink{class_buffer}{Buffer}$<$ float $>$ {\bfseries m\+\_\+vertex\+\_\+data}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a04c93c7cde962b82548c8a501fa19c4e}\label{class_mesh_storage_a04c93c7cde962b82548c8a501fa19c4e}} 
+\hyperlink{class_buffer}{Buffer}$<$ float $>$ {\bfseries m\+\_\+normal\+\_\+data}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_ae6c8e3f3eb4a696f1bbd20f742a1a94f}\label{class_mesh_storage_ae6c8e3f3eb4a696f1bbd20f742a1a94f}} 
+\hyperlink{class_buffer}{Buffer}$<$ uint32 $>$ {\bfseries m\+\_\+normal\+\_\+data\+\_\+comp}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a09c2417846df4c2b2a82e5edb5ff1c49}\label{class_mesh_storage_a09c2417846df4c2b2a82e5edb5ff1c49}} 
+\hyperlink{class_buffer}{Buffer}$<$ float $>$ {\bfseries m\+\_\+texture\+\_\+data}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a329be44680fe676fb4308e6395dca1be}\label{class_mesh_storage_a329be44680fe676fb4308e6395dca1be}} 
+\hyperlink{class_buffer}{Buffer}$<$ float $>$ {\bfseries m\+\_\+lightmap\+\_\+data}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a0c820671c0393cac9641e092d7a0d84d}\label{class_mesh_storage_a0c820671c0393cac9641e092d7a0d84d}} 
+\hyperlink{class_buffer}{Buffer}$<$ \hyperlink{struct_mesh_material}{Mesh\+Material} $>$ {\bfseries m\+\_\+materials}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a4204905bb48e7083b98d109549271416}\label{class_mesh_storage_a4204905bb48e7083b98d109549271416}} 
+\hyperlink{class_buffer}{Buffer}$<$ char $>$ {\bfseries m\+\_\+material\+\_\+names}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a9058557ccd7b26dc4ec07da42041ba5e}\label{class_mesh_storage_a9058557ccd7b26dc4ec07da42041ba5e}} 
+\hyperlink{class_buffer}{Buffer}$<$ int $>$ {\bfseries m\+\_\+material\+\_\+name\+\_\+offsets}
+\end{DoxyCompactItemize}
+\subsection*{Static Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a2c7de566b76991ab1c2a164c8aeeef35}\label{class_mesh_storage_a2c7de566b76991ab1c2a164c8aeeef35}} 
+static const uint32 {\bfseries V\+E\+R\+T\+E\+X\+\_\+\+T\+R\+I\+A\+N\+G\+L\+E\+\_\+\+S\+I\+ZE} = Mesh\+View\+::\+V\+E\+R\+T\+E\+X\+\_\+\+T\+R\+I\+A\+N\+G\+L\+E\+\_\+\+S\+I\+ZE
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a5386a8b4ef710ee288eae8d36f0c00c9}\label{class_mesh_storage_a5386a8b4ef710ee288eae8d36f0c00c9}} 
+static const uint32 {\bfseries N\+O\+R\+M\+A\+L\+\_\+\+T\+R\+I\+A\+N\+G\+L\+E\+\_\+\+S\+I\+ZE} = Mesh\+View\+::\+N\+O\+R\+M\+A\+L\+\_\+\+T\+R\+I\+A\+N\+G\+L\+E\+\_\+\+S\+I\+ZE
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a0f0e6fea91d1974881285f39d34988ab}\label{class_mesh_storage_a0f0e6fea91d1974881285f39d34988ab}} 
+static const uint32 {\bfseries T\+E\+X\+T\+U\+R\+E\+\_\+\+T\+R\+I\+A\+N\+G\+L\+E\+\_\+\+S\+I\+ZE} = Mesh\+View\+::\+T\+E\+X\+T\+U\+R\+E\+\_\+\+T\+R\+I\+A\+N\+G\+L\+E\+\_\+\+S\+I\+ZE
+\item 
+\mbox{\Hypertarget{class_mesh_storage_a791c914f7f07963836914dcc87c14a98}\label{class_mesh_storage_a791c914f7f07963836914dcc87c14a98}} 
+static const uint32 {\bfseries L\+I\+G\+H\+T\+M\+A\+P\+\_\+\+T\+R\+I\+A\+N\+G\+L\+E\+\_\+\+S\+I\+ZE} = Mesh\+View\+::\+L\+I\+G\+H\+T\+M\+A\+P\+\_\+\+T\+R\+I\+A\+N\+G\+L\+E\+\_\+\+S\+I\+ZE
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/mesh/Mesh\+Storage.\+h\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/mesh/Mesh\+Storage.\+cpp\end{DoxyCompactItemize}

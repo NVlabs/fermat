@@ -1,0 +1,164 @@
+\hypertarget{structnih_1_1cuda_1_1_binned__sah__builder}{}\section{nih\+:\+:cuda\+:\+:Binned\+\_\+sah\+\_\+builder Struct Reference}
+\label{structnih_1_1cuda_1_1_binned__sah__builder}\index{nih\+::cuda\+::\+Binned\+\_\+sah\+\_\+builder@{nih\+::cuda\+::\+Binned\+\_\+sah\+\_\+builder}}
+
+
+\subsection{Detailed description}
+G\+P\+U-\/based binned S\+AH B\+VH builder.
+
+This builders provides the context to generate a bounding volume hierarchy using the binned Surface Area Heuristic out of a generic set of unsorted bounding boxes. 
+
+{\ttfamily \#include $<$binned\+\_\+sah\+\_\+builder.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structnih_1_1cuda_1_1_binned__sah__builder_a554246500d49d52401d258d3bb26ba6a}\label{structnih_1_1cuda_1_1_binned__sah__builder_a554246500d49d52401d258d3bb26ba6a}} 
+typedef \hyperlink{structnih_1_1cuda_1_1binned__sah_1_1_bin}{binned\+\_\+sah\+::\+Bin} {\bfseries Bin}
+\item 
+\mbox{\Hypertarget{structnih_1_1cuda_1_1_binned__sah__builder_ac01ca50df0ebd0c560e9c800adcef6c3}\label{structnih_1_1cuda_1_1_binned__sah__builder_ac01ca50df0ebd0c560e9c800adcef6c3}} 
+typedef \hyperlink{structnih_1_1cuda_1_1binned__sah_1_1_bbox}{binned\+\_\+sah\+::\+Bbox} {\bfseries Bbox}
+\item 
+\mbox{\Hypertarget{structnih_1_1cuda_1_1_binned__sah__builder_afbe5b0cc5e44ee0728ece73979df0bf5}\label{structnih_1_1cuda_1_1_binned__sah__builder_afbe5b0cc5e44ee0728ece73979df0bf5}} 
+typedef \hyperlink{structnih_1_1cuda_1_1binned__sah_1_1_split}{binned\+\_\+sah\+::\+Split} {\bfseries Split}
+\item 
+\mbox{\Hypertarget{structnih_1_1cuda_1_1_binned__sah__builder_ae39fd7cb95dcceddf4ad19a2680370f6}\label{structnih_1_1cuda_1_1_binned__sah__builder_ae39fd7cb95dcceddf4ad19a2680370f6}} 
+typedef \hyperlink{structnih_1_1cuda_1_1binned__sah_1_1_queue}{binned\+\_\+sah\+::\+Queue} {\bfseries Queue}
+\item 
+\mbox{\Hypertarget{structnih_1_1cuda_1_1_binned__sah__builder_a0fb222ee587dd4e8977bc6b73dc423b5}\label{structnih_1_1cuda_1_1_binned__sah__builder_a0fb222ee587dd4e8977bc6b73dc423b5}} 
+typedef \hyperlink{structnih_1_1cuda_1_1binned__sah_1_1_objects}{binned\+\_\+sah\+::\+Objects} {\bfseries Objects}
+\item 
+\mbox{\Hypertarget{structnih_1_1cuda_1_1_binned__sah__builder_a9b763e41dcd445d72fd86c15bf46fd48}\label{structnih_1_1cuda_1_1_binned__sah__builder_a9b763e41dcd445d72fd86c15bf46fd48}} 
+typedef \hyperlink{structnih_1_1cuda_1_1binned__sah_1_1_bins}{binned\+\_\+sah\+::\+Bins} {\bfseries Bins}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structnih_1_1cuda_1_1_binned__sah__builder_aa63d7a78d801ae4bf48f61cc84733de8}{Binned\+\_\+sah\+\_\+builder} (thrust\+::device\+\_\+vector$<$ Bvh\+\_\+node $>$ \&nodes, thrust\+::device\+\_\+vector$<$ uint2 $>$ \&leaves, thrust\+::device\+\_\+vector$<$ uint32 $>$ \&index)
+\item 
+{\footnotesize template$<$typename Iterator $>$ }\\void \hyperlink{structnih_1_1cuda_1_1_binned__sah__builder_a7ca217a25c11788754ccdccfef056e65}{build} (const uint32 B\+I\+NS, const Bbox3f bbox, const Iterator bbox\+\_\+begin, const Iterator bbox\+\_\+end, const Iterator h\+\_\+bbox\+\_\+begin, const uint32 max\+\_\+leaf\+\_\+size, const float max\+\_\+cost=1.\+8f)
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structnih_1_1cuda_1_1_binned__sah__builder_a622cb42800e5ee4b2e7d7047b2d6a450}\label{structnih_1_1cuda_1_1_binned__sah__builder_a622cb42800e5ee4b2e7d7047b2d6a450}} 
+thrust\+::device\+\_\+vector$<$ Bvh\+\_\+node $>$ $\ast$ {\bfseries m\+\_\+nodes}
+\item 
+\mbox{\Hypertarget{structnih_1_1cuda_1_1_binned__sah__builder_ab82b4f8c71cc0a28aaf3aff2fde1b2a3}\label{structnih_1_1cuda_1_1_binned__sah__builder_ab82b4f8c71cc0a28aaf3aff2fde1b2a3}} 
+thrust\+::device\+\_\+vector$<$ uint2 $>$ $\ast$ {\bfseries m\+\_\+leaves}
+\item 
+\mbox{\Hypertarget{structnih_1_1cuda_1_1_binned__sah__builder_a4c533ca91518655498ceae8a8611dd88}\label{structnih_1_1cuda_1_1_binned__sah__builder_a4c533ca91518655498ceae8a8611dd88}} 
+thrust\+::device\+\_\+vector$<$ uint32 $>$ $\ast$ {\bfseries m\+\_\+index}
+\item 
+\mbox{\Hypertarget{structnih_1_1cuda_1_1_binned__sah__builder_ad2cba49707900fa31a015dcb432fa80d}\label{structnih_1_1cuda_1_1_binned__sah__builder_ad2cba49707900fa31a015dcb432fa80d}} 
+uint32 {\bfseries m\+\_\+levels} \mbox{[}128\mbox{]}
+\item 
+\mbox{\Hypertarget{structnih_1_1cuda_1_1_binned__sah__builder_a78d373a27961b471aa5fbdfc86b2c08f}\label{structnih_1_1cuda_1_1_binned__sah__builder_a78d373a27961b471aa5fbdfc86b2c08f}} 
+uint32 {\bfseries m\+\_\+level\+\_\+count}
+\item 
+\mbox{\Hypertarget{structnih_1_1cuda_1_1_binned__sah__builder_a7fa0f1ed12903bee53cfc6504913d5f8}\label{structnih_1_1cuda_1_1_binned__sah__builder_a7fa0f1ed12903bee53cfc6504913d5f8}} 
+Bbox3f {\bfseries m\+\_\+bbox}
+\item 
+\mbox{\Hypertarget{structnih_1_1cuda_1_1_binned__sah__builder_a28681b805d3b1b4eb4875827758b82e9}\label{structnih_1_1cuda_1_1_binned__sah__builder_a28681b805d3b1b4eb4875827758b82e9}} 
+uint32 {\bfseries m\+\_\+node\+\_\+count}
+\item 
+\mbox{\Hypertarget{structnih_1_1cuda_1_1_binned__sah__builder_a5b71b3b0d4789254f8f4495b1f37c632}\label{structnih_1_1cuda_1_1_binned__sah__builder_a5b71b3b0d4789254f8f4495b1f37c632}} 
+uint32 {\bfseries m\+\_\+leaf\+\_\+count}
+\item 
+\mbox{\Hypertarget{structnih_1_1cuda_1_1_binned__sah__builder_a9ab744938b3c86f84ec0e86375f0fb1b}\label{structnih_1_1cuda_1_1_binned__sah__builder_a9ab744938b3c86f84ec0e86375f0fb1b}} 
+float {\bfseries m\+\_\+init\+\_\+bins\+\_\+time}
+\item 
+\mbox{\Hypertarget{structnih_1_1cuda_1_1_binned__sah__builder_a3734bb6f4ddcf49e518014af63eaae4d}\label{structnih_1_1cuda_1_1_binned__sah__builder_a3734bb6f4ddcf49e518014af63eaae4d}} 
+float {\bfseries m\+\_\+update\+\_\+bins\+\_\+time}
+\item 
+\mbox{\Hypertarget{structnih_1_1cuda_1_1_binned__sah__builder_ad6afff198a6fd6b70364403be6d504ee}\label{structnih_1_1cuda_1_1_binned__sah__builder_ad6afff198a6fd6b70364403be6d504ee}} 
+float {\bfseries m\+\_\+sah\+\_\+split\+\_\+time}
+\item 
+\mbox{\Hypertarget{structnih_1_1cuda_1_1_binned__sah__builder_a3eff9293ede073c20c83d570cd52338f}\label{structnih_1_1cuda_1_1_binned__sah__builder_a3eff9293ede073c20c83d570cd52338f}} 
+float {\bfseries m\+\_\+distribute\+\_\+objects\+\_\+time}
+\item 
+\mbox{\Hypertarget{structnih_1_1cuda_1_1_binned__sah__builder_a284ef326abe8fd633192902b2d53b171}\label{structnih_1_1cuda_1_1_binned__sah__builder_a284ef326abe8fd633192902b2d53b171}} 
+thrust\+::device\+\_\+vector$<$ float3 $>$ {\bfseries m\+\_\+bin\+\_\+bmin}
+\item 
+\mbox{\Hypertarget{structnih_1_1cuda_1_1_binned__sah__builder_a8ba8a88ee4d3b73a3ac8438297aea3a9}\label{structnih_1_1cuda_1_1_binned__sah__builder_a8ba8a88ee4d3b73a3ac8438297aea3a9}} 
+thrust\+::device\+\_\+vector$<$ float3 $>$ {\bfseries m\+\_\+bin\+\_\+bmax}
+\item 
+\mbox{\Hypertarget{structnih_1_1cuda_1_1_binned__sah__builder_ace5bd10ed06c7427164b47148a4db972}\label{structnih_1_1cuda_1_1_binned__sah__builder_ace5bd10ed06c7427164b47148a4db972}} 
+thrust\+::device\+\_\+vector$<$ int32 $>$ {\bfseries m\+\_\+bin\+\_\+size}
+\item 
+\mbox{\Hypertarget{structnih_1_1cuda_1_1_binned__sah__builder_abe7812e41306dcb14e2d893bed3a997c}\label{structnih_1_1cuda_1_1_binned__sah__builder_abe7812e41306dcb14e2d893bed3a997c}} 
+thrust\+::device\+\_\+vector$<$ \hyperlink{structnih_1_1cuda_1_1binned__sah_1_1_bin}{Bin} $>$ {\bfseries m\+\_\+queue\+\_\+bins}
+\item 
+\mbox{\Hypertarget{structnih_1_1cuda_1_1_binned__sah__builder_a7e9b9e16f2802e106fdcb12c9dbdb031}\label{structnih_1_1cuda_1_1_binned__sah__builder_a7e9b9e16f2802e106fdcb12c9dbdb031}} 
+thrust\+::device\+\_\+vector$<$ \hyperlink{structnih_1_1cuda_1_1binned__sah_1_1_split}{Split} $>$ {\bfseries m\+\_\+queue\+\_\+splits}
+\item 
+\mbox{\Hypertarget{structnih_1_1cuda_1_1_binned__sah__builder_a276eeb44bed867172c818c4f256c9b12}\label{structnih_1_1cuda_1_1_binned__sah__builder_a276eeb44bed867172c818c4f256c9b12}} 
+thrust\+::device\+\_\+vector$<$ uint32 $>$ {\bfseries m\+\_\+queue\+\_\+offsets}
+\item 
+\mbox{\Hypertarget{structnih_1_1cuda_1_1_binned__sah__builder_a949b3b856a6e0fb81b5be169768e3b68}\label{structnih_1_1cuda_1_1_binned__sah__builder_a949b3b856a6e0fb81b5be169768e3b68}} 
+thrust\+::device\+\_\+vector$<$ int4 $>$ {\bfseries m\+\_\+bin\+\_\+ids}
+\item 
+\mbox{\Hypertarget{structnih_1_1cuda_1_1_binned__sah__builder_aa6475cf583a04104307b4fb62d13c738}\label{structnih_1_1cuda_1_1_binned__sah__builder_aa6475cf583a04104307b4fb62d13c738}} 
+thrust\+::device\+\_\+vector$<$ int32 $>$ {\bfseries m\+\_\+split\+\_\+ids}
+\item 
+\mbox{\Hypertarget{structnih_1_1cuda_1_1_binned__sah__builder_a0ee10cc2841c1cce7250db6c3d25f4d7}\label{structnih_1_1cuda_1_1_binned__sah__builder_a0ee10cc2841c1cce7250db6c3d25f4d7}} 
+thrust\+::device\+\_\+vector$<$ int32 $>$ {\bfseries m\+\_\+node\+\_\+ids}
+\item 
+\mbox{\Hypertarget{structnih_1_1cuda_1_1_binned__sah__builder_a64720f7846a23e8b928bf893a7c7542d}\label{structnih_1_1cuda_1_1_binned__sah__builder_a64720f7846a23e8b928bf893a7c7542d}} 
+thrust\+::device\+\_\+vector$<$ uint32 $>$ {\bfseries m\+\_\+new\+\_\+pos}
+\item 
+\mbox{\Hypertarget{structnih_1_1cuda_1_1_binned__sah__builder_accf758923f191a318793f5f46d0895d2}\label{structnih_1_1cuda_1_1_binned__sah__builder_accf758923f191a318793f5f46d0895d2}} 
+thrust\+::device\+\_\+vector$<$ uint32 $>$ {\bfseries m\+\_\+counters}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structnih_1_1cuda_1_1_binned__sah__builder_aa63d7a78d801ae4bf48f61cc84733de8}\label{structnih_1_1cuda_1_1_binned__sah__builder_aa63d7a78d801ae4bf48f61cc84733de8}} 
+\index{nih\+::cuda\+::\+Binned\+\_\+sah\+\_\+builder@{nih\+::cuda\+::\+Binned\+\_\+sah\+\_\+builder}!Binned\+\_\+sah\+\_\+builder@{Binned\+\_\+sah\+\_\+builder}}
+\index{Binned\+\_\+sah\+\_\+builder@{Binned\+\_\+sah\+\_\+builder}!nih\+::cuda\+::\+Binned\+\_\+sah\+\_\+builder@{nih\+::cuda\+::\+Binned\+\_\+sah\+\_\+builder}}
+\subsubsection{\texorpdfstring{Binned\+\_\+sah\+\_\+builder()}{Binned\_sah\_builder()}}
+{\footnotesize\ttfamily nih\+::cuda\+::\+Binned\+\_\+sah\+\_\+builder\+::\+Binned\+\_\+sah\+\_\+builder (\begin{DoxyParamCaption}\item[{thrust\+::device\+\_\+vector$<$ Bvh\+\_\+node $>$ \&}]{nodes,  }\item[{thrust\+::device\+\_\+vector$<$ uint2 $>$ \&}]{leaves,  }\item[{thrust\+::device\+\_\+vector$<$ uint32 $>$ \&}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em nodes} & output nodes array \\
+\hline
+{\em leaves} & output leaf array \\
+\hline
+{\em index} & output index array \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structnih_1_1cuda_1_1_binned__sah__builder_a7ca217a25c11788754ccdccfef056e65}\label{structnih_1_1cuda_1_1_binned__sah__builder_a7ca217a25c11788754ccdccfef056e65}} 
+\index{nih\+::cuda\+::\+Binned\+\_\+sah\+\_\+builder@{nih\+::cuda\+::\+Binned\+\_\+sah\+\_\+builder}!build@{build}}
+\index{build@{build}!nih\+::cuda\+::\+Binned\+\_\+sah\+\_\+builder@{nih\+::cuda\+::\+Binned\+\_\+sah\+\_\+builder}}
+\subsubsection{\texorpdfstring{build()}{build()}}
+{\footnotesize\ttfamily template$<$typename Iterator $>$ \\
+void nih\+::cuda\+::\+Binned\+\_\+sah\+\_\+builder\+::build (\begin{DoxyParamCaption}\item[{const uint32}]{B\+I\+NS,  }\item[{const Bbox3f}]{bbox,  }\item[{const Iterator}]{bbox\+\_\+begin,  }\item[{const Iterator}]{bbox\+\_\+end,  }\item[{const Iterator}]{h\+\_\+bbox\+\_\+begin,  }\item[{const uint32}]{max\+\_\+leaf\+\_\+size,  }\item[{const float}]{max\+\_\+cost = {\ttfamily 1.8f} }\end{DoxyParamCaption})}
+
+build a bvh given a set of bboxes
+
+
+\begin{DoxyParams}{Parameters}
+{\em B\+I\+NS} & number of bins to use \\
+\hline
+{\em bbox} & global bbox \\
+\hline
+{\em bbox\+\_\+begin} & beginning of the bbox sequence \\
+\hline
+{\em bbox\+\_\+end} & end of the bbox sequence \\
+\hline
+{\em max\+\_\+leaf\+\_\+size} & maximum leaf size \\
+\hline
+{\em max\+\_\+cost} & maximum cost relative to the parent \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bvh/cuda/binned\+\_\+sah\+\_\+builder.\+h\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bvh/cuda/binned\+\_\+sah\+\_\+builder\+\_\+inline.\+h\end{DoxyCompactItemize}

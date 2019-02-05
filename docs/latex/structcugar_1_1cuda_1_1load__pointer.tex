@@ -1,0 +1,188 @@
+\hypertarget{structcugar_1_1cuda_1_1load__pointer}{}\section{cugar\+:\+:cuda\+:\+:load\+\_\+pointer$<$ T, M\+OD $>$ Struct Template Reference}
+\label{structcugar_1_1cuda_1_1load__pointer}\index{cugar\+::cuda\+::load\+\_\+pointer$<$ T, M\+O\+D $>$@{cugar\+::cuda\+::load\+\_\+pointer$<$ T, M\+O\+D $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$typename T, Cache\+Load\+Modifier M\+OD$>$\newline
+struct cugar\+::cuda\+::load\+\_\+pointer$<$ T, M\+O\+D $>$}
+
+Wrapper class to create a cub\+::\+Thread\+Load iterator out of a raw pointer 
+
+{\ttfamily \#include $<$pointers.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1load__pointer_ad5342d667cd2bf3a09a671d41f95bd02}\label{structcugar_1_1cuda_1_1load__pointer_ad5342d667cd2bf3a09a671d41f95bd02}} 
+typedef T {\bfseries value\+\_\+type}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1load__pointer_a760402ce01d3fb864822ef936a53ecd8}\label{structcugar_1_1cuda_1_1load__pointer_a760402ce01d3fb864822ef936a53ecd8}} 
+typedef value\+\_\+type {\bfseries reference}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1load__pointer_a77e4111ae19242253876186dea7ce7f6}\label{structcugar_1_1cuda_1_1load__pointer_a77e4111ae19242253876186dea7ce7f6}} 
+typedef value\+\_\+type {\bfseries const\+\_\+reference}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1load__pointer_a7e70a15fd36847c2839aafdea78b5cb1}\label{structcugar_1_1cuda_1_1load__pointer_a7e70a15fd36847c2839aafdea78b5cb1}} 
+typedef value\+\_\+type $\ast$ {\bfseries pointer}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1load__pointer_a6e32c5fbeef7e45cafc81635b55463ff}\label{structcugar_1_1cuda_1_1load__pointer_a6e32c5fbeef7e45cafc81635b55463ff}} 
+typedef std\+::iterator\+\_\+traits$<$ const T $\ast$ $>$\+::difference\+\_\+type {\bfseries difference\+\_\+type}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1load__pointer_a136446b699486eafe979c52564168e0c}\label{structcugar_1_1cuda_1_1load__pointer_a136446b699486eafe979c52564168e0c}} 
+typedef std\+::random\+\_\+access\+\_\+iterator\+\_\+tag {\bfseries iterator\+\_\+category}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1load__pointer_aebee99efd0b548b9e54dcc2498109e7a}{load\+\_\+pointer} ()
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1load__pointer_a684b97c03124b110d126968f8bd98e16}{load\+\_\+pointer} (const T $\ast$base)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1load__pointer_a45b240775f177348dfea497c4bfa0458}{load\+\_\+pointer} (const \hyperlink{structcugar_1_1cuda_1_1load__pointer}{load\+\_\+pointer} \&it)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE value\+\_\+type \hyperlink{structcugar_1_1cuda_1_1load__pointer_a3620c30f2a6a81ece2a5e2cfcb3a994a}{operator\mbox{[}$\,$\mbox{]}} (const uint32 i) const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE value\+\_\+type \hyperlink{structcugar_1_1cuda_1_1load__pointer_aba233f41477ba21ed512217b2d7303a1}{operator$\ast$} () const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1load__pointer}{load\+\_\+pointer}$<$ T, M\+OD $>$ \& \hyperlink{structcugar_1_1cuda_1_1load__pointer_a404a1717ac8b334bdc235f523023a7a4}{operator++} ()
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1load__pointer}{load\+\_\+pointer}$<$ T, M\+OD $>$ \hyperlink{structcugar_1_1cuda_1_1load__pointer_ad5e951fdcb006c251a6402d085b77bdf}{operator++} (int i)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1load__pointer}{load\+\_\+pointer}$<$ T, M\+OD $>$ \& \hyperlink{structcugar_1_1cuda_1_1load__pointer_acd86b4b8a108df5a57181ab06633b781}{operator-\/-\/} ()
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1load__pointer}{load\+\_\+pointer}$<$ T, M\+OD $>$ \hyperlink{structcugar_1_1cuda_1_1load__pointer_afbac0cb3cc367c03f6f2922c330466f0}{operator-\/-\/} (int i)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1load__pointer}{load\+\_\+pointer}$<$ T, M\+OD $>$ \hyperlink{structcugar_1_1cuda_1_1load__pointer_a58594b15a0226632322e99011e19d4e0}{operator+} (const difference\+\_\+type i) const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1load__pointer}{load\+\_\+pointer}$<$ T, M\+OD $>$ \hyperlink{structcugar_1_1cuda_1_1load__pointer_ac49a87d9735d0cfa86515294c55ca378}{operator-\/} (const difference\+\_\+type i) const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1load__pointer}{load\+\_\+pointer}$<$ T, M\+OD $>$ \& \hyperlink{structcugar_1_1cuda_1_1load__pointer_ab010c8162c81964d682999df8475274c}{operator+=} (const difference\+\_\+type i)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1load__pointer}{load\+\_\+pointer}$<$ T, M\+OD $>$ \& \hyperlink{structcugar_1_1cuda_1_1load__pointer_a3f0eaa22c27c01573d432839c2210d83}{operator-\/=} (const difference\+\_\+type i)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE difference\+\_\+type \hyperlink{structcugar_1_1cuda_1_1load__pointer_aec49fd99699c175338bd322b9d2dc419}{operator-\/} (const \hyperlink{structcugar_1_1cuda_1_1load__pointer}{load\+\_\+pointer}$<$ T, M\+OD $>$ it) const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1load__pointer}{load\+\_\+pointer} \& \hyperlink{structcugar_1_1cuda_1_1load__pointer_a93990ba2e43e2b4843b5f480c2881e53}{operator=} (const \hyperlink{structcugar_1_1cuda_1_1load__pointer}{load\+\_\+pointer}$<$ T, M\+OD $>$ \&it)
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1load__pointer_a26a310bffb0428e3c82f0d2662907e4c}\label{structcugar_1_1cuda_1_1load__pointer_a26a310bffb0428e3c82f0d2662907e4c}} 
+const T $\ast$ {\bfseries m\+\_\+base}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1load__pointer_aebee99efd0b548b9e54dcc2498109e7a}\label{structcugar_1_1cuda_1_1load__pointer_aebee99efd0b548b9e54dcc2498109e7a}} 
+\index{cugar\+::cuda\+::load\+\_\+pointer@{cugar\+::cuda\+::load\+\_\+pointer}!load\+\_\+pointer@{load\+\_\+pointer}}
+\index{load\+\_\+pointer@{load\+\_\+pointer}!cugar\+::cuda\+::load\+\_\+pointer@{cugar\+::cuda\+::load\+\_\+pointer}}
+\subsubsection{\texorpdfstring{load\+\_\+pointer()}{load\_pointer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename T, Cache\+Load\+Modifier M\+OD$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1load__pointer}{cugar\+::cuda\+::load\+\_\+pointer}$<$ T, M\+OD $>$\+::\hyperlink{structcugar_1_1cuda_1_1load__pointer}{load\+\_\+pointer} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor \mbox{\Hypertarget{structcugar_1_1cuda_1_1load__pointer_a684b97c03124b110d126968f8bd98e16}\label{structcugar_1_1cuda_1_1load__pointer_a684b97c03124b110d126968f8bd98e16}} 
+\index{cugar\+::cuda\+::load\+\_\+pointer@{cugar\+::cuda\+::load\+\_\+pointer}!load\+\_\+pointer@{load\+\_\+pointer}}
+\index{load\+\_\+pointer@{load\+\_\+pointer}!cugar\+::cuda\+::load\+\_\+pointer@{cugar\+::cuda\+::load\+\_\+pointer}}
+\subsubsection{\texorpdfstring{load\+\_\+pointer()}{load\_pointer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$typename T, Cache\+Load\+Modifier M\+OD$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1load__pointer}{cugar\+::cuda\+::load\+\_\+pointer}$<$ T, M\+OD $>$\+::\hyperlink{structcugar_1_1cuda_1_1load__pointer}{load\+\_\+pointer} (\begin{DoxyParamCaption}\item[{const T $\ast$}]{base }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor \mbox{\Hypertarget{structcugar_1_1cuda_1_1load__pointer_a45b240775f177348dfea497c4bfa0458}\label{structcugar_1_1cuda_1_1load__pointer_a45b240775f177348dfea497c4bfa0458}} 
+\index{cugar\+::cuda\+::load\+\_\+pointer@{cugar\+::cuda\+::load\+\_\+pointer}!load\+\_\+pointer@{load\+\_\+pointer}}
+\index{load\+\_\+pointer@{load\+\_\+pointer}!cugar\+::cuda\+::load\+\_\+pointer@{cugar\+::cuda\+::load\+\_\+pointer}}
+\subsubsection{\texorpdfstring{load\+\_\+pointer()}{load\_pointer()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename T, Cache\+Load\+Modifier M\+OD$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1load__pointer}{cugar\+::cuda\+::load\+\_\+pointer}$<$ T, M\+OD $>$\+::\hyperlink{structcugar_1_1cuda_1_1load__pointer}{load\+\_\+pointer} (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1cuda_1_1load__pointer}{load\+\_\+pointer}$<$ T, M\+OD $>$ \&}]{it }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+copy constructor 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1load__pointer_aba233f41477ba21ed512217b2d7303a1}\label{structcugar_1_1cuda_1_1load__pointer_aba233f41477ba21ed512217b2d7303a1}} 
+\index{cugar\+::cuda\+::load\+\_\+pointer@{cugar\+::cuda\+::load\+\_\+pointer}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!cugar\+::cuda\+::load\+\_\+pointer@{cugar\+::cuda\+::load\+\_\+pointer}}
+\subsubsection{\texorpdfstring{operator$\ast$()}{operator*()}}
+{\footnotesize\ttfamily template$<$typename T, Cache\+Load\+Modifier M\+OD$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE value\+\_\+type \hyperlink{structcugar_1_1cuda_1_1load__pointer}{cugar\+::cuda\+::load\+\_\+pointer}$<$ T, M\+OD $>$\+::operator$\ast$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+dereference operator \mbox{\Hypertarget{structcugar_1_1cuda_1_1load__pointer_a58594b15a0226632322e99011e19d4e0}\label{structcugar_1_1cuda_1_1load__pointer_a58594b15a0226632322e99011e19d4e0}} 
+\index{cugar\+::cuda\+::load\+\_\+pointer@{cugar\+::cuda\+::load\+\_\+pointer}!operator+@{operator+}}
+\index{operator+@{operator+}!cugar\+::cuda\+::load\+\_\+pointer@{cugar\+::cuda\+::load\+\_\+pointer}}
+\subsubsection{\texorpdfstring{operator+()}{operator+()}}
+{\footnotesize\ttfamily template$<$typename T, Cache\+Load\+Modifier M\+OD$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1load__pointer}{load\+\_\+pointer}$<$T,M\+OD$>$ \hyperlink{structcugar_1_1cuda_1_1load__pointer}{cugar\+::cuda\+::load\+\_\+pointer}$<$ T, M\+OD $>$\+::operator+ (\begin{DoxyParamCaption}\item[{const difference\+\_\+type}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+addition \mbox{\Hypertarget{structcugar_1_1cuda_1_1load__pointer_a404a1717ac8b334bdc235f523023a7a4}\label{structcugar_1_1cuda_1_1load__pointer_a404a1717ac8b334bdc235f523023a7a4}} 
+\index{cugar\+::cuda\+::load\+\_\+pointer@{cugar\+::cuda\+::load\+\_\+pointer}!operator++@{operator++}}
+\index{operator++@{operator++}!cugar\+::cuda\+::load\+\_\+pointer@{cugar\+::cuda\+::load\+\_\+pointer}}
+\subsubsection{\texorpdfstring{operator++()}{operator++()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T, Cache\+Load\+Modifier M\+OD$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1load__pointer}{load\+\_\+pointer}$<$T,M\+OD$>$\& \hyperlink{structcugar_1_1cuda_1_1load__pointer}{cugar\+::cuda\+::load\+\_\+pointer}$<$ T, M\+OD $>$\+::operator++ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+pre-\/increment \mbox{\Hypertarget{structcugar_1_1cuda_1_1load__pointer_ad5e951fdcb006c251a6402d085b77bdf}\label{structcugar_1_1cuda_1_1load__pointer_ad5e951fdcb006c251a6402d085b77bdf}} 
+\index{cugar\+::cuda\+::load\+\_\+pointer@{cugar\+::cuda\+::load\+\_\+pointer}!operator++@{operator++}}
+\index{operator++@{operator++}!cugar\+::cuda\+::load\+\_\+pointer@{cugar\+::cuda\+::load\+\_\+pointer}}
+\subsubsection{\texorpdfstring{operator++()}{operator++()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T, Cache\+Load\+Modifier M\+OD$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1load__pointer}{load\+\_\+pointer}$<$T,M\+OD$>$ \hyperlink{structcugar_1_1cuda_1_1load__pointer}{cugar\+::cuda\+::load\+\_\+pointer}$<$ T, M\+OD $>$\+::operator++ (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+post-\/increment \mbox{\Hypertarget{structcugar_1_1cuda_1_1load__pointer_ab010c8162c81964d682999df8475274c}\label{structcugar_1_1cuda_1_1load__pointer_ab010c8162c81964d682999df8475274c}} 
+\index{cugar\+::cuda\+::load\+\_\+pointer@{cugar\+::cuda\+::load\+\_\+pointer}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!cugar\+::cuda\+::load\+\_\+pointer@{cugar\+::cuda\+::load\+\_\+pointer}}
+\subsubsection{\texorpdfstring{operator+=()}{operator+=()}}
+{\footnotesize\ttfamily template$<$typename T, Cache\+Load\+Modifier M\+OD$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1load__pointer}{load\+\_\+pointer}$<$T,M\+OD$>$\& \hyperlink{structcugar_1_1cuda_1_1load__pointer}{cugar\+::cuda\+::load\+\_\+pointer}$<$ T, M\+OD $>$\+::operator+= (\begin{DoxyParamCaption}\item[{const difference\+\_\+type}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+addition \mbox{\Hypertarget{structcugar_1_1cuda_1_1load__pointer_ac49a87d9735d0cfa86515294c55ca378}\label{structcugar_1_1cuda_1_1load__pointer_ac49a87d9735d0cfa86515294c55ca378}} 
+\index{cugar\+::cuda\+::load\+\_\+pointer@{cugar\+::cuda\+::load\+\_\+pointer}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!cugar\+::cuda\+::load\+\_\+pointer@{cugar\+::cuda\+::load\+\_\+pointer}}
+\subsubsection{\texorpdfstring{operator-\/()}{operator-()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T, Cache\+Load\+Modifier M\+OD$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1load__pointer}{load\+\_\+pointer}$<$T,M\+OD$>$ \hyperlink{structcugar_1_1cuda_1_1load__pointer}{cugar\+::cuda\+::load\+\_\+pointer}$<$ T, M\+OD $>$\+::operator-\/ (\begin{DoxyParamCaption}\item[{const difference\+\_\+type}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+subtraction \mbox{\Hypertarget{structcugar_1_1cuda_1_1load__pointer_aec49fd99699c175338bd322b9d2dc419}\label{structcugar_1_1cuda_1_1load__pointer_aec49fd99699c175338bd322b9d2dc419}} 
+\index{cugar\+::cuda\+::load\+\_\+pointer@{cugar\+::cuda\+::load\+\_\+pointer}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!cugar\+::cuda\+::load\+\_\+pointer@{cugar\+::cuda\+::load\+\_\+pointer}}
+\subsubsection{\texorpdfstring{operator-\/()}{operator-()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T, Cache\+Load\+Modifier M\+OD$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE difference\+\_\+type \hyperlink{structcugar_1_1cuda_1_1load__pointer}{cugar\+::cuda\+::load\+\_\+pointer}$<$ T, M\+OD $>$\+::operator-\/ (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1cuda_1_1load__pointer}{load\+\_\+pointer}$<$ T, M\+OD $>$}]{it }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+iterator subtraction \mbox{\Hypertarget{structcugar_1_1cuda_1_1load__pointer_acd86b4b8a108df5a57181ab06633b781}\label{structcugar_1_1cuda_1_1load__pointer_acd86b4b8a108df5a57181ab06633b781}} 
+\index{cugar\+::cuda\+::load\+\_\+pointer@{cugar\+::cuda\+::load\+\_\+pointer}!operator-\/-\/@{operator-\/-\/}}
+\index{operator-\/-\/@{operator-\/-\/}!cugar\+::cuda\+::load\+\_\+pointer@{cugar\+::cuda\+::load\+\_\+pointer}}
+\subsubsection{\texorpdfstring{operator-\/-\/()}{operator--()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T, Cache\+Load\+Modifier M\+OD$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1load__pointer}{load\+\_\+pointer}$<$T,M\+OD$>$\& \hyperlink{structcugar_1_1cuda_1_1load__pointer}{cugar\+::cuda\+::load\+\_\+pointer}$<$ T, M\+OD $>$\+::operator-\/-\/ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+pre-\/decrement \mbox{\Hypertarget{structcugar_1_1cuda_1_1load__pointer_afbac0cb3cc367c03f6f2922c330466f0}\label{structcugar_1_1cuda_1_1load__pointer_afbac0cb3cc367c03f6f2922c330466f0}} 
+\index{cugar\+::cuda\+::load\+\_\+pointer@{cugar\+::cuda\+::load\+\_\+pointer}!operator-\/-\/@{operator-\/-\/}}
+\index{operator-\/-\/@{operator-\/-\/}!cugar\+::cuda\+::load\+\_\+pointer@{cugar\+::cuda\+::load\+\_\+pointer}}
+\subsubsection{\texorpdfstring{operator-\/-\/()}{operator--()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T, Cache\+Load\+Modifier M\+OD$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1load__pointer}{load\+\_\+pointer}$<$T,M\+OD$>$ \hyperlink{structcugar_1_1cuda_1_1load__pointer}{cugar\+::cuda\+::load\+\_\+pointer}$<$ T, M\+OD $>$\+::operator-\/-\/ (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+post-\/decrement \mbox{\Hypertarget{structcugar_1_1cuda_1_1load__pointer_a3f0eaa22c27c01573d432839c2210d83}\label{structcugar_1_1cuda_1_1load__pointer_a3f0eaa22c27c01573d432839c2210d83}} 
+\index{cugar\+::cuda\+::load\+\_\+pointer@{cugar\+::cuda\+::load\+\_\+pointer}!operator-\/=@{operator-\/=}}
+\index{operator-\/=@{operator-\/=}!cugar\+::cuda\+::load\+\_\+pointer@{cugar\+::cuda\+::load\+\_\+pointer}}
+\subsubsection{\texorpdfstring{operator-\/=()}{operator-=()}}
+{\footnotesize\ttfamily template$<$typename T, Cache\+Load\+Modifier M\+OD$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1load__pointer}{load\+\_\+pointer}$<$T,M\+OD$>$\& \hyperlink{structcugar_1_1cuda_1_1load__pointer}{cugar\+::cuda\+::load\+\_\+pointer}$<$ T, M\+OD $>$\+::operator-\/= (\begin{DoxyParamCaption}\item[{const difference\+\_\+type}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+subtraction \mbox{\Hypertarget{structcugar_1_1cuda_1_1load__pointer_a93990ba2e43e2b4843b5f480c2881e53}\label{structcugar_1_1cuda_1_1load__pointer_a93990ba2e43e2b4843b5f480c2881e53}} 
+\index{cugar\+::cuda\+::load\+\_\+pointer@{cugar\+::cuda\+::load\+\_\+pointer}!operator=@{operator=}}
+\index{operator=@{operator=}!cugar\+::cuda\+::load\+\_\+pointer@{cugar\+::cuda\+::load\+\_\+pointer}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$typename T, Cache\+Load\+Modifier M\+OD$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1load__pointer}{load\+\_\+pointer}\& \hyperlink{structcugar_1_1cuda_1_1load__pointer}{cugar\+::cuda\+::load\+\_\+pointer}$<$ T, M\+OD $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1cuda_1_1load__pointer}{load\+\_\+pointer}$<$ T, M\+OD $>$ \&}]{it }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+assignment \mbox{\Hypertarget{structcugar_1_1cuda_1_1load__pointer_a3620c30f2a6a81ece2a5e2cfcb3a994a}\label{structcugar_1_1cuda_1_1load__pointer_a3620c30f2a6a81ece2a5e2cfcb3a994a}} 
+\index{cugar\+::cuda\+::load\+\_\+pointer@{cugar\+::cuda\+::load\+\_\+pointer}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!cugar\+::cuda\+::load\+\_\+pointer@{cugar\+::cuda\+::load\+\_\+pointer}}
+\subsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily template$<$typename T, Cache\+Load\+Modifier M\+OD$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE value\+\_\+type \hyperlink{structcugar_1_1cuda_1_1load__pointer}{cugar\+::cuda\+::load\+\_\+pointer}$<$ T, M\+OD $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const uint32}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+const indexing operator 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/cuda/pointers.\+h\end{DoxyCompactItemize}

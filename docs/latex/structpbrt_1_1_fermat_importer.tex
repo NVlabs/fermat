@@ -1,0 +1,155 @@
+\hypertarget{structpbrt_1_1_fermat_importer}{}\section{pbrt\+:\+:Fermat\+Importer Struct Reference}
+\label{structpbrt_1_1_fermat_importer}\index{pbrt\+::\+Fermat\+Importer@{pbrt\+::\+Fermat\+Importer}}
+Inheritance diagram for pbrt\+:\+:Fermat\+Importer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{structpbrt_1_1_fermat_importer}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_acdbdff3f7886caf8adf31379cd91a03e}\label{structpbrt_1_1_fermat_importer_acdbdff3f7886caf8adf31379cd91a03e}} 
+typedef std\+::map$<$ std\+::string, uint32 $>$ {\bfseries texture\+\_\+map\+\_\+type}
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_a4d69b9003deaf92200f5e44fe625fe59}\label{structpbrt_1_1_fermat_importer_a4d69b9003deaf92200f5e44fe625fe59}} 
+typedef std\+::map$<$ std\+::string, uint32 $>$ {\bfseries material\+\_\+map\+\_\+type}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_ac01d0672a20956f1bfceed58c391a072}\label{structpbrt_1_1_fermat_importer_ac01d0672a20956f1bfceed58c391a072}} 
+{\bfseries Fermat\+Importer} (const char $\ast$filename, \hyperlink{class_mesh_storage}{Mesh\+Storage} $\ast$mesh, \hyperlink{struct_camera}{Camera} $\ast$camera, std\+::vector$<$ \hyperlink{struct_directional_light}{Directional\+Light} $>$ $\ast$dir\+\_\+lights, std\+::vector$<$ std\+::string $>$ $\ast$scene\+\_\+dirs)
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_a629b96e7a653726d1b96de5d3dc06b28}\label{structpbrt_1_1_fermat_importer_a629b96e7a653726d1b96de5d3dc06b28}} 
+virtual void {\bfseries identity} ()
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_a04902349e2bab1814819d26db89e6727}\label{structpbrt_1_1_fermat_importer_a04902349e2bab1814819d26db89e6727}} 
+virtual void {\bfseries transform} (const \hyperlink{structpbrt_1_1_value}{Value} \&floats)
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_a9c99ea82488f03edf2f00cf21bd429e1}\label{structpbrt_1_1_fermat_importer_a9c99ea82488f03edf2f00cf21bd429e1}} 
+virtual void {\bfseries rotate} (const float angle, const float x, const float y, const float z)
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_ad851d9884a79729de1fbb0528b540213}\label{structpbrt_1_1_fermat_importer_ad851d9884a79729de1fbb0528b540213}} 
+virtual void {\bfseries scale} (const float x, const float y, const float z)
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_afe9f3f8a47e6d6fd227fa8bae64b69a9}\label{structpbrt_1_1_fermat_importer_afe9f3f8a47e6d6fd227fa8bae64b69a9}} 
+virtual void {\bfseries translate} (const float x, const float y, const float z)
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_a6d80a936da43f165e0e4ae9a57229eba}\label{structpbrt_1_1_fermat_importer_a6d80a936da43f165e0e4ae9a57229eba}} 
+virtual void {\bfseries look\+\_\+at} (const float ex, const float ey, const float ez, const float lx, const float ly, const float lz, const float ux, const float uy, const float uz)
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_ad9c8ec8e5e1366d8015a07eaa0f08100}\label{structpbrt_1_1_fermat_importer_ad9c8ec8e5e1366d8015a07eaa0f08100}} 
+virtual void {\bfseries integrator} (const char $\ast$name, const \hyperlink{structpbrt_1_1_parameter_list}{Parameter\+List} \&params)
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_a03f4c963396b6e188a91191c506b9674}\label{structpbrt_1_1_fermat_importer_a03f4c963396b6e188a91191c506b9674}} 
+virtual void {\bfseries sampler} (const char $\ast$name, const \hyperlink{structpbrt_1_1_parameter_list}{Parameter\+List} \&params)
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_a1ff854e8246ba489a1a980b0cff38944}\label{structpbrt_1_1_fermat_importer_a1ff854e8246ba489a1a980b0cff38944}} 
+virtual void {\bfseries pixel\+\_\+filter} (const char $\ast$name, const \hyperlink{structpbrt_1_1_parameter_list}{Parameter\+List} \&params)
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_adad7bdd342113af9b3d375748c3967e3}\label{structpbrt_1_1_fermat_importer_adad7bdd342113af9b3d375748c3967e3}} 
+virtual void {\bfseries film} (const char $\ast$name, const \hyperlink{structpbrt_1_1_parameter_list}{Parameter\+List} \&params)
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_a9ada13b8a06738ebbd9beac7c07c7056}\label{structpbrt_1_1_fermat_importer_a9ada13b8a06738ebbd9beac7c07c7056}} 
+virtual void {\bfseries camera} (const char $\ast$name, const \hyperlink{structpbrt_1_1_parameter_list}{Parameter\+List} \&params)
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_a9f214f059c51d29ec4e32324eae148a7}\label{structpbrt_1_1_fermat_importer_a9f214f059c51d29ec4e32324eae148a7}} 
+virtual void {\bfseries world\+\_\+begin} ()
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_a66b6b89c4e09275e5e7e6a8871be91c6}\label{structpbrt_1_1_fermat_importer_a66b6b89c4e09275e5e7e6a8871be91c6}} 
+virtual void {\bfseries world\+\_\+end} ()
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_add5090a1336cf355d38a552d53b1b752}\label{structpbrt_1_1_fermat_importer_add5090a1336cf355d38a552d53b1b752}} 
+virtual void {\bfseries attribute\+\_\+begin} ()
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_a197dbd0d970eba7f5881eed7ccac1fa3}\label{structpbrt_1_1_fermat_importer_a197dbd0d970eba7f5881eed7ccac1fa3}} 
+virtual void {\bfseries attribute\+\_\+end} ()
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_a07226ed16f0ae9c2825659b4d5160451}\label{structpbrt_1_1_fermat_importer_a07226ed16f0ae9c2825659b4d5160451}} 
+virtual void {\bfseries transform\+\_\+begin} ()
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_af6a37344c6acc2bca2e2abad5db0452b}\label{structpbrt_1_1_fermat_importer_af6a37344c6acc2bca2e2abad5db0452b}} 
+virtual void {\bfseries transform\+\_\+end} ()
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_a1a649e7181d04a740ae76cfa90608982}\label{structpbrt_1_1_fermat_importer_a1a649e7181d04a740ae76cfa90608982}} 
+virtual void {\bfseries texture} (const char $\ast$name, const char $\ast$texel\+\_\+type, const char $\ast$texture\+\_\+type, const \hyperlink{structpbrt_1_1_parameter_list}{Parameter\+List} \&params)
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_a759845459708189e797944d1b28ae135}\label{structpbrt_1_1_fermat_importer_a759845459708189e797944d1b28ae135}} 
+virtual void {\bfseries make\+\_\+named\+\_\+medium} (const char $\ast$name, const \hyperlink{structpbrt_1_1_parameter_list}{Parameter\+List} \&params)
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_a803089b10ebf40da89be695659b933de}\label{structpbrt_1_1_fermat_importer_a803089b10ebf40da89be695659b933de}} 
+virtual void {\bfseries make\+\_\+named\+\_\+material} (const char $\ast$name, const \hyperlink{structpbrt_1_1_parameter_list}{Parameter\+List} \&params)
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_ab3f7930db38f6fe7483bb1efb66c9293}\label{structpbrt_1_1_fermat_importer_ab3f7930db38f6fe7483bb1efb66c9293}} 
+virtual void {\bfseries named\+\_\+material} (const char $\ast$name)
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_a49dbdff3adf28f650905c284ae5e8916}\label{structpbrt_1_1_fermat_importer_a49dbdff3adf28f650905c284ae5e8916}} 
+virtual void {\bfseries medium\+\_\+interface} (const char $\ast$name1, const char $\ast$name2)
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_af0943810b0f02c709ca9ffb44de25fbd}\label{structpbrt_1_1_fermat_importer_af0943810b0f02c709ca9ffb44de25fbd}} 
+virtual void {\bfseries material} (const char $\ast$type, const \hyperlink{structpbrt_1_1_parameter_list}{Parameter\+List} \&params)
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_a3d2b8ce677d0a017a6f1e0db8ec5519f}\label{structpbrt_1_1_fermat_importer_a3d2b8ce677d0a017a6f1e0db8ec5519f}} 
+virtual void {\bfseries area\+\_\+light\+\_\+source} (const char $\ast$type, const \hyperlink{structpbrt_1_1_parameter_list}{Parameter\+List} \&params)
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_af838c7165a99353f1dd24f954e199f04}\label{structpbrt_1_1_fermat_importer_af838c7165a99353f1dd24f954e199f04}} 
+virtual void {\bfseries light\+\_\+source} (const char $\ast$type, const \hyperlink{structpbrt_1_1_parameter_list}{Parameter\+List} \&params)
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_ae71d871bfd10584e26f0a99d91ab5443}\label{structpbrt_1_1_fermat_importer_ae71d871bfd10584e26f0a99d91ab5443}} 
+virtual void {\bfseries shape} (const char $\ast$type, const \hyperlink{structpbrt_1_1_parameter_list}{Parameter\+List} \&params)
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_a5f3a7b08d9f67a525ccd9d84e989194c}\label{structpbrt_1_1_fermat_importer_a5f3a7b08d9f67a525ccd9d84e989194c}} 
+void {\bfseries build\+\_\+material} (const char $\ast$type, const \hyperlink{structpbrt_1_1_parameter_list}{Parameter\+List} \&params, \hyperlink{struct_mesh_material}{Mesh\+Material} \&material)
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_a93e2f9172213d074ed630a9e194cff40}\label{structpbrt_1_1_fermat_importer_a93e2f9172213d074ed630a9e194cff40}} 
+void {\bfseries finish} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_aebba36dcc493c854185d842beb3c037b}\label{structpbrt_1_1_fermat_importer_aebba36dcc493c854185d842beb3c037b}} 
+\hyperlink{structpbrt_1_1_film_options}{Film\+Options} {\bfseries m\+\_\+film}
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_a3365085768715733ea57f95564f517a6}\label{structpbrt_1_1_fermat_importer_a3365085768715733ea57f95564f517a6}} 
+\hyperlink{class_mesh_storage}{Mesh\+Storage} $\ast$ {\bfseries m\+\_\+mesh}
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_a4cc226526344ae8c320c2817546f7a0d}\label{structpbrt_1_1_fermat_importer_a4cc226526344ae8c320c2817546f7a0d}} 
+\hyperlink{struct_camera}{Camera} $\ast$ {\bfseries m\+\_\+camera}
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_ad76f30f5b33fad42b6cd1772aea76cba}\label{structpbrt_1_1_fermat_importer_ad76f30f5b33fad42b6cd1772aea76cba}} 
+std\+::vector$<$ \hyperlink{struct_directional_light}{Directional\+Light} $>$ $\ast$ {\bfseries m\+\_\+dir\+\_\+lights}
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_ad8413f2755260e10da7af323701bc9a3}\label{structpbrt_1_1_fermat_importer_ad8413f2755260e10da7af323701bc9a3}} 
+std\+::vector$<$ std\+::string $>$ \& {\bfseries m\+\_\+dirs}
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_aa5fa1f066ad6093015ca8d0dade15587}\label{structpbrt_1_1_fermat_importer_aa5fa1f066ad6093015ca8d0dade15587}} 
+texture\+\_\+map\+\_\+type {\bfseries m\+\_\+texture\+\_\+map}
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_a9a3dda06a3dae04bff14b30da601ab31}\label{structpbrt_1_1_fermat_importer_a9a3dda06a3dae04bff14b30da601ab31}} 
+material\+\_\+map\+\_\+type {\bfseries m\+\_\+material\+\_\+map}
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_aa76c976b638acf08531e1c57a29499b6}\label{structpbrt_1_1_fermat_importer_aa76c976b638acf08531e1c57a29499b6}} 
+std\+::vector$<$ \hyperlink{struct_mesh_material}{Mesh\+Material} $>$ {\bfseries m\+\_\+materials}
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_adadaefa9250f28b897c4da594e9ba216}\label{structpbrt_1_1_fermat_importer_adadaefa9250f28b897c4da594e9ba216}} 
+std\+::vector$<$ std\+::string $>$ {\bfseries m\+\_\+material\+\_\+names}
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_ad41f415f2786bce281d50dc98be136cb}\label{structpbrt_1_1_fermat_importer_ad41f415f2786bce281d50dc98be136cb}} 
+std\+::stack$<$ \hyperlink{structcugar_1_1_matrix}{cugar\+::\+Matrix4x4f} $>$ {\bfseries m\+\_\+transform\+\_\+stack}
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_a7c2690b8b567bcd0ec24395a669584cd}\label{structpbrt_1_1_fermat_importer_a7c2690b8b567bcd0ec24395a669584cd}} 
+std\+::stack$<$ int $>$ {\bfseries m\+\_\+material\+\_\+stack}
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_af008c7132624c12640996fc8bfa78927}\label{structpbrt_1_1_fermat_importer_af008c7132624c12640996fc8bfa78927}} 
+std\+::stack$<$ \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} $>$ {\bfseries m\+\_\+emission\+\_\+stack}
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_fermat_importer_acda30e25bf58809c0203e901359bc169}\label{structpbrt_1_1_fermat_importer_acda30e25bf58809c0203e901359bc169}} 
+int {\bfseries m\+\_\+default\+\_\+material}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/mesh/pbrt\+\_\+importer.\+h\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/mesh/pbrt\+\_\+importer.\+cpp\end{DoxyCompactItemize}

@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -27,21 +27,27 @@
  */
 
 #include <renderer.h>
+#include <renderer_impl.h>
 #include <pathtracer.h>
+#include <rt.h>
 #include <files.h>
 #include <bpt.h>
+#include <mlt.h>
 #include <cmlt.h>
 #include <pssmlt.h>
 #include <rpt.h>
-#include <optix_prime/optix_primepp.h>
-#include <optixu/optixu_matrix.h>
+#include <psfpt.h>
+#include <fermat_loader.h>
+#include <pbrt_importer.h>
 #include <mesh/MeshStorage.h>
 #include <eaw.h>
+#include <xbl.h>
 #include <cugar/basic/cuda/arch.h>
 #include <cugar/basic/cuda/timer.h>
 #include <cugar/basic/primitives.h>
 #include <cugar/basic/functors.h>
 #include <cugar/basic/cuda/sort.h>
+#include <cugar/basic/timer.h>
 #include <cugar/image/tga.h>
 #include <cugar/bsdf/ltc.h>
 #include <buffers.h>
@@ -54,7 +60,7 @@ namespace ltc_ggx
 #include <cugar/bsdf/ltc_ggx.inc>
 };
 
-void load_scene(const char* filename, MeshStorage& mesh, const std::vector<std::string>& dirs, std::vector<std::string>& scene_dirs);
+void load_assimp(const char* filename, MeshStorage& out_mesh, const std::vector<std::string>& dirs, std::vector<std::string>& scene_dirs);
 
 
 //------------------------------------------------------------------------------
@@ -73,7 +79,7 @@ void fill_n(const int n, Buffer<uint32_t>& pixels)
 }
 
 //------------------------------------------------------------------------------
-__global__ void to_rgba_kernel(const RendererView renderer, uint8* rgba)
+__global__ void to_rgba_kernel(const RenderingContextView renderer, uint8* rgba)
 {
 	const uint32 idx = threadIdx.x + blockIdx.x*blockDim.x;
 
@@ -89,10 +95,10 @@ __global__ void to_rgba_kernel(const RendererView renderer, uint8* rgba)
 
 			c *= renderer.exposure; // Hardcoded Exposure Adjustment
 			c = c / (c + cugar::Vector4f(1));
-			c.x = powf(c.x, 1.0f / 2.2f);
-			c.y = powf(c.y, 1.0f / 2.2f);
-			c.z = powf(c.z, 1.0f / 2.2f);
-			c.w = powf(c.w, 1.0f / 2.2f);
+			c.x = powf(c.x, 1.0f / renderer.gamma);
+			c.y = powf(c.y, 1.0f / renderer.gamma);
+			c.z = powf(c.z, 1.0f / renderer.gamma);
+			c.w = powf(c.w, 1.0f / renderer.gamma);
 
 			rgba[idx * 4 + 0] = uint8(fminf(c.x * 256.0f, 255.0f));
 			rgba[idx * 4 + 1] = uint8(fminf(c.y * 256.0f, 255.0f));
@@ -109,10 +115,10 @@ __global__ void to_rgba_kernel(const RendererView renderer, uint8* rgba)
 
 			c *= renderer.exposure; // Hardcoded Exposure Adjustment
 			c = c / (c + cugar::Vector4f(1));
-			c.x = powf(c.x, 1.0f / 2.2f);
-			c.y = powf(c.y, 1.0f / 2.2f);
-			c.z = powf(c.z, 1.0f / 2.2f);
-			c.w = powf(c.w, 1.0f / 2.2f);
+			c.x = powf(c.x, 1.0f / renderer.gamma);
+			c.y = powf(c.y, 1.0f / renderer.gamma);
+			c.z = powf(c.z, 1.0f / renderer.gamma);
+			c.w = powf(c.w, 1.0f / renderer.gamma);
 
 			rgba[idx * 4 + 0] = uint8(fminf(c.x * 256.0f, 255.0f));
 			rgba[idx * 4 + 1] = uint8(fminf(c.y * 256.0f, 255.0f));
@@ -153,10 +159,10 @@ __global__ void to_rgba_kernel(const RendererView renderer, uint8* rgba)
 
 			c *= renderer.exposure; // Hardcoded Exposure Adjustment
 			c = c / (c + cugar::Vector4f(1));
-			c.x = powf(c.x, 1.0f / 2.2f);
-			c.y = powf(c.y, 1.0f / 2.2f);
-			c.z = powf(c.z, 1.0f / 2.2f);
-			c.w = powf(c.w, 1.0f / 2.2f);
+			c.x = powf(c.x, 1.0f / renderer.gamma);
+			c.y = powf(c.y, 1.0f / renderer.gamma);
+			c.z = powf(c.z, 1.0f / renderer.gamma);
+			c.w = powf(c.w, 1.0f / renderer.gamma);
 
 			rgba[idx * 4 + 0] = uint8(fminf(c.x * 256.0f, 255.0f));
 			rgba[idx * 4 + 1] = uint8(fminf(c.y * 256.0f, 255.0f));
@@ -169,10 +175,10 @@ __global__ void to_rgba_kernel(const RendererView renderer, uint8* rgba)
 
 			c *= renderer.exposure; // Hardcoded Exposure Adjustment
 			c = c / (c + cugar::Vector4f(1));
-			c.x = powf(c.x, 1.0f / 2.2f);
-			c.y = powf(c.y, 1.0f / 2.2f);
-			c.z = powf(c.z, 1.0f / 2.2f);
-			c.w = powf(c.w, 1.0f / 2.2f);
+			c.x = powf(c.x, 1.0f / renderer.gamma);
+			c.y = powf(c.y, 1.0f / renderer.gamma);
+			c.z = powf(c.z, 1.0f / renderer.gamma);
+			c.w = powf(c.w, 1.0f / renderer.gamma);
 
 			rgba[idx * 4 + 0] = uint8(fminf(c.x * 256.0f, 255.0f));
 			rgba[idx * 4 + 1] = uint8(fminf(c.y * 256.0f, 255.0f));
@@ -185,10 +191,10 @@ __global__ void to_rgba_kernel(const RendererView renderer, uint8* rgba)
 
 			c *= renderer.exposure; // Hardcoded Exposure Adjustment
 			c = c / (c + cugar::Vector4f(1));
-			c.x = powf(c.x, 1.0f / 2.2f);
-			c.y = powf(c.y, 1.0f / 2.2f);
-			c.z = powf(c.z, 1.0f / 2.2f);
-			c.w = powf(c.w, 1.0f / 2.2f);
+			c.x = powf(c.x, 1.0f / renderer.gamma);
+			c.y = powf(c.y, 1.0f / renderer.gamma);
+			c.z = powf(c.z, 1.0f / renderer.gamma);
+			c.w = powf(c.w, 1.0f / renderer.gamma);
 
 			rgba[idx * 4 + 0] = uint8(fminf(c.x * 256.0f, 255.0f));
 			rgba[idx * 4 + 1] = uint8(fminf(c.y * 256.0f, 255.0f));
@@ -201,12 +207,58 @@ __global__ void to_rgba_kernel(const RendererView renderer, uint8* rgba)
 
 			c *= renderer.exposure; // Hardcoded Exposure Adjustment
 			c = c / (c + 1);
-			c = powf(c, 1.0f / 2.2f);
+			c = powf(c, 1.0f / renderer.gamma);
 
 			rgba[idx * 4 + 0] = uint8(fminf(c * 256.0f, 255.0f));
 			rgba[idx * 4 + 1] = uint8(fminf(c * 256.0f, 255.0f));
 			rgba[idx * 4 + 2] = uint8(fminf(c * 256.0f, 255.0f));
 			rgba[idx * 4 + 3] = uint8(fminf(c * 256.0f, 255.0f));
+		}
+		else if (renderer.shading_mode == kUV)
+		{
+			cugar::Vector4f c = renderer.fb.gbuffer.uv(idx);
+
+			// visualize the ST interpolated texture coordinates
+			c.x = c.z;
+			c.y = c.w;
+			c.z = 0.5f;
+			c.w = 0.0f;
+
+			rgba[idx * 4 + 0] = uint8(fminf(c.x * 256.0f, 255.0f));
+			rgba[idx * 4 + 1] = uint8(fminf(c.y * 256.0f, 255.0f));
+			rgba[idx * 4 + 2] = uint8(fminf(c.z * 256.0f, 255.0f));
+			rgba[idx * 4 + 3] = uint8(fminf(c.w * 256.0f, 255.0f));
+		}
+		else if (renderer.shading_mode == kCharts)
+		{
+			const uint32 tri_id = renderer.fb.gbuffer.tri(idx);
+
+			// find the chart containing this triangle
+			const uint32 group_id = tri_id < renderer.mesh.num_triangles ?
+				cugar::upper_bound_index( tri_id, renderer.mesh.group_offsets, renderer.mesh.num_groups+1 ) : uint32(-1);
+
+			// visualize the chart index as a color
+			cugar::Vector4f c;
+			c.x = cugar::randfloat(0, group_id) * 0.5f + 0.5f;
+			c.y = cugar::randfloat(1, group_id) * 0.5f + 0.5f;
+			c.z = cugar::randfloat(2, group_id) * 0.5f + 0.5f;
+			c.w = 0.0f;
+
+			rgba[idx * 4 + 0] = uint8(fminf(c.x * 256.0f, 255.0f));
+			rgba[idx * 4 + 1] = uint8(fminf(c.y * 256.0f, 255.0f));
+			rgba[idx * 4 + 2] = uint8(fminf(c.z * 256.0f, 255.0f));
+			rgba[idx * 4 + 3] = uint8(fminf(c.w * 256.0f, 255.0f));
+		}
+		else if (renderer.shading_mode == kNormal)
+		{
+			cugar::Vector4f geo = renderer.fb.gbuffer.geo(idx);
+
+			cugar::Vector3f normal = GBufferView::unpack_normal(geo);
+
+			rgba[idx * 4 + 0] = uint8(fminf(normal.x * 128.0f + 128.0f, 255.0f));
+			rgba[idx * 4 + 1] = uint8(fminf(normal.y * 128.0f + 128.0f, 255.0f));
+			rgba[idx * 4 + 2] = uint8(fminf(normal.z * 128.0f + 128.0f, 255.0f));
+			rgba[idx * 4 + 3] = 0;
 		}
 		else if (renderer.shading_mode >= kAux0 && (renderer.shading_mode - kAux0 < renderer.fb.n_channels - FBufferDesc::NUM_CHANNELS))
 		{
@@ -215,10 +267,10 @@ __global__ void to_rgba_kernel(const RendererView renderer, uint8* rgba)
 
 			c *= renderer.exposure; // Hardcoded Exposure Adjustment
 			c = c / (c + cugar::Vector4f(1));
-			c.x = powf(c.x, 1.0f / 2.2f);
-			c.y = powf(c.y, 1.0f / 2.2f);
-			c.z = powf(c.z, 1.0f / 2.2f);
-			c.w = powf(c.w, 1.0f / 2.2f);
+			c.x = powf(c.x, 1.0f / renderer.gamma);
+			c.y = powf(c.y, 1.0f / renderer.gamma);
+			c.z = powf(c.z, 1.0f / renderer.gamma);
+			c.w = powf(c.w, 1.0f / renderer.gamma);
 
 			rgba[idx * 4 + 0] = uint8(fminf(c.x * 256.0f, 255.0f));
 			rgba[idx * 4 + 1] = uint8(fminf(c.y * 256.0f, 255.0f));
@@ -228,7 +280,7 @@ __global__ void to_rgba_kernel(const RendererView renderer, uint8* rgba)
 	}
 }
 
-void to_rgba(const RendererView renderer, uint8* rgba)
+void to_rgba(const RenderingContextView renderer, uint8* rgba)
 {
 	dim3 blockSize(128);
 	dim3 gridSize(cugar::divide_ri(renderer.res_x * renderer.res_y, blockSize.x));
@@ -236,7 +288,7 @@ void to_rgba(const RendererView renderer, uint8* rgba)
 	CUDA_CHECK(cugar::cuda::sync_and_check_error("to_rgba"));
 }
 //------------------------------------------------------------------------------
-__global__ void multiply_frame_kernel(RendererView renderer, const float scale)
+__global__ void multiply_frame_kernel(RenderingContextView renderer, const float scale)
 {
 	const uint32 idx = threadIdx.x + blockIdx.x*blockDim.x;
 
@@ -258,7 +310,26 @@ __global__ void multiply_frame_kernel(RendererView renderer, const float scale)
 	}
 }
 //------------------------------------------------------------------------------
-__global__ void update_variances_kernel(RendererView renderer, const uint32 n)
+__global__ void clamp_frame_kernel(RenderingContextView renderer, const float max_value)
+{
+	const uint32 idx = threadIdx.x + blockIdx.x*blockDim.x;
+
+	if (idx < renderer.res_x * renderer.res_y)
+	{
+		renderer.fb(FBufferDesc::DIFFUSE_C,		idx)	= cugar::min( cugar::Vector4f(renderer.fb(FBufferDesc::DIFFUSE_C,		idx)), max_value );
+		renderer.fb(FBufferDesc::SPECULAR_C,	idx)	= cugar::min( cugar::Vector4f(renderer.fb(FBufferDesc::SPECULAR_C,		idx)), max_value );
+		renderer.fb(FBufferDesc::DIRECT_C,		idx)	= cugar::min( cugar::Vector4f(renderer.fb(FBufferDesc::DIRECT_C,		idx)), max_value );
+		renderer.fb(FBufferDesc::COMPOSITED_C,	idx)	= cugar::min( cugar::Vector4f(renderer.fb(FBufferDesc::COMPOSITED_C,	idx)), max_value );
+
+		FERMAT_ASSERT(
+			cugar::is_finite( renderer.fb(FBufferDesc::COMPOSITED_C,	idx).x ) &&
+			cugar::is_finite( renderer.fb(FBufferDesc::COMPOSITED_C,	idx).y ) &&
+			cugar::is_finite( renderer.fb(FBufferDesc::COMPOSITED_C,	idx).z ) &&
+			cugar::is_finite( renderer.fb(FBufferDesc::COMPOSITED_C,	idx).w ) );
+	}
+}
+//------------------------------------------------------------------------------
+__global__ void update_variances_kernel(RenderingContextView renderer, const uint32 n)
 {
 	const uint32 idx = threadIdx.x + blockIdx.x*blockDim.x;
 
@@ -328,7 +399,7 @@ void filter_variance(const FBufferChannelView img, float* var, const uint32 FW =
 
 //------------------------------------------------------------------------------
 
-void Renderer::multiply_frame(const float scale)
+void RenderingContextImpl::multiply_frame(const float scale)
 {
 	dim3 blockSize(128);
 	dim3 gridSize(cugar::divide_ri(m_res_x * m_res_y, blockSize.x));
@@ -338,14 +409,25 @@ void Renderer::multiply_frame(const float scale)
 
 //------------------------------------------------------------------------------
 
-void Renderer::rescale_frame(const uint32 instance)
+void RenderingContextImpl::rescale_frame(const uint32 instance)
 {
 	multiply_frame( float(instance)/float(instance+1) );
 }
 
+// clamp the output framebuffer to a given maximum
+//
+// \param max_value
+void RenderingContextImpl::clamp_frame(const float max_value)
+{
+	dim3 blockSize(128);
+	dim3 gridSize(cugar::divide_ri(m_res_x * m_res_y, blockSize.x));
+	clamp_frame_kernel <<< gridSize, blockSize >>>(view(0), max_value);
+	CUDA_CHECK( cugar::cuda::sync_and_check_error("clamp_frame") );
+}
+
 //------------------------------------------------------------------------------
 
-void Renderer::update_variances(const uint32 instance)
+void RenderingContextImpl::update_variances(const uint32 instance)
 {
 	dim3 blockSize(128);
 	dim3 gridSize(cugar::divide_ri(m_res_x * m_res_y, blockSize.x));
@@ -353,36 +435,64 @@ void Renderer::update_variances(const uint32 instance)
 	CUDA_CHECK( cugar::cuda::sync_and_check_error("update_variances") );
 }
 
+// load a plugin
+//
+uint32 RenderingContextImpl::load_plugin(const char* plugin_name)
+{
+	typedef uint32 (__stdcall *register_plugin_function)(RenderingContext& renderer);
+
+	fprintf(stderr, "  loading plugin \"%s\"... started\n", plugin_name);
+	m_plugins.push_back(DLL(plugin_name));
+
+	register_plugin_function plugin_entry_function = (register_plugin_function)m_plugins.front().get_proc_address("register_plugin");
+	if (!plugin_entry_function)
+	{
+		fprintf(stderr, "failed loading plugin entry function!\n");
+		throw cugar::runtime_error("failed loading plugin entry function");
+	}
+	fprintf(stderr, "  loading plugin \"%s\"... done\n", plugin_name);
+
+	fprintf(stderr, "  initializing plugin \"%s\"... started\n", plugin_name);
+	const uint32 r = plugin_entry_function( *m_this );
+	fprintf(stderr, "  initializing plugin \"%s\"... done\n", plugin_name);
+	return r;
+}
+
 //------------------------------------------------------------------------------
 
-// Renderer initialization
+
+// RenderingContext initialization
 //
-void Renderer::init(int argc, char** argv)
+void RenderingContextImpl::init(int argc, char** argv)
 {
 	const char* filename = NULL;
 
+	register_renderer("pt", &PathTracer::factory );
+	register_renderer("bpt", &BPT::factory );
+	register_renderer("cmlt", &CMLT::factory );
+	register_renderer("mlt", &MLT::factory );
+	register_renderer("pssmlt", &PSSMLT::factory );
+	register_renderer("rpt", &RPT::factory );
+	register_renderer("psfpt", &PSFPT::factory );
+	//register_renderer("hellopt", &HelloPT::factory );
+
 	m_renderer_type = kBPT;
 	m_exposure = 1.0f;
+	m_gamma = 2.2f;
 	m_res_x = 1600;
 	m_res_y = 900;
 	m_aspect = 0.0f;
 	m_shading_rate = 1.0f;
 	m_shading_mode = kShaded;
 
+	// set the directional light
+	m_light.dir   = cugar::normalize(cugar::Vector3f(1.0f,-0.5f,1.0f));
+	m_light.color = cugar::Vector3f(22.0f,21.0f,18.0f)*4;
+
 	for (int i = 0; i < argc; ++i)
 	{
 		if (strcmp(argv[i], "-i") == 0)
 			filename = argv[++i];
-		else if (strcmp(argv[i], "-pt") == 0)
-			m_renderer_type = kPT;
-		else if (strcmp(argv[i], "-bpt") == 0)
-			m_renderer_type = kBPT;
-		else if (strcmp(argv[i], "-cmlt") == 0)
-			m_renderer_type = kCMLT;
-		else if (strcmp(argv[i], "-pssmlt") == 0)
-			m_renderer_type = kPSSMLT;
-		else if (strcmp(argv[i], "-rpt") == 0)
-			m_renderer_type = kRPT;
 		else if (strcmp(argv[i], "-r") == 0 ||
 				 strcmp(argv[i], "-res") == 0)
 		{
@@ -409,6 +519,22 @@ void Renderer::init(int argc, char** argv)
 			m_camera.dx = normalize(cross(m_camera.aim - m_camera.eye, m_camera.up));
 			fclose(camera_file);
 		}
+		else if (strcmp(argv[i], "-plugin") == 0)
+		{
+			m_renderer_type = load_plugin( argv[++i] );
+			m_renderer = m_renderer_factories[m_renderer_type]();
+		}
+		else if (argv[i][0] == '-')
+		{
+			for (uint32 r = 0; r < m_renderer_names.size(); ++r)
+			{
+				if (m_renderer_names[r] == argv[i]+1)
+				{
+					m_renderer_type = r;
+					m_renderer = m_renderer_factories[r]();
+				}
+			}
+		}
 	}
 
 	if (m_aspect == 0.0f)
@@ -429,18 +555,25 @@ void Renderer::init(int argc, char** argv)
 		exit(0);
 	}
 
-
+	bool overwrite_camera = false;
 	for (int i = 0; i < argc; ++i)
 	{
 		if (strcmp(argv[i], "-c") == 0)
 		{
 			FILE* camera_file = fopen(argv[++i], "r");
+			if (camera_file == NULL)
+			{
+				fprintf(stderr, "failed opening camera file %s\n", argv[i]);
+				exit(0);
+			}
 			fscanf(camera_file, "%f %f %f", &m_camera.eye.x, &m_camera.eye.y, &m_camera.eye.z);
 			fscanf(camera_file, "%f %f %f", &m_camera.aim.x, &m_camera.aim.y, &m_camera.aim.z);
 			fscanf(camera_file, "%f %f %f", &m_camera.up.x, &m_camera.up.y, &m_camera.up.z);
 			fscanf(camera_file, "%f", &m_camera.fov);
 			m_camera.dx = normalize(cross(m_camera.aim - m_camera.eye, m_camera.up));
 			fclose(camera_file);
+
+			overwrite_camera = true;
 		}
 	}
 
@@ -450,9 +583,17 @@ void Renderer::init(int argc, char** argv)
 	cudaDeviceProp prop;
 	cudaGetDeviceProperties(&prop, 0);
 	fprintf(stderr, "cuda device: %s\n", prop.name);
+	fprintf(stderr, "  SM version : %d.%d\n",
+		prop.major, prop.minor);
+	fprintf(stderr, "  SM count   : %d \n",
+		prop.multiProcessorCount);
+	fprintf(stderr, "  SM clock   : %d \n",
+		prop.clockRate);
+	fprintf(stderr, "  mem clock  : %d \n",
+		prop.memoryClockRate);
 	size_t free, total;
 	cudaMemGetInfo(&free, &total);
-	fprintf(stderr, "  memory: %.3f GB\n",
+	fprintf(stderr, "  memory     : %.3f GB\n",
 		float(total) / (1024 * 1024 * 1024));
 
 	std::vector<unsigned int> devices(1);
@@ -460,20 +601,9 @@ void Renderer::init(int argc, char** argv)
 
 	cudaSetDevice( devices[0] );
 
-	// create an Optix Prime context
-	m_context = optix::prime::Context::create(RTP_CONTEXT_TYPE_CUDA);
-
-	m_context->setCudaDeviceNumbers( devices );
-
-	switch (m_renderer_type)
-	{
-	case kPT:		{ m_renderer = new PathTracer(); break; }
-	case kBPT:		{ m_renderer = new BPT(); break; }
-	case kCMLT:		{ m_renderer = new CMLT(); break; }
-	case kPSSMLT:	{ m_renderer = new PSSMLT(); break; }
-	case kRPT:		{ m_renderer = new RPT(); break; }
-	default:		{ m_renderer = new PathTracer(); break; }
-	};
+	// make sure we do have a renderer
+	if (m_renderer == NULL)
+		m_renderer = PathTracer::factory();
 
 	const uint32 aux_channels = m_renderer->auxiliary_channel_count();
 
@@ -491,6 +621,8 @@ void Renderer::init(int argc, char** argv)
 
 	m_fb_temp[0].resize(m_res_x, m_res_y);
 	m_fb_temp[1].resize(m_res_x, m_res_y);
+	m_fb_temp[2].resize(m_res_x, m_res_y);
+	m_fb_temp[3].resize(m_res_x, m_res_y);
 
 #if 0
 	// pre-computer the samples buffer
@@ -504,6 +636,31 @@ void Renderer::init(int argc, char** argv)
 		m_samples = samples;
 	}
 #endif
+
+	// Load the glossy reflectance profile
+	{
+		fprintf(stderr, "initializing glossy reflectance profile... started\n");
+		DomainBuffer<HOST_BUFFER, float>		glossy_reflectance;
+
+		const uint32 S = 32;
+
+		glossy_reflectance.alloc(S*S*S*S);
+
+		ScopedFile file("glossy_reflectance.dat", "rb");
+		if (!file)
+		{
+			fprintf(stderr, "  error opening glossy_reflectance.dat\n");
+			exit(1);
+		}
+		if (fread(glossy_reflectance.ptr(), sizeof(float), S*S*S*S, file) != S*S*S*S)
+		{
+			fprintf(stderr, "  error loading glossy_reflectance.dat\n");
+			exit(1);
+		}
+
+		m_glossy_reflectance = glossy_reflectance;
+		fprintf(stderr, "initializing glossy reflectance profile... done\n");
+	}
 
 	// Load the LTC coefficients
 	{
@@ -540,11 +697,47 @@ void Renderer::init(int argc, char** argv)
 	try
 	{
 		std::vector<std::string> dirs = scene_dirs;
+		std::vector<Camera>				cameras;
+		std::vector<DirectionalLight>	dir_lights;
 
 		if (strlen(filename) > 3 && strcmp(filename+strlen(filename)-3, ".fa") == 0)
-			load_scene(filename, m_mesh, dirs, scene_dirs);
-		else
+			load_scene(filename, m_mesh, cameras, dir_lights, dirs, scene_dirs);
+		else if ((strlen(filename) > 4 && strcmp(filename+strlen(filename)-4, ".obj") == 0) ||
+	 			 (strlen(filename) > 4 && strcmp(filename+strlen(filename)-4, ".ply") == 0))
 			loadModel(filename, m_mesh);
+		else if (strlen(filename) > 5 && strcmp(filename+strlen(filename)-5, ".pbrt") == 0)
+		{
+			pbrt::FermatImporter importer(filename, &m_mesh, &m_camera, &dir_lights, &scene_dirs);
+			pbrt::import(filename, &importer);
+			importer.finish();
+
+			// copy the film options
+			m_exposure	= importer.m_film.exposure;
+			m_gamma		= importer.m_film.gamma;
+		}
+		else
+			load_assimp(filename, m_mesh, dirs, scene_dirs);
+
+		// check whether we need to pick the loaded camera
+		if (cameras.size() && overwrite_camera == false)
+			m_camera = cameras[0];
+
+		// store directional lights on both host and device
+		m_dir_lights_h.alloc( dir_lights.size() );
+		m_dir_lights_h.copy_from( dir_lights.size(), HOST_BUFFER, &dir_lights.front() );
+		m_dir_lights_d = m_dir_lights_h;
+
+		// perform normal compression
+		m_mesh.compress_normals();
+		m_mesh.compress_tex();
+			
+		#if UNIFIED_VERTEX_ATTRIBUTES
+		// unify vertex attributes
+		unify_vertex_attributes( m_mesh );
+		#endif
+
+		// apply material flags
+		apply_material_flags( m_mesh );
 
 		// compute the bbox
 		if (1)
@@ -552,20 +745,11 @@ void Renderer::init(int argc, char** argv)
 			cugar::Vector3f bmin(1.0e16f, 1.0e16f, 1.0e16f);
 			cugar::Vector3f bmax(-1.0e16f, -1.0e16f, -1.0e16f);
 
-			float3* v = reinterpret_cast<float3*>(m_mesh.getVertexData());
+			MeshView::vertex_type* v = reinterpret_cast<MeshView::vertex_type*>(m_mesh.getVertexData());
 			for (int32_t i = 0; i < m_mesh.getNumVertices(); ++i)
 			{
-				bmin = cugar::min(bmin, cugar::Vector3f(v[i]));
-				bmax = cugar::max(bmax, cugar::Vector3f(v[i]));
-			}
-
-			// scale the model
-			if (0)
-			{
-				const cugar::Vector3f center = (bmin + bmax) * 0.5f;
-				const float scale = 1.0f / cugar::max3(bmax[0] - bmin[0], bmax[1] - bmin[1], bmax[2] - bmin[2]);
-				for (int32_t i = 0; i < m_mesh.getNumVertices(); ++i)
-					v[i] = (v[i] - center) * scale;
+				bmin = cugar::min(bmin, vertex_comp(v[i]));
+				bmax = cugar::max(bmax, vertex_comp(v[i]));
 			}
 
 			// print the bounding box
@@ -579,7 +763,12 @@ void Renderer::init(int argc, char** argv)
 		fprintf(stderr, "  error loading mesh file %s : %s\n", filename, e.what());
 		exit(1);
 	}
-	fprintf(stderr, "loading mesh file %s... done (%d triangles, %d materials, %d groups)\n", filename, m_mesh.getNumTriangles(), m_mesh.getNumMaterials(), m_mesh.getNumGroups());
+	fprintf(stderr, "loading mesh file %s... done\n", filename);
+	fprintf(stderr, "  triangles : %d\n", m_mesh.getNumTriangles());
+	fprintf(stderr, "  vertices  : %d\n", m_mesh.getNumVertices());
+	fprintf(stderr, "  normals   : %d\n", m_mesh.getNumNormals());
+	fprintf(stderr, "  materials : %d\n", m_mesh.getNumMaterials());
+	fprintf(stderr, "  groups    : %d\n", m_mesh.getNumGroups());
 	{
 		// print the group names
 		for (int32 i = 0; i < m_mesh.getNumGroups(); ++i)
@@ -668,6 +857,22 @@ void Renderer::init(int argc, char** argv)
 		}
 	}
 
+#if 0
+    fprintf(stderr, "creating UV index... started\n");
+    {
+        // initialize a uv-bvh on the host
+        HostUVBvh uv_bvh;
+
+        build( &uv_bvh, m_mesh );
+
+        output_uv_tris( m_mesh );
+
+        // and copy it to the device
+        m_uv_bvh = uv_bvh;
+    }
+    fprintf(stderr, "creating UV index... done\n");
+#endif
+
     // copy to the device
 	m_mesh_d = m_mesh;
 	{
@@ -677,27 +882,44 @@ void Renderer::init(int argc, char** argv)
 		fprintf(stderr, "free device memory: %.3f GB\n", float(mem_free) / (1024 * 1024 * 1024));
 	}
 
-	fprintf(stderr, "creatign RT index... started\n");
+	fprintf(stderr, "creating RT index... started\n");
 
-	try
-	{
-		m_model = m_context->createModel();
-		m_model->setTriangles(
-			m_mesh.getNumTriangles(), RTP_BUFFER_TYPE_HOST, m_mesh.getVertexIndices(),
-			m_mesh.getNumVertices(), RTP_BUFFER_TYPE_HOST, m_mesh.getVertexData());
-		m_model->update(0);
-	}
-	catch (optix::prime::Exception& e)
-	{
-		fprintf(stderr, "  error[%d] : %s\n", e.getErrorCode(), e.getErrorString().c_str());
-		exit(1);
-	}
+  #if 1
+	m_rt_context = new RTContext();
+	m_rt_context->create_geometry(
+		m_mesh_d.getNumTriangles(),
+		m_mesh_d.getVertexIndices(),
+		m_mesh_d.getNumVertices(),
+		m_mesh_d.getVertexData(),
+		m_mesh_d.getNormalIndices(),
+		m_mesh_d.getNormalData(),
+		m_mesh_d.getTextureCoordinateIndices(),
+		m_mesh_d.getTextureCoordinateData(),
+		m_mesh_d.getMaterialIndices());
 
-	fprintf(stderr, "creatign RT index... done\n");
+	// setup the material buffer
+	m_rt_context->bind_buffer( "g_materials", m_mesh_d.getNumMaterials(), sizeof(MeshMaterial), m_mesh_d.m_materials.ptr(), RT_FORMAT_USER );
+
+	// setup texture buffers
+	//m_rt_context->bind_buffer( "g_textures", m_texture_views_d.count(), sizeof(MipMapView), m_texture_views_d.ptr(), RT_FORMAT_USER );
+	
+	// perform a small test launch
+	//m_rt_context->launch(0,128);
+  #else
+	m_rt_context = NULL;
+  #endif
+
+	fprintf(stderr, "creating RT index... done\n");
+
+	const uint32 n_dimensions	= 6 * 12;
+	const uint32 tiled_dim		= 256;
+	fprintf(stderr, "  initializing sampler: %u dimensions\n", n_dimensions);
+
+	m_sequence.setup(n_dimensions, tiled_dim);
 
 	fprintf(stderr, "initializing path sampler... started\n");
 
-	m_renderer->init(argc, argv, *this);
+	m_renderer->init(argc, argv, *m_this);
 
 	fprintf(stderr, "initializing path sampler... done\n");
 	{
@@ -706,7 +928,7 @@ void Renderer::init(int argc, char** argv)
 		cudaMemGetInfo(&mem_free, &mem_tot);
 		fprintf(stderr, "free device memory: %.3f GB\n", float(mem_free) / (1024 * 1024 * 1024));
 	}
-
+	
 #if 0
 	cugar::host_vector<uint32_t> h_randoms(1024 * 1024);
 	for (uint32_t i = 0; i < 1024 * 1024; ++i)
@@ -733,45 +955,61 @@ void Renderer::init(int argc, char** argv)
 #endif
 }
 
-void Renderer::clear()
+void RenderingContextImpl::clear()
 {
 	for (uint32_t c = 0; c < m_fb.channel_count(); ++c)
 		m_fb.channels[c].clear();
 }
 
-void Renderer::update_model()
+void RenderingContextImpl::update_model()
 {
-	//m_model = m_context->createModel();
-	m_model->setTriangles(
-		m_mesh.getNumTriangles(), RTP_BUFFER_TYPE_HOST, m_mesh.getVertexIndices(),
-		m_mesh.getNumVertices(), RTP_BUFFER_TYPE_HOST, m_mesh.getVertexData());
-	m_model->update(0);
-	m_model->finish();
-	CUDA_CHECK(cugar::cuda::sync_and_check_error("model update"));
-
-	// copy to the device
-	m_mesh_d = m_mesh;
+	m_rt_context->create_geometry(
+		m_mesh_d.getNumTriangles(),
+		m_mesh_d.getVertexIndices(),
+		m_mesh_d.getNumVertices(),
+		m_mesh_d.getVertexData(),
+		m_mesh_d.getNormalIndices(),
+		m_mesh_d.getNormalData(),
+		m_mesh_d.getTextureCoordinateIndices(),
+		m_mesh_d.getTextureCoordinateData(),
+		m_mesh_d.getMaterialIndices());
 
 	// TODO: update m_mesh_lights if needed!
+	m_renderer->update_scene(*m_this);
+
+	// TODO: update the m_rt_context!
 }
 
-// Renderer display function
+// register a new rendering interface type
 //
-void Renderer::render(const uint32 instance)
+uint32 RenderingContextImpl::register_renderer(const char* name, RendererFactoryFunction factory)
+{
+	m_renderer_names.push_back( name );
+	m_renderer_factories.push_back( factory );
+	return uint32( m_renderer_factories.size() - 1 );
+}
+
+// RenderingContext display function
+//
+void RenderingContextImpl::render(const uint32 instance)
 {
 	try
 	{
-		RendererView renderer_view = view(instance);
+		RenderingContextView renderer_view = view(instance);
+
+		// setup optix vars
+		m_rt_context->bind_var( "g_renderer", renderer_view );
 
 		// clear the primary Gbuffer
 		m_fb.gbuffer.clear();
 
 		//cudaDeviceSynchronize();
 
-		m_renderer->render(instance, *this);
+		m_renderer->render(instance, *m_this);
 
 		// apply filtering, if enabled
-		filter( instance );
+		if (m_shading_mode == kFiltered)
+			filter( instance );
 		
 		to_rgba(renderer_view, m_rgba.ptr());
 	}
@@ -782,11 +1020,12 @@ void Renderer::render(const uint32 instance)
 	}
 }
 
-RendererView Renderer::view(const uint32 instance)
+RenderingContextView RenderingContextImpl::view(const uint32 instance)
 {
-	RendererView renderer_view(
+	RenderingContextView renderer_view(
 		m_camera,
-		m_light,
+		(uint32)m_dir_lights_d.count(),
+		m_dir_lights_d.ptr(),
         m_mesh_d.view(),
 		m_mesh_lights.view(false),
 		m_mesh_lights.view(true),
@@ -795,10 +1034,12 @@ RendererView Renderer::view(const uint32 instance)
 		m_ltc_M.ptr(),
 		m_ltc_Minv.ptr(),
 		m_ltc_A.ptr(),
+		m_glossy_reflectance.ptr(),
 		m_res_x,
 		m_res_y,
 		m_aspect,
 		m_exposure,
+		m_gamma,
         m_shading_rate,
         m_shading_mode,
 		m_fb.view(),
@@ -807,25 +1048,46 @@ RendererView Renderer::view(const uint32 instance)
     return renderer_view;
 }
 
-void Renderer::filter(const uint32 instance)
+// compute the scene's bbox
+//
+cugar::Bbox3f RenderingContextImpl::compute_bbox()
 {
-	// setup some ping-pong buffers
-	FBufferChannelView pingpong[2];
-	pingpong[0] = m_fb_temp[0].view();
-	pingpong[1] = m_fb_temp[1].view();
+	MeshView mesh_view = m_mesh.view();
 
+	cugar::Bbox3f bbox;
+	for (int32_t i = 0; i < m_mesh.getNumVertices(); ++i)
+		bbox.insert( load_vertex( mesh_view, i ) );
+
+	return bbox;
+}
+
+void RenderingContextImpl::filter(const uint32 instance)
+{
 	// clear the output filter
 	m_fb.channels[FBufferDesc::FILTERED_C] = m_fb.channels[FBufferDesc::DIRECT_C];
 
 	FBufferChannelView output = m_fb.channels[FBufferDesc::FILTERED_C].view();
 
-	EAWParams eaw_params;
-	eaw_params.phi_normal	= /*sqrtf(float(instance + 1)) **/ 128.0f;
-	eaw_params.phi_position = /*sqrtf(float(instance + 1)) **/ 8.0f;
-	eaw_params.phi_color	= float(instance + 1) / 20.0f;
-	//eaw_params.phi_color	= float(instance*instance + 1) / 10000.0f;
+	cugar::Vector3f U, V, W;
+	camera_frame( m_camera, m_aspect, U, V, W );
 
-	const uint32 n_iterations = 5;
+#if 1
+	// setup some ping-pong buffers
+	FBufferChannelView pingpong[2];
+	pingpong[0] = m_fb_temp[0].view();
+	pingpong[1] = m_fb_temp[1].view();
+
+	EAWParams eaw_params;
+	eaw_params.phi_normal	= /*sqrtf(float(instance + 1)) **/ 2.0f;
+	eaw_params.phi_position = /*sqrtf(float(instance + 1)) **/ 1.0f;
+	//eaw_params.phi_color	= float(instance + 1) / 20.0f;
+	eaw_params.phi_color	= float(instance*instance + 1) / 10000.0f;
+	eaw_params.E            = m_camera.eye;
+	eaw_params.U            = U;
+	eaw_params.V            = V;
+	eaw_params.W            = W;
+
+	const uint32 n_iterations = 7;
 
 	// filter the diffuse channel
 	{
@@ -861,4 +1123,279 @@ void Renderer::filter(const uint32 instance)
 			m_var.ptr(),				// variance
 			eaw_params, pingpong);
 	}
+#elif 0
+	XBLParams xbl_params;
+	xbl_params.taps			= 32;
+	xbl_params.phi_normal	= 32.0f;
+	xbl_params.phi_position = 1.0f;
+	xbl_params.phi_color	= 0.0f;
+	//xbl_params.phi_color	= float(instance*instance + 1) / 10000.0f;
+	//eaw_params.phi_color	= float(instance*instance + 1) / 10000.0f;
+	xbl_params.E            = m_camera.eye;
+	xbl_params.U            = U;
+	xbl_params.V            = V;
+	xbl_params.W            = W;
+
+	// filter the diffuse channel
+	{
+		GBufferView			gbuffer = m_fb.gbuffer.view();
+		FBufferChannelView	input	= m_fb.channels[FBufferDesc::DIFFUSE_C].view();
+		FBufferChannelView	weight	= m_fb.channels[FBufferDesc::DIFFUSE_A].view();
+
+		filter_variance(input, m_var.ptr(), 2);
+
+		XBL(
+			output,						// destination
+			FilterOp(kFilterOpDemodulateInput | kFilterOpModulateOutput | kFilterOpAddMode),
+			weight,						// weight
+			1.0e-4f,					// min weight
+			input,						// input
+			gbuffer,					// gbuffer
+			m_var.ptr(),				// variance
+			xbl_params,
+			21u,
+			1u,
+			m_sequence.view());
+	} 
+	// filter the specular channel
+	{
+		GBufferView			gbuffer	= m_fb.gbuffer.view();
+		FBufferChannelView	input	= m_fb.channels[FBufferDesc::SPECULAR_C].view();
+		FBufferChannelView	weight	= m_fb.channels[FBufferDesc::SPECULAR_A].view();
+
+		filter_variance(input, m_var.ptr(), 2);
+
+		XBL(
+			output,						// destination
+			FilterOp(kFilterOpDemodulateInput | kFilterOpModulateOutput | kFilterOpAddMode),
+			weight,						// weight
+			1.0e-4f,					// min weight
+			input,						// input
+			gbuffer,					// gbuffer
+			m_var.ptr(),				// variance
+			xbl_params,
+			21u,
+			1u,
+			m_sequence.view());
+	}
+#endif
 }
+
+// constructor
+//
+RenderingContext::RenderingContext()
+{
+	m_impl = new RenderingContextImpl( this );
+}
+
+// initialize the renderer
+//
+void RenderingContext::init(int argc, char** argv)
+{
+	m_impl->init( argc, argv );
+}
+
+// render a frame
+//
+// \param instance		the sequence instance / frame number in a progressive render
+void RenderingContext::render(const uint32 instance)
+{
+	m_impl->render( instance );
+}
+
+// clear all framebuffers
+//
+void RenderingContext::clear()
+{
+	m_impl->clear();	
+}
+
+// rescale the output framebuffer by a constant
+//
+void RenderingContext::multiply_frame(const float scale)
+{
+	m_impl->multiply_frame( scale );
+}
+
+// rescale the output framebuffer by n/(n-1)
+//
+// \param instance		the sequence instance / frame number in a progressive render, used for rescaling
+void RenderingContext::rescale_frame(const uint32 instance)
+{
+	m_impl->rescale_frame( instance );
+}
+
+// clamp the output framebuffer to a given maximum
+//
+// \param max_value
+void RenderingContext::clamp_frame(const float max_value)
+{
+	m_impl->clamp_frame( max_value );
+}
+
+// update the variance estimates
+//
+// \param instance		the sequence instance / frame number in a progressive render, used for rescaling
+void RenderingContext::update_variances(const uint32 instance)
+{
+	m_impl->update_variances( instance );
+}
+
+// update the internal data-structures (e.g. BVHs) associated to the geometry
+//
+void RenderingContext::update_model()
+{
+	m_impl->update_model();
+}
+
+// perform filtering
+//
+// \param instance		the sequence instance / frame number in a progressive render
+void RenderingContext::filter(const uint32 instance)
+{
+	m_impl->filter( instance );
+}
+
+// return the current output resolution
+//
+uint2 RenderingContext::res() const { return m_impl->res(); }
+
+// return a view of the renderer
+//
+RenderingContextView RenderingContext::view(const uint32 instance) { return m_impl->view( instance ); }
+
+// return the camera
+//
+Camera& RenderingContext::get_camera() { return m_impl->get_camera(); }
+
+// return the directional light count
+//
+uint32 RenderingContext::get_directional_light_count() const
+{
+	return (uint32)m_impl->m_dir_lights_d.count();
+}
+
+// return the host-side directional lights
+//
+const DirectionalLight* RenderingContext::get_host_directional_lights() const
+{
+	return m_impl->m_dir_lights_h.ptr();
+}
+
+// return the device-side directional lights
+//
+const DirectionalLight* RenderingContext::get_device_directional_lights() const
+{
+	return m_impl->m_dir_lights_d.ptr();
+}
+
+// set the number of directional lights
+//
+void RenderingContext::set_directional_light_count(const uint32 count)
+{
+	m_impl->m_dir_lights_h.alloc( count );
+	m_impl->m_dir_lights_d.alloc( count );
+}
+
+// set a directional light
+//
+void RenderingContext::set_directional_light(const uint32 i, const DirectionalLight& light)
+{
+	m_impl->m_dir_lights_h.set( i, light );
+	m_impl->m_dir_lights_d.set( i, light );
+}
+
+// return the target resolution
+//
+uint2 RenderingContext::get_res() const { return m_impl->get_res(); }
+
+// return the target aspect ratio
+//
+float RenderingContext::get_aspect_ratio() const { return m_impl->get_aspect_ratio(); }
+
+// return the target exposure
+//
+void RenderingContext::set_aspect_ratio(const float v) { m_impl->m_aspect = v; }
+
+// return the target exposure
+//
+float RenderingContext::get_exposure() const { return m_impl->get_exposure(); }
+
+// set the target exposure
+//
+void RenderingContext::set_exposure(const float v) { m_impl->m_exposure = v; }
+
+// return the target gamma
+//
+float RenderingContext::get_gamma() const { return m_impl->m_gamma; }
+
+// set the target gamma
+//
+void RenderingContext::set_gamma(const float v) { m_impl->m_gamma = v; }
+
+// return the shading mode
+//
+ShadingMode& RenderingContext::get_shading_mode() { return m_impl->m_shading_mode; }
+
+// return the frame buffer
+//
+FBufferStorage& RenderingContext::get_frame_buffer() { return m_impl->m_fb; }
+
+// return the frame buffer
+//
+uint8* RenderingContext::get_device_rgba_buffer() { return m_impl->m_rgba.ptr(); }
+
+// return the number of textures
+//
+uint32 RenderingContext::get_texture_count() const { return uint32( m_impl->m_textures_h.size() ); }
+
+// return the scene's host-side textures
+//
+RenderingContext::HostMipMapStoragePtr* RenderingContext::get_host_textures() { return &m_impl->m_textures_h.front(); }
+
+// return the scene's device-side textures
+//
+RenderingContext::DeviceMipMapStoragePtr* RenderingContext::get_device_textures() { return &m_impl->m_textures_d.front(); }
+
+// return the scene's host-side textures
+//
+MipMapView* RenderingContext::get_host_texture_views() { return m_impl->get_host_texture_views(); }
+
+// return the scene's device-side textures
+//
+MipMapView* RenderingContext::get_device_texture_views() { return m_impl->get_device_texture_views(); }
+
+// return the scene's host-side mesh
+//
+MeshStorage& RenderingContext::get_host_mesh() { return m_impl->get_host_mesh(); }
+
+// return the scene's device-side mesh
+//
+DeviceMeshStorage& RenderingContext::get_device_mesh() { return m_impl->get_device_mesh(); }
+
+// return the scene's device-side mesh emitters
+//
+MeshLightsStorage& RenderingContext::get_mesh_lights() { return m_impl->get_mesh_lights(); }
+
+// return the ray tracing context
+//
+RTContext* RenderingContext::get_rt_context() const { return m_impl->get_rt_context(); }
+
+// return the sampling sequence
+//
+TiledSequence& RenderingContext::get_sequence() { return m_impl->m_sequence; }
+
+// return the renderer
+//
+RendererInterface* RenderingContext::get_renderer() const { return m_impl->get_renderer(); }
+
+// register a new rendering interface type
+//
+uint32 RenderingContext::register_renderer(const char* name, RendererFactoryFunction factory)
+{
+	return m_impl->register_renderer( name, factory );
+}
+
+// compute the scene's bbox
+//
+cugar::Bbox3f RenderingContext::compute_bbox() { return m_impl->compute_bbox(); }

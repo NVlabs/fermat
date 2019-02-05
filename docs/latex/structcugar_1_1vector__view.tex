@@ -1,0 +1,291 @@
+\hypertarget{structcugar_1_1vector__view}{}\section{cugar\+:\+:vector\+\_\+view$<$ Iterator, Index\+Type $>$ Struct Template Reference}
+\label{structcugar_1_1vector__view}\index{cugar\+::vector\+\_\+view$<$ Iterator, Index\+Type $>$@{cugar\+::vector\+\_\+view$<$ Iterator, Index\+Type $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$typename Iterator, typename Index\+Type = uint32$>$\newline
+struct cugar\+::vector\+\_\+view$<$ Iterator, Index\+Type $>$}
+
+Wrapper class to create a \char`\"{}vector\char`\"{}-\/like container on top of a generic base iterator. See Vector\+Wrapper\+Example\+Section.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Iterator} & base iterator type \\
+\hline
+\end{DoxyTemplParams}
+
+
+{\ttfamily \#include $<$vector\+\_\+view.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1vector__view_af9c2325c1647f4e91441ecac908517d3}\label{structcugar_1_1vector__view_af9c2325c1647f4e91441ecac908517d3}} 
+typedef Iterator {\bfseries iterator}
+\item 
+\mbox{\Hypertarget{structcugar_1_1vector__view_afbf762f45569835c1ab8b6c0f8340bba}\label{structcugar_1_1vector__view_afbf762f45569835c1ab8b6c0f8340bba}} 
+typedef Iterator {\bfseries const\+\_\+iterator}
+\item 
+\mbox{\Hypertarget{structcugar_1_1vector__view_adf7cfbbdb7be3613b4218454aa7da674}\label{structcugar_1_1vector__view_adf7cfbbdb7be3613b4218454aa7da674}} 
+typedef \hyperlink{structcugar_1_1iterator__traits}{iterator\+\_\+traits}$<$ Iterator $>$\+::forward\+\_\+iterator {\bfseries forward\+\_\+iterator}
+\item 
+\mbox{\Hypertarget{structcugar_1_1vector__view_a957d49f4c9f029e6dcd251f95e6963eb}\label{structcugar_1_1vector__view_a957d49f4c9f029e6dcd251f95e6963eb}} 
+typedef \hyperlink{structcugar_1_1iterator__traits}{iterator\+\_\+traits}$<$ Iterator $>$\+::value\+\_\+type {\bfseries value\+\_\+type}
+\item 
+\mbox{\Hypertarget{structcugar_1_1vector__view_a302a9325f6b42c7c43aa171c8aeb1340}\label{structcugar_1_1vector__view_a302a9325f6b42c7c43aa171c8aeb1340}} 
+typedef \hyperlink{structcugar_1_1iterator__traits}{iterator\+\_\+traits}$<$ Iterator $>$\+::reference {\bfseries reference}
+\item 
+\mbox{\Hypertarget{structcugar_1_1vector__view_af17e8a5ccb7b1040cf6292300a0f1e6f}\label{structcugar_1_1vector__view_af17e8a5ccb7b1040cf6292300a0f1e6f}} 
+typedef \hyperlink{structcugar_1_1to__const}{to\+\_\+const}$<$ reference $>$\+::type {\bfseries const\+\_\+reference}
+\item 
+\mbox{\Hypertarget{structcugar_1_1vector__view_a1f4f3efed26b6035460add81fb8cbcaf}\label{structcugar_1_1vector__view_a1f4f3efed26b6035460add81fb8cbcaf}} 
+typedef \hyperlink{structcugar_1_1iterator__traits}{iterator\+\_\+traits}$<$ Iterator $>$\+::pointer {\bfseries pointer}
+\item 
+\mbox{\Hypertarget{structcugar_1_1vector__view_a432db2398511ecf0dd6ccd93df0c4c2f}\label{structcugar_1_1vector__view_a432db2398511ecf0dd6ccd93df0c4c2f}} 
+typedef Index\+Type {\bfseries size\+\_\+type}
+\item 
+\mbox{\Hypertarget{structcugar_1_1vector__view_a921bd09fcfa0fafc8c9c0966e64da088}\label{structcugar_1_1vector__view_a921bd09fcfa0fafc8c9c0966e64da088}} 
+typedef Index\+Type {\bfseries index\+\_\+type}
+\item 
+\mbox{\Hypertarget{structcugar_1_1vector__view_a506e15289e1ba21852d638ce56c3e5af}\label{structcugar_1_1vector__view_a506e15289e1ba21852d638ce56c3e5af}} 
+typedef \hyperlink{structcugar_1_1iterator__traits}{iterator\+\_\+traits}$<$ Iterator $>$\+::difference\+\_\+type {\bfseries difference\+\_\+type}
+\item 
+\mbox{\Hypertarget{structcugar_1_1vector__view_aa7a416cbd1d46d1bf183fdb68371faff}\label{structcugar_1_1vector__view_aa7a416cbd1d46d1bf183fdb68371faff}} 
+typedef std\+::random\+\_\+access\+\_\+iterator\+\_\+tag {\bfseries iterator\+\_\+category}
+\item 
+\mbox{\Hypertarget{structcugar_1_1vector__view_a011a9a4dd162329e2d5b44915893c5f6}\label{structcugar_1_1vector__view_a011a9a4dd162329e2d5b44915893c5f6}} 
+typedef \hyperlink{structcugar_1_1vector__view}{vector\+\_\+view}$<$ Iterator, Index\+Type $>$ {\bfseries plain\+\_\+view\+\_\+type}
+\item 
+\mbox{\Hypertarget{structcugar_1_1vector__view_a2f6a905df3358f51cb3d9775469d9ed1}\label{structcugar_1_1vector__view_a2f6a905df3358f51cb3d9775469d9ed1}} 
+typedef \hyperlink{structcugar_1_1vector__view}{vector\+\_\+view}$<$ Iterator, Index\+Type $>$ {\bfseries const\+\_\+plain\+\_\+view\+\_\+type}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1vector__view_af85824a098e4639d61a92e8fedd18eeb}{vector\+\_\+view} ()
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1vector__view_a3be7d304f396892386ca3490f81eeee1}{vector\+\_\+view} (const Index\+Type \hyperlink{structcugar_1_1vector__view_a773841d0e535b07e40a99891e22d937e}{size}, Iterator vec)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1vector__view_a7335a6a0571dd33619f292e79b90854d}{resize} (const uint32 sz)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1vector__view_a46b9be216230954a48e42cda236d7fcd}{clear} ()
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Index\+Type \hyperlink{structcugar_1_1vector__view_a773841d0e535b07e40a99891e22d937e}{size} () const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Index\+Type \hyperlink{structcugar_1_1vector__view_a601703688bdebd25c563c95ecea1cf43}{length} () const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{structcugar_1_1vector__view_ac375abedf354fd94d74cf897ce63568f}{empty} () const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const\+\_\+reference \hyperlink{structcugar_1_1vector__view_a446be6811de588c4ab935cf3b85b81d2}{operator$\ast$} () const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE reference \hyperlink{structcugar_1_1vector__view_a355007914d4ca4e66cdca7a16c90bf0f}{operator$\ast$} ()
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const\+\_\+reference \hyperlink{structcugar_1_1vector__view_a0fda103573e609c8c62592067806fc86}{operator\mbox{[}$\,$\mbox{]}} (const Index\+Type i) const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE reference \hyperlink{structcugar_1_1vector__view_a3b474a8603160454c4de16fd506e0f61}{operator\mbox{[}$\,$\mbox{]}} (const Index\+Type i)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const\+\_\+reference \hyperlink{structcugar_1_1vector__view_a011678a732fc8f46d65b65b1cb4ed466}{front} (void) const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE reference \hyperlink{structcugar_1_1vector__view_aba41f15593f52d248d7d525c152ba124}{front} (void)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const\+\_\+reference \hyperlink{structcugar_1_1vector__view_a45c3064a266bf5685e7963970d72fc48}{back} (void) const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE reference \hyperlink{structcugar_1_1vector__view_a2a03b86aef7a40e55d7c7e052c94af6b}{back} (void)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Iterator \hyperlink{structcugar_1_1vector__view_a0a8acdcfb98a8559b3870c685f496349}{base} () const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const\+\_\+iterator \hyperlink{structcugar_1_1vector__view_a20919196546a2644a43b3298d7da67ce}{begin} () const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const\+\_\+iterator \hyperlink{structcugar_1_1vector__view_ac19bc3ea1579b22053d0a91998026bc8}{end} () const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE iterator \hyperlink{structcugar_1_1vector__view_a5067c45d339f1062d3dceef8135d2d2a}{begin} ()
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE iterator \hyperlink{structcugar_1_1vector__view_a3d34bf66c1ee2cb7dccf53b7dc58e2a2}{end} ()
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1vector__view_a75d37990f826ddc16faa41424d2db89c}{operator Iterator} () const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1vector__view_a631505b61ddcb11f2e82984561289b37}{push\+\_\+back} (const\+\_\+reference val)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1vector__view_ab1466b027a90a72d8727fcdf32191048}{pop\+\_\+back} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1vector__view_a04006575e7b935e3b1d10b9e253a1a25}\label{structcugar_1_1vector__view_a04006575e7b935e3b1d10b9e253a1a25}} 
+Index\+Type {\bfseries m\+\_\+size}
+\item 
+\mbox{\Hypertarget{structcugar_1_1vector__view_adada6ba306cbd09caf2bfbeb8e923ff1}\label{structcugar_1_1vector__view_adada6ba306cbd09caf2bfbeb8e923ff1}} 
+Iterator {\bfseries m\+\_\+vec}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcugar_1_1vector__view_af85824a098e4639d61a92e8fedd18eeb}\label{structcugar_1_1vector__view_af85824a098e4639d61a92e8fedd18eeb}} 
+\index{cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}!vector\+\_\+view@{vector\+\_\+view}}
+\index{vector\+\_\+view@{vector\+\_\+view}!cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}}
+\subsubsection{\texorpdfstring{vector\+\_\+view()}{vector\_view()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Iterator, typename Index\+Type = uint32$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1vector__view}{cugar\+::vector\+\_\+view}$<$ Iterator, Index\+Type $>$\+::\hyperlink{structcugar_1_1vector__view}{vector\+\_\+view} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor \mbox{\Hypertarget{structcugar_1_1vector__view_a3be7d304f396892386ca3490f81eeee1}\label{structcugar_1_1vector__view_a3be7d304f396892386ca3490f81eeee1}} 
+\index{cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}!vector\+\_\+view@{vector\+\_\+view}}
+\index{vector\+\_\+view@{vector\+\_\+view}!cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}}
+\subsubsection{\texorpdfstring{vector\+\_\+view()}{vector\_view()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Iterator, typename Index\+Type = uint32$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1vector__view}{cugar\+::vector\+\_\+view}$<$ Iterator, Index\+Type $>$\+::\hyperlink{structcugar_1_1vector__view}{vector\+\_\+view} (\begin{DoxyParamCaption}\item[{const Index\+Type}]{size,  }\item[{Iterator}]{vec }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1vector__view_a45c3064a266bf5685e7963970d72fc48}\label{structcugar_1_1vector__view_a45c3064a266bf5685e7963970d72fc48}} 
+\index{cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}!back@{back}}
+\index{back@{back}!cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}}
+\subsubsection{\texorpdfstring{back()}{back()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Iterator, typename Index\+Type = uint32$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const\+\_\+reference \hyperlink{structcugar_1_1vector__view}{cugar\+::vector\+\_\+view}$<$ Iterator, Index\+Type $>$\+::back (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return reference to back \mbox{\Hypertarget{structcugar_1_1vector__view_a2a03b86aef7a40e55d7c7e052c94af6b}\label{structcugar_1_1vector__view_a2a03b86aef7a40e55d7c7e052c94af6b}} 
+\index{cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}!back@{back}}
+\index{back@{back}!cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}}
+\subsubsection{\texorpdfstring{back()}{back()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Iterator, typename Index\+Type = uint32$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE reference \hyperlink{structcugar_1_1vector__view}{cugar\+::vector\+\_\+view}$<$ Iterator, Index\+Type $>$\+::back (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return reference to back \mbox{\Hypertarget{structcugar_1_1vector__view_a0a8acdcfb98a8559b3870c685f496349}\label{structcugar_1_1vector__view_a0a8acdcfb98a8559b3870c685f496349}} 
+\index{cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}!base@{base}}
+\index{base@{base}!cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}}
+\subsubsection{\texorpdfstring{base()}{base()}}
+{\footnotesize\ttfamily template$<$typename Iterator, typename Index\+Type = uint32$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Iterator \hyperlink{structcugar_1_1vector__view}{cugar\+::vector\+\_\+view}$<$ Iterator, Index\+Type $>$\+::base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the base iterator \mbox{\Hypertarget{structcugar_1_1vector__view_a20919196546a2644a43b3298d7da67ce}\label{structcugar_1_1vector__view_a20919196546a2644a43b3298d7da67ce}} 
+\index{cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}!begin@{begin}}
+\index{begin@{begin}!cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}}
+\subsubsection{\texorpdfstring{begin()}{begin()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Iterator, typename Index\+Type = uint32$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const\+\_\+iterator \hyperlink{structcugar_1_1vector__view}{cugar\+::vector\+\_\+view}$<$ Iterator, Index\+Type $>$\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return begin iterator \mbox{\Hypertarget{structcugar_1_1vector__view_a5067c45d339f1062d3dceef8135d2d2a}\label{structcugar_1_1vector__view_a5067c45d339f1062d3dceef8135d2d2a}} 
+\index{cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}!begin@{begin}}
+\index{begin@{begin}!cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}}
+\subsubsection{\texorpdfstring{begin()}{begin()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Iterator, typename Index\+Type = uint32$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE iterator \hyperlink{structcugar_1_1vector__view}{cugar\+::vector\+\_\+view}$<$ Iterator, Index\+Type $>$\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return begin iterator \mbox{\Hypertarget{structcugar_1_1vector__view_a46b9be216230954a48e42cda236d7fcd}\label{structcugar_1_1vector__view_a46b9be216230954a48e42cda236d7fcd}} 
+\index{cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}!clear@{clear}}
+\index{clear@{clear}!cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}}
+\subsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily template$<$typename Iterator, typename Index\+Type = uint32$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1vector__view}{cugar\+::vector\+\_\+view}$<$ Iterator, Index\+Type $>$\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+clear \mbox{\Hypertarget{structcugar_1_1vector__view_ac375abedf354fd94d74cf897ce63568f}\label{structcugar_1_1vector__view_ac375abedf354fd94d74cf897ce63568f}} 
+\index{cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}!empty@{empty}}
+\index{empty@{empty}!cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}}
+\subsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily template$<$typename Iterator, typename Index\+Type = uint32$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{structcugar_1_1vector__view}{cugar\+::vector\+\_\+view}$<$ Iterator, Index\+Type $>$\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return true iff size is null \mbox{\Hypertarget{structcugar_1_1vector__view_ac19bc3ea1579b22053d0a91998026bc8}\label{structcugar_1_1vector__view_ac19bc3ea1579b22053d0a91998026bc8}} 
+\index{cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}!end@{end}}
+\index{end@{end}!cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}}
+\subsubsection{\texorpdfstring{end()}{end()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Iterator, typename Index\+Type = uint32$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const\+\_\+iterator \hyperlink{structcugar_1_1vector__view}{cugar\+::vector\+\_\+view}$<$ Iterator, Index\+Type $>$\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return end iterator \mbox{\Hypertarget{structcugar_1_1vector__view_a3d34bf66c1ee2cb7dccf53b7dc58e2a2}\label{structcugar_1_1vector__view_a3d34bf66c1ee2cb7dccf53b7dc58e2a2}} 
+\index{cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}!end@{end}}
+\index{end@{end}!cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}}
+\subsubsection{\texorpdfstring{end()}{end()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Iterator, typename Index\+Type = uint32$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE iterator \hyperlink{structcugar_1_1vector__view}{cugar\+::vector\+\_\+view}$<$ Iterator, Index\+Type $>$\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return end iterator \mbox{\Hypertarget{structcugar_1_1vector__view_a011678a732fc8f46d65b65b1cb4ed466}\label{structcugar_1_1vector__view_a011678a732fc8f46d65b65b1cb4ed466}} 
+\index{cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}!front@{front}}
+\index{front@{front}!cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}}
+\subsubsection{\texorpdfstring{front()}{front()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Iterator, typename Index\+Type = uint32$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const\+\_\+reference \hyperlink{structcugar_1_1vector__view}{cugar\+::vector\+\_\+view}$<$ Iterator, Index\+Type $>$\+::front (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return reference to front \mbox{\Hypertarget{structcugar_1_1vector__view_aba41f15593f52d248d7d525c152ba124}\label{structcugar_1_1vector__view_aba41f15593f52d248d7d525c152ba124}} 
+\index{cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}!front@{front}}
+\index{front@{front}!cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}}
+\subsubsection{\texorpdfstring{front()}{front()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Iterator, typename Index\+Type = uint32$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE reference \hyperlink{structcugar_1_1vector__view}{cugar\+::vector\+\_\+view}$<$ Iterator, Index\+Type $>$\+::front (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return reference to front \mbox{\Hypertarget{structcugar_1_1vector__view_a601703688bdebd25c563c95ecea1cf43}\label{structcugar_1_1vector__view_a601703688bdebd25c563c95ecea1cf43}} 
+\index{cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}!length@{length}}
+\index{length@{length}!cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}}
+\subsubsection{\texorpdfstring{length()}{length()}}
+{\footnotesize\ttfamily template$<$typename Iterator, typename Index\+Type = uint32$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Index\+Type \hyperlink{structcugar_1_1vector__view}{cugar\+::vector\+\_\+view}$<$ Iterator, Index\+Type $>$\+::length (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return vector size \mbox{\Hypertarget{structcugar_1_1vector__view_a75d37990f826ddc16faa41424d2db89c}\label{structcugar_1_1vector__view_a75d37990f826ddc16faa41424d2db89c}} 
+\index{cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}!operator Iterator@{operator Iterator}}
+\index{operator Iterator@{operator Iterator}!cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}}
+\subsubsection{\texorpdfstring{operator Iterator()}{operator Iterator()}}
+{\footnotesize\ttfamily template$<$typename Iterator, typename Index\+Type = uint32$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1vector__view}{cugar\+::vector\+\_\+view}$<$ Iterator, Index\+Type $>$\+::operator Iterator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+automatic conversion to the basic iterator type \mbox{\Hypertarget{structcugar_1_1vector__view_a446be6811de588c4ab935cf3b85b81d2}\label{structcugar_1_1vector__view_a446be6811de588c4ab935cf3b85b81d2}} 
+\index{cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}}
+\subsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Iterator, typename Index\+Type = uint32$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const\+\_\+reference \hyperlink{structcugar_1_1vector__view}{cugar\+::vector\+\_\+view}$<$ Iterator, Index\+Type $>$\+::operator$\ast$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+dereference operator \mbox{\Hypertarget{structcugar_1_1vector__view_a355007914d4ca4e66cdca7a16c90bf0f}\label{structcugar_1_1vector__view_a355007914d4ca4e66cdca7a16c90bf0f}} 
+\index{cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}}
+\subsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Iterator, typename Index\+Type = uint32$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE reference \hyperlink{structcugar_1_1vector__view}{cugar\+::vector\+\_\+view}$<$ Iterator, Index\+Type $>$\+::operator$\ast$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+dereference operator \mbox{\Hypertarget{structcugar_1_1vector__view_a0fda103573e609c8c62592067806fc86}\label{structcugar_1_1vector__view_a0fda103573e609c8c62592067806fc86}} 
+\index{cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}}
+\subsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Iterator, typename Index\+Type = uint32$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const\+\_\+reference \hyperlink{structcugar_1_1vector__view}{cugar\+::vector\+\_\+view}$<$ Iterator, Index\+Type $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const Index\+Type}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+const indexing operator \mbox{\Hypertarget{structcugar_1_1vector__view_a3b474a8603160454c4de16fd506e0f61}\label{structcugar_1_1vector__view_a3b474a8603160454c4de16fd506e0f61}} 
+\index{cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}}
+\subsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Iterator, typename Index\+Type = uint32$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE reference \hyperlink{structcugar_1_1vector__view}{cugar\+::vector\+\_\+view}$<$ Iterator, Index\+Type $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const Index\+Type}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+indexing operator \mbox{\Hypertarget{structcugar_1_1vector__view_ab1466b027a90a72d8727fcdf32191048}\label{structcugar_1_1vector__view_ab1466b027a90a72d8727fcdf32191048}} 
+\index{cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}!pop\+\_\+back@{pop\+\_\+back}}
+\index{pop\+\_\+back@{pop\+\_\+back}!cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}}
+\subsubsection{\texorpdfstring{pop\+\_\+back()}{pop\_back()}}
+{\footnotesize\ttfamily template$<$typename Iterator, typename Index\+Type = uint32$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1vector__view}{cugar\+::vector\+\_\+view}$<$ Iterator, Index\+Type $>$\+::pop\+\_\+back (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+pop back \mbox{\Hypertarget{structcugar_1_1vector__view_a631505b61ddcb11f2e82984561289b37}\label{structcugar_1_1vector__view_a631505b61ddcb11f2e82984561289b37}} 
+\index{cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}!push\+\_\+back@{push\+\_\+back}}
+\index{push\+\_\+back@{push\+\_\+back}!cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}}
+\subsubsection{\texorpdfstring{push\+\_\+back()}{push\_back()}}
+{\footnotesize\ttfamily template$<$typename Iterator, typename Index\+Type = uint32$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1vector__view}{cugar\+::vector\+\_\+view}$<$ Iterator, Index\+Type $>$\+::push\+\_\+back (\begin{DoxyParamCaption}\item[{const\+\_\+reference}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+push back \mbox{\Hypertarget{structcugar_1_1vector__view_a7335a6a0571dd33619f292e79b90854d}\label{structcugar_1_1vector__view_a7335a6a0571dd33619f292e79b90854d}} 
+\index{cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}!resize@{resize}}
+\index{resize@{resize}!cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}}
+\subsubsection{\texorpdfstring{resize()}{resize()}}
+{\footnotesize\ttfamily template$<$typename Iterator, typename Index\+Type = uint32$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1vector__view}{cugar\+::vector\+\_\+view}$<$ Iterator, Index\+Type $>$\+::resize (\begin{DoxyParamCaption}\item[{const uint32}]{sz }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+resize the vector \mbox{\Hypertarget{structcugar_1_1vector__view_a773841d0e535b07e40a99891e22d937e}\label{structcugar_1_1vector__view_a773841d0e535b07e40a99891e22d937e}} 
+\index{cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}!size@{size}}
+\index{size@{size}!cugar\+::vector\+\_\+view@{cugar\+::vector\+\_\+view}}
+\subsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$typename Iterator, typename Index\+Type = uint32$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Index\+Type \hyperlink{structcugar_1_1vector__view}{cugar\+::vector\+\_\+view}$<$ Iterator, Index\+Type $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return vector size 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/vector\+\_\+view.\+h\end{DoxyCompactItemize}

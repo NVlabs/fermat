@@ -1,0 +1,63 @@
+\begin{DoxyParagraph}{}
+This \hyperlink{group__kdtree}{module} implements data-\/structures and functions to store, build and manipulate K-\/d trees.
+\end{DoxyParagraph}
+
+\begin{DoxyItemize}
+\item \hyperlink{structcugar_1_1_kd__node}{Kd\+\_\+node}
+\item \hyperlink{structcugar_1_1cuda_1_1_kd__builder}{cugar\+::cuda\+::\+Kd\+\_\+builder}
+\end{DoxyItemize}
+
+\begin{DoxyParagraph}{}
+as well as a submodule for K-\/\+NN lookups\+: \hyperlink{group__knn}{k-\/\+Nearest Neighbors}. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+As an example, consider the following code to create a K-\/d tree on a set of points, in parallel, on the device\+: 
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <\hyperlink{kd__builder_8h}{cugar/kd/cuda/kd\_builder.h}>}
+\textcolor{preprocessor}{#include <\hyperlink{kd__context_8h}{cugar/kd/cuda/kd\_context.h}>}
+
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,Vector3f>} kd\_points;
+... \textcolor{comment}{// code to fill the input vector of points}
+
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,Kd\_node>}  kd\_nodes;
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint2>}    kd\_leaves;
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint32>}   kd\_index;
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint2>}    kd\_ranges;
+
+\hyperlink{structcugar_1_1cuda_1_1_kd__builder}{cugar::cuda::Kd\_builder<uint64>} builder( kd\_index );
+\hyperlink{structcugar_1_1cuda_1_1_kd__context}{cugar::cuda::Kd\_context} kd\_tree( &kd\_nodes, &kd\_leaves, &kd\_ranges );
+builder.build(
+    kd\_tree,                                    \textcolor{comment}{// output tree}
+    kd\_index,                                   \textcolor{comment}{// output index}
+    Bbox3f( Vector3f(0.0f), Vector3f(1.0f) ),   \textcolor{comment}{// suppose all bboxes are in [0,1]^3}
+    kd\_points.begin(),                          \textcolor{comment}{// begin iterator}
+    kd\_points.end(),                            \textcolor{comment}{// end iterator}
+    4 );                                        \textcolor{comment}{// target 4 objects per leaf}
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The following k-\/\+NN example shows how to perform k-\/\+NN lookups on such a tree\+: 
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <cugar/kd/cuda/kd\_knn.h>}
+
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,Vector4f>} query\_points;
+... \textcolor{comment}{// code to build the k-d tree and query points here...}
+    \textcolor{comment}{// NOTE: even though we're doing 3-dimensional queries,}
+    \textcolor{comment}{// we can use Vector4f arrays for better coalescing}
+
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,cuda::Kd\_knn<3>::Result}> results( 
+      query\_points.size() );
+
+\hyperlink{structcugar_1_1cuda_1_1_kd__knn}{cugar::cuda::Kd\_knn<3>} knn;
+knn.run(
+    query\_points.begin(),
+    query\_points.end(),
+    \hyperlink{namespacecugar_a3f6cb2c817f2ba065931cec569aa848b}{raw\_pointer}(kd\_nodes),
+    \hyperlink{namespacecugar_a3f6cb2c817f2ba065931cec569aa848b}{raw\_pointer}(kd\_ranges),
+    \hyperlink{namespacecugar_a3f6cb2c817f2ba065931cec569aa848b}{raw\_pointer}(kd\_leaves),
+    \hyperlink{namespacecugar_a3f6cb2c817f2ba065931cec569aa848b}{raw\_pointer}(kd\_points),
+    \hyperlink{namespacecugar_a3f6cb2c817f2ba065931cec569aa848b}{raw\_pointer}(results) );
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}

@@ -1,0 +1,80 @@
+\begin{DoxyParagraph}{}
+The user of \hyperlink{index}{Fermat} and \hyperlink{cugar_page}{C\+U\+G\+AR} needs to familiarize with the fact that on a G\+PU equipped system there is both a {\itshape host}, controlled by a {\itshape C\+PU}, and one or multiple {\itshape G\+PU} {\itshape devices}, with distinct memory spaces. Hence, there can be several types of functions and data-\/structures\+: 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+
+\begin{DoxyItemize}
+\item single-\/threaded functions that can be called by a host thread
+\item single-\/threaded functions that can be called by a device thread
+\item single-\/threaded functions that can be called both on the host and the device
+\item parallel functions that can be called by a host thread, and spawn one or more sets of host threads
+\item parallel functions that can be called by a host thread, but spawn one or more sets of device threads 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+
+\begin{DoxyItemize}
+\item data-\/structures that encapsulate host data and are meant to be used on the host (e.\+g. a resizable host vector, cugar\+::vector$<$host\+\_\+tag,\+T$>$)
+\item data-\/structures that encapsulate device data but are meant to be used on the host (e.\+g. a resizable device vector, cugar\+::vector$<$device\+\_\+tag,\+T$>$)
+\item data-\/structures that encapsulate device data and are meant to be used on the device 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Unified Virtual Memory (coming with the N\+V\+I\+D\+IA Maxwell generation) already allows to use any data-\/structure anywhere, but given the buses between C\+P\+Us and G\+P\+Us, it is still useful to sometimes have complete control of where the data lives.
+\end{DoxyParagraph}
+\hypertarget{_fermat_host_device_page_FermatPlainViewsSection}{}\section{Plain Views}\label{_fermat_host_device_page_FermatPlainViewsSection}
+\begin{DoxyParagraph}{}
+The fact that some data structures contain device data but can only be used from the host, coupled with the fact that dereferencing host side references from a device kernel would require going through a bus to access slow C\+PU memory, makes it advantageous to rethink how to communicate data between the two, and introduce the concept of {\itshape plain views}\+: in \hyperlink{cugar_page}{C\+U\+G\+AR}\textquotesingle{}s (and \hyperlink{index}{Fermat}\textquotesingle{}s) speech, a plain view of an object is essentially a {\itshape shallow reference} to an object\textquotesingle{}s data encapsulated in a P\+OD data structure that can be passed as a kernel parameter. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+\hyperlink{cugar_page}{C\+U\+G\+AR} defines the generic function \hyperlink{group___basic_ga6eb01f34e803fa6b384bf9930f6db426}{plain\+\_\+view()} to obtain the view of a given object. Analogously it defines the meta function plain\+\_\+view\+\_\+subtype$<$\+T$>$\+::type to get the type of the plain view of any given type T (where defined). Moreover, as a convention \hyperlink{cugar_page}{C\+U\+G\+AR}\textquotesingle{}s data structures T define the subtype T\+::plain\+\_\+view\+\_\+type and T\+::const\+\_\+plain\+\_\+view\+\_\+type to identify their plain view types. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+As an example consider the following situation, where on the host you have created a large device vector you want to be filled by a device kernel. Ideally, you\textquotesingle{}d want to simply pass a reference to the vector to your kernel, as in\+: 
+\begin{DoxyCode}
+\_\_global\_\_ \textcolor{keywordtype}{void} my\_kernel(                   \textcolor{comment}{// the CUDA kernel}
+    \hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint32>}& vec)   \textcolor{comment}{// ideally, receive a
+       reference: doesn't work without UVM!}
+\{
+    \textcolor{keyword}{const} uint32 tid = threadIdx.x + blockIdx.x * blockDim.x; \textcolor{comment}{// compute a linear thread id}
+    \textcolor{keywordflow}{if} (tid < vec.size())
+        vec[tid] = tid * 10;
+\}
+
+\textcolor{keywordtype}{int} main()
+\{
+    \hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint32>} vec( 1000000 );
+
+    \textcolor{keyword}{const} uint32 blockdim = 128;
+    \textcolor{keyword}{const} uint32 n\_blocks = \hyperlink{group___basic_utils_gabb6714186dbbd864f0a9298944ba509b}{util::divide\_ri}( vec.size(), blockdim ); 
+    my\_kernel<<<n\_blocks,blockdim>>>( vec );
+\}
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+However, this won\textquotesingle{}t be possible in C\+U\+DA until U\+VM is finally available. With Fermat, you\textquotesingle{}d do this instead\+: 
+\begin{DoxyCode}
+\_\_global\_\_ \textcolor{keywordtype}{void} my\_kernel(                   \textcolor{comment}{// the CUDA kernel}
+    \hyperlink{structcugar_1_1vector__view}{cugar::vector\_view<uint32>} vec)          \textcolor{comment}{// Fermat's surrogate of a reference}
+\{
+    \textcolor{keyword}{const} uint32 tid = threadIdx.x + blockIdx.x * blockDim.x; \textcolor{comment}{// compute a linear thread id}
+    \textcolor{keywordflow}{if} (tid < vec.\hyperlink{structcugar_1_1vector__view_a773841d0e535b07e40a99891e22d937e}{size}())
+        vec[tid] = tid * 10;
+\}
+
+\textcolor{keywordtype}{int} main()
+\{
+    \hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint32>} vec( 1000000 );
+
+    \textcolor{keyword}{const} uint32 blockdim = 128;
+    \textcolor{keyword}{const} uint32 n\_blocks = \hyperlink{group___basic_utils_gabb6714186dbbd864f0a9298944ba509b}{util::divide\_ri}( vec.\hyperlink{structcugar_1_1vector__view_a773841d0e535b07e40a99891e22d937e}{size}(), blockdim );
+    my\_kernel<<<n\_blocks,blockdim>>>( \hyperlink{namespacecugar_a347f91de482f0cb8dcba21c086b0aa46}{cugar::plain\_view}( vec ) );
+\}
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+This basic pattern can be applied to all of \hyperlink{cugar_page}{C\+U\+G\+AR}\textquotesingle{}s and \hyperlink{index}{Fermat}\textquotesingle{}s data structures that are meant to be setup from the host and accessed from the device.
+\end{DoxyParagraph}
+Top\+: \hyperlink{_overture_page}{An Overture} 

@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -49,7 +49,7 @@ void translate_group_kernel(
 
 	for (uint32 i = 0; i < 3; ++i)
 	{
-		const uint32 vertex_id = mesh.vertex_indices[tri_id * 3 + i];
+		const uint32 vertex_id = mesh.vertex_indices[tri_id * MeshStorage::VERTEX_TRIANGLE_SIZE + i];
 
 		const uint32 word_id = vertex_id / 32u;
 		const uint32 bit_id  = vertex_id & 31u;
@@ -57,7 +57,7 @@ void translate_group_kernel(
 
 		if ((cugar::atomic_or( set + word_id, bit_mask ) & bit_mask) == 0u)
 		{
-			float3* v = reinterpret_cast<float3*>(mesh.vertex_data) + vertex_id;
+			float4* v = reinterpret_cast<float4*>(mesh.vertex_data) + vertex_id;
 			v->x += delta.x;
 			v->y += delta.y;
 			v->z += delta.z;

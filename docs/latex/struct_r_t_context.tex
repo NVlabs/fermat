@@ -1,0 +1,69 @@
+\hypertarget{struct_r_t_context}{}\section{R\+T\+Context Struct Reference}
+\label{struct_r_t_context}\index{R\+T\+Context@{R\+T\+Context}}
+
+
+\subsection{Detailed description}
+Class defining core ray tracing functionality, ranging from geometry setup to performing actual ray tracing queries. 
+
+{\ttfamily \#include $<$rt.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_r_t_context_a67eec7e6a6c1691ef2173b0602360cf1}\label{struct_r_t_context_a67eec7e6a6c1691ef2173b0602360cf1}} 
+void {\bfseries create\+\_\+geometry} (const uint32 tri\+Count, const int $\ast$index\+\_\+ptr, const uint32 vertex\+\_\+count, const float $\ast$vertex\+\_\+ptr, const int $\ast$normal\+\_\+index\+\_\+ptr, const float $\ast$normal\+\_\+vertex\+\_\+ptr, const int $\ast$tex\+\_\+index\+\_\+ptr, const float $\ast$tex\+\_\+vertex\+\_\+ptr, const int $\ast$material\+\_\+index\+\_\+ptr)
+\item 
+\mbox{\Hypertarget{struct_r_t_context_a05d3b467a1705ac6f3da45a63da6a309}\label{struct_r_t_context_a05d3b467a1705ac6f3da45a63da6a309}} 
+void {\bfseries bind\+\_\+buffer} (const char $\ast$name, const uint32 size, const uint32 element\+\_\+size, void $\ast$ptr, const R\+Tformat format)
+\item 
+\mbox{\Hypertarget{struct_r_t_context_ab6412d7924c5ee72f7859ce718ea8bec}\label{struct_r_t_context_ab6412d7924c5ee72f7859ce718ea8bec}} 
+void {\bfseries bind\+\_\+var} (const char $\ast$name, const uint32 size, void $\ast$ptr)
+\item 
+\mbox{\Hypertarget{struct_r_t_context_a008bde2ae8eef725707e91d11fc93696}\label{struct_r_t_context_a008bde2ae8eef725707e91d11fc93696}} 
+{\footnotesize template$<$typename T $>$ }\\void {\bfseries bind\+\_\+var} (const char $\ast$name, const T value)
+\item 
+\mbox{\Hypertarget{struct_r_t_context_acdad4554bdc4abeb577147510be6b2e4}\label{struct_r_t_context_acdad4554bdc4abeb577147510be6b2e4}} 
+void {\bfseries bind\+\_\+var} (const char $\ast$name, const int32 value)
+\item 
+\mbox{\Hypertarget{struct_r_t_context_a103a415805b52765be25addf223eb9ea}\label{struct_r_t_context_a103a415805b52765be25addf223eb9ea}} 
+void {\bfseries bind\+\_\+var} (const char $\ast$name, const uint32 value)
+\item 
+\mbox{\Hypertarget{struct_r_t_context_a2aef7cd0103ef1ca0920ecfc6a5248dc}\label{struct_r_t_context_a2aef7cd0103ef1ca0920ecfc6a5248dc}} 
+void {\bfseries bind\+\_\+var} (const char $\ast$name, const float value)
+\item 
+\mbox{\Hypertarget{struct_r_t_context_aa3a4efba759b17aaf41421b5751c793b}\label{struct_r_t_context_aa3a4efba759b17aaf41421b5751c793b}} 
+uint32 {\bfseries create\+\_\+program} (const char $\ast$filename, const char $\ast$program\+\_\+name)
+\item 
+\mbox{\Hypertarget{struct_r_t_context_a54781388d138a0f19d9db32d67d03675}\label{struct_r_t_context_a54781388d138a0f19d9db32d67d03675}} 
+uint32 {\bfseries add\+\_\+ray\+\_\+generation\+\_\+program} (const uint32 program)
+\item 
+\mbox{\Hypertarget{struct_r_t_context_af5a07e2f0950d7c7d10dd3b1374133e5}\label{struct_r_t_context_af5a07e2f0950d7c7d10dd3b1374133e5}} 
+void {\bfseries launch} (const uint32 index, const uint32 width)
+\item 
+\mbox{\Hypertarget{struct_r_t_context_a1ea884b9c43b0c752c55ea5a6e9279fd}\label{struct_r_t_context_a1ea884b9c43b0c752c55ea5a6e9279fd}} 
+void {\bfseries launch} (const uint32 index, const uint32 width, const uint32 height)
+\item 
+\mbox{\Hypertarget{struct_r_t_context_a18ed5bf258d618471606ddfd8a933962}\label{struct_r_t_context_a18ed5bf258d618471606ddfd8a933962}} 
+void {\bfseries trace} (const uint32 count, const \hyperlink{struct_ray}{Ray} $\ast$rays, \hyperlink{struct_hit}{Hit} $\ast$hits)
+\item 
+\mbox{\Hypertarget{struct_r_t_context_a199e8462465979acbd31ce4e6f71a55e}\label{struct_r_t_context_a199e8462465979acbd31ce4e6f71a55e}} 
+void {\bfseries trace} (const uint32 count, const \hyperlink{struct_masked_ray}{Masked\+Ray} $\ast$rays, \hyperlink{struct_hit}{Hit} $\ast$hits)
+\item 
+\mbox{\Hypertarget{struct_r_t_context_acf20dae37613f1af995885300d20a7dd}\label{struct_r_t_context_acf20dae37613f1af995885300d20a7dd}} 
+void {\bfseries trace\+\_\+shadow} (const uint32 count, const \hyperlink{struct_masked_ray}{Masked\+Ray} $\ast$rays, \hyperlink{struct_hit}{Hit} $\ast$hits)
+\item 
+\mbox{\Hypertarget{struct_r_t_context_ac6a20522a8792f6e006aad254a5df6db}\label{struct_r_t_context_ac6a20522a8792f6e006aad254a5df6db}} 
+void {\bfseries trace\+\_\+shadow} (const uint32 count, const \hyperlink{struct_masked_ray}{Masked\+Ray} $\ast$rays, uint32 $\ast$binary\+\_\+hits)
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_r_t_context_a3f74695ea24d6af162ae2a2802d255e3}\label{struct_r_t_context_a3f74695ea24d6af162ae2a2802d255e3}} 
+\hyperlink{struct_r_t_context_impl}{R\+T\+Context\+Impl} $\ast$ {\bfseries impl}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/rt.\+h\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/rt.\+cpp\end{DoxyCompactItemize}

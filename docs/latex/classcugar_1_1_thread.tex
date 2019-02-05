@@ -1,0 +1,55 @@
+\hypertarget{classcugar_1_1_thread}{}\section{cugar\+:\+:Thread$<$ Derived\+Thread\+Type $>$ Class Template Reference}
+\label{classcugar_1_1_thread}\index{cugar\+::\+Thread$<$ Derived\+Thread\+Type $>$@{cugar\+::\+Thread$<$ Derived\+Thread\+Type $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$typename Derived\+Thread\+Type$>$\newline
+class cugar\+::\+Thread$<$ Derived\+Thread\+Type $>$}
+
+A thread class, which is meant to be derived from to construct user-\/defined threads
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Derived\+Thread\+Type} & the derived thread class, which must implement a single method\+: 
+\begin{DoxyCode}
+\textcolor{comment}{// run the user-defined thread}
+\textcolor{keywordtype}{void} run();
+\end{DoxyCode}
+\\
+\hline
+\end{DoxyTemplParams}
+e.\+g. 
+\begin{DoxyCode}
+\textcolor{keyword}{struct }MyThread : \textcolor{keyword}{public} Thread<MyThread>
+\{
+    \textcolor{keywordtype}{void} run()
+    \{
+       \textcolor{comment}{// do something}
+       ...
+    \}
+\}
+\end{DoxyCode}
+ 
+
+{\ttfamily \#include $<$threads.\+h$>$}
+
+Inheritance diagram for cugar\+:\+:Thread$<$ Derived\+Thread\+Type $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcugar_1_1_thread}
+\end{center}
+\end{figure}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcugar_1_1_thread_adada4b3267ea9be60732969db83b402e}\label{classcugar_1_1_thread_adada4b3267ea9be60732969db83b402e}} 
+void \hyperlink{classcugar_1_1_thread_adada4b3267ea9be60732969db83b402e}{create} ()
+\begin{DoxyCompactList}\small\item\em create the thread \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcugar_1_1_thread_a77376c060659561647e8adc49bdb1a1d}\label{classcugar_1_1_thread_a77376c060659561647e8adc49bdb1a1d}} 
+void \hyperlink{classcugar_1_1_thread_a77376c060659561647e8adc49bdb1a1d}{join} ()
+\begin{DoxyCompactList}\small\item\em join the thread \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/threads.\+h\end{DoxyCompactItemize}

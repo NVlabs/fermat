@@ -1,0 +1,30 @@
+\hypertarget{processes_8h}{}\section{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/sampling/processes.h File Reference}
+\label{processes_8h}\index{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/sampling/processes.\+h@{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/sampling/processes.\+h}}
+
+
+Defines utility functions to evaluate some stochastic processes.  
+
+
+{\ttfamily \#include $<$cugar/linalg/vector.\+h$>$}\newline
+{\ttfamily \#include $<$cugar/sampling/distributions.\+h$>$}\newline
+{\ttfamily \#include $<$cugar/sampling/sampler.\+h$>$}\newline
+{\ttfamily \#include $<$cugar/sampling/processes\+\_\+inline.\+h$>$}\newline
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespacecugar}{cugar}
+\begin{DoxyCompactList}\small\item\em Define a \hyperlink{structcugar_1_1vector__view}{vector\+\_\+view} P\+OD type and \hyperlink{namespacecugar_a347f91de482f0cb8dcba21c086b0aa46}{plain\+\_\+view()} for std\+::vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Generator , uint32 D\+IM$>$ }\\Vector$<$ float, D\+IM $>$ \hyperlink{group__processes_ga5c4e54da1f4419033a8ae7f5aa8cdbb2}{cugar\+::brownian\+\_\+bridge} (const uint32 L, const uint32 t, Generator gaussian)
+\item 
+{\footnotesize template$<$uint32 D\+IM, typename Distribution , typename Sampler\+\_\+type $>$ }\\Vector$<$ float, D\+IM $>$ \hyperlink{group__processes_ga9f3fe90d8a07d266c41f239963b83644}{cugar\+::generate\+\_\+point} (Sampler\+\_\+type \&sampler, Distribution \&gaussian)
+\item 
+{\footnotesize template$<$uint32 D\+IM, typename Sequence , typename Distribution $>$ }\\Vector$<$ float, D\+IM $>$ \hyperlink{group__processes_ga804d942e70bf4d755991fc3393004e8e}{cugar\+::brownian\+\_\+bridge} (Distribution \&gaussian, const float sigma, const uint32 N, const uint32 i, const uint32 L, const uint32 t, const Sequence \&sequence)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Defines utility functions to evaluate some stochastic processes. 
+

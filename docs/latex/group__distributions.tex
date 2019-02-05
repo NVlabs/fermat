@@ -1,0 +1,63 @@
+\hypertarget{group__distributions}{}\section{Distributions}
+\label{group__distributions}\index{Distributions@{Distributions}}
+
+
+\subsection{Detailed Description}
+\begin{DoxyParagraph}{}
+This module provides a list of classes that provide methods to transform uniformly distributed numbers into different types of random distributions, and evaluate their density. Each such class provides the following basic interface\+: 
+\begin{DoxyCode}
+\textcolor{keyword}{struct }Distribution
+\{
+    \textcolor{comment}{// map a uniformly-distributed number 'U into the desired distribution}
+    \textcolor{keywordtype}{float} map(\textcolor{keywordtype}{float} U) \textcolor{keyword}{const};
+
+    \textcolor{comment}{// evaluate the density of the distribution at the point 'x}
+    \textcolor{keywordtype}{float} density(\textcolor{keywordtype}{float} x) \textcolor{keyword}{const};
+\}
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The module further provides an adaptor for random number generators, that can be used to adapt a generator to the desired distribution. e.\+g. 
+\begin{DoxyCode}
+Random              random\_generator;
+Cosine\_distribution cos\_distribution;
+Transform\_generator<Random,Cosine\_distribution> cos\_generator(random\_generator,cos\_distribution);
+
+\textcolor{comment}{// approximate the average of the cosine distribution}
+\textcolor{keywordtype}{float} avg = 0.0f;
+\textcolor{keywordflow}{for} (uint32 i = 0; i < 8; ++)
+   avg += cos\_distribution.next();
+avg /= 8;
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcugar_1_1_base__distribution}{cugar\+::\+Base\+\_\+distribution$<$ Derived\+\_\+type $>$}
+\item 
+struct \hyperlink{structcugar_1_1_uniform__distribution}{cugar\+::\+Uniform\+\_\+distribution}
+\item 
+struct \hyperlink{structcugar_1_1_cosine__distribution}{cugar\+::\+Cosine\+\_\+distribution}
+\item 
+struct \hyperlink{structcugar_1_1_pareto__distribution}{cugar\+::\+Pareto\+\_\+distribution}
+\item 
+struct \hyperlink{structcugar_1_1_bounded__pareto__distribution}{cugar\+::\+Bounded\+\_\+pareto\+\_\+distribution}
+\item 
+struct \hyperlink{structcugar_1_1_bounded__exponential}{cugar\+::\+Bounded\+\_\+exponential}
+\item 
+struct \hyperlink{structcugar_1_1_cauchy__distribution}{cugar\+::\+Cauchy\+\_\+distribution}
+\item 
+struct \hyperlink{structcugar_1_1_exponential__distribution}{cugar\+::\+Exponential\+\_\+distribution}
+\item 
+struct \hyperlink{structcugar_1_1_gaussian__distribution__symm__2d}{cugar\+::\+Gaussian\+\_\+distribution\+\_\+symm\+\_\+2d}
+\item 
+struct \hyperlink{structcugar_1_1_gaussian__distribution__2d}{cugar\+::\+Gaussian\+\_\+distribution\+\_\+2d}
+\item 
+struct \hyperlink{structcugar_1_1_transform__generator}{cugar\+::\+Transform\+\_\+generator$<$ Generator, Distribution $>$}
+\item 
+struct \hyperlink{structcugar_1_1_gaussian__generator}{cugar\+::\+Gaussian\+\_\+generator}
+\item 
+struct \hyperlink{structcugar_1_1_mixture}{cugar\+::\+Mixture$<$ T\+Distribution, N\+C\+O\+M\+P $>$}
+\end{DoxyCompactItemize}

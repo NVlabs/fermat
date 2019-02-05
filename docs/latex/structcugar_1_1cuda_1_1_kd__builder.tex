@@ -1,0 +1,147 @@
+\hypertarget{structcugar_1_1cuda_1_1_kd__builder}{}\section{cugar\+:\+:cuda\+:\+:Kd\+\_\+builder$<$ Integer $>$ Struct Template Reference}
+\label{structcugar_1_1cuda_1_1_kd__builder}\index{cugar\+::cuda\+::\+Kd\+\_\+builder$<$ Integer $>$@{cugar\+::cuda\+::\+Kd\+\_\+builder$<$ Integer $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$typename Integer$>$\newline
+struct cugar\+::cuda\+::\+Kd\+\_\+builder$<$ Integer $>$}
+
+G\+P\+U-\/based middle-\/split k-\/d tree builder
+
+This class provides the context to generate k-\/d trees on the G\+PU starting from a set of unordered points. The output is a set of nodes with the corresponding leaves and a set of primitive indices into the input set of points. The output leaves will specify contiguous ranges into this index.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Integer} & an integer type that determines the number of bits used to compute the points\textquotesingle{} Morton codes. Accepted values are uint32 and uint64.\\
+\hline
+{\em Output\+Tree} & a template class used to write the output tree, with the following interface\+:\\
+\hline
+\end{DoxyTemplParams}
+\label{structcugar_1_1cuda_1_1_kd__builder_KdOutputTreeAnchor}%
+\Hypertarget{structcugar_1_1cuda_1_1_kd__builder_KdOutputTreeAnchor}%
+ 
+\begin{DoxyCode}
+\textcolor{keyword}{struct }OutputTree
+\{
+   \textcolor{keywordtype}{void} reserve\_nodes(\textcolor{keyword}{const} uint32 n);  \textcolor{comment}{// reserve space for n nodes}
+   \textcolor{keywordtype}{void} reserve\_leaves(\textcolor{keyword}{const} uint32 n); \textcolor{comment}{// reserve space for n leaves}
+
+   Context get\_context();             \textcolor{comment}{// get a context to write nodes/leaves}
+
+   \textcolor{keyword}{struct }Context
+   \{
+       \textcolor{keywordtype}{void} write\_node(
+          \textcolor{keyword}{const} uint32 node,          \textcolor{comment}{// node to write}
+          \textcolor{keyword}{const} uint32 offset,        \textcolor{comment}{// child offset}
+          \textcolor{keyword}{const} uint32 skip\_node,     \textcolor{comment}{// skip node}
+          \textcolor{keyword}{const} uint32 \hyperlink{namespacecugar_a2121df08f967e232ea5fe0ee378dee67}{begin},         \textcolor{comment}{// node range begin}
+          \textcolor{keyword}{const} uint32 end,           \textcolor{comment}{// node range end}
+          \textcolor{keyword}{const} uint32 split\_index,   \textcolor{comment}{// split index}
+          \textcolor{keyword}{const} uint32 split\_dim,     \textcolor{comment}{// splitting dimension}
+          \textcolor{keyword}{const} uint32 split\_plane);  \textcolor{comment}{// splitting plane}
+
+       \textcolor{keywordtype}{void} write\_node(
+          \textcolor{keyword}{const} uint32 node,          \textcolor{comment}{// node to write}
+          \textcolor{keyword}{const} uint32 offset,        \textcolor{comment}{// child offset}
+          \textcolor{keyword}{const} uint32 skip\_node,     \textcolor{comment}{// skip node}
+          \textcolor{keyword}{const} uint32 \hyperlink{namespacecugar_a2121df08f967e232ea5fe0ee378dee67}{begin},         \textcolor{comment}{// node range begin}
+          \textcolor{keyword}{const} uint32 end);          \textcolor{comment}{// node range end}
+
+       \textcolor{keywordtype}{void} write\_leaf(
+          \textcolor{keyword}{const} uint32 index,         \textcolor{comment}{// leaf to write}
+          \textcolor{keyword}{const} uint32 \hyperlink{namespacecugar_a2121df08f967e232ea5fe0ee378dee67}{begin},         \textcolor{comment}{// leaf range begin}
+          \textcolor{keyword}{const} uint32 end);          \textcolor{comment}{// leaf range end}
+   \};
+\};
+\end{DoxyCode}
+
+
+The following code snippet shows how to use this builder\+:
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <\hyperlink{kd__builder_8h}{cugar/kd/cuda/kd\_builder.h}>}
+\textcolor{preprocessor}{#include <\hyperlink{kd__context_8h}{cugar/kd/cuda/kd\_context.h}>}
+
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,Vector3f>} points;
+... \textcolor{comment}{// code to fill the input vector of points}
+
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,Kd\_node>}  kd\_nodes;
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint2>}    kd\_leaves;
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint32>}   kd\_index;
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint2>}    kd\_ranges;
+
+\hyperlink{structcugar_1_1cuda_1_1_kd__builder}{cugar::cuda::Kd\_builder<uint64>} builder( kd\_index );
+\hyperlink{structcugar_1_1cuda_1_1_kd__context}{cugar::cuda::Kd\_context} kd\_tree( &kd\_nodes, &kd\_leaves, &kd\_ranges );
+builder.build(
+    kd\_tree,                                    \textcolor{comment}{// output tree}
+    kd\_index,                                   \textcolor{comment}{// output index}
+    Bbox3f( Vector3f(0.0f), Vector3f(1.0f) ),   \textcolor{comment}{// suppose all bboxes are in [0,1]^3}
+    points.begin(),                             \textcolor{comment}{// begin iterator}
+    points.end(),                               \textcolor{comment}{// end iterator}
+    4 );                                        \textcolor{comment}{// target 4 objects per leaf}
+\end{DoxyCode}
+ 
+
+{\ttfamily \#include $<$kd\+\_\+builder.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Output\+Tree , typename Iterator , typename Bbox\+Type $>$ }\\void \hyperlink{structcugar_1_1cuda_1_1_kd__builder_a3406ba54cf8cb747ac03065e0df5398f}{build} (Output\+Tree \&out\+\_\+tree, \hyperlink{structcugar_1_1vector}{vector}$<$ \hyperlink{structcugar_1_1device__tag}{device\+\_\+tag}, uint32 $>$ \&out\+\_\+index, const Bbox\+Type bbox, const Iterator points\+\_\+begin, const Iterator points\+\_\+end, const uint32 max\+\_\+leaf\+\_\+size)
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_kd__builder_ae0697065717fc4e1716950edebaa5c2a}\label{structcugar_1_1cuda_1_1_kd__builder_ae0697065717fc4e1716950edebaa5c2a}} 
+\hyperlink{structcugar_1_1vector}{vector}$<$ \hyperlink{structcugar_1_1device__tag}{device\+\_\+tag}, Integer $>$ {\bfseries m\+\_\+codes}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_kd__builder_a01293ef7ba88b485ed06b71f004edef4}\label{structcugar_1_1cuda_1_1_kd__builder_a01293ef7ba88b485ed06b71f004edef4}} 
+\hyperlink{structcugar_1_1caching__device__vector}{caching\+\_\+device\+\_\+vector}$<$ Integer $>$ {\bfseries m\+\_\+temp\+\_\+codes}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_kd__builder_a9c7d09a9195fa322565fd5ac7b3c3aa2}\label{structcugar_1_1cuda_1_1_kd__builder_a9c7d09a9195fa322565fd5ac7b3c3aa2}} 
+\hyperlink{structcugar_1_1caching__device__vector}{caching\+\_\+device\+\_\+vector}$<$ uint32 $>$ {\bfseries m\+\_\+temp\+\_\+index}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_kd__builder_ad46ebcf11ed0b7958da2b153c2c942a0}\label{structcugar_1_1cuda_1_1_kd__builder_ad46ebcf11ed0b7958da2b153c2c942a0}} 
+uint32 {\bfseries m\+\_\+node\+\_\+count}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_kd__builder_a92e40df7182e091e9233d4ff99c08ebd}\label{structcugar_1_1cuda_1_1_kd__builder_a92e40df7182e091e9233d4ff99c08ebd}} 
+uint32 {\bfseries m\+\_\+leaf\+\_\+count}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_kd__builder_a6494783d773e12e7a6e4e5cb9c445bbc}\label{structcugar_1_1cuda_1_1_kd__builder_a6494783d773e12e7a6e4e5cb9c445bbc}} 
+\hyperlink{structcugar_1_1cuda_1_1_radixtree__context}{cuda\+::\+Radixtree\+\_\+context} {\bfseries m\+\_\+kd\+\_\+context}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_kd__builder_a3406ba54cf8cb747ac03065e0df5398f}\label{structcugar_1_1cuda_1_1_kd__builder_a3406ba54cf8cb747ac03065e0df5398f}} 
+\index{cugar\+::cuda\+::\+Kd\+\_\+builder@{cugar\+::cuda\+::\+Kd\+\_\+builder}!build@{build}}
+\index{build@{build}!cugar\+::cuda\+::\+Kd\+\_\+builder@{cugar\+::cuda\+::\+Kd\+\_\+builder}}
+\subsubsection{\texorpdfstring{build()}{build()}}
+{\footnotesize\ttfamily template$<$typename Integer $>$ \\
+template$<$typename Output\+Tree , typename Iterator , typename Bbox\+Type $>$ \\
+void \hyperlink{structcugar_1_1cuda_1_1_kd__builder}{cugar\+::cuda\+::\+Kd\+\_\+builder}$<$ Integer $>$\+::build (\begin{DoxyParamCaption}\item[{Output\+Tree \&}]{out\+\_\+tree,  }\item[{\hyperlink{structcugar_1_1vector}{vector}$<$ \hyperlink{structcugar_1_1device__tag}{device\+\_\+tag}, uint32 $>$ \&}]{out\+\_\+index,  }\item[{const Bbox\+Type}]{bbox,  }\item[{const Iterator}]{points\+\_\+begin,  }\item[{const Iterator}]{points\+\_\+end,  }\item[{const uint32}]{max\+\_\+leaf\+\_\+size }\end{DoxyParamCaption})}
+
+build a bvh given a set of points that will be reordered in-\/place
+
+
+\begin{DoxyParams}{Parameters}
+{\em out\+\_\+tree} & output tree \\
+\hline
+{\em out\+\_\+index} & output index \\
+\hline
+{\em bbox} & global bbox \\
+\hline
+{\em points\+\_\+begin} & beginning of the point sequence to sort \\
+\hline
+{\em points\+\_\+end} & end of the point sequence to sort \\
+\hline
+{\em max\+\_\+leaf\+\_\+size} & maximum leaf size \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/kd/cuda/\hyperlink{kd__builder_8h}{kd\+\_\+builder.\+h}\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/kd/cuda/kd\+\_\+builder\+\_\+inline.\+h\end{DoxyCompactItemize}

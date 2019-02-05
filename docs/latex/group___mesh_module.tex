@@ -1,0 +1,334 @@
+\hypertarget{group___mesh_module}{}\section{Mesh\+Module}
+\label{group___mesh_module}\index{Mesh\+Module@{Mesh\+Module}}
+
+
+\subsection{Detailed Description}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_mesh_material}{Mesh\+Material}
+\item 
+struct \hyperlink{struct_mesh_view}{Mesh\+View}
+\item 
+struct \hyperlink{structload__triangle__dispatch}{load\+\_\+triangle\+\_\+dispatch$<$ T $>$}
+\item 
+struct \hyperlink{structload__triangle__dispatch_3_01int3_01_4}{load\+\_\+triangle\+\_\+dispatch$<$ int3 $>$}
+\item 
+struct \hyperlink{structload__triangle__dispatch_3_01int4_01_4}{load\+\_\+triangle\+\_\+dispatch$<$ int4 $>$}
+\item 
+struct \hyperlink{structload__vertex__dispatch}{load\+\_\+vertex\+\_\+dispatch$<$ T $>$}
+\item 
+struct \hyperlink{structload__vertex__dispatch_3_01float3_01_4}{load\+\_\+vertex\+\_\+dispatch$<$ float3 $>$}
+\item 
+struct \hyperlink{structload__vertex__dispatch_3_01float4_01_4}{load\+\_\+vertex\+\_\+dispatch$<$ float4 $>$}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___mesh_module_ga22232a1f7a2d87cc6f5ae1e48a4e8437}\label{group___mesh_module_ga22232a1f7a2d87cc6f5ae1e48a4e8437}} 
+\#define {\bfseries S\+U\+T\+I\+L\+C\+L\+A\+S\+S\+A\+PI}
+\item 
+\mbox{\Hypertarget{group___mesh_module_ga12d2e7f5793a4725ea90451a7135b67d}\label{group___mesh_module_ga12d2e7f5793a4725ea90451a7135b67d}} 
+\#define {\bfseries S\+U\+T\+I\+L\+A\+PI}
+\item 
+\mbox{\Hypertarget{group___mesh_module_ga97f5a75eb316b29378911fbf0f5740cd}\label{group___mesh_module_ga97f5a75eb316b29378911fbf0f5740cd}} 
+\#define {\bfseries T\+E\+X\+\_\+\+C\+O\+O\+R\+D\+\_\+\+C\+O\+M\+P\+R\+E\+S\+S\+I\+O\+N\+\_\+\+F\+I\+X\+ED}~0
+\item 
+\mbox{\Hypertarget{group___mesh_module_ga89b19c84eadb09d0f3dc7c9501f3d431}\label{group___mesh_module_ga89b19c84eadb09d0f3dc7c9501f3d431}} 
+\#define {\bfseries T\+E\+X\+\_\+\+C\+O\+O\+R\+D\+\_\+\+C\+O\+M\+P\+R\+E\+S\+S\+I\+O\+N\+\_\+\+H\+A\+LF}~1
+\item 
+\mbox{\Hypertarget{group___mesh_module_ga7780197ed9d6830c5a039f5ee311cd57}\label{group___mesh_module_ga7780197ed9d6830c5a039f5ee311cd57}} 
+\#define {\bfseries T\+E\+X\+\_\+\+C\+O\+O\+R\+D\+\_\+\+C\+O\+M\+P\+R\+E\+S\+S\+I\+O\+N\+\_\+\+M\+O\+DE}~T\+E\+X\+\_\+\+C\+O\+O\+R\+D\+\_\+\+C\+O\+M\+P\+R\+E\+S\+S\+I\+O\+N\+\_\+\+H\+A\+LF
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___mesh_module_gaa0909d5ef26a080f1a19f2cdeb1eadf3}\label{group___mesh_module_gaa0909d5ef26a080f1a19f2cdeb1eadf3}} 
+enum {\bfseries Texture\+Set} \{ {\bfseries k\+Texture\+Coords0} = 0, 
+{\bfseries k\+Lightmap\+Coords} = 1
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE const Mesh\+View\+::vertex\+\_\+type \& \hyperlink{group___mesh_module_ga4b65791b4c323a93e391c4c2e88cd601}{fetch\+\_\+vertex} (const \hyperlink{struct_mesh_view}{Mesh\+View} \&mesh, const uint32 vert\+\_\+idx)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE const Mesh\+View\+::normal\+\_\+type \& \hyperlink{group___mesh_module_ga2d3d06537c1b2fc31399190bd353f6e6}{fetch\+\_\+normal} (const \hyperlink{struct_mesh_view}{Mesh\+View} \&mesh, const uint32 vert\+\_\+idx)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE const Mesh\+View\+::texture\+\_\+coord\+\_\+type \& \hyperlink{group___mesh_module_gae33ea9281c4276a5132e37c0b1331069}{fetch\+\_\+tex\+\_\+coord} (const \hyperlink{struct_mesh_view}{Mesh\+View} \&mesh, const uint32 vert\+\_\+idx)
+\item 
+\mbox{\Hypertarget{group___mesh_module_ga88236b1818256e4d96ccf5178b6d9fda}\label{group___mesh_module_ga88236b1818256e4d96ccf5178b6d9fda}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} {\bfseries vertex\+\_\+comp} (const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&v)
+\item 
+\mbox{\Hypertarget{group___mesh_module_ga430921440b8a3c52fabcc20083f19bb4}\label{group___mesh_module_ga430921440b8a3c52fabcc20083f19bb4}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} {\bfseries vertex\+\_\+comp} (const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector4f} \&v)
+\item 
+\mbox{\Hypertarget{group___mesh_module_ga7da0b06ec3de5cd39e896513c6e443e3}\label{group___mesh_module_ga7da0b06ec3de5cd39e896513c6e443e3}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} {\bfseries load\+\_\+vertex} (const \hyperlink{struct_mesh_view}{Mesh\+View} \&mesh, const uint32 vert\+\_\+idx)
+\item 
+\mbox{\Hypertarget{group___mesh_module_ga8c5e9b085b9f44a5ee92141bf3a90809}\label{group___mesh_module_ga8c5e9b085b9f44a5ee92141bf3a90809}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector4f} {\bfseries load\+\_\+full\+\_\+vertex} (const \hyperlink{struct_mesh_view}{Mesh\+View} \&mesh, const uint32 vert\+\_\+idx)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE int3 \hyperlink{group___mesh_module_ga50a8be2a2adb88816865cbd13a5aab57}{load\+\_\+vertex\+\_\+triangle} (const int $\ast$triangle\+\_\+indices, const uint32 tri\+\_\+idx)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE int3 \hyperlink{group___mesh_module_ga85e3684bd6c76144d9dc00a2b59cf93f}{load\+\_\+normal\+\_\+triangle} (const int $\ast$triangle\+\_\+indices, const uint32 tri\+\_\+idx)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE int3 \hyperlink{group___mesh_module_ga347e9722a85a86f87f7d31a63f333dd5}{load\+\_\+texture\+\_\+triangle} (const int $\ast$triangle\+\_\+indices, const uint32 tri\+\_\+idx)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE int3 \hyperlink{group___mesh_module_ga141eb095f266c67ca8005c9ec6f55815}{load\+\_\+lightmap\+\_\+triangle} (const int $\ast$triangle\+\_\+indices, const uint32 tri\+\_\+idx)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{group___mesh_module_ga516a7610fe394a18d5083aa21f6cda75}{prim\+\_\+area} (const \hyperlink{struct_mesh_view}{Mesh\+View} \&mesh, const uint32 tri\+\_\+id)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___mesh_module_ga4fa88a02d11b01ea12e6a602b3e3e5c2}{setup\+\_\+differential\+\_\+geometry} (const \hyperlink{struct_mesh_view}{Mesh\+View} \&mesh, const uint32 tri\+\_\+id, const float u, const float v, \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} $\ast$geom, float $\ast$pdf=0)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___mesh_module_gaf14996897cb3e5f1782571fa40736a4a}{setup\+\_\+differential\+\_\+geometry} (const \hyperlink{struct_mesh_view}{Mesh\+View} \&mesh, const \hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id} v, \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} $\ast$geom, float $\ast$pdf=0)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \hyperlink{group___mesh_module_ga9eea5d10bfff40b7f050910a97212189}{interpolate\+\_\+position} (const \hyperlink{struct_mesh_view}{Mesh\+View} \&mesh, const uint32 tri\+\_\+id, const float u, const float v, float $\ast$pdf=0)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \hyperlink{group___mesh_module_ga84038ff8b109ab0b5cab8d5557b94d8d}{interpolate\+\_\+position} (const \hyperlink{struct_mesh_view}{Mesh\+View} \&mesh, const \hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id} v, float $\ast$pdf=0)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \hyperlink{group___mesh_module_gac16c0ec581833a6cf3f821d0edeb698b}{interpolate\+\_\+normal} (const \hyperlink{struct_mesh_view}{Mesh\+View} \&mesh, const uint32 tri\+\_\+id, const float u, const float v)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \hyperlink{group___mesh_module_ga08fec3c8389f53f7493c6292d3bab80b}{interpolate\+\_\+normal} (const \hyperlink{struct_mesh_view}{Mesh\+View} \&mesh, const \hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id} v)
+\item 
+{\footnotesize template$<$Texture\+Set T\+E\+X\+T\+U\+R\+E\+\_\+\+S\+ET$>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{cugar\+::\+Matrix2x2f} \hyperlink{group___mesh_module_gae02af2f5ef03be32fc7743d596f34ae9}{prim\+\_\+dst\+\_\+duv} (const \hyperlink{struct_mesh_view}{Mesh\+View} \&mesh, const uint32 tri\+\_\+id)
+\item 
+{\footnotesize template$<$Texture\+Set T\+E\+X\+T\+U\+R\+E\+\_\+\+S\+ET$>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{cugar\+::\+Matrix2x2f} \hyperlink{group___mesh_module_gafd6fb57679fabecda3d5837dc29e3401}{prim\+\_\+duv\+\_\+dst} (const \hyperlink{struct_mesh_view}{Mesh\+View} \&mesh, const uint32 tri\+\_\+id)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{cugar\+::\+Matrix3x2f} \hyperlink{group___mesh_module_ga2ec8688996dc87889bb37d46de8a9783}{prim\+\_\+dp\+\_\+duv} (const \hyperlink{struct_mesh_view}{Mesh\+View} \&mesh, const uint32 tri\+\_\+id)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{cugar\+::\+Matrix3x3f} \hyperlink{group___mesh_module_ga614c297649ecb916e613cc928ccd5f76}{prim\+\_\+dp\+\_\+duvw} (const \hyperlink{struct_mesh_view}{Mesh\+View} \&mesh, const uint32 tri\+\_\+id)
+\item 
+{\footnotesize template$<$Texture\+Set T\+E\+X\+T\+U\+R\+E\+\_\+\+S\+ET$>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{cugar\+::\+Matrix3x2f} \hyperlink{group___mesh_module_ga5b45fde0da8e24af3485a8e733d91cfb}{prim\+\_\+dp\+\_\+dst} (const \hyperlink{struct_mesh_view}{Mesh\+View} \&mesh, const uint32 tri\+\_\+id)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{cugar\+::\+Matrix3x3f} \hyperlink{group___mesh_module_gabeca667804111edec7ffce34196f3668}{prim\+\_\+duvw\+\_\+dp} (const \hyperlink{struct_mesh_view}{Mesh\+View} \&mesh, const uint32 tri\+\_\+id)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{cugar\+::\+Matrix2x2f} \hyperlink{group___mesh_module_gae21ff4032c22a8cd5309479b4ce155b3}{prim\+\_\+dtb\+\_\+duv} (const \hyperlink{struct_mesh_view}{Mesh\+View} \&mesh, const uint32 tri\+\_\+id)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{cugar\+::\+Matrix2x2f} \hyperlink{group___mesh_module_gaa2d04b7a4f0a9b63a1783feae4dae840}{prim\+\_\+duv\+\_\+dtb} (const \hyperlink{struct_mesh_view}{Mesh\+View} \&mesh, const uint32 tri\+\_\+id)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{cugar\+::\+Matrix2x3f} \hyperlink{group___mesh_module_gaeb63648183e2a7d1d2e037540414c838}{prim\+\_\+duv\+\_\+dp} (const \hyperlink{struct_mesh_view}{Mesh\+View} \&mesh, const uint32 tri\+\_\+id)
+\item 
+{\footnotesize template$<$Texture\+Set T\+E\+X\+T\+U\+R\+E\+\_\+\+S\+ET$>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{cugar\+::\+Matrix2x3f} \hyperlink{group___mesh_module_ga1976fb01efbfc722e78de1f5415c606e}{prim\+\_\+dst\+\_\+dp} (const \hyperlink{struct_mesh_view}{Mesh\+View} \&mesh, const uint32 tri\+\_\+id)
+\item 
+{\footnotesize template$<$Texture\+Set T\+E\+X\+T\+U\+R\+E\+\_\+\+S\+ET$>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{cugar\+::\+Matrix2x2f} \hyperlink{group___mesh_module_gabdd7256342c1bcd89f9d790432243a3c}{prim\+\_\+dst\+\_\+dtb} (const \hyperlink{struct_mesh_view}{Mesh\+View} \&mesh, const uint32 tri\+\_\+id)
+\item 
+{\footnotesize template$<$Texture\+Set T\+E\+X\+T\+U\+R\+E\+\_\+\+S\+ET$>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{cugar\+::\+Matrix2x2f} \hyperlink{group___mesh_module_gac9ed44b788a4504434b1da004f987b8b}{prim\+\_\+dtb\+\_\+dst} (const \hyperlink{struct_mesh_view}{Mesh\+View} \&mesh, const uint32 tri\+\_\+id)
+\item 
+{\footnotesize template$<$Texture\+Set T\+E\+X\+T\+U\+R\+E\+\_\+\+S\+ET$>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} \hyperlink{group___mesh_module_gadff3b3290f88aeb4dc6e3734c36d76bb}{prim\+\_\+dst\+\_\+ellipse\+\_\+size} (const \hyperlink{struct_mesh_view}{Mesh\+View} \&mesh, const uint32 tri\+\_\+id)
+\item 
+{\footnotesize template$<$Texture\+Set T\+E\+X\+T\+U\+R\+E\+\_\+\+S\+ET$>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___mesh_module_ga26c332905023bcaa1134263884b75d96}{prim\+\_\+dst\+\_\+ellipse} (const \hyperlink{struct_mesh_view}{Mesh\+View} \&mesh, const uint32 tri\+\_\+id, \hyperlink{structcugar_1_1_matrix}{cugar\+::\+Matrix2x2f} \&u, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} \&s)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___mesh_module_ga2d3d06537c1b2fc31399190bd353f6e6}\label{group___mesh_module_ga2d3d06537c1b2fc31399190bd353f6e6}} 
+\index{Mesh\+Module@{Mesh\+Module}!fetch\+\_\+normal@{fetch\+\_\+normal}}
+\index{fetch\+\_\+normal@{fetch\+\_\+normal}!Mesh\+Module@{Mesh\+Module}}
+\subsubsection{\texorpdfstring{fetch\+\_\+normal()}{fetch\_normal()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE const Mesh\+View\+::normal\+\_\+type\& fetch\+\_\+normal (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_mesh_view}{Mesh\+View} \&}]{mesh,  }\item[{const uint32}]{vert\+\_\+idx }\end{DoxyParamCaption})}
+
+helper method to fetch a normal vertex \mbox{\Hypertarget{group___mesh_module_gae33ea9281c4276a5132e37c0b1331069}\label{group___mesh_module_gae33ea9281c4276a5132e37c0b1331069}} 
+\index{Mesh\+Module@{Mesh\+Module}!fetch\+\_\+tex\+\_\+coord@{fetch\+\_\+tex\+\_\+coord}}
+\index{fetch\+\_\+tex\+\_\+coord@{fetch\+\_\+tex\+\_\+coord}!Mesh\+Module@{Mesh\+Module}}
+\subsubsection{\texorpdfstring{fetch\+\_\+tex\+\_\+coord()}{fetch\_tex\_coord()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE const Mesh\+View\+::texture\+\_\+coord\+\_\+type\& fetch\+\_\+tex\+\_\+coord (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_mesh_view}{Mesh\+View} \&}]{mesh,  }\item[{const uint32}]{vert\+\_\+idx }\end{DoxyParamCaption})}
+
+helper method to fetch a texture coordinate vertex \mbox{\Hypertarget{group___mesh_module_ga4b65791b4c323a93e391c4c2e88cd601}\label{group___mesh_module_ga4b65791b4c323a93e391c4c2e88cd601}} 
+\index{Mesh\+Module@{Mesh\+Module}!fetch\+\_\+vertex@{fetch\+\_\+vertex}}
+\index{fetch\+\_\+vertex@{fetch\+\_\+vertex}!Mesh\+Module@{Mesh\+Module}}
+\subsubsection{\texorpdfstring{fetch\+\_\+vertex()}{fetch\_vertex()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE const Mesh\+View\+::vertex\+\_\+type\& fetch\+\_\+vertex (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_mesh_view}{Mesh\+View} \&}]{mesh,  }\item[{const uint32}]{vert\+\_\+idx }\end{DoxyParamCaption})}
+
+helper method to fetch a vertex \mbox{\Hypertarget{group___mesh_module_gac16c0ec581833a6cf3f821d0edeb698b}\label{group___mesh_module_gac16c0ec581833a6cf3f821d0edeb698b}} 
+\index{Mesh\+Module@{Mesh\+Module}!interpolate\+\_\+normal@{interpolate\+\_\+normal}}
+\index{interpolate\+\_\+normal@{interpolate\+\_\+normal}!Mesh\+Module@{Mesh\+Module}}
+\subsubsection{\texorpdfstring{interpolate\+\_\+normal()}{interpolate\_normal()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} interpolate\+\_\+normal (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_mesh_view}{Mesh\+View} \&}]{mesh,  }\item[{const uint32}]{tri\+\_\+id,  }\item[{const float}]{u,  }\item[{const float}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the interpolated normal at a given point on the mesh, specified by a (prim\+\_\+id, uv) pair \mbox{\Hypertarget{group___mesh_module_ga08fec3c8389f53f7493c6292d3bab80b}\label{group___mesh_module_ga08fec3c8389f53f7493c6292d3bab80b}} 
+\index{Mesh\+Module@{Mesh\+Module}!interpolate\+\_\+normal@{interpolate\+\_\+normal}}
+\index{interpolate\+\_\+normal@{interpolate\+\_\+normal}!Mesh\+Module@{Mesh\+Module}}
+\subsubsection{\texorpdfstring{interpolate\+\_\+normal()}{interpolate\_normal()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} interpolate\+\_\+normal (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_mesh_view}{Mesh\+View} \&}]{mesh,  }\item[{const \hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id}}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the interpolated normal at a given point on the mesh, specified by a (prim\+\_\+id, uv) pair \mbox{\Hypertarget{group___mesh_module_ga9eea5d10bfff40b7f050910a97212189}\label{group___mesh_module_ga9eea5d10bfff40b7f050910a97212189}} 
+\index{Mesh\+Module@{Mesh\+Module}!interpolate\+\_\+position@{interpolate\+\_\+position}}
+\index{interpolate\+\_\+position@{interpolate\+\_\+position}!Mesh\+Module@{Mesh\+Module}}
+\subsubsection{\texorpdfstring{interpolate\+\_\+position()}{interpolate\_position()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} interpolate\+\_\+position (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_mesh_view}{Mesh\+View} \&}]{mesh,  }\item[{const uint32}]{tri\+\_\+id,  }\item[{const float}]{u,  }\item[{const float}]{v,  }\item[{float $\ast$}]{pdf = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the interpolated position at a given point on the mesh, specified by a (prim\+\_\+id, uv) pair \mbox{\Hypertarget{group___mesh_module_ga84038ff8b109ab0b5cab8d5557b94d8d}\label{group___mesh_module_ga84038ff8b109ab0b5cab8d5557b94d8d}} 
+\index{Mesh\+Module@{Mesh\+Module}!interpolate\+\_\+position@{interpolate\+\_\+position}}
+\index{interpolate\+\_\+position@{interpolate\+\_\+position}!Mesh\+Module@{Mesh\+Module}}
+\subsubsection{\texorpdfstring{interpolate\+\_\+position()}{interpolate\_position()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} interpolate\+\_\+position (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_mesh_view}{Mesh\+View} \&}]{mesh,  }\item[{const \hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id}}]{v,  }\item[{float $\ast$}]{pdf = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the interpolated position at a given point on the mesh, specified by a (prim\+\_\+id, uv) pair \mbox{\Hypertarget{group___mesh_module_ga141eb095f266c67ca8005c9ec6f55815}\label{group___mesh_module_ga141eb095f266c67ca8005c9ec6f55815}} 
+\index{Mesh\+Module@{Mesh\+Module}!load\+\_\+lightmap\+\_\+triangle@{load\+\_\+lightmap\+\_\+triangle}}
+\index{load\+\_\+lightmap\+\_\+triangle@{load\+\_\+lightmap\+\_\+triangle}!Mesh\+Module@{Mesh\+Module}}
+\subsubsection{\texorpdfstring{load\+\_\+lightmap\+\_\+triangle()}{load\_lightmap\_triangle()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE int3 load\+\_\+lightmap\+\_\+triangle (\begin{DoxyParamCaption}\item[{const int $\ast$}]{triangle\+\_\+indices,  }\item[{const uint32}]{tri\+\_\+idx }\end{DoxyParamCaption})}
+
+helper method to fetch the lightmap coordinate indices of a given triangle \mbox{\Hypertarget{group___mesh_module_ga85e3684bd6c76144d9dc00a2b59cf93f}\label{group___mesh_module_ga85e3684bd6c76144d9dc00a2b59cf93f}} 
+\index{Mesh\+Module@{Mesh\+Module}!load\+\_\+normal\+\_\+triangle@{load\+\_\+normal\+\_\+triangle}}
+\index{load\+\_\+normal\+\_\+triangle@{load\+\_\+normal\+\_\+triangle}!Mesh\+Module@{Mesh\+Module}}
+\subsubsection{\texorpdfstring{load\+\_\+normal\+\_\+triangle()}{load\_normal\_triangle()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE int3 load\+\_\+normal\+\_\+triangle (\begin{DoxyParamCaption}\item[{const int $\ast$}]{triangle\+\_\+indices,  }\item[{const uint32}]{tri\+\_\+idx }\end{DoxyParamCaption})}
+
+helper method to fetch the normal indices of a given triangle \mbox{\Hypertarget{group___mesh_module_ga347e9722a85a86f87f7d31a63f333dd5}\label{group___mesh_module_ga347e9722a85a86f87f7d31a63f333dd5}} 
+\index{Mesh\+Module@{Mesh\+Module}!load\+\_\+texture\+\_\+triangle@{load\+\_\+texture\+\_\+triangle}}
+\index{load\+\_\+texture\+\_\+triangle@{load\+\_\+texture\+\_\+triangle}!Mesh\+Module@{Mesh\+Module}}
+\subsubsection{\texorpdfstring{load\+\_\+texture\+\_\+triangle()}{load\_texture\_triangle()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE int3 load\+\_\+texture\+\_\+triangle (\begin{DoxyParamCaption}\item[{const int $\ast$}]{triangle\+\_\+indices,  }\item[{const uint32}]{tri\+\_\+idx }\end{DoxyParamCaption})}
+
+helper method to fetch the texture coordinate indices of a given triangle \mbox{\Hypertarget{group___mesh_module_ga50a8be2a2adb88816865cbd13a5aab57}\label{group___mesh_module_ga50a8be2a2adb88816865cbd13a5aab57}} 
+\index{Mesh\+Module@{Mesh\+Module}!load\+\_\+vertex\+\_\+triangle@{load\+\_\+vertex\+\_\+triangle}}
+\index{load\+\_\+vertex\+\_\+triangle@{load\+\_\+vertex\+\_\+triangle}!Mesh\+Module@{Mesh\+Module}}
+\subsubsection{\texorpdfstring{load\+\_\+vertex\+\_\+triangle()}{load\_vertex\_triangle()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE int3 load\+\_\+vertex\+\_\+triangle (\begin{DoxyParamCaption}\item[{const int $\ast$}]{triangle\+\_\+indices,  }\item[{const uint32}]{tri\+\_\+idx }\end{DoxyParamCaption})}
+
+helper method to fetch the vertex indices of a given triangle \mbox{\Hypertarget{group___mesh_module_ga516a7610fe394a18d5083aa21f6cda75}\label{group___mesh_module_ga516a7610fe394a18d5083aa21f6cda75}} 
+\index{Mesh\+Module@{Mesh\+Module}!prim\+\_\+area@{prim\+\_\+area}}
+\index{prim\+\_\+area@{prim\+\_\+area}!Mesh\+Module@{Mesh\+Module}}
+\subsubsection{\texorpdfstring{prim\+\_\+area()}{prim\_area()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float prim\+\_\+area (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_mesh_view}{Mesh\+View} \&}]{mesh,  }\item[{const uint32}]{tri\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the area of a given primitive \mbox{\Hypertarget{group___mesh_module_ga5b45fde0da8e24af3485a8e733d91cfb}\label{group___mesh_module_ga5b45fde0da8e24af3485a8e733d91cfb}} 
+\index{Mesh\+Module@{Mesh\+Module}!prim\+\_\+dp\+\_\+dst@{prim\+\_\+dp\+\_\+dst}}
+\index{prim\+\_\+dp\+\_\+dst@{prim\+\_\+dp\+\_\+dst}!Mesh\+Module@{Mesh\+Module}}
+\subsubsection{\texorpdfstring{prim\+\_\+dp\+\_\+dst()}{prim\_dp\_dst()}}
+{\footnotesize\ttfamily template$<$Texture\+Set T\+E\+X\+T\+U\+R\+E\+\_\+\+S\+ET$>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{cugar\+::\+Matrix3x2f} prim\+\_\+dp\+\_\+dst (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_mesh_view}{Mesh\+View} \&}]{mesh,  }\item[{const uint32}]{tri\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+build a matrix representing the rate of change of dp wrt to (s,t) coordinates; specifically, the matrix which sends\+:
+
+s=(1,0) in dp\+\_\+ds t=(0,1) in dp\+\_\+dt \mbox{\Hypertarget{group___mesh_module_ga2ec8688996dc87889bb37d46de8a9783}\label{group___mesh_module_ga2ec8688996dc87889bb37d46de8a9783}} 
+\index{Mesh\+Module@{Mesh\+Module}!prim\+\_\+dp\+\_\+duv@{prim\+\_\+dp\+\_\+duv}}
+\index{prim\+\_\+dp\+\_\+duv@{prim\+\_\+dp\+\_\+duv}!Mesh\+Module@{Mesh\+Module}}
+\subsubsection{\texorpdfstring{prim\+\_\+dp\+\_\+duv()}{prim\_dp\_duv()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{cugar\+::\+Matrix3x2f} prim\+\_\+dp\+\_\+duv (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_mesh_view}{Mesh\+View} \&}]{mesh,  }\item[{const uint32}]{tri\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+build a matrix representing the rate of change of dp wrt to (u,v,w) coordinates; specifically, the matrix which sends\+:
+
+u=(1,0) in dp\+\_\+du v=(0,1) in dp\+\_\+dv \mbox{\Hypertarget{group___mesh_module_ga614c297649ecb916e613cc928ccd5f76}\label{group___mesh_module_ga614c297649ecb916e613cc928ccd5f76}} 
+\index{Mesh\+Module@{Mesh\+Module}!prim\+\_\+dp\+\_\+duvw@{prim\+\_\+dp\+\_\+duvw}}
+\index{prim\+\_\+dp\+\_\+duvw@{prim\+\_\+dp\+\_\+duvw}!Mesh\+Module@{Mesh\+Module}}
+\subsubsection{\texorpdfstring{prim\+\_\+dp\+\_\+duvw()}{prim\_dp\_duvw()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{cugar\+::\+Matrix3x3f} prim\+\_\+dp\+\_\+duvw (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_mesh_view}{Mesh\+View} \&}]{mesh,  }\item[{const uint32}]{tri\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+build a matrix representing the rate of change of dp wrt to (u,v,w) coordinates; specifically, the matrix which sends\+:
+
+u=(1,0,0) in dp\+\_\+du v=(0,1,0) in dp\+\_\+dv w=(0,0,1) in dp\+\_\+dw \mbox{\Hypertarget{group___mesh_module_ga1976fb01efbfc722e78de1f5415c606e}\label{group___mesh_module_ga1976fb01efbfc722e78de1f5415c606e}} 
+\index{Mesh\+Module@{Mesh\+Module}!prim\+\_\+dst\+\_\+dp@{prim\+\_\+dst\+\_\+dp}}
+\index{prim\+\_\+dst\+\_\+dp@{prim\+\_\+dst\+\_\+dp}!Mesh\+Module@{Mesh\+Module}}
+\subsubsection{\texorpdfstring{prim\+\_\+dst\+\_\+dp()}{prim\_dst\_dp()}}
+{\footnotesize\ttfamily template$<$Texture\+Set T\+E\+X\+T\+U\+R\+E\+\_\+\+S\+ET$>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{cugar\+::\+Matrix2x3f} prim\+\_\+dst\+\_\+dp (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_mesh_view}{Mesh\+View} \&}]{mesh,  }\item[{const uint32}]{tri\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+build a matrix representing the rate of change of (s,t) wrt to dp, where dp is expressed in the world coordinates; specifically, the matrix which sends\+:
+
+dp\+\_\+du in dst\+\_\+du dp\+\_\+dv in dst\+\_\+dv \mbox{\Hypertarget{group___mesh_module_gabdd7256342c1bcd89f9d790432243a3c}\label{group___mesh_module_gabdd7256342c1bcd89f9d790432243a3c}} 
+\index{Mesh\+Module@{Mesh\+Module}!prim\+\_\+dst\+\_\+dtb@{prim\+\_\+dst\+\_\+dtb}}
+\index{prim\+\_\+dst\+\_\+dtb@{prim\+\_\+dst\+\_\+dtb}!Mesh\+Module@{Mesh\+Module}}
+\subsubsection{\texorpdfstring{prim\+\_\+dst\+\_\+dtb()}{prim\_dst\_dtb()}}
+{\footnotesize\ttfamily template$<$Texture\+Set T\+E\+X\+T\+U\+R\+E\+\_\+\+S\+ET$>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{cugar\+::\+Matrix2x2f} prim\+\_\+dst\+\_\+dtb (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_mesh_view}{Mesh\+View} \&}]{mesh,  }\item[{const uint32}]{tri\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+build a matrix representing the rate of change of (s,t) wrt to dp, where dp is expressed in the local tangent frame (t,b); specifically, the matrix which sends\+:
+
+t=(1,0) in dst\+\_\+dt b=(0,1) in dst\+\_\+db \mbox{\Hypertarget{group___mesh_module_gae02af2f5ef03be32fc7743d596f34ae9}\label{group___mesh_module_gae02af2f5ef03be32fc7743d596f34ae9}} 
+\index{Mesh\+Module@{Mesh\+Module}!prim\+\_\+dst\+\_\+duv@{prim\+\_\+dst\+\_\+duv}}
+\index{prim\+\_\+dst\+\_\+duv@{prim\+\_\+dst\+\_\+duv}!Mesh\+Module@{Mesh\+Module}}
+\subsubsection{\texorpdfstring{prim\+\_\+dst\+\_\+duv()}{prim\_dst\_duv()}}
+{\footnotesize\ttfamily template$<$Texture\+Set T\+E\+X\+T\+U\+R\+E\+\_\+\+S\+ET$>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{cugar\+::\+Matrix2x2f} prim\+\_\+dst\+\_\+duv (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_mesh_view}{Mesh\+View} \&}]{mesh,  }\item[{const uint32}]{tri\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+build a matrix representing the rate of change of (s,t) wrt to (u,v) coordinates; specifically, the matrix which sends\+:
+
+u=(1,0) in dst\+\_\+du v=(0,1) in dst\+\_\+dv \mbox{\Hypertarget{group___mesh_module_ga26c332905023bcaa1134263884b75d96}\label{group___mesh_module_ga26c332905023bcaa1134263884b75d96}} 
+\index{Mesh\+Module@{Mesh\+Module}!prim\+\_\+dst\+\_\+ellipse@{prim\+\_\+dst\+\_\+ellipse}}
+\index{prim\+\_\+dst\+\_\+ellipse@{prim\+\_\+dst\+\_\+ellipse}!Mesh\+Module@{Mesh\+Module}}
+\subsubsection{\texorpdfstring{prim\+\_\+dst\+\_\+ellipse()}{prim\_dst\_ellipse()}}
+{\footnotesize\ttfamily template$<$Texture\+Set T\+E\+X\+T\+U\+R\+E\+\_\+\+S\+ET$>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void prim\+\_\+dst\+\_\+ellipse (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_mesh_view}{Mesh\+View} \&}]{mesh,  }\item[{const uint32}]{tri\+\_\+id,  }\item[{\hyperlink{structcugar_1_1_matrix}{cugar\+::\+Matrix2x2f} \&}]{u,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the the semi-\/axes of the differential texture-\/space (s,t) ellipse corresponding to a unit-\/radius circle on the local tangent plane.
+
+
+\begin{DoxyParams}{Parameters}
+{\em u} & output matrix storing the two semi-\/axes in the columns \\
+\hline
+{\em s} & output vector storing the length of the two semi-\/axes \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___mesh_module_gadff3b3290f88aeb4dc6e3734c36d76bb}\label{group___mesh_module_gadff3b3290f88aeb4dc6e3734c36d76bb}} 
+\index{Mesh\+Module@{Mesh\+Module}!prim\+\_\+dst\+\_\+ellipse\+\_\+size@{prim\+\_\+dst\+\_\+ellipse\+\_\+size}}
+\index{prim\+\_\+dst\+\_\+ellipse\+\_\+size@{prim\+\_\+dst\+\_\+ellipse\+\_\+size}!Mesh\+Module@{Mesh\+Module}}
+\subsubsection{\texorpdfstring{prim\+\_\+dst\+\_\+ellipse\+\_\+size()}{prim\_dst\_ellipse\_size()}}
+{\footnotesize\ttfamily template$<$Texture\+Set T\+E\+X\+T\+U\+R\+E\+\_\+\+S\+ET$>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} prim\+\_\+dst\+\_\+ellipse\+\_\+size (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_mesh_view}{Mesh\+View} \&}]{mesh,  }\item[{const uint32}]{tri\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the length of the semi-\/axes of the differential texture-\/space (s,t) ellipse corresponding to a unit-\/radius circle on the local tangent plane. \mbox{\Hypertarget{group___mesh_module_gac9ed44b788a4504434b1da004f987b8b}\label{group___mesh_module_gac9ed44b788a4504434b1da004f987b8b}} 
+\index{Mesh\+Module@{Mesh\+Module}!prim\+\_\+dtb\+\_\+dst@{prim\+\_\+dtb\+\_\+dst}}
+\index{prim\+\_\+dtb\+\_\+dst@{prim\+\_\+dtb\+\_\+dst}!Mesh\+Module@{Mesh\+Module}}
+\subsubsection{\texorpdfstring{prim\+\_\+dtb\+\_\+dst()}{prim\_dtb\_dst()}}
+{\footnotesize\ttfamily template$<$Texture\+Set T\+E\+X\+T\+U\+R\+E\+\_\+\+S\+ET$>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{cugar\+::\+Matrix2x2f} prim\+\_\+dtb\+\_\+dst (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_mesh_view}{Mesh\+View} \&}]{mesh,  }\item[{const uint32}]{tri\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+build a matrix representing the rate of change of dp wrt (s,t), where dp is expressed in the local tangent frame (t,b); specifically, the matrix which sends\+:
+
+dst\+\_\+dt in t=(1,0) dst\+\_\+db in b=(0,1) \mbox{\Hypertarget{group___mesh_module_gae21ff4032c22a8cd5309479b4ce155b3}\label{group___mesh_module_gae21ff4032c22a8cd5309479b4ce155b3}} 
+\index{Mesh\+Module@{Mesh\+Module}!prim\+\_\+dtb\+\_\+duv@{prim\+\_\+dtb\+\_\+duv}}
+\index{prim\+\_\+dtb\+\_\+duv@{prim\+\_\+dtb\+\_\+duv}!Mesh\+Module@{Mesh\+Module}}
+\subsubsection{\texorpdfstring{prim\+\_\+dtb\+\_\+duv()}{prim\_dtb\_duv()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{cugar\+::\+Matrix2x2f} prim\+\_\+dtb\+\_\+duv (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_mesh_view}{Mesh\+View} \&}]{mesh,  }\item[{const uint32}]{tri\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+build a matrix representing the rate of change of dp wrt to (u,v,w) coordinates, where dp is expressed in the local tangent frame (t,b); specifically, the matrix which sends\+:
+
+u=(1,0) in the coordinates of dp\+\_\+dpu wrt (t,b), and v=(0,1) in the coordinates of dp\+\_\+dpv wrt (t,b) \mbox{\Hypertarget{group___mesh_module_gaeb63648183e2a7d1d2e037540414c838}\label{group___mesh_module_gaeb63648183e2a7d1d2e037540414c838}} 
+\index{Mesh\+Module@{Mesh\+Module}!prim\+\_\+duv\+\_\+dp@{prim\+\_\+duv\+\_\+dp}}
+\index{prim\+\_\+duv\+\_\+dp@{prim\+\_\+duv\+\_\+dp}!Mesh\+Module@{Mesh\+Module}}
+\subsubsection{\texorpdfstring{prim\+\_\+duv\+\_\+dp()}{prim\_duv\_dp()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{cugar\+::\+Matrix2x3f} prim\+\_\+duv\+\_\+dp (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_mesh_view}{Mesh\+View} \&}]{mesh,  }\item[{const uint32}]{tri\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+build a matrix representing the rate of change of (u,v) wrt to dp; specifically, the matrix which sends\+:
+
+dp\+\_\+du in u=(1,0) dp\+\_\+dv in v=(0,1) \mbox{\Hypertarget{group___mesh_module_gafd6fb57679fabecda3d5837dc29e3401}\label{group___mesh_module_gafd6fb57679fabecda3d5837dc29e3401}} 
+\index{Mesh\+Module@{Mesh\+Module}!prim\+\_\+duv\+\_\+dst@{prim\+\_\+duv\+\_\+dst}}
+\index{prim\+\_\+duv\+\_\+dst@{prim\+\_\+duv\+\_\+dst}!Mesh\+Module@{Mesh\+Module}}
+\subsubsection{\texorpdfstring{prim\+\_\+duv\+\_\+dst()}{prim\_duv\_dst()}}
+{\footnotesize\ttfamily template$<$Texture\+Set T\+E\+X\+T\+U\+R\+E\+\_\+\+S\+ET$>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{cugar\+::\+Matrix2x2f} prim\+\_\+duv\+\_\+dst (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_mesh_view}{Mesh\+View} \&}]{mesh,  }\item[{const uint32}]{tri\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+build a matrix representing the rate of change of (u,v) wrt (s,t) coordinates; specifically, the matrix which sends\+:
+
+dst\+\_\+du in u=(1,0) dst\+\_\+dv in v=(0,1) \mbox{\Hypertarget{group___mesh_module_gaa2d04b7a4f0a9b63a1783feae4dae840}\label{group___mesh_module_gaa2d04b7a4f0a9b63a1783feae4dae840}} 
+\index{Mesh\+Module@{Mesh\+Module}!prim\+\_\+duv\+\_\+dtb@{prim\+\_\+duv\+\_\+dtb}}
+\index{prim\+\_\+duv\+\_\+dtb@{prim\+\_\+duv\+\_\+dtb}!Mesh\+Module@{Mesh\+Module}}
+\subsubsection{\texorpdfstring{prim\+\_\+duv\+\_\+dtb()}{prim\_duv\_dtb()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{cugar\+::\+Matrix2x2f} prim\+\_\+duv\+\_\+dtb (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_mesh_view}{Mesh\+View} \&}]{mesh,  }\item[{const uint32}]{tri\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+build a matrix representing the rate of change of (u,v) wrt to dp, where dp is expressed in the local tangent frame (t,b); specifically, the matrix which sends\+:
+
+dp\+\_\+du wrt (t,b) in u=(1,0) dp\+\_\+dv wrt (t,b) in v=(0,1) \mbox{\Hypertarget{group___mesh_module_gabeca667804111edec7ffce34196f3668}\label{group___mesh_module_gabeca667804111edec7ffce34196f3668}} 
+\index{Mesh\+Module@{Mesh\+Module}!prim\+\_\+duvw\+\_\+dp@{prim\+\_\+duvw\+\_\+dp}}
+\index{prim\+\_\+duvw\+\_\+dp@{prim\+\_\+duvw\+\_\+dp}!Mesh\+Module@{Mesh\+Module}}
+\subsubsection{\texorpdfstring{prim\+\_\+duvw\+\_\+dp()}{prim\_duvw\_dp()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_matrix}{cugar\+::\+Matrix3x3f} prim\+\_\+duvw\+\_\+dp (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_mesh_view}{Mesh\+View} \&}]{mesh,  }\item[{const uint32}]{tri\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+build a matrix representing the rate of change of (u,v,w) wrt to world coordinates; specifically, the matrix which sends\+:
+
+dp\+\_\+du in u=(1,0,0) dp\+\_\+dv in v=(0,1,0) dp\+\_\+dw in w=(0,0,1) \mbox{\Hypertarget{group___mesh_module_ga4fa88a02d11b01ea12e6a602b3e3e5c2}\label{group___mesh_module_ga4fa88a02d11b01ea12e6a602b3e3e5c2}} 
+\index{Mesh\+Module@{Mesh\+Module}!setup\+\_\+differential\+\_\+geometry@{setup\+\_\+differential\+\_\+geometry}}
+\index{setup\+\_\+differential\+\_\+geometry@{setup\+\_\+differential\+\_\+geometry}!Mesh\+Module@{Mesh\+Module}}
+\subsubsection{\texorpdfstring{setup\+\_\+differential\+\_\+geometry()}{setup\_differential\_geometry()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void setup\+\_\+differential\+\_\+geometry (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_mesh_view}{Mesh\+View} \&}]{mesh,  }\item[{const uint32}]{tri\+\_\+id,  }\item[{const float}]{u,  }\item[{const float}]{v,  }\item[{\hyperlink{struct_vertex_geometry}{Vertex\+Geometry} $\ast$}]{geom,  }\item[{float $\ast$}]{pdf = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the differential geometry of a given point on the mesh, specified by a (prim\+\_\+id, uv) pair \mbox{\Hypertarget{group___mesh_module_gaf14996897cb3e5f1782571fa40736a4a}\label{group___mesh_module_gaf14996897cb3e5f1782571fa40736a4a}} 
+\index{Mesh\+Module@{Mesh\+Module}!setup\+\_\+differential\+\_\+geometry@{setup\+\_\+differential\+\_\+geometry}}
+\index{setup\+\_\+differential\+\_\+geometry@{setup\+\_\+differential\+\_\+geometry}!Mesh\+Module@{Mesh\+Module}}
+\subsubsection{\texorpdfstring{setup\+\_\+differential\+\_\+geometry()}{setup\_differential\_geometry()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void setup\+\_\+differential\+\_\+geometry (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_mesh_view}{Mesh\+View} \&}]{mesh,  }\item[{const \hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id}}]{v,  }\item[{\hyperlink{struct_vertex_geometry}{Vertex\+Geometry} $\ast$}]{geom,  }\item[{float $\ast$}]{pdf = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the differential geometry of a given point on the mesh, specified by a (prim\+\_\+id, uv) pair 

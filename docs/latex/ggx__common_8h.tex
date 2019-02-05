@@ -1,0 +1,52 @@
+\hypertarget{ggx__common_8h}{}\section{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bsdf/ggx\+\_\+common.h File Reference}
+\label{ggx__common_8h}\index{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bsdf/ggx\+\_\+common.\+h@{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bsdf/ggx\+\_\+common.\+h}}
+
+
+Defines the G\+GX B\+S\+DF.  
+
+
+{\ttfamily \#include $<$cugar/linalg/vector.\+h$>$}\newline
+{\ttfamily \#include $<$cugar/basic/numbers.\+h$>$}\newline
+{\ttfamily \#include $<$cugar/bsdf/differential\+\_\+geometry.\+h$>$}\newline
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespacecugar}{cugar}
+\begin{DoxyCompactList}\small\item\em Define a \hyperlink{structcugar_1_1vector__view}{vector\+\_\+view} P\+OD type and \hyperlink{namespacecugar_a347f91de482f0cb8dcba21c086b0aa46}{plain\+\_\+view()} for std\+::vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Vector3f \hyperlink{group___b_s_d_f_module_gae47d332728711dde1d05b721b74267f7}{cugar\+::microfacet} (const Vector3f V, const Vector3f L, const Vector3f N, const float inv\+\_\+eta)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Vector3f \hyperlink{group___b_s_d_f_module_gaa871796466d7998c178e28e2eccd7248}{cugar\+::vndf\+\_\+microfacet} (const Vector3f V, const Vector3f L, const Vector3f N, const float inv\+\_\+eta)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{group___b_s_d_f_module_ga985268a447aa898cd2f2e1c792d9ddff}{cugar\+::hvd\+\_\+ggx\+\_\+eval} (const float2 \&inv\+\_\+alpha, const float nh, const float ht, const float hb)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float3 \hyperlink{group___b_s_d_f_module_ga49eab615e64e73c409bb285fd95c56c3}{cugar\+::hvd\+\_\+ggx\+\_\+sample} (const float2 \&samples, const float inv\+\_\+alpha)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float3 \hyperlink{group___b_s_d_f_module_gaa94fad7af98e50d2b2abe6801df8bd93}{cugar\+::hvd\+\_\+ggx\+\_\+sample} (const float2 \&samples, const float2 \&inv\+\_\+alpha)
+\item 
+\mbox{\Hypertarget{ggx__common_8h_aae65be51410e4d63afcc7e2dec10b6d4}\label{ggx__common_8h_aae65be51410e4d63afcc7e2dec10b6d4}} 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Vector2f {\bfseries cugar\+::ggx\+::\+Fu} (const float u, const float2 ia, const float2 b)
+\item 
+\mbox{\Hypertarget{ggx__common_8h_a56de8d6391503da5c1c92b64ffbc7119}\label{ggx__common_8h_a56de8d6391503da5c1c92b64ffbc7119}} 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Vector2f {\bfseries cugar\+::ggx\+::\+Ju} (const float u, const float2 ia, const float2 b)
+\item 
+\mbox{\Hypertarget{ggx__common_8h_afe520b1a7554edd16169f6985dd7da95}\label{ggx__common_8h_afe520b1a7554edd16169f6985dd7da95}} 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool {\bfseries cugar\+::ggx\+::refine\+\_\+solution} (float \&u, const float2 ia, const float2 b)
+\item 
+\mbox{\Hypertarget{ggx__common_8h_a5fd66f7c6d978dd78dd1c976dd04b424}\label{ggx__common_8h_a5fd66f7c6d978dd78dd1c976dd04b424}} 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool {\bfseries cugar\+::ggx\+::invert} (float \&u, const float2 ia, const float2 b)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float2 \hyperlink{group___b_s_d_f_module_ga009dbdc5ba0035fc161335607c2b328d}{cugar\+::hvd\+\_\+ggx\+\_\+invert} (const float3 H, const float2 inv\+\_\+alpha)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float3 \hyperlink{group___b_s_d_f_module_gaae32e76bc82f281f61485ea552aba53a}{cugar\+::vndf\+\_\+ggx\+\_\+smith\+\_\+sample} (const float2 samples, const float2 alpha, const Vector3f \+\_\+V)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float2 \hyperlink{group___b_s_d_f_module_gabe2116f566e70937f1abb126140afae8}{cugar\+::vndf\+\_\+ggx\+\_\+smith\+\_\+invert} (const Vector3f \+\_\+N, const float2 alpha, const Vector3f \+\_\+V)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Defines the G\+GX B\+S\+DF. 
+
+This module provides a G\+GX B\+S\+DF implementation 

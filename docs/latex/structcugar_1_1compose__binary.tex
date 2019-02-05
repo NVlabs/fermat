@@ -1,0 +1,41 @@
+\hypertarget{structcugar_1_1compose__binary}{}\section{cugar\+:\+:compose\+\_\+binary$<$ F, G1, G2 $>$ Struct Template Reference}
+\label{structcugar_1_1compose__binary}\index{cugar\+::compose\+\_\+binary$<$ F, G1, G2 $>$@{cugar\+::compose\+\_\+binary$<$ F, G1, G2 $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$typename F, typename G1, typename G2$>$\newline
+struct cugar\+::compose\+\_\+binary$<$ F, G1, G2 $>$}
+
+compose a binary function after two unary ones 
+
+{\ttfamily \#include $<$functors.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1compose__binary_a952674add18272aa843b649c2eaf673f}\label{structcugar_1_1compose__binary_a952674add18272aa843b649c2eaf673f}} 
+typedef \hyperlink{structcugar_1_1binary__function__tag}{binary\+\_\+function\+\_\+tag} {\bfseries function\+\_\+tag}
+\item 
+\mbox{\Hypertarget{structcugar_1_1compose__binary_ae13750e2e9d55157716d02d7cf6a0772}\label{structcugar_1_1compose__binary_ae13750e2e9d55157716d02d7cf6a0772}} 
+typedef G1\+::argument\+\_\+type {\bfseries first\+\_\+argument\+\_\+type}
+\item 
+\mbox{\Hypertarget{structcugar_1_1compose__binary_a63cd0573a047ba9ccb92494f3e69d56c}\label{structcugar_1_1compose__binary_a63cd0573a047ba9ccb92494f3e69d56c}} 
+typedef G2\+::argument\+\_\+type {\bfseries second\+\_\+argument\+\_\+type}
+\item 
+\mbox{\Hypertarget{structcugar_1_1compose__binary_a12735065900fa746b5cdbaa639a305bf}\label{structcugar_1_1compose__binary_a12735065900fa746b5cdbaa639a305bf}} 
+typedef F\+::result\+\_\+type {\bfseries result\+\_\+type}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1compose__binary_ac5d7be1ab8894f7dacce1013995509a7}\label{structcugar_1_1compose__binary_ac5d7be1ab8894f7dacce1013995509a7}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries compose\+\_\+binary} (const F f, const G1 g1, const G2 g2)
+\item 
+\mbox{\Hypertarget{structcugar_1_1compose__binary_a82bd71ce4af43bafa5f651c258cdbc8c}\label{structcugar_1_1compose__binary_a82bd71ce4af43bafa5f651c258cdbc8c}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE result\+\_\+type {\bfseries operator()} (const first\+\_\+argument\+\_\+type \&op1, const second\+\_\+argument\+\_\+type \&op2) const
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/\hyperlink{functors_8h}{functors.\+h}\end{DoxyCompactItemize}

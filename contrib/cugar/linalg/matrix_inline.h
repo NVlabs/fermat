@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2011, NVIDIA Corporation
+ * Copyright (c) 2010-2018, NVIDIA Corporation
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -68,6 +68,20 @@ template <typename T, int N, int M> Matrix<T,N,M>::Matrix(const Matrix<T,N,M>& m
 {
 	for (int i = 0; i < N; i++)
 		r[i] = m.r[i];
+}
+
+template <typename T, int N, int M> Matrix<T,N,M>::Matrix(const Vector<T,M>& v)
+{
+	for (int i = 0; i < N; i++)
+		for (int j = 0; j < M; j++)
+			r[i][j] = 0.0f;
+
+	// NOTE: only set the first M rows
+	if (M < N)
+	{
+		for (int i = 0; i < M; i++)
+			r[i][i] = v[i];
+	}
 }
 
 template <typename T, int N, int M> Matrix<T,N,M>::Matrix(const Vector<T,M> *v)
@@ -150,7 +164,7 @@ template <typename T, int N, int M> void Matrix<T,N,M>::set(int i, const Vector<
 	r[i] = v;
 }
 
-template <typename T, int N, int M> T Matrix<T,N,M>::operator () (int i, int j) const
+template <typename T, int N, int M> const T& Matrix<T,N,M>::operator () (int i, int j) const
 {
 	return r[i][j];
 }
@@ -474,6 +488,38 @@ template <typename T, int N, int M> CUGAR_API_CS CUGAR_HOST_DEVICE Matrix<T,N,M>
 	return r;
 }
 
+template <typename T, int N> CUGAR_API_CS CUGAR_HOST_DEVICE Matrix<T,N,N> operator + (const Matrix<T,N,N>& a, const Vector<T,N>& b)
+{
+	return a + Matrix<T,N,N>(b);
+}
+
+template <typename T, int N> CUGAR_API_CS CUGAR_HOST_DEVICE Matrix<T,N,N> operator + (const Vector<T,N>& a, const Matrix<T,N,N>& b)
+{
+	return Matrix<T,N,N>(a) + b;
+}
+
+template <typename T, uint32 N, uint32 M>
+CUGAR_API_CS CUGAR_HOST_DEVICE
+inline Matrix<T,N,M> outer_product(const Vector<T,N> op1, const Vector<T,M> op2)
+{
+	Matrix<T,N,M> r;
+	for (uint32 i = 0; i < N; ++i)
+		for (uint32 j = 0; j < M; ++j)
+			r(i,j) = op1[i]*op2[j];
+	return r;
+}
+
+CUGAR_API_CS CUGAR_HOST_DEVICE
+inline Matrix2x2f outer_product(const Vector2f op1, const Vector2f op2)
+{
+	Matrix2x2f r;
+	r(0,0) = op1.x * op2.x;
+	r(0,1) = op1.x * op2.y;
+	r(1,0) = op1.y * op2.x;
+	r(1,1) = op1.y * op2.y;
+	return r;
+}
+
 template <typename T>
 CUGAR_HOST_DEVICE Matrix<T,4,4> translate(const Vector<T,3>& vec)
 {
@@ -637,7 +683,7 @@ template <typename T>
 CUGAR_HOST_DEVICE Matrix<T, 4, 4> rotation_around_axis(const T q, const Vector3f& axis)
 {
 	const Vector3f tangent  = orthogonal( axis );
-	const Vector3f binormal = cross( axis, binormal );
+	const Vector3f binormal = cross( axis, tangent );
 
 	Matrix4x4f basis_change;
 	basis_change[0] = Vector4f( tangent, 0.0f );

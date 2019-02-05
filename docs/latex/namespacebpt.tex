@@ -1,0 +1,79 @@
+\hypertarget{namespacebpt}{}\section{bpt Namespace Reference}
+\label{namespacebpt}\index{bpt@{bpt}}
+
+
+\mbox{[}Sample\+Sink\+Base\+Block\mbox{]}  
+
+
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T\+Primary\+Coordinates , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\void \hyperlink{group___b_p_t_lib_ga679afc8704a42ed1c8e6b57018cd676e}{sample\+\_\+light\+\_\+subpaths} (const uint32 n\+\_\+light\+\_\+paths, T\+Primary\+Coordinates primary\+\_\+coords, T\+B\+P\+T\+Context \&context, const T\+B\+P\+T\+Config \&config, \hyperlink{struct_rendering_context}{Rendering\+Context} \&renderer, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer\+\_\+view)
+\item 
+{\footnotesize template$<$typename T\+Sample\+Sink , typename T\+B\+P\+T\+Context $>$ }\\void \hyperlink{group___b_p_t_lib_ga67c2c1dbc4ee8212daf3728fafe55969}{solve\+\_\+shadows} (T\+Sample\+Sink sample\+\_\+sink, T\+B\+P\+T\+Context \&context, \hyperlink{struct_rendering_context}{Rendering\+Context} \&renderer, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer\+\_\+view)
+\item 
+{\footnotesize template$<$typename T\+Primary\+Coordinates , typename T\+Sample\+Sink , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\void \hyperlink{group___b_p_t_lib_ga5dcb245a5dfa3a0910069446d27aa8eb}{sample\+\_\+eye\+\_\+subpaths} (const uint32 n\+\_\+eye\+\_\+paths, const uint32 n\+\_\+light\+\_\+paths, T\+Primary\+Coordinates primary\+\_\+coords, T\+Sample\+Sink sample\+\_\+sink, T\+B\+P\+T\+Context \&context, const T\+B\+P\+T\+Config \&config, \hyperlink{struct_rendering_context}{Rendering\+Context} \&renderer, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer\+\_\+view, const bool lazy\+\_\+shadows=false)
+\item 
+{\footnotesize template$<$typename T\+Eye\+Primary\+Coordinates , typename T\+Light\+Primary\+Coordinates , typename T\+Sample\+Sink , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\void \hyperlink{group___b_p_t_lib_ga4c1164d859ed146eb306e8b7b178c7e7}{sample\+\_\+paths} (const uint32 n\+\_\+eye\+\_\+paths, const uint32 n\+\_\+light\+\_\+paths, T\+Eye\+Primary\+Coordinates eye\+\_\+primary\+\_\+coords, T\+Light\+Primary\+Coordinates light\+\_\+primary\+\_\+coords, T\+Sample\+Sink sample\+\_\+sink, T\+B\+P\+T\+Context \&context, const T\+B\+P\+T\+Config \&config, \hyperlink{struct_rendering_context}{Rendering\+Context} \&renderer, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer\+\_\+view, const bool lazy\+\_\+shadows=false)
+\item 
+{\footnotesize template$<$typename T\+Sample\+Sink , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\void \hyperlink{group___b_p_t_lib_ga497e0940986e5f948a9dcf42242d39c7}{light\+\_\+tracing} (const uint32 n\+\_\+light\+\_\+paths, T\+Sample\+Sink sample\+\_\+sink, T\+B\+P\+T\+Context \&context, const T\+B\+P\+T\+Config \&config, \hyperlink{struct_rendering_context}{Rendering\+Context} \&renderer, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer\+\_\+view)
+\item 
+{\footnotesize template$<$typename T\+Primary\+Coordinates , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___b_p_t_lib_core_gaa688dca0d66d8dfeffc8d2eedfb02246}{generate\+\_\+primary\+\_\+light\+\_\+vertex} (const uint32 light\+\_\+path\+\_\+id, const uint32 n\+\_\+light\+\_\+paths, const T\+Primary\+Coordinates \&primary\+\_\+coords, T\+B\+P\+T\+Context \&context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer, T\+B\+P\+T\+Config \&config)
+\item 
+{\footnotesize template$<$typename T\+Primary\+Coordinates , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___b_p_t_lib_core_ga124952cd2917df181f6aa6f39cdeda1b}{process\+\_\+secondary\+\_\+light\+\_\+vertex} (const uint32 queue\+\_\+idx, const uint32 n\+\_\+light\+\_\+paths, const T\+Primary\+Coordinates \&primary\+\_\+coords, T\+B\+P\+T\+Context \&context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer, T\+B\+P\+T\+Config \&config)
+\item 
+{\footnotesize template$<$typename T\+Primary\+Coordinates , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___b_p_t_lib_core_gad13a8364b017ae28c4732ffd7eab9a65}{generate\+\_\+primary\+\_\+eye\+\_\+vertex} (const uint32 idx, const uint32 n\+\_\+eye\+\_\+paths, const uint32 n\+\_\+light\+\_\+paths, const T\+Primary\+Coordinates \&primary\+\_\+coords, T\+B\+P\+T\+Context \&context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer, T\+B\+P\+T\+Config \&config)
+\item 
+{\footnotesize template$<$typename T\+Sample\+Sink , typename T\+Primary\+Coordinates , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___b_p_t_lib_core_ga560956a804364f64f0cf35d2d0c07124}{process\+\_\+secondary\+\_\+eye\+\_\+vertex} (const uint32 queue\+\_\+idx, const uint32 n\+\_\+eye\+\_\+paths, const uint32 n\+\_\+light\+\_\+paths, T\+Sample\+Sink \&sample\+\_\+sink, const T\+Primary\+Coordinates \&primary\+\_\+coords, T\+B\+P\+T\+Context \&context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer, T\+B\+P\+T\+Config \&config)
+\item 
+{\footnotesize template$<$typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___b_p_t_lib_core_gaf85f457b11ee79f45371b8afe928cabe}{connect\+\_\+to\+\_\+camera} (const uint32 light\+\_\+idx, const uint32 n\+\_\+light\+\_\+paths, T\+B\+P\+T\+Context \&context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer, const T\+B\+P\+T\+Config \&config)
+\item 
+{\footnotesize template$<$typename T\+Sample\+Sink , typename T\+B\+P\+T\+Context $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___b_p_t_lib_core_ga588188b86e2afbe1f62d1bdd7a145cbf}{solve\+\_\+occlusion} (const uint32 queue\+\_\+idx, T\+Sample\+Sink \&sample\+\_\+sink, T\+B\+P\+T\+Context \&context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer)
+\item 
+{\footnotesize template$<$typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\\+\_\+\+\_\+global\+\_\+\+\_\+ void {\bfseries light\+\_\+tracing\+\_\+kernel} (const uint32 n\+\_\+light\+\_\+paths, T\+B\+P\+T\+Context context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} renderer, T\+B\+P\+T\+Config config)
+\item 
+{\footnotesize template$<$typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\void {\bfseries light\+\_\+tracing} (const uint32 n\+\_\+light\+\_\+paths, T\+B\+P\+T\+Context \&context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer, T\+B\+P\+T\+Config \&config)
+\item 
+{\footnotesize template$<$typename T\+Sample\+Sink , typename T\+B\+P\+T\+Context $>$ }\\\+\_\+\+\_\+global\+\_\+\+\_\+ void {\bfseries solve\+\_\+occlusions\+\_\+kernel} (const uint32 in\+\_\+queue\+\_\+size, T\+Sample\+Sink sample\+\_\+sink, T\+B\+P\+T\+Context context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} renderer)
+\item 
+{\footnotesize template$<$typename T\+Sample\+Sink , typename T\+B\+P\+T\+Context $>$ }\\void {\bfseries solve\+\_\+occlusions} (const uint32 in\+\_\+queue\+\_\+size, T\+Sample\+Sink sample\+\_\+sink, T\+B\+P\+T\+Context context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} renderer)
+\item 
+{\footnotesize template$<$typename T\+Primary\+Coordinates , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\\+\_\+\+\_\+global\+\_\+\+\_\+ void {\bfseries generate\+\_\+primary\+\_\+light\+\_\+vertices\+\_\+kernel} (const uint32 n\+\_\+light\+\_\+paths, T\+Primary\+Coordinates primary\+\_\+coords, T\+B\+P\+T\+Context context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} renderer, const T\+B\+P\+T\+Config config)
+\item 
+{\footnotesize template$<$typename T\+Primary\+Coordinates , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\void {\bfseries generate\+\_\+primary\+\_\+light\+\_\+vertices} (const uint32 n\+\_\+light\+\_\+paths, T\+Primary\+Coordinates primary\+\_\+coords, T\+B\+P\+T\+Context context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} renderer, const T\+B\+P\+T\+Config config)
+\item 
+{\footnotesize template$<$typename T\+Primary\+Coordinates , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\\+\_\+\+\_\+global\+\_\+\+\_\+ {\bfseries \+\_\+\+\_\+launch\+\_\+bounds\+\_\+\+\_\+} (S\+E\+C\+O\+N\+D\+A\+R\+Y\+\_\+\+L\+I\+G\+H\+T\+\_\+\+V\+E\+R\+T\+I\+C\+E\+S\+\_\+\+B\+L\+O\+C\+K\+S\+I\+ZE, S\+E\+C\+O\+N\+D\+A\+R\+Y\+\_\+\+L\+I\+G\+H\+T\+\_\+\+V\+E\+R\+T\+I\+C\+E\+S\+\_\+\+C\+T\+A\+\_\+\+B\+L\+O\+C\+KS) void process\+\_\+secondary\+\_\+light\+\_\+vertices\+\_\+kernel(const uint32 in\+\_\+queue\+\_\+size
+\item 
+{\bfseries if} (thread\+\_\+id$<$ in\+\_\+queue\+\_\+size) \hyperlink{group___b_p_t_lib_core_ga124952cd2917df181f6aa6f39cdeda1b}{process\+\_\+secondary\+\_\+light\+\_\+vertex}(thread\+\_\+id
+\item 
+{\footnotesize template$<$typename T\+Primary\+Coordinates , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\void {\bfseries process\+\_\+secondary\+\_\+light\+\_\+vertices} (const uint32 in\+\_\+queue\+\_\+size, const uint32 n\+\_\+light\+\_\+paths, T\+Primary\+Coordinates primary\+\_\+coords, T\+B\+P\+T\+Context context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} renderer, const T\+B\+P\+T\+Config config)
+\item 
+{\footnotesize template$<$typename T\+Primary\+Coordinates , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\\+\_\+\+\_\+global\+\_\+\+\_\+ void {\bfseries generate\+\_\+primary\+\_\+eye\+\_\+vertices\+\_\+kernel} (const uint32 n\+\_\+eye\+\_\+paths, const uint32 n\+\_\+light\+\_\+paths, T\+Primary\+Coordinates primary\+\_\+coords, T\+B\+P\+T\+Context context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} renderer, const T\+B\+P\+T\+Config config)
+\item 
+{\footnotesize template$<$typename T\+Primary\+Coordinates , typename T\+B\+P\+T\+Config , typename T\+B\+P\+T\+Context $>$ }\\void {\bfseries generate\+\_\+primary\+\_\+eye\+\_\+vertices} (const uint32 n\+\_\+eye\+\_\+paths, const uint32 n\+\_\+light\+\_\+paths, T\+Primary\+Coordinates primary\+\_\+coords, T\+B\+P\+T\+Context context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} renderer, const T\+B\+P\+T\+Config config)
+\item 
+{\footnotesize template$<$typename T\+Sample\+Sink , typename T\+Primary\+Coordinates , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\\+\_\+\+\_\+global\+\_\+\+\_\+ {\bfseries \+\_\+\+\_\+launch\+\_\+bounds\+\_\+\+\_\+} (S\+E\+C\+O\+N\+D\+A\+R\+Y\+\_\+\+E\+Y\+E\+\_\+\+V\+E\+R\+T\+I\+C\+E\+S\+\_\+\+B\+L\+O\+C\+K\+S\+I\+ZE, S\+E\+C\+O\+N\+D\+A\+R\+Y\+\_\+\+E\+Y\+E\+\_\+\+V\+E\+R\+T\+I\+C\+E\+S\+\_\+\+C\+T\+A\+\_\+\+B\+L\+O\+C\+KS) void process\+\_\+secondary\+\_\+eye\+\_\+vertices\+\_\+kernel(const uint32 in\+\_\+queue\+\_\+size
+\item 
+{\footnotesize template$<$typename T\+Sample\+Sink , typename T\+Primary\+Coordinates , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\void {\bfseries process\+\_\+secondary\+\_\+eye\+\_\+vertices} (const uint32 in\+\_\+queue\+\_\+size, const uint32 n\+\_\+eye\+\_\+paths, const uint32 n\+\_\+light\+\_\+paths, T\+Sample\+Sink sink, T\+Primary\+Coordinates primary\+\_\+coords, T\+B\+P\+T\+Context context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} renderer, const T\+B\+P\+T\+Config config)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\+\_\+\+\_\+global\+\_\+\+\_\+ const uint32 {\bfseries n\+\_\+light\+\_\+paths}
+\item 
+\+\_\+\+\_\+global\+\_\+\+\_\+ const uint32 T\+Primary\+Coordinates {\bfseries primary\+\_\+coords}
+\item 
+\+\_\+\+\_\+global\+\_\+\+\_\+ const uint32 T\+Primary\+Coordinates T\+B\+P\+T\+Context {\bfseries context}
+\item 
+\+\_\+\+\_\+global\+\_\+\+\_\+ const uint32 T\+Primary\+Coordinates T\+B\+P\+T\+Context \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} {\bfseries renderer}
+\item 
+\+\_\+\+\_\+global\+\_\+\+\_\+ const uint32 T\+Primary\+Coordinates T\+B\+P\+T\+Context \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} const T\+B\+P\+T\+Config {\bfseries config}
+\item 
+\+\_\+\+\_\+global\+\_\+\+\_\+ const uint32 {\bfseries n\+\_\+eye\+\_\+paths}
+\item 
+\+\_\+\+\_\+global\+\_\+\+\_\+ const uint32 const uint32 T\+Sample\+Sink {\bfseries sink}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\mbox{[}Sample\+Sink\+Base\+Block\mbox{]} 

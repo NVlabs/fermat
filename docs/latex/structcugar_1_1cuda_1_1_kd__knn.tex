@@ -1,0 +1,133 @@
+\hypertarget{structcugar_1_1cuda_1_1_kd__knn}{}\section{cugar\+:\+:cuda\+:\+:Kd\+\_\+knn$<$ D\+IM $>$ Struct Template Reference}
+\label{structcugar_1_1cuda_1_1_kd__knn}\index{cugar\+::cuda\+::\+Kd\+\_\+knn$<$ D\+I\+M $>$@{cugar\+::cuda\+::\+Kd\+\_\+knn$<$ D\+I\+M $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$uint32 D\+IM$>$\newline
+struct cugar\+::cuda\+::\+Kd\+\_\+knn$<$ D\+I\+M $>$}
+
+G\+P\+U-\/based k-\/\+Nearest Neighbors lookup context.
+
+This class provides the context to perform 3-\/dimensional k-\/nn lookups on the G\+PU, using a k-\/d tree.
+
+The following code snippet shows how to use this class\+:
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <cugar/kd/cuda/kd\_knn.h>}
+
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,Vector4f>} kd\_points;
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,Kd\_node>}  kd\_nodes;
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint2>}    kd\_leaves;
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint32>}   kd\_index;
+
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,Vector4f>} query\_points;
+... \textcolor{comment}{// code to build the k-d tree and query points here...}
+    \textcolor{comment}{// NOTE: even though we're doing 3-dimensional queries,}
+    \textcolor{comment}{// we can use Vector4f arrays for better coalescing}
+
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,cuda::Kd\_knn<3>::Result}> results( 
+      query\_points.size() );
+
+\hyperlink{structcugar_1_1cuda_1_1_kd__knn}{cugar::cuda::Kd\_knn<3>} knn;
+knn.run(
+    query\_points.begin(),
+    query\_points.end(),
+    \hyperlink{namespacecugar_a3f6cb2c817f2ba065931cec569aa848b}{raw\_pointer}(kd\_nodes),
+    \hyperlink{namespacecugar_a3f6cb2c817f2ba065931cec569aa848b}{raw\_pointer}(kd\_ranges),
+    \hyperlink{namespacecugar_a3f6cb2c817f2ba065931cec569aa848b}{raw\_pointer}(kd\_leaves),
+    \hyperlink{namespacecugar_a3f6cb2c817f2ba065931cec569aa848b}{raw\_pointer}(kd\_points),
+    \hyperlink{namespacecugar_a3f6cb2c817f2ba065931cec569aa848b}{raw\_pointer}(results) );
+\end{DoxyCode}
+ 
+
+{\ttfamily \#include $<$knn.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_kd__knn_a0786ce849457dbcd48ea5d5713134fb8}\label{structcugar_1_1cuda_1_1_kd__knn_a0786ce849457dbcd48ea5d5713134fb8}} 
+typedef \hyperlink{structcugar_1_1cuda_1_1_kd__knn__result}{Kd\+\_\+knn\+\_\+result} {\bfseries Result}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Query\+Iterator , typename Point\+Iterator $>$ }\\void \hyperlink{structcugar_1_1cuda_1_1_kd__knn_a7d04646c1a646cd30b49ba6faf4b06d2}{run} (const Query\+Iterator points\+\_\+begin, const Query\+Iterator points\+\_\+end, const \hyperlink{structcugar_1_1_kd__node}{Kd\+\_\+node} $\ast$kd\+\_\+nodes, const uint2 $\ast$kd\+\_\+ranges, const uint2 $\ast$kd\+\_\+leaves, const Point\+Iterator kd\+\_\+points, \hyperlink{structcugar_1_1cuda_1_1_kd__knn__result}{Result} $\ast$results)
+\item 
+{\footnotesize template$<$uint32 K, typename Query\+Iterator , typename Point\+Iterator $>$ }\\void \hyperlink{structcugar_1_1cuda_1_1_kd__knn_aa9040a5e6f8cf2ba2c5c50af64a066f8}{run} (const Query\+Iterator points\+\_\+begin, const Query\+Iterator points\+\_\+end, const \hyperlink{structcugar_1_1_kd__node}{Kd\+\_\+node} $\ast$kd\+\_\+nodes, const uint2 $\ast$kd\+\_\+ranges, const uint2 $\ast$kd\+\_\+leaves, const Point\+Iterator kd\+\_\+points, \hyperlink{structcugar_1_1cuda_1_1_kd__knn__result}{Result} $\ast$results)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_kd__knn_a7d04646c1a646cd30b49ba6faf4b06d2}\label{structcugar_1_1cuda_1_1_kd__knn_a7d04646c1a646cd30b49ba6faf4b06d2}} 
+\index{cugar\+::cuda\+::\+Kd\+\_\+knn@{cugar\+::cuda\+::\+Kd\+\_\+knn}!run@{run}}
+\index{run@{run}!cugar\+::cuda\+::\+Kd\+\_\+knn@{cugar\+::cuda\+::\+Kd\+\_\+knn}}
+\subsubsection{\texorpdfstring{run()}{run()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$uint32 D\+IM$>$ \\
+template$<$typename Query\+Iterator , typename Point\+Iterator $>$ \\
+void \hyperlink{structcugar_1_1cuda_1_1_kd__knn}{cugar\+::cuda\+::\+Kd\+\_\+knn}$<$ D\+IM $>$\+::run (\begin{DoxyParamCaption}\item[{const Query\+Iterator}]{points\+\_\+begin,  }\item[{const Query\+Iterator}]{points\+\_\+end,  }\item[{const \hyperlink{structcugar_1_1_kd__node}{Kd\+\_\+node} $\ast$}]{kd\+\_\+nodes,  }\item[{const uint2 $\ast$}]{kd\+\_\+ranges,  }\item[{const uint2 $\ast$}]{kd\+\_\+leaves,  }\item[{const Point\+Iterator}]{kd\+\_\+points,  }\item[{\hyperlink{structcugar_1_1cuda_1_1_kd__knn__result}{Result} $\ast$}]{results }\end{DoxyParamCaption})}
+
+perform a k-\/nn lookup for a set of query points
+
+
+\begin{DoxyParams}{Parameters}
+{\em points\+\_\+begin} & beginning of the query point sequence \\
+\hline
+{\em points\+\_\+end} & end of the query point sequence \\
+\hline
+{\em kd\+\_\+nodes} & k-\/d tree nodes \\
+\hline
+{\em kd\+\_\+ranges} & k-\/d tree node ranges \\
+\hline
+{\em kd\+\_\+leaves} & k-\/d tree leaves \\
+\hline
+{\em kd\+\_\+points} & k-\/d tree points\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Query\+Iterator} & an iterator type dereferencing to Vector$<$float,\+N$>$, with N $>$= 3 \\
+\hline
+{\em Point\+Iterator} & an iterator type dereferencing to Vector$<$float,\+N$>$, with N $>$= 3 \\
+\hline
+\end{DoxyTemplParams}
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_kd__knn_aa9040a5e6f8cf2ba2c5c50af64a066f8}\label{structcugar_1_1cuda_1_1_kd__knn_aa9040a5e6f8cf2ba2c5c50af64a066f8}} 
+\index{cugar\+::cuda\+::\+Kd\+\_\+knn@{cugar\+::cuda\+::\+Kd\+\_\+knn}!run@{run}}
+\index{run@{run}!cugar\+::cuda\+::\+Kd\+\_\+knn@{cugar\+::cuda\+::\+Kd\+\_\+knn}}
+\subsubsection{\texorpdfstring{run()}{run()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$uint32 D\+IM$>$ \\
+template$<$uint32 K, typename Query\+Iterator , typename Point\+Iterator $>$ \\
+void \hyperlink{structcugar_1_1cuda_1_1_kd__knn}{cugar\+::cuda\+::\+Kd\+\_\+knn}$<$ D\+IM $>$\+::run (\begin{DoxyParamCaption}\item[{const Query\+Iterator}]{points\+\_\+begin,  }\item[{const Query\+Iterator}]{points\+\_\+end,  }\item[{const \hyperlink{structcugar_1_1_kd__node}{Kd\+\_\+node} $\ast$}]{kd\+\_\+nodes,  }\item[{const uint2 $\ast$}]{kd\+\_\+ranges,  }\item[{const uint2 $\ast$}]{kd\+\_\+leaves,  }\item[{const Point\+Iterator}]{kd\+\_\+points,  }\item[{\hyperlink{structcugar_1_1cuda_1_1_kd__knn__result}{Result} $\ast$}]{results }\end{DoxyParamCaption})}
+
+perform a k-\/nn lookup for a set of query points
+
+
+\begin{DoxyParams}{Parameters}
+{\em points\+\_\+begin} & beginning of the query point sequence \\
+\hline
+{\em points\+\_\+end} & end of the query point sequence \\
+\hline
+{\em kd\+\_\+nodes} & k-\/d tree nodes \\
+\hline
+{\em kd\+\_\+ranges} & k-\/d tree node ranges \\
+\hline
+{\em kd\+\_\+leaves} & k-\/d tree leaves \\
+\hline
+{\em kd\+\_\+points} & k-\/d tree points\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em K} & the number of requested nearest neighbors K \\
+\hline
+{\em Query\+Iterator} & an iterator type dereferencing to Vector$<$float,\+N$>$, with N $>$= 3 \\
+\hline
+{\em Point\+Iterator} & an iterator type dereferencing to Vector$<$float,\+N$>$, with N $>$= 3 \\
+\hline
+\end{DoxyTemplParams}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/kd/cuda/knn.\+h\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/kd/cuda/knn\+\_\+inline.\+h\end{DoxyCompactItemize}

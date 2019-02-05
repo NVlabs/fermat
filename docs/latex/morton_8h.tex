@@ -1,0 +1,43 @@
+\hypertarget{morton_8h}{}\section{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bits/morton.h File Reference}
+\label{morton_8h}\index{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bits/morton.\+h@{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bits/morton.\+h}}
+
+
+Defines some general purpose algorithms.  
+
+
+{\ttfamily \#include $<$cugar/basic/types.\+h$>$}\newline
+{\ttfamily \#include $<$cugar/linalg/vector.\+h$>$}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcugar_1_1morton__functor}{cugar\+::morton\+\_\+functor$<$ Integer, D\+I\+M, Bbox\+Type $>$}
+\item 
+struct \hyperlink{structcugar_1_1morton__functor_3_01uint32_00_012u_00_01_bbox_type_01_4}{cugar\+::morton\+\_\+functor$<$ uint32, 2u, Bbox\+Type $>$}
+\item 
+struct \hyperlink{structcugar_1_1morton__functor_3_01uint64_00_012u_00_01_bbox_type_01_4}{cugar\+::morton\+\_\+functor$<$ uint64, 2u, Bbox\+Type $>$}
+\item 
+struct \hyperlink{structcugar_1_1morton__functor_3_01uint32_00_013u_00_01_bbox_type_01_4}{cugar\+::morton\+\_\+functor$<$ uint32, 3u, Bbox\+Type $>$}
+\item 
+struct \hyperlink{structcugar_1_1morton__functor_3_01uint64_00_013u_00_01_bbox_type_01_4}{cugar\+::morton\+\_\+functor$<$ uint64, 3u, Bbox\+Type $>$}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespacecugar}{cugar}
+\begin{DoxyCompactList}\small\item\em Define a \hyperlink{structcugar_1_1vector__view}{vector\+\_\+view} P\+OD type and \hyperlink{namespacecugar_a347f91de482f0cb8dcba21c086b0aa46}{plain\+\_\+view()} for std\+::vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{group___bits_module_ga6494ab687521f35e3e28dc1524d15218}{cugar\+::morton\+\_\+code} (uint32 x, uint32 y)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{group___bits_module_ga4b9f4b0383537e421a0c7299ca64d76e}{cugar\+::morton\+\_\+code} (uint32 x, uint32 y, uint32 z)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint64 \hyperlink{group___bits_module_ga849b7e23fee1b2d3b573469a983cac3d}{cugar\+::morton\+\_\+code60} (uint32 \+\_\+x, uint32 \+\_\+y)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint64 \hyperlink{group___bits_module_ga341afe20927dde33979a1d6720d26569}{cugar\+::morton\+\_\+code60} (uint32 x, uint32 y, uint32 z)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Defines some general purpose algorithms. 
+

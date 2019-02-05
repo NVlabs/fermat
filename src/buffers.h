@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -30,7 +30,6 @@
 
 #include "types.h"
 
-#include <optix_prime/optix_prime.h>
 #include <cuda_runtime.h>
 #include <stdlib.h>
 #include <iostream>
@@ -50,21 +49,6 @@
 }
 
 //------------------------------------------------------------------------------
-#define CHK_PRIME( code )                                                      \
-{                                                                              \
-  RTPresult res__ = code;                                                      \
-  if( res__ != RTP_SUCCESS )                                                   \
-  {                                                                            \
-  const char* err_string;                                                      \
-  rtpContextGetLastErrorString( context, &err_string );                        \
-  std::cerr << "Error on line " << __LINE__ << ": '"                           \
-  << err_string                                                                \
-  << "' (" << res__ << ")" << std::endl;                                       \
-  exit(1);                                                                     \
-  }                                                                            \
-}
-
-//------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
 enum PageLockedState
@@ -75,8 +59,8 @@ enum PageLockedState
 
 enum BufferType
 {
-	CUDA_BUFFER = RTP_BUFFER_TYPE_CUDA_LINEAR,
-	HOST_BUFFER = RTP_BUFFER_TYPE_HOST,
+	HOST_BUFFER = 0x200,
+	CUDA_BUFFER = 0x201,
 };
 
 template<typename T> class Buffer;
@@ -215,7 +199,7 @@ public:
 			{
 				m_ptr = new T[m_count];
 				if( pageLockedState == LOCKED )
-					rtpHostBufferLock( m_ptr, sizeInBytes() ); // for improved transfer performance
+					cudaHostRegister( m_ptr, sizeInBytes(), cudaHostRegisterDefault ); // for improved transfer performance
 				m_pageLockedState = pageLockedState;
 			}
 			else
@@ -236,6 +220,7 @@ public:
 
 	void copy_from(const size_t count, const BufferType src_type, const T* src, const uint32 dst_offset = 0)
 	{
+		assert(dst_offset + count <= m_count);
 		if (count == 0)
 			return;
 
@@ -276,7 +261,7 @@ public:
 			if (m_type == HOST_BUFFER)
 			{
 				if (m_pageLockedState == LOCKED)
-					rtpHostBufferUnlock(m_ptr);
+					cudaHostUnregister(m_ptr);
 				delete[] m_ptr;
 			}
 			else
@@ -303,11 +288,23 @@ public:
 
     T operator[] (const size_t i) const
     {
-        if (m_type == RTP_BUFFER_TYPE_HOST)
+        if (m_type == HOST_BUFFER)
             return m_ptr[i];
         else
         {
             T t;
+            cudaMemcpy( &t, m_ptr + i, sizeof(T), cudaMemcpyDeviceToHost);
+            return t;
+        }
+    }
+
+    T& operator[] (const size_t i)
+    {
+        if (m_type == HOST_BUFFER)
+            return m_ptr[i];
+        else
+        {
+            static T t; // FIXME: this not thread-safe!
             cudaMemcpy( &t, m_ptr + i, sizeof(T), cudaMemcpyDeviceToHost);
             return t;
         }
@@ -367,6 +364,11 @@ public:
 		return *this;
 	}
 };
+
+FERMAT_API_EXTERN template class FERMAT_API DomainBuffer<HOST_BUFFER, float>;
+FERMAT_API_EXTERN template class FERMAT_API DomainBuffer<CUDA_BUFFER, float>;
+FERMAT_API_EXTERN template class FERMAT_API DomainBuffer<HOST_BUFFER, float4>;
+FERMAT_API_EXTERN template class FERMAT_API DomainBuffer<CUDA_BUFFER, float4>;
 
 
 inline float3 ptr_to_float3(const float* v) { return make_float3(v[0], v[1], v[2]); }

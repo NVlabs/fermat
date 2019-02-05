@@ -1,0 +1,86 @@
+\hypertarget{struct_direct_lighting_mesh}{}\section{Direct\+Lighting\+Mesh Struct Reference}
+\label{struct_direct_lighting_mesh}\index{Direct\+Lighting\+Mesh@{Direct\+Lighting\+Mesh}}
+
+
+\subsection{Detailed description}
+A model of \hyperlink{_p_t_lib_page_TPTDirectLightingSampler}{T\+P\+T\+Direct\+Lighting\+Sampler}, implementing N\+EE sample generation from an emissive mesh 
+
+{\ttfamily \#include $<$direct\+\_\+lighting\+\_\+mesh.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{struct_direct_lighting_mesh_a6f51872d622c3ee9a81e2f433b9e256c}{Direct\+Lighting\+Mesh} ()
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{struct_direct_lighting_mesh_af86ba1cf583e3a9e8527afa4d83a2f3d}{Direct\+Lighting\+Mesh} (const \hyperlink{struct_mesh_light}{Mesh\+Light} \+\_\+mesh\+\_\+light)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{struct_direct_lighting_mesh_a2df01e89667068136231e0c6efd4eefc}{preprocess\+\_\+vertex} (const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer, const \hyperlink{struct_eye_vertex}{Eye\+Vertex} \&ev, const uint32 pixel, const uint32 bounce, const bool is\+\_\+secondary\+\_\+diffuse, const float cone\+\_\+radius, const \hyperlink{structcugar_1_1_bbox}{cugar\+::\+Bbox3f} scene\+\_\+bbox)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{struct_direct_lighting_mesh_af509addd3c3bce6853b5721ac85cae4d}{sample} (const uint32 nee\+\_\+slot, const float z\mbox{[}3\mbox{]}, \hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id} $\ast$light\+\_\+vertex, \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} $\ast$light\+\_\+vertex\+\_\+geom, float $\ast$light\+\_\+pdf, \hyperlink{struct_edf}{Edf} $\ast$light\+\_\+edf)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{struct_direct_lighting_mesh_a2dabf1d83d06e47ee36c1290e10b0b3e}{map} (const uint32 prev\+\_\+nee\+\_\+slot, const uint32 tri\+Id, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} uv, const \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} light\+\_\+vertex\+\_\+geom, float $\ast$light\+\_\+pdf, \hyperlink{struct_edf}{Edf} $\ast$light\+\_\+edf)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{struct_direct_lighting_mesh_a3328811ee1cbe8a570f7b5d0b2c6a4f4}{update} (const uint32 nee\+\_\+slot, const uint32 nee\+\_\+sample, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} w, const bool occluded)
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_direct_lighting_mesh_a546e8419bdf60853deaca1d754932ade}\label{struct_direct_lighting_mesh_a546e8419bdf60853deaca1d754932ade}} 
+\hyperlink{struct_mesh_light}{Mesh\+Light} {\bfseries mesh\+\_\+light}
+\end{DoxyCompactItemize}
+\subsection*{Static Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_direct_lighting_mesh_ac87d51f9b1deac8f500d53cfb9771916}\label{struct_direct_lighting_mesh_ac87d51f9b1deac8f500d53cfb9771916}} 
+static const uint32 {\bfseries I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+L\+OT} = 0x\+F\+F\+F\+F\+F\+F\+FF
+\item 
+\mbox{\Hypertarget{struct_direct_lighting_mesh_a887262d35e3f04bc3f674e571ed7353b}\label{struct_direct_lighting_mesh_a887262d35e3f04bc3f674e571ed7353b}} 
+static const uint32 {\bfseries I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+A\+M\+P\+LE} = 0x\+F\+F\+F\+F\+F\+F\+FF
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{struct_direct_lighting_mesh_a6f51872d622c3ee9a81e2f433b9e256c}\label{struct_direct_lighting_mesh_a6f51872d622c3ee9a81e2f433b9e256c}} 
+\index{Direct\+Lighting\+Mesh@{Direct\+Lighting\+Mesh}!Direct\+Lighting\+Mesh@{Direct\+Lighting\+Mesh}}
+\index{Direct\+Lighting\+Mesh@{Direct\+Lighting\+Mesh}!Direct\+Lighting\+Mesh@{Direct\+Lighting\+Mesh}}
+\subsubsection{\texorpdfstring{Direct\+Lighting\+Mesh()}{DirectLightingMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Direct\+Lighting\+Mesh\+::\+Direct\+Lighting\+Mesh (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+empty constructor \mbox{\Hypertarget{struct_direct_lighting_mesh_af86ba1cf583e3a9e8527afa4d83a2f3d}\label{struct_direct_lighting_mesh_af86ba1cf583e3a9e8527afa4d83a2f3d}} 
+\index{Direct\+Lighting\+Mesh@{Direct\+Lighting\+Mesh}!Direct\+Lighting\+Mesh@{Direct\+Lighting\+Mesh}}
+\index{Direct\+Lighting\+Mesh@{Direct\+Lighting\+Mesh}!Direct\+Lighting\+Mesh@{Direct\+Lighting\+Mesh}}
+\subsubsection{\texorpdfstring{Direct\+Lighting\+Mesh()}{DirectLightingMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Direct\+Lighting\+Mesh\+::\+Direct\+Lighting\+Mesh (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_mesh_light}{Mesh\+Light}}]{\+\_\+mesh\+\_\+light }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{struct_direct_lighting_mesh_a2dabf1d83d06e47ee36c1290e10b0b3e}\label{struct_direct_lighting_mesh_a2dabf1d83d06e47ee36c1290e10b0b3e}} 
+\index{Direct\+Lighting\+Mesh@{Direct\+Lighting\+Mesh}!map@{map}}
+\index{map@{map}!Direct\+Lighting\+Mesh@{Direct\+Lighting\+Mesh}}
+\subsubsection{\texorpdfstring{map()}{map()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE void Direct\+Lighting\+Mesh\+::map (\begin{DoxyParamCaption}\item[{const uint32}]{prev\+\_\+nee\+\_\+slot,  }\item[{const uint32}]{tri\+Id,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f}}]{uv,  }\item[{const \hyperlink{struct_vertex_geometry}{Vertex\+Geometry}}]{light\+\_\+vertex\+\_\+geom,  }\item[{float $\ast$}]{light\+\_\+pdf,  }\item[{\hyperlink{struct_edf}{Edf} $\ast$}]{light\+\_\+edf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+map a light vertex at the slot given at the previous vertex \mbox{\Hypertarget{struct_direct_lighting_mesh_a2df01e89667068136231e0c6efd4eefc}\label{struct_direct_lighting_mesh_a2df01e89667068136231e0c6efd4eefc}} 
+\index{Direct\+Lighting\+Mesh@{Direct\+Lighting\+Mesh}!preprocess\+\_\+vertex@{preprocess\+\_\+vertex}}
+\index{preprocess\+\_\+vertex@{preprocess\+\_\+vertex}!Direct\+Lighting\+Mesh@{Direct\+Lighting\+Mesh}}
+\subsubsection{\texorpdfstring{preprocess\+\_\+vertex()}{preprocess\_vertex()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE uint32 Direct\+Lighting\+Mesh\+::preprocess\+\_\+vertex (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&}]{renderer,  }\item[{const \hyperlink{struct_eye_vertex}{Eye\+Vertex} \&}]{ev,  }\item[{const uint32}]{pixel,  }\item[{const uint32}]{bounce,  }\item[{const bool}]{is\+\_\+secondary\+\_\+diffuse,  }\item[{const float}]{cone\+\_\+radius,  }\item[{const \hyperlink{structcugar_1_1_bbox}{cugar\+::\+Bbox3f}}]{scene\+\_\+bbox }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+preprocess a path vertex and return a hash slot used for N\+EE \mbox{\Hypertarget{struct_direct_lighting_mesh_af509addd3c3bce6853b5721ac85cae4d}\label{struct_direct_lighting_mesh_af509addd3c3bce6853b5721ac85cae4d}} 
+\index{Direct\+Lighting\+Mesh@{Direct\+Lighting\+Mesh}!sample@{sample}}
+\index{sample@{sample}!Direct\+Lighting\+Mesh@{Direct\+Lighting\+Mesh}}
+\subsubsection{\texorpdfstring{sample()}{sample()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE uint32 Direct\+Lighting\+Mesh\+::sample (\begin{DoxyParamCaption}\item[{const uint32}]{nee\+\_\+slot,  }\item[{const float}]{z\mbox{[}3\mbox{]},  }\item[{\hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id} $\ast$}]{light\+\_\+vertex,  }\item[{\hyperlink{struct_vertex_geometry}{Vertex\+Geometry} $\ast$}]{light\+\_\+vertex\+\_\+geom,  }\item[{float $\ast$}]{light\+\_\+pdf,  }\item[{\hyperlink{struct_edf}{Edf} $\ast$}]{light\+\_\+edf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+sample a light vertex at a given slot \mbox{\Hypertarget{struct_direct_lighting_mesh_a3328811ee1cbe8a570f7b5d0b2c6a4f4}\label{struct_direct_lighting_mesh_a3328811ee1cbe8a570f7b5d0b2c6a4f4}} 
+\index{Direct\+Lighting\+Mesh@{Direct\+Lighting\+Mesh}!update@{update}}
+\index{update@{update}!Direct\+Lighting\+Mesh@{Direct\+Lighting\+Mesh}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE void Direct\+Lighting\+Mesh\+::update (\begin{DoxyParamCaption}\item[{const uint32}]{nee\+\_\+slot,  }\item[{const uint32}]{nee\+\_\+sample,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{w,  }\item[{const bool}]{occluded }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+update with the resulting N\+EE sample 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/direct\+\_\+lighting\+\_\+mesh.\+h\end{DoxyCompactItemize}

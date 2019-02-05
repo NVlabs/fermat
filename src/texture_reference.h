@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -41,6 +41,9 @@
 struct TextureReference
 {
 	const static uint32 INVALID = uint32(-1);
+
+	FERMAT_HOST_DEVICE
+	TextureReference(const uint32 _texture = INVALID) : texture(_texture) { scaling.x = scaling.y = 1.0f; }
 
 	FERMAT_HOST_DEVICE
 	bool is_valid() const { return texture != INVALID; }

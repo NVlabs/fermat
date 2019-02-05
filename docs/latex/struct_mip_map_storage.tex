@@ -1,0 +1,78 @@
+\hypertarget{struct_mip_map_storage}{}\section{Mip\+Map\+Storage$<$ T\+Y\+PE $>$ Struct Template Reference}
+\label{struct_mip_map_storage}\index{Mip\+Map\+Storage$<$ T\+Y\+P\+E $>$@{Mip\+Map\+Storage$<$ T\+Y\+P\+E $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$Buffer\+Type T\+Y\+PE$>$\newline
+struct Mip\+Map\+Storage$<$ T\+Y\+P\+E $>$}
+
+Mip-\/\+Map storage
+
+\label{struct_mip_map_storage_MipMapStorage}%
+\Hypertarget{struct_mip_map_storage_MipMapStorage}%
+
+
+{\ttfamily \#include $<$texture.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_mip_map_storage_aab6d06e9eabd5c92089b88cbfc9d35ac}\label{struct_mip_map_storage_aab6d06e9eabd5c92089b88cbfc9d35ac}} 
+typedef \hyperlink{struct_texture_storage}{Texture\+Storage}$<$ T\+Y\+PE $>$ {\bfseries Texture\+Type}
+\item 
+\mbox{\Hypertarget{struct_mip_map_storage_a533144637a590e50df0ec2941002f385}\label{struct_mip_map_storage_a533144637a590e50df0ec2941002f385}} 
+typedef std\+::shared\+\_\+ptr$<$ \hyperlink{struct_texture_storage}{Texture\+Storage}$<$ T\+Y\+PE $>$ $>$ {\bfseries Texture\+Ptr}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_mip_map_storage_a87ed3e97080201ec964ee9da89ecdaf9}\label{struct_mip_map_storage_a87ed3e97080201ec964ee9da89ecdaf9}} 
+{\footnotesize template$<$Buffer\+Type U\+T\+Y\+PE$>$ }\\{\bfseries Mip\+Map\+Storage} (const \hyperlink{struct_mip_map_storage}{Mip\+Map\+Storage}$<$ U\+T\+Y\+PE $>$ \&other)
+\item 
+\mbox{\Hypertarget{struct_mip_map_storage_a2690a2d16f541a988301377635e6a056}\label{struct_mip_map_storage_a2690a2d16f541a988301377635e6a056}} 
+{\footnotesize template$<$Buffer\+Type U\+T\+Y\+PE$>$ }\\\hyperlink{struct_mip_map_storage}{Mip\+Map\+Storage} \& {\bfseries operator=} (const \hyperlink{struct_mip_map_storage}{Mip\+Map\+Storage}$<$ U\+T\+Y\+PE $>$ \&other)
+\item 
+\mbox{\Hypertarget{struct_mip_map_storage_a850b9177f676cf28ff867534a355e4ba}\label{struct_mip_map_storage_a850b9177f676cf28ff867534a355e4ba}} 
+void {\bfseries set} (Texture\+Ptr texture)
+\item 
+\mbox{\Hypertarget{struct_mip_map_storage_a1068590c92bd2eb253c204d70d275f63}\label{struct_mip_map_storage_a1068590c92bd2eb253c204d70d275f63}} 
+void {\bfseries resize} (const uint32\+\_\+t \+\_\+res\+\_\+x, const uint32\+\_\+t \+\_\+res\+\_\+y)
+\item 
+\mbox{\Hypertarget{struct_mip_map_storage_a3afa10e31ddd056d79749cd1c96b32a2}\label{struct_mip_map_storage_a3afa10e31ddd056d79749cd1c96b32a2}} 
+void {\bfseries generate\+\_\+mips} ()
+\item 
+\mbox{\Hypertarget{struct_mip_map_storage_afa581eb81c37598c6d8624f8ca67a52e}\label{struct_mip_map_storage_afa581eb81c37598c6d8624f8ca67a52e}} 
+uint32 {\bfseries level\+\_\+count} () const
+\item 
+\mbox{\Hypertarget{struct_mip_map_storage_ae7c42dd84ef516fa1583ed87b5c88237}\label{struct_mip_map_storage_ae7c42dd84ef516fa1583ed87b5c88237}} 
+\hyperlink{struct_mip_map_view}{Mip\+Map\+View} {\bfseries view} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_mip_map_storage_ad84067580f5608dae7e36467c8144e19}\label{struct_mip_map_storage_ad84067580f5608dae7e36467c8144e19}} 
+static void {\bfseries downsample} (Texture\+Ptr src, Texture\+Ptr dst)
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_mip_map_storage_a76dfa100a3515cf30653577b3c5962a1}\label{struct_mip_map_storage_a76dfa100a3515cf30653577b3c5962a1}} 
+uint32\+\_\+t {\bfseries res\+\_\+x}
+\item 
+\mbox{\Hypertarget{struct_mip_map_storage_a4c750dbf0ac0c80e14364c026c1850d1}\label{struct_mip_map_storage_a4c750dbf0ac0c80e14364c026c1850d1}} 
+uint32\+\_\+t {\bfseries res\+\_\+y}
+\item 
+\mbox{\Hypertarget{struct_mip_map_storage_a27f34997640a7bbe780831e8c22184c4}\label{struct_mip_map_storage_a27f34997640a7bbe780831e8c22184c4}} 
+uint32\+\_\+t {\bfseries n\+\_\+levels}
+\item 
+\mbox{\Hypertarget{struct_mip_map_storage_aa7f92834316116fbab5ebe5fc9aa6514}\label{struct_mip_map_storage_aa7f92834316116fbab5ebe5fc9aa6514}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ H\+O\+S\+T\+\_\+\+B\+U\+F\+F\+ER, Texture\+Ptr $>$ {\bfseries levels}
+\item 
+\mbox{\Hypertarget{struct_mip_map_storage_a2a5c8a733908a9ba4a3a0f8ee046ccf8}\label{struct_mip_map_storage_a2a5c8a733908a9ba4a3a0f8ee046ccf8}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ T\+Y\+PE, \hyperlink{struct_texture_view}{Texture\+View} $>$ {\bfseries level\+\_\+views}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/texture.\+h\end{DoxyCompactItemize}

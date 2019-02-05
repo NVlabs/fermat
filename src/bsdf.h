@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -25,7 +25,6 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 #pragma once
 
 // ------------------------------------------------------------------------- //
@@ -51,7 +50,20 @@
 ///@addtogroup Fermat
 ///@{
 
-///@addtogroup BSDFModule
+///@defgroup BSDFModule
+///\par
+/// This module defines the Bidirectional Scattering Distribution Function employed throughout Fermat.
+/// At present time, this model is rather simple, and consists of four layered components only:
+///\par
+/// - a diffuse reflection component
+/// - a diffuse transmission component
+/// - a glossy reflection component layered on top of the diffuse layer
+/// - a glossy transmission component layered on top of the diffuse layer
+///\par
+/// The diffuse model is purely Lambertian, while the glossy components are based on the GGX model with Smith's joint masking-shadowing function
+/// described in:
+///> [Heitz 2014, "Understanding the Masking-Shadowing Function in Microfacet-Based BRDFs"]
+///
 ///@{
 
 /// transport type: defines whether we are tracing rays, or particles, i.e. whether the quantity being transported is radiance or power.
@@ -74,6 +86,20 @@ float pow5(const float x)
 
 ///
 /// Composite BSDF class
+///\par
+/// This class defines the Bidirectional Scattering Distribution Function employed throughout Fermat.
+/// At present time, this model is rather simple, and consists of four layered components only:
+///\par
+/// - a diffuse reflection component
+/// - a diffuse transmission component
+/// - a glossy reflection component layered on top of the diffuse layer
+/// - a glossy transmission component layered on top of the diffuse layer
+///\par
+/// The BSDF uses Fresnel coefficients to determine how much light undergoes glossy reflection, and how
+/// much undergoes transmission. Part of the radiance transmitted from the upper glossy layer undergoes
+/// diffuse scattering. The interaction between the glossy layer and the underlying diffuse layer is
+/// modeled in a simplified manner, as if the layer was infinitely thin and the diffusely reflected particles
+/// were not interacting again with the upper layer.
 ///
 struct Bsdf
 {
@@ -161,18 +187,19 @@ struct Bsdf
 		m_fresnel(bsdf.m_fresnel),
 		m_ior(bsdf.m_ior),
 		m_opacity(bsdf.m_opacity),
+		m_glossy_reflectance(bsdf.m_glossy_reflectance),
 		m_transport(bsdf.m_transport) {}
 
 	/// constructor
 	///
 	FERMAT_HOST_DEVICE
 	Bsdf(
-		const TransportType	transport,
-		const RendererView	renderer,
-		const MeshMaterial	material,
-		const float			mollification_factor = 1.0f,
-		const float			mollification_bias   = 0.0f,
-		const float			min_roughness		 = 0.0f) :
+		const TransportType			transport,
+		const RenderingContextView	renderer,
+		const MeshMaterial			material,
+		const float					mollification_factor = 1.0f,
+		const float					mollification_bias   = 0.0f,
+		const float					min_roughness		 = 0.0f) :
 		m_diffuse(cugar::Vector3f(material.diffuse.x, material.diffuse.y, material.diffuse.z) / M_PIf),
 		m_diffuse_trans(cugar::Vector3f(material.diffuse_trans.x, material.diffuse_trans.y, material.diffuse_trans.z) / M_PIf),
 	#if defined(USE_LTC)
@@ -184,6 +211,7 @@ struct Bsdf
 		m_fresnel(cugar::Vector3f(material.specular.x, material.specular.y, material.specular.z) / M_PIf),
 		m_ior(material.index_of_refraction),
 		m_opacity(material.opacity),
+		m_glossy_reflectance(renderer.glossy_reflectance),
 		m_transport(transport)
 	{}
 
@@ -191,14 +219,14 @@ struct Bsdf
 	///
 	FERMAT_HOST_DEVICE
 	Bsdf(
-		const TransportType		transport, 
-		const RendererView		renderer,
-		const cugar::Vector3f	diffuse,
-		const cugar::Vector3f	specular,
-		const float				roughness,
-		const cugar::Vector3f	diffuse_trans,
-		const float				opacity			= 1.0f,
-		const float				ior				= 1.0f) :
+		const TransportType			transport, 
+		const RenderingContextView	renderer,
+		const cugar::Vector3f		diffuse,
+		const cugar::Vector3f		specular,
+		const float					roughness,
+		const cugar::Vector3f		diffuse_trans,
+		const float					opacity			= 1.0f,
+		const float					ior				= 1.0f) :
 		m_diffuse(diffuse / M_PIf),
 		m_diffuse_trans(diffuse_trans / M_PIf),
 	#if defined(USE_LTC)
@@ -210,6 +238,7 @@ struct Bsdf
 		m_fresnel(specular / M_PIf),
 		m_ior(opacity),
 		m_opacity(ior),
+		m_glossy_reflectance(renderer.glossy_reflectance),
 		m_transport(transport)
 	{}
 
@@ -233,9 +262,23 @@ struct Bsdf
 	FERMAT_HOST_DEVICE
 	const glossy_component& glossy_trans() const { return m_glossy_trans; }
 
+	/// return the incident ior ratio
+	///
+	FERMAT_HOST_DEVICE
+	float get_eta(const float NoV)		const { return NoV > 0.0f ? 1.0f / m_ior : m_ior; }
+
+	/// return the incident inverse ior ratio
+	///
+	FERMAT_HOST_DEVICE
+	float get_inv_eta(const float NoV)	const { return NoV > 0.0f ? m_ior : 1.0f / m_ior; }
+
 	/// evaluate the BSDF f(V,L)
 	///
-	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+	/// \param geometry				the local differential geometry
+	/// \param in					the incoming direction
+	/// \param out					the outgoing direction
+	/// \param components			the components to consider
+	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
 	cugar::Vector3f f(
 		const cugar::DifferentialGeometry&	geometry,
 		const cugar::Vector3f				V,
@@ -258,15 +301,50 @@ struct Bsdf
 		}
 
 		return
-			((components & kDiffuseReflection)	 ? m_diffuse.f(geometry, V, L)			* t_coeff * m_opacity * factor		: 0.0f) + 
-			((components & kDiffuseTransmission) ? m_diffuse_trans.f(geometry, V, L)	* t_coeff * m_opacity * factor		: 0.0f) +
-			((components & kGlossyReflection)    ? m_glossy.f(geometry, V, L)			* r_coeff * factor					: 0.0f) + 
-			((components & kGlossyTransmission)	 ? m_glossy_trans.f(geometry, V, L)	* t_coeff * (1.0f - m_opacity) * factor : 0.0f);
+			((components & kDiffuseReflection)	 ? m_diffuse.f(geometry, V, L)			* t_coeff * m_opacity * factor			: 0.0f) + 
+			((components & kDiffuseTransmission) ? m_diffuse_trans.f(geometry, V, L)	* t_coeff * m_opacity * factor			: 0.0f) +
+			((components & kGlossyReflection)    ? m_glossy.f(geometry, V, L)			* r_coeff * factor						: 0.0f) + 
+			((components & kGlossyTransmission)	 ? m_glossy_trans.f(geometry, V, L)		* t_coeff * (1.0f - m_opacity) * factor : 0.0f);
 	}
 
-	/// evaluate the BSDF f(V,L) and p(V,L) in a single call
+	/// evaluate the BSDF f(V,L) separately for all components
 	///
-	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
+	void f(
+		const cugar::DifferentialGeometry&	geometry,
+		const cugar::Vector3f				V,
+		const cugar::Vector3f				L,
+		cugar::Vector3f*					f) const
+	{
+		cugar::Vector3f f_d, f_g, f_dt, f_gt;
+
+		f_d = m_diffuse.f(geometry, V, L);
+		f_g = m_diffuse_trans.f(geometry, V, L);
+		f_dt = m_glossy.f(geometry, V, L);
+		f_gt = m_glossy_trans.f(geometry, V, L);
+
+		cugar::Vector3f r_coeff, t_coeff;
+		weights(geometry, V, L, r_coeff, t_coeff);
+
+		float factor = 1.0f;
+		if (m_transport == kRadianceTransport)
+		{
+			// apply the radiance compression factor of (eta_t / eta_i)^2
+			const float NoV = dot(V, geometry.normal_s);
+			const float NoL = dot(L, geometry.normal_s);
+			if (NoV * NoL < 0.0f)
+				factor = cugar::sqr( NoV > 0.0f ? m_ior : 1.0f / m_ior );
+		}
+
+		f[kDiffuseReflectionIndex]		= f_d	* t_coeff * m_opacity * factor;
+		f[kDiffuseTransmissionIndex]	= f_dt	* t_coeff * m_opacity * factor;
+		f[kGlossyReflectionIndex]		= f_g	* r_coeff * factor;
+		f[kGlossyTransmissionIndex]		= f_gt	* t_coeff * (1 - m_opacity) * factor;
+	}
+
+	/// evaluate the BSDF f(V,L) and its pdf p(V,L) in a single call
+	///
+	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
 	void f_and_p(
 		const cugar::DifferentialGeometry&	geometry,
 		const cugar::Vector3f				V,
@@ -325,9 +403,9 @@ struct Bsdf
 		f[kGlossyTransmissionIndex]		= f_gt	* t_coeff * (1 - m_opacity) * factor;
 	}
 
-	/// evaluate the BSDF f(V,L) and p(V,L) in a single call
+	/// evaluate the BSDF f(V,L) and its p(V,L) in a single call
 	///
-	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
 	void f_and_p(
 		const cugar::DifferentialGeometry&	geometry,
 		const cugar::Vector3f				V,
@@ -389,7 +467,12 @@ struct Bsdf
 
 	/// evaluate the total projected probability p(V,L) = p(L|V)
 	///
-	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+	/// \param geometry				the local differential geometry
+	/// \param in					the incoming direction
+	/// \param out					the outgoing direction
+	/// \param measure				the spherical measure to use
+	/// \param RR					indicate whether to use Russian-Roulette or not
+	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
 	float p(
 		const cugar::DifferentialGeometry&	geometry,
 		const cugar::Vector3f				V,
@@ -431,7 +514,7 @@ struct Bsdf
 
 	/// evaluate the Fresnel weight for the glossy component
 	///
-	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
 	void sampling_weights(
 		const cugar::DifferentialGeometry&	geometry,
 		const cugar::Vector3f				V,
@@ -445,11 +528,38 @@ struct Bsdf
 		cugar::Vector3f r_coeff;
 		cugar::Vector3f t_coeff;
 
+	#if 0
 		const float Fc = pow5(1 - NoV);									// 1 sub, 3 mul
 		//const float Fc = exp2( (-5.55473 * VoH - 6.98316) * VoH );	// 1 mad, 1 mul, 1 exp
 
 		r_coeff = cugar::Vector3f(Fc) + (1 - Fc) * m_fresnel;			// 1 add, 3 mad
 		t_coeff = cugar::Vector3f(1.0f - cugar::max_comp(r_coeff));
+	#elif 0
+		const cugar::Vector3f N = geometry.normal_s;
+
+		const float eta     = dot(N, V) > 0.0f ? 1.0f / m_ior : m_ior;
+		const float inv_eta = dot(N, V) > 0.0f ? m_ior        : 1.0f / m_ior;
+
+		r_coeff = Fresnel(geometry, NoV, eta, m_fresnel);
+		t_coeff = cugar::Vector3f(1.0f - cugar::max_comp(r_coeff));
+	#elif 0
+		r_coeff = cugar::Vector3f(0.5f);
+		t_coeff = cugar::Vector3f(0.5f);
+	#else
+		const uint32 S = 32;
+
+		const float eta = cugar::dot(geometry.normal_s, V) > 0.0f ?  1.0f / m_ior : m_ior;
+
+		const uint32 cos_theta_i = cugar::min( S-1u, uint32( NoV * (S-1) ) );
+		const uint32 base_spec_i = cugar::min( S-1u, uint32( cugar::max_comp( m_fresnel ) * (S-1) ) );
+		const uint32 eta_i       = cugar::min( S-1u, uint32( (eta / 2.0f) * (S-1) ) );
+		const uint32 roughness_i = cugar::min( S-1u, uint32( m_glossy.roughness * (S-1) ) );
+
+		const uint32 cell_i = (eta_i*S*S*S + base_spec_i*S*S + roughness_i*S + cos_theta_i);
+
+		r_coeff = m_glossy_reflectance[cell_i];
+		t_coeff = cugar::Vector3f(1.0f - cugar::max_comp(r_coeff));
+	#endif
 
 	#if DIFFUSE_ONLY
 		// disable Fresnel mixing - allow diffuse only
@@ -473,9 +583,19 @@ struct Bsdf
 		diffuse_trans_prob	= m_opacity * cugar::max_comp( t_coeff * m_diffuse_trans.color ) * M_PIf;
 	}
 
-	/// evaluate the Fresnel weights for reflection and transmission in the glossy layer
+	/// evaluate the Fresnel weight for the glossy component
 	///
-	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
+	void sampling_weights(
+		const cugar::DifferentialGeometry&	geometry,
+		const cugar::Vector3f				V,
+		float*								w) const
+	{
+		sampling_weights( geometry, V, w[kDiffuseReflectionIndex], w[kDiffuseTransmissionIndex], w[kGlossyReflectionIndex], w[kGlossyTransmissionIndex] );
+	}
+
+	///
+	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
 	void weights(
 		const cugar::DifferentialGeometry&	geometry,
 		const cugar::Vector3f				V,
@@ -537,7 +657,7 @@ struct Bsdf
 
 	/// evaluate the Fresnel weight for the glossy component
 	///
-	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
 	void component_weights(
 		const cugar::DifferentialGeometry&	geometry,
 		const cugar::Vector3f				V,
@@ -558,7 +678,7 @@ struct Bsdf
 
 	/// evaluate the component weights
 	///
-	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
 	void component_weights(
 		const cugar::DifferentialGeometry&	geometry,
 		const cugar::Vector3f				V,
@@ -574,8 +694,127 @@ struct Bsdf
 		w[kDiffuseTransmissionIndex]	= t_coeff * m_opacity;
 	}
 
+	/// sample a given component
+	///
+	/// \param geometry				the local differential geometry
+	/// \param z					the input random numbers, relative to the given component
+	/// \param in					the incoming direction
+	/// \param out_comp				the given component
+	/// \param out					the outgoing direction
+	/// \param out_p				the output solid angle pdf
+	/// \param out_p_proj			the output projected solid angle pdf
+	/// \param out_g				the output sample value = f/p_proj
+	/// \param RR					indicate whether to use Russian-Roulette or not
+	/// \param evaluate_full_bsdf	ndicate whether to evaluate the full BSDF, or just an unbiased estimate
+	/// \param components			the components to consider
+	FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
+	bool sample_component(
+		const cugar::DifferentialGeometry&	geometry,
+		const float							z[3],
+		const cugar::Vector3f				in,
+		const ComponentType					out_comp,
+		cugar::Vector3f&					out,
+		float&								out_p,
+		float&								out_p_proj,
+		cugar::Vector3f&					out_g,
+		const bool							evaluate_full_bsdf = false) const
+	{
+		cugar::Vector3f g(0.0f);
+		float			p(0.0f);
+		float           p_proj(0.0f);
+
+		if (out_comp == kDiffuseReflection)
+		{
+			// sample the diffuse component
+			const Bsdf::diffuse_component component = diffuse();
+
+			component.sample(cugar::Vector3f(z[0], z[1], z[2]), geometry, in, out, g, p, p_proj);
+		}
+		else if (out_comp == kGlossyReflection)
+		{
+			// sample the glossy component
+			const Bsdf::glossy_component component = glossy();
+
+			component.sample(cugar::Vector3f(z[0], z[1], z[2]), geometry, in, out, g, p, p_proj);
+		}
+		else if (out_comp == kDiffuseTransmission)
+		{
+			// sample the diffuse component
+			const Bsdf::diffuse_trans_component component = diffuse_trans();
+
+			component.sample(cugar::Vector3f(z[0], z[1], z[2]), geometry, in, out, g, p, p_proj);
+		}
+		else if (out_comp == kGlossyTransmission)
+		{
+			// sample the glossy component
+			const Bsdf::glossy_component& component = glossy_trans();
+
+			component.sample(cugar::Vector3f(z[0], z[1], z[2]), geometry, in, out, g, p, p_proj);
+		}
+
+		if (out_comp != kAbsorption)
+		{
+			// re-evaluate the entire BSDF
+			if (evaluate_full_bsdf)
+			{
+				g = this->f(geometry, in, out, kAllComponents) / p_proj;
+			}
+			else
+			{
+				cugar::Vector3f diffuse_refl_coeff;
+				cugar::Vector3f diffuse_trans_coeff;
+				cugar::Vector3f glossy_refl_coeff;
+				cugar::Vector3f glossy_trans_coeff;
+
+				// evaluate the true weights, now that the output direction is known
+				component_weights(geometry, in, out, diffuse_refl_coeff, diffuse_trans_coeff, glossy_refl_coeff, glossy_trans_coeff);
+
+				// re-weight the bsdf value
+				g *=
+					(out_comp & kGlossyReflection)   ?	glossy_refl_coeff :
+					(out_comp & kGlossyTransmission) ?	glossy_trans_coeff :
+					(out_comp & kDiffuseReflection)  ?	diffuse_refl_coeff :
+														diffuse_trans_coeff;
+			}
+
+			float factor = 1.0f;
+			if (m_transport == kRadianceTransport)
+			{
+				// apply the radiance compression factor of (eta_t / eta_i)^2
+				const float NoV = dot(in, geometry.normal_s);
+				const float NoL = dot(out, geometry.normal_s);
+				if (NoV * NoL < 0.0f)
+					factor = cugar::sqr( NoV > 0.0f ? m_ior : 1.0f / m_ior );
+			}
+
+			out_p		= p;
+			out_p_proj	= p_proj;
+			out_g		= g * factor;
+			return true;
+		}
+		else
+		{
+			out			= cugar::Vector3f(0.0f);
+			out_p		= 0.0f;
+			out_p_proj	= 0.0f;
+			out_g		= cugar::Vector3f(0.0f);
+			return false;
+		}
+	}
+
 	/// sample an outgoing direction
 	///
+	/// \param geometry				the local differential geometry
+	/// \param z					the incoming direction
+	/// \param in					the incoming direction
+	/// \param out_comp				the output component
+	/// \param out					the outgoing direction
+	/// \param out_p				the output solid angle pdf
+	/// \param out_p_proj			the output projected solid angle pdf
+	/// \param out_g				the output sample value = f/p_proj
+	/// \param RR					indicate whether to use Russian-Roulette or not
+	/// \param evaluate_full_bsdf	ndicate whether to evaluate the full BSDF, or just an unbiased estimate
+	/// \param components			the components to consider
 	FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
 	bool sample(
 		const cugar::DifferentialGeometry&	geometry,
@@ -681,7 +920,7 @@ struct Bsdf
 			if (evaluate_full_bsdf)
 			{
 				p_proj	= this->p(geometry, in, out, cugar::kProjectedSolidAngle, RR, components);
-				p		= p_proj * dot(out, geometry.normal_s);
+				p		= p_proj * fabsf( dot(out, geometry.normal_s) );
 				g		= this->f(geometry, in, out, components) / p_proj;
 			}
 			else
@@ -735,7 +974,7 @@ struct Bsdf
 	///
 	/// \param eta			incoming IOR / outgoing IOR
 	///
-	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
 	static cugar::Vector3f Fresnel(const cugar::DifferentialGeometry& geometry, const float VoH, const float eta, const cugar::Vector3f fresnel_base)
 	{
 		const float cos_theta_i = fabsf(VoH);
@@ -765,6 +1004,7 @@ struct Bsdf
 	cugar::Vector3f			m_fresnel;
 	float					m_ior;
 	float					m_opacity;
+	const float*			m_glossy_reflectance;
 	TransportType			m_transport;
 };
 

@@ -1,0 +1,63 @@
+\hypertarget{struct_v_t_l_mesh_view}{}\section{V\+T\+L\+Mesh\+View Struct Reference}
+\label{struct_v_t_l_mesh_view}\index{V\+T\+L\+Mesh\+View@{V\+T\+L\+Mesh\+View}}
+
+
+\subsection{Detailed description}
+This class provides utilities to view a V\+T\+L-\/mesh, i.\+e. a collection of mesh-\/based V\+T\+Ls. Particularly, it provides methods to sample a given \hyperlink{struct_v_t_l}{V\+TL}, and methods to locate/map a \hyperlink{struct_v_t_l}{V\+TL} from a given mesh point. 
+
+{\ttfamily \#include $<$vtl\+\_\+mesh\+\_\+view.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_v_t_l_mesh_view_a0a2a2b9bdc64659c1fb02b732e8fc71c}\label{struct_v_t_l_mesh_view_a0a2a2b9bdc64659c1fb02b732e8fc71c}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries V\+T\+L\+Mesh\+View} (const uint32 \+\_\+n\+\_\+vtls, const \hyperlink{struct_v_t_l}{V\+TL} $\ast$\+\_\+vtls, const \hyperlink{struct_u_v_bvh_view}{U\+V\+Bvh\+View} \&\+\_\+uvbvh, const \hyperlink{struct_mesh_view}{Mesh\+View} \&\+\_\+mesh, const \hyperlink{struct_mip_map_view}{Mip\+Map\+View} $\ast$\+\_\+textures)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{struct_v_t_l_mesh_view_a2026bede1d2bf7ef4cfaad5d80882b69}{sample} (const uint32 vtl\+\_\+idx, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} vtl\+\_\+uv, uint32\+\_\+t $\ast$prim\+\_\+id, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} $\ast$uv, \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} $\ast$geom, float $\ast$pdf, \hyperlink{struct_edf}{Edf} $\ast$edf) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{struct_v_t_l_mesh_view_a74c81f6a7fb7eca25c7f1a2584ec595d}{map} (const uint32\+\_\+t prim\+\_\+id, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} \&uv, const \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} \&geom, float $\ast$pdf, \hyperlink{struct_edf}{Edf} $\ast$edf) const
+\item 
+\mbox{\Hypertarget{struct_v_t_l_mesh_view_a1781848c9bcf42f5fedc89b667183cd1}\label{struct_v_t_l_mesh_view_a1781848c9bcf42f5fedc89b667183cd1}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 {\bfseries vtl\+\_\+count} () const
+\item 
+\mbox{\Hypertarget{struct_v_t_l_mesh_view_ac615562473fc2f006d733d1cfa3399a2}\label{struct_v_t_l_mesh_view_ac615562473fc2f006d733d1cfa3399a2}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{struct_v_t_l}{V\+TL} {\bfseries get\+\_\+vtl} (const uint32 i) const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_v_t_l_mesh_view_ad66e4d4d081cfe85027968780c9d56ea}\label{struct_v_t_l_mesh_view_ad66e4d4d081cfe85027968780c9d56ea}} 
+uint32 {\bfseries n\+\_\+vtls}
+\item 
+\mbox{\Hypertarget{struct_v_t_l_mesh_view_a7de93e0b8c5c1e3e688e5995a6a493a5}\label{struct_v_t_l_mesh_view_a7de93e0b8c5c1e3e688e5995a6a493a5}} 
+const \hyperlink{struct_v_t_l}{V\+TL} $\ast$ {\bfseries vtls}
+\item 
+\mbox{\Hypertarget{struct_v_t_l_mesh_view_a65c96b430b46f285cab1d8698851ad99}\label{struct_v_t_l_mesh_view_a65c96b430b46f285cab1d8698851ad99}} 
+\hyperlink{struct_u_v_bvh_view}{U\+V\+Bvh\+View} {\bfseries uvbvh}
+\item 
+\mbox{\Hypertarget{struct_v_t_l_mesh_view_a185f8589a1210e404d24cd3ace967746}\label{struct_v_t_l_mesh_view_a185f8589a1210e404d24cd3ace967746}} 
+\hyperlink{struct_mesh_view}{Mesh\+View} {\bfseries mesh}
+\item 
+\mbox{\Hypertarget{struct_v_t_l_mesh_view_ab17d8b007a506bd236c2e0bf996e086d}\label{struct_v_t_l_mesh_view_ab17d8b007a506bd236c2e0bf996e086d}} 
+const \hyperlink{struct_mip_map_view}{Mip\+Map\+View} $\ast$ {\bfseries textures}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{struct_v_t_l_mesh_view_a74c81f6a7fb7eca25c7f1a2584ec595d}\label{struct_v_t_l_mesh_view_a74c81f6a7fb7eca25c7f1a2584ec595d}} 
+\index{V\+T\+L\+Mesh\+View@{V\+T\+L\+Mesh\+View}!map@{map}}
+\index{map@{map}!V\+T\+L\+Mesh\+View@{V\+T\+L\+Mesh\+View}}
+\subsubsection{\texorpdfstring{map()}{map()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 V\+T\+L\+Mesh\+View\+::map (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{prim\+\_\+id,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} \&}]{uv,  }\item[{const \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} \&}]{geom,  }\item[{float $\ast$}]{pdf,  }\item[{\hyperlink{struct_edf}{Edf} $\ast$}]{edf }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+map a (prim,uv) pair and its surface element to the corresponding V\+T\+L/\+E\+D\+F/pdf N\+O\+TE\+: the returned pdf here is only {\itshape relative} to the \hyperlink{struct_v_t_l}{V\+TL}, i.\+e. it doesn\textquotesingle{}t account for the probability of sampling that \hyperlink{struct_v_t_l}{V\+TL}, since the sampling policy is not controlled by this class and intentionally left outside of it. \mbox{\Hypertarget{struct_v_t_l_mesh_view_a2026bede1d2bf7ef4cfaad5d80882b69}\label{struct_v_t_l_mesh_view_a2026bede1d2bf7ef4cfaad5d80882b69}} 
+\index{V\+T\+L\+Mesh\+View@{V\+T\+L\+Mesh\+View}!sample@{sample}}
+\index{sample@{sample}!V\+T\+L\+Mesh\+View@{V\+T\+L\+Mesh\+View}}
+\subsubsection{\texorpdfstring{sample()}{sample()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void V\+T\+L\+Mesh\+View\+::sample (\begin{DoxyParamCaption}\item[{const uint32}]{vtl\+\_\+idx,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f}}]{vtl\+\_\+uv,  }\item[{uint32\+\_\+t $\ast$}]{prim\+\_\+id,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} $\ast$}]{uv,  }\item[{\hyperlink{struct_vertex_geometry}{Vertex\+Geometry} $\ast$}]{geom,  }\item[{float $\ast$}]{pdf,  }\item[{\hyperlink{struct_edf}{Edf} $\ast$}]{edf }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+sample a point on a given \hyperlink{struct_v_t_l}{V\+TL} 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/vtl\+\_\+mesh\+\_\+view.\+h\end{DoxyCompactItemize}

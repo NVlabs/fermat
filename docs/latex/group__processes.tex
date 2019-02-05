@@ -1,0 +1,39 @@
+\hypertarget{group__processes}{}\section{Stochastic Processes}
+\label{group__processes}\index{Stochastic Processes@{Stochastic Processes}}
+
+
+\subsection{Detailed Description}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Generator , uint32 D\+IM$>$ }\\\hyperlink{structcugar_1_1_vector}{Vector}$<$ float, D\+IM $>$ \hyperlink{group__processes_ga5c4e54da1f4419033a8ae7f5aa8cdbb2}{cugar\+::brownian\+\_\+bridge} (const uint32 L, const uint32 t, Generator gaussian)
+\item 
+{\footnotesize template$<$uint32 D\+IM, typename Distribution , typename Sampler\+\_\+type $>$ }\\\hyperlink{structcugar_1_1_vector}{Vector}$<$ float, D\+IM $>$ \hyperlink{group__processes_ga9f3fe90d8a07d266c41f239963b83644}{cugar\+::generate\+\_\+point} (Sampler\+\_\+type \&sampler, Distribution \&gaussian)
+\item 
+{\footnotesize template$<$uint32 D\+IM, typename Sequence , typename Distribution $>$ }\\\hyperlink{structcugar_1_1_vector}{Vector}$<$ float, D\+IM $>$ \hyperlink{group__processes_ga804d942e70bf4d755991fc3393004e8e}{cugar\+::brownian\+\_\+bridge} (Distribution \&gaussian, const float sigma, const uint32 N, const uint32 i, const uint32 L, const uint32 t, const Sequence \&sequence)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__processes_ga5c4e54da1f4419033a8ae7f5aa8cdbb2}\label{group__processes_ga5c4e54da1f4419033a8ae7f5aa8cdbb2}} 
+\index{Stochastic Processes@{Stochastic Processes}!brownian\+\_\+bridge@{brownian\+\_\+bridge}}
+\index{brownian\+\_\+bridge@{brownian\+\_\+bridge}!Stochastic Processes@{Stochastic Processes}}
+\subsubsection{\texorpdfstring{brownian\+\_\+bridge()}{brownian\_bridge()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Generator , uint32 D\+IM$>$ \\
+\hyperlink{structcugar_1_1_vector}{Vector}$<$ float, D\+IM $>$ cugar\+::brownian\+\_\+bridge (\begin{DoxyParamCaption}\item[{const uint32}]{L,  }\item[{const uint32}]{t,  }\item[{Generator}]{gaussian }\end{DoxyParamCaption})}
+
+Evaluate a D\+I\+M-\/dimensional Brownian bridge of length L at time t, using a black-\/box Gaussian generator. \mbox{\Hypertarget{group__processes_ga804d942e70bf4d755991fc3393004e8e}\label{group__processes_ga804d942e70bf4d755991fc3393004e8e}} 
+\index{Stochastic Processes@{Stochastic Processes}!brownian\+\_\+bridge@{brownian\+\_\+bridge}}
+\index{brownian\+\_\+bridge@{brownian\+\_\+bridge}!Stochastic Processes@{Stochastic Processes}}
+\subsubsection{\texorpdfstring{brownian\+\_\+bridge()}{brownian\_bridge()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$uint32 D\+IM, typename Sequence , typename Distribution $>$ \\
+\hyperlink{structcugar_1_1_vector}{Vector}$<$ float, D\+IM $>$ cugar\+::brownian\+\_\+bridge (\begin{DoxyParamCaption}\item[{Distribution \&}]{gaussian,  }\item[{const float}]{sigma,  }\item[{const uint32}]{N,  }\item[{const uint32}]{i,  }\item[{const uint32}]{L,  }\item[{const uint32}]{t,  }\item[{const Sequence \&}]{sequence }\end{DoxyParamCaption})}
+
+Evaluate the i/\+N-\/th D\+I\+M-\/dimensional Brownian bridge of length L at time t. The bridges are created using L copies of a D\+I\+M-\/dimensional Sobol sequence, first permuted and then shifted through Cranley-\/\+Patterson rotations. The vector of permutations must contain L permutations of the indices \mbox{[}0,N-\/1\mbox{]}, and the vector of rotations must contain L $\ast$ (D\+IM + (D\+IM \& 1)) entries. \mbox{\Hypertarget{group__processes_ga9f3fe90d8a07d266c41f239963b83644}\label{group__processes_ga9f3fe90d8a07d266c41f239963b83644}} 
+\index{Stochastic Processes@{Stochastic Processes}!generate\+\_\+point@{generate\+\_\+point}}
+\index{generate\+\_\+point@{generate\+\_\+point}!Stochastic Processes@{Stochastic Processes}}
+\subsubsection{\texorpdfstring{generate\+\_\+point()}{generate\_point()}}
+{\footnotesize\ttfamily template$<$uint32 D\+IM, typename Distribution , typename Sampler\+\_\+type $>$ \\
+\hyperlink{structcugar_1_1_vector}{Vector}$<$ float, D\+IM $>$ cugar\+::generate\+\_\+point (\begin{DoxyParamCaption}\item[{Sampler\+\_\+type \&}]{sampler,  }\item[{Distribution \&}]{gaussian }\end{DoxyParamCaption})}
+
+A simple utility function to generate a D\+I\+M-\/dimensional Gaussian point using the i-\/th point of a sample sequence, shifted by a Cranley-\/\+Patterson rotation. 

@@ -1,0 +1,135 @@
+\hypertarget{structcugar_1_1_bintree__writer}{}\section{cugar\+:\+:Bintree\+\_\+writer$<$ node\+\_\+type, system\+\_\+tag, node\+\_\+vector, range\+\_\+vector, index\+\_\+vector $>$ Struct Template Reference}
+\label{structcugar_1_1_bintree__writer}\index{cugar\+::\+Bintree\+\_\+writer$<$ node\+\_\+type, system\+\_\+tag, node\+\_\+vector, range\+\_\+vector, index\+\_\+vector $>$@{cugar\+::\+Bintree\+\_\+writer$<$ node\+\_\+type, system\+\_\+tag, node\+\_\+vector, range\+\_\+vector, index\+\_\+vector $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$typename node\+\_\+type, typename system\+\_\+tag, typename node\+\_\+vector = vector$<$system\+\_\+tag,node\+\_\+type$>$, typename range\+\_\+vector = vector$<$system\+\_\+tag,uint2$>$, typename index\+\_\+vector = vector$<$system\+\_\+tag,uint32$>$$>$\newline
+struct cugar\+::\+Bintree\+\_\+writer$<$ node\+\_\+type, system\+\_\+tag, node\+\_\+vector, range\+\_\+vector, index\+\_\+vector $>$}
+
+A simple binary tree writer implementation to be used with the \hyperlink{group__radixtree_gafa925282e2b6e8bd87c1a00c1f1e6807}{generate\+\_\+radix\+\_\+tree()} function.
+
+\hyperlink{group__radixtree_TreeWriterAnchor}{Tree Writer} 
+
+{\ttfamily \#include $<$bintree\+\_\+writer.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_bintree__writer_a86bf5533920acd9e5dc32d656c2e6973}\label{structcugar_1_1_bintree__writer_a86bf5533920acd9e5dc32d656c2e6973}} 
+typedef node\+\_\+type\+::node\+\_\+tag {\bfseries node\+\_\+tag}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_bintree__writer_af67f19d76858ac421021017924a644de}\label{structcugar_1_1_bintree__writer_af67f19d76858ac421021017924a644de}} 
+typedef \hyperlink{structcugar_1_1_bintree__writer__context}{Bintree\+\_\+writer\+\_\+context}$<$ node\+\_\+type, node\+\_\+tag $>$ {\bfseries context\+\_\+type}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structcugar_1_1_bintree__writer_aa6285a28d4809fe64221e532ecbec891}{Bintree\+\_\+writer} (node\+\_\+vector $\ast$nodes=N\+U\+LL, range\+\_\+vector $\ast$leaf\+\_\+ranges=N\+U\+LL, index\+\_\+vector $\ast$leaf\+\_\+pointers=N\+U\+LL, index\+\_\+vector $\ast$parents=N\+U\+LL, index\+\_\+vector $\ast$skip\+\_\+nodes=N\+U\+LL, range\+\_\+vector $\ast$node\+\_\+ranges=N\+U\+LL)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_bintree__writer_afdc80c794419b3f83e3a6db5383cd63a}\label{structcugar_1_1_bintree__writer_afdc80c794419b3f83e3a6db5383cd63a}} 
+void {\bfseries set\+\_\+nodes} (node\+\_\+vector $\ast$nodes)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_bintree__writer_a01c1fd5dc32bf390b9c7381b54e501f8}\label{structcugar_1_1_bintree__writer_a01c1fd5dc32bf390b9c7381b54e501f8}} 
+void {\bfseries set\+\_\+parents} (index\+\_\+vector $\ast$parents)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_bintree__writer_ad81143b0029d8ad763a7eb78cdd43a88}\label{structcugar_1_1_bintree__writer_ad81143b0029d8ad763a7eb78cdd43a88}} 
+void {\bfseries set\+\_\+skip\+\_\+nodes} (index\+\_\+vector $\ast$skip\+\_\+nodes)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_bintree__writer_a37656872367b3963c7fcf7d4fe5fcebf}\label{structcugar_1_1_bintree__writer_a37656872367b3963c7fcf7d4fe5fcebf}} 
+void {\bfseries set\+\_\+leaf\+\_\+pointers} (index\+\_\+vector $\ast$leaf\+\_\+pointers)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_bintree__writer_a81cb73fb7e3e60b9c1700c56ac17de31}\label{structcugar_1_1_bintree__writer_a81cb73fb7e3e60b9c1700c56ac17de31}} 
+void {\bfseries set\+\_\+leaf\+\_\+ranges} (range\+\_\+vector $\ast$leaf\+\_\+ranges)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_bintree__writer_ac4823eac623850f441585d857adffb22}\label{structcugar_1_1_bintree__writer_ac4823eac623850f441585d857adffb22}} 
+void {\bfseries set\+\_\+node\+\_\+ranges} (range\+\_\+vector $\ast$node\+\_\+ranges)
+\item 
+void \hyperlink{structcugar_1_1_bintree__writer_a5c181a6cc8ee971fda6435d4d25ad089}{reserve\+\_\+nodes} (const uint32 n)
+\item 
+void \hyperlink{structcugar_1_1_bintree__writer_aaff80118d0d6e4cc98e8decfedecd332}{reserve\+\_\+leaves} (const uint32 n)
+\item 
+\hyperlink{structcugar_1_1_bintree__writer__context}{context\+\_\+type} \hyperlink{structcugar_1_1_bintree__writer_a90d28ca497d65523760ab584d569d38a}{get\+\_\+context} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_bintree__writer_ad23ee37955a658ab99d345082fe3cdaa}\label{structcugar_1_1_bintree__writer_ad23ee37955a658ab99d345082fe3cdaa}} 
+node\+\_\+vector $\ast$ {\bfseries m\+\_\+nodes}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_bintree__writer_a95aad906c69c6b972e202a6f793c7ba6}\label{structcugar_1_1_bintree__writer_a95aad906c69c6b972e202a6f793c7ba6}} 
+range\+\_\+vector $\ast$ {\bfseries m\+\_\+leaf\+\_\+ranges}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_bintree__writer_aa9ae4f117b46181f5e343874eb54ef8b}\label{structcugar_1_1_bintree__writer_aa9ae4f117b46181f5e343874eb54ef8b}} 
+index\+\_\+vector $\ast$ {\bfseries m\+\_\+leaf\+\_\+pointers}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_bintree__writer_a6970c2fd61bb561034d8066fd6b0e5e9}\label{structcugar_1_1_bintree__writer_a6970c2fd61bb561034d8066fd6b0e5e9}} 
+index\+\_\+vector $\ast$ {\bfseries m\+\_\+parents}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_bintree__writer_a785cf47888d5ae0a434600d909b95728}\label{structcugar_1_1_bintree__writer_a785cf47888d5ae0a434600d909b95728}} 
+index\+\_\+vector $\ast$ {\bfseries m\+\_\+skip\+\_\+nodes}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_bintree__writer_a3ddae8b3ffa9049895c812b1d3e468d4}\label{structcugar_1_1_bintree__writer_a3ddae8b3ffa9049895c812b1d3e468d4}} 
+range\+\_\+vector $\ast$ {\bfseries m\+\_\+node\+\_\+ranges}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcugar_1_1_bintree__writer_aa6285a28d4809fe64221e532ecbec891}\label{structcugar_1_1_bintree__writer_aa6285a28d4809fe64221e532ecbec891}} 
+\index{cugar\+::\+Bintree\+\_\+writer@{cugar\+::\+Bintree\+\_\+writer}!Bintree\+\_\+writer@{Bintree\+\_\+writer}}
+\index{Bintree\+\_\+writer@{Bintree\+\_\+writer}!cugar\+::\+Bintree\+\_\+writer@{cugar\+::\+Bintree\+\_\+writer}}
+\subsubsection{\texorpdfstring{Bintree\+\_\+writer()}{Bintree\_writer()}}
+{\footnotesize\ttfamily template$<$typename node\+\_\+type, typename system\+\_\+tag, typename node\+\_\+vector = vector$<$system\+\_\+tag,node\+\_\+type$>$, typename range\+\_\+vector = vector$<$system\+\_\+tag,uint2$>$, typename index\+\_\+vector = vector$<$system\+\_\+tag,uint32$>$$>$ \\
+\hyperlink{structcugar_1_1_bintree__writer}{cugar\+::\+Bintree\+\_\+writer}$<$ node\+\_\+type, system\+\_\+tag, node\+\_\+vector, range\+\_\+vector, index\+\_\+vector $>$\+::\hyperlink{structcugar_1_1_bintree__writer}{Bintree\+\_\+writer} (\begin{DoxyParamCaption}\item[{node\+\_\+vector $\ast$}]{nodes = {\ttfamily NULL},  }\item[{range\+\_\+vector $\ast$}]{leaf\+\_\+ranges = {\ttfamily NULL},  }\item[{index\+\_\+vector $\ast$}]{leaf\+\_\+pointers = {\ttfamily NULL},  }\item[{index\+\_\+vector $\ast$}]{parents = {\ttfamily NULL},  }\item[{index\+\_\+vector $\ast$}]{skip\+\_\+nodes = {\ttfamily NULL},  }\item[{range\+\_\+vector $\ast$}]{node\+\_\+ranges = {\ttfamily NULL} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em nodes} & nodes to write to \\
+\hline
+{\em leaves} & leaves to write to \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1_bintree__writer_a90d28ca497d65523760ab584d569d38a}\label{structcugar_1_1_bintree__writer_a90d28ca497d65523760ab584d569d38a}} 
+\index{cugar\+::\+Bintree\+\_\+writer@{cugar\+::\+Bintree\+\_\+writer}!get\+\_\+context@{get\+\_\+context}}
+\index{get\+\_\+context@{get\+\_\+context}!cugar\+::\+Bintree\+\_\+writer@{cugar\+::\+Bintree\+\_\+writer}}
+\subsubsection{\texorpdfstring{get\+\_\+context()}{get\_context()}}
+{\footnotesize\ttfamily template$<$typename node\+\_\+type, typename system\+\_\+tag, typename node\+\_\+vector = vector$<$system\+\_\+tag,node\+\_\+type$>$, typename range\+\_\+vector = vector$<$system\+\_\+tag,uint2$>$, typename index\+\_\+vector = vector$<$system\+\_\+tag,uint32$>$$>$ \\
+\hyperlink{structcugar_1_1_bintree__writer__context}{context\+\_\+type} \hyperlink{structcugar_1_1_bintree__writer}{cugar\+::\+Bintree\+\_\+writer}$<$ node\+\_\+type, system\+\_\+tag, node\+\_\+vector, range\+\_\+vector, index\+\_\+vector $>$\+::get\+\_\+context (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return a cuda context \mbox{\Hypertarget{structcugar_1_1_bintree__writer_aaff80118d0d6e4cc98e8decfedecd332}\label{structcugar_1_1_bintree__writer_aaff80118d0d6e4cc98e8decfedecd332}} 
+\index{cugar\+::\+Bintree\+\_\+writer@{cugar\+::\+Bintree\+\_\+writer}!reserve\+\_\+leaves@{reserve\+\_\+leaves}}
+\index{reserve\+\_\+leaves@{reserve\+\_\+leaves}!cugar\+::\+Bintree\+\_\+writer@{cugar\+::\+Bintree\+\_\+writer}}
+\subsubsection{\texorpdfstring{reserve\+\_\+leaves()}{reserve\_leaves()}}
+{\footnotesize\ttfamily template$<$typename node\+\_\+type, typename system\+\_\+tag, typename node\+\_\+vector = vector$<$system\+\_\+tag,node\+\_\+type$>$, typename range\+\_\+vector = vector$<$system\+\_\+tag,uint2$>$, typename index\+\_\+vector = vector$<$system\+\_\+tag,uint32$>$$>$ \\
+void \hyperlink{structcugar_1_1_bintree__writer}{cugar\+::\+Bintree\+\_\+writer}$<$ node\+\_\+type, system\+\_\+tag, node\+\_\+vector, range\+\_\+vector, index\+\_\+vector $>$\+::reserve\+\_\+leaves (\begin{DoxyParamCaption}\item[{const uint32}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+reserve space for more leaves
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & leaves to reserve \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1_bintree__writer_a5c181a6cc8ee971fda6435d4d25ad089}\label{structcugar_1_1_bintree__writer_a5c181a6cc8ee971fda6435d4d25ad089}} 
+\index{cugar\+::\+Bintree\+\_\+writer@{cugar\+::\+Bintree\+\_\+writer}!reserve\+\_\+nodes@{reserve\+\_\+nodes}}
+\index{reserve\+\_\+nodes@{reserve\+\_\+nodes}!cugar\+::\+Bintree\+\_\+writer@{cugar\+::\+Bintree\+\_\+writer}}
+\subsubsection{\texorpdfstring{reserve\+\_\+nodes()}{reserve\_nodes()}}
+{\footnotesize\ttfamily template$<$typename node\+\_\+type, typename system\+\_\+tag, typename node\+\_\+vector = vector$<$system\+\_\+tag,node\+\_\+type$>$, typename range\+\_\+vector = vector$<$system\+\_\+tag,uint2$>$, typename index\+\_\+vector = vector$<$system\+\_\+tag,uint32$>$$>$ \\
+void \hyperlink{structcugar_1_1_bintree__writer}{cugar\+::\+Bintree\+\_\+writer}$<$ node\+\_\+type, system\+\_\+tag, node\+\_\+vector, range\+\_\+vector, index\+\_\+vector $>$\+::reserve\+\_\+nodes (\begin{DoxyParamCaption}\item[{const uint32}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+reserve space for more nodes
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & nodes to reserve \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bintree/\hyperlink{bintree__writer_8h}{bintree\+\_\+writer.\+h}\end{DoxyCompactItemize}

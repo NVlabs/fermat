@@ -1,0 +1,419 @@
+Top\+: \hyperlink{_overture_contents_page}{Contents}
+
+\hyperlink{group___p_t_lib}{P\+T\+Lib} is a flexible path tracing library, thought to be as performant as possible and yet vastly configurable at compile-\/time. The module is organized into a host library of parallel kernels, \hyperlink{group___p_t_lib}{P\+T\+Lib}, and a core module of device-\/side functions, \hyperlink{group___p_t_lib_core}{P\+T\+Lib\+Core}. The latter provides functions to generate primary rays, process path vertices, sample Next-\/\+Event Estimation and emissive surface hits at each of them, and process all the generated samples. In order to make the whole process configurable, all the functions accept three template interfaces\+: \begin{DoxyParagraph}{}
+\label{_p_t_lib_page_TPTContext}%
+\Hypertarget{_p_t_lib_page_TPTContext}%
+
+\begin{DoxyEnumerate}
+\item a context interface, holding members describing the current path tracer state, and providing two trace methods, for scattering and shadow rays respectively. The basic path tracer state can be inherited from the \hyperlink{struct_p_t_context_base}{P\+T\+Context\+Base} class. On top of that, this class has to provide the following interface\+: ~\newline
+
+\begin{DoxyCode}
+\textcolor{keyword}{struct }TPTContext
+\{
+  FERMAT\_DEVICE
+  \textcolor{keywordtype}{void} trace\_ray(
+      TPTVertexProcessor&     vertex\_processor, 
+      \hyperlink{struct_rendering_context_view}{RenderingContextView}&   renderer,
+      \textcolor{keyword}{const} \hyperlink{union_pixel_info}{PixelInfo}         pixel,
+      \textcolor{keyword}{const} \hyperlink{struct_masked_ray}{MaskedRay}         ray,
+      \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector4f}   weight,
+      \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector2f}   cone,
+      \textcolor{keyword}{const} uint32            nee\_vertex\_id);
+
+  FERMAT\_DEVICE
+  \textcolor{keywordtype}{void} trace\_shadow\_ray(
+      TPTVertexProcessor&     vertex\_processor,
+      \hyperlink{struct_rendering_context_view}{RenderingContextView}&   renderer,
+      \textcolor{keyword}{const} \hyperlink{union_pixel_info}{PixelInfo}         pixel,
+      \textcolor{keyword}{const} \hyperlink{struct_masked_ray}{MaskedRay}         ray,
+      \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}   weight,
+      \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}   weight\_d,
+      \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}   weight\_g,
+      \textcolor{keyword}{const} uint32            nee\_vertex\_id,
+      \textcolor{keyword}{const} uint32            nee\_sample\_id);
+\};
+\end{DoxyCode}
+ Note that for the purpose of the \hyperlink{group___p_t_lib_core}{P\+T\+Lib\+Core} module, a given implementation is free to define the trace methods in any arbitrary manner, since the result of tracing a ray is not used directly. This topic will be covered in more detail later on. ~\newline
+~\newline
+\label{_p_t_lib_page_TPTVertexProcessor}%
+\Hypertarget{_p_t_lib_page_TPTVertexProcessor}%
+
+\item a user defined vertex processor, determining what to do with each generated path vertex; this is the class responsible for weighting each sample and accumulating them to the image. It has to provide the following interface\+: ~\newline
+
+\begin{DoxyCode}
+\textcolor{keyword}{struct }TPTVertexProcessor
+\{
+  \textcolor{comment}{// preprocess a vertex and return some packed vertex info - this is useful since this}
+  \textcolor{comment}{// information bit is automatically propagated through the entire path tracing pipeline,}
+  \textcolor{comment}{// and might be used, for example, to implement user defined caching strategies like}
+  \textcolor{comment}{// those employed in path space filtering, where the packed info would e.g. encode a}
+  \textcolor{comment}{// spatial hash.}
+  \textcolor{comment}{//}
+  \textcolor{comment}{// \(\backslash\)param context               the current context}
+  \textcolor{comment}{// \(\backslash\)param renderer              the current renderer}
+  \textcolor{comment}{// \(\backslash\)param pixel\_info            packed pixel info}
+  \textcolor{comment}{// \(\backslash\)param ev                    the current vertex}
+  \textcolor{comment}{// \(\backslash\)param cone\_radius           the current cone radius}
+  \textcolor{comment}{// \(\backslash\)param scene\_bbox            the scene bounding box}
+  \textcolor{comment}{// \(\backslash\)param prev\_vertex\_info      the vertex info at the previous path vertex}
+  FERMAT\_DEVICE
+  uint32 preprocess\_vertex(
+      \textcolor{keyword}{const} TPTContext&           context,
+      \textcolor{keyword}{const} \hyperlink{struct_rendering_context_view}{RenderingContextView}& renderer,
+      \textcolor{keyword}{const} \hyperlink{union_pixel_info}{PixelInfo}             pixel\_info,
+      \textcolor{keyword}{const} \hyperlink{struct_eye_vertex}{EyeVertex}&            ev,
+      \textcolor{keyword}{const} \textcolor{keywordtype}{float}                 cone\_radius,
+      \textcolor{keyword}{const} \hyperlink{structcugar_1_1_bbox}{cugar::Bbox3f}         scene\_bbox,
+      \textcolor{keyword}{const} uint32                prev\_vertex\_info);
+
+  \textcolor{comment}{// compute NEE weights given a vertex and a light sample}
+  \textcolor{comment}{//}
+  \textcolor{comment}{// \(\backslash\)param context               the current context}
+  \textcolor{comment}{// \(\backslash\)param renderer              the current renderer}
+  \textcolor{comment}{// \(\backslash\)param pixel\_info            packed pixel info}
+  \textcolor{comment}{// \(\backslash\)param prev\_vertex\_info      packed vertex info at the previous path vertex}
+  \textcolor{comment}{// \(\backslash\)param vertex\_info           packed vertex info}
+  \textcolor{comment}{// \(\backslash\)param ev                    the current vertex}
+  \textcolor{comment}{// \(\backslash\)param f\_d                   the diffuse brdf}
+  \textcolor{comment}{// \(\backslash\)param f\_g                   the glossy brdf}
+  \textcolor{comment}{// \(\backslash\)param w                     the current path weight}
+  \textcolor{comment}{// \(\backslash\)param f\_L                   the current sample contribution, including the MIS weight}
+  \textcolor{comment}{// \(\backslash\)param out\_w\_d               the output diffuse weight}
+  \textcolor{comment}{// \(\backslash\)param out\_w\_g               the output glossy weight}
+  \textcolor{comment}{// \(\backslash\)param out\_vertex\_info       the output packed vertex info}
+  FERMAT\_DEVICE
+  \textcolor{keywordtype}{void} compute\_nee\_weights(
+      \textcolor{keyword}{const} TPTContext&           context,
+      \textcolor{keyword}{const} \hyperlink{struct_rendering_context_view}{RenderingContextView}& renderer,
+      \textcolor{keyword}{const} \hyperlink{union_pixel_info}{PixelInfo}             pixel\_info,
+      \textcolor{keyword}{const} uint32                prev\_vertex\_info,
+      \textcolor{keyword}{const} uint32                vertex\_info,
+      \textcolor{keyword}{const} \hyperlink{struct_eye_vertex}{EyeVertex}&            ev,
+      \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&      f\_d,
+      \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&      f\_g,
+      \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&      w,
+      \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&      f\_L,
+            \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&      out\_w\_d,
+            \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&      out\_w\_g,
+            uint32&               out\_vertex\_info);
+
+  \textcolor{comment}{// compute scattering weights given a vertex}
+  \textcolor{comment}{//}
+  \textcolor{comment}{// \(\backslash\)param context               the current context}
+  \textcolor{comment}{// \(\backslash\)param renderer              the current renderer}
+  \textcolor{comment}{// \(\backslash\)param pixel\_info            packed pixel info}
+  \textcolor{comment}{// \(\backslash\)param prev\_vertex\_info      packed vertex info at the previous path vertex}
+  \textcolor{comment}{// \(\backslash\)param vertex\_info           packed vertex info}
+  \textcolor{comment}{// \(\backslash\)param ev                    the current vertex}
+  \textcolor{comment}{// \(\backslash\)param out\_comp              the brdf scattering component}
+  \textcolor{comment}{// \(\backslash\)param g                     the brdf scattering weight (= f/p)}
+  \textcolor{comment}{// \(\backslash\)param w                     the current path weight}
+  \textcolor{comment}{// \(\backslash\)param out\_w                 the output weight}
+  \textcolor{comment}{// \(\backslash\)param out\_vertex\_info       the output vertex info}
+  \textcolor{comment}{//}
+  FERMAT\_DEVICE
+  \textcolor{keywordtype}{void} compute\_scattering\_weights(
+      \textcolor{keyword}{const} TPTContext&           context,
+      \textcolor{keyword}{const} \hyperlink{struct_rendering_context_view}{RenderingContextView}& renderer,
+      \textcolor{keyword}{const} \hyperlink{union_pixel_info}{PixelInfo}             pixel\_info,
+      \textcolor{keyword}{const} uint32                prev\_vertex\_info,
+      \textcolor{keyword}{const} uint32                vertex\_info,
+      \textcolor{keyword}{const} \hyperlink{struct_eye_vertex}{EyeVertex}&            ev,
+      \textcolor{keyword}{const} uint32                out\_comp,
+      \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&      g,
+      \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&      w,
+            \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&      out\_w,
+            uint32&               out\_vertex\_info);
+
+  \textcolor{comment}{// accumulate an emissive surface hit}
+  \textcolor{comment}{//}
+  \textcolor{comment}{// \(\backslash\)param context               the current context}
+  \textcolor{comment}{// \(\backslash\)param renderer              the current renderer}
+  \textcolor{comment}{// \(\backslash\)param pixel\_info            packed pixel info}
+  \textcolor{comment}{// \(\backslash\)param prev\_vertex\_info      packed vertex info at the previous path vertex}
+  \textcolor{comment}{// \(\backslash\)param vertex\_info           packed vertex info}
+  \textcolor{comment}{// \(\backslash\)param ev                    the current vertex}
+  \textcolor{comment}{// \(\backslash\)param w                     the emissive sample weight}
+  \textcolor{comment}{//}
+  FERMAT\_DEVICE
+  \textcolor{keywordtype}{void} accumulate\_emissive(
+      \textcolor{keyword}{const} TPTContext&           context,
+            \hyperlink{struct_rendering_context_view}{RenderingContextView}& renderer,
+      \textcolor{keyword}{const} \hyperlink{union_pixel_info}{PixelInfo}             pixel\_info,
+      \textcolor{keyword}{const} uint32                prev\_vertex\_info,
+      \textcolor{keyword}{const} uint32                vertex\_info,
+      \textcolor{keyword}{const} \hyperlink{struct_eye_vertex}{EyeVertex}&            ev,
+      \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&      w);
+
+
+  \textcolor{comment}{// accumulate a NEE sample}
+  \textcolor{comment}{//}
+  \textcolor{comment}{// \(\backslash\)param context               the current context}
+  \textcolor{comment}{// \(\backslash\)param renderer              the current renderer}
+  \textcolor{comment}{// \(\backslash\)param pixel\_info            packed pixel info}
+  \textcolor{comment}{// \(\backslash\)param vertex\_info           packed vertex info}
+  \textcolor{comment}{// \(\backslash\)param hit                   the hit information}
+  \textcolor{comment}{// \(\backslash\)param w\_d                   the diffuse nee weight}
+  \textcolor{comment}{// \(\backslash\)param w\_g                   the glossy nee weight}
+  \textcolor{comment}{//}
+  FERMAT\_DEVICE
+  \textcolor{keywordtype}{void} accumulate\_nee(
+      \textcolor{keyword}{const} TPTContext&           context,
+            \hyperlink{struct_rendering_context_view}{RenderingContextView}& renderer,
+      \textcolor{keyword}{const} \hyperlink{union_pixel_info}{PixelInfo}             pixel\_info,
+      \textcolor{keyword}{const} uint32                vertex\_info,
+      \textcolor{keyword}{const} \textcolor{keywordtype}{bool}                  shadow\_hit,
+      \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&      w\_d,
+      \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&      w\_g);
+\};
+\end{DoxyCode}
+ ~\newline
+\label{_p_t_lib_page_TPTDirectLightingSampler}%
+\Hypertarget{_p_t_lib_page_TPTDirectLightingSampler}%
+
+\item a user defined direct lighting engine, responsible to generate N\+EE samples. It has to provide the following interface\+: ~\newline
+
+\begin{DoxyCode}
+\textcolor{keyword}{struct }TDirectLightingSampler
+\{
+  \textcolor{comment}{// preprocess a path vertex and return a user defined hash integer key,}
+  \textcolor{comment}{// called <i>nee\_vertex\_id</i>,}
+  \textcolor{comment}{// used for all subsequent NEE computations at this vertex;}
+  \textcolor{comment}{// this packed integer is useful to implement things like spatial hashing, where the current}
+  \textcolor{comment}{// vertex is hashed to a slot in a hash table, e.g. storing reinforcement-learning data.}
+  \textcolor{comment}{//}
+  FERMAT\_DEVICE
+  uint32 preprocess\_vertex(
+      \textcolor{keyword}{const} \hyperlink{struct_rendering_context_view}{RenderingContextView}& renderer,
+      \textcolor{keyword}{const} \hyperlink{struct_eye_vertex}{EyeVertex}&    ev,
+      \textcolor{keyword}{const} uint32        pixel,
+      \textcolor{keyword}{const} uint32        bounce,
+      \textcolor{keyword}{const} \textcolor{keywordtype}{bool}          is\_secondary\_diffuse,
+      \textcolor{keyword}{const} \textcolor{keywordtype}{float}         cone\_radius,
+      \textcolor{keyword}{const} \hyperlink{structcugar_1_1_bbox}{cugar::Bbox3f} scene\_bbox);
+
+  \textcolor{comment}{// sample a light vertex at a given slot, and return a user defined sample index,}
+  \textcolor{comment}{// called <i>nee\_sample\_id</i>: this integer may encode any arbitrary data the sampler}
+  \textcolor{comment}{// might need to later on address the generated sample in the update() method.}
+  \textcolor{comment}{//}
+  FERMAT\_DEVICE
+  uint32 sample(
+      \textcolor{keyword}{const} uint32        nee\_vertex\_id,
+      \textcolor{keyword}{const} \textcolor{keywordtype}{float}         z[3],
+      \hyperlink{struct_vertex_geometry_id}{VertexGeometryId}*   light\_vertex,
+      \hyperlink{struct_vertex_geometry}{VertexGeometry}*     light\_vertex\_geom,
+      \textcolor{keywordtype}{float}*              light\_pdf,
+      \hyperlink{struct_edf}{Edf}*                light\_edf);
+
+  \textcolor{comment}{// map a light vertex defined by its triangle id and uv barycentric coordinates to the}
+  \textcolor{comment}{// corresponding differential geometry, computing its EDF and sampling PDF, using the}
+  \textcolor{comment}{// slot information computed at the previous vertex along the path; this method is called}
+  \textcolor{comment}{// on emissive surface hits to figure out the PDF with which the hits would have been}
+  \textcolor{comment}{// generated by NEE.}
+  \textcolor{comment}{//}
+  FERMAT\_DEVICE
+  \textcolor{keywordtype}{void} map(
+      \textcolor{keyword}{const} uint32            prev\_nee\_vertex\_id,
+      \textcolor{keyword}{const} uint32            triId,
+      \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector2f}   uv,
+      \textcolor{keyword}{const} \hyperlink{struct_vertex_geometry}{VertexGeometry}    light\_vertex\_geom,
+      \textcolor{keywordtype}{float}*                  light\_pdf,
+      \hyperlink{struct_edf}{Edf}*                    light\_edf);
+
+  \textcolor{comment}{// update the internal state of the sampler with the resulting NEE sample}
+  \textcolor{comment}{// information, useful to e.g. implement reinforcement-learning strategies.}
+  \textcolor{comment}{//}
+  FERMAT\_DEVICE
+  \textcolor{keywordtype}{void} update(
+      \textcolor{keyword}{const} uint32            nee\_vertex\_id,
+      \textcolor{keyword}{const} uint32            nee\_sample\_id,
+      \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}   w,
+      \textcolor{keyword}{const} \textcolor{keywordtype}{bool}              occluded);
+\};
+\end{DoxyCode}
+ 
+\end{DoxyEnumerate}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+You\textquotesingle{}ll notice this is just a slight generalization of the \hyperlink{struct_light}{Light} interface, providing more controls for preprocessing and updating some per-\/vertex information. At the moment, Fermat provides two different implementations of this interface\+: ~\newline
+
+\begin{DoxyItemize}
+\item \hyperlink{struct_direct_lighting_mesh}{Direct\+Lighting\+Mesh} \+: a simple wrapper around the \hyperlink{struct_mesh_light}{Mesh\+Light} class;
+\item \hyperlink{struct_direct_lighting_r_l}{Direct\+Lighting\+RL} \+: a more advanced sampler based on \href{https://en.wikipedia.org/wiki/Reinforcement_learning}{\tt Reinforcement Learning}.
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The most important functions implemented by the \hyperlink{group___p_t_lib_core}{P\+T\+Lib\+Core} module are\+: ~\newline
+
+\begin{DoxyCode}
+\textcolor{comment}{// generate a primary ray based on the given pixel index}
+\textcolor{comment}{//}
+\textcolor{comment}{// \(\backslash\)tparam TPTContext             A path tracing context}
+\textcolor{comment}{//}
+\textcolor{comment}{// \(\backslash\)param context                  the path tracing context}
+\textcolor{comment}{// \(\backslash\)param renderer                 the rendering context}
+\textcolor{comment}{// \(\backslash\)param pixel                    the unpacked 2d pixel index}
+\textcolor{comment}{// \(\backslash\)param U                        the horizontal (+X) camera frame vector}
+\textcolor{comment}{// \(\backslash\)param V                        the vertical (+Y) camera frame vector}
+\textcolor{comment}{// \(\backslash\)param W                        the depth (+Z) camera frame vector}
+\textcolor{keyword}{template} <\textcolor{keyword}{typename} TPTContext>
+FERMAT\_DEVICE
+\hyperlink{struct_masked_ray}{MaskedRay} \hyperlink{group___p_t_lib_core_ga28fe33ab0663b2331fe607662ed07349}{generate\_primary\_ray}(
+  TPTContext&             context,
+  \hyperlink{struct_rendering_context_view}{RenderingContextView}&   renderer,
+  \textcolor{keyword}{const} uint2             pixel,
+  \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}         U,
+  \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}         V,
+  \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}         W);
+
+\textcolor{comment}{// processes a NEE sample, using already computed occlusion information}
+\textcolor{comment}{//}
+\textcolor{comment}{// \(\backslash\)tparam TPTContext         A path tracing context, which must adhere to the TPTContext interface}
+\textcolor{comment}{// \(\backslash\)tparam TPTVertexProcessor A vertex processor, which must adhere to the TPTVertexProcessor interface}
+\textcolor{comment}{//}
+\textcolor{comment}{// \(\backslash\)param context                  the path tracing context}
+\textcolor{comment}{// \(\backslash\)param vertex\_processor         the vertex processor}
+\textcolor{comment}{// \(\backslash\)param renderer                 the rendering context}
+\textcolor{comment}{// \(\backslash\)param shadow\_hit               a bit indicating whether the sample is occluded or not}
+\textcolor{comment}{// \(\backslash\)param pixel\_info               the packed pixel info}
+\textcolor{comment}{// \(\backslash\)param w                        the total sample weight}
+\textcolor{comment}{// \(\backslash\)param w\_d                      the diffuse sample weight}
+\textcolor{comment}{// \(\backslash\)param w\_g                      the glossy sample weight}
+\textcolor{comment}{// \(\backslash\)param vertex\_info              the current vertex info produced by the vertex processor}
+\textcolor{comment}{// \(\backslash\)param nee\_vertex\_id            the current NEE slot computed by the direct lighting sampler}
+\textcolor{comment}{// \(\backslash\)param nee\_sample\_id            the current NEE sample info computed by the direct lighting sampler}
+\textcolor{keyword}{template} <\textcolor{keyword}{typename} TPTContext, \textcolor{keyword}{typename} TPTVertexProcessor>
+FERMAT\_DEVICE
+\textcolor{keywordtype}{void} \hyperlink{group___b_p_t_lib_core_ga588188b86e2afbe1f62d1bdd7a145cbf}{solve\_occlusion}(
+  TPTContext&             context,
+  TPTVertexProcessor&     vertex\_processor,
+  \hyperlink{struct_rendering_context_view}{RenderingContextView}&   renderer,
+  \textcolor{keyword}{const} \textcolor{keywordtype}{bool}              shadow\_hit,
+  \textcolor{keyword}{const} \hyperlink{union_pixel_info}{PixelInfo}         pixel\_info,
+  \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}   w,
+  \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}   w\_d,
+  \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}   w\_g
+  \textcolor{keyword}{const} uint32            vertex\_info    = uint32(-1),
+  \textcolor{keyword}{const} uint32            nee\_vertex\_id  = uint32(-1),
+  \textcolor{keyword}{const} uint32            nee\_sample\_id  = uint32(-1));
+
+\textcolor{comment}{// processes a path vertex, performing these three key steps:}
+\textcolor{comment}{// - sampling NEE}
+\textcolor{comment}{// - accumulating emissive surface hits}
+\textcolor{comment}{// - scattering}
+\textcolor{comment}{//}
+\textcolor{comment}{// \(\backslash\)tparam TPTContext         A path tracing context, which must adhere to the TPTContext interface}
+\textcolor{comment}{// \(\backslash\)tparam TPTVertexProcessor A vertex processor, which must adhere to the TPTVertexProcessor interface}
+\textcolor{comment}{//}
+\textcolor{comment}{// \(\backslash\)param context                  the path tracing context}
+\textcolor{comment}{// \(\backslash\)param vertex\_processor         the vertex processor}
+\textcolor{comment}{// \(\backslash\)param renderer                 the rendering context}
+\textcolor{comment}{// \(\backslash\)param pixel\_info               the packed pixel info}
+\textcolor{comment}{// \(\backslash\)param pixel                    the unpacked 2d pixel index}
+\textcolor{comment}{// \(\backslash\)param ray                      the incoming ray}
+\textcolor{comment}{// \(\backslash\)param hit                      the hit information}
+\textcolor{comment}{// \(\backslash\)param w                        the current path weight}
+\textcolor{comment}{// \(\backslash\)param prev\_vertex\_info         the vertex info produced by the vertex processor at the previous vertex}
+\textcolor{comment}{// \(\backslash\)param prev\_nee\_vertex\_id       the NEE slot corresponding to the previous vertex}
+\textcolor{comment}{// \(\backslash\)param cone                     the incoming ray cone}
+\textcolor{keyword}{template} <\textcolor{keyword}{typename} TPTContext, \textcolor{keyword}{typename} TPTVertexProcessor>
+FERMAT\_DEVICE
+\textcolor{keywordtype}{bool} \hyperlink{group___p_t_lib_core_ga9b8be237ade285e6db792a9ea7bf900e}{shade\_vertex}(
+  TPTContext&             context,
+  TPTVertexProcessor&     vertex\_processor,
+  \hyperlink{struct_rendering_context_view}{RenderingContextView}&   renderer,
+  \textcolor{keyword}{const} uint32            bounce,
+  \textcolor{keyword}{const} \hyperlink{union_pixel_info}{PixelInfo}         pixel\_info,
+  \textcolor{keyword}{const} uint2             pixel,
+  \textcolor{keyword}{const} \hyperlink{struct_masked_ray}{MaskedRay}&        ray,
+  \textcolor{keyword}{const} \hyperlink{struct_hit}{Hit}               hit,
+  \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector4f}   w,
+  \textcolor{keyword}{const} uint32            prev\_vertex\_info = uint32(-1),
+  \textcolor{keyword}{const} uint32            prev\_nee\_vertex\_id    = uint32(-1),
+  \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector2f}   cone             = \hyperlink{structcugar_1_1_vector}{cugar::Vector2f}(0));
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Note that all of these are device-\/side functions meant to be called by individual C\+U\+DA threads. The underlying idea is that all of them might call into \hyperlink{_p_t_lib_page_TPTContext}{T\+P\+T\+Context} trace() methods, but that the implementation of the \hyperlink{_p_t_lib_page_TPTContext}{T\+P\+T\+Context} class might decide whether to perform the trace calls in-\/place, or rather enqueue them. The latter approach is called \char`\"{}wavefront\char`\"{} scheduling, and is the one favored in Fermat, as so far it has proven most efficient.
+\end{DoxyParagraph}
+\hypertarget{_p_t_lib_page_PTWavefrontSchedulingSection}{}\section{Wavefront Scheduling}\label{_p_t_lib_page_PTWavefrontSchedulingSection}
+\begin{DoxyParagraph}{}
+\hyperlink{group___p_t_lib}{P\+T\+Lib} implements a series of kernels to execute all of the above functions in massively parallel waves, assuming their inputs can be fetched from some \hyperlink{_p_t_lib_page_TPTContext}{T\+P\+T\+Context} -\/defined queues. In order for these wavefronts kernels to work, it is sufficient to have the \hyperlink{_p_t_lib_page_TPTContext}{T\+P\+T\+Context} implementation inherit from the prepackaged \hyperlink{struct_p_t_context_queues}{P\+T\+Context\+Queues} class, containing all necessary queue storage. Together with the kernels themselves, the corresponding host dispatch functions are provided as well. These are the following\+:
+\end{DoxyParagraph}
+
+\begin{DoxyCode}
+\textcolor{comment}{// dispatch the kernel to generate primary rays: the number of rays is defined by the resolution}
+\textcolor{comment}{// parameters provided by the rendering context.}
+\textcolor{comment}{//}
+\textcolor{comment}{// \(\backslash\)tparam TPTContext           A path tracing context}
+\textcolor{comment}{//}
+\textcolor{comment}{// \(\backslash\)param context               the path tracing context}
+\textcolor{comment}{// \(\backslash\)param renderer              the rendering context}
+\textcolor{keyword}{template} <\textcolor{keyword}{typename} TPTContext>
+\textcolor{keywordtype}{void} \hyperlink{group___p_t_lib_ga66602a846711dc021ed0b930846ea596}{generate\_primary\_rays}(
+    TPTContext              context,
+    \hyperlink{struct_rendering_context_view}{RenderingContextView}    renderer);
+
+\textcolor{comment}{// dispatch the shade hits kernel}
+\textcolor{comment}{//}
+\textcolor{comment}{// \(\backslash\)tparam TPTContext           A path tracing context, which must adhere to the TPTContext interface}
+\textcolor{comment}{// \(\backslash\)tparam TPTVertexProcessor   A vertex processor, which must adhere to the TPTVertexProcessor interface}
+\textcolor{comment}{//}
+\textcolor{comment}{// \(\backslash\)param in\_queue\_size         the size of the input queue containing all path vertices in the current
+       wave}
+\textcolor{comment}{// \(\backslash\)param context               the path tracing context}
+\textcolor{comment}{// \(\backslash\)param vertex\_processor      the vertex\_processor}
+\textcolor{comment}{// \(\backslash\)param renderer              the rendering context}
+\textcolor{keyword}{template} <\textcolor{keyword}{typename} TPTContext, \textcolor{keyword}{typename} TPTVertexProcessor>
+\textcolor{keywordtype}{void} \hyperlink{group___p_t_lib_ga303934170f8bdcf0d8c674d7bc2f2513}{shade\_hits}(
+    \textcolor{keyword}{const} uint32            in\_queue\_size,
+    TPTContext              context,
+    TPTVertexProcessor      vertex\_processor,
+    \hyperlink{struct_rendering_context_view}{RenderingContextView}    renderer);
+
+\textcolor{comment}{// dispatch a kernel to process NEE samples using computed occlusion information}
+\textcolor{comment}{//}
+\textcolor{comment}{// \(\backslash\)tparam TPTContext           A path tracing context, which must adhere to the TPTContext interface}
+\textcolor{comment}{// \(\backslash\)tparam TPTVertexProcessor   A vertex processor, which must adhere to the TPTVertexProcessor interface}
+\textcolor{comment}{//}
+\textcolor{comment}{// \(\backslash\)param in\_queue\_size         the size of the input queue containing all processed NEE samples}
+\textcolor{comment}{// \(\backslash\)param context               the path tracing context}
+\textcolor{comment}{// \(\backslash\)param vertex\_processor      the vertex\_processor}
+\textcolor{comment}{// \(\backslash\)param renderer              the rendering context}
+\textcolor{keyword}{template} <\textcolor{keyword}{typename} TPTContext, \textcolor{keyword}{typename} TPTVertexProcessor>
+\textcolor{keywordtype}{void} \hyperlink{group___b_p_t_lib_core_ga588188b86e2afbe1f62d1bdd7a145cbf}{solve\_occlusion}(
+    \textcolor{keyword}{const} uint32            in\_queue\_size,
+    TPTContext              context,
+    TPTVertexProcessor      vertex\_processor,
+    \hyperlink{struct_rendering_context_view}{RenderingContextView}    renderer);
+\end{DoxyCode}
+ \label{_p_t_lib_page_path_trace_loop_anchor}%
+\Hypertarget{_p_t_lib_page_path_trace_loop_anchor}%
+\begin{DoxyParagraph}{}
+The last key function provided by this module is the one assembling all of the above into a single loop, or rather, into a complete pipeline that generates primary rays, traces them, shades the resulting vertices, traces any generated shadow and scattering rays, shades the results, and so, and so on, until all generated paths are terminated\+:
+\end{DoxyParagraph}
+
+\begin{DoxyCode}
+\textcolor{comment}{// main path tracing loop}
+\textcolor{comment}{//}
+\textcolor{keyword}{template} <\textcolor{keyword}{typename} TPTContext, \textcolor{keyword}{typename} TPTVertexProcessor>
+\textcolor{keywordtype}{void} \hyperlink{group___p_t_lib_gadbd6e824e2ecdd07fae235bddebcd1d8}{path\_trace\_loop}(
+    TPTContext&             context,
+    TPTVertexProcessor&     vertex\_processor,
+    \hyperlink{struct_rendering_context}{RenderingContext}&       renderer,
+    \hyperlink{struct_rendering_context_view}{RenderingContextView}&   renderer\_view,
+    \hyperlink{struct_p_t_loop_stats}{PTLoopStats}&            stats);
+\end{DoxyCode}
+
+
+\begin{DoxyParagraph}{}
+In the next chapter we\textquotesingle{}ll see how all of this can be used to write a very compact path tracer.
+\end{DoxyParagraph}
+ \begin{DoxyParagraph}{}
+
+\footnotesize \textquotesingle{}Modern Hall, at sunset\textquotesingle{}, based on a \href{http://www.blendswap.com/blends/view/51997}{\tt model} by {\itshape New\+See2l035}
+\normalsize  ~\newline
+
+\end{DoxyParagraph}
+Next\+: \hyperlink{_p_t_page}{The Path Tracer (Revisited)} 

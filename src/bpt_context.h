@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -40,23 +40,33 @@
 ///@addtogroup BPTLib
 ///@{
 
-///
+//! [BPTContextBaseBlock]
+///\par
 /// Basic context for bidirectional path tracing
+///\par
+/// This context class is responsible for storing:
+///\n
+/// - a set of light vertices, generated throughout the light subpath sampling phase
+/// - a set of ray queues used throughout the wavefront scheduling process of the entire bidirectional path tracing pipeline
+/// - an options member, deriving from \ref BPTOptionsBase
 ///
+template <typename TBPTOptions>
 struct BPTContextBase
 {
 	BPTContextBase() :
 		in_bounce(0) {}
 
 	BPTContextBase(
-		const RendererView&			_renderer,
+		const RenderingContextView&	_renderer,
 		const VertexStorageView&	_light_vertices,
-		const BPTQueuesView&		_queues) :
+		const BPTQueuesView&		_queues,
+		const TBPTOptions			_options = TBPTOptions()) :
 		in_bounce(0),
 		light_vertices(_light_vertices),
 		in_queue(_queues.in_queue),
 		shadow_queue(_queues.shadow_queue),
-		scatter_queue(_queues.scatter_queue)
+		scatter_queue(_queues.scatter_queue),
+		options(_options)
 	{
 		set_camera(_renderer.camera, _renderer.res_x, _renderer.res_y, _renderer.aspect);
 	}
@@ -84,7 +94,10 @@ struct BPTContextBase
 	cugar::Vector3f		camera_W;
 	float				camera_W_len;
 	float				camera_square_focal_length;
+
+	TBPTOptions			options;
 };
+//! [BPTContextBaseBlock]
 
 ///@} BPTLib
 ///@} Fermat

@@ -1,0 +1,58 @@
+\hypertarget{structpbrt_1_1_value}{}\section{pbrt\+:\+:Value Struct Reference}
+\label{structpbrt_1_1_value}\index{pbrt\+::\+Value@{pbrt\+::\+Value}}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_value_acb9858ecc4a6bf502478d445dff63ba1}\label{structpbrt_1_1_value_acb9858ecc4a6bf502478d445dff63ba1}} 
+{\bfseries Value} (const \hyperlink{structpbrt_1_1_value}{Value} \&other)
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_value_a14edea1f667a0691a0bb992e811504a0}\label{structpbrt_1_1_value_a14edea1f667a0691a0bb992e811504a0}} 
+size\+\_\+t {\bfseries size} () const
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_value_a6bdea8fa2e790eccada39e06c8829d77}\label{structpbrt_1_1_value_a6bdea8fa2e790eccada39e06c8829d77}} 
+const float $\ast$ {\bfseries get\+\_\+floats} () const
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_value_aa17433ba500f6acda552490e47584c63}\label{structpbrt_1_1_value_aa17433ba500f6acda552490e47584c63}} 
+const int $\ast$ {\bfseries get\+\_\+ints} () const
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_value_a6cb1c65cce3f30d685ae652bbd7e6875}\label{structpbrt_1_1_value_a6cb1c65cce3f30d685ae652bbd7e6875}} 
+const std\+::string \& {\bfseries get\+\_\+string} (const size\+\_\+t i) const
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_value_a174a2d64275395e1876f0642e066bc40}\label{structpbrt_1_1_value_a174a2d64275395e1876f0642e066bc40}} 
+float {\bfseries get\+\_\+float} (const size\+\_\+t i) const
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_value_a4d094c7884041a85bf80f8f9d6335b55}\label{structpbrt_1_1_value_a4d094c7884041a85bf80f8f9d6335b55}} 
+int {\bfseries get\+\_\+int} (const size\+\_\+t i) const
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_value_aa3f5ecbc3a25a8e732b502c6797e9a41}\label{structpbrt_1_1_value_aa3f5ecbc3a25a8e732b502c6797e9a41}} 
+bool {\bfseries get\+\_\+bool} (const size\+\_\+t i) const
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_value_a6528bb64a3ab0c2ea029b2b78eec315e}\label{structpbrt_1_1_value_a6528bb64a3ab0c2ea029b2b78eec315e}} 
+void {\bfseries clear} ()
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_value_ad66a52a0fecd5a45c0e2e7208e6f8793}\label{structpbrt_1_1_value_ad66a52a0fecd5a45c0e2e7208e6f8793}} 
+void {\bfseries set\+\_\+type} (const Value\+Type \+\_\+type)
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_value_a7026e5b14959d74750eff7a88d23cbcc}\label{structpbrt_1_1_value_a7026e5b14959d74750eff7a88d23cbcc}} 
+const char $\ast$ {\bfseries type\+\_\+string} () const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_value_a2de3a97f80c479e31993d4dcb1377626}\label{structpbrt_1_1_value_a2de3a97f80c479e31993d4dcb1377626}} 
+uint32 {\bfseries type}
+\item 
+\mbox{\Hypertarget{structpbrt_1_1_value_ab3dc6cf58a952dce1cffb107c12a0e32}\label{structpbrt_1_1_value_ab3dc6cf58a952dce1cffb107c12a0e32}} 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\>NumVec $\ast$ {\bfseries nvec}\\
+\>StringVec $\ast$ {\bfseries svec}\\
+\}; \\
+
+\end{tabbing}\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/mesh/pbrt\+\_\+parser.\+h\end{DoxyCompactItemize}

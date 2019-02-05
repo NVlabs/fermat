@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -39,8 +39,10 @@
 ///@addtogroup Fermat
 ///@{
 
-#define SHADOW_BIAS		0.0f
-#define SHADOW_TMIN		1.0e-4f
+//#define SHADOW_BIAS		0.0f
+//#define SHADOW_TMIN		1.0e-4f
+#define SHADOW_BIAS		1.0e-4f
+#define SHADOW_TMIN		0.0f
 
 enum RendererType
 {
@@ -51,6 +53,10 @@ enum RendererType
 	kPSSMLT			= 4,
 	kRPT			= 5,
 	kPSFPT			= 6,
+	kRLPT			= 7,
+	kTRPT			= 8,
+	kGamePT			= 9,
+	kUserRenderer	= 10,
 };
 
 enum ShadingMode {
@@ -66,51 +72,62 @@ enum ShadingMode {
 	kDirectLighting = 9,
 	kFiltered		= 10,
 	kVariance		= 11,
-	kAux0			= 12,
+	kNormal			= 12,
+	kAux0			= 13,
 };
 
 
-struct RendererView
+struct RenderingContextView
 {
-	RendererView(
-	    Camera				_camera,
-	    DiskLight			_light,
-        MeshView			_mesh,
-		MeshLight			_mesh_light,
-		MeshLight			_mesh_vpls,
-		const MipMapView*	_textures,
-		const uint32		_ltc_size,
-		const float4*		_ltc_M,
-		const float4*		_ltc_Minv,
-		const float*		_ltc_A,
-		const uint32_t		_x,
-	    const uint32_t		_y,
-		const float			_aspect,
-		const float			_exposure,
-		const float			_shading_rate,
-        const ShadingMode	_shading_mode,
-		const FBufferView	_fb,
-		const uint32		_instance)
-	: camera(_camera), light(_light), mesh(_mesh), mesh_light(_mesh_light), mesh_vpls(_mesh_vpls), textures(_textures), ltc_M(_ltc_M), ltc_Minv(_ltc_Minv), ltc_A(_ltc_A), ltc_size(_ltc_size), res_x(_x), res_y(_y), aspect(_aspect), exposure(_exposure), shading_rate(_shading_rate), shading_mode(_shading_mode), fb(_fb), instance(_instance) {}
+	FERMAT_HOST_DEVICE RenderingContextView() {}
+#if !defined(OPTIX_COMPILATION)
+	FERMAT_HOST_DEVICE RenderingContextView(
+	    Camera					_camera,
+		const uint32			_dir_lights_count,
+	    const DirectionalLight*	_dir_lights,
+        MeshView				_mesh,
+		MeshLight				_mesh_light,
+		MeshLight				_mesh_vpls,
+		const MipMapView*		_textures,
+		const uint32			_ltc_size,
+		const float4*			_ltc_M,
+		const float4*			_ltc_Minv,
+		const float*			_ltc_A,
+		const float*			_glossy_reflectance,
+		const uint32_t			_x,
+	    const uint32_t			_y,
+		const float				_aspect,
+		const float				_exposure,
+		const float				_gamma,
+		const float				_shading_rate,
+        const ShadingMode		_shading_mode,
+		const FBufferView		_fb,
+		const uint32			_instance)
+	: camera(_camera), camera_sampler(_camera, _aspect), dir_lights_count(_dir_lights_count), dir_lights(_dir_lights), mesh(_mesh), mesh_light(_mesh_light), mesh_vpls(_mesh_vpls), textures(_textures), ltc_M(_ltc_M), ltc_Minv(_ltc_Minv), ltc_A(_ltc_A), ltc_size(_ltc_size), glossy_reflectance(_glossy_reflectance), res_x(_x), res_y(_y), aspect(_aspect), exposure(_exposure), gamma(_gamma), shading_rate(_shading_rate), shading_mode(_shading_mode), fb(_fb), instance(_instance) {}
+#endif
 
-	Camera				camera;
-	DiskLight			light;
-    MeshView			mesh;
-	MeshLight			mesh_light;
-	MeshLight			mesh_vpls;
-	const MipMapView*	textures;
-	const float4*		ltc_M;
-	const float4*		ltc_Minv;
-	const float*		ltc_A;
-	uint32				ltc_size;
-	uint32_t			res_x;
-	uint32_t			res_y;
-	float				aspect;
-	float				exposure;
-	float				shading_rate;
-    ShadingMode			shading_mode;
-	FBufferView			fb;
-	uint32				instance;
+	Camera					camera;
+	CameraSampler			camera_sampler;
+	uint32_t				dir_lights_count;
+	const DirectionalLight*	dir_lights;
+    MeshView				mesh;
+	MeshLight				mesh_light;
+	MeshLight				mesh_vpls;
+	const MipMapView*		textures;
+	const float4*			ltc_M;
+	const float4*			ltc_Minv;
+	const float*			ltc_A;
+	uint32					ltc_size;
+	const float*			glossy_reflectance;
+	uint32_t				res_x;
+	uint32_t				res_y;
+	float					aspect;
+	float					exposure;
+	float					gamma;
+	float					shading_rate;
+    ShadingMode				shading_mode;
+	FBufferView				fb;
+	uint32					instance;
 };
 
 struct FBufferDesc

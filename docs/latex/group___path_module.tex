@@ -1,0 +1,126 @@
+\hypertarget{group___path_module}{}\section{Path\+Module}
+\label{group___path_module}\index{Path\+Module@{Path\+Module}}
+
+
+\subsection{Detailed Description}
+\begin{DoxyParagraph}{}
+This module defines the basic classes used to represent and manipulate light paths throughout Fermat, particularly\+: 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+
+\begin{DoxyItemize}
+\item \hyperlink{struct_path}{Path} \+: represent a light path in compact form, storing its vertex ids only
+\item \hyperlink{struct_bidir_path}{Bidir\+Path} \+: represent a bidirectional path in compact form, storing its vertex ids only 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_path}{Path}
+\item 
+struct \hyperlink{struct_bidir_path}{Bidir\+Path}
+\item 
+struct \hyperlink{struct_path_cache}{Path\+Cache$<$ T $>$}
+\item 
+struct \hyperlink{struct_bsdf_inverse}{Bsdf\+Inverse}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___path_module_gaf84800d736ee11764f35286ff69fd391}\label{group___path_module_gaf84800d736ee11764f35286ff69fd391}} 
+\#define {\bfseries M\+A\+X\+I\+M\+U\+M\+\_\+\+I\+N\+V\+E\+R\+S\+I\+O\+N\+\_\+\+E\+R\+R\+OR}~1.\+0e-\/6f
+\item 
+\mbox{\Hypertarget{group___path_module_ga0a99a8224e6e2b94bb5c13cbeaac2edc}\label{group___path_module_ga0a99a8224e6e2b94bb5c13cbeaac2edc}} 
+\#define {\bfseries T\+R\+A\+N\+S\+F\+O\+R\+M\+\_\+\+P\+DF}(\+\_\+p,  \+\_\+w,  \+\_\+w\+\_\+norm)~(\+\_\+p $\ast$= \+\_\+w\+\_\+norm / \+\_\+w)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___path_module_ga172c19c44ec311215152416c563bf6e2}\label{group___path_module_ga172c19c44ec311215152416c563bf6e2}} 
+{\footnotesize template$<$typename T\+Random\+Generator , typename Bsdf\+Component $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool {\bfseries invert\+\_\+layer} (const Bsdf\+Component \&bsdf\+\_\+comp, const \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} \&v\+\_\+prev, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&in, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&out, T\+Random\+Generator \&\hyperlink{group___sampling_module_gaec17bbbfd36295353081b7b4480d933d}{random}, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&z, float \&p, float \&p\+\_\+proj)
+\item 
+\mbox{\Hypertarget{group___path_module_ga8ec22d679711a82fbf1d5ef3725605e4}\label{group___path_module_ga8ec22d679711a82fbf1d5ef3725605e4}} 
+{\footnotesize template$<$typename T\+Random\+Generator $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool {\bfseries invert\+\_\+bsdf} (const \hyperlink{struct_bsdf}{Bsdf} \&bsdf, const \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} \&v\+\_\+prev, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&in, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&out, T\+Random\+Generator \&\hyperlink{group___sampling_module_gaec17bbbfd36295353081b7b4480d933d}{random}, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&z, float \&p, float \&p\+\_\+proj, bool RR=true)
+\item 
+\mbox{\Hypertarget{group___path_module_gae6f0e1995f4aba555cbe38d41ef1d44e}\label{group___path_module_gae6f0e1995f4aba555cbe38d41ef1d44e}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE void {\bfseries inversion\+\_\+pdf} (const \hyperlink{struct_bsdf}{Bsdf} \&bsdf, const \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} \&v\+\_\+prev, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&in, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&out, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&z, float \&p, float \&p\+\_\+proj)
+\item 
+\mbox{\Hypertarget{group___path_module_ga7f9ae29454dded68cdef487b1d35fd9a}\label{group___path_module_ga7f9ae29454dded68cdef487b1d35fd9a}} 
+{\footnotesize template$<$typename Path\+Type , typename T\+Random\+Generator $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool {\bfseries invert\+\_\+eye\+\_\+subpath} (const Path\+Type \&path, const uint32 t, const uint32 t\+\_\+ext, float $\ast$out\+\_\+Z, float $\ast$out\+\_\+pdf, const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer, T\+Random\+Generator \&\hyperlink{group___sampling_module_gaec17bbbfd36295353081b7b4480d933d}{random})
+\item 
+\mbox{\Hypertarget{group___path_module_ga97619b3314cb048b9af4aed8b5724d91}\label{group___path_module_ga97619b3314cb048b9af4aed8b5724d91}} 
+{\footnotesize template$<$typename Path\+Type $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float {\bfseries eye\+\_\+subpath\+\_\+inversion\+\_\+pdf} (const Path\+Type \&path, const uint32 t, const uint32 t\+\_\+ext, const float $\ast$out\+\_\+Z, const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer)
+\item 
+\mbox{\Hypertarget{group___path_module_gaa53acb9062a624ae464a52c2b09b0c6a}\label{group___path_module_gaa53acb9062a624ae464a52c2b09b0c6a}} 
+{\footnotesize template$<$typename Path\+Type , typename T\+Random\+Generator $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool {\bfseries invert\+\_\+light\+\_\+subpath} (const Path\+Type \&path, const uint32 s, const uint32 s\+\_\+ext, float $\ast$out\+\_\+Z, float $\ast$out\+\_\+pdf, const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer, T\+Random\+Generator \&\hyperlink{group___sampling_module_gaec17bbbfd36295353081b7b4480d933d}{random})
+\item 
+\mbox{\Hypertarget{group___path_module_ga9aba8aeaa8a07139583975ca21c06fad}\label{group___path_module_ga9aba8aeaa8a07139583975ca21c06fad}} 
+{\footnotesize template$<$typename Path\+Type $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float {\bfseries light\+\_\+subpath\+\_\+inversion\+\_\+pdf} (const Path\+Type \&path, const uint32 s, const uint32 s\+\_\+ext, const float $\ast$out\+\_\+Z, const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE void \hyperlink{group___path_module_gaecfd88fd5ceeaef4df9d86387855e78c}{Bsdf\+Inverse\+::setup} (Component\+Selection\+Strategy \+\_\+strategy, const \hyperlink{struct_bsdf}{Bsdf} \&bsdf, const \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} \&geom, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&in, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&out, const bool \+\_\+\+RR=false)
+\item 
+\mbox{\Hypertarget{group___path_module_gab22cbe7216d6907a8b28597edb789c45}\label{group___path_module_gab22cbe7216d6907a8b28597edb789c45}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool {\bfseries Bsdf\+Inverse\+::precompute\+\_\+component\+\_\+selection\+\_\+coefficients} ()
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type} \hyperlink{group___path_module_gab7b0d8544e315f99452e7798fe812be4}{Bsdf\+Inverse\+::sample\+\_\+component} (const float v) const
+\item 
+{\footnotesize template$<$typename T\+Random\+Generator $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool \hyperlink{group___path_module_gabf86c201c8bc8e874d935f3eeae66269}{Bsdf\+Inverse\+::invert} (const \hyperlink{struct_bsdf}{Bsdf} \&bsdf, const \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} \&geom, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&in, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&out, T\+Random\+Generator \&\hyperlink{group___sampling_module_gaec17bbbfd36295353081b7b4480d933d}{random}, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&z, Bsdf\+Inverse\+::\+Pdf\+Type pdf\+\_\+type=Bsdf\+Inverse\+::k\+Direct\+Transform\+Pdf, float $\ast$p=N\+U\+LL, float $\ast$p\+\_\+proj=N\+U\+LL)
+\item 
+{\footnotesize template$<$typename T\+Random\+Generator $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool \hyperlink{group___path_module_gae150d5775f0c5c69fc21b8ab50680db6}{Bsdf\+Inverse\+::invert\+\_\+component} (const \hyperlink{struct_bsdf}{Bsdf} \&bsdf, const \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} \&geom, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&in, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&out, const \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type} out\+\_\+comp, T\+Random\+Generator \&\hyperlink{group___sampling_module_gaec17bbbfd36295353081b7b4480d933d}{random}, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&z, const bool output\+\_\+global\+\_\+coordinates=true)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float \hyperlink{group___path_module_gae689ddf830059ea1ebe7a235c954b25f}{Bsdf\+Inverse\+::pdf} (const \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type} out\+\_\+comp, cugar\+::\+Spherical\+Measure measure=cugar\+::k\+Projected\+Solid\+Angle, const bool weighted=false) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float \hyperlink{group___path_module_gaad6ea81c789229423f13731f4d7b1088}{Bsdf\+Inverse\+::pdf\+\_\+comp} (const \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type} out\+\_\+comp) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float \hyperlink{group___path_module_ga26ab6168a450774594081beba929f9fa}{Bsdf\+Inverse\+::weight} (const \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type} out\+\_\+comp) const
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___path_module_gabf86c201c8bc8e874d935f3eeae66269}\label{group___path_module_gabf86c201c8bc8e874d935f3eeae66269}} 
+\index{Path\+Module@{Path\+Module}!invert@{invert}}
+\index{invert@{invert}!Path\+Module@{Path\+Module}}
+\subsubsection{\texorpdfstring{invert()}{invert()}}
+{\footnotesize\ttfamily template$<$typename T\+Random\+Generator $>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool Bsdf\+Inverse\+::invert (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_bsdf}{Bsdf} \&}]{bsdf,  }\item[{const \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} \&}]{geom,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{in,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{out,  }\item[{T\+Random\+Generator \&}]{random,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{z,  }\item[{Bsdf\+Inverse\+::\+Pdf\+Type}]{pdf\+\_\+type = {\ttfamily BsdfInverse\+:\+:kDirectTransformPdf},  }\item[{float $\ast$}]{p = {\ttfamily NULL},  }\item[{float $\ast$}]{p\+\_\+proj = {\ttfamily NULL} }\end{DoxyParamCaption})}
+
+invert a bsdf by randomly chosing a component \mbox{\Hypertarget{group___path_module_gae150d5775f0c5c69fc21b8ab50680db6}\label{group___path_module_gae150d5775f0c5c69fc21b8ab50680db6}} 
+\index{Path\+Module@{Path\+Module}!invert\+\_\+component@{invert\+\_\+component}}
+\index{invert\+\_\+component@{invert\+\_\+component}!Path\+Module@{Path\+Module}}
+\subsubsection{\texorpdfstring{invert\+\_\+component()}{invert\_component()}}
+{\footnotesize\ttfamily template$<$typename T\+Random\+Generator $>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool Bsdf\+Inverse\+::invert\+\_\+component (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_bsdf}{Bsdf} \&}]{bsdf,  }\item[{const \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} \&}]{geom,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{in,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{out,  }\item[{const \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type}}]{out\+\_\+comp,  }\item[{T\+Random\+Generator \&}]{random,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{z,  }\item[{const bool}]{output\+\_\+global\+\_\+coordinates = {\ttfamily true} }\end{DoxyParamCaption})}
+
+invert a given component of a bsdf \mbox{\Hypertarget{group___path_module_gae689ddf830059ea1ebe7a235c954b25f}\label{group___path_module_gae689ddf830059ea1ebe7a235c954b25f}} 
+\index{Path\+Module@{Path\+Module}!pdf@{pdf}}
+\index{pdf@{pdf}!Path\+Module@{Path\+Module}}
+\subsubsection{\texorpdfstring{pdf()}{pdf()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float Bsdf\+Inverse\+::pdf (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type}}]{out\+\_\+comp,  }\item[{cugar\+::\+Spherical\+Measure}]{measure = {\ttfamily cugar\+:\+:kProjectedSolidAngle},  }\item[{const bool}]{weighted = {\ttfamily false} }\end{DoxyParamCaption}) const}
+
+return the Jacobian determinant of the inverse transform for a given component; note that the returned Jacobian determinant is equal to the pdf of sampling that component, by definition of pdf of a transformed variable. In fact, if U is a uniform r.\+v. in the primary sample space, and X is the transformed path space variable, X = T(\+U), we have\+:
+
+P(\+X) = P(\+T\+\_\+inv(\+X)) $\ast$ $\vert$J\mbox{[}T\+\_\+inv\mbox{]}(X)$\vert$ = P(\+U) $\ast$ $\vert$J\mbox{[}T\+\_\+inv\mbox{]}(X)$\vert$ = $\vert$J\mbox{[}T\+\_\+inv\mbox{]}(X)$\vert$ \mbox{\Hypertarget{group___path_module_gaad6ea81c789229423f13731f4d7b1088}\label{group___path_module_gaad6ea81c789229423f13731f4d7b1088}} 
+\index{Path\+Module@{Path\+Module}!pdf\+\_\+comp@{pdf\+\_\+comp}}
+\index{pdf\+\_\+comp@{pdf\+\_\+comp}!Path\+Module@{Path\+Module}}
+\subsubsection{\texorpdfstring{pdf\+\_\+comp()}{pdf\_comp()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float Bsdf\+Inverse\+::pdf\+\_\+comp (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type}}]{out\+\_\+comp }\end{DoxyParamCaption}) const}
+
+return the pdf with which a given component is selected by the inversion method. \mbox{\Hypertarget{group___path_module_gab7b0d8544e315f99452e7798fe812be4}\label{group___path_module_gab7b0d8544e315f99452e7798fe812be4}} 
+\index{Path\+Module@{Path\+Module}!sample\+\_\+component@{sample\+\_\+component}}
+\index{sample\+\_\+component@{sample\+\_\+component}!Path\+Module@{Path\+Module}}
+\subsubsection{\texorpdfstring{sample\+\_\+component()}{sample\_component()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type} Bsdf\+Inverse\+::sample\+\_\+component (\begin{DoxyParamCaption}\item[{const float}]{v }\end{DoxyParamCaption}) const}
+
+sample a component given a random number \mbox{\Hypertarget{group___path_module_gaecfd88fd5ceeaef4df9d86387855e78c}\label{group___path_module_gaecfd88fd5ceeaef4df9d86387855e78c}} 
+\index{Path\+Module@{Path\+Module}!setup@{setup}}
+\index{setup@{setup}!Path\+Module@{Path\+Module}}
+\subsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE void Bsdf\+Inverse\+::setup (\begin{DoxyParamCaption}\item[{Component\+Selection\+Strategy}]{\+\_\+strategy,  }\item[{const \hyperlink{struct_bsdf}{Bsdf} \&}]{bsdf,  }\item[{const \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} \&}]{geom,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{in,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{out,  }\item[{const bool}]{\+\_\+\+RR = {\ttfamily false} }\end{DoxyParamCaption})}
+
+setup the inverter for a specific bsdf and geometry configuration\+: note that all subsequent calls to other methods of this class need to use the same configuration, unless \hyperlink{group___path_module_gaecfd88fd5ceeaef4df9d86387855e78c}{setup()} is called again with different parameters \mbox{\Hypertarget{group___path_module_ga26ab6168a450774594081beba929f9fa}\label{group___path_module_ga26ab6168a450774594081beba929f9fa}} 
+\index{Path\+Module@{Path\+Module}!weight@{weight}}
+\index{weight@{weight}!Path\+Module@{Path\+Module}}
+\subsubsection{\texorpdfstring{weight()}{weight()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float Bsdf\+Inverse\+::weight (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type}}]{out\+\_\+comp }\end{DoxyParamCaption}) const}
+
+return the sampling weight applied to a given component. 

@@ -1,0 +1,80 @@
+\hypertarget{struct_clustered_r_l_view}{}\section{Clustered\+R\+L\+View Struct Reference}
+\label{struct_clustered_r_l_view}\index{Clustered\+R\+L\+View@{Clustered\+R\+L\+View}}
+
+
+\subsection{Detailed description}
+Device-\/side view class for the Clustered Reinforcement Learning sampler (\hyperlink{group___clustered_r_l_module}{Clustered RL}). 
+
+{\ttfamily \#include $<$clustered\+\_\+rl.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_clustered_r_l_view_a78da128381803af43c08b47b0427cb02}\label{struct_clustered_r_l_view_a78da128381803af43c08b47b0427cb02}} 
+typedef \hyperlink{structcugar_1_1cuda_1_1_sync_free_hash_map}{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map}$<$ uint64, uint32, 0x\+F\+F\+F\+F\+F\+F\+F\+F\+F\+F\+F\+F\+F\+F\+F\+Fllu $>$ {\bfseries Hash\+Map}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{struct_clustered_r_l_view_ad23add8b87f5755240e40d976f9c8b0d}{find\+\_\+slot} (const uint64 key)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{struct_clustered_r_l_view_a72030c277568b5f0ee9476ce520e1096}{sample} (const uint32 cell\+\_\+slot, const float z, float $\ast$\hyperlink{struct_clustered_r_l_view_ad2f4d9df7d5b7278462e1f0dbf2386e3}{pdf}, uint32 $\ast$cluster\+\_\+idx) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{struct_clustered_r_l_view_ad2f4d9df7d5b7278462e1f0dbf2386e3}{pdf} (const uint32 cell\+\_\+slot, const uint32 index) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{struct_clustered_r_l_view_a007fd0458e4dd173adf57dec5f4db9e2}{update} (const uint32 cell\+\_\+slot, const uint32 cluster\+\_\+idx, const float val, const float alpha=0.\+05f)
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_clustered_r_l_view_af017028074f59ea52f3b1b67ffe42cd9}\label{struct_clustered_r_l_view_af017028074f59ea52f3b1b67ffe42cd9}} 
+\hyperlink{structcugar_1_1cuda_1_1_sync_free_hash_map}{Hash\+Map} {\bfseries hashmap}
+\item 
+\mbox{\Hypertarget{struct_clustered_r_l_view_abd81e6d4f9872bb2a0e8d39c9c556d07}\label{struct_clustered_r_l_view_abd81e6d4f9872bb2a0e8d39c9c556d07}} 
+float $\ast$ {\bfseries pdfs}
+\item 
+\mbox{\Hypertarget{struct_clustered_r_l_view_af7e919362e6c7bb1abf565f0de4086b7}\label{struct_clustered_r_l_view_af7e919362e6c7bb1abf565f0de4086b7}} 
+float $\ast$ {\bfseries cdfs}
+\item 
+\mbox{\Hypertarget{struct_clustered_r_l_view_af65cac683664066fbf4a11f2ebdc85b5}\label{struct_clustered_r_l_view_af65cac683664066fbf4a11f2ebdc85b5}} 
+const uint32 $\ast$ {\bfseries cluster\+\_\+offsets}
+\item 
+\mbox{\Hypertarget{struct_clustered_r_l_view_afdd21a456172be84e79373771a4501e3}\label{struct_clustered_r_l_view_afdd21a456172be84e79373771a4501e3}} 
+uint32 {\bfseries cluster\+\_\+count}
+\item 
+\mbox{\Hypertarget{struct_clustered_r_l_view_abf5bfb1437690f7099f91ef3ae35890e}\label{struct_clustered_r_l_view_abf5bfb1437690f7099f91ef3ae35890e}} 
+uint32 {\bfseries hash\+\_\+size}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{struct_clustered_r_l_view_ad23add8b87f5755240e40d976f9c8b0d}\label{struct_clustered_r_l_view_ad23add8b87f5755240e40d976f9c8b0d}} 
+\index{Clustered\+R\+L\+View@{Clustered\+R\+L\+View}!find\+\_\+slot@{find\+\_\+slot}}
+\index{find\+\_\+slot@{find\+\_\+slot}!Clustered\+R\+L\+View@{Clustered\+R\+L\+View}}
+\subsubsection{\texorpdfstring{find\+\_\+slot()}{find\_slot()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE uint32 Clustered\+R\+L\+View\+::find\+\_\+slot (\begin{DoxyParamCaption}\item[{const uint64}]{key }\end{DoxyParamCaption})}
+
+given a hashing key, return the corresponding cell slot \mbox{\Hypertarget{struct_clustered_r_l_view_ad2f4d9df7d5b7278462e1f0dbf2386e3}\label{struct_clustered_r_l_view_ad2f4d9df7d5b7278462e1f0dbf2386e3}} 
+\index{Clustered\+R\+L\+View@{Clustered\+R\+L\+View}!pdf@{pdf}}
+\index{pdf@{pdf}!Clustered\+R\+L\+View@{Clustered\+R\+L\+View}}
+\subsubsection{\texorpdfstring{pdf()}{pdf()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float Clustered\+R\+L\+View\+::pdf (\begin{DoxyParamCaption}\item[{const uint32}]{cell\+\_\+slot,  }\item[{const uint32}]{index }\end{DoxyParamCaption}) const}
+
+given a cell and an item\textquotesingle{}s index, return the sampling pdf of that item \mbox{\Hypertarget{struct_clustered_r_l_view_a72030c277568b5f0ee9476ce520e1096}\label{struct_clustered_r_l_view_a72030c277568b5f0ee9476ce520e1096}} 
+\index{Clustered\+R\+L\+View@{Clustered\+R\+L\+View}!sample@{sample}}
+\index{sample@{sample}!Clustered\+R\+L\+View@{Clustered\+R\+L\+View}}
+\subsubsection{\texorpdfstring{sample()}{sample()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE uint32 Clustered\+R\+L\+View\+::sample (\begin{DoxyParamCaption}\item[{const uint32}]{cell\+\_\+slot,  }\item[{const float}]{z,  }\item[{float $\ast$}]{pdf,  }\item[{uint32 $\ast$}]{cluster\+\_\+idx }\end{DoxyParamCaption}) const}
+
+given a cell and a random number, sample an item \mbox{\Hypertarget{struct_clustered_r_l_view_a007fd0458e4dd173adf57dec5f4db9e2}\label{struct_clustered_r_l_view_a007fd0458e4dd173adf57dec5f4db9e2}} 
+\index{Clustered\+R\+L\+View@{Clustered\+R\+L\+View}!update@{update}}
+\index{update@{update}!Clustered\+R\+L\+View@{Clustered\+R\+L\+View}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE void Clustered\+R\+L\+View\+::update (\begin{DoxyParamCaption}\item[{const uint32}]{cell\+\_\+slot,  }\item[{const uint32}]{cluster\+\_\+idx,  }\item[{const float}]{val,  }\item[{const float}]{alpha = {\ttfamily 0.05f} }\end{DoxyParamCaption})}
+
+update the value corresponding to sampled cluster 
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/clustered\+\_\+rl.\+h\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/clustered\+\_\+rl\+\_\+inline.\+h\end{DoxyCompactItemize}

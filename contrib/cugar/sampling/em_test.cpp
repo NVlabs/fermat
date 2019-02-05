@@ -29,7 +29,6 @@
 #include <cugar/basic/vector.h>
 #include <cugar/image/tga.h>
 #include <cugar/sampling/random.h>
-#include <cugar/sampling/latin_hypercube.h>
 
 namespace cugar {
 
@@ -259,12 +258,9 @@ bool em_test()
 		points.resize(N);
 		weights.resize(N);
 
-		cugar::LHSampler sampler;
-		sampler.sample(N, &points[0]);
-
 		for (uint32 i = 0; i < N; ++i)
 		{
-			points[i]  = points[i]*2.0f - cugar::Vector2f(1.0f);
+			points[i]  = cugar::Vector2f(cugar::randfloat(i,0), cugar::randfloat(i,1))*2.0f - cugar::Vector2f(1.0f);
 			weights[i] = src_mixture.density(points[i]);
 		}
 

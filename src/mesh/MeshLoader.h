@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2008-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -41,6 +41,10 @@ public:
   MeshLoader(MeshStorage* mesh);
 
   virtual ~MeshLoader();
+
+  int getVertexTriangleSize() const { return MeshStorage::VERTEX_TRIANGLE_SIZE; }
+  int getNormalTriangleSize() const { return MeshStorage::NORMAL_TRIANGLE_SIZE; }
+  int getTextureTriangleSize() const { return MeshStorage::TEXTURE_TRIANGLE_SIZE; }
 
 		int* getVertexIndices()			{ return m_vertex_indices; }
   const int* getVertexIndices() const	{ return m_vertex_indices; }

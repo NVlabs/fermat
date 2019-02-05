@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -39,10 +39,18 @@
 
 /// A tiled sample sequence view.
 ///
-/// Basically, represents an tiled 2d grid of N-dimensional sample sequences, which can be conveniently
+///\par
+/// Basically, represents a tiled 2d grid of N-dimensional sample sequences, which can be conveniently
 /// "sliced" in 1d or 2d sections (each such slice representing a 2d grid of 1d or 2d samples).
+/// The per-pixel sequences are constructed by "offsetting" a base, common sequence using a set of per-pixel
+/// N-dimensional shifts. The offsetting process is a regular Cranley-Patterson rotation, i.e. the <i>d</i>-th
+/// coordinate of the final sequence for pixel <i>p</i> is given by:
+///\n
+///\code
+///    sequence(p,d) = mod( base_sequence[d] + shift[p][d], 1 );
+///\endcode
 ///
-struct TiledSequenceView
+struct FERMAT_API TiledSequenceView
 {
 	FERMAT_HOST_DEVICE
 	uint32 shift_index(const uint32 idx, const uint32 dim) const
@@ -62,6 +70,16 @@ struct TiledSequenceView
 	{
 		FERMAT_ASSERT(dim < n_dimensions);
 		return shifts[shift_index(idx, dim)];
+	}
+
+	FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
+	float shift(const uint32 pixel_x, const uint32 pixel_y, const uint32 dim) const
+	{
+		FERMAT_ASSERT(dim < n_dimensions);
+		const uint32 shift_x = pixel_x & (tile_size - 1);
+		const uint32 shift_y = pixel_y & (tile_size - 1);
+		const uint32 shift_i = shift_x + shift_y*tile_size;
+		return shift(shift_i,dim);
 	}
 
 	FERMAT_HOST_DEVICE
@@ -94,9 +112,23 @@ struct TiledSequenceView
 
 /// A tiled sample sequence.
 ///
-/// Basically, represents an tiled 2d grid of N-dimensional sample sequences.
+///\par
+/// Basically, represents a tiled 2d grid of N-dimensional sample sequences, which can be conveniently
+/// "sliced" in 1d or 2d sections (each such slice representing a 2d grid of 1d or 2d samples).
+/// The per-pixel sequences are constructed by "offsetting" a base, common sequence using a set of per-pixel
+/// N-dimensional shifts. The offsetting process is a regular Cranley-Patterson rotation, i.e. the <i>d</i>-th
+/// coordinate of the final sequence for pixel <i>p</i> is given by:
+///\n
+///\code
+///    sequence(p,d) = mod( base_sequence[d] + shift[p][d], 1 );
+///\endcode
+/// The sequence has a further <i>time</i> dimension that can be used for progressive rendering, which can
+/// be advanced calling the TiledSequence::set_instance() method.
+///\par
+/// Notice this is a host container for a device-side sequence.
+/// Once it is set up, the device-side view can be queried using the TiledSequence::view() method.
 ///
-struct TiledSequence
+struct FERMAT_API TiledSequence
 {
 	TiledSequence() {}
 
@@ -122,7 +154,6 @@ struct TiledSequence
 	DomainBuffer<CUDA_BUFFER, float>	m_tile_shifts;
 	DomainBuffer<CUDA_BUFFER, float>	m_samples;
 	DomainBuffer<CUDA_BUFFER, float>	m_sequence;
-	DomainBuffer<HOST_BUFFER, float>	m_sequence_samples;
 };
 
 ///@} SamplingModule

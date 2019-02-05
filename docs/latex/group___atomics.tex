@@ -1,0 +1,173 @@
+\hypertarget{group___atomics}{}\section{Atomics Module}
+\label{group___atomics}\index{Atomics Module@{Atomics Module}}
+
+
+\subsection{Detailed Description}
+This module implements basic host/device atomic counters. \subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcugar_1_1_atomic_int}{cugar\+::\+Atomic\+Int$<$ int\+T $>$}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___atomics_gada49a12d52883f36cca112defd30e80c}\label{group___atomics_gada49a12d52883f36cca112defd30e80c}} 
+typedef \hyperlink{structcugar_1_1_atomic_int}{Atomic\+Int}$<$ int $>$ {\bfseries cugar\+::\+Atomic\+Int32}
+\item 
+\mbox{\Hypertarget{group___atomics_gae8a4647d6ea3fdf84a9d2faff1ae5102}\label{group___atomics_gae8a4647d6ea3fdf84a9d2faff1ae5102}} 
+typedef \hyperlink{structcugar_1_1_atomic_int}{Atomic\+Int}$<$ int64 $>$ {\bfseries cugar\+::\+Atomic\+Int64}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___atomics_ga67162ca1a09e35e860fe540bfdf6dbe8}\label{group___atomics_ga67162ca1a09e35e860fe540bfdf6dbe8}} 
+void {\bfseries cugar\+::host\+\_\+release\+\_\+fence} ()
+\item 
+\mbox{\Hypertarget{group___atomics_gaefb8e349465d1ec7ac8fbe9ec6300d18}\label{group___atomics_gaefb8e349465d1ec7ac8fbe9ec6300d18}} 
+void {\bfseries cugar\+::host\+\_\+acquire\+\_\+fence} ()
+\item 
+\mbox{\Hypertarget{group___atomics_gaa5cb62d8e1ff37eb3fd05f4f1987456a}\label{group___atomics_gaa5cb62d8e1ff37eb3fd05f4f1987456a}} 
+int32 {\bfseries cugar\+::host\+\_\+atomic\+\_\+add} (int32 $\ast$value, const int32 op)
+\item 
+\mbox{\Hypertarget{group___atomics_gabc4b79b9f9d824d5e8af14c6bde9c95d}\label{group___atomics_gabc4b79b9f9d824d5e8af14c6bde9c95d}} 
+uint32 {\bfseries cugar\+::host\+\_\+atomic\+\_\+add} (uint32 $\ast$value, const uint32 op)
+\item 
+\mbox{\Hypertarget{group___atomics_ga0c236c3c2899740c7736d7b88edec307}\label{group___atomics_ga0c236c3c2899740c7736d7b88edec307}} 
+int64 {\bfseries cugar\+::host\+\_\+atomic\+\_\+add} (int64 $\ast$value, const int64 op)
+\item 
+\mbox{\Hypertarget{group___atomics_ga19d506f8dca51f0f3d2db4dba41ecbcf}\label{group___atomics_ga19d506f8dca51f0f3d2db4dba41ecbcf}} 
+uint64 {\bfseries cugar\+::host\+\_\+atomic\+\_\+add} (uint64 $\ast$value, const uint64 op)
+\item 
+\mbox{\Hypertarget{group___atomics_gaf747361ba69633265de15a83d046bb4c}\label{group___atomics_gaf747361ba69633265de15a83d046bb4c}} 
+int32 {\bfseries cugar\+::host\+\_\+atomic\+\_\+sub} (int32 $\ast$value, const int32 op)
+\item 
+\mbox{\Hypertarget{group___atomics_ga14ea60eb9ccb660caf8383747a0f93d8}\label{group___atomics_ga14ea60eb9ccb660caf8383747a0f93d8}} 
+uint32 {\bfseries cugar\+::host\+\_\+atomic\+\_\+sub} (uint32 $\ast$value, const uint32 op)
+\item 
+\mbox{\Hypertarget{group___atomics_ga1852c34edff8556f5d09d90fd4c9c0bf}\label{group___atomics_ga1852c34edff8556f5d09d90fd4c9c0bf}} 
+int64 {\bfseries cugar\+::host\+\_\+atomic\+\_\+sub} (int64 $\ast$value, const int64 op)
+\item 
+\mbox{\Hypertarget{group___atomics_gae94467e77459e81a35ce7cd321ec6391}\label{group___atomics_gae94467e77459e81a35ce7cd321ec6391}} 
+uint64 {\bfseries cugar\+::host\+\_\+atomic\+\_\+sub} (uint64 $\ast$value, const uint64 op)
+\item 
+\mbox{\Hypertarget{group___atomics_gad9fe547d45b656783dcdc488b5ae093f}\label{group___atomics_gad9fe547d45b656783dcdc488b5ae093f}} 
+uint32 {\bfseries cugar\+::host\+\_\+atomic\+\_\+or} (uint32 $\ast$value, const uint32 op)
+\item 
+\mbox{\Hypertarget{group___atomics_ga843271e1ff5ac28c518eddd9b049f561}\label{group___atomics_ga843271e1ff5ac28c518eddd9b049f561}} 
+uint64 {\bfseries cugar\+::host\+\_\+atomic\+\_\+or} (uint64 $\ast$value, const uint64 op)
+\item 
+\mbox{\Hypertarget{group___atomics_gaff8bbdb2d54e2738c145df2148dccde2}\label{group___atomics_gaff8bbdb2d54e2738c145df2148dccde2}} 
+C\+U\+G\+A\+R\+\_\+\+A\+PI int32 {\bfseries cugar\+::host\+\_\+atomic\+\_\+increment} (int32 $\ast$value)
+\item 
+\mbox{\Hypertarget{group___atomics_ga3bf66fab480b9b53f0f9cca8826c3ac1}\label{group___atomics_ga3bf66fab480b9b53f0f9cca8826c3ac1}} 
+C\+U\+G\+A\+R\+\_\+\+A\+PI int64 {\bfseries cugar\+::host\+\_\+atomic\+\_\+increment} (int64 $\ast$value)
+\item 
+\mbox{\Hypertarget{group___atomics_gac448b74098759d1a056ec99006bd9bc2}\label{group___atomics_gac448b74098759d1a056ec99006bd9bc2}} 
+C\+U\+G\+A\+R\+\_\+\+A\+PI int32 {\bfseries cugar\+::host\+\_\+atomic\+\_\+decrement} (int32 $\ast$value)
+\item 
+\mbox{\Hypertarget{group___atomics_ga04f1ec7d04e18e82bc892005902b86c4}\label{group___atomics_ga04f1ec7d04e18e82bc892005902b86c4}} 
+C\+U\+G\+A\+R\+\_\+\+A\+PI int64 {\bfseries cugar\+::host\+\_\+atomic\+\_\+decrement} (int64 $\ast$value)
+\item 
+\mbox{\Hypertarget{group___atomics_ga2699c8fe4ad73c9e804a0a0028dd8a99}\label{group___atomics_ga2699c8fe4ad73c9e804a0a0028dd8a99}} 
+C\+U\+G\+A\+R\+\_\+\+A\+PI float {\bfseries cugar\+::host\+\_\+atomic\+\_\+add} (float $\ast$value, const float op)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{group___atomics_ga0c9d949be7ac5b6f27a232c7cd27a05c}{cugar\+::atomic\+\_\+add} (float $\ast$value, const float op)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE int32 \hyperlink{group___atomics_ga584797bd163a76c90bf0fb5c7df58de4}{cugar\+::atomic\+\_\+add} (int32 $\ast$value, const int32 op)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{group___atomics_ga130aea0c6d0c91af08bea4b52d6a8208}{cugar\+::atomic\+\_\+add} (uint32 $\ast$value, const uint32 op)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint64 \hyperlink{group___atomics_gaed434d4f310d826a6e39932269de15c4}{cugar\+::atomic\+\_\+add} (uint64 $\ast$value, const uint64 op)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE int32 \hyperlink{group___atomics_ga3efc1d5c63f30d1ee11887f76744bafe}{cugar\+::atomic\+\_\+sub} (int32 $\ast$value, const int32 op)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{group___atomics_ga9d9415fae4e05362c8d6f43d2fd61c60}{cugar\+::atomic\+\_\+sub} (uint32 $\ast$value, const uint32 op)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{group___atomics_ga4b242819dd9c2a9986e0ea35b4883f67}{cugar\+::atomic\+\_\+or} (uint32 $\ast$value, const uint32 op)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint64 \hyperlink{group___atomics_ga5d15edb3c64f3cde839eb76c54aacf7c}{cugar\+::atomic\+\_\+or} (uint64 $\ast$value, const uint64 op)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE int32 \hyperlink{group___atomics_ga3034bbde9594dc3c4894fe31ad5a0b3c}{cugar\+::atomic\+\_\+increment} (int32 $\ast$value)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE int64 \hyperlink{group___atomics_ga57595e5240e01e562a47816a82e14dd2}{cugar\+::atomic\+\_\+increment} (int64 $\ast$value)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE int32 \hyperlink{group___atomics_ga60cd477d17c1ff78aa673ce06b60b569}{cugar\+::atomic\+\_\+decrement} (int32 $\ast$value)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE int64 \hyperlink{group___atomics_gae94ecfb92e8d261326f527daa39c770d}{cugar\+::atomic\+\_\+decrement} (int64 $\ast$value)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___atomics_ga0c9d949be7ac5b6f27a232c7cd27a05c}\label{group___atomics_ga0c9d949be7ac5b6f27a232c7cd27a05c}} 
+\index{Atomics Module@{Atomics Module}!atomic\+\_\+add@{atomic\+\_\+add}}
+\index{atomic\+\_\+add@{atomic\+\_\+add}!Atomics Module@{Atomics Module}}
+\subsubsection{\texorpdfstring{atomic\+\_\+add()}{atomic\_add()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float cugar\+::atomic\+\_\+add (\begin{DoxyParamCaption}\item[{float $\ast$}]{value,  }\item[{const float}]{op }\end{DoxyParamCaption})}
+
+atomic add\+: returns the value B\+E\+F\+O\+RE the addition \mbox{\Hypertarget{group___atomics_ga584797bd163a76c90bf0fb5c7df58de4}\label{group___atomics_ga584797bd163a76c90bf0fb5c7df58de4}} 
+\index{Atomics Module@{Atomics Module}!atomic\+\_\+add@{atomic\+\_\+add}}
+\index{atomic\+\_\+add@{atomic\+\_\+add}!Atomics Module@{Atomics Module}}
+\subsubsection{\texorpdfstring{atomic\+\_\+add()}{atomic\_add()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE int32 cugar\+::atomic\+\_\+add (\begin{DoxyParamCaption}\item[{int32 $\ast$}]{value,  }\item[{const int32}]{op }\end{DoxyParamCaption})}
+
+atomic add\+: returns the value B\+E\+F\+O\+RE the addition \mbox{\Hypertarget{group___atomics_ga130aea0c6d0c91af08bea4b52d6a8208}\label{group___atomics_ga130aea0c6d0c91af08bea4b52d6a8208}} 
+\index{Atomics Module@{Atomics Module}!atomic\+\_\+add@{atomic\+\_\+add}}
+\index{atomic\+\_\+add@{atomic\+\_\+add}!Atomics Module@{Atomics Module}}
+\subsubsection{\texorpdfstring{atomic\+\_\+add()}{atomic\_add()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 cugar\+::atomic\+\_\+add (\begin{DoxyParamCaption}\item[{uint32 $\ast$}]{value,  }\item[{const uint32}]{op }\end{DoxyParamCaption})}
+
+atomic add\+: returns the value B\+E\+F\+O\+RE the addition \mbox{\Hypertarget{group___atomics_gaed434d4f310d826a6e39932269de15c4}\label{group___atomics_gaed434d4f310d826a6e39932269de15c4}} 
+\index{Atomics Module@{Atomics Module}!atomic\+\_\+add@{atomic\+\_\+add}}
+\index{atomic\+\_\+add@{atomic\+\_\+add}!Atomics Module@{Atomics Module}}
+\subsubsection{\texorpdfstring{atomic\+\_\+add()}{atomic\_add()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint64 cugar\+::atomic\+\_\+add (\begin{DoxyParamCaption}\item[{uint64 $\ast$}]{value,  }\item[{const uint64}]{op }\end{DoxyParamCaption})}
+
+atomic add\+: returns the value B\+E\+F\+O\+RE the addition \mbox{\Hypertarget{group___atomics_ga60cd477d17c1ff78aa673ce06b60b569}\label{group___atomics_ga60cd477d17c1ff78aa673ce06b60b569}} 
+\index{Atomics Module@{Atomics Module}!atomic\+\_\+decrement@{atomic\+\_\+decrement}}
+\index{atomic\+\_\+decrement@{atomic\+\_\+decrement}!Atomics Module@{Atomics Module}}
+\subsubsection{\texorpdfstring{atomic\+\_\+decrement()}{atomic\_decrement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE int32 cugar\+::atomic\+\_\+decrement (\begin{DoxyParamCaption}\item[{int32 $\ast$}]{value }\end{DoxyParamCaption})}
+
+atomic decrement\+: returns the value B\+E\+F\+O\+RE the decrement \mbox{\Hypertarget{group___atomics_gae94ecfb92e8d261326f527daa39c770d}\label{group___atomics_gae94ecfb92e8d261326f527daa39c770d}} 
+\index{Atomics Module@{Atomics Module}!atomic\+\_\+decrement@{atomic\+\_\+decrement}}
+\index{atomic\+\_\+decrement@{atomic\+\_\+decrement}!Atomics Module@{Atomics Module}}
+\subsubsection{\texorpdfstring{atomic\+\_\+decrement()}{atomic\_decrement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE int64 cugar\+::atomic\+\_\+decrement (\begin{DoxyParamCaption}\item[{int64 $\ast$}]{value }\end{DoxyParamCaption})}
+
+atomic decrement\+: returns the value B\+E\+F\+O\+RE the decrement \mbox{\Hypertarget{group___atomics_ga3034bbde9594dc3c4894fe31ad5a0b3c}\label{group___atomics_ga3034bbde9594dc3c4894fe31ad5a0b3c}} 
+\index{Atomics Module@{Atomics Module}!atomic\+\_\+increment@{atomic\+\_\+increment}}
+\index{atomic\+\_\+increment@{atomic\+\_\+increment}!Atomics Module@{Atomics Module}}
+\subsubsection{\texorpdfstring{atomic\+\_\+increment()}{atomic\_increment()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE int32 cugar\+::atomic\+\_\+increment (\begin{DoxyParamCaption}\item[{int32 $\ast$}]{value }\end{DoxyParamCaption})}
+
+atomic increment\+: returns the value B\+E\+F\+O\+RE the increment \mbox{\Hypertarget{group___atomics_ga57595e5240e01e562a47816a82e14dd2}\label{group___atomics_ga57595e5240e01e562a47816a82e14dd2}} 
+\index{Atomics Module@{Atomics Module}!atomic\+\_\+increment@{atomic\+\_\+increment}}
+\index{atomic\+\_\+increment@{atomic\+\_\+increment}!Atomics Module@{Atomics Module}}
+\subsubsection{\texorpdfstring{atomic\+\_\+increment()}{atomic\_increment()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE int64 cugar\+::atomic\+\_\+increment (\begin{DoxyParamCaption}\item[{int64 $\ast$}]{value }\end{DoxyParamCaption})}
+
+atomic increment\+: returns the value B\+E\+F\+O\+RE the increment \mbox{\Hypertarget{group___atomics_ga4b242819dd9c2a9986e0ea35b4883f67}\label{group___atomics_ga4b242819dd9c2a9986e0ea35b4883f67}} 
+\index{Atomics Module@{Atomics Module}!atomic\+\_\+or@{atomic\+\_\+or}}
+\index{atomic\+\_\+or@{atomic\+\_\+or}!Atomics Module@{Atomics Module}}
+\subsubsection{\texorpdfstring{atomic\+\_\+or()}{atomic\_or()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 cugar\+::atomic\+\_\+or (\begin{DoxyParamCaption}\item[{uint32 $\ast$}]{value,  }\item[{const uint32}]{op }\end{DoxyParamCaption})}
+
+atomic OR\+: returns the value B\+E\+F\+O\+RE the or \mbox{\Hypertarget{group___atomics_ga5d15edb3c64f3cde839eb76c54aacf7c}\label{group___atomics_ga5d15edb3c64f3cde839eb76c54aacf7c}} 
+\index{Atomics Module@{Atomics Module}!atomic\+\_\+or@{atomic\+\_\+or}}
+\index{atomic\+\_\+or@{atomic\+\_\+or}!Atomics Module@{Atomics Module}}
+\subsubsection{\texorpdfstring{atomic\+\_\+or()}{atomic\_or()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint64 cugar\+::atomic\+\_\+or (\begin{DoxyParamCaption}\item[{uint64 $\ast$}]{value,  }\item[{const uint64}]{op }\end{DoxyParamCaption})}
+
+atomic OR\+: returns the value B\+E\+F\+O\+RE the or \mbox{\Hypertarget{group___atomics_ga3efc1d5c63f30d1ee11887f76744bafe}\label{group___atomics_ga3efc1d5c63f30d1ee11887f76744bafe}} 
+\index{Atomics Module@{Atomics Module}!atomic\+\_\+sub@{atomic\+\_\+sub}}
+\index{atomic\+\_\+sub@{atomic\+\_\+sub}!Atomics Module@{Atomics Module}}
+\subsubsection{\texorpdfstring{atomic\+\_\+sub()}{atomic\_sub()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE int32 cugar\+::atomic\+\_\+sub (\begin{DoxyParamCaption}\item[{int32 $\ast$}]{value,  }\item[{const int32}]{op }\end{DoxyParamCaption})}
+
+atomic subtract\+: returns the value B\+E\+F\+O\+RE the suctraction \mbox{\Hypertarget{group___atomics_ga9d9415fae4e05362c8d6f43d2fd61c60}\label{group___atomics_ga9d9415fae4e05362c8d6f43d2fd61c60}} 
+\index{Atomics Module@{Atomics Module}!atomic\+\_\+sub@{atomic\+\_\+sub}}
+\index{atomic\+\_\+sub@{atomic\+\_\+sub}!Atomics Module@{Atomics Module}}
+\subsubsection{\texorpdfstring{atomic\+\_\+sub()}{atomic\_sub()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 cugar\+::atomic\+\_\+sub (\begin{DoxyParamCaption}\item[{uint32 $\ast$}]{value,  }\item[{const uint32}]{op }\end{DoxyParamCaption})}
+
+atomic subtract\+: returns the value B\+E\+F\+O\+RE the suctraction 

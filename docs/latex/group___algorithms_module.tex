@@ -1,0 +1,159 @@
+\hypertarget{group___algorithms_module}{}\section{Algorithms}
+\label{group___algorithms_module}\index{Algorithms@{Algorithms}}
+
+
+\subsection{Detailed Description}
+This module implements several host/device S\+T\+L-\/like algorithms. \subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Iterator , typename Predicate $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Iterator \hyperlink{group___algorithms_module_gaf5c0f35d93fa8af4939155b21c7e2a4f}{cugar\+::find\+\_\+pivot} (Iterator \hyperlink{namespacecugar_a2121df08f967e232ea5fe0ee378dee67}{begin}, const uint32 n, const Predicate predicate)
+\item 
+{\footnotesize template$<$typename Iterator , typename Value , typename index\+\_\+type $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Iterator \hyperlink{group___algorithms_module_gab5ce2c7f834a31bc40d9101865dec5d1}{cugar\+::lower\+\_\+bound} (const Value x, Iterator \hyperlink{namespacecugar_a2121df08f967e232ea5fe0ee378dee67}{begin}, const index\+\_\+type n)
+\item 
+{\footnotesize template$<$typename Iterator , typename Value , typename index\+\_\+type $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Iterator \hyperlink{group___algorithms_module_gafe7ee3a93350b3d2f7f7bb6266ee0425}{cugar\+::upper\+\_\+bound} (const Value x, Iterator \hyperlink{namespacecugar_a2121df08f967e232ea5fe0ee378dee67}{begin}, const index\+\_\+type n)
+\item 
+{\footnotesize template$<$typename Iterator , typename Value , typename index\+\_\+type $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE index\+\_\+type \hyperlink{group___algorithms_module_ga43d4b89e44476e26c04a89f975e4a21e}{cugar\+::lower\+\_\+bound\+\_\+index} (const Value x, Iterator \hyperlink{namespacecugar_a2121df08f967e232ea5fe0ee378dee67}{begin}, const index\+\_\+type n)
+\item 
+{\footnotesize template$<$typename Iterator , typename Value , typename index\+\_\+type $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE index\+\_\+type \hyperlink{group___algorithms_module_ga8f544d88f3f11cd945933bfa50626375}{cugar\+::upper\+\_\+bound\+\_\+index} (const Value x, Iterator \hyperlink{namespacecugar_a2121df08f967e232ea5fe0ee378dee67}{begin}, const index\+\_\+type n)
+\item 
+{\footnotesize template$<$typename input\+\_\+iterator1 , typename input\+\_\+iterator2 , typename output\+\_\+iterator $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___algorithms_module_gae6ef81c9ca1cd3976caad12299e37452}{cugar\+::merge} (input\+\_\+iterator1 first1, input\+\_\+iterator1 end1, input\+\_\+iterator2 first2, input\+\_\+iterator2 end2, output\+\_\+iterator output)
+\item 
+{\footnotesize template$<$typename key\+\_\+iterator1 , typename key\+\_\+iterator2 , typename value\+\_\+iterator1 , typename value\+\_\+iterator2 , typename key\+\_\+iterator , typename value\+\_\+iterator $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___algorithms_module_ga267a2752f3e81f521e759ec274b80561}{cugar\+::merge\+\_\+by\+\_\+key} (key\+\_\+iterator1 first1, key\+\_\+iterator1 end1, key\+\_\+iterator2 first2, key\+\_\+iterator2 end2, value\+\_\+iterator1 values1, value\+\_\+iterator2 values2, key\+\_\+iterator output\+\_\+keys, value\+\_\+iterator output\+\_\+values)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___algorithms_module_gaf5c0f35d93fa8af4939155b21c7e2a4f}\label{group___algorithms_module_gaf5c0f35d93fa8af4939155b21c7e2a4f}} 
+\index{Algorithms@{Algorithms}!find\+\_\+pivot@{find\+\_\+pivot}}
+\index{find\+\_\+pivot@{find\+\_\+pivot}!Algorithms@{Algorithms}}
+\subsubsection{\texorpdfstring{find\+\_\+pivot()}{find\_pivot()}}
+{\footnotesize\ttfamily template$<$typename Iterator , typename Predicate $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Iterator cugar\+::find\+\_\+pivot (\begin{DoxyParamCaption}\item[{Iterator}]{begin,  }\item[{const uint32}]{n,  }\item[{const Predicate}]{predicate }\end{DoxyParamCaption})}
+
+find the first element in a sequence for which a given predicate evaluates to true
+
+
+\begin{DoxyParams}{Parameters}
+{\em begin} & sequence start iterator \\
+\hline
+{\em n} & sequence size \\
+\hline
+{\em predicate} & unary predicate \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___algorithms_module_gab5ce2c7f834a31bc40d9101865dec5d1}\label{group___algorithms_module_gab5ce2c7f834a31bc40d9101865dec5d1}} 
+\index{Algorithms@{Algorithms}!lower\+\_\+bound@{lower\+\_\+bound}}
+\index{lower\+\_\+bound@{lower\+\_\+bound}!Algorithms@{Algorithms}}
+\subsubsection{\texorpdfstring{lower\+\_\+bound()}{lower\_bound()}}
+{\footnotesize\ttfamily template$<$typename Iterator , typename Value , typename index\+\_\+type $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Iterator cugar\+::lower\+\_\+bound (\begin{DoxyParamCaption}\item[{const Value}]{x,  }\item[{Iterator}]{begin,  }\item[{const index\+\_\+type}]{n }\end{DoxyParamCaption})}
+
+find the lower bound in a sequence
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & element to find \\
+\hline
+{\em begin} & sequence start iterator \\
+\hline
+{\em n} & sequence size \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___algorithms_module_ga43d4b89e44476e26c04a89f975e4a21e}\label{group___algorithms_module_ga43d4b89e44476e26c04a89f975e4a21e}} 
+\index{Algorithms@{Algorithms}!lower\+\_\+bound\+\_\+index@{lower\+\_\+bound\+\_\+index}}
+\index{lower\+\_\+bound\+\_\+index@{lower\+\_\+bound\+\_\+index}!Algorithms@{Algorithms}}
+\subsubsection{\texorpdfstring{lower\+\_\+bound\+\_\+index()}{lower\_bound\_index()}}
+{\footnotesize\ttfamily template$<$typename Iterator , typename Value , typename index\+\_\+type $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE index\+\_\+type cugar\+::lower\+\_\+bound\+\_\+index (\begin{DoxyParamCaption}\item[{const Value}]{x,  }\item[{Iterator}]{begin,  }\item[{const index\+\_\+type}]{n }\end{DoxyParamCaption})}
+
+find the lower bound in a sequence
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & element to find \\
+\hline
+{\em begin} & sequence start iterator \\
+\hline
+{\em n} & sequence size \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___algorithms_module_gae6ef81c9ca1cd3976caad12299e37452}\label{group___algorithms_module_gae6ef81c9ca1cd3976caad12299e37452}} 
+\index{Algorithms@{Algorithms}!merge@{merge}}
+\index{merge@{merge}!Algorithms@{Algorithms}}
+\subsubsection{\texorpdfstring{merge()}{merge()}}
+{\footnotesize\ttfamily template$<$typename input\+\_\+iterator1 , typename input\+\_\+iterator2 , typename output\+\_\+iterator $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void cugar\+::merge (\begin{DoxyParamCaption}\item[{input\+\_\+iterator1}]{first1,  }\item[{input\+\_\+iterator1}]{end1,  }\item[{input\+\_\+iterator2}]{first2,  }\item[{input\+\_\+iterator2}]{end2,  }\item[{output\+\_\+iterator}]{output }\end{DoxyParamCaption})}
+
+merge two ranges
+
+
+\begin{DoxyParams}{Parameters}
+{\em first1} & beginning of the first range \\
+\hline
+{\em end1} & end of the first range \\
+\hline
+{\em first2} & beginning of the second range \\
+\hline
+{\em end2} & end of the second range \\
+\hline
+{\em output} & beginning of the output range \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___algorithms_module_ga267a2752f3e81f521e759ec274b80561}\label{group___algorithms_module_ga267a2752f3e81f521e759ec274b80561}} 
+\index{Algorithms@{Algorithms}!merge\+\_\+by\+\_\+key@{merge\+\_\+by\+\_\+key}}
+\index{merge\+\_\+by\+\_\+key@{merge\+\_\+by\+\_\+key}!Algorithms@{Algorithms}}
+\subsubsection{\texorpdfstring{merge\+\_\+by\+\_\+key()}{merge\_by\_key()}}
+{\footnotesize\ttfamily template$<$typename key\+\_\+iterator1 , typename key\+\_\+iterator2 , typename value\+\_\+iterator1 , typename value\+\_\+iterator2 , typename key\+\_\+iterator , typename value\+\_\+iterator $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void cugar\+::merge\+\_\+by\+\_\+key (\begin{DoxyParamCaption}\item[{key\+\_\+iterator1}]{first1,  }\item[{key\+\_\+iterator1}]{end1,  }\item[{key\+\_\+iterator2}]{first2,  }\item[{key\+\_\+iterator2}]{end2,  }\item[{value\+\_\+iterator1}]{values1,  }\item[{value\+\_\+iterator2}]{values2,  }\item[{key\+\_\+iterator}]{output\+\_\+keys,  }\item[{value\+\_\+iterator}]{output\+\_\+values }\end{DoxyParamCaption})}
+
+merge two ranges
+
+
+\begin{DoxyParams}{Parameters}
+{\em first1} & beginning of the first range \\
+\hline
+{\em end1} & end of the first range \\
+\hline
+{\em first2} & beginning of the second range \\
+\hline
+{\em end2} & end of the second range \\
+\hline
+{\em output} & beginning of the output range \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___algorithms_module_gafe7ee3a93350b3d2f7f7bb6266ee0425}\label{group___algorithms_module_gafe7ee3a93350b3d2f7f7bb6266ee0425}} 
+\index{Algorithms@{Algorithms}!upper\+\_\+bound@{upper\+\_\+bound}}
+\index{upper\+\_\+bound@{upper\+\_\+bound}!Algorithms@{Algorithms}}
+\subsubsection{\texorpdfstring{upper\+\_\+bound()}{upper\_bound()}}
+{\footnotesize\ttfamily template$<$typename Iterator , typename Value , typename index\+\_\+type $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Iterator cugar\+::upper\+\_\+bound (\begin{DoxyParamCaption}\item[{const Value}]{x,  }\item[{Iterator}]{begin,  }\item[{const index\+\_\+type}]{n }\end{DoxyParamCaption})}
+
+find the upper bound in a sequence
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & element to find \\
+\hline
+{\em begin} & sequence start iterator \\
+\hline
+{\em n} & sequence size \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___algorithms_module_ga8f544d88f3f11cd945933bfa50626375}\label{group___algorithms_module_ga8f544d88f3f11cd945933bfa50626375}} 
+\index{Algorithms@{Algorithms}!upper\+\_\+bound\+\_\+index@{upper\+\_\+bound\+\_\+index}}
+\index{upper\+\_\+bound\+\_\+index@{upper\+\_\+bound\+\_\+index}!Algorithms@{Algorithms}}
+\subsubsection{\texorpdfstring{upper\+\_\+bound\+\_\+index()}{upper\_bound\_index()}}
+{\footnotesize\ttfamily template$<$typename Iterator , typename Value , typename index\+\_\+type $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE index\+\_\+type cugar\+::upper\+\_\+bound\+\_\+index (\begin{DoxyParamCaption}\item[{const Value}]{x,  }\item[{Iterator}]{begin,  }\item[{const index\+\_\+type}]{n }\end{DoxyParamCaption})}
+
+find the upper bound in a sequence
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & element to find \\
+\hline
+{\em begin} & sequence start iterator \\
+\hline
+{\em n} & sequence size \\
+\hline
+\end{DoxyParams}

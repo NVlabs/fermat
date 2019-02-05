@@ -1,0 +1,120 @@
+\hypertarget{struct_r_p_t}{}\section{R\+PT Struct Reference}
+\label{struct_r_p_t}\index{R\+PT@{R\+PT}}
+
+
+\subsection{Detailed description}
+Reuse-\/based \hyperlink{struct_path}{Path} tracer\+: This class implements a reuse-\/based path tracer, inspired by the paper\+: \char`\"{}\+Accelerating path tracing by re-\/using paths\char`\"{}, by Bekaert et al E\+G\+RW \textquotesingle{}02 Proceedings of the 13th Eurographics workshop on Rendering Pages 125-\/134 
+
+{\ttfamily \#include $<$rpt.\+h$>$}
+
+Inheritance diagram for R\+PT\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{struct_r_p_t}
+\end{center}
+\end{figure}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{struct_r_p_t_ae840ee9e9ef3939729ef0bb653c19f9e}{init} (int argc, char $\ast$$\ast$argv, \hyperlink{struct_rendering_context}{Rendering\+Context} \&renderer)
+\item 
+void \hyperlink{struct_r_p_t_a03e6ba660d7750e633ec69de179e48e7}{render} (const uint32 instance, \hyperlink{struct_rendering_context}{Rendering\+Context} \&renderer)
+\item 
+\mbox{\Hypertarget{struct_r_p_t_a4e37bf30b78ba306b1118e4fc7e2c475}\label{struct_r_p_t_a4e37bf30b78ba306b1118e4fc7e2c475}} 
+void {\bfseries setup\+\_\+samples} (const uint32 instance)
+\item 
+void \hyperlink{struct_r_p_t_a201a475612d2fa357ff9fa6d75ad5dfe}{destroy} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_r_p_t_a36edd21f92190eabb3de82823ce50197}\label{struct_r_p_t_a36edd21f92190eabb3de82823ce50197}} 
+static \hyperlink{struct_renderer_interface}{Renderer\+Interface} $\ast$ {\bfseries factory} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_r_p_t_ae838c411f4669dc75c47bed493e647ef}\label{struct_r_p_t_ae838c411f4669dc75c47bed493e647ef}} 
+\hyperlink{struct_r_p_t_options}{R\+P\+T\+Options} {\bfseries m\+\_\+options}
+\item 
+\mbox{\Hypertarget{struct_r_p_t_a6b46dc5b5489719cea68e0e3f789fc34}\label{struct_r_p_t_a6b46dc5b5489719cea68e0e3f789fc34}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, \hyperlink{struct_ray}{Ray} $>$ {\bfseries m\+\_\+rays}
+\item 
+\mbox{\Hypertarget{struct_r_p_t_a9a7b7b1a3f82034f07bc111bb3587c78}\label{struct_r_p_t_a9a7b7b1a3f82034f07bc111bb3587c78}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, \hyperlink{struct_hit}{Hit} $>$ {\bfseries m\+\_\+hits}
+\item 
+\mbox{\Hypertarget{struct_r_p_t_a835f6e432e63ef25b6c6982743f3de1a}\label{struct_r_p_t_a835f6e432e63ef25b6c6982743f3de1a}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float4 $>$ {\bfseries m\+\_\+weights}
+\item 
+\mbox{\Hypertarget{struct_r_p_t_a5b794e27b213c1d5c5d0ee8037e22c6c}\label{struct_r_p_t_a5b794e27b213c1d5c5d0ee8037e22c6c}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float4 $>$ {\bfseries m\+\_\+weights2}
+\item 
+\mbox{\Hypertarget{struct_r_p_t_a12910ae713a66dba4d91a0d5714574b6}\label{struct_r_p_t_a12910ae713a66dba4d91a0d5714574b6}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float $>$ {\bfseries m\+\_\+probs}
+\item 
+\mbox{\Hypertarget{struct_r_p_t_a7391b970846b087971be97cf5c9b7609}\label{struct_r_p_t_a7391b970846b087971be97cf5c9b7609}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, uint32 $>$ {\bfseries m\+\_\+pixels}
+\item 
+\mbox{\Hypertarget{struct_r_p_t_ae5e2d6769ba70cc660adf45915e0ebca}\label{struct_r_p_t_ae5e2d6769ba70cc660adf45915e0ebca}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, uint32 $>$ {\bfseries m\+\_\+counters}
+\item 
+\mbox{\Hypertarget{struct_r_p_t_a699e428743a17f8c336aab20711716ad}\label{struct_r_p_t_a699e428743a17f8c336aab20711716ad}} 
+\hyperlink{struct_r_p_t_v_p_l_storage}{R\+P\+T\+V\+P\+L\+Storage} {\bfseries m\+\_\+vpls}
+\item 
+\mbox{\Hypertarget{struct_r_p_t_a6db90337620980f371318f7b10a6a8e1}\label{struct_r_p_t_a6db90337620980f371318f7b10a6a8e1}} 
+\hyperlink{struct_tiled_sequence}{Tiled\+Sequence} {\bfseries m\+\_\+sequence}
+\item 
+\mbox{\Hypertarget{struct_r_p_t_a941c8604df3244c0d7da600307c1adec}\label{struct_r_p_t_a941c8604df3244c0d7da600307c1adec}} 
+\hyperlink{classcugar_1_1_l_f_s_r_generator_matrix}{cugar\+::\+L\+F\+S\+R\+Generator\+Matrix} {\bfseries m\+\_\+generator}
+\item 
+\mbox{\Hypertarget{struct_r_p_t_a1895a2f03428311f093a5f6d9451570a}\label{struct_r_p_t_a1895a2f03428311f093a5f6d9451570a}} 
+\hyperlink{structcugar_1_1_l_f_s_r_random_stream}{cugar\+::\+L\+F\+S\+R\+Random\+Stream} {\bfseries m\+\_\+random}
+\item 
+\mbox{\Hypertarget{struct_r_p_t_a9e7ffda9319084b048dc97e41325b189}\label{struct_r_p_t_a9e7ffda9319084b048dc97e41325b189}} 
+float {\bfseries m\+\_\+time}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{struct_r_p_t_a201a475612d2fa357ff9fa6d75ad5dfe}\label{struct_r_p_t_a201a475612d2fa357ff9fa6d75ad5dfe}} 
+\index{R\+PT@{R\+PT}!destroy@{destroy}}
+\index{destroy@{destroy}!R\+PT@{R\+PT}}
+\subsubsection{\texorpdfstring{destroy()}{destroy()}}
+{\footnotesize\ttfamily void R\+P\+T\+::destroy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+this method is responsible for destroying the object itself 
+
+Reimplemented from \hyperlink{struct_renderer_interface_a7469218aafa029a3e22bac2c00dca9f5}{Renderer\+Interface}.
+
+\mbox{\Hypertarget{struct_r_p_t_ae840ee9e9ef3939729ef0bb653c19f9e}\label{struct_r_p_t_ae840ee9e9ef3939729ef0bb653c19f9e}} 
+\index{R\+PT@{R\+PT}!init@{init}}
+\index{init@{init}!R\+PT@{R\+PT}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void R\+P\+T\+::init (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv,  }\item[{\hyperlink{struct_rendering_context}{Rendering\+Context} \&}]{renderer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+this method is responsible for any command options parsing / initializations the renderer might need to perform 
+
+Reimplemented from \hyperlink{struct_renderer_interface_a2ead9b943d6d48fcd32872e0005ebe63}{Renderer\+Interface}.
+
+\mbox{\Hypertarget{struct_r_p_t_a03e6ba660d7750e633ec69de179e48e7}\label{struct_r_p_t_a03e6ba660d7750e633ec69de179e48e7}} 
+\index{R\+PT@{R\+PT}!render@{render}}
+\index{render@{render}!R\+PT@{R\+PT}}
+\subsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void R\+P\+T\+::render (\begin{DoxyParamCaption}\item[{const uint32}]{instance,  }\item[{\hyperlink{struct_rendering_context}{Rendering\+Context} \&}]{renderer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+this method is responsible for rendering a given frame in a progressive rendering
+
+
+\begin{DoxyParams}{Parameters}
+{\em instance} & the frame instance \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{struct_renderer_interface_aa64254dd44c94929b05092dc8d74f29d}{Renderer\+Interface}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/renderers/rpt.\+h\end{DoxyCompactItemize}

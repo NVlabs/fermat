@@ -1,0 +1,92 @@
+\hypertarget{struct_f_buffer_channel_storage}{}\section{F\+Buffer\+Channel\+Storage Struct Reference}
+\label{struct_f_buffer_channel_storage}\index{F\+Buffer\+Channel\+Storage@{F\+Buffer\+Channel\+Storage}}
+
+
+\subsection{Detailed description}
+Framebuffer channel storage class, to be used from the host to allocate frame-\/buffer storage 
+
+{\ttfamily \#include $<$framebuffer.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_f_buffer_channel_storage_afc136c51ec78c859c6019ac4493ec884}\label{struct_f_buffer_channel_storage_afc136c51ec78c859c6019ac4493ec884}} 
+float4 {\bfseries operator()} (const uint32\+\_\+t pixel) const
+\item 
+\mbox{\Hypertarget{struct_f_buffer_channel_storage_ad53a855e5bc7b04153f41f97bcf52bbf}\label{struct_f_buffer_channel_storage_ad53a855e5bc7b04153f41f97bcf52bbf}} 
+float4 {\bfseries operator()} (const uint32\+\_\+t x, const uint32\+\_\+t y) const
+\item 
+\mbox{\Hypertarget{struct_f_buffer_channel_storage_a1ee9767232c6d6f85dcc0a2cc1b9fa05}\label{struct_f_buffer_channel_storage_a1ee9767232c6d6f85dcc0a2cc1b9fa05}} 
+const float4 $\ast$ {\bfseries ptr} () const
+\item 
+\mbox{\Hypertarget{struct_f_buffer_channel_storage_aefc013d6d0e2126fb99971fb71d6fc80}\label{struct_f_buffer_channel_storage_aefc013d6d0e2126fb99971fb71d6fc80}} 
+float4 $\ast$ {\bfseries ptr} ()
+\item 
+void \hyperlink{struct_f_buffer_channel_storage_a183964cd1e00171df5eb4c2130db6c44}{resize} (const uint32\+\_\+t \+\_\+res\+\_\+x, const uint32\+\_\+t \+\_\+res\+\_\+y)
+\item 
+size\+\_\+t \hyperlink{struct_f_buffer_channel_storage_ace7afe67f49b4a628653dd42a5e39147}{size} () const
+\item 
+void \hyperlink{struct_f_buffer_channel_storage_a329a7a82c5c066eb4910cdf1694ae38c}{clear} ()
+\item 
+\hyperlink{struct_f_buffer_channel_storage}{F\+Buffer\+Channel\+Storage} \& \hyperlink{struct_f_buffer_channel_storage_a071ed06855db0e5fe595b6b7d8757fda}{operator=} (\hyperlink{struct_f_buffer_channel_storage}{F\+Buffer\+Channel\+Storage} \&other)
+\item 
+\hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View} \hyperlink{struct_f_buffer_channel_storage_a1be90e5b134cb810c2497a66d2ac7b12}{view} ()
+\item 
+void \hyperlink{struct_f_buffer_channel_storage_adff7d04a3c7da747d662403c930c4074}{swap} (\hyperlink{struct_f_buffer_channel_storage}{F\+Buffer\+Channel\+Storage} \&other)
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_f_buffer_channel_storage_a3e84f2025da610cce330d7dd2e558ba6}\label{struct_f_buffer_channel_storage_a3e84f2025da610cce330d7dd2e558ba6}} 
+uint32\+\_\+t {\bfseries res\+\_\+x}
+\item 
+\mbox{\Hypertarget{struct_f_buffer_channel_storage_a8a237bd2ab9f0675ab0083187398a806}\label{struct_f_buffer_channel_storage_a8a237bd2ab9f0675ab0083187398a806}} 
+uint32\+\_\+t {\bfseries res\+\_\+y}
+\item 
+\mbox{\Hypertarget{struct_f_buffer_channel_storage_a2d1131bcca4bd4f2df3b74aeae1badc4}\label{struct_f_buffer_channel_storage_a2d1131bcca4bd4f2df3b74aeae1badc4}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float4 $>$ {\bfseries c}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{struct_f_buffer_channel_storage_a329a7a82c5c066eb4910cdf1694ae38c}\label{struct_f_buffer_channel_storage_a329a7a82c5c066eb4910cdf1694ae38c}} 
+\index{F\+Buffer\+Channel\+Storage@{F\+Buffer\+Channel\+Storage}!clear@{clear}}
+\index{clear@{clear}!F\+Buffer\+Channel\+Storage@{F\+Buffer\+Channel\+Storage}}
+\subsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily void F\+Buffer\+Channel\+Storage\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+clear the channel with zeros \mbox{\Hypertarget{struct_f_buffer_channel_storage_a071ed06855db0e5fe595b6b7d8757fda}\label{struct_f_buffer_channel_storage_a071ed06855db0e5fe595b6b7d8757fda}} 
+\index{F\+Buffer\+Channel\+Storage@{F\+Buffer\+Channel\+Storage}!operator=@{operator=}}
+\index{operator=@{operator=}!F\+Buffer\+Channel\+Storage@{F\+Buffer\+Channel\+Storage}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \hyperlink{struct_f_buffer_channel_storage}{F\+Buffer\+Channel\+Storage}\& F\+Buffer\+Channel\+Storage\+::operator= (\begin{DoxyParamCaption}\item[{\hyperlink{struct_f_buffer_channel_storage}{F\+Buffer\+Channel\+Storage} \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+copy the channel from another source \mbox{\Hypertarget{struct_f_buffer_channel_storage_a183964cd1e00171df5eb4c2130db6c44}\label{struct_f_buffer_channel_storage_a183964cd1e00171df5eb4c2130db6c44}} 
+\index{F\+Buffer\+Channel\+Storage@{F\+Buffer\+Channel\+Storage}!resize@{resize}}
+\index{resize@{resize}!F\+Buffer\+Channel\+Storage@{F\+Buffer\+Channel\+Storage}}
+\subsubsection{\texorpdfstring{resize()}{resize()}}
+{\footnotesize\ttfamily void F\+Buffer\+Channel\+Storage\+::resize (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{\+\_\+res\+\_\+x,  }\item[{const uint32\+\_\+t}]{\+\_\+res\+\_\+y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+set the resolution \mbox{\Hypertarget{struct_f_buffer_channel_storage_ace7afe67f49b4a628653dd42a5e39147}\label{struct_f_buffer_channel_storage_ace7afe67f49b4a628653dd42a5e39147}} 
+\index{F\+Buffer\+Channel\+Storage@{F\+Buffer\+Channel\+Storage}!size@{size}}
+\index{size@{size}!F\+Buffer\+Channel\+Storage@{F\+Buffer\+Channel\+Storage}}
+\subsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily size\+\_\+t F\+Buffer\+Channel\+Storage\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the total number of pixels \mbox{\Hypertarget{struct_f_buffer_channel_storage_adff7d04a3c7da747d662403c930c4074}\label{struct_f_buffer_channel_storage_adff7d04a3c7da747d662403c930c4074}} 
+\index{F\+Buffer\+Channel\+Storage@{F\+Buffer\+Channel\+Storage}!swap@{swap}}
+\index{swap@{swap}!F\+Buffer\+Channel\+Storage@{F\+Buffer\+Channel\+Storage}}
+\subsubsection{\texorpdfstring{swap()}{swap()}}
+{\footnotesize\ttfamily void F\+Buffer\+Channel\+Storage\+::swap (\begin{DoxyParamCaption}\item[{\hyperlink{struct_f_buffer_channel_storage}{F\+Buffer\+Channel\+Storage} \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+swap with another framebuffer channel \mbox{\Hypertarget{struct_f_buffer_channel_storage_a1be90e5b134cb810c2497a66d2ac7b12}\label{struct_f_buffer_channel_storage_a1be90e5b134cb810c2497a66d2ac7b12}} 
+\index{F\+Buffer\+Channel\+Storage@{F\+Buffer\+Channel\+Storage}!view@{view}}
+\index{view@{view}!F\+Buffer\+Channel\+Storage@{F\+Buffer\+Channel\+Storage}}
+\subsubsection{\texorpdfstring{view()}{view()}}
+{\footnotesize\ttfamily \hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View} F\+Buffer\+Channel\+Storage\+::view (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return a view object 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/framebuffer.\+h\end{DoxyCompactItemize}

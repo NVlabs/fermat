@@ -23,6 +23,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>fermat</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <CudaToolkitCustomDir>$(CUDA_PATH)</CudaToolkitCustomDir>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -53,7 +54,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
-    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 9.2.props" />
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 10.0.props" />
   </ImportGroup>
   <ImportGroup Label="Shared">
   </ImportGroup>
@@ -97,16 +98,23 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG; WIN32; _CONSOLE;_CRT_SECURE_NO_WARNINGS; NOMINMAX; _USE_MATH_DEFINES; %(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(CudaToolkitIncludeDir);../../src/; ../../src/mesh/;  ../../contrib;  ../../contrib/OptiX/include/; ../../contrib/freeglut/include/; ../../contrib/cub;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(CudaToolkitLibDir);../../contrib/freeglut/win64/Release/; ../../contrib/OptiX/lib64; ../../contrib/cugar/win64;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;freeglut.lib; optix_prime.1.lib;cugar.lib;curand.lib;cudart.lib; %(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <CudaCompile>
+      <Include>$(CudaToolkitIncludeDir);../../src/; ../../src/mesh/;  ../../contrib;  ../../contrib/OptiX/include/; ../../contrib/freeglut/include/;</Include>
+      <CodeGeneration>compute_52,sm_52</CodeGeneration>
+    </CudaCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -132,9 +140,9 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32; _CONSOLE;_CRT_SECURE_NO_WARNINGS; NOMINMAX; _USE_MATH_DEFINES; %(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32; _WIN32; _WIN64; _CONSOLE;_CRT_SECURE_NO_WARNINGS; NOMINMAX; _USE_MATH_DEFINES; %(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>false</SDLCheck>
-      <AdditionalIncludeDirectories>$(CudaToolkitIncludeDir);../../src/; ../../src/mesh/;  ../../contrib;  ../../contrib/OptiX/include/; ../../contrib/freeglut/include/; ../../contrib/cub;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(CudaToolkitIncludeDir);../../src/; ../../src/renderers; ../../src/mesh/;  ../../contrib;  ../../contrib/OptiX/include/; ../../contrib/freeglut/include/; ../../contrib/cub; ../../contrib/assimp-4.1.0/include;</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -142,13 +150,13 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;freeglut.lib; optix_prime.1.lib;cugar.lib;curand.lib;cudart.lib; %(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(CudaToolkitLibDir);../../contrib/freeglut/win64/Release/; ../../contrib/OptiX/lib64; ../../contrib/cugar/win64;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;freeglut.lib; optix.6.0.0.lib; optix_prime.6.0.0.lib;cugar.lib;curand.lib;cudart.lib;assimp-vc140-mt.lib; fermatdll.lib; %(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(CudaToolkitLibDir);../../contrib/freeglut/win64/Release/; ../../contrib/OptiX/lib64; ../../contrib/cugar/win64; ../../contrib/assimp-4.1.0/build/code/Release; $(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
     <CudaCompile>
       <CodeGeneration>compute_70,sm_70</CodeGeneration>
       <PtxAsOptionV>true</PtxAsOptionV>
-      <Include>$(CudaToolkitIncludeDir);../../src/; ../../src/mesh/;  ../../contrib;  ../../contrib/OptiX/include/; ../../contrib/freeglut/include/;</Include>
+      <Include>$(CudaToolkitIncludeDir);../../src/; ../../src/renderers; ../../src/mesh/;  ../../contrib;  ../../contrib/OptiX/include/; ../../contrib/freeglut/include/;</Include>
       <TargetMachinePlatform>64</TargetMachinePlatform>
     </CudaCompile>
   </ItemDefinitionGroup>
@@ -156,88 +164,18 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\bpt.h" />
-    <ClInclude Include="..\..\src\bpt_context.h" />
-    <ClInclude Include="..\..\src\bpt_control.h" />
-    <ClInclude Include="..\..\src\bpt_kernels.h" />
-    <ClInclude Include="..\..\src\bpt_options.h" />
-    <ClInclude Include="..\..\src\bpt_queues.h" />
-    <ClInclude Include="..\..\src\bpt_samplers.h" />
-    <ClInclude Include="..\..\src\bpt_utils.h" />
-    <ClInclude Include="..\..\src\bsdf.h" />
-    <ClInclude Include="..\..\src\buffers.h" />
-    <ClInclude Include="..\..\src\camera.h" />
-    <ClInclude Include="..\..\src\eaw.h" />
-    <ClInclude Include="..\..\src\edf.h" />
-    <ClInclude Include="..\..\src\files.h" />
-    <ClInclude Include="..\..\src\framebuffer.h" />
-    <ClInclude Include="..\..\src\glut_viewer.h" />
-    <ClInclude Include="..\..\src\hashmap.h" />
-    <ClInclude Include="..\..\src\mesh\glm.h" />
-    <ClInclude Include="..\..\src\mesh\MeshBase.h" />
-    <ClInclude Include="..\..\src\mesh\MeshException.h" />
-    <ClInclude Include="..\..\src\mesh\MeshLoader.h" />
-    <ClInclude Include="..\..\src\mesh\MeshStorage.h" />
-    <ClInclude Include="..\..\src\mesh_lights.h" />
-    <ClInclude Include="..\..\src\cmlt.h" />
-    <ClInclude Include="..\..\src\mis_utils.h" />
-    <ClInclude Include="..\..\src\path.h" />
-    <ClInclude Include="..\..\src\pathtracer.h" />
-    <ClInclude Include="..\..\src\path_inversion.h" />
-    <ClInclude Include="..\..\src\pssmlt.h" />
-    <ClInclude Include="..\..\src\random_sequence.h" />
-    <ClInclude Include="..\..\src\ray_queues.h" />
-    <ClInclude Include="..\..\src\renderer_interface.h" />
-    <ClInclude Include="..\..\src\renderer_view.h" />
-    <ClInclude Include="..\..\src\rpt.h" />
-    <ClInclude Include="..\..\src\spatial_hash.h" />
-    <ClInclude Include="..\..\src\texture.h" />
-    <ClInclude Include="..\..\src\texture_reference.h" />
-    <ClInclude Include="..\..\src\tiled_sampling.h" />
-    <ClInclude Include="..\..\src\tiled_sequence.h" />
-    <ClInclude Include="..\..\src\vertex.h" />
-    <ClInclude Include="..\..\src\lights.h" />
-    <ClInclude Include="..\..\src\mesh\rply-1.01\rply.h" />
-    <ClInclude Include="..\..\src\mesh_utils.h" />
-    <ClInclude Include="..\..\src\ray.h" />
-    <ClInclude Include="..\..\src\renderer.h" />
-    <ClInclude Include="..\..\src\types.h" />
-    <ClInclude Include="..\..\src\vertex_storage.h" />
+    <ClInclude Include="..\..\src\types - Copy.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\files.cpp" />
-    <ClCompile Include="..\..\src\mesh\fermat_loader.cpp" />
-    <ClCompile Include="..\..\src\mesh\glm.cpp" />
-    <ClCompile Include="..\..\src\mesh\MeshBase.cpp" />
-    <ClCompile Include="..\..\src\mesh\MeshLoader.cpp" />
-    <ClCompile Include="..\..\src\mesh\MeshStorage.cpp" />
-    <ClCompile Include="..\..\src\mesh\rply-1.01\rply.c" />
-    <ClCompile Include="..\..\src\metro_test.cpp" />
-    <ClCompile Include="stdafx.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
+    <CudaCompile Include="..\..\src\main.cu" />
   </ItemGroup>
   <ItemGroup>
-    <CudaCompile Include="..\..\src\bpt.cu" />
-    <CudaCompile Include="..\..\src\eaw.cu" />
-    <CudaCompile Include="..\..\src\glut_viewer.cu" />
-    <CudaCompile Include="..\..\src\main.cu" />
-    <CudaCompile Include="..\..\src\mesh\MeshKernels.cu" />
-    <CudaCompile Include="..\..\src\mesh_lights.cu" />
-    <CudaCompile Include="..\..\src\cmlt.cu" />
-    <CudaCompile Include="..\..\src\pathtracer.cu" />
-    <CudaCompile Include="..\..\src\pssmlt.cu" />
-    <CudaCompile Include="..\..\src\renderer.cu" />
-    <CudaCompile Include="..\..\src\rpt.cu" />
-    <CudaCompile Include="..\..\src\tiled_sequence.cu" />
+    <None Include="..\..\src\fermat.dox" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 9.2.targets" />
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 10.0.targets" />
   </ImportGroup>
 </Project>

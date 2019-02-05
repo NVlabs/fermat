@@ -1,0 +1,418 @@
+\hypertarget{group___b_p_t_lib_core}{}\section{B\+P\+T\+Lib\+Core}
+\label{group___b_p_t_lib_core}\index{B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}}
+
+
+\subsection{Detailed Description}
+This module provides the core device functions available in \hyperlink{_b_p_t_lib_page}{B\+P\+T\+Lib}. \subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_path_weights}{Path\+Weights}
+\item 
+struct \hyperlink{struct_temp_path_weights}{Temp\+Path\+Weights}
+\item 
+struct \hyperlink{struct_light_vertex}{Light\+Vertex}
+\item 
+struct \hyperlink{struct_eye_vertex}{Eye\+Vertex}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_core_gad52999b8f0e6bcdcb8eff92c83a9a6d0}\label{group___b_p_t_lib_core_gad52999b8f0e6bcdcb8eff92c83a9a6d0}} 
+\#define {\bfseries D\+E\+B\+U\+G\+\_\+S}~-\/1
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_core_ga5d82fcdd390b5b6830570f45ed38d6fe}\label{group___b_p_t_lib_core_ga5d82fcdd390b5b6830570f45ed38d6fe}} 
+\#define {\bfseries D\+E\+B\+U\+G\+\_\+T}~-\/1
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_core_gae9f1ff1c13ba5d59483b6fe60d6ed7f0}\label{group___b_p_t_lib_core_gae9f1ff1c13ba5d59483b6fe60d6ed7f0}} 
+\#define {\bfseries D\+E\+B\+U\+G\+\_\+\+L\+E\+N\+G\+TH}~0
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_core_ga994bb2c2098e2755000049c79e0534f6}\label{group___b_p_t_lib_core_ga994bb2c2098e2755000049c79e0534f6}} 
+\#define {\bfseries M\+I\+N\+\_\+\+G\+\_\+\+D\+E\+N\+OM}~1.\+0e-\/8f
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T\+Primary\+Coordinates , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___b_p_t_lib_core_gaa688dca0d66d8dfeffc8d2eedfb02246}{bpt\+::generate\+\_\+primary\+\_\+light\+\_\+vertex} (const uint32 light\+\_\+path\+\_\+id, const uint32 n\+\_\+light\+\_\+paths, const T\+Primary\+Coordinates \&primary\+\_\+coords, T\+B\+P\+T\+Context \&context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer, T\+B\+P\+T\+Config \&config)
+\item 
+{\footnotesize template$<$typename T\+Primary\+Coordinates , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___b_p_t_lib_core_ga124952cd2917df181f6aa6f39cdeda1b}{bpt\+::process\+\_\+secondary\+\_\+light\+\_\+vertex} (const uint32 queue\+\_\+idx, const uint32 n\+\_\+light\+\_\+paths, const T\+Primary\+Coordinates \&primary\+\_\+coords, T\+B\+P\+T\+Context \&context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer, T\+B\+P\+T\+Config \&config)
+\item 
+{\footnotesize template$<$typename T\+Primary\+Coordinates , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___b_p_t_lib_core_gad13a8364b017ae28c4732ffd7eab9a65}{bpt\+::generate\+\_\+primary\+\_\+eye\+\_\+vertex} (const uint32 idx, const uint32 n\+\_\+eye\+\_\+paths, const uint32 n\+\_\+light\+\_\+paths, const T\+Primary\+Coordinates \&primary\+\_\+coords, T\+B\+P\+T\+Context \&context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer, T\+B\+P\+T\+Config \&config)
+\item 
+{\footnotesize template$<$typename T\+Sample\+Sink , typename T\+Primary\+Coordinates , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___b_p_t_lib_core_ga560956a804364f64f0cf35d2d0c07124}{bpt\+::process\+\_\+secondary\+\_\+eye\+\_\+vertex} (const uint32 queue\+\_\+idx, const uint32 n\+\_\+eye\+\_\+paths, const uint32 n\+\_\+light\+\_\+paths, T\+Sample\+Sink \&sample\+\_\+sink, const T\+Primary\+Coordinates \&primary\+\_\+coords, T\+B\+P\+T\+Context \&context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer, T\+B\+P\+T\+Config \&config)
+\item 
+{\footnotesize template$<$typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___b_p_t_lib_core_gaf85f457b11ee79f45371b8afe928cabe}{bpt\+::connect\+\_\+to\+\_\+camera} (const uint32 light\+\_\+idx, const uint32 n\+\_\+light\+\_\+paths, T\+B\+P\+T\+Context \&context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer, const T\+B\+P\+T\+Config \&config)
+\item 
+{\footnotesize template$<$typename T\+Sample\+Sink , typename T\+B\+P\+T\+Context $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___b_p_t_lib_core_ga588188b86e2afbe1f62d1bdd7a145cbf}{bpt\+::solve\+\_\+occlusion} (const uint32 queue\+\_\+idx, T\+Sample\+Sink \&sample\+\_\+sink, T\+B\+P\+T\+Context \&context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer)
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_core_gaefc1e6e64ff1fdc09195b98facf023fe}\label{group___b_p_t_lib_core_gaefc1e6e64ff1fdc09195b98facf023fe}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float {\bfseries mis\+\_\+selector} (const uint32 s, const uint32 t, const float w)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float \hyperlink{group___b_p_t_lib_core_gaab2d16546a42205b009be794594ead61}{mis\+\_\+power} (const float w)
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_core_ga6473afa8910469fdec791e033d19facb}\label{group___b_p_t_lib_core_ga6473afa8910469fdec791e033d19facb}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float {\bfseries bpt\+\_\+mis} (const float p\+Gp, const float prev\+\_\+p\+Gp, const float next\+\_\+p\+Gp, const float p\+Gp\+\_\+sum)
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_core_gaf967121c1d37c948098d2845ca434a6d}\label{group___b_p_t_lib_core_gaf967121c1d37c948098d2845ca434a6d}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float {\bfseries bpt\+\_\+mis} (const float p\+Gp, const float other\+\_\+p\+Gp, const float p\+Gp\+\_\+sum)
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_core_ga6dccad51efe9f04afa22146e529150a8}\label{group___b_p_t_lib_core_ga6dccad51efe9f04afa22146e529150a8}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE uint32 {\bfseries channel\+\_\+selector} (const \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type} comp)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE uint4 \hyperlink{group___b_p_t_lib_core_ga8d573ce2770a2613a1605ddc09154ffc}{pack\+\_\+edf} (const \hyperlink{struct_edf}{Edf} \&edf)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE uint4 \hyperlink{group___b_p_t_lib_core_gad4aa7704b646405fd0a0465ac8408e9d}{pack\+\_\+edf} (const \hyperlink{struct_mesh_material}{Mesh\+Material} \&material)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE uint4 \hyperlink{group___b_p_t_lib_core_gafc4b6904df544dc81fd8ced4434a6213}{pack\+\_\+bsdf} (const \hyperlink{struct_mesh_material}{Mesh\+Material} \&material)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{struct_edf}{Edf} \hyperlink{group___b_p_t_lib_core_ga1d22946cfb852e33bf79b6e145eb10f9}{unpack\+\_\+edf} (const uint4 packed\+\_\+info)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{struct_bsdf}{Bsdf} \hyperlink{group___b_p_t_lib_core_gaf814976a256cbbcf1e03fc5105688385}{unpack\+\_\+bsdf} (const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer, const uint4 packed\+\_\+info, const \hyperlink{group___b_s_d_f_module_gaca1e72535e7f260e54ed8bbf984dade9}{Transport\+Type} transport=k\+Particle\+Transport)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \hyperlink{group___b_p_t_lib_core_ga83f7d21077ca755f72b6e699f29f4704}{unpack\+\_\+bsdf\+\_\+diffuse} (const uint4 packed\+\_\+info)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \hyperlink{group___b_p_t_lib_core_gae8ae96255cfc4529971fc00aa44ac9ab}{unpack\+\_\+bsdf\+\_\+specular} (const uint4 packed\+\_\+info)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float \hyperlink{group___b_p_t_lib_core_ga51ab08450720cf29963a5ea1ba68f600}{unpack\+\_\+bsdf\+\_\+roughness} (const uint4 packed\+\_\+info)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \hyperlink{group___b_p_t_lib_core_ga6622eb324770dae8cd60dc5b6def876a}{unpack\+\_\+bsdf\+\_\+diffuse\+\_\+trans} (const uint4 packed\+\_\+info)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___b_p_t_lib_core_gab2057368defff97d2e5a217450c9ec9b}{eval\+\_\+connection\+\_\+terms} (const \hyperlink{struct_eye_vertex}{Eye\+Vertex} ev, const \hyperlink{struct_light_vertex}{Light\+Vertex} \&lv, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&out, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&f\+\_\+conn, float \&G, float \&d)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___b_p_t_lib_core_ga630c6ca6bd993457e69d47dda397e6a3}{eval\+\_\+connection\+\_\+terms} (const \hyperlink{struct_eye_vertex}{Eye\+Vertex} ev, const \hyperlink{struct_light_vertex}{Light\+Vertex} \&lv, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&out, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&f\+\_\+conn, float \&G, float \&d, float \&mis\+\_\+w, bool RR=true, bool direct\+\_\+lighting\+\_\+nee=true, bool direct\+\_\+lighting\+\_\+bsdf=true)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___b_p_t_lib_core_ga4aa55c80f176afb93197d76f8eb77751}{eval\+\_\+connection\+\_\+terms} (const \hyperlink{struct_eye_vertex}{Eye\+Vertex} ev, const \hyperlink{struct_light_vertex}{Light\+Vertex} \&lv, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&out, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&f\+\_\+s, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&f\+\_\+L, float \&G, float \&d, float \&mis\+\_\+w, bool RR=true, bool direct\+\_\+lighting\+\_\+nee=true, bool direct\+\_\+lighting\+\_\+bsdf=true)
+\item 
+\mbox{\Hypertarget{group___b_p_t_lib_core_gae60b78f9de82f098e74de5a59fc06985}\label{group___b_p_t_lib_core_gae60b78f9de82f098e74de5a59fc06985}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void {\bfseries eval\+\_\+connection} (const \hyperlink{struct_eye_vertex}{Eye\+Vertex} ev, const \hyperlink{struct_light_vertex}{Light\+Vertex} \&lv, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&out, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&out\+\_\+w, float \&d, bool RR=true, bool direct\+\_\+lighting\+\_\+nee=true, bool direct\+\_\+lighting\+\_\+bsdf=true)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \hyperlink{group___b_p_t_lib_core_ga73b14b0e545498e4ad796b4776c20836}{eval\+\_\+incoming\+\_\+emission} (const \hyperlink{struct_eye_vertex}{Eye\+Vertex} \&ev, const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer, bool direct\+\_\+lighting\+\_\+nee, bool indirect\+\_\+lighting\+\_\+nee, bool use\+\_\+vpls)
+\item 
+{\footnotesize template$<$typename Vertex\+Type $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool \hyperlink{group___b_p_t_lib_core_ga161551b8c343e47e329703e71e0aaeca}{scatter} (const Vertex\+Type \&v, const float z\mbox{[}3\mbox{]}, \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type} \&out\+\_\+component, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&out, float \&out\+\_\+p, float \&out\+\_\+p\+\_\+proj, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&out\+\_\+w, bool RR=true, bool output\+\_\+alpha=true, bool evaluate\+\_\+full\+\_\+bsdf=false, \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type} components=Bsdf\+::k\+All\+Components)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___b_p_t_lib_core_gaf85f457b11ee79f45371b8afe928cabe}\label{group___b_p_t_lib_core_gaf85f457b11ee79f45371b8afe928cabe}} 
+\index{B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}!connect\+\_\+to\+\_\+camera@{connect\+\_\+to\+\_\+camera}}
+\index{connect\+\_\+to\+\_\+camera@{connect\+\_\+to\+\_\+camera}!B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}}
+\subsubsection{\texorpdfstring{connect\+\_\+to\+\_\+camera()}{connect\_to\_camera()}}
+{\footnotesize\ttfamily template$<$typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void bpt\+::connect\+\_\+to\+\_\+camera (\begin{DoxyParamCaption}\item[{const uint32}]{light\+\_\+idx,  }\item[{const uint32}]{n\+\_\+light\+\_\+paths,  }\item[{T\+B\+P\+T\+Context \&}]{context,  }\item[{\hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&}]{renderer,  }\item[{const T\+B\+P\+T\+Config \&}]{config }\end{DoxyParamCaption})}
+
+\begin{DoxyParagraph}{}
+This function connects the given light vertex to the camera. Valid connections with non-\/zero contribution get enqueued in the shadow queue for occlusion testing.
+\end{DoxyParagraph}
+
+\begin{DoxyParams}{Parameters}
+{\em light\+\_\+idx} & the index of the light vertex in context.\+light\+\_\+vertices \\
+\hline
+{\em n\+\_\+light\+\_\+paths} & the total number of generated light subpaths \\
+\hline
+{\em context} & the bidirectional path tracing context \\
+\hline
+{\em renderer} & the rendering context \\
+\hline
+{\em config} & the bidirectional path tracing configuration policy \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___b_p_t_lib_core_gab2057368defff97d2e5a217450c9ec9b}\label{group___b_p_t_lib_core_gab2057368defff97d2e5a217450c9ec9b}} 
+\index{B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}!eval\+\_\+connection\+\_\+terms@{eval\+\_\+connection\+\_\+terms}}
+\index{eval\+\_\+connection\+\_\+terms@{eval\+\_\+connection\+\_\+terms}!B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}}
+\subsubsection{\texorpdfstring{eval\+\_\+connection\+\_\+terms()}{eval\_connection\_terms()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void eval\+\_\+connection\+\_\+terms (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_eye_vertex}{Eye\+Vertex}}]{ev,  }\item[{const \hyperlink{struct_light_vertex}{Light\+Vertex} \&}]{lv,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{out,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{f\+\_\+conn,  }\item[{float \&}]{G,  }\item[{float \&}]{d }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyParagraph}{}
+Evaluate all the separate terms needed for a bidirectional connection, including ~\newline
+
+\begin{DoxyItemize}
+\item the edge vector joining the eye and light vertex
+\item the product of the B\+S\+D\+Fs at the two vertices
+\item the geometric throughput G
+\item the distance between the vertices 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\mbox{\Hypertarget{group___b_p_t_lib_core_ga630c6ca6bd993457e69d47dda397e6a3}\label{group___b_p_t_lib_core_ga630c6ca6bd993457e69d47dda397e6a3}} 
+\index{B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}!eval\+\_\+connection\+\_\+terms@{eval\+\_\+connection\+\_\+terms}}
+\index{eval\+\_\+connection\+\_\+terms@{eval\+\_\+connection\+\_\+terms}!B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}}
+\subsubsection{\texorpdfstring{eval\+\_\+connection\+\_\+terms()}{eval\_connection\_terms()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void eval\+\_\+connection\+\_\+terms (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_eye_vertex}{Eye\+Vertex}}]{ev,  }\item[{const \hyperlink{struct_light_vertex}{Light\+Vertex} \&}]{lv,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{out,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{f\+\_\+conn,  }\item[{float \&}]{G,  }\item[{float \&}]{d,  }\item[{float \&}]{mis\+\_\+w,  }\item[{bool}]{RR = {\ttfamily true},  }\item[{bool}]{direct\+\_\+lighting\+\_\+nee = {\ttfamily true},  }\item[{bool}]{direct\+\_\+lighting\+\_\+bsdf = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyParagraph}{}
+Evaluate all the separate terms needed for a bidirectional connection, including ~\newline
+
+\begin{DoxyItemize}
+\item the edge vector joining the eye and light vertex
+\item the product of the B\+S\+D\+Fs at the two vertices
+\item the geometric throughput G
+\item the distance between the vertices
+\item the M\+IS weight 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\mbox{\Hypertarget{group___b_p_t_lib_core_ga4aa55c80f176afb93197d76f8eb77751}\label{group___b_p_t_lib_core_ga4aa55c80f176afb93197d76f8eb77751}} 
+\index{B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}!eval\+\_\+connection\+\_\+terms@{eval\+\_\+connection\+\_\+terms}}
+\index{eval\+\_\+connection\+\_\+terms@{eval\+\_\+connection\+\_\+terms}!B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}}
+\subsubsection{\texorpdfstring{eval\+\_\+connection\+\_\+terms()}{eval\_connection\_terms()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void eval\+\_\+connection\+\_\+terms (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_eye_vertex}{Eye\+Vertex}}]{ev,  }\item[{const \hyperlink{struct_light_vertex}{Light\+Vertex} \&}]{lv,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{out,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{f\+\_\+s,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{f\+\_\+L,  }\item[{float \&}]{G,  }\item[{float \&}]{d,  }\item[{float \&}]{mis\+\_\+w,  }\item[{bool}]{RR = {\ttfamily true},  }\item[{bool}]{direct\+\_\+lighting\+\_\+nee = {\ttfamily true},  }\item[{bool}]{direct\+\_\+lighting\+\_\+bsdf = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyParagraph}{}
+Evaluate all the separate terms needed for a bidirectional connection, including ~\newline
+
+\begin{DoxyItemize}
+\item the edge vector joining the eye and light vertex
+\item the product of the B\+S\+D\+Fs at the two vertices
+\item the geometric throughput G
+\item the distance between the vertices
+\item the M\+IS weight 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\mbox{\Hypertarget{group___b_p_t_lib_core_ga73b14b0e545498e4ad796b4776c20836}\label{group___b_p_t_lib_core_ga73b14b0e545498e4ad796b4776c20836}} 
+\index{B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}!eval\+\_\+incoming\+\_\+emission@{eval\+\_\+incoming\+\_\+emission}}
+\index{eval\+\_\+incoming\+\_\+emission@{eval\+\_\+incoming\+\_\+emission}!B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}}
+\subsubsection{\texorpdfstring{eval\+\_\+incoming\+\_\+emission()}{eval\_incoming\_emission()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} eval\+\_\+incoming\+\_\+emission (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_eye_vertex}{Eye\+Vertex} \&}]{ev,  }\item[{const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&}]{renderer,  }\item[{bool}]{direct\+\_\+lighting\+\_\+nee,  }\item[{bool}]{indirect\+\_\+lighting\+\_\+nee,  }\item[{bool}]{use\+\_\+vpls }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyParagraph}{}
+Evaluate the surface emission in the incoming direction at a eye vertex 
+\end{DoxyParagraph}
+\mbox{\Hypertarget{group___b_p_t_lib_core_gad13a8364b017ae28c4732ffd7eab9a65}\label{group___b_p_t_lib_core_gad13a8364b017ae28c4732ffd7eab9a65}} 
+\index{B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}!generate\+\_\+primary\+\_\+eye\+\_\+vertex@{generate\+\_\+primary\+\_\+eye\+\_\+vertex}}
+\index{generate\+\_\+primary\+\_\+eye\+\_\+vertex@{generate\+\_\+primary\+\_\+eye\+\_\+vertex}!B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}}
+\subsubsection{\texorpdfstring{generate\+\_\+primary\+\_\+eye\+\_\+vertex()}{generate\_primary\_eye\_vertex()}}
+{\footnotesize\ttfamily template$<$typename T\+Primary\+Coordinates , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void bpt\+::generate\+\_\+primary\+\_\+eye\+\_\+vertex (\begin{DoxyParamCaption}\item[{const uint32}]{idx,  }\item[{const uint32}]{n\+\_\+eye\+\_\+paths,  }\item[{const uint32}]{n\+\_\+light\+\_\+paths,  }\item[{const T\+Primary\+Coordinates \&}]{primary\+\_\+coords,  }\item[{T\+B\+P\+T\+Context \&}]{context,  }\item[{\hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&}]{renderer,  }\item[{T\+B\+P\+T\+Config \&}]{config }\end{DoxyParamCaption})}
+
+\begin{DoxyParagraph}{}
+This function generates the primary eye vertex for a given path, expressed by the path id, and its primary sample space coordinates.
+\end{DoxyParagraph}
+
+\begin{DoxyParams}{Parameters}
+{\em light\+\_\+path\+\_\+id} & the id of the light subpath \\
+\hline
+{\em n\+\_\+light\+\_\+paths} & the total number of generated light subpaths \\
+\hline
+{\em primary\+\_\+coords} & the primary sample space coordinates generator \\
+\hline
+{\em context} & the bidirectional path tracing context \\
+\hline
+{\em renderer} & the rendering context \\
+\hline
+{\em config} & the bidirectional path tracing configuration policy \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___b_p_t_lib_core_gaa688dca0d66d8dfeffc8d2eedfb02246}\label{group___b_p_t_lib_core_gaa688dca0d66d8dfeffc8d2eedfb02246}} 
+\index{B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}!generate\+\_\+primary\+\_\+light\+\_\+vertex@{generate\+\_\+primary\+\_\+light\+\_\+vertex}}
+\index{generate\+\_\+primary\+\_\+light\+\_\+vertex@{generate\+\_\+primary\+\_\+light\+\_\+vertex}!B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}}
+\subsubsection{\texorpdfstring{generate\+\_\+primary\+\_\+light\+\_\+vertex()}{generate\_primary\_light\_vertex()}}
+{\footnotesize\ttfamily template$<$typename T\+Primary\+Coordinates , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void bpt\+::generate\+\_\+primary\+\_\+light\+\_\+vertex (\begin{DoxyParamCaption}\item[{const uint32}]{light\+\_\+path\+\_\+id,  }\item[{const uint32}]{n\+\_\+light\+\_\+paths,  }\item[{const T\+Primary\+Coordinates \&}]{primary\+\_\+coords,  }\item[{T\+B\+P\+T\+Context \&}]{context,  }\item[{\hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&}]{renderer,  }\item[{T\+B\+P\+T\+Config \&}]{config }\end{DoxyParamCaption})}
+
+\begin{DoxyParagraph}{}
+This function generates the primary light vertex for a given path, expressed by the path id, and its primary sample space coordinates.
+\end{DoxyParagraph}
+
+\begin{DoxyParams}{Parameters}
+{\em light\+\_\+path\+\_\+id} & the id of the light subpath \\
+\hline
+{\em n\+\_\+light\+\_\+paths} & the total number of generated light subpaths \\
+\hline
+{\em primary\+\_\+coords} & the primary sample space coordinates generator \\
+\hline
+{\em context} & the bidirectional path tracing context \\
+\hline
+{\em renderer} & the rendering context \\
+\hline
+{\em config} & the bidirectional path tracing configuration policy \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___b_p_t_lib_core_gaab2d16546a42205b009be794594ead61}\label{group___b_p_t_lib_core_gaab2d16546a42205b009be794594ead61}} 
+\index{B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}!mis\+\_\+power@{mis\+\_\+power}}
+\index{mis\+\_\+power@{mis\+\_\+power}!B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}}
+\subsubsection{\texorpdfstring{mis\+\_\+power()}{mis\_power()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float mis\+\_\+power (\begin{DoxyParamCaption}\item[{const float}]{w }\end{DoxyParamCaption})}
+
+w \mbox{\Hypertarget{group___b_p_t_lib_core_gafc4b6904df544dc81fd8ced4434a6213}\label{group___b_p_t_lib_core_gafc4b6904df544dc81fd8ced4434a6213}} 
+\index{B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}!pack\+\_\+bsdf@{pack\+\_\+bsdf}}
+\index{pack\+\_\+bsdf@{pack\+\_\+bsdf}!B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}}
+\subsubsection{\texorpdfstring{pack\+\_\+bsdf()}{pack\_bsdf()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE uint4 pack\+\_\+bsdf (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_mesh_material}{Mesh\+Material} \&}]{material }\end{DoxyParamCaption})}
+
+\begin{DoxyParagraph}{}
+Pack an B\+S\+DF into a uint4 
+\end{DoxyParagraph}
+\mbox{\Hypertarget{group___b_p_t_lib_core_ga8d573ce2770a2613a1605ddc09154ffc}\label{group___b_p_t_lib_core_ga8d573ce2770a2613a1605ddc09154ffc}} 
+\index{B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}!pack\+\_\+edf@{pack\+\_\+edf}}
+\index{pack\+\_\+edf@{pack\+\_\+edf}!B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}}
+\subsubsection{\texorpdfstring{pack\+\_\+edf()}{pack\_edf()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE uint4 pack\+\_\+edf (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_edf}{Edf} \&}]{edf }\end{DoxyParamCaption})}
+
+\begin{DoxyParagraph}{}
+Pack an E\+DF into a uint4 
+\end{DoxyParagraph}
+\mbox{\Hypertarget{group___b_p_t_lib_core_gad4aa7704b646405fd0a0465ac8408e9d}\label{group___b_p_t_lib_core_gad4aa7704b646405fd0a0465ac8408e9d}} 
+\index{B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}!pack\+\_\+edf@{pack\+\_\+edf}}
+\index{pack\+\_\+edf@{pack\+\_\+edf}!B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}}
+\subsubsection{\texorpdfstring{pack\+\_\+edf()}{pack\_edf()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE uint4 pack\+\_\+edf (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_mesh_material}{Mesh\+Material} \&}]{material }\end{DoxyParamCaption})}
+
+\begin{DoxyParagraph}{}
+Pack an E\+DF into a uint4 
+\end{DoxyParagraph}
+\mbox{\Hypertarget{group___b_p_t_lib_core_ga560956a804364f64f0cf35d2d0c07124}\label{group___b_p_t_lib_core_ga560956a804364f64f0cf35d2d0c07124}} 
+\index{B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}!process\+\_\+secondary\+\_\+eye\+\_\+vertex@{process\+\_\+secondary\+\_\+eye\+\_\+vertex}}
+\index{process\+\_\+secondary\+\_\+eye\+\_\+vertex@{process\+\_\+secondary\+\_\+eye\+\_\+vertex}!B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}}
+\subsubsection{\texorpdfstring{process\+\_\+secondary\+\_\+eye\+\_\+vertex()}{process\_secondary\_eye\_vertex()}}
+{\footnotesize\ttfamily template$<$typename T\+Sample\+Sink , typename T\+Primary\+Coordinates , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void bpt\+::process\+\_\+secondary\+\_\+eye\+\_\+vertex (\begin{DoxyParamCaption}\item[{const uint32}]{queue\+\_\+idx,  }\item[{const uint32}]{n\+\_\+eye\+\_\+paths,  }\item[{const uint32}]{n\+\_\+light\+\_\+paths,  }\item[{T\+Sample\+Sink \&}]{sample\+\_\+sink,  }\item[{const T\+Primary\+Coordinates \&}]{primary\+\_\+coords,  }\item[{T\+B\+P\+T\+Context \&}]{context,  }\item[{\hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&}]{renderer,  }\item[{T\+B\+P\+T\+Config \&}]{config }\end{DoxyParamCaption})}
+
+\begin{DoxyParagraph}{}
+This function processes the secondary eye vertex corresponding to a given entry in the path tracing queue, stored in the bidirectional path tracing context. Specifically, processing a queue entry means performing the following operations\+: ~\newline
+
+\begin{DoxyItemize}
+\item fetching the corresponding ray and hit (or miss) information from the queue
+\item interpolating the local geometry of the hit (or that of the environment on a miss)
+\item reconstructing the local B\+S\+DF
+\item performing Next-\/\+Event Estimation, if enabled, and handing the resulting sample (a full path) to the output sample sink
+\item computing the local emission at the hit towards the incoming direction, i.\+e. forming a full path through pure forward path tracing, and passing the resulting sample to the output sample sink
+\item sampling another scattering/absorption event 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+This function assumes a set of light subpaths have already been sampled and it is possible to sample and perform connections between the pre-\/existing light vertices and each new eye vertex. The light vertices are assumed to be stored in a T\+B\+P\+T\+Context\+::light\+\_\+vertices member, see \hyperlink{struct_b_p_t_context_base}{B\+P\+T\+Context\+Base}.
+\end{DoxyParagraph}
+
+\begin{DoxyParams}{Parameters}
+{\em queue\+\_\+idx} & the index of the queue entry \\
+\hline
+{\em n\+\_\+eye\+\_\+paths} & the total number of generated eye subpaths \\
+\hline
+{\em n\+\_\+light\+\_\+paths} & the total number of generated light subpaths \\
+\hline
+{\em sample\+\_\+sink} & the output sample sink, processing all bidirectional paths formed processing this vertex \\
+\hline
+{\em primary\+\_\+coords} & the primary sample space coordinates generator \\
+\hline
+{\em context} & the bidirectional path tracing context \\
+\hline
+{\em renderer} & the rendering context \\
+\hline
+{\em config} & the bidirectional path tracing configuration policy \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___b_p_t_lib_core_ga124952cd2917df181f6aa6f39cdeda1b}\label{group___b_p_t_lib_core_ga124952cd2917df181f6aa6f39cdeda1b}} 
+\index{B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}!process\+\_\+secondary\+\_\+light\+\_\+vertex@{process\+\_\+secondary\+\_\+light\+\_\+vertex}}
+\index{process\+\_\+secondary\+\_\+light\+\_\+vertex@{process\+\_\+secondary\+\_\+light\+\_\+vertex}!B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}}
+\subsubsection{\texorpdfstring{process\+\_\+secondary\+\_\+light\+\_\+vertex()}{process\_secondary\_light\_vertex()}}
+{\footnotesize\ttfamily template$<$typename T\+Primary\+Coordinates , typename T\+B\+P\+T\+Context , typename T\+B\+P\+T\+Config $>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void bpt\+::process\+\_\+secondary\+\_\+light\+\_\+vertex (\begin{DoxyParamCaption}\item[{const uint32}]{queue\+\_\+idx,  }\item[{const uint32}]{n\+\_\+light\+\_\+paths,  }\item[{const T\+Primary\+Coordinates \&}]{primary\+\_\+coords,  }\item[{T\+B\+P\+T\+Context \&}]{context,  }\item[{\hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&}]{renderer,  }\item[{T\+B\+P\+T\+Config \&}]{config }\end{DoxyParamCaption})}
+
+\begin{DoxyParagraph}{}
+This function processes the secondary light vertex corresponding to a given entry in the path tracing queue, stored in the bidirectional path tracing context. Specifically, processing a queue entry means performing the following operations\+: ~\newline
+
+\begin{DoxyItemize}
+\item fetching the corresponding ray and hit (or miss) information from the queue
+\item interpolating the local geometry of the hit (or that of the environment on a miss)
+\item reconstructing the local B\+S\+DF
+\item potentially storing the resulting light vertex, based on the passed configuration/policy
+\item sampling another scattering/absorption event
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+\begin{DoxyParams}{Parameters}
+{\em queue\+\_\+idx} & the index of the queue entry \\
+\hline
+{\em n\+\_\+light\+\_\+paths} & the total number of generated light subpaths \\
+\hline
+{\em primary\+\_\+coords} & the primary sample space coordinates generator \\
+\hline
+{\em context} & the bidirectional path tracing context \\
+\hline
+{\em renderer} & the rendering context \\
+\hline
+{\em config} & the bidirectional path tracing configuration policy \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___b_p_t_lib_core_ga161551b8c343e47e329703e71e0aaeca}\label{group___b_p_t_lib_core_ga161551b8c343e47e329703e71e0aaeca}} 
+\index{B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}!scatter@{scatter}}
+\index{scatter@{scatter}!B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}}
+\subsubsection{\texorpdfstring{scatter()}{scatter()}}
+{\footnotesize\ttfamily template$<$typename Vertex\+Type $>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool scatter (\begin{DoxyParamCaption}\item[{const Vertex\+Type \&}]{v,  }\item[{const float}]{z\mbox{[}3\mbox{]},  }\item[{\hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type} \&}]{out\+\_\+component,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{out,  }\item[{float \&}]{out\+\_\+p,  }\item[{float \&}]{out\+\_\+p\+\_\+proj,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{out\+\_\+w,  }\item[{bool}]{RR = {\ttfamily true},  }\item[{bool}]{output\+\_\+alpha = {\ttfamily true},  }\item[{bool}]{evaluate\+\_\+full\+\_\+bsdf = {\ttfamily false},  }\item[{\hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type}}]{components = {\ttfamily Bsdf\+:\+:kAllComponents} }\end{DoxyParamCaption})}
+
+\begin{DoxyParagraph}{}
+sample a scattering/absorption event at a given vertex 
+\end{DoxyParagraph}
+\mbox{\Hypertarget{group___b_p_t_lib_core_ga588188b86e2afbe1f62d1bdd7a145cbf}\label{group___b_p_t_lib_core_ga588188b86e2afbe1f62d1bdd7a145cbf}} 
+\index{B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}!solve\+\_\+occlusion@{solve\+\_\+occlusion}}
+\index{solve\+\_\+occlusion@{solve\+\_\+occlusion}!B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}}
+\subsubsection{\texorpdfstring{solve\+\_\+occlusion()}{solve\_occlusion()}}
+{\footnotesize\ttfamily template$<$typename T\+Sample\+Sink , typename T\+B\+P\+T\+Context $>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void bpt\+::solve\+\_\+occlusion (\begin{DoxyParamCaption}\item[{const uint32}]{queue\+\_\+idx,  }\item[{T\+Sample\+Sink \&}]{sample\+\_\+sink,  }\item[{T\+B\+P\+T\+Context \&}]{context,  }\item[{\hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&}]{renderer }\end{DoxyParamCaption})}
+
+\begin{DoxyParagraph}{}
+Resolve the occlusion for the specified entry in the shadow queue, and pass the resulting sample to the sink. Specifically, if the queue entry contains a (ray tracing) hit, the sample will be considered shadowed and its contribution will be set to zero. Otherwise, the sample\textquotesingle{}s contribution will be left unmodified.
+\end{DoxyParagraph}
+
+\begin{DoxyParams}{Parameters}
+{\em queue\+\_\+idx} & the index of the queue entry \\
+\hline
+{\em sample\+\_\+sink} & the output sample sink, processing all bidirectional paths formed processing this vertex \\
+\hline
+{\em context} & the bidirectional path tracing context \\
+\hline
+{\em renderer} & the rendering context \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___b_p_t_lib_core_gaf814976a256cbbcf1e03fc5105688385}\label{group___b_p_t_lib_core_gaf814976a256cbbcf1e03fc5105688385}} 
+\index{B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}!unpack\+\_\+bsdf@{unpack\+\_\+bsdf}}
+\index{unpack\+\_\+bsdf@{unpack\+\_\+bsdf}!B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}}
+\subsubsection{\texorpdfstring{unpack\+\_\+bsdf()}{unpack\_bsdf()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{struct_bsdf}{Bsdf} unpack\+\_\+bsdf (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&}]{renderer,  }\item[{const uint4}]{packed\+\_\+info,  }\item[{const \hyperlink{group___b_s_d_f_module_gaca1e72535e7f260e54ed8bbf984dade9}{Transport\+Type}}]{transport = {\ttfamily kParticleTransport} }\end{DoxyParamCaption})}
+
+\begin{DoxyParagraph}{}
+Unpack an B\+S\+DF from a uint4 
+\end{DoxyParagraph}
+\mbox{\Hypertarget{group___b_p_t_lib_core_ga83f7d21077ca755f72b6e699f29f4704}\label{group___b_p_t_lib_core_ga83f7d21077ca755f72b6e699f29f4704}} 
+\index{B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}!unpack\+\_\+bsdf\+\_\+diffuse@{unpack\+\_\+bsdf\+\_\+diffuse}}
+\index{unpack\+\_\+bsdf\+\_\+diffuse@{unpack\+\_\+bsdf\+\_\+diffuse}!B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}}
+\subsubsection{\texorpdfstring{unpack\+\_\+bsdf\+\_\+diffuse()}{unpack\_bsdf\_diffuse()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} unpack\+\_\+bsdf\+\_\+diffuse (\begin{DoxyParamCaption}\item[{const uint4}]{packed\+\_\+info }\end{DoxyParamCaption})}
+
+\begin{DoxyParagraph}{}
+Unpack the diffuse component of a uint4-\/packed B\+S\+DF 
+\end{DoxyParagraph}
+\mbox{\Hypertarget{group___b_p_t_lib_core_ga6622eb324770dae8cd60dc5b6def876a}\label{group___b_p_t_lib_core_ga6622eb324770dae8cd60dc5b6def876a}} 
+\index{B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}!unpack\+\_\+bsdf\+\_\+diffuse\+\_\+trans@{unpack\+\_\+bsdf\+\_\+diffuse\+\_\+trans}}
+\index{unpack\+\_\+bsdf\+\_\+diffuse\+\_\+trans@{unpack\+\_\+bsdf\+\_\+diffuse\+\_\+trans}!B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}}
+\subsubsection{\texorpdfstring{unpack\+\_\+bsdf\+\_\+diffuse\+\_\+trans()}{unpack\_bsdf\_diffuse\_trans()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} unpack\+\_\+bsdf\+\_\+diffuse\+\_\+trans (\begin{DoxyParamCaption}\item[{const uint4}]{packed\+\_\+info }\end{DoxyParamCaption})}
+
+\begin{DoxyParagraph}{}
+Unpack the diffuse transmission component of a uint4-\/packed B\+S\+DF 
+\end{DoxyParagraph}
+\mbox{\Hypertarget{group___b_p_t_lib_core_ga51ab08450720cf29963a5ea1ba68f600}\label{group___b_p_t_lib_core_ga51ab08450720cf29963a5ea1ba68f600}} 
+\index{B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}!unpack\+\_\+bsdf\+\_\+roughness@{unpack\+\_\+bsdf\+\_\+roughness}}
+\index{unpack\+\_\+bsdf\+\_\+roughness@{unpack\+\_\+bsdf\+\_\+roughness}!B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}}
+\subsubsection{\texorpdfstring{unpack\+\_\+bsdf\+\_\+roughness()}{unpack\_bsdf\_roughness()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float unpack\+\_\+bsdf\+\_\+roughness (\begin{DoxyParamCaption}\item[{const uint4}]{packed\+\_\+info }\end{DoxyParamCaption})}
+
+\begin{DoxyParagraph}{}
+Unpack the roughness component of a uint4-\/packed B\+S\+DF 
+\end{DoxyParagraph}
+\mbox{\Hypertarget{group___b_p_t_lib_core_gae8ae96255cfc4529971fc00aa44ac9ab}\label{group___b_p_t_lib_core_gae8ae96255cfc4529971fc00aa44ac9ab}} 
+\index{B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}!unpack\+\_\+bsdf\+\_\+specular@{unpack\+\_\+bsdf\+\_\+specular}}
+\index{unpack\+\_\+bsdf\+\_\+specular@{unpack\+\_\+bsdf\+\_\+specular}!B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}}
+\subsubsection{\texorpdfstring{unpack\+\_\+bsdf\+\_\+specular()}{unpack\_bsdf\_specular()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} unpack\+\_\+bsdf\+\_\+specular (\begin{DoxyParamCaption}\item[{const uint4}]{packed\+\_\+info }\end{DoxyParamCaption})}
+
+\begin{DoxyParagraph}{}
+Unpack the specular component of a uint4-\/packed B\+S\+DF 
+\end{DoxyParagraph}
+\mbox{\Hypertarget{group___b_p_t_lib_core_ga1d22946cfb852e33bf79b6e145eb10f9}\label{group___b_p_t_lib_core_ga1d22946cfb852e33bf79b6e145eb10f9}} 
+\index{B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}!unpack\+\_\+edf@{unpack\+\_\+edf}}
+\index{unpack\+\_\+edf@{unpack\+\_\+edf}!B\+P\+T\+Lib\+Core@{B\+P\+T\+Lib\+Core}}
+\subsubsection{\texorpdfstring{unpack\+\_\+edf()}{unpack\_edf()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{struct_edf}{Edf} unpack\+\_\+edf (\begin{DoxyParamCaption}\item[{const uint4}]{packed\+\_\+info }\end{DoxyParamCaption})}
+
+\begin{DoxyParagraph}{}
+Unpack an E\+DF from a uint4 
+\end{DoxyParagraph}

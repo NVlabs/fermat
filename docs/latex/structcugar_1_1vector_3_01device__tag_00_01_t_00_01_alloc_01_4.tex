@@ -1,0 +1,63 @@
+\hypertarget{structcugar_1_1vector_3_01device__tag_00_01_t_00_01_alloc_01_4}{}\section{cugar\+:\+:vector$<$ device\+\_\+tag, T, Alloc $>$ Struct Template Reference}
+\label{structcugar_1_1vector_3_01device__tag_00_01_t_00_01_alloc_01_4}\index{cugar\+::vector$<$ device\+\_\+tag, T, Alloc $>$@{cugar\+::vector$<$ device\+\_\+tag, T, Alloc $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$typename T, typename Alloc$>$\newline
+struct cugar\+::vector$<$ device\+\_\+tag, T, Alloc $>$}
+
+a dynamic device vector class 
+
+{\ttfamily \#include $<$vector.\+h$>$}
+
+Inheritance diagram for cugar\+:\+:vector$<$ device\+\_\+tag, T, Alloc $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{structcugar_1_1vector_3_01device__tag_00_01_t_00_01_alloc_01_4}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \hyperlink{structcugar_1_1device__tag}{device\+\_\+tag} {\bfseries system\+\_\+tag}
+\item 
+typedef thrust\+::device\+\_\+vector$<$ T, Alloc $>$ {\bfseries base\+\_\+type}
+\item 
+typedef base\+\_\+type\+::const\+\_\+iterator {\bfseries const\+\_\+iterator}
+\item 
+typedef base\+\_\+type\+::iterator {\bfseries iterator}
+\item 
+typedef base\+\_\+type\+::value\+\_\+type {\bfseries value\+\_\+type}
+\item 
+typedef \hyperlink{structcugar_1_1vector__view}{cugar\+::vector\+\_\+view}$<$ T $\ast$, uint64 $>$ {\bfseries plain\+\_\+view\+\_\+type}
+\item 
+typedef \hyperlink{structcugar_1_1vector__view}{cugar\+::vector\+\_\+view}$<$ const T $\ast$, uint64 $>$ {\bfseries const\+\_\+plain\+\_\+view\+\_\+type}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group___basic_ga7954a5910e324f03b69b16b0fc0475fa}{vector} (const size\+\_\+t size=0, const T val=T())
+\item 
+{\footnotesize template$<$typename Other\+Alloc $>$ }\\{\bfseries vector} (const thrust\+::host\+\_\+vector$<$ T, Other\+Alloc $>$ \&v)
+\item 
+{\footnotesize template$<$typename Other\+Alloc $>$ }\\{\bfseries vector} (const thrust\+::device\+\_\+vector$<$ T, Other\+Alloc $>$ \&v)
+\item 
+{\footnotesize template$<$typename Other\+Alloc $>$ }\\\hyperlink{structcugar_1_1vector}{vector}$<$ \hyperlink{structcugar_1_1device__tag}{device\+\_\+tag}, T, Alloc $>$ \& {\bfseries operator=} (const thrust\+::host\+\_\+vector$<$ T, Other\+Alloc $>$ \&v)
+\item 
+{\footnotesize template$<$typename Other\+Alloc $>$ }\\\hyperlink{structcugar_1_1vector}{vector}$<$ \hyperlink{structcugar_1_1device__tag}{device\+\_\+tag}, T, Alloc $>$ \& {\bfseries operator=} (const thrust\+::device\+\_\+vector$<$ T, Other\+Alloc $>$ \&v)
+\item 
+\hyperlink{group___basic_ga5cdeb00ca2a3ec211fe5ceccbc9b0a20}{operator plain\+\_\+view\+\_\+type} ()
+\item 
+\hyperlink{group___basic_gaeb5b6b16b7efd8be40fe5c410c95b53e}{operator const\+\_\+plain\+\_\+view\+\_\+type} () const
+\item 
+void \hyperlink{group___basic_ga872aa5811aafdfdae83d56c76378bf53}{expand} (const size\+\_\+t sz)
+\item 
+T \& {\bfseries last} ()
+\item 
+const T \& {\bfseries last} () const
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/vector.\+h\end{DoxyCompactItemize}

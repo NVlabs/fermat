@@ -1,0 +1,53 @@
+\hypertarget{struct_path}{}\section{Path Struct Reference}
+\label{struct_path}\index{Path@{Path}}
+
+
+\subsection{Detailed description}
+A class to represent light paths in compact form, storing only the vertex ids. 
+
+{\ttfamily \#include $<$path.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_path_aa30b5405c1ddf9026a8a4a878caedf14}\label{struct_path_aa30b5405c1ddf9026a8a4a878caedf14}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries Path} (const uint32 \+\_\+n\+\_\+vertices, \hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id} $\ast$\+\_\+verts, const uint32 \+\_\+stride)
+\item 
+\mbox{\Hypertarget{struct_path_af5f50f1500ffcf2be814ef5c62be407f}\label{struct_path_af5f50f1500ffcf2be814ef5c62be407f}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const \hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id} \& {\bfseries v\+\_\+L} (const uint32 i) const
+\item 
+\mbox{\Hypertarget{struct_path_a13616464c91185262c8cb8ae296688a2}\label{struct_path_a13616464c91185262c8cb8ae296688a2}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const \hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id} \& {\bfseries v\+\_\+E} (const uint32 i) const
+\item 
+\mbox{\Hypertarget{struct_path_ad3bd90bb4c64dbab4843014f2b614136}\label{struct_path_ad3bd90bb4c64dbab4843014f2b614136}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id} \& {\bfseries v\+\_\+L} (const uint32 i)
+\item 
+\mbox{\Hypertarget{struct_path_a38a66c133d4ed740fc5b2416599a6788}\label{struct_path_a38a66c133d4ed740fc5b2416599a6788}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id} \& {\bfseries v\+\_\+E} (const uint32 i)
+\item 
+\mbox{\Hypertarget{struct_path_afbc51ed7086e523c8ae0d5a62d6ccb3d}\label{struct_path_afbc51ed7086e523c8ae0d5a62d6ccb3d}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float {\bfseries G} (const uint32 i, const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer) const
+\item 
+\mbox{\Hypertarget{struct_path_a278e02a02b9c176eb81688db7828a8cf}\label{struct_path_a278e02a02b9c176eb81688db7828a8cf}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} {\bfseries edge\+\_\+L} (const uint32 i, const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer) const
+\item 
+\mbox{\Hypertarget{struct_path_a4614790d32103332f90f0c3a135a2933}\label{struct_path_a4614790d32103332f90f0c3a135a2933}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} {\bfseries edge\+\_\+E} (const uint32 i, const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer) const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_path_a78555e28d407d5f9a7b357de09672177}\label{struct_path_a78555e28d407d5f9a7b357de09672177}} 
+\hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id} $\ast$ {\bfseries vertex\+\_\+ids}
+\item 
+\mbox{\Hypertarget{struct_path_a378f7d2cd404c20660058b9f9996814b}\label{struct_path_a378f7d2cd404c20660058b9f9996814b}} 
+uint32 {\bfseries n\+\_\+vertices}
+\item 
+\mbox{\Hypertarget{struct_path_adf70bfe5101af8293b27fc4b43c490a2}\label{struct_path_adf70bfe5101af8293b27fc4b43c490a2}} 
+uint32 {\bfseries stride}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/path.\+h\end{DoxyCompactItemize}

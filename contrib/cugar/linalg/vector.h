@@ -94,7 +94,7 @@ struct Vector
 template <typename T>
 struct Vector<T,1>
 {
-	typedef typename vector_type<T, 1>::type    base_type;
+	typedef T									base_type;
 	typedef T									value_type;
 
 	static const uint32 DIMENSION = 1;
@@ -152,7 +152,7 @@ struct Vector<T, 2> : vector_type<T, 2>::type
 
 	template <typename U>
 	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
-		explicit Vector<T, 2>(const Vector<U, 2> op)
+	explicit Vector<T, 2>(const Vector<U, 2> op)
 	{
 		base_type::x = T(op[0]);
 		base_type::y = T(op[1]);
@@ -634,6 +634,13 @@ Vector<T, 2> unpack_vector(const uint32 u, const uint32 n_bits_comp);
 template <typename T, uint32 DIM>
 CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
 Vector<T, DIM> mod(const Vector<T, DIM>& op, const T m);
+
+/// \relates Vector
+/// component-wise vector sqrt
+///
+template <typename T, uint32 DIM>
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+Vector<T, DIM> sqrt(const Vector<T, DIM>& op);
 
 /// \relates Vector
 /// return true iff all components are finite

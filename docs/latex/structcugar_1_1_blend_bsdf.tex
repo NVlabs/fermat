@@ -1,0 +1,123 @@
+\hypertarget{structcugar_1_1_blend_bsdf}{}\section{cugar\+:\+:Blend\+Bsdf$<$ T\+Bsdf1, T\+Bsdf2 $>$ Struct Template Reference}
+\label{structcugar_1_1_blend_bsdf}\index{cugar\+::\+Blend\+Bsdf$<$ T\+Bsdf1, T\+Bsdf2 $>$@{cugar\+::\+Blend\+Bsdf$<$ T\+Bsdf1, T\+Bsdf2 $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$typename T\+Bsdf1, typename T\+Bsdf2$>$\newline
+struct cugar\+::\+Blend\+Bsdf$<$ T\+Bsdf1, T\+Bsdf2 $>$}
+
+Implements a weighted blending between two B\+S\+D\+Fs. 
+
+{\ttfamily \#include $<$blend.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_blend_bsdf_af515289322a7ba88671802d09b4b3b9f}{Blend\+Bsdf} (const float \+\_\+w1=0.\+5f, const float \+\_\+w2=0.\+5f, const T\+Bsdf1 \+\_\+bsdf1=\+T\+Bsdf1(), const T\+Bsdf2 \+\_\+bsdf2=\+T\+Bsdf2())
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector3f} \hyperlink{structcugar_1_1_blend_bsdf_a5837aacab01105f3023c7653b82a5e65}{f} (const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&geometry, const \hyperlink{structcugar_1_1_vector}{Vector3f} V, const \hyperlink{structcugar_1_1_vector}{Vector3f} L) const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector3f} \hyperlink{structcugar_1_1_blend_bsdf_a7d5ba65e5d6de1e48ffdf523f31e6cd6}{f\+\_\+over\+\_\+p} (const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&geometry, const \hyperlink{structcugar_1_1_vector}{Vector3f} V, const \hyperlink{structcugar_1_1_vector}{Vector3f} L) const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1_blend_bsdf_ac8354f275a1834a351d8347d922e6415}{f\+\_\+and\+\_\+p} (const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&geometry, const \hyperlink{structcugar_1_1_vector}{Vector3f} V, const \hyperlink{structcugar_1_1_vector}{Vector3f} L, \hyperlink{structcugar_1_1_vector}{Vector3f} \&\hyperlink{structcugar_1_1_blend_bsdf_a5837aacab01105f3023c7653b82a5e65}{f}, float \&\hyperlink{structcugar_1_1_blend_bsdf_a682a0bffe043ff21a03d519921bef7bc}{p}, const Spherical\+Measure measure=k\+Projected\+Solid\+Angle) const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_blend_bsdf_a682a0bffe043ff21a03d519921bef7bc}{p} (const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&geometry, const \hyperlink{structcugar_1_1_vector}{Vector3f} V, const \hyperlink{structcugar_1_1_vector}{Vector3f} L, const Spherical\+Measure measure=k\+Projected\+Solid\+Angle) const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1_blend_bsdf_ad2aff372bc3fa24b90e99505d7cb7c37}{sample} (const \hyperlink{structcugar_1_1_vector}{Vector3f} u, const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&geometry, const \hyperlink{structcugar_1_1_vector}{Vector3f} V, \hyperlink{structcugar_1_1_vector}{Vector3f} \&L, \hyperlink{structcugar_1_1_vector}{Vector3f} \&g, float \&\hyperlink{structcugar_1_1_blend_bsdf_a682a0bffe043ff21a03d519921bef7bc}{p}, float \&p\+\_\+proj) const
+\item 
+{\footnotesize template$<$typename Random\+GeneratorT $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{structcugar_1_1_blend_bsdf_ae441aab40fa52f1223cd34cafede6a41}{invert} (const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&geometry, const \hyperlink{structcugar_1_1_vector}{Vector3f} V, const \hyperlink{structcugar_1_1_vector}{Vector3f} L, Random\+GeneratorT \&\hyperlink{group___sampling_module_gaec17bbbfd36295353081b7b4480d933d}{random}, \hyperlink{structcugar_1_1_vector}{Vector3f} \&z, float \&\hyperlink{structcugar_1_1_blend_bsdf_a682a0bffe043ff21a03d519921bef7bc}{p}, float \&p\+\_\+proj) const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1_blend_bsdf_a5bfb9e04adb1ba5a5a2cebc49b137561}{inverse\+\_\+pdf} (const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&geometry, const \hyperlink{structcugar_1_1_vector}{Vector3f} V, const \hyperlink{structcugar_1_1_vector}{Vector3f} L, const \hyperlink{structcugar_1_1_vector}{Vector3f} u, float \&\hyperlink{structcugar_1_1_blend_bsdf_a682a0bffe043ff21a03d519921bef7bc}{p}, float \&p\+\_\+proj) const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_blend_bsdf_a73959ff4a7af6a9fd6c2ea866776c80f}\label{structcugar_1_1_blend_bsdf_a73959ff4a7af6a9fd6c2ea866776c80f}} 
+float {\bfseries w1}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_blend_bsdf_a486fb30eab1f8906604419dc1fd415b7}\label{structcugar_1_1_blend_bsdf_a486fb30eab1f8906604419dc1fd415b7}} 
+float {\bfseries w2}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_blend_bsdf_a702893909d451b976e7fbf4785793b1a}\label{structcugar_1_1_blend_bsdf_a702893909d451b976e7fbf4785793b1a}} 
+T\+Bsdf1 {\bfseries bsdf1}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_blend_bsdf_a8beb477a0b37ec4f5f5fbe2965dbcb12}\label{structcugar_1_1_blend_bsdf_a8beb477a0b37ec4f5f5fbe2965dbcb12}} 
+T\+Bsdf2 {\bfseries bsdf2}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcugar_1_1_blend_bsdf_af515289322a7ba88671802d09b4b3b9f}\label{structcugar_1_1_blend_bsdf_af515289322a7ba88671802d09b4b3b9f}} 
+\index{cugar\+::\+Blend\+Bsdf@{cugar\+::\+Blend\+Bsdf}!Blend\+Bsdf@{Blend\+Bsdf}}
+\index{Blend\+Bsdf@{Blend\+Bsdf}!cugar\+::\+Blend\+Bsdf@{cugar\+::\+Blend\+Bsdf}}
+\subsubsection{\texorpdfstring{Blend\+Bsdf()}{BlendBsdf()}}
+{\footnotesize\ttfamily template$<$typename T\+Bsdf1 , typename T\+Bsdf2 $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_blend_bsdf}{cugar\+::\+Blend\+Bsdf}$<$ T\+Bsdf1, T\+Bsdf2 $>$\+::\hyperlink{structcugar_1_1_blend_bsdf}{Blend\+Bsdf} (\begin{DoxyParamCaption}\item[{const float}]{\+\_\+w1 = {\ttfamily 0.5f},  }\item[{const float}]{\+\_\+w2 = {\ttfamily 0.5f},  }\item[{const T\+Bsdf1}]{\+\_\+bsdf1 = {\ttfamily TBsdf1()},  }\item[{const T\+Bsdf2}]{\+\_\+bsdf2 = {\ttfamily TBsdf2()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor\+: this method accepts weights \+\_\+w1 and \+\_\+w2 for the corresponding B\+S\+DF components; the weights must be such that their sum is equal to or less than 1. If it is less, some energy will be absorbed.
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+w1} & the weight of the first B\+S\+DF \\
+\hline
+{\em \+\_\+w2} & the weight of the second B\+S\+DF \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1_blend_bsdf_a5837aacab01105f3023c7653b82a5e65}\label{structcugar_1_1_blend_bsdf_a5837aacab01105f3023c7653b82a5e65}} 
+\index{cugar\+::\+Blend\+Bsdf@{cugar\+::\+Blend\+Bsdf}!f@{f}}
+\index{f@{f}!cugar\+::\+Blend\+Bsdf@{cugar\+::\+Blend\+Bsdf}}
+\subsubsection{\texorpdfstring{f()}{f()}}
+{\footnotesize\ttfamily template$<$typename T\+Bsdf1 , typename T\+Bsdf2 $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector3f} \hyperlink{structcugar_1_1_blend_bsdf}{cugar\+::\+Blend\+Bsdf}$<$ T\+Bsdf1, T\+Bsdf2 $>$\+::f (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&}]{geometry,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{V,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{L }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+evaluate the B\+S\+DF f(\+V,\+L) \mbox{\Hypertarget{structcugar_1_1_blend_bsdf_ac8354f275a1834a351d8347d922e6415}\label{structcugar_1_1_blend_bsdf_ac8354f275a1834a351d8347d922e6415}} 
+\index{cugar\+::\+Blend\+Bsdf@{cugar\+::\+Blend\+Bsdf}!f\+\_\+and\+\_\+p@{f\+\_\+and\+\_\+p}}
+\index{f\+\_\+and\+\_\+p@{f\+\_\+and\+\_\+p}!cugar\+::\+Blend\+Bsdf@{cugar\+::\+Blend\+Bsdf}}
+\subsubsection{\texorpdfstring{f\+\_\+and\+\_\+p()}{f\_and\_p()}}
+{\footnotesize\ttfamily template$<$typename T\+Bsdf1 , typename T\+Bsdf2 $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1_blend_bsdf}{cugar\+::\+Blend\+Bsdf}$<$ T\+Bsdf1, T\+Bsdf2 $>$\+::f\+\_\+and\+\_\+p (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&}]{geometry,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{V,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{L,  }\item[{\hyperlink{structcugar_1_1_vector}{Vector3f} \&}]{f,  }\item[{float \&}]{p,  }\item[{const Spherical\+Measure}]{measure = {\ttfamily kProjectedSolidAngle} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+evaluate the B\+S\+DF and the pdf in a single call \mbox{\Hypertarget{structcugar_1_1_blend_bsdf_a7d5ba65e5d6de1e48ffdf523f31e6cd6}\label{structcugar_1_1_blend_bsdf_a7d5ba65e5d6de1e48ffdf523f31e6cd6}} 
+\index{cugar\+::\+Blend\+Bsdf@{cugar\+::\+Blend\+Bsdf}!f\+\_\+over\+\_\+p@{f\+\_\+over\+\_\+p}}
+\index{f\+\_\+over\+\_\+p@{f\+\_\+over\+\_\+p}!cugar\+::\+Blend\+Bsdf@{cugar\+::\+Blend\+Bsdf}}
+\subsubsection{\texorpdfstring{f\+\_\+over\+\_\+p()}{f\_over\_p()}}
+{\footnotesize\ttfamily template$<$typename T\+Bsdf1 , typename T\+Bsdf2 $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector3f} \hyperlink{structcugar_1_1_blend_bsdf}{cugar\+::\+Blend\+Bsdf}$<$ T\+Bsdf1, T\+Bsdf2 $>$\+::f\+\_\+over\+\_\+p (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&}]{geometry,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{V,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{L }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+evaluate the B\+S\+D\+F/pdf ratio f(\+V,\+L)/p(V,L) wrt projected solid angle \mbox{\Hypertarget{structcugar_1_1_blend_bsdf_a5bfb9e04adb1ba5a5a2cebc49b137561}\label{structcugar_1_1_blend_bsdf_a5bfb9e04adb1ba5a5a2cebc49b137561}} 
+\index{cugar\+::\+Blend\+Bsdf@{cugar\+::\+Blend\+Bsdf}!inverse\+\_\+pdf@{inverse\+\_\+pdf}}
+\index{inverse\+\_\+pdf@{inverse\+\_\+pdf}!cugar\+::\+Blend\+Bsdf@{cugar\+::\+Blend\+Bsdf}}
+\subsubsection{\texorpdfstring{inverse\+\_\+pdf()}{inverse\_pdf()}}
+{\footnotesize\ttfamily template$<$typename T\+Bsdf1 , typename T\+Bsdf2 $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1_blend_bsdf}{cugar\+::\+Blend\+Bsdf}$<$ T\+Bsdf1, T\+Bsdf2 $>$\+::inverse\+\_\+pdf (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&}]{geometry,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{V,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{L,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{u,  }\item[{float \&}]{p,  }\item[{float \&}]{p\+\_\+proj }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+given V and L and u, compute the probability of sampling u by inversion of V and L \mbox{\Hypertarget{structcugar_1_1_blend_bsdf_ae441aab40fa52f1223cd34cafede6a41}\label{structcugar_1_1_blend_bsdf_ae441aab40fa52f1223cd34cafede6a41}} 
+\index{cugar\+::\+Blend\+Bsdf@{cugar\+::\+Blend\+Bsdf}!invert@{invert}}
+\index{invert@{invert}!cugar\+::\+Blend\+Bsdf@{cugar\+::\+Blend\+Bsdf}}
+\subsubsection{\texorpdfstring{invert()}{invert()}}
+{\footnotesize\ttfamily template$<$typename T\+Bsdf1 , typename T\+Bsdf2 $>$ \\
+template$<$typename Random\+GeneratorT $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{structcugar_1_1_blend_bsdf}{cugar\+::\+Blend\+Bsdf}$<$ T\+Bsdf1, T\+Bsdf2 $>$\+::invert (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&}]{geometry,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{V,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{L,  }\item[{Random\+GeneratorT \&}]{random,  }\item[{\hyperlink{structcugar_1_1_vector}{Vector3f} \&}]{z,  }\item[{float \&}]{p,  }\item[{float \&}]{p\+\_\+proj }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+given V and L, invert the sampling functions used to generate L from V \mbox{\Hypertarget{structcugar_1_1_blend_bsdf_a682a0bffe043ff21a03d519921bef7bc}\label{structcugar_1_1_blend_bsdf_a682a0bffe043ff21a03d519921bef7bc}} 
+\index{cugar\+::\+Blend\+Bsdf@{cugar\+::\+Blend\+Bsdf}!p@{p}}
+\index{p@{p}!cugar\+::\+Blend\+Bsdf@{cugar\+::\+Blend\+Bsdf}}
+\subsubsection{\texorpdfstring{p()}{p()}}
+{\footnotesize\ttfamily template$<$typename T\+Bsdf1 , typename T\+Bsdf2 $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_blend_bsdf}{cugar\+::\+Blend\+Bsdf}$<$ T\+Bsdf1, T\+Bsdf2 $>$\+::p (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&}]{geometry,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{V,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{L,  }\item[{const Spherical\+Measure}]{measure = {\ttfamily kProjectedSolidAngle} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+evaluate the pdf of sampling L given V, p(L$\vert$V) = p(\+V,\+L) \mbox{\Hypertarget{structcugar_1_1_blend_bsdf_ad2aff372bc3fa24b90e99505d7cb7c37}\label{structcugar_1_1_blend_bsdf_ad2aff372bc3fa24b90e99505d7cb7c37}} 
+\index{cugar\+::\+Blend\+Bsdf@{cugar\+::\+Blend\+Bsdf}!sample@{sample}}
+\index{sample@{sample}!cugar\+::\+Blend\+Bsdf@{cugar\+::\+Blend\+Bsdf}}
+\subsubsection{\texorpdfstring{sample()}{sample()}}
+{\footnotesize\ttfamily template$<$typename T\+Bsdf1 , typename T\+Bsdf2 $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1_blend_bsdf}{cugar\+::\+Blend\+Bsdf}$<$ T\+Bsdf1, T\+Bsdf2 $>$\+::sample (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{u,  }\item[{const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&}]{geometry,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{V,  }\item[{\hyperlink{structcugar_1_1_vector}{Vector3f} \&}]{L,  }\item[{\hyperlink{structcugar_1_1_vector}{Vector3f} \&}]{g,  }\item[{float \&}]{p,  }\item[{float \&}]{p\+\_\+proj }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+sample L given V and return both the pdf p and the value g = f/p, wrt projected solid angle 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bsdf/\hyperlink{blend_8h}{blend.\+h}\end{DoxyCompactItemize}

@@ -1,0 +1,58 @@
+\hypertarget{structcugar_1_1if__constant}{}\section{cugar\+:\+:if\+\_\+constant$<$ T, R $>$ Struct Template Reference}
+\label{structcugar_1_1if__constant}\index{cugar\+::if\+\_\+constant$<$ T, R $>$@{cugar\+::if\+\_\+constant$<$ T, R $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$typename T, typename R$>$\newline
+struct cugar\+::if\+\_\+constant$<$ T, R $>$}
+
+A functor to select between two output values based on equality to a given constant 
+
+{\ttfamily \#include $<$functors.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1if__constant_ada35cd698be964ddb1241ab1d5619572}\label{structcugar_1_1if__constant_ada35cd698be964ddb1241ab1d5619572}} 
+typedef \hyperlink{structcugar_1_1unary__function__tag}{unary\+\_\+function\+\_\+tag} {\bfseries function\+\_\+tag}
+\item 
+\mbox{\Hypertarget{structcugar_1_1if__constant_a556f0bef0bb0da89f26c8045a6533d73}\label{structcugar_1_1if__constant_a556f0bef0bb0da89f26c8045a6533d73}} 
+typedef T {\bfseries argument\+\_\+type}
+\item 
+\mbox{\Hypertarget{structcugar_1_1if__constant_a6db32c9baffde58c3e87201808a154a0}\label{structcugar_1_1if__constant_a6db32c9baffde58c3e87201808a154a0}} 
+typedef R {\bfseries result\+\_\+type}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1if__constant_a86a62f5771592414a15ee2bc2029352e}{if\+\_\+constant} (const T c, const R r0, const R r1)
+\item 
+\mbox{\Hypertarget{structcugar_1_1if__constant_a1f595bf54abb6a850da069dbc2faaf0c}\label{structcugar_1_1if__constant_a1f595bf54abb6a850da069dbc2faaf0c}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE R {\bfseries operator()} (const T \&v) const
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcugar_1_1if__constant_a86a62f5771592414a15ee2bc2029352e}\label{structcugar_1_1if__constant_a86a62f5771592414a15ee2bc2029352e}} 
+\index{cugar\+::if\+\_\+constant@{cugar\+::if\+\_\+constant}!if\+\_\+constant@{if\+\_\+constant}}
+\index{if\+\_\+constant@{if\+\_\+constant}!cugar\+::if\+\_\+constant@{cugar\+::if\+\_\+constant}}
+\subsubsection{\texorpdfstring{if\+\_\+constant()}{if\_constant()}}
+{\footnotesize\ttfamily template$<$typename T , typename R $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1if__constant}{cugar\+::if\+\_\+constant}$<$ T, R $>$\+::\hyperlink{structcugar_1_1if__constant}{if\+\_\+constant} (\begin{DoxyParamCaption}\item[{const T}]{c,  }\item[{const R}]{r0,  }\item[{const R}]{r1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & constant value \\
+\hline
+{\em r0} & true output value \\
+\hline
+{\em r1} & false output value \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/\hyperlink{functors_8h}{functors.\+h}\end{DoxyCompactItemize}

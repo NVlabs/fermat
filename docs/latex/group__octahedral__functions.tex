@@ -1,0 +1,52 @@
+\hypertarget{group__octahedral__functions}{}\section{Octahedral Functions}
+\label{group__octahedral__functions}\index{Octahedral Functions@{Octahedral Functions}}
+
+
+\subsection{Detailed Description}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcugar_1_1_oct__basis}{cugar\+::\+Oct\+\_\+basis}
+\item 
+struct \hyperlink{structcugar_1_1_oct__smooth__basis}{cugar\+::\+Oct\+\_\+smooth\+\_\+basis}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+A\+PI C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{group__octahedral__functions_gab5a718bf9c2f681d6ee998cdc429f5ef}{cugar\+::oct\+\_\+basis} (const int32 i, const \hyperlink{structcugar_1_1_vector}{Vector3f} \&d)
+\item 
+C\+U\+G\+A\+R\+\_\+\+A\+PI C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{group__octahedral__functions_ga71566a5a9606f7c37b4b04c9b6c8bac5}{cugar\+::oct\+\_\+smooth\+\_\+basis} (const int32 i, const \hyperlink{structcugar_1_1_vector}{Vector3f} \&omega)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__octahedral__functions_gab5a718bf9c2f681d6ee998cdc429f5ef}\label{group__octahedral__functions_gab5a718bf9c2f681d6ee998cdc429f5ef}} 
+\index{Octahedral Functions@{Octahedral Functions}!oct\+\_\+basis@{oct\+\_\+basis}}
+\index{oct\+\_\+basis@{oct\+\_\+basis}!Octahedral Functions@{Octahedral Functions}}
+\subsubsection{\texorpdfstring{oct\+\_\+basis()}{oct\_basis()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+ST C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE float cugar\+::oct\+\_\+basis (\begin{DoxyParamCaption}\item[{const int32}]{i,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f} \&}]{d }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+evaluate the i-\/th octahedral function
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & function index \\
+\hline
+{\em d} & input direction vector \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__octahedral__functions_ga71566a5a9606f7c37b4b04c9b6c8bac5}\label{group__octahedral__functions_ga71566a5a9606f7c37b4b04c9b6c8bac5}} 
+\index{Octahedral Functions@{Octahedral Functions}!oct\+\_\+smooth\+\_\+basis@{oct\+\_\+smooth\+\_\+basis}}
+\index{oct\+\_\+smooth\+\_\+basis@{oct\+\_\+smooth\+\_\+basis}!Octahedral Functions@{Octahedral Functions}}
+\subsubsection{\texorpdfstring{oct\+\_\+smooth\+\_\+basis()}{oct\_smooth\_basis()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float cugar\+::oct\+\_\+smooth\+\_\+basis (\begin{DoxyParamCaption}\item[{const int32}]{i,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f} \&}]{omega }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+evaluate the i-\/th smoothed octahedral function
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & function index \\
+\hline
+{\em d} & input direction vector \\
+\hline
+\end{DoxyParams}

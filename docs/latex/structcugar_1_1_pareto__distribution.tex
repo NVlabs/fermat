@@ -1,0 +1,76 @@
+\hypertarget{structcugar_1_1_pareto__distribution}{}\section{cugar\+:\+:Pareto\+\_\+distribution Struct Reference}
+\label{structcugar_1_1_pareto__distribution}\index{cugar\+::\+Pareto\+\_\+distribution@{cugar\+::\+Pareto\+\_\+distribution}}
+
+
+\subsection{Detailed description}
+Pareto distribution 
+
+{\ttfamily \#include $<$distributions.\+h$>$}
+
+Inheritance diagram for cugar\+:\+:Pareto\+\_\+distribution\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{structcugar_1_1_pareto__distribution}
+\end{center}
+\end{figure}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_pareto__distribution_a316908fdf3b7a364f5cf4d5c78309527}{Pareto\+\_\+distribution} (const float a, const float min)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_pareto__distribution_ac168806c81e9638f01ba994e746ed30f}{map} (const float U) const
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_pareto__distribution_ab4fff6aa700593597ff36de102b62d43}{density} (const float x) const
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcugar_1_1_pareto__distribution_a316908fdf3b7a364f5cf4d5c78309527}\label{structcugar_1_1_pareto__distribution_a316908fdf3b7a364f5cf4d5c78309527}} 
+\index{cugar\+::\+Pareto\+\_\+distribution@{cugar\+::\+Pareto\+\_\+distribution}!Pareto\+\_\+distribution@{Pareto\+\_\+distribution}}
+\index{Pareto\+\_\+distribution@{Pareto\+\_\+distribution}!cugar\+::\+Pareto\+\_\+distribution@{cugar\+::\+Pareto\+\_\+distribution}}
+\subsubsection{\texorpdfstring{Pareto\+\_\+distribution()}{Pareto\_distribution()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE cugar\+::\+Pareto\+\_\+distribution\+::\+Pareto\+\_\+distribution (\begin{DoxyParamCaption}\item[{const float}]{a,  }\item[{const float}]{min }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & distribution parameter \\
+\hline
+{\em min} & distribution parameter \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1_pareto__distribution_ab4fff6aa700593597ff36de102b62d43}\label{structcugar_1_1_pareto__distribution_ab4fff6aa700593597ff36de102b62d43}} 
+\index{cugar\+::\+Pareto\+\_\+distribution@{cugar\+::\+Pareto\+\_\+distribution}!density@{density}}
+\index{density@{density}!cugar\+::\+Pareto\+\_\+distribution@{cugar\+::\+Pareto\+\_\+distribution}}
+\subsubsection{\texorpdfstring{density()}{density()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float cugar\+::\+Pareto\+\_\+distribution\+::density (\begin{DoxyParamCaption}\item[{const float}]{x }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+probability density function
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & sample location \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1_pareto__distribution_ac168806c81e9638f01ba994e746ed30f}\label{structcugar_1_1_pareto__distribution_ac168806c81e9638f01ba994e746ed30f}} 
+\index{cugar\+::\+Pareto\+\_\+distribution@{cugar\+::\+Pareto\+\_\+distribution}!map@{map}}
+\index{map@{map}!cugar\+::\+Pareto\+\_\+distribution@{cugar\+::\+Pareto\+\_\+distribution}}
+\subsubsection{\texorpdfstring{map()}{map()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float cugar\+::\+Pareto\+\_\+distribution\+::map (\begin{DoxyParamCaption}\item[{const float}]{U }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+transform a uniformly distributed number through the distribution
+
+
+\begin{DoxyParams}{Parameters}
+{\em U} & real number to transform \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/sampling/\hyperlink{distributions_8h}{distributions.\+h}\end{DoxyCompactItemize}

@@ -1,0 +1,142 @@
+\hypertarget{group___basic_functors}{}\section{Basic Functors Module}
+\label{group___basic_functors}\index{Basic Functors Module@{Basic Functors Module}}
+
+
+\subsection{Detailed Description}
+This module implements several basic functors \subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcugar_1_1unary__function__tag}{cugar\+::unary\+\_\+function\+\_\+tag}
+\item 
+struct \hyperlink{structcugar_1_1binary__function__tag}{cugar\+::binary\+\_\+function\+\_\+tag}
+\item 
+struct \hyperlink{structcugar_1_1ternary__function__tag}{cugar\+::ternary\+\_\+function\+\_\+tag}
+\item 
+struct \hyperlink{structcugar_1_1default__predicate}{cugar\+::default\+\_\+predicate$<$ T $>$}
+\item 
+struct \hyperlink{structcugar_1_1constant__functor}{cugar\+::constant\+\_\+functor$<$ T, R $>$}
+\item 
+struct \hyperlink{structcugar_1_1one__fun}{cugar\+::one\+\_\+fun$<$ T, R $>$}
+\item 
+struct \hyperlink{structcugar_1_1one__or__zero}{cugar\+::one\+\_\+or\+\_\+zero}
+\item 
+struct \hyperlink{structcugar_1_1not__functor}{cugar\+::not\+\_\+functor$<$ T $>$}
+\item 
+struct \hyperlink{structcugar_1_1minus__one}{cugar\+::minus\+\_\+one$<$ T $>$}
+\item 
+struct \hyperlink{structcugar_1_1binder1st}{cugar\+::binder1st$<$ F, C $>$}
+\item 
+struct \hyperlink{structcugar_1_1binder2nd}{cugar\+::binder2nd$<$ F, C $>$}
+\item 
+struct \hyperlink{structcugar_1_1component__functor}{cugar\+::component\+\_\+functor$<$ Vector\+\_\+type $>$}
+\item 
+struct \hyperlink{structcugar_1_1sqr__functor}{cugar\+::sqr\+\_\+functor$<$ T $>$}
+\item 
+struct \hyperlink{structcugar_1_1greater__than__zero}{cugar\+::greater\+\_\+than\+\_\+zero$<$ T $>$}
+\item 
+struct \hyperlink{structcugar_1_1equal__functor}{cugar\+::equal\+\_\+functor$<$ T $>$}
+\item 
+struct \hyperlink{structcugar_1_1not__equal__functor}{cugar\+::not\+\_\+equal\+\_\+functor$<$ T $>$}
+\item 
+struct \hyperlink{structcugar_1_1eq__constant}{cugar\+::eq\+\_\+constant$<$ T $>$}
+\item 
+struct \hyperlink{structcugar_1_1neq__constant}{cugar\+::neq\+\_\+constant$<$ T $>$}
+\item 
+struct \hyperlink{structcugar_1_1if__true__functor}{cugar\+::if\+\_\+true\+\_\+functor$<$ T, R $>$}
+\item 
+struct \hyperlink{structcugar_1_1if__constant}{cugar\+::if\+\_\+constant$<$ T, R $>$}
+\item 
+struct \hyperlink{structcugar_1_1compose__unary}{cugar\+::compose\+\_\+unary$<$ F1, F2 $>$}
+\item 
+struct \hyperlink{structcugar_1_1compose__binary}{cugar\+::compose\+\_\+binary$<$ F, G1, G2 $>$}
+\item 
+struct \hyperlink{structcugar_1_1compose__unary__after__binary}{cugar\+::compose\+\_\+unary\+\_\+after\+\_\+binary$<$ F1, F2 $>$}
+\item 
+struct \hyperlink{structcugar_1_1composition__type}{cugar\+::composition\+\_\+type$<$ F1, F2, T1, T2 $>$}
+\item 
+struct \hyperlink{structcugar_1_1composition__type_3_01_f1_00_01_f2_00_01unary__function__tag_00_01binary__function__tag_01_4}{cugar\+::composition\+\_\+type$<$ F1, F2, unary\+\_\+function\+\_\+tag, binary\+\_\+function\+\_\+tag $>$}
+\item 
+struct \hyperlink{structcugar_1_1composition__type_3_01_f1_00_01_f2_00_01unary__function__tag_00_01unary__function__tag_01_4}{cugar\+::composition\+\_\+type$<$ F1, F2, unary\+\_\+function\+\_\+tag, unary\+\_\+function\+\_\+tag $>$}
+\item 
+struct \hyperlink{structcugar_1_1min__functor}{cugar\+::min\+\_\+functor$<$ T $>$}
+\item 
+struct \hyperlink{structcugar_1_1max__functor}{cugar\+::max\+\_\+functor$<$ T $>$}
+\item 
+struct \hyperlink{structcugar_1_1add}{cugar\+::add$<$ T $>$}
+\item 
+struct \hyperlink{structcugar_1_1binary__or}{cugar\+::binary\+\_\+or$<$ T $>$}
+\item 
+struct \hyperlink{structcugar_1_1binary__and}{cugar\+::binary\+\_\+and$<$ T $>$}
+\item 
+struct \hyperlink{structcugar_1_1mask__and}{cugar\+::mask\+\_\+and$<$ T $>$}
+\item 
+struct \hyperlink{structcugar_1_1mask__or}{cugar\+::mask\+\_\+or$<$ T $>$}
+\item 
+struct \hyperlink{structcugar_1_1l__bit__shift}{cugar\+::l\+\_\+bit\+\_\+shift$<$ T $>$}
+\item 
+struct \hyperlink{structcugar_1_1r__bit__shift}{cugar\+::r\+\_\+bit\+\_\+shift$<$ T $>$}
+\item 
+struct \hyperlink{structcugar_1_1clamped__cosine__functor}{cugar\+::clamped\+\_\+cosine\+\_\+functor$<$ Vector\+\_\+type $>$}
+\item 
+struct \hyperlink{structcugar_1_1abs__cosine__functor}{cugar\+::abs\+\_\+cosine\+\_\+functor$<$ Vector\+\_\+type $>$}
+\item 
+struct \hyperlink{structcugar_1_1less}{cugar\+::less$<$ T $>$}
+\item 
+struct \hyperlink{structcugar_1_1greater}{cugar\+::greater$<$ T $>$}
+\item 
+struct \hyperlink{structcugar_1_1leading__bits}{cugar\+::leading\+\_\+bits$<$ word\+\_\+type $>$}
+\item 
+struct \hyperlink{structcugar_1_1shift__left}{cugar\+::shift\+\_\+left$<$ word\+\_\+type $>$}
+\item 
+struct \hyperlink{structcugar_1_1shift__right}{cugar\+::shift\+\_\+right$<$ word\+\_\+type $>$}
+\item 
+struct \hyperlink{structcugar_1_1hi__bits__functor}{cugar\+::hi\+\_\+bits\+\_\+functor$<$ T, U $>$}
+\item 
+struct \hyperlink{structcugar_1_1hi__bits__functor_3_01uint8_00_01uint32_01_4}{cugar\+::hi\+\_\+bits\+\_\+functor$<$ uint8, uint32 $>$}
+\item 
+struct \hyperlink{structcugar_1_1hi__bits__functor_3_01uint16_00_01uint32_01_4}{cugar\+::hi\+\_\+bits\+\_\+functor$<$ uint16, uint32 $>$}
+\item 
+struct \hyperlink{structcugar_1_1hi__bits__functor_3_01uint32_00_01uint32_01_4}{cugar\+::hi\+\_\+bits\+\_\+functor$<$ uint32, uint32 $>$}
+\item 
+struct \hyperlink{structcugar_1_1hi__bits__functor_3_01uint32_00_01uint64_01_4}{cugar\+::hi\+\_\+bits\+\_\+functor$<$ uint32, uint64 $>$}
+\item 
+struct \hyperlink{structcugar_1_1is__true__functor}{cugar\+::is\+\_\+true\+\_\+functor$<$ T $>$}
+\item 
+struct \hyperlink{structcugar_1_1is__false__functor}{cugar\+::is\+\_\+false\+\_\+functor$<$ T $>$}
+\item 
+struct \hyperlink{structcugar_1_1gather__functor}{cugar\+::gather\+\_\+functor$<$ Iterator, index\+\_\+type $>$}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___basic_functors_gac0e691c6a1f8ba14c912f00a19c053d9}\label{group___basic_functors_gac0e691c6a1f8ba14c912f00a19c053d9}} 
+{\footnotesize template$<$typename F , typename C $>$ }\\\hyperlink{structcugar_1_1binder1st}{binder1st}$<$ F, C $>$ {\bfseries cugar\+::bind1st} (const F \&f, const C c)
+\item 
+\mbox{\Hypertarget{group___basic_functors_ga08cd1637715914189f164bf35f36e794}\label{group___basic_functors_ga08cd1637715914189f164bf35f36e794}} 
+{\footnotesize template$<$typename F , typename C $>$ }\\\hyperlink{structcugar_1_1binder2nd}{binder2nd}$<$ F, C $>$ {\bfseries cugar\+::bind2nd} (const F \&f, const C c)
+\item 
+{\footnotesize template$<$typename F1 , typename F2 $>$ }\\\hyperlink{structcugar_1_1composition__type}{composition\+\_\+type}$<$ F1, F2, typename F1\+::function\+\_\+tag, typename F2\+::function\+\_\+tag $>$\+::type \hyperlink{group___basic_functors_ga3f7ecfc55f5d92661c8cb23428d52f7b}{cugar\+::compose} (const F1 f1, const F2 f2)
+\item 
+{\footnotesize template$<$typename F , typename G1 , typename G2 $>$ }\\\hyperlink{structcugar_1_1compose__binary}{compose\+\_\+binary}$<$ F, G1, G2 $>$ \hyperlink{group___basic_functors_gadbd492970eb013a975551b9cf4b846fe}{cugar\+::compose} (const F f, const G1 g1, const G2 g2)
+\item 
+\mbox{\Hypertarget{group___basic_functors_ga9ddc5a46d21892ed104592b370f67011}\label{group___basic_functors_ga9ddc5a46d21892ed104592b370f67011}} 
+{\footnotesize template$<$typename Iterator $>$ }\\\hyperlink{structcugar_1_1gather__functor}{gather\+\_\+functor}$<$ Iterator $>$ {\bfseries cugar\+::make\+\_\+gather\+\_\+functor} (const Iterator perm)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___basic_functors_ga3f7ecfc55f5d92661c8cb23428d52f7b}\label{group___basic_functors_ga3f7ecfc55f5d92661c8cb23428d52f7b}} 
+\index{Basic Functors Module@{Basic Functors Module}!compose@{compose}}
+\index{compose@{compose}!Basic Functors Module@{Basic Functors Module}}
+\subsubsection{\texorpdfstring{compose()}{compose()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename F1 , typename F2 $>$ \\
+\hyperlink{structcugar_1_1composition__type}{composition\+\_\+type}$<$F1,F2,typename F1\+::function\+\_\+tag,typename F2\+::function\+\_\+tag$>$\+::type cugar\+::compose (\begin{DoxyParamCaption}\item[{const F1}]{f1,  }\item[{const F2}]{f2 }\end{DoxyParamCaption})}
+
+compose two functions \mbox{\Hypertarget{group___basic_functors_gadbd492970eb013a975551b9cf4b846fe}\label{group___basic_functors_gadbd492970eb013a975551b9cf4b846fe}} 
+\index{Basic Functors Module@{Basic Functors Module}!compose@{compose}}
+\index{compose@{compose}!Basic Functors Module@{Basic Functors Module}}
+\subsubsection{\texorpdfstring{compose()}{compose()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename F , typename G1 , typename G2 $>$ \\
+\hyperlink{structcugar_1_1compose__binary}{compose\+\_\+binary}$<$F,G1,G2$>$ cugar\+::compose (\begin{DoxyParamCaption}\item[{const F}]{f,  }\item[{const G1}]{g1,  }\item[{const G2}]{g2 }\end{DoxyParamCaption})}
+
+compose a binary function after two unary ones 

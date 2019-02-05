@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2015-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -29,6 +29,7 @@
 #pragma once
 
 #include <cuda_runtime.h>
+#include <cugar/basic/types.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <cassert>
@@ -79,6 +80,21 @@
 
 #define FERMAT_ALMOST_ONE_AS_INT	0x3F7FFFFFu
 
+#if defined(WIN32)
+  #if defined(FERMAT_EXPORTS) && !defined(FERMAT_DEVICE_COMPILATION)
+    #define FERMAT_API __declspec(dllexport)
+    #define FERMAT_API_EXTERN
+  #elif defined(FERMAT_IMPORTS) && !defined(FERMAT_DEVICE_COMPILATION)
+    #define FERMAT_API __declspec(dllimport)
+    #define FERMAT_API_EXTERN extern
+  #else
+    #define FERMAT_API 
+    #define FERMAT_API_EXTERN
+  #endif
+#else
+  #define FERMAT_API
+#endif
+
 #if 0
 typedef unsigned long long  uint64_t;
 typedef unsigned int		uint32_t;
@@ -90,6 +106,7 @@ typedef short				int16_t;
 typedef char				int8_t;
 #endif
 
+#if 0
 typedef uint64_t uint64;
 typedef uint32_t uint32;
 typedef uint16_t uint16;
@@ -98,3 +115,13 @@ typedef int64_t int64;
 typedef int32_t int32;
 typedef int16_t int16;
 typedef int8_t  int8;
+#else
+using cugar::uint64;
+using cugar::uint32;
+using cugar::uint16;
+using cugar::uint8;
+using cugar::int64;
+using cugar::int32;
+using cugar::int16;
+using cugar::int8;
+#endif

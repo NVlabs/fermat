@@ -1,0 +1,48 @@
+\hypertarget{sh_8h}{}\section{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/spherical/sh.h File Reference}
+\label{sh_8h}\index{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/spherical/sh.\+h@{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/spherical/sh.\+h}}
+
+
+Defines spherical and zonal harmonics functions and classes.  
+
+
+{\ttfamily \#include $<$cugar/basic/numbers.\+h$>$}\newline
+{\ttfamily \#include $<$cugar/linalg/vector.\+h$>$}\newline
+{\ttfamily \#include $<$cugar/analysis/project.\+h$>$}\newline
+{\ttfamily \#include $<$cugar/basic/functors.\+h$>$}\newline
+{\ttfamily \#include $<$cugar/spherical/sh\+\_\+inline.\+h$>$}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcugar_1_1_s_h__basis}{cugar\+::\+S\+H\+\_\+basis$<$ L $>$}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespacecugar}{cugar}
+\begin{DoxyCompactList}\small\item\em Define a \hyperlink{structcugar_1_1vector__view}{vector\+\_\+view} P\+OD type and \hyperlink{namespacecugar_a347f91de482f0cb8dcba21c086b0aa46}{plain\+\_\+view()} for std\+::vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Vector3 $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{group__spherical__harmonics_ga4a19db33e0259a49e5d872f18d7996c2}{cugar\+::sh} (const int32 l, const int32 m, const Vector3 \&v)
+\item 
+{\footnotesize template$<$int32 l, typename Vector3 $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{group__spherical__harmonics_gacbaf1fe0a158310ce09117940766f617}{cugar\+::sh} (const int32 m, const Vector3 \&v)
+\item 
+{\footnotesize template$<$int32 l, int32 m, typename Vector3 $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{group__spherical__harmonics_ga41a8f3c96516611a04d677c1af75c542}{cugar\+::sh} (const Vector3 \&v)
+\item 
+{\footnotesize template$<$typename Z\+H\+Vector , typename S\+H\+Vector , typename Vector3 $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group__spherical__harmonics_ga5d1edfb2dfc7c53051c512e0d7c6d21d}{cugar\+::rotate\+\_\+\+ZH} (const int32 L, const Z\+H\+Vector \&zh\+\_\+coeff, const Vector3 \&d, S\+H\+Vector \&sh\+\_\+coeff)
+\item 
+{\footnotesize template$<$int32 L, typename Z\+H\+Vector , typename S\+H\+Vector , typename Vector3 $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group__spherical__harmonics_ga26fd25de1095f8c798028bce5bcf3922}{cugar\+::rotate\+\_\+\+ZH} (const Z\+H\+Vector \&zh\+\_\+coeff, const Vector3 \&d, S\+H\+Vector \&sh\+\_\+coeff)
+\item 
+{\footnotesize template$<$int32 l, int32 m, typename Vector3 $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{group__spherical__harmonics_gafb4e2ee177fc0d4bf43999edd3aed697}{cugar\+::rotate\+\_\+\+ZH} (const float zh\+\_\+l, const Vector3 \&d)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{group__spherical__harmonics_ga42386bd8275ff973952f8d88e6c58cbf}{cugar\+::sh\+\_\+legendre\+\_\+polynomial} (const uint32 l, const uint32 m, const float x, const float y)
+\item 
+{\footnotesize template$<$typename Output\+Iterator $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group__spherical__harmonics_ga609b7d6a3f4d56d1d111b6d50a8d82a7}{cugar\+::sh\+\_\+legendre\+\_\+integrals} (const uint32 n, const float x, Output\+Iterator r)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{group__spherical__harmonics_ga8018a68e82e9f27c253af9880d70f98d}{cugar\+::sh\+\_\+polar\+\_\+integral} (const int32 m, const float phi)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Defines spherical and zonal harmonics functions and classes. 
+

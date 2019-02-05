@@ -1,0 +1,53 @@
+\hypertarget{struct_r_p_t_v_p_l_storage}{}\section{R\+P\+T\+V\+P\+L\+Storage Struct Reference}
+\label{struct_r_p_t_v_p_l_storage}\index{R\+P\+T\+V\+P\+L\+Storage@{R\+P\+T\+V\+P\+L\+Storage}}
+
+
+\subsection{Detailed description}
+\hyperlink{struct_r_p_t}{R\+PT} \hyperlink{struct_v_p_l}{V\+PL} storage\+: The reuse-\/based path tracer encodes ray hits as \char`\"{}virtual point lights\char`\"{} to be used by neighboring pixels; this class implements their storage. 
+
+{\ttfamily \#include $<$rpt.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_r_p_t_v_p_l_storage_a017acca5f0875803911bc99799ddc429}\label{struct_r_p_t_v_p_l_storage_a017acca5f0875803911bc99799ddc429}} 
+void {\bfseries alloc} (const uint32 pixels)
+\item 
+\mbox{\Hypertarget{struct_r_p_t_v_p_l_storage_ab9155a06eae5903867d4ebc91190345a}\label{struct_r_p_t_v_p_l_storage_ab9155a06eae5903867d4ebc91190345a}} 
+\hyperlink{struct_r_p_t_v_p_l_view}{R\+P\+T\+V\+P\+L\+View} {\bfseries view} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_r_p_t_v_p_l_storage_acbc7bc2968ba0890f1908519553b67d4}\label{struct_r_p_t_v_p_l_storage_acbc7bc2968ba0890f1908519553b67d4}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float4 $>$ {\bfseries m\+\_\+pos}
+\item 
+\mbox{\Hypertarget{struct_r_p_t_v_p_l_storage_aa2e4f83957318b2f11f3f412c534a4ad}\label{struct_r_p_t_v_p_l_storage_aa2e4f83957318b2f11f3f412c534a4ad}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, uint4 $>$ {\bfseries m\+\_\+gbuffer}
+\item 
+\mbox{\Hypertarget{struct_r_p_t_v_p_l_storage_aa4f7eaca20a1d8aef01a24ef5c8f8b68}\label{struct_r_p_t_v_p_l_storage_aa4f7eaca20a1d8aef01a24ef5c8f8b68}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, uint4 $>$ {\bfseries m\+\_\+ebuffer}
+\item 
+\mbox{\Hypertarget{struct_r_p_t_v_p_l_storage_a20d6754f7e745aa6bc19a6157e6660fc}\label{struct_r_p_t_v_p_l_storage_a20d6754f7e745aa6bc19a6157e6660fc}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float4 $>$ {\bfseries m\+\_\+weight}
+\item 
+\mbox{\Hypertarget{struct_r_p_t_v_p_l_storage_a646f957b5b903d9c1126e770939ac550}\label{struct_r_p_t_v_p_l_storage_a646f957b5b903d9c1126e770939ac550}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float4 $>$ {\bfseries m\+\_\+weight2}
+\item 
+\mbox{\Hypertarget{struct_r_p_t_v_p_l_storage_a8f2601f8c1e1255ba7ae7e2207ed9697}\label{struct_r_p_t_v_p_l_storage_a8f2601f8c1e1255ba7ae7e2207ed9697}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, uint32 $>$ {\bfseries m\+\_\+in\+\_\+dir}
+\item 
+\mbox{\Hypertarget{struct_r_p_t_v_p_l_storage_a7cc0c9a6c8e216d2e71f091ffcdb50a7}\label{struct_r_p_t_v_p_l_storage_a7cc0c9a6c8e216d2e71f091ffcdb50a7}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, uint32 $>$ {\bfseries m\+\_\+in\+\_\+dir2}
+\item 
+\mbox{\Hypertarget{struct_r_p_t_v_p_l_storage_a3c7e4d1287ab9921b2690ae33c56a876}\label{struct_r_p_t_v_p_l_storage_a3c7e4d1287ab9921b2690ae33c56a876}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float4 $>$ {\bfseries m\+\_\+in\+\_\+alpha}
+\item 
+\mbox{\Hypertarget{struct_r_p_t_v_p_l_storage_a1727425d44f791b706ef3796497d5832}\label{struct_r_p_t_v_p_l_storage_a1727425d44f791b706ef3796497d5832}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float4 $>$ {\bfseries m\+\_\+in\+\_\+alpha2}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/renderers/rpt.\+h\end{DoxyCompactItemize}

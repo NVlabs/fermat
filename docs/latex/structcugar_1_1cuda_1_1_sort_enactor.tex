@@ -1,0 +1,101 @@
+\hypertarget{structcugar_1_1cuda_1_1_sort_enactor}{}\section{cugar\+:\+:cuda\+:\+:Sort\+Enactor Struct Reference}
+\label{structcugar_1_1cuda_1_1_sort_enactor}\index{cugar\+::cuda\+::\+Sort\+Enactor@{cugar\+::cuda\+::\+Sort\+Enactor}}
+
+
+\subsection{Detailed description}
+\begin{DoxyParagraph}{}
+A simple class to enact sorts of various kinds 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The way most parallel sorting algorithms work require having a set of ping-\/pong buffers that are exchanged at every pass through the data. In order to do this, and communicate where the sorted data lies after its work, \hyperlink{structcugar_1_1cuda_1_1_sort_enactor}{Sort\+Enactor} employs an auxiliary class, \hyperlink{structcugar_1_1cuda_1_1_sort_buffers}{Sort\+Buffers}. The following example shows their combined usage.
+\end{DoxyParagraph}
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{void} sort\_test(\textcolor{keyword}{const} uint32 n, uint32* h\_keys, uint32* h\_data)
+\{
+    \textcolor{comment}{// allocate twice as much storage as the input to accomodate for ping-pong buffers}
+    \hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint32>} d\_keys( n * 2 );
+    \hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint32>} d\_data( n * 2 );
+
+    \textcolor{comment}{// copy the test data to the host}
+    thrust::copy( h\_keys, h\_keys + n, d\_keys.begin() );
+    thrust::copy( h\_data, h\_data + n, d\_data.begin() );
+
+    \textcolor{comment}{// prepare the sorting buffers}
+    cuda::SortBuffers<uint32*,uint32*> sort\_buffers;
+    sort\_buffers.keys[0] = \hyperlink{namespacecugar_a3f6cb2c817f2ba065931cec569aa848b}{raw\_pointer}( d\_keys );
+    sort\_buffers.keys[1] = \hyperlink{namespacecugar_a3f6cb2c817f2ba065931cec569aa848b}{raw\_pointer}( d\_keys ) + n;
+    sort\_buffers.data[0] = \hyperlink{namespacecugar_a3f6cb2c817f2ba065931cec569aa848b}{raw\_pointer}( d\_data );
+    sort\_buffers.data[1] = \hyperlink{namespacecugar_a3f6cb2c817f2ba065931cec569aa848b}{raw\_pointer}( d\_data ) + n;
+
+    \textcolor{comment}{// and sort the data}
+    cuda::SortEnactor sort\_enactor;
+    sort\_enactor.sort( n, sort\_buffers );
+
+    \textcolor{comment}{// the sorted device data is now in here:}
+    uint32* d\_sorted\_keys = sort\_buffers.current\_keys();
+    uint32* d\_sorted\_data = sort\_buffers.current\_values();
+    ...
+\}
+\end{DoxyCode}
+ 
+
+{\ttfamily \#include $<$sort.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structcugar_1_1cuda_1_1_sort_enactor_ac1aed4c8b9362ca5e349bd4b0fbd4c18}{Sort\+Enactor} ()
+\item 
+\hyperlink{structcugar_1_1cuda_1_1_sort_enactor_abf18529a97f46aefeea4c9056118e6bf}{$\sim$\+Sort\+Enactor} ()
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_sort_enactor_ad1a1f71ceab48b96a080bed38713358e}\label{structcugar_1_1cuda_1_1_sort_enactor_ad1a1f71ceab48b96a080bed38713358e}} 
+void {\bfseries sort} (const uint32 count, \hyperlink{structcugar_1_1cuda_1_1_sort_buffers}{Sort\+Buffers}$<$ uint8 $\ast$, uint32 $\ast$$>$ \&buffers, const uint32 begin\+\_\+bit=0, const uint32 end\+\_\+bit=8)
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_sort_enactor_ac80590f55902fe181d294a3b49d739b8}\label{structcugar_1_1cuda_1_1_sort_enactor_ac80590f55902fe181d294a3b49d739b8}} 
+void {\bfseries sort} (const uint32 count, \hyperlink{structcugar_1_1cuda_1_1_sort_buffers}{Sort\+Buffers}$<$ uint16 $\ast$, uint32 $\ast$$>$ \&buffers, const uint32 begin\+\_\+bit=0, const uint32 end\+\_\+bit=16)
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_sort_enactor_a57191614b996f83a9a459608bcd85bc2}\label{structcugar_1_1cuda_1_1_sort_enactor_a57191614b996f83a9a459608bcd85bc2}} 
+void {\bfseries sort} (const uint32 count, \hyperlink{structcugar_1_1cuda_1_1_sort_buffers}{Sort\+Buffers}$<$ uint32 $\ast$, uint32 $\ast$$>$ \&buffers, const uint32 begin\+\_\+bit=0, const uint32 end\+\_\+bit=32)
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_sort_enactor_a591352f52421ab697cabe195460636be}\label{structcugar_1_1cuda_1_1_sort_enactor_a591352f52421ab697cabe195460636be}} 
+void {\bfseries sort} (const uint32 count, \hyperlink{structcugar_1_1cuda_1_1_sort_buffers}{Sort\+Buffers}$<$ uint32 $\ast$, uint64 $\ast$$>$ \&buffers, const uint32 begin\+\_\+bit=0, const uint32 end\+\_\+bit=32)
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_sort_enactor_a77c4af32cc1bcade4353704c27c28b53}\label{structcugar_1_1cuda_1_1_sort_enactor_a77c4af32cc1bcade4353704c27c28b53}} 
+void {\bfseries sort} (const uint32 count, \hyperlink{structcugar_1_1cuda_1_1_sort_buffers}{Sort\+Buffers}$<$ uint64 $\ast$, uint32 $\ast$$>$ \&buffers, const uint32 begin\+\_\+bit=0, const uint32 end\+\_\+bit=64)
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_sort_enactor_a6a001d2ccd71d808eb8cdf6b66df042a}\label{structcugar_1_1cuda_1_1_sort_enactor_a6a001d2ccd71d808eb8cdf6b66df042a}} 
+void {\bfseries sort} (const uint32 count, \hyperlink{structcugar_1_1cuda_1_1_sort_buffers}{Sort\+Buffers}$<$ uint64 $\ast$, uint64 $\ast$$>$ \&buffers, const uint32 begin\+\_\+bit=0, const uint32 end\+\_\+bit=64)
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_sort_enactor_ac8efe7d94a0912cdc17d123d73db48de}\label{structcugar_1_1cuda_1_1_sort_enactor_ac8efe7d94a0912cdc17d123d73db48de}} 
+void {\bfseries sort} (const uint32 count, \hyperlink{structcugar_1_1cuda_1_1_sort_buffers}{Sort\+Buffers}$<$ uint8 $\ast$$>$ \&buffers, const uint32 begin\+\_\+bit=0, const uint32 end\+\_\+bit=8)
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_sort_enactor_a947c35bc6d921aa46c79beb86f78cacb}\label{structcugar_1_1cuda_1_1_sort_enactor_a947c35bc6d921aa46c79beb86f78cacb}} 
+void {\bfseries sort} (const uint32 count, \hyperlink{structcugar_1_1cuda_1_1_sort_buffers}{Sort\+Buffers}$<$ uint16 $\ast$$>$ \&buffers, const uint32 begin\+\_\+bit=0, const uint32 end\+\_\+bit=16)
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_sort_enactor_ae1a45d3aa7dc26b5f84889f5e9d3f638}\label{structcugar_1_1cuda_1_1_sort_enactor_ae1a45d3aa7dc26b5f84889f5e9d3f638}} 
+void {\bfseries sort} (const uint32 count, \hyperlink{structcugar_1_1cuda_1_1_sort_buffers}{Sort\+Buffers}$<$ uint32 $\ast$$>$ \&buffers, const uint32 begin\+\_\+bit=0, const uint32 end\+\_\+bit=32)
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_sort_enactor_aff579dfe9527392d1b364056358fd00e}\label{structcugar_1_1cuda_1_1_sort_enactor_aff579dfe9527392d1b364056358fd00e}} 
+void {\bfseries sort} (const uint32 count, \hyperlink{structcugar_1_1cuda_1_1_sort_buffers}{Sort\+Buffers}$<$ uint64 $\ast$$>$ \&buffers, const uint32 begin\+\_\+bit=0, const uint32 end\+\_\+bit=64)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_sort_enactor_ac1aed4c8b9362ca5e349bd4b0fbd4c18}\label{structcugar_1_1cuda_1_1_sort_enactor_ac1aed4c8b9362ca5e349bd4b0fbd4c18}} 
+\index{cugar\+::cuda\+::\+Sort\+Enactor@{cugar\+::cuda\+::\+Sort\+Enactor}!Sort\+Enactor@{Sort\+Enactor}}
+\index{Sort\+Enactor@{Sort\+Enactor}!cugar\+::cuda\+::\+Sort\+Enactor@{cugar\+::cuda\+::\+Sort\+Enactor}}
+\subsubsection{\texorpdfstring{Sort\+Enactor()}{SortEnactor()}}
+{\footnotesize\ttfamily cugar\+::cuda\+::\+Sort\+Enactor\+::\+Sort\+Enactor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+constructor \mbox{\Hypertarget{structcugar_1_1cuda_1_1_sort_enactor_abf18529a97f46aefeea4c9056118e6bf}\label{structcugar_1_1cuda_1_1_sort_enactor_abf18529a97f46aefeea4c9056118e6bf}} 
+\index{cugar\+::cuda\+::\+Sort\+Enactor@{cugar\+::cuda\+::\+Sort\+Enactor}!````~Sort\+Enactor@{$\sim$\+Sort\+Enactor}}
+\index{````~Sort\+Enactor@{$\sim$\+Sort\+Enactor}!cugar\+::cuda\+::\+Sort\+Enactor@{cugar\+::cuda\+::\+Sort\+Enactor}}
+\subsubsection{\texorpdfstring{$\sim$\+Sort\+Enactor()}{~SortEnactor()}}
+{\footnotesize\ttfamily cugar\+::cuda\+::\+Sort\+Enactor\+::$\sim$\+Sort\+Enactor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+destructor 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/cuda/\hyperlink{sort_8h}{sort.\+h}\end{DoxyCompactItemize}

@@ -1,0 +1,125 @@
+\hypertarget{structcugar_1_1_s_h__basis}{}\section{cugar\+:\+:S\+H\+\_\+basis$<$ L $>$ Struct Template Reference}
+\label{structcugar_1_1_s_h__basis}\index{cugar\+::\+S\+H\+\_\+basis$<$ L $>$@{cugar\+::\+S\+H\+\_\+basis$<$ L $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$int32 L$>$\newline
+struct cugar\+::\+S\+H\+\_\+basis$<$ L $>$}
+
+Spherical harmonics basis functions of order L 
+
+{\ttfamily \#include $<$sh.\+h$>$}
+
+\subsection*{Static Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Vector3 $>$ }\\static C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_s_h__basis_acc9543bf841c9c8970300f60fc47e5ef}{eval} (const int32 i, const Vector3 \&d)
+\item 
+static C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1_s_h__basis_a0582cd1dc8fdfd9e6752fde399cfaaf0}{clamped\+\_\+cosine} (const \hyperlink{structcugar_1_1_vector}{Vector3f} \&normal, const float w, float $\ast$coeffs)
+\item 
+static C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1_s_h__basis_ad090d345301f626d3f10b51ccade7e68}{constant} (float k, float $\ast$coeffs)
+\item 
+static C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_s_h__basis_adfba32c9f637a576bdb8761e5393c7f7}{integral} (const float $\ast$coeffs)
+\item 
+{\footnotesize template$<$typename Vector\+\_\+type $>$ }\\static C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_s_h__basis_a8a6a16022c216964f777d7d6668a739c}{integral} (const Vector\+\_\+type \&coeffs)
+\item 
+static C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1_s_h__basis_abf09a4757b23d89f9691753746fd1649}{solve} (float $\ast$coeffs)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_s_h__basis_a821ac48509615cf4a5e8aea28d9e3c7d}\label{structcugar_1_1_s_h__basis_a821ac48509615cf4a5e8aea28d9e3c7d}} 
+static const int32 {\bfseries O\+R\+D\+ER} = L
+\item 
+\mbox{\Hypertarget{structcugar_1_1_s_h__basis_a657e94d9aaa8c75c0d15b563fd0cac23}\label{structcugar_1_1_s_h__basis_a657e94d9aaa8c75c0d15b563fd0cac23}} 
+static const int32 {\bfseries C\+O\+E\+F\+FS} = L$\ast$L
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1_s_h__basis_a0582cd1dc8fdfd9e6752fde399cfaaf0}\label{structcugar_1_1_s_h__basis_a0582cd1dc8fdfd9e6752fde399cfaaf0}} 
+\index{cugar\+::\+S\+H\+\_\+basis@{cugar\+::\+S\+H\+\_\+basis}!clamped\+\_\+cosine@{clamped\+\_\+cosine}}
+\index{clamped\+\_\+cosine@{clamped\+\_\+cosine}!cugar\+::\+S\+H\+\_\+basis@{cugar\+::\+S\+H\+\_\+basis}}
+\subsubsection{\texorpdfstring{clamped\+\_\+cosine()}{clamped\_cosine()}}
+{\footnotesize\ttfamily template$<$int32 L$>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1_s_h__basis}{cugar\+::\+S\+H\+\_\+basis}$<$ L $>$\+::clamped\+\_\+cosine (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f} \&}]{normal,  }\item[{const float}]{w,  }\item[{float $\ast$}]{coeffs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+add a weighted basis expansion of a clamped cosine lobe to a given set of coefficients
+
+
+\begin{DoxyParams}{Parameters}
+{\em normal} & input normal \\
+\hline
+{\em w} & scalar weight \\
+\hline
+{\em coeffs} & input/output coefficients \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1_s_h__basis_ad090d345301f626d3f10b51ccade7e68}\label{structcugar_1_1_s_h__basis_ad090d345301f626d3f10b51ccade7e68}} 
+\index{cugar\+::\+S\+H\+\_\+basis@{cugar\+::\+S\+H\+\_\+basis}!constant@{constant}}
+\index{constant@{constant}!cugar\+::\+S\+H\+\_\+basis@{cugar\+::\+S\+H\+\_\+basis}}
+\subsubsection{\texorpdfstring{constant()}{constant()}}
+{\footnotesize\ttfamily template$<$int32 L$>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1_s_h__basis}{cugar\+::\+S\+H\+\_\+basis}$<$ L $>$\+::constant (\begin{DoxyParamCaption}\item[{float}]{k,  }\item[{float $\ast$}]{coeffs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+return the basis expansion of a constant
+
+
+\begin{DoxyParams}{Parameters}
+{\em k} & input constant \\
+\hline
+{\em coeffs} & output coefficients \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1_s_h__basis_acc9543bf841c9c8970300f60fc47e5ef}\label{structcugar_1_1_s_h__basis_acc9543bf841c9c8970300f60fc47e5ef}} 
+\index{cugar\+::\+S\+H\+\_\+basis@{cugar\+::\+S\+H\+\_\+basis}!eval@{eval}}
+\index{eval@{eval}!cugar\+::\+S\+H\+\_\+basis@{cugar\+::\+S\+H\+\_\+basis}}
+\subsubsection{\texorpdfstring{eval()}{eval()}}
+{\footnotesize\ttfamily template$<$int32 L$>$ \\
+template$<$typename Vector3 $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_s_h__basis}{cugar\+::\+S\+H\+\_\+basis}$<$ L $>$\+::eval (\begin{DoxyParamCaption}\item[{const int32}]{i,  }\item[{const Vector3 \&}]{d }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+evaluate the i-\/th coefficient at a given point
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & coefficient index \\
+\hline
+{\em d} & direction vector \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1_s_h__basis_adfba32c9f637a576bdb8761e5393c7f7}\label{structcugar_1_1_s_h__basis_adfba32c9f637a576bdb8761e5393c7f7}} 
+\index{cugar\+::\+S\+H\+\_\+basis@{cugar\+::\+S\+H\+\_\+basis}!integral@{integral}}
+\index{integral@{integral}!cugar\+::\+S\+H\+\_\+basis@{cugar\+::\+S\+H\+\_\+basis}}
+\subsubsection{\texorpdfstring{integral()}{integral()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$int32 L$>$ \\
+static C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_s_h__basis}{cugar\+::\+S\+H\+\_\+basis}$<$ L $>$\+::integral (\begin{DoxyParamCaption}\item[{const float $\ast$}]{coeffs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+return the integral of a spherical hamonics function \mbox{\Hypertarget{structcugar_1_1_s_h__basis_a8a6a16022c216964f777d7d6668a739c}\label{structcugar_1_1_s_h__basis_a8a6a16022c216964f777d7d6668a739c}} 
+\index{cugar\+::\+S\+H\+\_\+basis@{cugar\+::\+S\+H\+\_\+basis}!integral@{integral}}
+\index{integral@{integral}!cugar\+::\+S\+H\+\_\+basis@{cugar\+::\+S\+H\+\_\+basis}}
+\subsubsection{\texorpdfstring{integral()}{integral()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$int32 L$>$ \\
+template$<$typename Vector\+\_\+type $>$ \\
+static C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_s_h__basis}{cugar\+::\+S\+H\+\_\+basis}$<$ L $>$\+::integral (\begin{DoxyParamCaption}\item[{const Vector\+\_\+type \&}]{coeffs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+return the integral of a spherical hamonics function \mbox{\Hypertarget{structcugar_1_1_s_h__basis_abf09a4757b23d89f9691753746fd1649}\label{structcugar_1_1_s_h__basis_abf09a4757b23d89f9691753746fd1649}} 
+\index{cugar\+::\+S\+H\+\_\+basis@{cugar\+::\+S\+H\+\_\+basis}!solve@{solve}}
+\index{solve@{solve}!cugar\+::\+S\+H\+\_\+basis@{cugar\+::\+S\+H\+\_\+basis}}
+\subsubsection{\texorpdfstring{solve()}{solve()}}
+{\footnotesize\ttfamily template$<$int32 L$>$ \\
+static C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1_s_h__basis}{cugar\+::\+S\+H\+\_\+basis}$<$ L $>$\+::solve (\begin{DoxyParamCaption}\item[{float $\ast$}]{coeffs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+solve the linear least squares projection for a set of coefficients
+
+
+\begin{DoxyParams}{Parameters}
+{\em coeffs} & input projection coefficients \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/spherical/\hyperlink{sh_8h}{sh.\+h}\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/spherical/sh\+\_\+inline.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,193 @@
+\hypertarget{structcugar_1_1_mixture}{}\section{cugar\+:\+:Mixture$<$ T\+Distribution, N\+C\+O\+MP $>$ Struct Template Reference}
+\label{structcugar_1_1_mixture}\index{cugar\+::\+Mixture$<$ T\+Distribution, N\+C\+O\+M\+P $>$@{cugar\+::\+Mixture$<$ T\+Distribution, N\+C\+O\+M\+P $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$typename T\+Distribution, uint32 N\+C\+O\+MP$>$\newline
+struct cugar\+::\+Mixture$<$ T\+Distribution, N\+C\+O\+M\+P $>$}
+
+A statically-\/sized mixture of parametric distributions
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T\+Distribution} & the underlying distribution type \\
+\hline
+{\em N\+C\+O\+MP} & the number of components, each of type T\+Distribution \\
+\hline
+\end{DoxyTemplParams}
+
+
+{\ttfamily \#include $<$mixtures.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_mixture_a04a3b1cde4b34d07c4e330ce205515df}\label{structcugar_1_1_mixture_a04a3b1cde4b34d07c4e330ce205515df}} 
+typedef T\+Distribution {\bfseries distribution\+\_\+type}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_mixture_a5749d6a34b2efbe87df854c09a3cee09}{Mixture} ()
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structcugar_1_1_mixture_a2e54c53e471a88e775802c2c15804fe5}{size} () const
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_mixture_a8056e27efcefea2005a3b52b8abf751f}{density} (const \hyperlink{structcugar_1_1_vector}{Vector2f} x) const
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_mixture_a1f5002f32c4f8af39983d3b805721007}{density} (const uint32 i, const \hyperlink{structcugar_1_1_vector}{Vector2f} x) const
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const distribution\+\_\+type \& \hyperlink{structcugar_1_1_mixture_a9a558f72b8f9e9735942014f2a07c37b}{component} (const uint32 i) const
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE distribution\+\_\+type \& \hyperlink{structcugar_1_1_mixture_af1cbb67b23fe32e6b1957243b4441ea8}{component} (const uint32 i)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1_mixture_a0f98ea273f18224f1a7376b0967a8104}{set\+\_\+component} (const uint32 i, const distribution\+\_\+type \&c, const float w)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1_mixture_abc1a088191870c698dc314d72a405914}{set\+\_\+component} (const uint32 i, const distribution\+\_\+type \&c)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_mixture_aca3cf56f710173842eb6fac00415ce79}{weight} (const uint32 i) const
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1_mixture_a534c401940e7eb7478eb96107d09a300}{set\+\_\+weight} (const uint32 i, const float w)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_mixture_a4189bd7ab52e85fbcf8a51ccc19bf0ac}\label{structcugar_1_1_mixture_a4189bd7ab52e85fbcf8a51ccc19bf0ac}} 
+static const uint32 {\bfseries N\+U\+M\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+TS} = N\+C\+O\+MP
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcugar_1_1_mixture_a5749d6a34b2efbe87df854c09a3cee09}\label{structcugar_1_1_mixture_a5749d6a34b2efbe87df854c09a3cee09}} 
+\index{cugar\+::\+Mixture@{cugar\+::\+Mixture}!Mixture@{Mixture}}
+\index{Mixture@{Mixture}!cugar\+::\+Mixture@{cugar\+::\+Mixture}}
+\subsubsection{\texorpdfstring{Mixture()}{Mixture()}}
+{\footnotesize\ttfamily template$<$typename T\+Distribution, uint32 N\+C\+O\+MP$>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_mixture}{cugar\+::\+Mixture}$<$ T\+Distribution, N\+C\+O\+MP $>$\+::\hyperlink{structcugar_1_1_mixture}{Mixture} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1_mixture_a9a558f72b8f9e9735942014f2a07c37b}\label{structcugar_1_1_mixture_a9a558f72b8f9e9735942014f2a07c37b}} 
+\index{cugar\+::\+Mixture@{cugar\+::\+Mixture}!component@{component}}
+\index{component@{component}!cugar\+::\+Mixture@{cugar\+::\+Mixture}}
+\subsubsection{\texorpdfstring{component()}{component()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T\+Distribution, uint32 N\+C\+O\+MP$>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const distribution\+\_\+type\& \hyperlink{structcugar_1_1_mixture}{cugar\+::\+Mixture}$<$ T\+Distribution, N\+C\+O\+MP $>$\+::component (\begin{DoxyParamCaption}\item[{const uint32}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the i-\/th component
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & component index \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1_mixture_af1cbb67b23fe32e6b1957243b4441ea8}\label{structcugar_1_1_mixture_af1cbb67b23fe32e6b1957243b4441ea8}} 
+\index{cugar\+::\+Mixture@{cugar\+::\+Mixture}!component@{component}}
+\index{component@{component}!cugar\+::\+Mixture@{cugar\+::\+Mixture}}
+\subsubsection{\texorpdfstring{component()}{component()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T\+Distribution, uint32 N\+C\+O\+MP$>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE distribution\+\_\+type\& \hyperlink{structcugar_1_1_mixture}{cugar\+::\+Mixture}$<$ T\+Distribution, N\+C\+O\+MP $>$\+::component (\begin{DoxyParamCaption}\item[{const uint32}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the i-\/th component
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & component index \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1_mixture_a8056e27efcefea2005a3b52b8abf751f}\label{structcugar_1_1_mixture_a8056e27efcefea2005a3b52b8abf751f}} 
+\index{cugar\+::\+Mixture@{cugar\+::\+Mixture}!density@{density}}
+\index{density@{density}!cugar\+::\+Mixture@{cugar\+::\+Mixture}}
+\subsubsection{\texorpdfstring{density()}{density()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T\+Distribution, uint32 N\+C\+O\+MP$>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_mixture}{cugar\+::\+Mixture}$<$ T\+Distribution, N\+C\+O\+MP $>$\+::density (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector2f}}]{x }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+probability density function
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & sample location \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1_mixture_a1f5002f32c4f8af39983d3b805721007}\label{structcugar_1_1_mixture_a1f5002f32c4f8af39983d3b805721007}} 
+\index{cugar\+::\+Mixture@{cugar\+::\+Mixture}!density@{density}}
+\index{density@{density}!cugar\+::\+Mixture@{cugar\+::\+Mixture}}
+\subsubsection{\texorpdfstring{density()}{density()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T\+Distribution, uint32 N\+C\+O\+MP$>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_mixture}{cugar\+::\+Mixture}$<$ T\+Distribution, N\+C\+O\+MP $>$\+::density (\begin{DoxyParamCaption}\item[{const uint32}]{i,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector2f}}]{x }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+probability density function of the i-\/th component
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & sample location \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1_mixture_a0f98ea273f18224f1a7376b0967a8104}\label{structcugar_1_1_mixture_a0f98ea273f18224f1a7376b0967a8104}} 
+\index{cugar\+::\+Mixture@{cugar\+::\+Mixture}!set\+\_\+component@{set\+\_\+component}}
+\index{set\+\_\+component@{set\+\_\+component}!cugar\+::\+Mixture@{cugar\+::\+Mixture}}
+\subsubsection{\texorpdfstring{set\+\_\+component()}{set\_component()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T\+Distribution, uint32 N\+C\+O\+MP$>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1_mixture}{cugar\+::\+Mixture}$<$ T\+Distribution, N\+C\+O\+MP $>$\+::set\+\_\+component (\begin{DoxyParamCaption}\item[{const uint32}]{i,  }\item[{const distribution\+\_\+type \&}]{c,  }\item[{const float}]{w }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+set the i-\/th component
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & component index \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1_mixture_abc1a088191870c698dc314d72a405914}\label{structcugar_1_1_mixture_abc1a088191870c698dc314d72a405914}} 
+\index{cugar\+::\+Mixture@{cugar\+::\+Mixture}!set\+\_\+component@{set\+\_\+component}}
+\index{set\+\_\+component@{set\+\_\+component}!cugar\+::\+Mixture@{cugar\+::\+Mixture}}
+\subsubsection{\texorpdfstring{set\+\_\+component()}{set\_component()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T\+Distribution, uint32 N\+C\+O\+MP$>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1_mixture}{cugar\+::\+Mixture}$<$ T\+Distribution, N\+C\+O\+MP $>$\+::set\+\_\+component (\begin{DoxyParamCaption}\item[{const uint32}]{i,  }\item[{const distribution\+\_\+type \&}]{c }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+set the i-\/th component
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & component index \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1_mixture_a534c401940e7eb7478eb96107d09a300}\label{structcugar_1_1_mixture_a534c401940e7eb7478eb96107d09a300}} 
+\index{cugar\+::\+Mixture@{cugar\+::\+Mixture}!set\+\_\+weight@{set\+\_\+weight}}
+\index{set\+\_\+weight@{set\+\_\+weight}!cugar\+::\+Mixture@{cugar\+::\+Mixture}}
+\subsubsection{\texorpdfstring{set\+\_\+weight()}{set\_weight()}}
+{\footnotesize\ttfamily template$<$typename T\+Distribution, uint32 N\+C\+O\+MP$>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1_mixture}{cugar\+::\+Mixture}$<$ T\+Distribution, N\+C\+O\+MP $>$\+::set\+\_\+weight (\begin{DoxyParamCaption}\item[{const uint32}]{i,  }\item[{const float}]{w }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the i-\/th component weight
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & component index \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1_mixture_a2e54c53e471a88e775802c2c15804fe5}\label{structcugar_1_1_mixture_a2e54c53e471a88e775802c2c15804fe5}} 
+\index{cugar\+::\+Mixture@{cugar\+::\+Mixture}!size@{size}}
+\index{size@{size}!cugar\+::\+Mixture@{cugar\+::\+Mixture}}
+\subsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$typename T\+Distribution, uint32 N\+C\+O\+MP$>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structcugar_1_1_mixture}{cugar\+::\+Mixture}$<$ T\+Distribution, N\+C\+O\+MP $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+size of the mixture \mbox{\Hypertarget{structcugar_1_1_mixture_aca3cf56f710173842eb6fac00415ce79}\label{structcugar_1_1_mixture_aca3cf56f710173842eb6fac00415ce79}} 
+\index{cugar\+::\+Mixture@{cugar\+::\+Mixture}!weight@{weight}}
+\index{weight@{weight}!cugar\+::\+Mixture@{cugar\+::\+Mixture}}
+\subsubsection{\texorpdfstring{weight()}{weight()}}
+{\footnotesize\ttfamily template$<$typename T\+Distribution, uint32 N\+C\+O\+MP$>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_mixture}{cugar\+::\+Mixture}$<$ T\+Distribution, N\+C\+O\+MP $>$\+::weight (\begin{DoxyParamCaption}\item[{const uint32}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the i-\/th component weight
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & component index \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/sampling/mixtures.\+h\end{DoxyCompactItemize}

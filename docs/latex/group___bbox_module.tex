@@ -1,0 +1,173 @@
+\hypertarget{group___bbox_module}{}\section{Bounding Boxes}
+\label{group___bbox_module}\index{Bounding Boxes@{Bounding Boxes}}
+
+
+\subsection{Detailed Description}
+This module defines everything related to bounding boxes \subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcugar_1_1_bbox}{cugar\+::\+Bbox$<$ Vector\+\_\+t $>$}
+\item 
+struct \hyperlink{structcugar_1_1bbox__area__functor}{cugar\+::bbox\+\_\+area\+\_\+functor$<$ D\+I\+M $>$}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___bbox_module_gac3802a18124dd547189b5e5c779c434a}\label{group___bbox_module_gac3802a18124dd547189b5e5c779c434a}} 
+typedef \hyperlink{structcugar_1_1_bbox}{Bbox}$<$ \hyperlink{structcugar_1_1_vector}{Vector2f} $>$ {\bfseries cugar\+::\+Bbox2f}
+\item 
+\mbox{\Hypertarget{group___bbox_module_ga4c52e6a9a30a16046286618750c9ae91}\label{group___bbox_module_ga4c52e6a9a30a16046286618750c9ae91}} 
+typedef \hyperlink{structcugar_1_1_bbox}{Bbox}$<$ \hyperlink{structcugar_1_1_vector}{Vector3f} $>$ {\bfseries cugar\+::\+Bbox3f}
+\item 
+\mbox{\Hypertarget{group___bbox_module_ga6b4eae653a7de83f780808d1827eec8c}\label{group___bbox_module_ga6b4eae653a7de83f780808d1827eec8c}} 
+typedef \hyperlink{structcugar_1_1_bbox}{Bbox}$<$ \hyperlink{structcugar_1_1_vector}{Vector4f} $>$ {\bfseries cugar\+::\+Bbox4f}
+\item 
+\mbox{\Hypertarget{group___bbox_module_gadae4404434320ca0f083517577ab5b37}\label{group___bbox_module_gadae4404434320ca0f083517577ab5b37}} 
+typedef \hyperlink{structcugar_1_1_bbox}{Bbox}$<$ \hyperlink{structcugar_1_1_vector}{Vector2d} $>$ {\bfseries cugar\+::\+Bbox2d}
+\item 
+\mbox{\Hypertarget{group___bbox_module_gaff945a4433725bbc785894080ffa4542}\label{group___bbox_module_gaff945a4433725bbc785894080ffa4542}} 
+typedef \hyperlink{structcugar_1_1_bbox}{Bbox}$<$ \hyperlink{structcugar_1_1_vector}{Vector3d} $>$ {\bfseries cugar\+::\+Bbox3d}
+\item 
+\mbox{\Hypertarget{group___bbox_module_gabc9fe502e1f04db871565a70407072a9}\label{group___bbox_module_gabc9fe502e1f04db871565a70407072a9}} 
+typedef \hyperlink{structcugar_1_1_bbox}{Bbox}$<$ \hyperlink{structcugar_1_1_vector}{Vector4d} $>$ {\bfseries cugar\+::\+Bbox4d}
+\item 
+\mbox{\Hypertarget{group___bbox_module_gaaa8c6a5fc042c1578564376977f482bf}\label{group___bbox_module_gaaa8c6a5fc042c1578564376977f482bf}} 
+typedef \hyperlink{structcugar_1_1_bbox}{Bbox}$<$ \hyperlink{structcugar_1_1_vector}{Vector2i} $>$ {\bfseries cugar\+::\+Bbox2i}
+\item 
+\mbox{\Hypertarget{group___bbox_module_ga201fe89c53e4c8b6c6b1cbf354ceddc5}\label{group___bbox_module_ga201fe89c53e4c8b6c6b1cbf354ceddc5}} 
+typedef \hyperlink{structcugar_1_1_bbox}{Bbox}$<$ \hyperlink{structcugar_1_1_vector}{Vector3i} $>$ {\bfseries cugar\+::\+Bbox3i}
+\item 
+\mbox{\Hypertarget{group___bbox_module_ga1908c3fb86c6b8b07368065528b6299e}\label{group___bbox_module_ga1908c3fb86c6b8b07368065528b6299e}} 
+typedef \hyperlink{structcugar_1_1_bbox}{Bbox}$<$ \hyperlink{structcugar_1_1_vector}{Vector4i} $>$ {\bfseries cugar\+::\+Bbox4i}
+\item 
+\mbox{\Hypertarget{group___bbox_module_gaf9603606d5d6a6525926916ff99521db}\label{group___bbox_module_gaf9603606d5d6a6525926916ff99521db}} 
+typedef \hyperlink{structcugar_1_1_bbox}{Bbox}$<$ \hyperlink{structcugar_1_1_vector}{Vector2u} $>$ {\bfseries cugar\+::\+Bbox2u}
+\item 
+\mbox{\Hypertarget{group___bbox_module_gabc94eb228b3c256caf8626ddf1371428}\label{group___bbox_module_gabc94eb228b3c256caf8626ddf1371428}} 
+typedef \hyperlink{structcugar_1_1_bbox}{Bbox}$<$ \hyperlink{structcugar_1_1_vector}{Vector3u} $>$ {\bfseries cugar\+::\+Bbox3u}
+\item 
+\mbox{\Hypertarget{group___bbox_module_gab7c7b9c74e080a6d80c3a88dff62c299}\label{group___bbox_module_gab7c7b9c74e080a6d80c3a88dff62c299}} 
+typedef \hyperlink{structcugar_1_1_bbox}{Bbox}$<$ \hyperlink{structcugar_1_1_vector}{Vector4u} $>$ {\bfseries cugar\+::\+Bbox4u}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{group___bbox_module_ga9bac92087484f436dd7eb6f20cb0b15a}{cugar\+::area} (const \hyperlink{structcugar_1_1_bbox}{Bbox2f} \&bbox)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{group___bbox_module_gae06f9ebe0da53f175c2d35b0ef604b1a}{cugar\+::area} (const \hyperlink{structcugar_1_1_bbox}{Bbox3f} \&bbox)
+\item 
+{\footnotesize template$<$typename Vector\+\_\+t $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{group___bbox_module_ga997d14f97dd4c3c80e1896796170ea60}{cugar\+::contains} (const \hyperlink{structcugar_1_1_bbox}{Bbox}$<$ Vector\+\_\+t $>$ \&bbox, const Vector\+\_\+t \&p)
+\item 
+{\footnotesize template$<$typename Vector\+\_\+t $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{group___bbox_module_gaeb563052dce95e32012796563ea7f611}{cugar\+::contains} (const \hyperlink{structcugar_1_1_bbox}{Bbox}$<$ Vector\+\_\+t $>$ \&bbox, const \hyperlink{structcugar_1_1_bbox}{Bbox}$<$ Vector\+\_\+t $>$ \&candidate)
+\item 
+{\footnotesize template$<$typename Vector\+\_\+t $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{group___bbox_module_ga771255b0f67e5f421e1cbb5b2fa367e0}{cugar\+::sq\+\_\+distance} (const \hyperlink{structcugar_1_1_bbox}{Bbox}$<$ Vector\+\_\+t $>$ \&bbox, const Vector\+\_\+t \&p)
+\item 
+{\footnotesize template$<$typename Vector\+\_\+t $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE size\+\_\+t \hyperlink{group___bbox_module_ga45c74efdebfc6b9233fecb19aa268e45}{cugar\+::largest\+\_\+axis} (const \hyperlink{structcugar_1_1_bbox}{Bbox}$<$ Vector\+\_\+t $>$ \&bbox)
+\item 
+{\footnotesize template$<$typename Vector\+\_\+t $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Vector\+\_\+t \hyperlink{group___bbox_module_ga4f5184c6a804324810a86f4e6ccd29f4}{cugar\+::extents} (const \hyperlink{structcugar_1_1_bbox}{Bbox}$<$ Vector\+\_\+t $>$ \&bbox)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___bbox_module_ga9bac92087484f436dd7eb6f20cb0b15a}\label{group___bbox_module_ga9bac92087484f436dd7eb6f20cb0b15a}} 
+\index{Bounding Boxes@{Bounding Boxes}!area@{area}}
+\index{area@{area}!Bounding Boxes@{Bounding Boxes}}
+\subsubsection{\texorpdfstring{area()}{area()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily float cugar\+::area (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_bbox}{Bbox2f} \&}]{bbox }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+compute the area of a 2d bbox
+
+
+\begin{DoxyParams}{Parameters}
+{\em bbox} & bbox object \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___bbox_module_gae06f9ebe0da53f175c2d35b0ef604b1a}\label{group___bbox_module_gae06f9ebe0da53f175c2d35b0ef604b1a}} 
+\index{Bounding Boxes@{Bounding Boxes}!area@{area}}
+\index{area@{area}!Bounding Boxes@{Bounding Boxes}}
+\subsubsection{\texorpdfstring{area()}{area()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily float cugar\+::area (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_bbox}{Bbox3f} \&}]{bbox }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+compute the area of a 3d bbox
+
+
+\begin{DoxyParams}{Parameters}
+{\em bbox} & bbox object \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___bbox_module_ga997d14f97dd4c3c80e1896796170ea60}\label{group___bbox_module_ga997d14f97dd4c3c80e1896796170ea60}} 
+\index{Bounding Boxes@{Bounding Boxes}!contains@{contains}}
+\index{contains@{contains}!Bounding Boxes@{Bounding Boxes}}
+\subsubsection{\texorpdfstring{contains()}{contains()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Vector\+\_\+t $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool cugar\+::contains (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_bbox}{Bbox}$<$ Vector\+\_\+t $>$ \&}]{bbox,  }\item[{const Vector\+\_\+t \&}]{p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+point-\/in-\/bbox inclusion predicate
+
+
+\begin{DoxyParams}{Parameters}
+{\em bbox} & bbox object \\
+\hline
+{\em p} & point to test for inclusion \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___bbox_module_gaeb563052dce95e32012796563ea7f611}\label{group___bbox_module_gaeb563052dce95e32012796563ea7f611}} 
+\index{Bounding Boxes@{Bounding Boxes}!contains@{contains}}
+\index{contains@{contains}!Bounding Boxes@{Bounding Boxes}}
+\subsubsection{\texorpdfstring{contains()}{contains()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Vector\+\_\+t $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool cugar\+::contains (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_bbox}{Bbox}$<$ Vector\+\_\+t $>$ \&}]{bbox,  }\item[{const \hyperlink{structcugar_1_1_bbox}{Bbox}$<$ Vector\+\_\+t $>$ \&}]{candidate }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+bbox-\/in-\/bbox inclusion predicate
+
+
+\begin{DoxyParams}{Parameters}
+{\em bbox} & bbox object \\
+\hline
+{\em p} & candidate to test for inclusion \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___bbox_module_ga4f5184c6a804324810a86f4e6ccd29f4}\label{group___bbox_module_ga4f5184c6a804324810a86f4e6ccd29f4}} 
+\index{Bounding Boxes@{Bounding Boxes}!extents@{extents}}
+\index{extents@{extents}!Bounding Boxes@{Bounding Boxes}}
+\subsubsection{\texorpdfstring{extents()}{extents()}}
+{\footnotesize\ttfamily template$<$typename Vector\+\_\+t $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Vector\+\_\+t cugar\+::extents (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_bbox}{Bbox}$<$ Vector\+\_\+t $>$ \&}]{bbox }\end{DoxyParamCaption})}
+
+returns the delta between corners
+
+
+\begin{DoxyParams}{Parameters}
+{\em bbox} & bbox object \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___bbox_module_ga45c74efdebfc6b9233fecb19aa268e45}\label{group___bbox_module_ga45c74efdebfc6b9233fecb19aa268e45}} 
+\index{Bounding Boxes@{Bounding Boxes}!largest\+\_\+axis@{largest\+\_\+axis}}
+\index{largest\+\_\+axis@{largest\+\_\+axis}!Bounding Boxes@{Bounding Boxes}}
+\subsubsection{\texorpdfstring{largest\+\_\+axis()}{largest\_axis()}}
+{\footnotesize\ttfamily template$<$typename Vector\+\_\+t $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE size\+\_\+t cugar\+::largest\+\_\+axis (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_bbox}{Bbox}$<$ Vector\+\_\+t $>$ \&}]{bbox }\end{DoxyParamCaption})}
+
+returns the largest axis of a bbox
+
+
+\begin{DoxyParams}{Parameters}
+{\em bbox} & bbox object \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___bbox_module_ga771255b0f67e5f421e1cbb5b2fa367e0}\label{group___bbox_module_ga771255b0f67e5f421e1cbb5b2fa367e0}} 
+\index{Bounding Boxes@{Bounding Boxes}!sq\+\_\+distance@{sq\+\_\+distance}}
+\index{sq\+\_\+distance@{sq\+\_\+distance}!Bounding Boxes@{Bounding Boxes}}
+\subsubsection{\texorpdfstring{sq\+\_\+distance()}{sq\_distance()}}
+{\footnotesize\ttfamily template$<$typename Vector\+\_\+t $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float cugar\+::sq\+\_\+distance (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_bbox}{Bbox}$<$ Vector\+\_\+t $>$ \&}]{bbox,  }\item[{const Vector\+\_\+t \&}]{p }\end{DoxyParamCaption})}
+
+point-\/to-\/bbox squared distance
+
+
+\begin{DoxyParams}{Parameters}
+{\em bbox} & bbox object \\
+\hline
+{\em p} & point \\
+\hline
+\end{DoxyParams}

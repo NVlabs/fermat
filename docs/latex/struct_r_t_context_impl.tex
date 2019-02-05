@@ -1,0 +1,85 @@
+\hypertarget{struct_r_t_context_impl}{}\section{R\+T\+Context\+Impl Struct Reference}
+\label{struct_r_t_context_impl}\index{R\+T\+Context\+Impl@{R\+T\+Context\+Impl}}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_r_t_context_impl_af903f24be9478fdde22706667ce5ca1c}\label{struct_r_t_context_impl_af903f24be9478fdde22706667ce5ca1c}} 
+void {\bfseries create\+\_\+context} ()
+\item 
+\mbox{\Hypertarget{struct_r_t_context_impl_a7b16a2183adfc1820aaf21f85f510f27}\label{struct_r_t_context_impl_a7b16a2183adfc1820aaf21f85f510f27}} 
+void {\bfseries create\+\_\+geometry} (unsigned int tri\+\_\+count, const int $\ast$index\+\_\+ptr, unsigned int vertex\+\_\+count, const float $\ast$vertex\+\_\+ptr, const int $\ast$normal\+\_\+index\+\_\+ptr, const float $\ast$normal\+\_\+vertex\+\_\+ptr, const int $\ast$tex\+\_\+index\+\_\+ptr, const float $\ast$tex\+\_\+vertex\+\_\+ptr, const int $\ast$material\+\_\+index\+\_\+ptr)
+\item 
+\mbox{\Hypertarget{struct_r_t_context_impl_aa10208fdf297c0057ce767cf6b5138be}\label{struct_r_t_context_impl_aa10208fdf297c0057ce767cf6b5138be}} 
+optix\+::\+Program {\bfseries create\+\_\+optix\+\_\+program} (const char $\ast$filename, const std\+::string \&program\+\_\+name)
+\item 
+\mbox{\Hypertarget{struct_r_t_context_impl_a34a20085c8f05ad18590057e3cc7dfcc}\label{struct_r_t_context_impl_a34a20085c8f05ad18590057e3cc7dfcc}} 
+uint32 {\bfseries create\+\_\+program} (const char $\ast$filename, const char $\ast$program\+\_\+name)
+\item 
+\mbox{\Hypertarget{struct_r_t_context_impl_a8ccd378a87b5e5ef99da715571a2d870}\label{struct_r_t_context_impl_a8ccd378a87b5e5ef99da715571a2d870}} 
+uint32 {\bfseries add\+\_\+ray\+\_\+generation\+\_\+program} (const uint32 program)
+\item 
+\mbox{\Hypertarget{struct_r_t_context_impl_a71608b32ec8890758a63e7c78743128f}\label{struct_r_t_context_impl_a71608b32ec8890758a63e7c78743128f}} 
+void {\bfseries update} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_r_t_context_impl_ad6f1acb7796f3f168dc793c71b075338}\label{struct_r_t_context_impl_ad6f1acb7796f3f168dc793c71b075338}} 
+optix\+::\+Context {\bfseries context}
+\item 
+\mbox{\Hypertarget{struct_r_t_context_impl_abbac0671d6a75e34fec707845972a98c}\label{struct_r_t_context_impl_abbac0671d6a75e34fec707845972a98c}} 
+optix\+::\+Geometry\+Triangles {\bfseries geometry\+\_\+triangles}
+\item 
+\mbox{\Hypertarget{struct_r_t_context_impl_af13e2989a37c7126de324e358e794ab1}\label{struct_r_t_context_impl_af13e2989a37c7126de324e358e794ab1}} 
+optix\+::\+Geometry\+Instance {\bfseries geometry\+\_\+instance}
+\item 
+\mbox{\Hypertarget{struct_r_t_context_impl_a1e5cae2cf09162570a12a92374b6b3f4}\label{struct_r_t_context_impl_a1e5cae2cf09162570a12a92374b6b3f4}} 
+optix\+::\+Material {\bfseries material}
+\item 
+\mbox{\Hypertarget{struct_r_t_context_impl_a9ade08c655fc59346d107e8a9c9b34b5}\label{struct_r_t_context_impl_a9ade08c655fc59346d107e8a9c9b34b5}} 
+optix\+::\+Program {\bfseries programs} \mbox{[}E\+Program\+::\+P\+R\+O\+G\+R\+A\+M\+\_\+\+M\+A\+X\+\_\+\+C\+O\+U\+NT\mbox{]}
+\item 
+\mbox{\Hypertarget{struct_r_t_context_impl_afce8941d9768bcb55292d6de69c0992d}\label{struct_r_t_context_impl_afce8941d9768bcb55292d6de69c0992d}} 
+std\+::map$<$ uint32, optix\+::\+Program $>$ {\bfseries user\+\_\+programs}
+\item 
+\mbox{\Hypertarget{struct_r_t_context_impl_a3d90b5c7ecbcb6ccc90b395cb8278d07}\label{struct_r_t_context_impl_a3d90b5c7ecbcb6ccc90b395cb8278d07}} 
+uint32 {\bfseries user\+\_\+programs\+\_\+count}
+\item 
+\mbox{\Hypertarget{struct_r_t_context_impl_ac605680f16cb08c232fcea63d79b6ebb}\label{struct_r_t_context_impl_ac605680f16cb08c232fcea63d79b6ebb}} 
+std\+::vector$<$ uint32 $>$ {\bfseries ray\+\_\+gen\+\_\+programs}
+\item 
+\mbox{\Hypertarget{struct_r_t_context_impl_a2c908b2c01dfdaf087bb1a213ddd0552}\label{struct_r_t_context_impl_a2c908b2c01dfdaf087bb1a213ddd0552}} 
+bool {\bfseries ray\+\_\+gen\+\_\+programs\+\_\+dirty}
+\item 
+\mbox{\Hypertarget{struct_r_t_context_impl_afeca42d7216b01fc253cd79cbb12834d}\label{struct_r_t_context_impl_afeca42d7216b01fc253cd79cbb12834d}} 
+uint32 {\bfseries null\+\_\+ray\+\_\+gen\+\_\+idx}
+\item 
+\mbox{\Hypertarget{struct_r_t_context_impl_a5ab526617130d2810f3396307a9f60a5}\label{struct_r_t_context_impl_a5ab526617130d2810f3396307a9f60a5}} 
+uint32 {\bfseries tmin\+\_\+intersection\+\_\+ray\+\_\+gen\+\_\+idx}
+\item 
+\mbox{\Hypertarget{struct_r_t_context_impl_a76ea60f68893a73cf961d7f46058d349}\label{struct_r_t_context_impl_a76ea60f68893a73cf961d7f46058d349}} 
+uint32 {\bfseries masked\+\_\+intersection\+\_\+ray\+\_\+gen\+\_\+idx}
+\item 
+\mbox{\Hypertarget{struct_r_t_context_impl_a46552f7f5c4cf3c37364a419caa8aafb}\label{struct_r_t_context_impl_a46552f7f5c4cf3c37364a419caa8aafb}} 
+uint32 {\bfseries masked\+\_\+shadow\+\_\+intersection\+\_\+ray\+\_\+gen\+\_\+idx}
+\item 
+\mbox{\Hypertarget{struct_r_t_context_impl_ab3799caf6f504b5f0c8f1828cdcce034}\label{struct_r_t_context_impl_ab3799caf6f504b5f0c8f1828cdcce034}} 
+uint32 {\bfseries masked\+\_\+shadow\+\_\+binary\+\_\+intersection\+\_\+ray\+\_\+gen\+\_\+idx}
+\item 
+\mbox{\Hypertarget{struct_r_t_context_impl_a39952c219f540b00ccc3c3dffa7935a3}\label{struct_r_t_context_impl_a39952c219f540b00ccc3c3dffa7935a3}} 
+std\+::vector$<$ optix\+::\+Buffer $>$ {\bfseries user\+\_\+buffers}
+\item 
+\mbox{\Hypertarget{struct_r_t_context_impl_aaff0e3e58bba04a0735a5252fa88d798}\label{struct_r_t_context_impl_aaff0e3e58bba04a0735a5252fa88d798}} 
+optix\+::\+Buffer {\bfseries ray\+\_\+buffer}
+\item 
+\mbox{\Hypertarget{struct_r_t_context_impl_aa3a6223f2d76ca92d83164d18a36e7b4}\label{struct_r_t_context_impl_aa3a6223f2d76ca92d83164d18a36e7b4}} 
+optix\+::\+Buffer {\bfseries hit\+\_\+buffer}
+\item 
+\mbox{\Hypertarget{struct_r_t_context_impl_afb5f884318c993d83301c66d0b6553d9}\label{struct_r_t_context_impl_afb5f884318c993d83301c66d0b6553d9}} 
+\hyperlink{struct_r_t_mesh}{R\+T\+Mesh} {\bfseries mesh}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/rt.\+cpp\end{DoxyCompactItemize}

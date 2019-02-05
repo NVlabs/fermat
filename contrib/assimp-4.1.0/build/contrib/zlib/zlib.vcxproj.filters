@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib\adler32.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib\compress.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib\crc32.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib\deflate.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib\gzclose.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib\gzlib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib\gzread.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib\gzwrite.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib\inflate.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib\infback.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib\inftrees.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib\inffast.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib\trees.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib\uncompr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib\zutil.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\zlib\zconf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib\zlib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib\crc32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib\deflate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib\gzguts.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib\inffast.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib\inffixed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib\inflate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib\inftrees.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib\trees.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib\zutil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib\win32\zlib1.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{AD646091-16B9-364B-B986-266672EAC204}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{639C4902-DD71-3425-A407-5DA736C40709}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

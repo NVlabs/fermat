@@ -1,0 +1,53 @@
+\hypertarget{struct_camera}{}\section{Camera Struct Reference}
+\label{struct_camera}\index{Camera@{Camera}}
+
+
+\subsection{Detailed description}
+A simple pinhole camera model 
+
+{\ttfamily \#include $<$camera.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_camera_a2c492aca90a8a4c011ea3fbb81da07eb}\label{struct_camera_a2c492aca90a8a4c011ea3fbb81da07eb}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{struct_camera}{Camera} {\bfseries rotate} (const float2 rot) const
+\item 
+\mbox{\Hypertarget{struct_camera_a67c1e2e95fdf31adc114ecd1e6c83298}\label{struct_camera_a67c1e2e95fdf31adc114ecd1e6c83298}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{struct_camera}{Camera} {\bfseries walk} (const float delta) const
+\item 
+\mbox{\Hypertarget{struct_camera_abc036f653e1f2c8810f7ccdf44b05f76}\label{struct_camera_abc036f653e1f2c8810f7ccdf44b05f76}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{struct_camera}{Camera} {\bfseries pan} (const float2 delta) const
+\item 
+\mbox{\Hypertarget{struct_camera_a10fea162ffafa1b9b58213c3b58cba91}\label{struct_camera_a10fea162ffafa1b9b58213c3b58cba91}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{struct_camera}{Camera} {\bfseries zoom} (const float delta) const
+\item 
+\mbox{\Hypertarget{struct_camera_a3d6e3421c6a48fd29b5d8a1462c40ec4}\label{struct_camera_a3d6e3421c6a48fd29b5d8a1462c40ec4}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float {\bfseries square\+\_\+pixel\+\_\+focal\+\_\+length} (const uint32 res\+\_\+x, const uint32 res\+\_\+y) const
+\item 
+\mbox{\Hypertarget{struct_camera_ad321b3e08095707d67438c9588f43e8d}\label{struct_camera_ad321b3e08095707d67438c9588f43e8d}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float {\bfseries square\+\_\+screen\+\_\+focal\+\_\+length} () const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_camera_ab5328d278495c795eca66a2fcb2a442b}\label{struct_camera_ab5328d278495c795eca66a2fcb2a442b}} 
+float3 {\bfseries eye}
+\item 
+\mbox{\Hypertarget{struct_camera_a326af25ea49f8f35737a6d0334864f8b}\label{struct_camera_a326af25ea49f8f35737a6d0334864f8b}} 
+float3 {\bfseries aim}
+\item 
+\mbox{\Hypertarget{struct_camera_a9f5ba0529bf851c30546a57fe045fff1}\label{struct_camera_a9f5ba0529bf851c30546a57fe045fff1}} 
+float3 {\bfseries up}
+\item 
+\mbox{\Hypertarget{struct_camera_a8a27bc6c1ea9994052eb1d1c6b304a8a}\label{struct_camera_a8a27bc6c1ea9994052eb1d1c6b304a8a}} 
+float3 {\bfseries dx}
+\item 
+\mbox{\Hypertarget{struct_camera_aff7393c9cfbccd7e369091f00008da93}\label{struct_camera_aff7393c9cfbccd7e369091f00008da93}} 
+float {\bfseries fov}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/camera.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,121 @@
+\hypertarget{struct_camera_sampler}{}\section{Camera\+Sampler Struct Reference}
+\label{struct_camera_sampler}\index{Camera\+Sampler@{Camera\+Sampler}}
+
+
+\subsection{Detailed description}
+A sampler for the pinhole camera model 
+
+{\ttfamily \#include $<$camera.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{struct_camera_sampler_a50332d884a007ab1ffcb05215af5d92a}{Camera\+Sampler} ()
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{struct_camera_sampler_a9d018f4ac9bbd0e93bfcc283ab915eeb}{Camera\+Sampler} (const \hyperlink{struct_camera}{Camera} \&camera, const float aspect\+\_\+ratio)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \hyperlink{struct_camera_sampler_ac502e1699c99c595b773b1419225fe32}{sample\+\_\+direction} (const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} ndc) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float \hyperlink{struct_camera_sampler_a0edd94ccee6da3180f13845d189bc758}{pdf} (const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} out, const bool projected=false) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float \hyperlink{struct_camera_sampler_afe4852bed67331cf757518e046d82ef1}{W\+\_\+e} (const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} out) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} \hyperlink{struct_camera_sampler_a347623323319a7111f933d4af6ac2d19}{invert} (const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} out) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} \hyperlink{struct_camera_sampler_aaa68e077536fc88429fb35dd04d30af1}{invert} (const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} out, float $\ast$pdf\+\_\+proj) const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_camera_sampler_a78eb2537995dd7909bdeeb1dbd83bbfe}\label{struct_camera_sampler_a78eb2537995dd7909bdeeb1dbd83bbfe}} 
+\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} {\bfseries U}
+\item 
+\mbox{\Hypertarget{struct_camera_sampler_a6701783b3acedd9d54c22ee4decb3fb5}\label{struct_camera_sampler_a6701783b3acedd9d54c22ee4decb3fb5}} 
+\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} {\bfseries V}
+\item 
+\mbox{\Hypertarget{struct_camera_sampler_a4647d9cea99da93ffb22bda37cd0cef0}\label{struct_camera_sampler_a4647d9cea99da93ffb22bda37cd0cef0}} 
+\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} {\bfseries W}
+\item 
+\mbox{\Hypertarget{struct_camera_sampler_a74381044c3ffd87d1b88890abb39c084}\label{struct_camera_sampler_a74381044c3ffd87d1b88890abb39c084}} 
+float {\bfseries W\+\_\+len}
+\item 
+\mbox{\Hypertarget{struct_camera_sampler_abd374561d2f1ea3cd0bdbd4839f8cfc7}\label{struct_camera_sampler_abd374561d2f1ea3cd0bdbd4839f8cfc7}} 
+float {\bfseries square\+\_\+focal\+\_\+length}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{struct_camera_sampler_a50332d884a007ab1ffcb05215af5d92a}\label{struct_camera_sampler_a50332d884a007ab1ffcb05215af5d92a}} 
+\index{Camera\+Sampler@{Camera\+Sampler}!Camera\+Sampler@{Camera\+Sampler}}
+\index{Camera\+Sampler@{Camera\+Sampler}!Camera\+Sampler@{Camera\+Sampler}}
+\subsubsection{\texorpdfstring{Camera\+Sampler()}{CameraSampler()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE Camera\+Sampler\+::\+Camera\+Sampler (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+empty constructor \mbox{\Hypertarget{struct_camera_sampler_a9d018f4ac9bbd0e93bfcc283ab915eeb}\label{struct_camera_sampler_a9d018f4ac9bbd0e93bfcc283ab915eeb}} 
+\index{Camera\+Sampler@{Camera\+Sampler}!Camera\+Sampler@{Camera\+Sampler}}
+\index{Camera\+Sampler@{Camera\+Sampler}!Camera\+Sampler@{Camera\+Sampler}}
+\subsubsection{\texorpdfstring{Camera\+Sampler()}{CameraSampler()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE Camera\+Sampler\+::\+Camera\+Sampler (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_camera}{Camera} \&}]{camera,  }\item[{const float}]{aspect\+\_\+ratio }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{struct_camera_sampler_a347623323319a7111f933d4af6ac2d19}\label{struct_camera_sampler_a347623323319a7111f933d4af6ac2d19}} 
+\index{Camera\+Sampler@{Camera\+Sampler}!invert@{invert}}
+\index{invert@{invert}!Camera\+Sampler@{Camera\+Sampler}}
+\subsubsection{\texorpdfstring{invert()}{invert()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} Camera\+Sampler\+::invert (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{out }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+invert the camera direction sampler
+
+
+\begin{DoxyParams}{Parameters}
+{\em out} & the given direction \\
+\hline
+{\em projected} & whether to return the pdf in projected solid angle or solid angle measure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the N\+DC coordinates corresponding to the given direction 
+\end{DoxyReturn}
+\mbox{\Hypertarget{struct_camera_sampler_aaa68e077536fc88429fb35dd04d30af1}\label{struct_camera_sampler_aaa68e077536fc88429fb35dd04d30af1}} 
+\index{Camera\+Sampler@{Camera\+Sampler}!invert@{invert}}
+\index{invert@{invert}!Camera\+Sampler@{Camera\+Sampler}}
+\subsubsection{\texorpdfstring{invert()}{invert()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} Camera\+Sampler\+::invert (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{out,  }\item[{float $\ast$}]{pdf\+\_\+proj }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+invert the camera direction sampler and compute its projected pdf
+
+
+\begin{DoxyParams}{Parameters}
+{\em out} & the given direction \\
+\hline
+{\em projected} & whether to return the pdf in projected solid angle or solid angle measure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the N\+DC coordinates corresponding to the given direction 
+\end{DoxyReturn}
+\mbox{\Hypertarget{struct_camera_sampler_a0edd94ccee6da3180f13845d189bc758}\label{struct_camera_sampler_a0edd94ccee6da3180f13845d189bc758}} 
+\index{Camera\+Sampler@{Camera\+Sampler}!pdf@{pdf}}
+\index{pdf@{pdf}!Camera\+Sampler@{Camera\+Sampler}}
+\subsubsection{\texorpdfstring{pdf()}{pdf()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float Camera\+Sampler\+::pdf (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{out,  }\item[{const bool}]{projected = {\ttfamily false} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+compute the direction pdf \mbox{\Hypertarget{struct_camera_sampler_ac502e1699c99c595b773b1419225fe32}\label{struct_camera_sampler_ac502e1699c99c595b773b1419225fe32}} 
+\index{Camera\+Sampler@{Camera\+Sampler}!sample\+\_\+direction@{sample\+\_\+direction}}
+\index{sample\+\_\+direction@{sample\+\_\+direction}!Camera\+Sampler@{Camera\+Sampler}}
+\subsubsection{\texorpdfstring{sample\+\_\+direction()}{sample\_direction()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} Camera\+Sampler\+::sample\+\_\+direction (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f}}]{ndc }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+sample a direction from normalized device coordinates (N\+DC) in \mbox{[}0,1\mbox{]}$^\wedge$2 \mbox{\Hypertarget{struct_camera_sampler_afe4852bed67331cf757518e046d82ef1}\label{struct_camera_sampler_afe4852bed67331cf757518e046d82ef1}} 
+\index{Camera\+Sampler@{Camera\+Sampler}!W\+\_\+e@{W\+\_\+e}}
+\index{W\+\_\+e@{W\+\_\+e}!Camera\+Sampler@{Camera\+Sampler}}
+\subsubsection{\texorpdfstring{W\+\_\+e()}{W\_e()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float Camera\+Sampler\+::\+W\+\_\+e (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{out }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+compute the importance 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/camera.\+h\end{DoxyCompactItemize}

@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -25,7 +25,6 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 #pragma once
 
 #include "buffers.h"
@@ -40,6 +39,11 @@ struct DeviceHashTable
 		m_size.alloc(1);
 	}
 
+	uint64 needed_bytes(const uint32 N) const
+	{
+		return (sizeof(uint64) * 2 + sizeof(uint32)) * N + sizeof(uint32);
+	}
+
 	void clear()
 	{
 		// initialize the cache size
@@ -48,6 +52,11 @@ struct DeviceHashTable
 		// initialize the cache keys
 		cudaMemset(m_keys.ptr(),  0xFFu, m_keys.sizeInBytes());
 		cudaMemset(m_slots.ptr(), 0xFFu, m_slots.sizeInBytes());
+	}
+
+	uint32 size() const
+	{
+		return m_size[0];
 	}
 
 	DomainBuffer<CUDA_BUFFER, uint64>	m_keys;

@@ -820,6 +820,7 @@ FILE_PATTERNS          = *.c \
                          *.cxx \
                          *.cpp \
                          *.c++ \
+						 *.cu \
                          *.java \
                          *.ii \
                          *.ixx \
@@ -906,7 +907,7 @@ EXCLUDE_SYMBOLS        =
 # that contain example code fragments that are included (see the \include
 # command).
 
-EXAMPLE_PATH           = 
+EXAMPLE_PATH           = ../src ../src/renderers
 
 # If the value of the EXAMPLE_PATH tag contains directories, you can use the
 # EXAMPLE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp and
@@ -1205,6 +1206,16 @@ HTML_EXTRA_STYLESHEET  = extra_stylesheet.css
 HTML_EXTRA_FILES       = images/nvidia.png 
 HTML_EXTRA_FILES      += images/nvidia_cubes.png
 HTML_EXTRA_FILES      += images/escher_room.png
+HTML_EXTRA_FILES      += images/bathroom.png
+HTML_EXTRA_FILES      += images/morning-coffee-bath.jpg
+HTML_EXTRA_FILES      += images/morning-bath-rec.jpg
+HTML_EXTRA_FILES      += images/morning-bath-rec-moonlight.jpg
+HTML_EXTRA_FILES      += images/staircase2-evening.jpg
+HTML_EXTRA_FILES      += images/staircase2-sunset.jpg
+HTML_EXTRA_FILES      += images/psfpt-scheme.jpg
+HTML_EXTRA_FILES      += images/pt-32.jpg
+HTML_EXTRA_FILES      += images/psfpt-32.jpg
+HTML_EXTRA_FILES      += images/water_caustic.jpg
 
 # The HTML_COLORSTYLE_HUE tag controls the color of the HTML output. Doxygen
 # will adjust the colors in the style sheet and background images according to

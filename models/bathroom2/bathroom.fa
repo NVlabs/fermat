@@ -1,0 +1,3 @@
+LoadScene bathroom.obj
+
+Camera persp eye -2.520284 15.735250 32.335594 aim -1.976656 14.700628 -2.417851 up 0 1 0 fov 1.768946

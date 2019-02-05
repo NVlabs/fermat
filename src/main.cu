@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -31,10 +31,10 @@
 #include <cugar/linalg/matrix.h>
 #include <cugar/sampling/random.h>
 #include <cugar/image/tga.h>
+#include <cugar/image/tga_utils.h>
 #include <bsdf.h>
 
-void metropolis_test();
-bool ltc_test();
+#include <tiled_sampling.h>
 
 bool load_image(const char* filename, std::vector<cugar::Vector3f>& img, uint2& res)
 {
@@ -99,25 +99,6 @@ float diff_image(const uint2 res, const cugar::Vector3f* ref, cugar::Vector3f* d
 
 int main(int argc, char** argv)
 {
-#if 0
-	const uint32 S = 32;
-	std::vector<float> tables(S*S*S*S);
-	precompute_glossy_reflectance(S, &tables[0]);
-	FILE* file = fopen("fresnel.dat", "wb");
-	fwrite(&tables[0], sizeof(float), S*S*S*S, file);
-	fclose(file);
-#endif
-
-#if 0
-	metropolis_test();
-	exit(0);
-#endif
-
-#if 0
-	ltc_test();
-	exit(0);
-#endif
-
 	if (strcmp(argv[1], "-diff") == 0)
 	{
 		std::vector<cugar::Vector3f> img1;
@@ -150,6 +131,8 @@ int main(int argc, char** argv)
 	std::vector<cugar::Vector3f>	ref_img;
 	uint2							ref_res = make_uint2(0,0);
 	uint32							n_passes = 1024;
+	FILE*							benchmark_file;
+	bool							save_intermediate = false;
 
 	for (int i = 0; i < argc; ++i)
 	{
@@ -165,11 +148,19 @@ int main(int argc, char** argv)
 			output_name = argv[++i];
 		else if (strcmp(argv[i], "-passes") == 0)
 			n_passes = atoi(argv[++i]);
+		else if (strcmp(argv[i], "-benchmark") == 0)
+		{
+			benchmark_file = fopen(argv[++i], "w");
+			if (benchmark_file == NULL)
+				fprintf(stderr, "warning: failed to open file %s\n", argv[i]);
+		}
+		else if (strcmp(argv[i], "-save-intermediate") == 0)
+			save_intermediate = true;
 	}
 
 	if (start_viewer == false)
 	{
-		Renderer renderer;
+		RenderingContext renderer;
 		renderer.init(argc, argv);
 		renderer.clear();
 
@@ -177,20 +168,23 @@ int main(int argc, char** argv)
 		{
 			renderer.render(i);
 
-			if (i+1 >= 1 && cugar::is_pow2(i+1))
+			if ((i == n_passes) || (save_intermediate && (i+1 >= 1 && cugar::is_pow2(i+1))))
 			{
-				DomainBuffer<HOST_BUFFER, uint8> h_rgba = renderer.m_rgba;
+				const uint32 rgba_bytes = renderer.res().x * renderer.res().y * 4u;
+				DomainBuffer<HOST_BUFFER,uint8> h_rgba( rgba_bytes );
+				h_rgba.copy_from( rgba_bytes, CUDA_BUFFER, renderer.get_device_rgba_buffer() );
 				const uint8* rgba = h_rgba.ptr();
 
 				// dump the image to a tga
 				char filename[1024];
-				sprintf(filename, "%s-%u.tga", output_name, i+1);
+				if (save_intermediate)	sprintf(filename, "%s-%u.tga", output_name, i+1);
+				else					sprintf(filename, "%s.tga", output_name);
 				fprintf(stderr, "\nsaving %s\n", filename);
 
-				cugar::write_tga(filename, renderer.m_res_x, renderer.m_res_y, rgba, cugar::TGAPixels::RGBA);
+				cugar::write_tga(filename, renderer.res().x, renderer.res().y, rgba, cugar::TGAPixels::RGBA);
 
-				if (ref_res.x == renderer.m_res_x &&
-					ref_res.y == renderer.m_res_y)
+				if (ref_res.x == renderer.res().x &&
+					ref_res.y == renderer.res().y)
 				{
 					std::vector<cugar::Vector3f> img(ref_res.x * ref_res.y);
 					std::vector<uchar3>			 rgb(ref_res.x * ref_res.y);
@@ -210,12 +204,16 @@ int main(int argc, char** argv)
 				}
 			}
 		}
+
+		if (benchmark_file)
+		{
+			renderer.get_renderer()->dump_speed_stats( benchmark_file );
+
+			fclose(benchmark_file);
+		}
 	}
 	else
-	{
-		GlutViewer renderer;
-		s_renderer = &renderer;
-		s_renderer->init(argc, argv);
-	}
+		start_glut_viewer( argc, argv );
+
 	return 0;
 }

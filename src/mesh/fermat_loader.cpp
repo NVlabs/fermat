@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -26,18 +26,28 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #pragma once
 
 #include "MeshStorage.h"
+#include <camera.h>
+#include <lights.h>
 #include <cugar/linalg/matrix.h>
 #include <files.h>
 #include <stack>
+#include <sstream>
 
-
-void load_scene(const char* filename, MeshStorage& mesh, const std::vector<std::string>& dirs, std::vector<std::string>& scene_dirs)
+void load_scene(
+	const char*						filename,
+	MeshStorage&					mesh, 
+	std::vector<Camera>&			cameras,
+	std::vector<DirectionalLight>&	dir_lights,
+	const std::vector<std::string>&	dirs,
+	std::vector<std::string>&		scene_dirs)
 {
 	char complete_name[2048];
 	strcpy(complete_name, filename);
+	bool has_camera = false;
 
 	if (!find_file(complete_name, dirs))
 	{
@@ -154,7 +164,7 @@ void load_scene(const char* filename, MeshStorage& mesh, const std::vector<std::
 				fprintf(stderr, "  loading mesh file %s... started\n", name);
 				MeshStorage other;
 
-				load_scene(name, other, dirs, scene_dirs); // recurse
+				load_scene(name, other, cameras, dir_lights, dirs, scene_dirs); // recurse
 				fprintf(stderr, "  loading mesh file %s... done (%d triangles, %d materials, %d groups)\n", name, other.getNumTriangles(), other.getNumMaterials(), other.getNumGroups());
 
 				transform( other, &transform_stack.top()[0][0] );
@@ -206,6 +216,129 @@ void load_scene(const char* filename, MeshStorage& mesh, const std::vector<std::
 						break;
 					}
 				}
+			}
+			else if (strcmp(command, "Camera") == 0)
+			{
+				Camera camera;
+
+				// read the entire command-line
+				char camera_command[4096];
+				fgets(camera_command,4096,file);
+
+				std::istringstream stream( camera_command );
+
+				char type[2048];
+				stream >> type;
+
+				if (strcmp(type, "persp") != 0)
+				{
+					fprintf(stderr, "warning: unsupported camera type \"%s\", in file %s\n", type, filename);
+					continue;
+				}
+
+				while (1)
+				{
+					char param_name[2048];
+
+					if (stream.eof())
+						break;
+
+					if (!(stream >> param_name))
+						break;
+
+					if (strcmp(param_name, "eye") == 0)
+					{
+						if (!(stream >> camera.eye.x >> camera.eye.y >> camera.eye.z))
+						{
+							fprintf(stderr, "warning: badly formatted value for Camera parameter \"%s\", in file %s\n", param_name, filename);
+							break;
+						}
+					}
+					else if (strcmp(param_name, "aim") == 0)
+					{
+						if (!(stream >> camera.aim.x >> camera.aim.y >> camera.aim.z))
+						{
+							fprintf(stderr, "warning: badly formatted value for Camera parameter \"%s\", in file %s\n", param_name, filename);
+							break;
+						}
+					}
+					else if (strcmp(param_name, "up") == 0)
+					{
+						if (!(stream >> camera.up.x >> camera.up.y >> camera.up.z))
+						{
+							fprintf(stderr, "warning: badly formatted value for Camera parameter \"%s\", in file %s\n", param_name, filename);
+							break;
+						}
+					}
+					else if (strcmp(param_name, "fov") == 0)
+					{
+						if (!(stream >> camera.fov))
+						{
+							fprintf(stderr, "warning: badly formatted value for Camera parameter \"%s\", in file %s\n", param_name, filename);
+							break;
+						}
+					}
+					else
+					{
+						fprintf(stderr, "warning: unsupported Camera parameter \"%s\", in file %s\n", param_name, filename);
+						break;
+					}
+				}
+
+				// finish initilizing camera model
+				camera.dx = normalize(cross(camera.aim - camera.eye, camera.up));
+
+				// push back new camera
+				cameras.push_back( camera );
+			}
+			else if (strcmp(command, "DirectionalLight") == 0)
+			{
+				DirectionalLight light;
+
+				// read the entire command-line
+				char light_command[4096];
+				fgets(light_command,4096,file);
+
+				std::istringstream stream( light_command );
+
+				while (1)
+				{
+					char param_name[2048];
+
+					if (stream.eof())
+						break;
+
+					if (!(stream >> param_name))
+						break;
+
+					if (strcmp(param_name, "dir") == 0 ||
+						strcmp(param_name, "direction") == 0)
+					{
+						if (!(stream >> light.dir.x >> light.dir.y >> light.dir.z))
+						{
+							fprintf(stderr, "warning: badly formatted value for DirectionalLight parameter \"%s\", in file %s\n", param_name, filename);
+							break;
+						}
+
+						light.dir = cugar::normalize( light.dir );
+					}
+					else if (strcmp(param_name, "color") == 0)
+					{
+						if (!(stream >> light.color.x >> light.color.y >> light.color.z))
+						{
+							fprintf(stderr, "warning: badly formatted value for DirectionalLight parameter \"%s\", in file %s\n", param_name, filename);
+							break;
+						}
+					}
+					else
+					{
+						fprintf(stderr, "warning: unsupported DirectionalLight parameter \"%s\", in file %s\n", param_name, filename);
+						break;
+					}
+				}
+
+				// push back new light
+				dir_lights.push_back( light );
 			}
 		}
 	}

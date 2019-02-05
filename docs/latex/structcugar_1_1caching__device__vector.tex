@@ -1,0 +1,57 @@
+\hypertarget{structcugar_1_1caching__device__vector}{}\section{cugar\+:\+:caching\+\_\+device\+\_\+vector$<$ T $>$ Struct Template Reference}
+\label{structcugar_1_1caching__device__vector}\index{cugar\+::caching\+\_\+device\+\_\+vector$<$ T $>$@{cugar\+::caching\+\_\+device\+\_\+vector$<$ T $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$typename T$>$\newline
+struct cugar\+::caching\+\_\+device\+\_\+vector$<$ T $>$}
+
+a dynamic device vector class with a caching allocator 
+
+{\ttfamily \#include $<$vector.\+h$>$}
+
+Inheritance diagram for cugar\+:\+:caching\+\_\+device\+\_\+vector$<$ T $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{structcugar_1_1caching__device__vector}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \hyperlink{structcugar_1_1device__tag}{device\+\_\+tag} {\bfseries system\+\_\+tag}
+\item 
+typedef \hyperlink{structcugar_1_1vector}{vector}$<$ \hyperlink{structcugar_1_1device__tag}{device\+\_\+tag}, T, \hyperlink{structcugar_1_1caching__device__allocator}{caching\+\_\+device\+\_\+allocator}$<$ T $>$ $>$ {\bfseries base\+\_\+type}
+\item 
+typedef base\+\_\+type\+::const\+\_\+iterator {\bfseries const\+\_\+iterator}
+\item 
+typedef base\+\_\+type\+::iterator {\bfseries iterator}
+\item 
+typedef base\+\_\+type\+::value\+\_\+type {\bfseries value\+\_\+type}
+\item 
+typedef base\+\_\+type\+::plain\+\_\+view\+\_\+type {\bfseries plain\+\_\+view\+\_\+type}
+\item 
+typedef base\+\_\+type\+::const\+\_\+plain\+\_\+view\+\_\+type {\bfseries const\+\_\+plain\+\_\+view\+\_\+type}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group___basic_ga2146480a7d6cae513ac29c3ec28a73a3}{caching\+\_\+device\+\_\+vector} (const size\+\_\+t size=0, const T val=T())
+\item 
+{\footnotesize template$<$typename Other\+Alloc $>$ }\\{\bfseries caching\+\_\+device\+\_\+vector} (const thrust\+::host\+\_\+vector$<$ T, Other\+Alloc $>$ \&v)
+\item 
+{\footnotesize template$<$typename Other\+Alloc $>$ }\\{\bfseries caching\+\_\+device\+\_\+vector} (const thrust\+::device\+\_\+vector$<$ T, Other\+Alloc $>$ \&v)
+\item 
+{\footnotesize template$<$typename Other\+Alloc $>$ }\\\hyperlink{structcugar_1_1caching__device__vector}{caching\+\_\+device\+\_\+vector}$<$ T $>$ \& {\bfseries operator=} (const thrust\+::host\+\_\+vector$<$ T, Other\+Alloc $>$ \&v)
+\item 
+{\footnotesize template$<$typename Other\+Alloc $>$ }\\\hyperlink{structcugar_1_1caching__device__vector}{caching\+\_\+device\+\_\+vector}$<$ T $>$ \& {\bfseries operator=} (const thrust\+::device\+\_\+vector$<$ T, Other\+Alloc $>$ \&v)
+\item 
+\hyperlink{group___basic_ga88dd1949f9871da3aa4d4aefd0167c8b}{operator plain\+\_\+view\+\_\+type} ()
+\item 
+\hyperlink{group___basic_gacf7a82dbc75f3ff33d4cb3bc1cae2e2f}{operator const\+\_\+plain\+\_\+view\+\_\+type} () const
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/vector.\+h\end{DoxyCompactItemize}

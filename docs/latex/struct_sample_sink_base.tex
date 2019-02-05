@@ -1,0 +1,44 @@
+\hypertarget{struct_sample_sink_base}{}\section{Sample\+Sink\+Base Struct Reference}
+\label{struct_sample_sink_base}\index{Sample\+Sink\+Base@{Sample\+Sink\+Base}}
+
+
+\subsection{Detailed description}
+\mbox{[}Sample\+Sink\+Base\+Block\mbox{]}
+
+Base class for sample sinks, a class specifying how to handle final samples produced by the bidirectional path tracing kernels
+
+\label{struct_sample_sink_base_SampleSinkAnchor}%
+\Hypertarget{struct_sample_sink_base_SampleSinkAnchor}%
+
+
+{\ttfamily \#include $<$bpt\+\_\+kernels.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T\+B\+P\+T\+Context $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{struct_sample_sink_base_ab34316c125cab0da36ea2ae41e67f98f}{sink} (const uint32 channel, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector4f} value, const uint32 light\+\_\+path\+\_\+id, const uint32 eye\+\_\+path\+\_\+id, const uint32 s, const uint32 t, T\+B\+P\+T\+Context \&context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer)
+\item 
+{\footnotesize template$<$typename T\+B\+P\+T\+Context $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{struct_sample_sink_base_ac96fd485e8196264c43115c68a0bbc25}{sink\+\_\+eye\+\_\+scattering\+\_\+event} (const \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type} component, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector4f} value, const uint32 eye\+\_\+path\+\_\+id, const uint32 t, T\+B\+P\+T\+Context \&context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{struct_sample_sink_base_ab34316c125cab0da36ea2ae41e67f98f}\label{struct_sample_sink_base_ab34316c125cab0da36ea2ae41e67f98f}} 
+\index{Sample\+Sink\+Base@{Sample\+Sink\+Base}!sink@{sink}}
+\index{sink@{sink}!Sample\+Sink\+Base@{Sample\+Sink\+Base}}
+\subsubsection{\texorpdfstring{sink()}{sink()}}
+{\footnotesize\ttfamily template$<$typename T\+B\+P\+T\+Context $>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void Sample\+Sink\+Base\+::sink (\begin{DoxyParamCaption}\item[{const uint32}]{channel,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector4f}}]{value,  }\item[{const uint32}]{light\+\_\+path\+\_\+id,  }\item[{const uint32}]{eye\+\_\+path\+\_\+id,  }\item[{const uint32}]{s,  }\item[{const uint32}]{t,  }\item[{T\+B\+P\+T\+Context \&}]{context,  }\item[{\hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&}]{renderer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Sink a full path sample \mbox{\Hypertarget{struct_sample_sink_base_ac96fd485e8196264c43115c68a0bbc25}\label{struct_sample_sink_base_ac96fd485e8196264c43115c68a0bbc25}} 
+\index{Sample\+Sink\+Base@{Sample\+Sink\+Base}!sink\+\_\+eye\+\_\+scattering\+\_\+event@{sink\+\_\+eye\+\_\+scattering\+\_\+event}}
+\index{sink\+\_\+eye\+\_\+scattering\+\_\+event@{sink\+\_\+eye\+\_\+scattering\+\_\+event}!Sample\+Sink\+Base@{Sample\+Sink\+Base}}
+\subsubsection{\texorpdfstring{sink\+\_\+eye\+\_\+scattering\+\_\+event()}{sink\_eye\_scattering\_event()}}
+{\footnotesize\ttfamily template$<$typename T\+B\+P\+T\+Context $>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void Sample\+Sink\+Base\+::sink\+\_\+eye\+\_\+scattering\+\_\+event (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type}}]{component,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector4f}}]{value,  }\item[{const uint32}]{eye\+\_\+path\+\_\+id,  }\item[{const uint32}]{t,  }\item[{T\+B\+P\+T\+Context \&}]{context,  }\item[{\hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&}]{renderer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+record an eye scattering event 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/bpt\+\_\+kernels.\+h\end{DoxyCompactItemize}

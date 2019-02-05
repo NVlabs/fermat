@@ -1,0 +1,118 @@
+\hypertarget{group___basic_utils}{}\section{Utilities}
+\label{group___basic_utils}\index{Utilities@{Utilities}}
+
+
+\subsection{Detailed Description}
+C\+U\+G\+AR\textquotesingle{}s convenience functions and functors needed for every day\textquotesingle{}s work... \subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group___basic_meta_functions}{Meta Functions}
+\end{DoxyCompactItemize}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+union \hyperlink{unioncugar_1_1_binary_cast}{cugar\+::\+Binary\+Cast$<$ Out, In $>$}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$uint32 N$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{group___basic_utils_gaf1c33dd2c16b4650bae4a033c14f39a5}{cugar\+::lo\+\_\+bits} ()
+\item 
+{\footnotesize template$<$uint32 N$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{group___basic_utils_ga47492a6dcbe7be467ffda1dd9ad48fb8}{cugar\+::hi\+\_\+bits} ()
+\item 
+{\footnotesize template$<$typename Iterator , typename T $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{group___basic_utils_gae983de927851c298a386b9a35b0e82e4}{cugar\+::count\+\_\+occurrences} (const Iterator \hyperlink{namespacecugar_a2121df08f967e232ea5fe0ee378dee67}{begin}, uint32 size, const T val, const uint32 max\+\_\+occ=uint32(-\/1))
+\item 
+{\footnotesize template$<$typename L , typename R $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE L \hyperlink{group___basic_utils_gabb6714186dbbd864f0a9298944ba509b}{cugar\+::divide\+\_\+ri} (const L x, const R y)
+\item 
+{\footnotesize template$<$typename L , typename R $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE L \hyperlink{group___basic_utils_gae5973146d12ab34b3cdf518c2ea0d14b}{cugar\+::divide\+\_\+rz} (const L x, const R y)
+\item 
+{\footnotesize template$<$typename L , typename R $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE L \hyperlink{group___basic_utils_gab417c685b4c9fc81ccb34e970d4fbc7d}{cugar\+::round\+\_\+i} (const L x, const R y)
+\item 
+{\footnotesize template$<$typename L , typename R $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE L \hyperlink{group___basic_utils_ga40a1778d81e29db2dd88253a284b0c62}{cugar\+::round\+\_\+z} (const L x, const R y)
+\item 
+{\footnotesize template$<$typename L , typename R $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE L \hyperlink{group___basic_utils_ga6d264db70d9d9d514ced6ae7e74372ff}{cugar\+::round} (const L x, const R y)
+\item 
+{\footnotesize template$<$typename Out , typename In $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Out \hyperlink{group___basic_utils_ga27a8f4df38255278583c8b582a7912bd}{cugar\+::binary\+\_\+cast} (const In in)
+\item 
+\mbox{\Hypertarget{group___basic_utils_gae4550c10fd0c2aed63273a0f4767ea7e}\label{group___basic_utils_gae4550c10fd0c2aed63273a0f4767ea7e}} 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool {\bfseries cugar\+::is\+\_\+pow2} (const uint32 C)
+\item 
+\mbox{\Hypertarget{group___basic_utils_ga0a14b2715a2d04117f9905f8867f7317}\label{group___basic_utils_ga0a14b2715a2d04117f9905f8867f7317}} 
+{\footnotesize template$<$uint32 C$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool {\bfseries cugar\+::is\+\_\+pow2\+\_\+static} ()
+\item 
+\mbox{\Hypertarget{group___basic_utils_ga099339cce7556b97041dd9555ccd8afe}\label{group___basic_utils_ga099339cce7556b97041dd9555ccd8afe}} 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 {\bfseries cugar\+::next\+\_\+power\+\_\+of\+\_\+two} (uint32 v)
+\item 
+\mbox{\Hypertarget{group___basic_utils_gada564914cc1baef6985d31c261c8e72b}\label{group___basic_utils_gada564914cc1baef6985d31c261c8e72b}} 
+{\footnotesize template$<$uint32 N, typename I $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE I {\bfseries cugar\+::align} (const I a)
+\item 
+\mbox{\Hypertarget{group___basic_utils_ga40802a386c7bb9d3c3e50dcd2ae0a650}\label{group___basic_utils_ga40802a386c7bb9d3c3e50dcd2ae0a650}} 
+{\footnotesize template$<$uint32 N, typename I $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE I {\bfseries cugar\+::align\+\_\+down} (const I a)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___basic_utils_ga27a8f4df38255278583c8b582a7912bd}\label{group___basic_utils_ga27a8f4df38255278583c8b582a7912bd}} 
+\index{Utilities@{Utilities}!binary\+\_\+cast@{binary\+\_\+cast}}
+\index{binary\+\_\+cast@{binary\+\_\+cast}!Utilities@{Utilities}}
+\subsubsection{\texorpdfstring{binary\+\_\+cast()}{binary\_cast()}}
+{\footnotesize\ttfamily template$<$typename Out , typename In $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Out cugar\+::binary\+\_\+cast (\begin{DoxyParamCaption}\item[{const In}]{in }\end{DoxyParamCaption})}
+
+a utility to perform binary casts between different types \mbox{\Hypertarget{group___basic_utils_gae983de927851c298a386b9a35b0e82e4}\label{group___basic_utils_gae983de927851c298a386b9a35b0e82e4}} 
+\index{Utilities@{Utilities}!count\+\_\+occurrences@{count\+\_\+occurrences}}
+\index{count\+\_\+occurrences@{count\+\_\+occurrences}!Utilities@{Utilities}}
+\subsubsection{\texorpdfstring{count\+\_\+occurrences()}{count\_occurrences()}}
+{\footnotesize\ttfamily template$<$typename Iterator , typename T $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 cugar\+::count\+\_\+occurrences (\begin{DoxyParamCaption}\item[{const Iterator}]{begin,  }\item[{uint32}]{size,  }\item[{const T}]{val,  }\item[{const uint32}]{max\+\_\+occ = {\ttfamily uint32(-\/1)} }\end{DoxyParamCaption})}
+
+count the number of occurrences of a given value inside an array, up to a maximum value \mbox{\Hypertarget{group___basic_utils_gabb6714186dbbd864f0a9298944ba509b}\label{group___basic_utils_gabb6714186dbbd864f0a9298944ba509b}} 
+\index{Utilities@{Utilities}!divide\+\_\+ri@{divide\+\_\+ri}}
+\index{divide\+\_\+ri@{divide\+\_\+ri}!Utilities@{Utilities}}
+\subsubsection{\texorpdfstring{divide\+\_\+ri()}{divide\_ri()}}
+{\footnotesize\ttfamily template$<$typename L , typename R $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE L cugar\+::divide\+\_\+ri (\begin{DoxyParamCaption}\item[{const L}]{x,  }\item[{const R}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+x/y rounding towards +infinity for integers, used to determine \# of blocks/warps etc. \mbox{\Hypertarget{group___basic_utils_gae5973146d12ab34b3cdf518c2ea0d14b}\label{group___basic_utils_gae5973146d12ab34b3cdf518c2ea0d14b}} 
+\index{Utilities@{Utilities}!divide\+\_\+rz@{divide\+\_\+rz}}
+\index{divide\+\_\+rz@{divide\+\_\+rz}!Utilities@{Utilities}}
+\subsubsection{\texorpdfstring{divide\+\_\+rz()}{divide\_rz()}}
+{\footnotesize\ttfamily template$<$typename L , typename R $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE L cugar\+::divide\+\_\+rz (\begin{DoxyParamCaption}\item[{const L}]{x,  }\item[{const R}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+x/y rounding towards zero for integers, used to determine \# of blocks/warps etc. \mbox{\Hypertarget{group___basic_utils_ga47492a6dcbe7be467ffda1dd9ad48fb8}\label{group___basic_utils_ga47492a6dcbe7be467ffda1dd9ad48fb8}} 
+\index{Utilities@{Utilities}!hi\+\_\+bits@{hi\+\_\+bits}}
+\index{hi\+\_\+bits@{hi\+\_\+bits}!Utilities@{Utilities}}
+\subsubsection{\texorpdfstring{hi\+\_\+bits()}{hi\_bits()}}
+{\footnotesize\ttfamily template$<$uint32 N$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 cugar\+::hi\+\_\+bits (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+return the bitmask with the hi N bits set \mbox{\Hypertarget{group___basic_utils_gaf1c33dd2c16b4650bae4a033c14f39a5}\label{group___basic_utils_gaf1c33dd2c16b4650bae4a033c14f39a5}} 
+\index{Utilities@{Utilities}!lo\+\_\+bits@{lo\+\_\+bits}}
+\index{lo\+\_\+bits@{lo\+\_\+bits}!Utilities@{Utilities}}
+\subsubsection{\texorpdfstring{lo\+\_\+bits()}{lo\_bits()}}
+{\footnotesize\ttfamily template$<$uint32 N$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 cugar\+::lo\+\_\+bits (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+return the bitmask with the lo N bits set \mbox{\Hypertarget{group___basic_utils_ga6d264db70d9d9d514ced6ae7e74372ff}\label{group___basic_utils_ga6d264db70d9d9d514ced6ae7e74372ff}} 
+\index{Utilities@{Utilities}!round@{round}}
+\index{round@{round}!Utilities@{Utilities}}
+\subsubsection{\texorpdfstring{round()}{round()}}
+{\footnotesize\ttfamily template$<$typename L , typename R $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE L cugar\+::round (\begin{DoxyParamCaption}\item[{const L}]{x,  }\item[{const R}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+round x towards to the closest multiple of x \mbox{\Hypertarget{group___basic_utils_gab417c685b4c9fc81ccb34e970d4fbc7d}\label{group___basic_utils_gab417c685b4c9fc81ccb34e970d4fbc7d}} 
+\index{Utilities@{Utilities}!round\+\_\+i@{round\+\_\+i}}
+\index{round\+\_\+i@{round\+\_\+i}!Utilities@{Utilities}}
+\subsubsection{\texorpdfstring{round\+\_\+i()}{round\_i()}}
+{\footnotesize\ttfamily template$<$typename L , typename R $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE L cugar\+::round\+\_\+i (\begin{DoxyParamCaption}\item[{const L}]{x,  }\item[{const R}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+round x towards infinity to the next multiple of y \mbox{\Hypertarget{group___basic_utils_ga40a1778d81e29db2dd88253a284b0c62}\label{group___basic_utils_ga40a1778d81e29db2dd88253a284b0c62}} 
+\index{Utilities@{Utilities}!round\+\_\+z@{round\+\_\+z}}
+\index{round\+\_\+z@{round\+\_\+z}!Utilities@{Utilities}}
+\subsubsection{\texorpdfstring{round\+\_\+z()}{round\_z()}}
+{\footnotesize\ttfamily template$<$typename L , typename R $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE L cugar\+::round\+\_\+z (\begin{DoxyParamCaption}\item[{const L}]{x,  }\item[{const R}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+round x towards zero to the next multiple of y 

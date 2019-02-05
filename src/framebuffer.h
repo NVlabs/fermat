@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -54,10 +54,18 @@ struct GBufferView
 	FERMAT_HOST_DEVICE const float4& geo(const uint32_t pixel) const { return m_geo[pixel]; }
 	FERMAT_HOST_DEVICE float4&       uv(const uint32_t pixel)		 { return m_uv[pixel]; }
 	FERMAT_HOST_DEVICE const float4& uv(const uint32_t pixel) const  { return m_uv[pixel]; }
+	FERMAT_HOST_DEVICE uint4&		 material(const uint32_t pixel)			{ return m_material[pixel]; }
+	FERMAT_HOST_DEVICE const uint4&	 material(const uint32_t pixel) const	{ return m_material[pixel]; }
+	FERMAT_HOST_DEVICE float&        depth(const uint32_t pixel)					{ return m_depth[pixel]; }
+	FERMAT_HOST_DEVICE const float&  depth(const uint32_t pixel) const				{ return m_depth[pixel]; }
 	FERMAT_HOST_DEVICE float4&       geo(const uint32_t x, const uint32_t y)		{ return m_geo[y*res_x + x]; }
 	FERMAT_HOST_DEVICE const float4& geo(const uint32_t x, const uint32_t y) const	{ return m_geo[y*res_x + x]; }
 	FERMAT_HOST_DEVICE float4&       uv(const uint32_t x, const uint32_t y)			{ return m_uv[y*res_x + x]; }
 	FERMAT_HOST_DEVICE const float4& uv(const uint32_t x, const uint32_t y) const	{ return m_uv[y*res_x + x]; }
+	FERMAT_HOST_DEVICE float&        depth(const uint32_t x, const uint32_t y)			{ return m_depth[y*res_x + x]; }
+	FERMAT_HOST_DEVICE const float&  depth(const uint32_t x, const uint32_t y) const	{ return m_depth[y*res_x + x]; }
+	FERMAT_HOST_DEVICE uint4&		 material(const uint32_t x, const uint32_t y)		{ return m_material[y*res_x + x]; }
+	FERMAT_HOST_DEVICE const uint4&	 material(const uint32_t x, const uint32_t y) const	{ return m_material[y*res_x + x]; }
 
 	FERMAT_HOST_DEVICE float4&       geo(const int2 pixel)			{ return m_geo[pixel.y * res_x + pixel.x]; }
 	FERMAT_HOST_DEVICE const float4& geo(const int2 pixel) const	{ return m_geo[pixel.y * res_x + pixel.x]; }
@@ -67,11 +75,16 @@ struct GBufferView
 	FERMAT_HOST_DEVICE const float4& uv(const int2 pixel) const		{ return m_uv[pixel.y * res_x + pixel.x]; }
 	FERMAT_HOST_DEVICE float4&       uv(const uint2 pixel)			{ return m_uv[pixel.y * res_x + pixel.x]; }
 	FERMAT_HOST_DEVICE const float4& uv(const uint2 pixel) const	{ return m_uv[pixel.y * res_x + pixel.x]; }
+	FERMAT_HOST_DEVICE float&		 depth(const uint2 pixel) 		{ return m_depth[pixel.y * res_x + pixel.x]; }
+	FERMAT_HOST_DEVICE float		 depth(const uint2 pixel) const	{ return m_depth[pixel.y * res_x + pixel.x]; }
+	FERMAT_HOST_DEVICE uint4&		 material(const int2 pixel)			{ return m_material[pixel.y * res_x + pixel.x]; }
+	FERMAT_HOST_DEVICE const uint4&	 material(const int2 pixel) const	{ return m_material[pixel.y * res_x + pixel.x]; }
 
 	FERMAT_HOST_DEVICE
 	static float4 pack_geometry(const cugar::Vector3f P, cugar::Vector3f N, bool miss = false)
 	{
 		const uint32_t n_i = cugar::pack_vector(cugar::uniform_sphere_to_square(N), 15u);
+		//const uint32_t n_i = cugar::pack_vector(cugar::sphere_to_oct(N)*0.5f + cugar::Vector2f(0.5f), 15u);
 
 		return make_float4(P.x, P.y, P.z, cugar::binary_cast<float>((uint32_t(miss) << 31) | n_i));
 	}
@@ -91,14 +104,17 @@ struct GBufferView
 	FERMAT_HOST_DEVICE
 	static cugar::Vector3f unpack_normal(const float4 geom)
 	{
-		const uint32_t n_i = cugar::binary_cast<uint32_t>(geom.w) & 0x0000FFFF;
+		const uint32_t n_i = cugar::binary_cast<uint32_t>(geom.w) & (~(1u << 31));
 
 		return cugar::uniform_square_to_sphere(cugar::unpack_vector<float>(n_i, 15u));
+		//return cugar::oct_to_sphere(cugar::unpack_vector<float>(n_i, 15u)*2.0f - cugar::Vector2f(1.0f));
 	}
 
 	float4*	m_geo;			// gbuffer geometry
 	float4* m_uv;			// gbuffer texture coordinates
 	uint32* m_tri;			// gbuffer tri ids
+	float*  m_depth;		// depth buffer
+	uint4*	m_material;		// packed material
 
 	uint32_t res_x;
 	uint32_t res_y;
@@ -136,7 +152,11 @@ struct GBufferStorage
 	DomainBuffer<CUDA_BUFFER, float4>	geo;			// gbuffer geometry
 	DomainBuffer<CUDA_BUFFER, float4>	uv;				// gbuffer texture coordinates + group ids
 	DomainBuffer<CUDA_BUFFER, uint32>	tri;			// gbuffer triangle ids
+	DomainBuffer<CUDA_BUFFER, float>	depth;			// gbuffer depth
+	DomainBuffer<CUDA_BUFFER, uint4>	material;		// gbuffer material
 
+	/// set the resolution
+	///
 	void resize(const uint32_t _res_x, const uint32_t _res_y)
 	{
 		res_x = _res_x;
@@ -145,17 +165,27 @@ struct GBufferStorage
 		geo.alloc(res_x * res_y);
 		uv.alloc(res_x * res_y);
 		tri.alloc(res_x * res_y);
+		depth.alloc(res_x * res_y);
+		material.alloc(res_x * res_y);
 	}
 
-    size_t size() const { return res_x * res_y; }
+	/// return the total number of pixels
+	///
+	size_t size() const { return res_x * res_y; }
 
+	/// clear the G-buffer with invalid bits
+	///
 	void clear()
 	{
 		cudaMemset(geo.ptr(), 0xFF, geo.sizeInBytes());
 		cudaMemset(uv.ptr(),  0xFF, uv.sizeInBytes());
 		cudaMemset(tri.ptr(), 0xFF, tri.sizeInBytes());
+		cudaMemset(depth.ptr(), 0xFF, depth.sizeInBytes());
+		cudaMemset(material.ptr(), 0xFF, depth.sizeInBytes());
 	}
 
+	/// return a view object
+	///
 	GBufferView view()
 	{
 		GBufferView out;
@@ -164,11 +194,13 @@ struct GBufferStorage
 		out.m_geo = geo.ptr();
 		out.m_uv  = uv.ptr();
 		out.m_tri = tri.ptr();
+		out.m_depth = depth.ptr();
+		out.m_material = material.ptr();
 		return out;
 	}
 };
 
-/// Framebuffer channel storage class, to be used from the host to allocate frmaebuffer storage
+/// Framebuffer channel storage class, to be used from the host to allocate frame-buffer storage
 ///
 struct FBufferChannelStorage
 {
@@ -184,6 +216,8 @@ struct FBufferChannelStorage
 	const float4* ptr() const { return c.ptr(); }
 	      float4* ptr()		  { return c.ptr(); }
 
+	/// set the resolution
+	///
 	void resize(const uint32_t _res_x, const uint32_t _res_y)
 	{
 		res_x = _res_x;
@@ -192,13 +226,19 @@ struct FBufferChannelStorage
 		c.alloc(res_x * res_y);
 	}
 
+	/// return the total number of pixels
+	///
 	size_t size() const { return res_x * res_y; }
 
+	/// clear the channel with zeros
+	///
 	void clear()
 	{
 		cudaMemset(c.ptr(), 0, c.sizeInBytes());
 	}
 
+	/// copy the channel from another source
+	///
 	FBufferChannelStorage& operator=(FBufferChannelStorage& other)
 	{
 		res_x = other.res_x;
@@ -207,6 +247,8 @@ struct FBufferChannelStorage
 		return *this;
 	}
 
+	/// return a view object
+	///
 	FBufferChannelView view()
 	{
 		FBufferChannelView out;
@@ -216,6 +258,8 @@ struct FBufferChannelStorage
 		return out;
 	}
 
+	/// swap with another framebuffer channel
+	///
 	void swap(FBufferChannelStorage& other)
 	{
 		std::swap(res_x, other.res_x);
@@ -243,6 +287,10 @@ struct FBufferView
 };
 
 /// Framebuffer storage class, to be used from the host to allocate framebuffer storage
+///\n
+/// A framebuffer can hold multiple named channels of the same size; currently, only float4 channels
+/// are supported - in the future multiple formats might be added.
+/// The framebuffer also holds a single G-buffer.
 ///
 struct FBufferStorage
 {
@@ -258,9 +306,16 @@ struct FBufferStorage
 
 	DomainBuffer<CUDA_BUFFER, FBufferChannelView> channel_views;
 
+	/// constructor
+	///
 	FBufferStorage() : res_x(0), res_y(0), n_channels(0), channels(NULL) {}
+
+	/// destructor
+	///
 	~FBufferStorage() { delete[] channels; }
 
+	/// set the number of channels
+	///
 	void set_channel_count(const uint32 _n_channels)
 	{
 		n_channels = _n_channels;
@@ -268,11 +323,15 @@ struct FBufferStorage
 		names.resize(n_channels);
 	}
 
+	/// set the name of a channel
+	///
 	void set_channel(const uint32_t i, const char* name)
 	{
 		names[i] = std::string(name);
 	}
 
+	/// set the resolution of the framebuffer
+	///
 	void resize(const uint32_t _res_x, const uint32_t _res_y)
 	{
 		res_x = _res_x;
@@ -289,13 +348,19 @@ struct FBufferStorage
 		channel_views = _channel_views;
 	}
 
+	/// return the number of channels
+	///
 	uint32_t channel_count() const
 	{
 		return uint32_t(n_channels);
 	}
 
+	/// return the resolution of the framebuffer
+	///
 	size_t size() const { return res_x * res_y; }
 
+	/// return a view object
+	///
 	FBufferView view()
 	{
 		FBufferView out;

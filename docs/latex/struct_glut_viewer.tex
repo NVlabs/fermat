@@ -1,0 +1,118 @@
+\hypertarget{struct_glut_viewer}{}\section{Glut\+Viewer Struct Reference}
+\label{struct_glut_viewer}\index{Glut\+Viewer@{Glut\+Viewer}}
+Inheritance diagram for Glut\+Viewer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{struct_glut_viewer}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_glut_viewer_aea31480390a568733169b60a83e3c8fc}\label{struct_glut_viewer_aea31480390a568733169b60a83e3c8fc}} 
+enum {\bfseries Orientation} \{ {\bfseries X\+\_\+\+UP}, 
+{\bfseries Y\+\_\+\+UP}, 
+{\bfseries Z\+\_\+\+UP}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_glut_viewer_ab49b8c33c56c472f42946c32a479a47d}\label{struct_glut_viewer_ab49b8c33c56c472f42946c32a479a47d}} 
+void {\bfseries init} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_glut_viewer_a88ec1ef1e42cdf6daa6e93cebfa3cdae}\label{struct_glut_viewer_a88ec1ef1e42cdf6daa6e93cebfa3cdae}} 
+static void {\bfseries display} ()
+\item 
+\mbox{\Hypertarget{struct_glut_viewer_ac94c554f4339d0ff55c5cca9d1be2676}\label{struct_glut_viewer_ac94c554f4339d0ff55c5cca9d1be2676}} 
+static void {\bfseries idle} ()
+\item 
+\mbox{\Hypertarget{struct_glut_viewer_a25fa4839d244f5f221c3fb346cdbe584}\label{struct_glut_viewer_a25fa4839d244f5f221c3fb346cdbe584}} 
+static void {\bfseries mouse} (int button, int state, int x, int y)
+\item 
+\mbox{\Hypertarget{struct_glut_viewer_a88c7d9e7144e1dae7bd9b5e2d409a9d9}\label{struct_glut_viewer_a88c7d9e7144e1dae7bd9b5e2d409a9d9}} 
+static void {\bfseries motion} (int x, int y)
+\item 
+\mbox{\Hypertarget{struct_glut_viewer_a738d02267b5482162d1c059e43257fb5}\label{struct_glut_viewer_a738d02267b5482162d1c059e43257fb5}} 
+static void {\bfseries keyboard} (unsigned char character, int x, int y)
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_glut_viewer_ac8c1bdb89bdd8c8ba11f317038922828}\label{struct_glut_viewer_ac8c1bdb89bdd8c8ba11f317038922828}} 
+G\+Luint {\bfseries m\+\_\+texture}
+\item 
+\mbox{\Hypertarget{struct_glut_viewer_a80515c2f9201dba55f00c016a3f236c2}\label{struct_glut_viewer_a80515c2f9201dba55f00c016a3f236c2}} 
+\hyperlink{struct_camera}{Camera} {\bfseries m\+\_\+camera\+\_\+o}
+\item 
+\mbox{\Hypertarget{struct_glut_viewer_a620431346d0b18b9ed623e74b572365b}\label{struct_glut_viewer_a620431346d0b18b9ed623e74b572365b}} 
+\hyperlink{struct_directional_light}{Directional\+Light} {\bfseries m\+\_\+light\+\_\+o}
+\item 
+\mbox{\Hypertarget{struct_glut_viewer_a7b1cdc82f8800cd6b07af7ec98028311}\label{struct_glut_viewer_a7b1cdc82f8800cd6b07af7ec98028311}} 
+int2 {\bfseries m\+\_\+mouse}
+\item 
+\mbox{\Hypertarget{struct_glut_viewer_adda7025a498500b5592d028dffa63aee}\label{struct_glut_viewer_adda7025a498500b5592d028dffa63aee}} 
+float {\bfseries m\+\_\+mouse\+\_\+depth}
+\item 
+\mbox{\Hypertarget{struct_glut_viewer_a3ea2579916370b9e10fe46e35d5d3087}\label{struct_glut_viewer_a3ea2579916370b9e10fe46e35d5d3087}} 
+bool {\bfseries m\+\_\+dollying}
+\item 
+\mbox{\Hypertarget{struct_glut_viewer_ab7376dddeca9d7a08a9f7f815f4090db}\label{struct_glut_viewer_ab7376dddeca9d7a08a9f7f815f4090db}} 
+bool {\bfseries m\+\_\+panning}
+\item 
+\mbox{\Hypertarget{struct_glut_viewer_af0a18c2c6194c49f7a54781e90414722}\label{struct_glut_viewer_af0a18c2c6194c49f7a54781e90414722}} 
+bool {\bfseries m\+\_\+walking}
+\item 
+\mbox{\Hypertarget{struct_glut_viewer_a32b35e32fea871ebf493ad7ffa425685}\label{struct_glut_viewer_a32b35e32fea871ebf493ad7ffa425685}} 
+bool {\bfseries m\+\_\+zooming}
+\item 
+\mbox{\Hypertarget{struct_glut_viewer_a81293ef53f2bd8e4787787b9d93296c8}\label{struct_glut_viewer_a81293ef53f2bd8e4787787b9d93296c8}} 
+bool {\bfseries m\+\_\+moving\+\_\+selection}
+\item 
+\mbox{\Hypertarget{struct_glut_viewer_a992438d7af514950b8ee24a8e2e7204b}\label{struct_glut_viewer_a992438d7af514950b8ee24a8e2e7204b}} 
+bool {\bfseries m\+\_\+light\+\_\+rotation}
+\item 
+\mbox{\Hypertarget{struct_glut_viewer_a55f53e58dc74308bbd02fd04c8b6b3ba}\label{struct_glut_viewer_a55f53e58dc74308bbd02fd04c8b6b3ba}} 
+Orientation {\bfseries m\+\_\+orientation}
+\item 
+\mbox{\Hypertarget{struct_glut_viewer_a6963748b58cd9ddecadfdbd9233f09fa}\label{struct_glut_viewer_a6963748b58cd9ddecadfdbd9233f09fa}} 
+bool {\bfseries m\+\_\+dirty}
+\item 
+\mbox{\Hypertarget{struct_glut_viewer_a57f261531422115760708337530dbff5}\label{struct_glut_viewer_a57f261531422115760708337530dbff5}} 
+bool {\bfseries m\+\_\+dirty\+\_\+geo}
+\item 
+\mbox{\Hypertarget{struct_glut_viewer_a57ea8813c0cecd6e73be5adcc1fd5e37}\label{struct_glut_viewer_a57ea8813c0cecd6e73be5adcc1fd5e37}} 
+uint32 {\bfseries m\+\_\+instance}
+\item 
+\mbox{\Hypertarget{struct_glut_viewer_af71356b0780e37d9eb42903ee4073e3f}\label{struct_glut_viewer_af71356b0780e37d9eb42903ee4073e3f}} 
+uint32 {\bfseries m\+\_\+selected\+\_\+group}
+\item 
+\mbox{\Hypertarget{struct_glut_viewer_a3dae4869ce235493a5e1206619a43495}\label{struct_glut_viewer_a3dae4869ce235493a5e1206619a43495}} 
+char {\bfseries m\+\_\+output\+\_\+name} \mbox{[}1024\mbox{]}
+\item 
+\mbox{\Hypertarget{struct_glut_viewer_a0976d324bc91c1ce89a9361298318c8d}\label{struct_glut_viewer_a0976d324bc91c1ce89a9361298318c8d}} 
+F\+I\+LE $\ast$ {\bfseries m\+\_\+ffmpeg}
+\item 
+\mbox{\Hypertarget{struct_glut_viewer_a4a743b7a3aaaa00cece6836809f9be74}\label{struct_glut_viewer_a4a743b7a3aaaa00cece6836809f9be74}} 
+F\+I\+LE $\ast$ {\bfseries m\+\_\+camera\+\_\+path}
+\item 
+\mbox{\Hypertarget{struct_glut_viewer_a26c53d85482f5dad4c5cd14d63f964a8}\label{struct_glut_viewer_a26c53d85482f5dad4c5cd14d63f964a8}} 
+bool {\bfseries m\+\_\+record}
+\item 
+\mbox{\Hypertarget{struct_glut_viewer_ac41a4b158f869094c622c4f7bb9d300d}\label{struct_glut_viewer_ac41a4b158f869094c622c4f7bb9d300d}} 
+bool {\bfseries m\+\_\+playback}
+\item 
+\mbox{\Hypertarget{struct_glut_viewer_a94c9dbd2ffe934f197192d8d7e6fac9c}\label{struct_glut_viewer_a94c9dbd2ffe934f197192d8d7e6fac9c}} 
+bool {\bfseries m\+\_\+accumulation}
+\item 
+\mbox{\Hypertarget{struct_glut_viewer_aa62ec6a90f69184520edab863b117243}\label{struct_glut_viewer_aa62ec6a90f69184520edab863b117243}} 
+\hyperlink{classcugar_1_1_mutex}{cugar\+::\+Mutex} {\bfseries mutex}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/glut\+\_\+viewer.\+h\end{DoxyCompactItemize}

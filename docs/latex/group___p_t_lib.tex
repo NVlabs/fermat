@@ -1,0 +1,192 @@
+\hypertarget{group___p_t_lib}{}\section{P\+T\+Lib}
+\label{group___p_t_lib}\index{P\+T\+Lib@{P\+T\+Lib}}
+
+
+\subsection{Detailed Description}
+\subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group___p_t_lib_core}{P\+T\+Lib\+Core}
+\end{DoxyCompactItemize}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_direct_lighting_mesh}{Direct\+Lighting\+Mesh}
+\item 
+struct \hyperlink{struct_direct_lighting_r_l}{Direct\+Lighting\+RL}
+\item 
+struct \hyperlink{struct_p_t_context_queues}{P\+T\+Context\+Queues}
+\item 
+struct \hyperlink{struct_p_t_loop_stats}{P\+T\+Loop\+Stats}
+\item 
+struct \hyperlink{struct_p_t_ray_queue}{P\+T\+Ray\+Queue}
+\item 
+struct \hyperlink{struct_p_t_vertex_processor}{P\+T\+Vertex\+Processor}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___p_t_lib_ga755b56efd2e259b632bc0ec8eda852ee}\label{group___p_t_lib_ga755b56efd2e259b632bc0ec8eda852ee}} 
+\#define {\bfseries S\+H\+A\+D\+E\+\_\+\+H\+I\+T\+S\+\_\+\+B\+L\+O\+C\+K\+S\+I\+ZE}~64
+\item 
+\mbox{\Hypertarget{group___p_t_lib_ga6f11598b27b1c1ec5a95264319c357f9}\label{group___p_t_lib_ga6f11598b27b1c1ec5a95264319c357f9}} 
+\#define {\bfseries S\+H\+A\+D\+E\+\_\+\+H\+I\+T\+S\+\_\+\+C\+T\+A\+\_\+\+B\+L\+O\+C\+KS}~8
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group___p_t_lib_gaf8daef8b815f7712ff692edbaa628881}{alloc\+\_\+queues} (\hyperlink{struct_p_t_options}{P\+T\+Options} options, const uint32 n\+\_\+pixels, \hyperlink{struct_p_t_ray_queue}{P\+T\+Ray\+Queue} \&input\+\_\+queue, \hyperlink{struct_p_t_ray_queue}{P\+T\+Ray\+Queue} \&scatter\+\_\+queue, \hyperlink{struct_p_t_ray_queue}{P\+T\+Ray\+Queue} \&shadow\+\_\+queue, \hyperlink{structcugar_1_1memory__arena}{cugar\+::memory\+\_\+arena} \&arena)
+\item 
+{\footnotesize template$<$typename T\+P\+T\+Context $>$ }\\\+\_\+\+\_\+global\+\_\+\+\_\+ void \hyperlink{group___p_t_lib_ga9382084c986a4fe52d55f7f225211e66}{generate\+\_\+primary\+\_\+rays\+\_\+kernel} (T\+P\+T\+Context context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} renderer, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} U, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} V, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} W, const float W\+\_\+len, const float square\+\_\+pixel\+\_\+focal\+\_\+length)
+\item 
+{\footnotesize template$<$typename T\+P\+T\+Context $>$ }\\void \hyperlink{group___p_t_lib_ga66602a846711dc021ed0b930846ea596}{generate\+\_\+primary\+\_\+rays} (T\+P\+T\+Context context, const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} renderer)
+\item 
+{\footnotesize template$<$uint32 N\+U\+M\+\_\+\+W\+A\+R\+PS, typename T\+P\+T\+Context , typename T\+P\+T\+Vertex\+Processor $>$ }\\\+\_\+\+\_\+global\+\_\+\+\_\+ \hyperlink{group___p_t_lib_ga0a753a84987b59dab9b11e077e72c26b}{\+\_\+\+\_\+launch\+\_\+bounds\+\_\+\+\_\+} (S\+H\+A\+D\+E\+\_\+\+H\+I\+T\+S\+\_\+\+B\+L\+O\+C\+K\+S\+I\+ZE, S\+H\+A\+D\+E\+\_\+\+H\+I\+T\+S\+\_\+\+C\+T\+A\+\_\+\+B\+L\+O\+C\+KS) void shade\+\_\+hits\+\_\+kernel(const uint32 in\+\_\+queue\+\_\+size
+\item 
+\mbox{\Hypertarget{group___p_t_lib_gaa3fe68413cea6a5379b5d290ee9dd139}\label{group___p_t_lib_gaa3fe68413cea6a5379b5d290ee9dd139}} 
+{\bfseries if} (thread\+\_\+id$<$ in\+\_\+queue\+\_\+size)
+\item 
+{\footnotesize template$<$typename T\+P\+T\+Context , typename T\+P\+T\+Vertex\+Processor $>$ }\\void \hyperlink{group___p_t_lib_ga303934170f8bdcf0d8c674d7bc2f2513}{shade\+\_\+hits} (const uint32 in\+\_\+queue\+\_\+size, T\+P\+T\+Context context, T\+P\+T\+Vertex\+Processor vertex\+\_\+processor, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} renderer)
+\item 
+{\footnotesize template$<$typename T\+P\+T\+Context , typename T\+P\+T\+Vertex\+Processor $>$ }\\\+\_\+\+\_\+global\+\_\+\+\_\+ void \hyperlink{group___p_t_lib_gafdd73db6764901e4b3f75b55362acf8b}{solve\+\_\+occlusion\+\_\+kernel} (const uint32 in\+\_\+queue\+\_\+size, T\+P\+T\+Context context, T\+P\+T\+Vertex\+Processor vertex\+\_\+processor, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} renderer)
+\item 
+{\footnotesize template$<$typename T\+P\+T\+Context , typename T\+P\+T\+Vertex\+Processor $>$ }\\void \hyperlink{group___p_t_lib_ga90f55f0d6d838b4bc1a09c6682fbd709}{solve\+\_\+occlusion} (const uint32 in\+\_\+queue\+\_\+size, T\+P\+T\+Context context, T\+P\+T\+Vertex\+Processor vertex\+\_\+processor, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} renderer)
+\item 
+{\footnotesize template$<$typename T\+P\+T\+Context , typename T\+P\+T\+Vertex\+Processor $>$ }\\void \hyperlink{group___p_t_lib_gadbd6e824e2ecdd07fae235bddebcd1d8}{path\+\_\+trace\+\_\+loop} (T\+P\+T\+Context \&context, T\+P\+T\+Vertex\+Processor \&vertex\+\_\+processor, \hyperlink{struct_rendering_context}{Rendering\+Context} \&renderer, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer\+\_\+view, \hyperlink{struct_p_t_loop_stats}{P\+T\+Loop\+Stats} \&stats)
+\item 
+\mbox{\Hypertarget{group___p_t_lib_ga329bfd966a8af06bad3b181aacbed4d5}\label{group___p_t_lib_ga329bfd966a8af06bad3b181aacbed4d5}} 
+void {\bfseries print\+\_\+timer\+\_\+stats} (const uint64 $\ast$device\+\_\+timers, const \hyperlink{struct_p_t_loop_stats}{P\+T\+Loop\+Stats} \&stats)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___p_t_lib_gad1b309ea79b3dd65eba4d029255b056d}\label{group___p_t_lib_gad1b309ea79b3dd65eba4d029255b056d}} 
+\+\_\+\+\_\+global\+\_\+\+\_\+ T\+P\+T\+Context {\bfseries context}
+\item 
+\mbox{\Hypertarget{group___p_t_lib_ga1b659d1eb27ee1514ee1701d9c4c122e}\label{group___p_t_lib_ga1b659d1eb27ee1514ee1701d9c4c122e}} 
+\+\_\+\+\_\+global\+\_\+\+\_\+ T\+P\+T\+Context T\+P\+T\+Vertex\+Processor {\bfseries vertex\+\_\+processor}
+\item 
+\+\_\+\+\_\+global\+\_\+\+\_\+ T\+P\+T\+Context T\+P\+T\+Vertex\+Processor \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} {\bfseries renderer}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___p_t_lib_ga0a753a84987b59dab9b11e077e72c26b}\label{group___p_t_lib_ga0a753a84987b59dab9b11e077e72c26b}} 
+\index{P\+T\+Lib@{P\+T\+Lib}!\+\_\+\+\_\+launch\+\_\+bounds\+\_\+\+\_\+@{\+\_\+\+\_\+launch\+\_\+bounds\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+launch\+\_\+bounds\+\_\+\+\_\+@{\+\_\+\+\_\+launch\+\_\+bounds\+\_\+\+\_\+}!P\+T\+Lib@{P\+T\+Lib}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+launch\+\_\+bounds\+\_\+\+\_\+()}{\_\_launch\_bounds\_\_()}}
+{\footnotesize\ttfamily template$<$uint32 N\+U\+M\+\_\+\+W\+A\+R\+PS, typename T\+P\+T\+Context , typename T\+P\+T\+Vertex\+Processor $>$ \\
+\+\_\+\+\_\+global\+\_\+\+\_\+ \+\_\+\+\_\+launch\+\_\+bounds\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{S\+H\+A\+D\+E\+\_\+\+H\+I\+T\+S\+\_\+\+B\+L\+O\+C\+K\+S\+I\+ZE}]{,  }\item[{S\+H\+A\+D\+E\+\_\+\+H\+I\+T\+S\+\_\+\+C\+T\+A\+\_\+\+B\+L\+O\+C\+KS}]{ }\end{DoxyParamCaption}) const}
+
+a kernel to shade all path tracing hits
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T\+P\+T\+Context} & A path tracing context, which must adhere to the \hyperlink{_p_t_lib_page_TPTContext}{T\+P\+T\+Context} interface \\
+\hline
+{\em T\+P\+T\+Vertex\+Processor} & A vertex processor, which must adhere to the \hyperlink{_p_t_lib_page_TPTVertexProcessor}{T\+P\+T\+Vertex\+Processor} interface \\
+\hline
+\end{DoxyTemplParams}
+\mbox{\Hypertarget{group___p_t_lib_gaf8daef8b815f7712ff692edbaa628881}\label{group___p_t_lib_gaf8daef8b815f7712ff692edbaa628881}} 
+\index{P\+T\+Lib@{P\+T\+Lib}!alloc\+\_\+queues@{alloc\+\_\+queues}}
+\index{alloc\+\_\+queues@{alloc\+\_\+queues}!P\+T\+Lib@{P\+T\+Lib}}
+\subsubsection{\texorpdfstring{alloc\+\_\+queues()}{alloc\_queues()}}
+{\footnotesize\ttfamily void alloc\+\_\+queues (\begin{DoxyParamCaption}\item[{\hyperlink{struct_p_t_options}{P\+T\+Options}}]{options,  }\item[{const uint32}]{n\+\_\+pixels,  }\item[{\hyperlink{struct_p_t_ray_queue}{P\+T\+Ray\+Queue} \&}]{input\+\_\+queue,  }\item[{\hyperlink{struct_p_t_ray_queue}{P\+T\+Ray\+Queue} \&}]{scatter\+\_\+queue,  }\item[{\hyperlink{struct_p_t_ray_queue}{P\+T\+Ray\+Queue} \&}]{shadow\+\_\+queue,  }\item[{\hyperlink{structcugar_1_1memory__arena}{cugar\+::memory\+\_\+arena} \&}]{arena }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+a utility function to alloc the path tracing queues \mbox{\Hypertarget{group___p_t_lib_ga66602a846711dc021ed0b930846ea596}\label{group___p_t_lib_ga66602a846711dc021ed0b930846ea596}} 
+\index{P\+T\+Lib@{P\+T\+Lib}!generate\+\_\+primary\+\_\+rays@{generate\+\_\+primary\+\_\+rays}}
+\index{generate\+\_\+primary\+\_\+rays@{generate\+\_\+primary\+\_\+rays}!P\+T\+Lib@{P\+T\+Lib}}
+\subsubsection{\texorpdfstring{generate\+\_\+primary\+\_\+rays()}{generate\_primary\_rays()}}
+{\footnotesize\ttfamily template$<$typename T\+P\+T\+Context $>$ \\
+void generate\+\_\+primary\+\_\+rays (\begin{DoxyParamCaption}\item[{T\+P\+T\+Context}]{context,  }\item[{const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View}}]{renderer }\end{DoxyParamCaption})}
+
+dispatch the kernel to generate primary rays
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T\+P\+T\+Context} & A path tracing context \\
+\hline
+\end{DoxyTemplParams}
+\mbox{\Hypertarget{group___p_t_lib_ga9382084c986a4fe52d55f7f225211e66}\label{group___p_t_lib_ga9382084c986a4fe52d55f7f225211e66}} 
+\index{P\+T\+Lib@{P\+T\+Lib}!generate\+\_\+primary\+\_\+rays\+\_\+kernel@{generate\+\_\+primary\+\_\+rays\+\_\+kernel}}
+\index{generate\+\_\+primary\+\_\+rays\+\_\+kernel@{generate\+\_\+primary\+\_\+rays\+\_\+kernel}!P\+T\+Lib@{P\+T\+Lib}}
+\subsubsection{\texorpdfstring{generate\+\_\+primary\+\_\+rays\+\_\+kernel()}{generate\_primary\_rays\_kernel()}}
+{\footnotesize\ttfamily template$<$typename T\+P\+T\+Context $>$ \\
+\+\_\+\+\_\+global\+\_\+\+\_\+ void generate\+\_\+primary\+\_\+rays\+\_\+kernel (\begin{DoxyParamCaption}\item[{T\+P\+T\+Context}]{context,  }\item[{\hyperlink{struct_rendering_context_view}{Rendering\+Context\+View}}]{renderer,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{U,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{V,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{W,  }\item[{const float}]{W\+\_\+len,  }\item[{const float}]{square\+\_\+pixel\+\_\+focal\+\_\+length }\end{DoxyParamCaption})}
+
+a kernel to generate primary rays
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T\+P\+T\+Context} & A path tracing context \\
+\hline
+\end{DoxyTemplParams}
+\mbox{\Hypertarget{group___p_t_lib_gadbd6e824e2ecdd07fae235bddebcd1d8}\label{group___p_t_lib_gadbd6e824e2ecdd07fae235bddebcd1d8}} 
+\index{P\+T\+Lib@{P\+T\+Lib}!path\+\_\+trace\+\_\+loop@{path\+\_\+trace\+\_\+loop}}
+\index{path\+\_\+trace\+\_\+loop@{path\+\_\+trace\+\_\+loop}!P\+T\+Lib@{P\+T\+Lib}}
+\subsubsection{\texorpdfstring{path\+\_\+trace\+\_\+loop()}{path\_trace\_loop()}}
+{\footnotesize\ttfamily template$<$typename T\+P\+T\+Context , typename T\+P\+T\+Vertex\+Processor $>$ \\
+void path\+\_\+trace\+\_\+loop (\begin{DoxyParamCaption}\item[{T\+P\+T\+Context \&}]{context,  }\item[{T\+P\+T\+Vertex\+Processor \&}]{vertex\+\_\+processor,  }\item[{\hyperlink{struct_rendering_context}{Rendering\+Context} \&}]{renderer,  }\item[{\hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&}]{renderer\+\_\+view,  }\item[{\hyperlink{struct_p_t_loop_stats}{P\+T\+Loop\+Stats} \&}]{stats }\end{DoxyParamCaption})}
+
+main path tracing loop \mbox{\Hypertarget{group___p_t_lib_ga303934170f8bdcf0d8c674d7bc2f2513}\label{group___p_t_lib_ga303934170f8bdcf0d8c674d7bc2f2513}} 
+\index{P\+T\+Lib@{P\+T\+Lib}!shade\+\_\+hits@{shade\+\_\+hits}}
+\index{shade\+\_\+hits@{shade\+\_\+hits}!P\+T\+Lib@{P\+T\+Lib}}
+\subsubsection{\texorpdfstring{shade\+\_\+hits()}{shade\_hits()}}
+{\footnotesize\ttfamily template$<$typename T\+P\+T\+Context , typename T\+P\+T\+Vertex\+Processor $>$ \\
+void shade\+\_\+hits (\begin{DoxyParamCaption}\item[{const uint32}]{in\+\_\+queue\+\_\+size,  }\item[{T\+P\+T\+Context}]{context,  }\item[{T\+P\+T\+Vertex\+Processor}]{vertex\+\_\+processor,  }\item[{\hyperlink{struct_rendering_context_view}{Rendering\+Context\+View}}]{renderer }\end{DoxyParamCaption})}
+
+dispatch the shade hits kernel
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T\+P\+T\+Context} & A path tracing context, which must adhere to the \hyperlink{_p_t_lib_page_TPTContext}{T\+P\+T\+Context} interface \\
+\hline
+{\em T\+P\+T\+Vertex\+Processor} & A vertex processor, which must adhere to the \hyperlink{_p_t_lib_page_TPTVertexProcessor}{T\+P\+T\+Vertex\+Processor} interface \\
+\hline
+\end{DoxyTemplParams}
+\mbox{\Hypertarget{group___p_t_lib_ga90f55f0d6d838b4bc1a09c6682fbd709}\label{group___p_t_lib_ga90f55f0d6d838b4bc1a09c6682fbd709}} 
+\index{P\+T\+Lib@{P\+T\+Lib}!solve\+\_\+occlusion@{solve\+\_\+occlusion}}
+\index{solve\+\_\+occlusion@{solve\+\_\+occlusion}!P\+T\+Lib@{P\+T\+Lib}}
+\subsubsection{\texorpdfstring{solve\+\_\+occlusion()}{solve\_occlusion()}}
+{\footnotesize\ttfamily template$<$typename T\+P\+T\+Context , typename T\+P\+T\+Vertex\+Processor $>$ \\
+void solve\+\_\+occlusion (\begin{DoxyParamCaption}\item[{const uint32}]{in\+\_\+queue\+\_\+size,  }\item[{T\+P\+T\+Context}]{context,  }\item[{T\+P\+T\+Vertex\+Processor}]{vertex\+\_\+processor,  }\item[{\hyperlink{struct_rendering_context_view}{Rendering\+Context\+View}}]{renderer }\end{DoxyParamCaption})}
+
+dispatch a kernel to process N\+EE samples using computed occlusion information
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T\+P\+T\+Context} & A path tracing context, which must adhere to the \hyperlink{_p_t_lib_page_TPTContext}{T\+P\+T\+Context} interface \\
+\hline
+{\em T\+P\+T\+Vertex\+Processor} & A vertex processor, which must adhere to the \hyperlink{_p_t_lib_page_TPTVertexProcessor}{T\+P\+T\+Vertex\+Processor} interface \\
+\hline
+\end{DoxyTemplParams}
+\mbox{\Hypertarget{group___p_t_lib_gafdd73db6764901e4b3f75b55362acf8b}\label{group___p_t_lib_gafdd73db6764901e4b3f75b55362acf8b}} 
+\index{P\+T\+Lib@{P\+T\+Lib}!solve\+\_\+occlusion\+\_\+kernel@{solve\+\_\+occlusion\+\_\+kernel}}
+\index{solve\+\_\+occlusion\+\_\+kernel@{solve\+\_\+occlusion\+\_\+kernel}!P\+T\+Lib@{P\+T\+Lib}}
+\subsubsection{\texorpdfstring{solve\+\_\+occlusion\+\_\+kernel()}{solve\_occlusion\_kernel()}}
+{\footnotesize\ttfamily template$<$typename T\+P\+T\+Context , typename T\+P\+T\+Vertex\+Processor $>$ \\
+\+\_\+\+\_\+global\+\_\+\+\_\+ void solve\+\_\+occlusion\+\_\+kernel (\begin{DoxyParamCaption}\item[{const uint32}]{in\+\_\+queue\+\_\+size,  }\item[{T\+P\+T\+Context}]{context,  }\item[{T\+P\+T\+Vertex\+Processor}]{vertex\+\_\+processor,  }\item[{\hyperlink{struct_rendering_context_view}{Rendering\+Context\+View}}]{renderer }\end{DoxyParamCaption})}
+
+a kernel to process N\+EE samples using computed occlusion information
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T\+P\+T\+Context} & A path tracing context, which must adhere to the \hyperlink{_p_t_lib_page_TPTContext}{T\+P\+T\+Context} interface \\
+\hline
+{\em T\+P\+T\+Vertex\+Processor} & A vertex processor, which must adhere to the \hyperlink{_p_t_lib_page_TPTVertexProcessor}{T\+P\+T\+Vertex\+Processor} interface \\
+\hline
+\end{DoxyTemplParams}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{group___p_t_lib_gae95d7c96b9ac2c50c31658f8dcee372c}\label{group___p_t_lib_gae95d7c96b9ac2c50c31658f8dcee372c}} 
+\index{P\+T\+Lib@{P\+T\+Lib}!renderer@{renderer}}
+\index{renderer@{renderer}!P\+T\+Lib@{P\+T\+Lib}}
+\subsubsection{\texorpdfstring{renderer}{renderer}}
+{\footnotesize\ttfamily \+\_\+\+\_\+global\+\_\+\+\_\+ T\+P\+T\+Context T\+P\+T\+Vertex\+Processor \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} renderer}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+\{
+    \textcolor{keyword}{const} uint32 thread\_id = threadIdx.x + blockIdx.x * blockDim.x
+\end{DoxyCode}

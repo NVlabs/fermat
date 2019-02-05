@@ -1,0 +1,387 @@
+\hypertarget{group___primitives}{}\section{Parallel Primitives}
+\label{group___primitives}\index{Parallel Primitives@{Parallel Primitives}}
+
+
+\subsection{Detailed Description}
+This module provides a set of convenience wrappers to invoke system-\/wide C\+UB\textquotesingle{}s parallel primitives without worrying about the memory management. All temporary storage is in fact allocated within a single thrust\+::system\+\_\+vector passed by the user, which can be safely reused across function calls. \subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcugar_1_1for__each__enactor}{cugar\+::for\+\_\+each\+\_\+enactor$<$ system\+\_\+tag $>$}
+\item 
+struct \hyperlink{structcugar_1_1for__each__enactor_3_01device__tag_01_4}{cugar\+::for\+\_\+each\+\_\+enactor$<$ device\+\_\+tag $>$}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename system\+\_\+tag , typename Predicate\+Iterator $>$ }\\bool \hyperlink{group___primitives_ga71416af3e5407b31c78a10026520dbed}{cugar\+::any} (const uint32 n, const Predicate\+Iterator pred)
+\item 
+{\footnotesize template$<$typename system\+\_\+tag , typename Predicate\+Iterator $>$ }\\bool \hyperlink{group___primitives_gaa98aa06ec6a5f38dda15d74ce0c47d57}{cugar\+::all} (const uint32 n, const Predicate\+Iterator pred)
+\item 
+{\footnotesize template$<$typename system\+\_\+tag , typename Iterator $>$ }\\bool \hyperlink{group___primitives_gaec6f4aab196d418865686901c11a093c}{cugar\+::is\+\_\+sorted} (const uint32 n, const Iterator values)
+\item 
+{\footnotesize template$<$typename system\+\_\+tag , typename Iterator , typename Headflags $>$ }\\bool \hyperlink{group___primitives_ga5e6eb75d00ed617295bcee0b1db0ee3e}{cugar\+::is\+\_\+segment\+\_\+sorted} (const uint32 n, const Iterator values, const Headflags flags)
+\item 
+{\footnotesize template$<$typename system\+\_\+tag , typename Iterator , typename Functor $>$ }\\void \hyperlink{group___primitives_ga1e40de6d157d7b833f31f13a26a3bd04}{cugar\+::for\+\_\+each} (const uint64 n, const Iterator in, Functor functor)
+\item 
+{\footnotesize template$<$typename system\+\_\+tag , typename Iterator , typename Output , typename Functor $>$ }\\void \hyperlink{group___primitives_gab584ee91ed39f9b1fec5aa0e7a0284a4}{cugar\+::transform} (const uint32 n, const Iterator in, const Output out, const Functor functor)
+\item 
+{\footnotesize template$<$typename system\+\_\+tag , typename Iterator1 , typename Iterator2 , typename Output , typename Functor $>$ }\\void \hyperlink{group___primitives_ga2c0c3bba686f00f120c68465c28f5259}{cugar\+::transform} (const uint32 n, const Iterator1 in1, const Iterator2 in2, const Output out, const Functor functor)
+\item 
+{\footnotesize template$<$typename system\+\_\+tag , typename Input\+Iterator , typename Binary\+Op $>$ }\\std\+::iterator\+\_\+traits$<$ Input\+Iterator $>$\+::value\+\_\+type \hyperlink{group___primitives_gab8f49b135164aaef1fb6b51b90874915}{cugar\+::reduce} (const uint32 n, Input\+Iterator in, Binary\+Op op, \hyperlink{structcugar_1_1vector}{cugar\+::vector}$<$ system\+\_\+tag, uint8 $>$ \&temp\+\_\+storage)
+\item 
+{\footnotesize template$<$typename system\+\_\+tag , typename Input\+Iterator , typename Output\+Iterator , typename Binary\+Op $>$ }\\void \hyperlink{group___primitives_ga6c5ea5be5565ce7aa2c99b3e602a7cb7}{cugar\+::inclusive\+\_\+scan} (const uint32 n, Input\+Iterator in, Output\+Iterator out, Binary\+Op op, \hyperlink{structcugar_1_1vector}{cugar\+::vector}$<$ system\+\_\+tag, uint8 $>$ \&temp\+\_\+storage)
+\item 
+{\footnotesize template$<$typename system\+\_\+tag , typename Input\+Iterator , typename Output\+Iterator , typename Binary\+Op , typename Identity $>$ }\\void \hyperlink{group___primitives_ga1394066fd7b6215bcae781ca56cae872}{cugar\+::exclusive\+\_\+scan} (const uint32 n, Input\+Iterator in, Output\+Iterator out, Binary\+Op op, Identity identity, \hyperlink{structcugar_1_1vector}{cugar\+::vector}$<$ system\+\_\+tag, uint8 $>$ \&temp\+\_\+storage)
+\item 
+{\footnotesize template$<$typename system\+\_\+tag , typename Input\+Iterator , typename Flags\+Iterator , typename Output\+Iterator $>$ }\\uint32 \hyperlink{group___primitives_gaafc4aac8b44cf750c98a3a97fe72e5c6}{cugar\+::copy\+\_\+flagged} (const uint32 n, Input\+Iterator in, Flags\+Iterator flags, Output\+Iterator out, \hyperlink{structcugar_1_1vector}{cugar\+::vector}$<$ system\+\_\+tag, uint8 $>$ \&temp\+\_\+storage)
+\item 
+{\footnotesize template$<$typename system\+\_\+tag , typename Input\+Iterator , typename Output\+Iterator , typename Predicate $>$ }\\uint32 \hyperlink{group___primitives_ga536856eaa09125bec01892d565a49f8e}{cugar\+::copy\+\_\+if} (const uint32 n, Input\+Iterator in, Output\+Iterator out, const Predicate pred, \hyperlink{structcugar_1_1vector}{cugar\+::vector}$<$ system\+\_\+tag, uint8 $>$ \&temp\+\_\+storage)
+\item 
+{\footnotesize template$<$typename system\+\_\+tag , typename Input\+Iterator , typename Output\+Iterator , typename Count\+Iterator $>$ }\\uint32 \hyperlink{group___primitives_gae48c0c95572ea1dd13ec562eed6e2755}{cugar\+::runlength\+\_\+encode} (const uint32 n, Input\+Iterator in, Output\+Iterator out, Count\+Iterator counts, \hyperlink{structcugar_1_1vector}{cugar\+::vector}$<$ system\+\_\+tag, uint8 $>$ \&temp\+\_\+storage)
+\item 
+{\footnotesize template$<$typename system\+\_\+tag , typename Key\+Iterator , typename Value\+Iterator , typename Output\+Key\+Iterator , typename Output\+Value\+Iterator , typename Reduction\+Op $>$ }\\uint32 \hyperlink{group___primitives_ga67aba73e3ceb623f48b734cb19889f1d}{cugar\+::reduce\+\_\+by\+\_\+key} (const uint32 n, Key\+Iterator keys\+\_\+in, Value\+Iterator values\+\_\+in, Output\+Key\+Iterator keys\+\_\+out, Output\+Value\+Iterator values\+\_\+out, Reduction\+Op reduction\+\_\+op, \hyperlink{structcugar_1_1vector}{cugar\+::vector}$<$ system\+\_\+tag, uint8 $>$ \&temp\+\_\+storage)
+\item 
+{\footnotesize template$<$typename system\+\_\+tag , typename Key\+Iterator , typename Value\+Iterator , typename Output\+Iterator $>$ }\\void \hyperlink{group___primitives_ga9dafac99df89cdd69ff33b9351e8cf7e}{cugar\+::lower\+\_\+bound} (const uint32 n, Value\+Iterator values, const uint32 n\+\_\+keys, Key\+Iterator keys, Output\+Iterator indices)
+\item 
+{\footnotesize template$<$typename system\+\_\+tag , typename Key\+Iterator , typename Value\+Iterator , typename Output\+Iterator $>$ }\\void \hyperlink{group___primitives_ga56b7c8a32a7a8a42afe413b087159230}{cugar\+::upper\+\_\+bound} (const uint32 n, Value\+Iterator values, const uint32 n\+\_\+keys, Key\+Iterator keys, Output\+Iterator indices)
+\item 
+{\footnotesize template$<$typename system\+\_\+tag , typename Key\+Iterator $>$ }\\void \hyperlink{group___primitives_gac4584fb9407d3d12ff3a4a1890e9b903}{cugar\+::radix\+\_\+sort} (const uint32 n, Key\+Iterator keys, \hyperlink{structcugar_1_1vector}{cugar\+::vector}$<$ system\+\_\+tag, uint8 $>$ \&temp\+\_\+storage)
+\item 
+{\footnotesize template$<$typename system\+\_\+tag , typename Key\+Iterator , typename Value\+Iterator $>$ }\\void \hyperlink{group___primitives_ga5b655f3d4ce7cf922eaf9ed446ab426b}{cugar\+::radix\+\_\+sort} (const uint32 n, Key\+Iterator keys, Value\+Iterator values, \hyperlink{structcugar_1_1vector}{cugar\+::vector}$<$ system\+\_\+tag, uint8 $>$ \&temp\+\_\+storage)
+\item 
+{\footnotesize template$<$typename system\+\_\+tag , typename key\+\_\+iterator1 , typename key\+\_\+iterator2 , typename value\+\_\+iterator1 , typename value\+\_\+iterator2 , typename key\+\_\+output , typename value\+\_\+output $>$ }\\void \hyperlink{group___primitives_gadbc27f73bf0312243aed32fc5610ac0d}{cugar\+::merge\+\_\+by\+\_\+key} (const uint32 A\+\_\+len, const uint32 B\+\_\+len, const key\+\_\+iterator1 A\+\_\+keys, const key\+\_\+iterator2 B\+\_\+keys, const value\+\_\+iterator1 A\+\_\+values, const value\+\_\+iterator2 B\+\_\+values, key\+\_\+output C\+\_\+keys, value\+\_\+output C\+\_\+values, \hyperlink{structcugar_1_1vector}{cugar\+::vector}$<$ system\+\_\+tag, uint8 $>$ \&temp\+\_\+storage)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___primitives_gaa98aa06ec6a5f38dda15d74ce0c47d57}\label{group___primitives_gaa98aa06ec6a5f38dda15d74ce0c47d57}} 
+\index{Parallel Primitives@{Parallel Primitives}!all@{all}}
+\index{all@{all}!Parallel Primitives@{Parallel Primitives}}
+\subsubsection{\texorpdfstring{all()}{all()}}
+{\footnotesize\ttfamily template$<$typename system\+\_\+tag , typename Predicate\+Iterator $>$ \\
+bool cugar\+::all (\begin{DoxyParamCaption}\item[{const uint32}]{n,  }\item[{const Predicate\+Iterator}]{pred }\end{DoxyParamCaption})}
+
+return true if all items in the range \mbox{[}0,n) evaluate to true \mbox{\Hypertarget{group___primitives_ga71416af3e5407b31c78a10026520dbed}\label{group___primitives_ga71416af3e5407b31c78a10026520dbed}} 
+\index{Parallel Primitives@{Parallel Primitives}!any@{any}}
+\index{any@{any}!Parallel Primitives@{Parallel Primitives}}
+\subsubsection{\texorpdfstring{any()}{any()}}
+{\footnotesize\ttfamily template$<$typename system\+\_\+tag , typename Predicate\+Iterator $>$ \\
+bool cugar\+::any (\begin{DoxyParamCaption}\item[{const uint32}]{n,  }\item[{const Predicate\+Iterator}]{pred }\end{DoxyParamCaption})}
+
+return true if any item in the range \mbox{[}0,n) evaluates to true \mbox{\Hypertarget{group___primitives_gaafc4aac8b44cf750c98a3a97fe72e5c6}\label{group___primitives_gaafc4aac8b44cf750c98a3a97fe72e5c6}} 
+\index{Parallel Primitives@{Parallel Primitives}!copy\+\_\+flagged@{copy\+\_\+flagged}}
+\index{copy\+\_\+flagged@{copy\+\_\+flagged}!Parallel Primitives@{Parallel Primitives}}
+\subsubsection{\texorpdfstring{copy\+\_\+flagged()}{copy\_flagged()}}
+{\footnotesize\ttfamily template$<$typename system\+\_\+tag , typename Input\+Iterator , typename Flags\+Iterator , typename Output\+Iterator $>$ \\
+uint32 cugar\+::copy\+\_\+flagged (\begin{DoxyParamCaption}\item[{const uint32}]{n,  }\item[{Input\+Iterator}]{in,  }\item[{Flags\+Iterator}]{flags,  }\item[{Output\+Iterator}]{out,  }\item[{\hyperlink{structcugar_1_1vector}{cugar\+::vector}$<$ system\+\_\+tag, uint8 $>$ \&}]{temp\+\_\+storage }\end{DoxyParamCaption})}
+
+system-\/wide copy of flagged items
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & number of input items \\
+\hline
+{\em in} & a system input iterator \\
+\hline
+{\em flags} & a system flags iterator \\
+\hline
+{\em out} & a system output iterator \\
+\hline
+{\em temp\+\_\+storage} & some temporary storage\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of copied items 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___primitives_ga536856eaa09125bec01892d565a49f8e}\label{group___primitives_ga536856eaa09125bec01892d565a49f8e}} 
+\index{Parallel Primitives@{Parallel Primitives}!copy\+\_\+if@{copy\+\_\+if}}
+\index{copy\+\_\+if@{copy\+\_\+if}!Parallel Primitives@{Parallel Primitives}}
+\subsubsection{\texorpdfstring{copy\+\_\+if()}{copy\_if()}}
+{\footnotesize\ttfamily template$<$typename system\+\_\+tag , typename Input\+Iterator , typename Output\+Iterator , typename Predicate $>$ \\
+uint32 cugar\+::copy\+\_\+if (\begin{DoxyParamCaption}\item[{const uint32}]{n,  }\item[{Input\+Iterator}]{in,  }\item[{Output\+Iterator}]{out,  }\item[{const Predicate}]{pred,  }\item[{\hyperlink{structcugar_1_1vector}{cugar\+::vector}$<$ system\+\_\+tag, uint8 $>$ \&}]{temp\+\_\+storage }\end{DoxyParamCaption})}
+
+system-\/wide copy of predicated items
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & number of input items \\
+\hline
+{\em in} & a system input iterator \\
+\hline
+{\em out} & a system output iterator \\
+\hline
+{\em pred} & a unary predicate functor \\
+\hline
+{\em temp\+\_\+storage} & some temporary storage\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of copied items 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___primitives_ga1394066fd7b6215bcae781ca56cae872}\label{group___primitives_ga1394066fd7b6215bcae781ca56cae872}} 
+\index{Parallel Primitives@{Parallel Primitives}!exclusive\+\_\+scan@{exclusive\+\_\+scan}}
+\index{exclusive\+\_\+scan@{exclusive\+\_\+scan}!Parallel Primitives@{Parallel Primitives}}
+\subsubsection{\texorpdfstring{exclusive\+\_\+scan()}{exclusive\_scan()}}
+{\footnotesize\ttfamily template$<$typename system\+\_\+tag , typename Input\+Iterator , typename Output\+Iterator , typename Binary\+Op , typename Identity $>$ \\
+void cugar\+::exclusive\+\_\+scan (\begin{DoxyParamCaption}\item[{const uint32}]{n,  }\item[{Input\+Iterator}]{in,  }\item[{Output\+Iterator}]{out,  }\item[{Binary\+Op}]{op,  }\item[{Identity}]{identity,  }\item[{\hyperlink{structcugar_1_1vector}{cugar\+::vector}$<$ system\+\_\+tag, uint8 $>$ \&}]{temp\+\_\+storage }\end{DoxyParamCaption})}
+
+system-\/wide exclusive scan
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & number of items to reduce \\
+\hline
+{\em in} & a system input iterator \\
+\hline
+{\em out} & a system output iterator \\
+\hline
+{\em op} & the binary reduction operator \\
+\hline
+{\em identity} & the identity element \\
+\hline
+{\em temp\+\_\+storage} & some temporary storage \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___primitives_ga1e40de6d157d7b833f31f13a26a3bd04}\label{group___primitives_ga1e40de6d157d7b833f31f13a26a3bd04}} 
+\index{Parallel Primitives@{Parallel Primitives}!for\+\_\+each@{for\+\_\+each}}
+\index{for\+\_\+each@{for\+\_\+each}!Parallel Primitives@{Parallel Primitives}}
+\subsubsection{\texorpdfstring{for\+\_\+each()}{for\_each()}}
+{\footnotesize\ttfamily template$<$typename system\+\_\+tag , typename Iterator , typename Functor $>$ \\
+void cugar\+::for\+\_\+each (\begin{DoxyParamCaption}\item[{const uint64}]{n,  }\item[{const Iterator}]{in,  }\item[{Functor}]{functor }\end{DoxyParamCaption})}
+
+invoke a functor for each element of the given sequence \mbox{\Hypertarget{group___primitives_ga6c5ea5be5565ce7aa2c99b3e602a7cb7}\label{group___primitives_ga6c5ea5be5565ce7aa2c99b3e602a7cb7}} 
+\index{Parallel Primitives@{Parallel Primitives}!inclusive\+\_\+scan@{inclusive\+\_\+scan}}
+\index{inclusive\+\_\+scan@{inclusive\+\_\+scan}!Parallel Primitives@{Parallel Primitives}}
+\subsubsection{\texorpdfstring{inclusive\+\_\+scan()}{inclusive\_scan()}}
+{\footnotesize\ttfamily template$<$typename system\+\_\+tag , typename Input\+Iterator , typename Output\+Iterator , typename Binary\+Op $>$ \\
+void cugar\+::inclusive\+\_\+scan (\begin{DoxyParamCaption}\item[{const uint32}]{n,  }\item[{Input\+Iterator}]{in,  }\item[{Output\+Iterator}]{out,  }\item[{Binary\+Op}]{op,  }\item[{\hyperlink{structcugar_1_1vector}{cugar\+::vector}$<$ system\+\_\+tag, uint8 $>$ \&}]{temp\+\_\+storage }\end{DoxyParamCaption})}
+
+system-\/wide inclusive scan
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & number of items to reduce \\
+\hline
+{\em in} & a system input iterator \\
+\hline
+{\em out} & a system output iterator \\
+\hline
+{\em op} & the binary reduction operator \\
+\hline
+{\em temp\+\_\+storage} & some temporary storage \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___primitives_ga5e6eb75d00ed617295bcee0b1db0ee3e}\label{group___primitives_ga5e6eb75d00ed617295bcee0b1db0ee3e}} 
+\index{Parallel Primitives@{Parallel Primitives}!is\+\_\+segment\+\_\+sorted@{is\+\_\+segment\+\_\+sorted}}
+\index{is\+\_\+segment\+\_\+sorted@{is\+\_\+segment\+\_\+sorted}!Parallel Primitives@{Parallel Primitives}}
+\subsubsection{\texorpdfstring{is\+\_\+segment\+\_\+sorted()}{is\_segment\_sorted()}}
+{\footnotesize\ttfamily template$<$typename system\+\_\+tag , typename Iterator , typename Headflags $>$ \\
+bool cugar\+::is\+\_\+segment\+\_\+sorted (\begin{DoxyParamCaption}\item[{const uint32}]{n,  }\item[{const Iterator}]{values,  }\item[{const Headflags}]{flags }\end{DoxyParamCaption})}
+
+return true if the items in the range \mbox{[}0,n) are sorted by segment, where the beginning of each segment is identified by a set head flag \mbox{\Hypertarget{group___primitives_gaec6f4aab196d418865686901c11a093c}\label{group___primitives_gaec6f4aab196d418865686901c11a093c}} 
+\index{Parallel Primitives@{Parallel Primitives}!is\+\_\+sorted@{is\+\_\+sorted}}
+\index{is\+\_\+sorted@{is\+\_\+sorted}!Parallel Primitives@{Parallel Primitives}}
+\subsubsection{\texorpdfstring{is\+\_\+sorted()}{is\_sorted()}}
+{\footnotesize\ttfamily template$<$typename system\+\_\+tag , typename Iterator $>$ \\
+bool cugar\+::is\+\_\+sorted (\begin{DoxyParamCaption}\item[{const uint32}]{n,  }\item[{const Iterator}]{values }\end{DoxyParamCaption})}
+
+return true if the items in the range \mbox{[}0,n) are sorted \mbox{\Hypertarget{group___primitives_ga9dafac99df89cdd69ff33b9351e8cf7e}\label{group___primitives_ga9dafac99df89cdd69ff33b9351e8cf7e}} 
+\index{Parallel Primitives@{Parallel Primitives}!lower\+\_\+bound@{lower\+\_\+bound}}
+\index{lower\+\_\+bound@{lower\+\_\+bound}!Parallel Primitives@{Parallel Primitives}}
+\subsubsection{\texorpdfstring{lower\+\_\+bound()}{lower\_bound()}}
+{\footnotesize\ttfamily template$<$typename system\+\_\+tag , typename Key\+Iterator , typename Value\+Iterator , typename Output\+Iterator $>$ \\
+void cugar\+::lower\+\_\+bound (\begin{DoxyParamCaption}\item[{const uint32}]{n,  }\item[{Value\+Iterator}]{values,  }\item[{const uint32}]{n\+\_\+keys,  }\item[{Key\+Iterator}]{keys,  }\item[{Output\+Iterator}]{indices }\end{DoxyParamCaption})}
+
+system-\/wide lower\+\_\+bound
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & number of input items \\
+\hline
+{\em values} & a system input iterator of values to be searched \\
+\hline
+{\em n\+\_\+keys} & number of sorted keys \\
+\hline
+{\em keys} & a system input iterator of sorted keys \\
+\hline
+{\em indices} & a system output iterator \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___primitives_gadbc27f73bf0312243aed32fc5610ac0d}\label{group___primitives_gadbc27f73bf0312243aed32fc5610ac0d}} 
+\index{Parallel Primitives@{Parallel Primitives}!merge\+\_\+by\+\_\+key@{merge\+\_\+by\+\_\+key}}
+\index{merge\+\_\+by\+\_\+key@{merge\+\_\+by\+\_\+key}!Parallel Primitives@{Parallel Primitives}}
+\subsubsection{\texorpdfstring{merge\+\_\+by\+\_\+key()}{merge\_by\_key()}}
+{\footnotesize\ttfamily template$<$typename system\+\_\+tag , typename key\+\_\+iterator1 , typename key\+\_\+iterator2 , typename value\+\_\+iterator1 , typename value\+\_\+iterator2 , typename key\+\_\+output , typename value\+\_\+output $>$ \\
+void cugar\+::merge\+\_\+by\+\_\+key (\begin{DoxyParamCaption}\item[{const uint32}]{A\+\_\+len,  }\item[{const uint32}]{B\+\_\+len,  }\item[{const key\+\_\+iterator1}]{A\+\_\+keys,  }\item[{const key\+\_\+iterator2}]{B\+\_\+keys,  }\item[{const value\+\_\+iterator1}]{A\+\_\+values,  }\item[{const value\+\_\+iterator2}]{B\+\_\+values,  }\item[{key\+\_\+output}]{C\+\_\+keys,  }\item[{value\+\_\+output}]{C\+\_\+values,  }\item[{\hyperlink{structcugar_1_1vector}{cugar\+::vector}$<$ system\+\_\+tag, uint8 $>$ \&}]{temp\+\_\+storage }\end{DoxyParamCaption})}
+
+merge two sequences by key
+
+
+\begin{DoxyParams}{Parameters}
+{\em A\+\_\+len} & number of input items in the first sequence \\
+\hline
+{\em B\+\_\+len} & number of input items in the second sequence \\
+\hline
+{\em A\+\_\+keys} & a system input iterator of keys to be merged from the first sequence \\
+\hline
+{\em B\+\_\+keys} & a system input iterator of keys to be merged from the second sequence \\
+\hline
+{\em A\+\_\+values} & a system input iterator of values to be merged from the first sequence \\
+\hline
+{\em B\+\_\+values} & a system input iterator of values to be merged from the second sequence \\
+\hline
+{\em C\+\_\+keys} & a system output iterator to the final merged keys \\
+\hline
+{\em C\+\_\+values} & a system output iterator of the final merged values \\
+\hline
+{\em temp\+\_\+storage} & some temporary storage \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___primitives_gac4584fb9407d3d12ff3a4a1890e9b903}\label{group___primitives_gac4584fb9407d3d12ff3a4a1890e9b903}} 
+\index{Parallel Primitives@{Parallel Primitives}!radix\+\_\+sort@{radix\+\_\+sort}}
+\index{radix\+\_\+sort@{radix\+\_\+sort}!Parallel Primitives@{Parallel Primitives}}
+\subsubsection{\texorpdfstring{radix\+\_\+sort()}{radix\_sort()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename system\+\_\+tag , typename Key\+Iterator $>$ \\
+void cugar\+::radix\+\_\+sort (\begin{DoxyParamCaption}\item[{const uint32}]{n,  }\item[{Key\+Iterator}]{keys,  }\item[{\hyperlink{structcugar_1_1vector}{cugar\+::vector}$<$ system\+\_\+tag, uint8 $>$ \&}]{temp\+\_\+storage }\end{DoxyParamCaption})}
+
+system-\/wide radix-\/sort
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & number of input items \\
+\hline
+{\em keys} & a system input iterator of keys to be sorted \\
+\hline
+{\em temp\+\_\+storage} & some temporary storage \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___primitives_ga5b655f3d4ce7cf922eaf9ed446ab426b}\label{group___primitives_ga5b655f3d4ce7cf922eaf9ed446ab426b}} 
+\index{Parallel Primitives@{Parallel Primitives}!radix\+\_\+sort@{radix\+\_\+sort}}
+\index{radix\+\_\+sort@{radix\+\_\+sort}!Parallel Primitives@{Parallel Primitives}}
+\subsubsection{\texorpdfstring{radix\+\_\+sort()}{radix\_sort()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename system\+\_\+tag , typename Key\+Iterator , typename Value\+Iterator $>$ \\
+void cugar\+::radix\+\_\+sort (\begin{DoxyParamCaption}\item[{const uint32}]{n,  }\item[{Key\+Iterator}]{keys,  }\item[{Value\+Iterator}]{values,  }\item[{\hyperlink{structcugar_1_1vector}{cugar\+::vector}$<$ system\+\_\+tag, uint8 $>$ \&}]{temp\+\_\+storage }\end{DoxyParamCaption})}
+
+system-\/wide radix-\/sort by key
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & number of input items \\
+\hline
+{\em keys} & a system input iterator of keys to be sorted \\
+\hline
+{\em values} & a system input iterator of values to be sorted \\
+\hline
+{\em temp\+\_\+storage} & some temporary storage \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___primitives_gab8f49b135164aaef1fb6b51b90874915}\label{group___primitives_gab8f49b135164aaef1fb6b51b90874915}} 
+\index{Parallel Primitives@{Parallel Primitives}!reduce@{reduce}}
+\index{reduce@{reduce}!Parallel Primitives@{Parallel Primitives}}
+\subsubsection{\texorpdfstring{reduce()}{reduce()}}
+{\footnotesize\ttfamily template$<$typename system\+\_\+tag , typename Input\+Iterator , typename Binary\+Op $>$ \\
+std\+::iterator\+\_\+traits$<$ Input\+Iterator $>$\+::value\+\_\+type cugar\+::reduce (\begin{DoxyParamCaption}\item[{const uint32}]{n,  }\item[{Input\+Iterator}]{in,  }\item[{Binary\+Op}]{op,  }\item[{\hyperlink{structcugar_1_1vector}{cugar\+::vector}$<$ system\+\_\+tag, uint8 $>$ \&}]{temp\+\_\+storage }\end{DoxyParamCaption})}
+
+system-\/wide reduce
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & number of items to reduce \\
+\hline
+{\em in} & a system iterator \\
+\hline
+{\em op} & the binary reduction operator \\
+\hline
+{\em temp\+\_\+storage} & some temporary storage \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___primitives_ga67aba73e3ceb623f48b734cb19889f1d}\label{group___primitives_ga67aba73e3ceb623f48b734cb19889f1d}} 
+\index{Parallel Primitives@{Parallel Primitives}!reduce\+\_\+by\+\_\+key@{reduce\+\_\+by\+\_\+key}}
+\index{reduce\+\_\+by\+\_\+key@{reduce\+\_\+by\+\_\+key}!Parallel Primitives@{Parallel Primitives}}
+\subsubsection{\texorpdfstring{reduce\+\_\+by\+\_\+key()}{reduce\_by\_key()}}
+{\footnotesize\ttfamily template$<$typename system\+\_\+tag , typename Key\+Iterator , typename Value\+Iterator , typename Output\+Key\+Iterator , typename Output\+Value\+Iterator , typename Reduction\+Op $>$ \\
+uint32 cugar\+::reduce\+\_\+by\+\_\+key (\begin{DoxyParamCaption}\item[{const uint32}]{n,  }\item[{Key\+Iterator}]{keys\+\_\+in,  }\item[{Value\+Iterator}]{values\+\_\+in,  }\item[{Output\+Key\+Iterator}]{keys\+\_\+out,  }\item[{Output\+Value\+Iterator}]{values\+\_\+out,  }\item[{Reduction\+Op}]{reduction\+\_\+op,  }\item[{\hyperlink{structcugar_1_1vector}{cugar\+::vector}$<$ system\+\_\+tag, uint8 $>$ \&}]{temp\+\_\+storage }\end{DoxyParamCaption})}
+
+system-\/wide run-\/length encode
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & number of input items \\
+\hline
+{\em keys\+\_\+in} & a system input iterator \\
+\hline
+{\em values\+\_\+in} & a system input iterator \\
+\hline
+{\em keys\+\_\+out} & a system output iterator \\
+\hline
+{\em values\+\_\+out} & a system output iterator \\
+\hline
+{\em reduction\+\_\+op} & a reduction operator \\
+\hline
+{\em temp\+\_\+storage} & some temporary storage\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of copied items 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___primitives_gae48c0c95572ea1dd13ec562eed6e2755}\label{group___primitives_gae48c0c95572ea1dd13ec562eed6e2755}} 
+\index{Parallel Primitives@{Parallel Primitives}!runlength\+\_\+encode@{runlength\+\_\+encode}}
+\index{runlength\+\_\+encode@{runlength\+\_\+encode}!Parallel Primitives@{Parallel Primitives}}
+\subsubsection{\texorpdfstring{runlength\+\_\+encode()}{runlength\_encode()}}
+{\footnotesize\ttfamily template$<$typename system\+\_\+tag , typename Input\+Iterator , typename Output\+Iterator , typename Count\+Iterator $>$ \\
+uint32 cugar\+::runlength\+\_\+encode (\begin{DoxyParamCaption}\item[{const uint32}]{n,  }\item[{Input\+Iterator}]{in,  }\item[{Output\+Iterator}]{out,  }\item[{Count\+Iterator}]{counts,  }\item[{\hyperlink{structcugar_1_1vector}{cugar\+::vector}$<$ system\+\_\+tag, uint8 $>$ \&}]{temp\+\_\+storage }\end{DoxyParamCaption})}
+
+system-\/wide run-\/length encode
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & number of input items \\
+\hline
+{\em in} & a system input iterator \\
+\hline
+{\em out} & a system output iterator \\
+\hline
+{\em counts} & a system output count iterator \\
+\hline
+{\em temp\+\_\+storage} & some temporary storage\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of copied items 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___primitives_gab584ee91ed39f9b1fec5aa0e7a0284a4}\label{group___primitives_gab584ee91ed39f9b1fec5aa0e7a0284a4}} 
+\index{Parallel Primitives@{Parallel Primitives}!transform@{transform}}
+\index{transform@{transform}!Parallel Primitives@{Parallel Primitives}}
+\subsubsection{\texorpdfstring{transform()}{transform()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename system\+\_\+tag , typename Iterator , typename Output , typename Functor $>$ \\
+void cugar\+::transform (\begin{DoxyParamCaption}\item[{const uint32}]{n,  }\item[{const Iterator}]{in,  }\item[{const Output}]{out,  }\item[{const Functor}]{functor }\end{DoxyParamCaption})}
+
+apply a functor to each element of the given sequence \mbox{\Hypertarget{group___primitives_ga2c0c3bba686f00f120c68465c28f5259}\label{group___primitives_ga2c0c3bba686f00f120c68465c28f5259}} 
+\index{Parallel Primitives@{Parallel Primitives}!transform@{transform}}
+\index{transform@{transform}!Parallel Primitives@{Parallel Primitives}}
+\subsubsection{\texorpdfstring{transform()}{transform()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename system\+\_\+tag , typename Iterator1 , typename Iterator2 , typename Output , typename Functor $>$ \\
+void cugar\+::transform (\begin{DoxyParamCaption}\item[{const uint32}]{n,  }\item[{const Iterator1}]{in1,  }\item[{const Iterator2}]{in2,  }\item[{const Output}]{out,  }\item[{const Functor}]{functor }\end{DoxyParamCaption})}
+
+apply a binary functor to each pair of elements of the given sequences \mbox{\Hypertarget{group___primitives_ga56b7c8a32a7a8a42afe413b087159230}\label{group___primitives_ga56b7c8a32a7a8a42afe413b087159230}} 
+\index{Parallel Primitives@{Parallel Primitives}!upper\+\_\+bound@{upper\+\_\+bound}}
+\index{upper\+\_\+bound@{upper\+\_\+bound}!Parallel Primitives@{Parallel Primitives}}
+\subsubsection{\texorpdfstring{upper\+\_\+bound()}{upper\_bound()}}
+{\footnotesize\ttfamily template$<$typename system\+\_\+tag , typename Key\+Iterator , typename Value\+Iterator , typename Output\+Iterator $>$ \\
+void cugar\+::upper\+\_\+bound (\begin{DoxyParamCaption}\item[{const uint32}]{n,  }\item[{Value\+Iterator}]{values,  }\item[{const uint32}]{n\+\_\+keys,  }\item[{Key\+Iterator}]{keys,  }\item[{Output\+Iterator}]{indices }\end{DoxyParamCaption})}
+
+system-\/wide upper\+\_\+bound
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & number of input items \\
+\hline
+{\em values} & a system input iterator of values to be searched \\
+\hline
+{\em n\+\_\+keys} & number of sorted keys \\
+\hline
+{\em keys} & a system input iterator of sorted keys \\
+\hline
+{\em indices} & a system output iterator \\
+\hline
+\end{DoxyParams}

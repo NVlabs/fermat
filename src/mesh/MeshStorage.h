@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -29,6 +29,7 @@
 #pragma once
 
 #include <MeshException.h>
+#include <MeshView.h>
 #include <texture_reference.h>
 #include <buffers.h>
 #include <string>
@@ -37,64 +38,41 @@
 class MeshGroup;
 class MeshMaterialParams;
 
-struct SUTILCLASSAPI MeshMaterial
-{
-	float4 diffuse;
-	float4 diffuse_trans;
-	float4 ambient;
-	float4 specular;
-	float4 emissive;
-	float4 reflectivity;
-	float  roughness;
-	float  index_of_refraction;
-	float  opacity;
-	int    flags;
-
-	TextureReference ambient_map;
-	TextureReference diffuse_map;
-	TextureReference diffuse_trans_map;
-	TextureReference specular_map;
-	TextureReference emissive_map;
-	TextureReference bump_map;
-};
-
-/**
-* This class provides basic Mesh view
-*/
-struct SUTILCLASSAPI MeshView
-{
-	int num_vertices;
-	int num_normals;
-	int num_texture_coordinates;
-	int num_triangles;
-	int num_groups;
-	int num_materials;
-
-	int vertex_stride;
-	int normal_stride;
-	int texture_stride;
-
-	int*	vertex_indices;
-	int*	normal_indices;
-	int*	material_indices;
-	int*	texture_indices;
-	int*    group_offsets;
-	float*  vertex_data;
-	float*	normal_data;
-	float*	texture_data;
-	int*	lightmap_indices;
-	float*	lightmap_data;
-
-	MeshMaterial* materials;
-};
-
-
 /**
  * This class provides basic Mesh storage for either the host or device
  */
 class SUTILCLASSAPI MeshStorage
 {
 public:
+#if 0
+	static const uint32 VERTEX_TRIANGLE_SIZE	= 4;
+	static const uint32 NORMAL_TRIANGLE_SIZE	= 3;
+	static const uint32 TEXTURE_TRIANGLE_SIZE	= 3;
+	static const uint32 LIGHTMAP_TRIANGLE_SIZE	= 3;
+
+	typedef int4 vertex_triangle;
+	typedef int3 normal_triangle;
+	typedef int3 texture_triangle;
+	typedef int3 lightmap_triangle;
+
+	static normal_triangle make_normal_triangle(const int32 x, const int32 y, const int32 z) { return make_int3(x,y,z); }
+	static texture_triangle make_texture_triangle(const int32 x, const int32 y, const int32 z) { return make_int3(x,y,z); }
+	static lightmap_triangle make_lightmap_triangle(const int32 x, const int32 y, const int32 z) { return make_int3(x,y,z); }
+#else
+	static const uint32 VERTEX_TRIANGLE_SIZE	= MeshView::VERTEX_TRIANGLE_SIZE;
+	static const uint32 NORMAL_TRIANGLE_SIZE	= MeshView::NORMAL_TRIANGLE_SIZE;
+	static const uint32 TEXTURE_TRIANGLE_SIZE	= MeshView::TEXTURE_TRIANGLE_SIZE;
+	static const uint32 LIGHTMAP_TRIANGLE_SIZE	= MeshView::LIGHTMAP_TRIANGLE_SIZE;
+
+	typedef MeshView::vertex_triangle	vertex_triangle;
+	typedef MeshView::normal_triangle	normal_triangle;
+	typedef MeshView::texture_triangle	texture_triangle;
+	typedef MeshView::lightmap_triangle	lightmap_triangle;
+
+	static normal_triangle make_normal_triangle(const int32 x, const int32 y, const int32 z) { return make_int4(x,y,z,0); }
+	static texture_triangle make_texture_triangle(const int32 x, const int32 y, const int32 z) { return make_int4(x,y,z,0); }
+	static lightmap_triangle make_lightmap_triangle(const int32 x, const int32 y, const int32 z) { return make_int4(x,y,z,0); }
+#endif
 
 	SUTILAPI MeshStorage() :
 		m_num_vertices(0),
@@ -103,9 +81,9 @@ public:
 		m_num_lightmap_coordinates(0),
 		m_num_triangles(0),
 		m_num_groups(0),
-		m_vertex_stride(3),
-		m_normal_stride(3),
-		m_texture_stride(2) {}
+		m_vertex_stride(sizeof(MeshView::vertex_type) / 4u),
+		m_normal_stride(sizeof(MeshView::normal_type) / 4u),
+		m_texture_stride(sizeof(MeshView::texture_coord_type) / 4u) {}
 
 	void alloc(
 		const int num_triangles,
@@ -120,32 +98,36 @@ public:
 		m_num_triangles			  = num_triangles;
 		m_num_groups			  = num_groups;
 
-		m_vertex_stride  = 3;
-		m_normal_stride  = 3;
-		m_texture_stride = 2;
+		m_vertex_stride  = sizeof(MeshView::vertex_type) / 4u;
+		m_normal_stride  = sizeof(MeshView::normal_type) / 4u;
+		m_texture_stride = sizeof(MeshView::texture_coord_type) / 4u;
 
 		// alloc per-triangle indices
-		m_vertex_indices.alloc(3 * num_triangles);
+		m_vertex_indices.alloc(4 * num_triangles);
 		if (num_normals)
 		{
-            m_normal_indices.alloc(3 * num_triangles);
+            m_normal_indices.alloc(NORMAL_TRIANGLE_SIZE * num_triangles);
 			m_normal_indices.clear(0); // initialize to 0
+            m_normal_indices_comp.alloc(NORMAL_TRIANGLE_SIZE * num_triangles);
 		}
 		if (num_texture_coordinates)
 		{
-			m_texture_indices.alloc(3 * num_triangles);
+			m_texture_indices.alloc(TEXTURE_TRIANGLE_SIZE * num_triangles);
 			m_texture_indices.clear(0); // initialize to 0
+
+			m_texture_indices_comp.alloc(TEXTURE_TRIANGLE_SIZE * num_triangles);
 		}
 
         m_material_indices.alloc(num_triangles);
         m_material_indices.clear(0xFF); // initialize to undefined|-1
 
 		m_group_offsets.alloc(num_groups + 1);
-		m_group_names.resize(num_groups + 1);
+		m_group_names.resize(num_groups);
 
 		// alloc vertex data
 		m_vertex_data.alloc(m_vertex_stride * num_vertices);
 		m_normal_data.alloc(m_normal_stride * num_normals);
+		m_normal_data_comp.alloc(num_normals);
 		m_texture_data.alloc(m_texture_stride * num_texture_coordinates);
 	}
 
@@ -155,10 +137,14 @@ public:
 		if (num_lightmap_coordinates)
 		{
 			m_num_lightmap_coordinates = num_lightmap_coordinates;
-			m_lightmap_indices.alloc(3 * m_num_triangles);
+			m_lightmap_indices.alloc(LIGHTMAP_TRIANGLE_SIZE * m_num_triangles);
+			m_lightmap_indices_comp.alloc(TEXTURE_TRIANGLE_SIZE * m_num_triangles);
 			m_lightmap_data.alloc(m_texture_stride * num_lightmap_coordinates);
 		}
 	}
+
+	void compress_normals();
+	void compress_tex();
 
 	SUTILAPI MeshMaterial* alloc_materials(const size_t n) { m_materials.resize(n);  m_material_name_offsets.resize(n); return m_materials.ptr(); }
 	SUTILAPI char* alloc_material_names(const size_t n_chars) { m_material_names.resize(n_chars); return m_material_names.ptr(); }
@@ -183,6 +169,8 @@ public:
 	SUTILAPI const int* getMaterialIndices() const			{ return m_material_indices.ptr(); }
 	SUTILAPI int* getTextureCoordinateIndices()				{ return m_texture_indices.ptr(); }
 	SUTILAPI const int* getTextureCoordinateIndices() const { return m_texture_indices.ptr(); }
+	SUTILAPI int* getLightmapIndices()						{ return m_lightmap_indices.ptr(); }
+	SUTILAPI const int* getLightmapIndices() const			{ return m_lightmap_indices.ptr(); }
 	SUTILAPI int* getGroupOffsets()							{ return m_group_offsets.ptr(); }
 	SUTILAPI const int* getGroupOffsets() const				{ return m_group_offsets.ptr(); }
 
@@ -195,9 +183,12 @@ public:
 	SUTILAPI float* getTextureCoordinateData()				{ return m_texture_data.ptr(); }
 	SUTILAPI const float* getTextureCoordinateData() const	{ return m_texture_data.ptr(); }
 
+	SUTILAPI	   std::string& getGroupName(const uint32 i)       { return m_group_names[i]; }
 	SUTILAPI const std::string& getGroupName(const uint32 i) const { return m_group_names[i]; }
 
 	SUTILAPI const char* getMaterialName(const uint32 i) const { return m_material_names.ptr() + m_material_name_offsets[i]; }
+
+	SUTILAPI uint32 insert_texture(const std::string& tex_name);
 
 	SUTILAPI MeshView view()
 	{
@@ -212,14 +203,23 @@ public:
 		mesh.texture_stride				= m_texture_stride;
 		mesh.vertex_indices				= m_vertex_indices.ptr();
 		mesh.normal_indices				= m_normal_indices.ptr();
+		mesh.normal_indices_comp		= m_normal_indices_comp.ptr();
 		mesh.material_indices			= m_material_indices.ptr();
 		mesh.texture_indices			= m_texture_indices.ptr();
+		mesh.texture_indices_comp		= m_texture_indices_comp.ptr();
 		mesh.vertex_data				= m_vertex_data.ptr();
 		mesh.normal_data				= m_normal_data.ptr();
+		mesh.normal_data_comp			= m_normal_data_comp.ptr();
 		mesh.texture_data				= m_texture_data.ptr();
 		mesh.lightmap_indices			= m_lightmap_indices.ptr();
+		mesh.lightmap_indices_comp		= m_lightmap_indices_comp.ptr();
 		mesh.lightmap_data				= m_lightmap_data.ptr();
 		mesh.materials					= m_materials.ptr();
+
+		mesh.tex_bias	= m_tex_bias;
+		mesh.tex_scale	= m_tex_scale;
+		mesh.lm_bias	= m_lm_bias;
+		mesh.lm_scale	= m_lm_scale;
 		return mesh;
 	}
 
@@ -238,6 +238,11 @@ public:
 	int m_normal_stride;
 	int m_texture_stride;
 
+	float2 m_tex_bias;
+	float2 m_tex_scale;
+	float2 m_lm_bias;
+	float2 m_lm_scale;
+
 	std::map<std::string,uint32> m_textures_map;
 	std::vector<std::string>	 m_textures;
 
@@ -245,12 +250,16 @@ public:
 
 	Buffer<int>				m_vertex_indices;
 	Buffer<int>				m_normal_indices;
+	Buffer<int>				m_normal_indices_comp;
 	Buffer<int>				m_material_indices;
 	Buffer<int>				m_texture_indices;
+	Buffer<int>				m_texture_indices_comp;
 	Buffer<int>				m_lightmap_indices;
+	Buffer<int>				m_lightmap_indices_comp;
 	Buffer<int>				m_group_offsets;
 	Buffer<float>			m_vertex_data;
 	Buffer<float>			m_normal_data;
+	Buffer<uint32>			m_normal_data_comp;
 	Buffer<float>			m_texture_data;
 	Buffer<float>			m_lightmap_data;
 	Buffer<MeshMaterial>	m_materials;
@@ -288,9 +297,19 @@ public:
 		m_group_offsets		= mesh.m_group_offsets;
 		m_vertex_data		= mesh.m_vertex_data;
 		m_normal_data		= mesh.m_normal_data;
+		m_normal_data_comp	= mesh.m_normal_data_comp;
 		m_texture_data		= mesh.m_texture_data;
 		m_lightmap_data		= mesh.m_lightmap_data;
 		m_materials			= mesh.m_materials;
+
+		m_normal_indices_comp	= mesh.m_normal_indices_comp;
+		m_texture_indices_comp	= mesh.m_texture_indices_comp;
+		m_lightmap_indices_comp	= mesh.m_lightmap_indices_comp;
+
+		m_tex_bias	= mesh.m_tex_bias;
+		m_tex_scale	= mesh.m_tex_scale;
+		m_lm_bias	= mesh.m_lm_bias;
+		m_lm_scale	= mesh.m_lm_scale;
 		return *this;
 	}
 
@@ -312,6 +331,8 @@ public:
 	SUTILAPI const int* getMaterialIndices() const			{ return m_material_indices.ptr(); }
 	SUTILAPI int* getTextureCoordinateIndices()				{ return m_texture_indices.ptr(); }
 	SUTILAPI const int* getTextureCoordinateIndices() const { return m_texture_indices.ptr(); }
+	SUTILAPI int* getLightmapIndices()						{ return m_lightmap_indices.ptr(); }
+	SUTILAPI const int* getLightmapIndices() const			{ return m_lightmap_indices.ptr(); }
 
 	SUTILAPI float* getVertexData()							{ return m_vertex_data.ptr(); }
 	SUTILAPI const float* getVertexData() const				{ return m_vertex_data.ptr(); }
@@ -336,15 +357,24 @@ public:
 		mesh.texture_stride				= m_texture_stride;
 		mesh.vertex_indices				= m_vertex_indices.ptr();
 		mesh.normal_indices				= m_normal_indices.ptr();
+		mesh.normal_indices_comp		= m_normal_indices_comp.ptr();
 		mesh.material_indices			= m_material_indices.ptr();
 		mesh.texture_indices			= m_texture_indices.ptr();
+		mesh.texture_indices_comp		= m_texture_indices_comp.ptr();
 		mesh.group_offsets				= m_group_offsets.ptr();
 		mesh.vertex_data				= m_vertex_data.ptr();
 		mesh.normal_data				= m_normal_data.ptr();
+		mesh.normal_data_comp			= m_normal_data_comp.ptr();
 		mesh.texture_data				= m_texture_data.ptr();
 		mesh.lightmap_indices			= m_lightmap_indices.ptr();
+		mesh.lightmap_indices_comp		= m_lightmap_indices_comp.ptr();
 		mesh.lightmap_data				= m_lightmap_data.ptr();
 		mesh.materials					= m_materials.ptr();
+
+		mesh.tex_bias	= m_tex_bias;
+		mesh.tex_scale	= m_tex_scale;
+		mesh.lm_bias	= m_lm_bias;
+		mesh.lm_scale	= m_lm_scale;
 		return mesh;
 	}
 
@@ -360,14 +390,23 @@ public:
 	int m_normal_stride;
 	int m_texture_stride;
 
+	float2 m_tex_bias;
+	float2 m_tex_scale;
+	float2 m_lm_bias;
+	float2 m_lm_scale;
+
 	DomainBuffer<CUDA_BUFFER, int>				m_vertex_indices;
 	DomainBuffer<CUDA_BUFFER, int>				m_normal_indices;
+	DomainBuffer<CUDA_BUFFER, int>				m_normal_indices_comp;
 	DomainBuffer<CUDA_BUFFER, int>				m_material_indices;
 	DomainBuffer<CUDA_BUFFER, int>				m_texture_indices;
+	DomainBuffer<CUDA_BUFFER, int>				m_texture_indices_comp;
 	DomainBuffer<CUDA_BUFFER, int>				m_lightmap_indices;
+	DomainBuffer<CUDA_BUFFER, int>				m_lightmap_indices_comp;
 	DomainBuffer<CUDA_BUFFER, int>				m_group_offsets;
 	DomainBuffer<CUDA_BUFFER, float>			m_vertex_data;
 	DomainBuffer<CUDA_BUFFER, float>			m_normal_data;
+	DomainBuffer<CUDA_BUFFER, uint32>			m_normal_data_comp;
 	DomainBuffer<CUDA_BUFFER, float>			m_texture_data;
 	DomainBuffer<CUDA_BUFFER, float>			m_lightmap_data;
 	DomainBuffer<CUDA_BUFFER, MeshMaterial>		m_materials;
@@ -416,3 +455,7 @@ SUTILAPI void add_per_triangle_normals(MeshStorage& mesh);
 /// add per-triangle texture coordinates
 ///
 SUTILAPI void add_per_triangle_texture_coordinates(MeshStorage& mesh);
+
+/// unify all vertex attributes, so as to have a single triplet of indices per triangle
+///
+SUTILAPI void unify_vertex_attributes(MeshStorage& mesh);

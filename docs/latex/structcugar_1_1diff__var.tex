@@ -1,0 +1,137 @@
+\hypertarget{structcugar_1_1diff__var}{}\section{cugar\+:\+:diff\+\_\+var$<$ Val\+Type, N, O $>$ Struct Template Reference}
+\label{structcugar_1_1diff__var}\index{cugar\+::diff\+\_\+var$<$ Val\+Type, N, O $>$@{cugar\+::diff\+\_\+var$<$ Val\+Type, N, O $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$typename Val\+Type, uint32 N, uint32 O$>$\newline
+struct cugar\+::diff\+\_\+var$<$ Val\+Type, N, O $>$}
+
+This class allows to represent variables that carry associated differentials up to a specified compile-\/time order with respect to a predefined set of variables
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Val\+Type} & the value type of the expression \\
+\hline
+{\em N} & the number of variables the expression is differentiated against \\
+\hline
+{\em O} & the maximum order of differentiation, i.\+e\+: 0 = no derivatives, 1 = first order derivatives / gradient, 2 = second-\/order derivatives / Hessian, 3 = third-\/order derivatives, ... \\
+\hline
+\end{DoxyTemplParams}
+
+
+{\ttfamily \#include $<$diff.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1diff__var_a67c8868ae47924ac0730b47342ce118f}\label{structcugar_1_1diff__var_a67c8868ae47924ac0730b47342ce118f}} 
+typedef Val\+Type {\bfseries value\+\_\+type}
+\item 
+\mbox{\Hypertarget{structcugar_1_1diff__var_aea9b40098586d8c221a335f7e42c9b3c}\label{structcugar_1_1diff__var_aea9b40098586d8c221a335f7e42c9b3c}} 
+typedef \hyperlink{structcugar_1_1diff__var}{diff\+\_\+var}$<$ Val\+Type, N, O-\/1 $>$ {\bfseries diff\+\_\+component\+\_\+type}
+\item 
+\mbox{\Hypertarget{structcugar_1_1diff__var_aa4fb144eb95b619784581466b0804b0f}\label{structcugar_1_1diff__var_aa4fb144eb95b619784581466b0804b0f}} 
+typedef \hyperlink{structcugar_1_1_vector}{Vector}$<$ \hyperlink{structcugar_1_1diff__var}{diff\+\_\+component\+\_\+type}, N $>$ {\bfseries diff\+\_\+type}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1diff__var_aeb8a77349c388de8401541fa57fa2677}{diff\+\_\+var} ()
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1diff__var_a2c4d3739cc2516f30278285afd992f74}{diff\+\_\+var} (const \hyperlink{structcugar_1_1diff__var}{diff\+\_\+var}$<$ Val\+Type, N, O $>$ \&\+\_\+other)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1diff__var_a3fa7d4d596c209e89ae543fe023666ca}{diff\+\_\+var} (const value\+\_\+type \+\_\+u, const \hyperlink{structcugar_1_1_vector}{diff\+\_\+type} \+\_\+du)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1diff__var_a3dfedcb37cf1bdbf2f6b2f9bd15bc65f}{diff\+\_\+var} (value\+\_\+type \+\_\+u)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1diff__var_a073bb39f8d7563a648e4fc8fc4056035}{operator value\+\_\+type} () const
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1diff__var}{diff\+\_\+var} \& \hyperlink{structcugar_1_1diff__var_a57e8d8d3aa5e039c93ebf2c165dd7516}{operator=} (const value\+\_\+type \&\+\_\+u)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{diff\+\_\+type} \hyperlink{structcugar_1_1diff__var_a5b4aa7e26e75bc03041ac1e15c81e960}{diff} () const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1diff__var_af95523ef626400e3787954df020e1192}\label{structcugar_1_1diff__var_af95523ef626400e3787954df020e1192}} 
+value\+\_\+type {\bfseries u}
+\item 
+\mbox{\Hypertarget{structcugar_1_1diff__var_a1f1f32b25e1388fb09ac496b6b777b93}\label{structcugar_1_1diff__var_a1f1f32b25e1388fb09ac496b6b777b93}} 
+\hyperlink{structcugar_1_1_vector}{diff\+\_\+type} {\bfseries du}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcugar_1_1diff__var_aeb8a77349c388de8401541fa57fa2677}\label{structcugar_1_1diff__var_aeb8a77349c388de8401541fa57fa2677}} 
+\index{cugar\+::diff\+\_\+var@{cugar\+::diff\+\_\+var}!diff\+\_\+var@{diff\+\_\+var}}
+\index{diff\+\_\+var@{diff\+\_\+var}!cugar\+::diff\+\_\+var@{cugar\+::diff\+\_\+var}}
+\subsubsection{\texorpdfstring{diff\+\_\+var()}{diff\_var()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$typename Val\+Type, uint32 N, uint32 O$>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1diff__var}{cugar\+::diff\+\_\+var}$<$ Val\+Type, N, O $>$\+::\hyperlink{structcugar_1_1diff__var}{diff\+\_\+var} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+default constructor \mbox{\Hypertarget{structcugar_1_1diff__var_a2c4d3739cc2516f30278285afd992f74}\label{structcugar_1_1diff__var_a2c4d3739cc2516f30278285afd992f74}} 
+\index{cugar\+::diff\+\_\+var@{cugar\+::diff\+\_\+var}!diff\+\_\+var@{diff\+\_\+var}}
+\index{diff\+\_\+var@{diff\+\_\+var}!cugar\+::diff\+\_\+var@{cugar\+::diff\+\_\+var}}
+\subsubsection{\texorpdfstring{diff\+\_\+var()}{diff\_var()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$typename Val\+Type, uint32 N, uint32 O$>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1diff__var}{cugar\+::diff\+\_\+var}$<$ Val\+Type, N, O $>$\+::\hyperlink{structcugar_1_1diff__var}{diff\+\_\+var} (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1diff__var}{diff\+\_\+var}$<$ Val\+Type, N, O $>$ \&}]{\+\_\+other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+copy constructor \mbox{\Hypertarget{structcugar_1_1diff__var_a3fa7d4d596c209e89ae543fe023666ca}\label{structcugar_1_1diff__var_a3fa7d4d596c209e89ae543fe023666ca}} 
+\index{cugar\+::diff\+\_\+var@{cugar\+::diff\+\_\+var}!diff\+\_\+var@{diff\+\_\+var}}
+\index{diff\+\_\+var@{diff\+\_\+var}!cugar\+::diff\+\_\+var@{cugar\+::diff\+\_\+var}}
+\subsubsection{\texorpdfstring{diff\+\_\+var()}{diff\_var()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$typename Val\+Type, uint32 N, uint32 O$>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1diff__var}{cugar\+::diff\+\_\+var}$<$ Val\+Type, N, O $>$\+::\hyperlink{structcugar_1_1diff__var}{diff\+\_\+var} (\begin{DoxyParamCaption}\item[{const value\+\_\+type}]{\+\_\+u,  }\item[{const \hyperlink{structcugar_1_1_vector}{diff\+\_\+type}}]{\+\_\+du }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+u} & scalar value \\
+\hline
+{\em \+\_\+du} & differential \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1diff__var_a3dfedcb37cf1bdbf2f6b2f9bd15bc65f}\label{structcugar_1_1diff__var_a3dfedcb37cf1bdbf2f6b2f9bd15bc65f}} 
+\index{cugar\+::diff\+\_\+var@{cugar\+::diff\+\_\+var}!diff\+\_\+var@{diff\+\_\+var}}
+\index{diff\+\_\+var@{diff\+\_\+var}!cugar\+::diff\+\_\+var@{cugar\+::diff\+\_\+var}}
+\subsubsection{\texorpdfstring{diff\+\_\+var()}{diff\_var()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$typename Val\+Type, uint32 N, uint32 O$>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1diff__var}{cugar\+::diff\+\_\+var}$<$ Val\+Type, N, O $>$\+::\hyperlink{structcugar_1_1diff__var}{diff\+\_\+var} (\begin{DoxyParamCaption}\item[{value\+\_\+type}]{\+\_\+u }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+constructor from scalar
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+u} & scalar value \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1diff__var_a5b4aa7e26e75bc03041ac1e15c81e960}\label{structcugar_1_1diff__var_a5b4aa7e26e75bc03041ac1e15c81e960}} 
+\index{cugar\+::diff\+\_\+var@{cugar\+::diff\+\_\+var}!diff@{diff}}
+\index{diff@{diff}!cugar\+::diff\+\_\+var@{cugar\+::diff\+\_\+var}}
+\subsubsection{\texorpdfstring{diff()}{diff()}}
+{\footnotesize\ttfamily template$<$typename Val\+Type, uint32 N, uint32 O$>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{diff\+\_\+type} \hyperlink{structcugar_1_1diff__var}{cugar\+::diff\+\_\+var}$<$ Val\+Type, N, O $>$\+::diff (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the first-\/order differential \mbox{\Hypertarget{structcugar_1_1diff__var_a073bb39f8d7563a648e4fc8fc4056035}\label{structcugar_1_1diff__var_a073bb39f8d7563a648e4fc8fc4056035}} 
+\index{cugar\+::diff\+\_\+var@{cugar\+::diff\+\_\+var}!operator value\+\_\+type@{operator value\+\_\+type}}
+\index{operator value\+\_\+type@{operator value\+\_\+type}!cugar\+::diff\+\_\+var@{cugar\+::diff\+\_\+var}}
+\subsubsection{\texorpdfstring{operator value\+\_\+type()}{operator value\_type()}}
+{\footnotesize\ttfamily template$<$typename Val\+Type, uint32 N, uint32 O$>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1diff__var}{cugar\+::diff\+\_\+var}$<$ Val\+Type, N, O $>$\+::operator value\+\_\+type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+conversion to scalar \mbox{\Hypertarget{structcugar_1_1diff__var_a57e8d8d3aa5e039c93ebf2c165dd7516}\label{structcugar_1_1diff__var_a57e8d8d3aa5e039c93ebf2c165dd7516}} 
+\index{cugar\+::diff\+\_\+var@{cugar\+::diff\+\_\+var}!operator=@{operator=}}
+\index{operator=@{operator=}!cugar\+::diff\+\_\+var@{cugar\+::diff\+\_\+var}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$typename Val\+Type, uint32 N, uint32 O$>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1diff__var}{diff\+\_\+var}\& \hyperlink{structcugar_1_1diff__var}{cugar\+::diff\+\_\+var}$<$ Val\+Type, N, O $>$\+::operator= (\begin{DoxyParamCaption}\item[{const value\+\_\+type \&}]{\+\_\+u }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+assignment to scalar 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/analysis/\hyperlink{diff_8h}{diff.\+h}\end{DoxyCompactItemize}

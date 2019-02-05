@@ -1,0 +1,35 @@
+\hypertarget{struct_per_pixel_eye_subpath_primary_coords}{}\section{Per\+Pixel\+Eye\+Subpath\+Primary\+Coords Struct Reference}
+\label{struct_per_pixel_eye_subpath_primary_coords}\index{Per\+Pixel\+Eye\+Subpath\+Primary\+Coords@{Per\+Pixel\+Eye\+Subpath\+Primary\+Coords}}
+
+
+\subsection{Detailed description}
+Primary coordinate sampler for eye subpaths, based on a \hyperlink{struct_tiled_sequence}{Tiled\+Sequence} sampler. This sampler assumes that there is a one to one correspondence between paths and pixels, i.\+e. that the path index IS the pixel index. 
+
+{\ttfamily \#include $<$bpt\+\_\+samplers.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_per_pixel_eye_subpath_primary_coords_a0680b91cb249feac14bac477c601f000}\label{struct_per_pixel_eye_subpath_primary_coords_a0680b91cb249feac14bac477c601f000}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE {\bfseries Per\+Pixel\+Eye\+Subpath\+Primary\+Coords} (const \hyperlink{struct_tiled_sequence_view}{Tiled\+Sequence\+View} \+\_\+sequence, const uint32 \+\_\+res\+\_\+x, const uint32 \+\_\+res\+\_\+y)
+\item 
+\mbox{\Hypertarget{struct_per_pixel_eye_subpath_primary_coords_a149efc72191a13e0d1cefb81396173a4}\label{struct_per_pixel_eye_subpath_primary_coords_a149efc72191a13e0d1cefb81396173a4}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float {\bfseries sample} (const uint32 idx, const uint32 vertex, const uint32 dim) const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_per_pixel_eye_subpath_primary_coords_a01c5b417f7141a04f062586d28d328c5}\label{struct_per_pixel_eye_subpath_primary_coords_a01c5b417f7141a04f062586d28d328c5}} 
+const \hyperlink{struct_tiled_sequence_view}{Tiled\+Sequence\+View} {\bfseries sequence}
+\item 
+\mbox{\Hypertarget{struct_per_pixel_eye_subpath_primary_coords_aabe1c9d4b9bcb950c776d168a0ef4a83}\label{struct_per_pixel_eye_subpath_primary_coords_aabe1c9d4b9bcb950c776d168a0ef4a83}} 
+const uint32 {\bfseries res\+\_\+x}
+\item 
+\mbox{\Hypertarget{struct_per_pixel_eye_subpath_primary_coords_aa529fe217bad21e144832d688eb71609}\label{struct_per_pixel_eye_subpath_primary_coords_aa529fe217bad21e144832d688eb71609}} 
+const uint32 {\bfseries res\+\_\+y}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/bpt\+\_\+samplers.\+h\end{DoxyCompactItemize}

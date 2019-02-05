@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML\irrXML.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML\CXMLReaderImpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML\heapsort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML\irrArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML\irrString.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML\irrTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML\irrXML.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{AD646091-16B9-364B-B986-266672EAC204}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{639C4902-DD71-3425-A407-5DA736C40709}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

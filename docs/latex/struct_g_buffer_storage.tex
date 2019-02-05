@@ -1,0 +1,76 @@
+\hypertarget{struct_g_buffer_storage}{}\section{G\+Buffer\+Storage Struct Reference}
+\label{struct_g_buffer_storage}\index{G\+Buffer\+Storage@{G\+Buffer\+Storage}}
+
+
+\subsection{Detailed description}
+G-\/buffer storage class, to be used from the host to allocate g-\/buffer storage 
+
+{\ttfamily \#include $<$framebuffer.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{struct_g_buffer_storage_a4c56dec448dc48418f8e4dd47adc8e44}{resize} (const uint32\+\_\+t \+\_\+res\+\_\+x, const uint32\+\_\+t \+\_\+res\+\_\+y)
+\item 
+size\+\_\+t \hyperlink{struct_g_buffer_storage_ad9fd298041c1d4f7b239c0242a8f8b5f}{size} () const
+\item 
+void \hyperlink{struct_g_buffer_storage_a9d8e6e8f1dc353833e1c18ae4304561e}{clear} ()
+\item 
+\hyperlink{struct_g_buffer_view}{G\+Buffer\+View} \hyperlink{struct_g_buffer_storage_ade6d37a2dba46fe7b701634fe97fb7b9}{view} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_g_buffer_storage_a258a1487c734012b98e9228741c749c0}\label{struct_g_buffer_storage_a258a1487c734012b98e9228741c749c0}} 
+uint32\+\_\+t {\bfseries res\+\_\+x}
+\item 
+\mbox{\Hypertarget{struct_g_buffer_storage_adb9bc21bd1df3742c6561374534851c5}\label{struct_g_buffer_storage_adb9bc21bd1df3742c6561374534851c5}} 
+uint32\+\_\+t {\bfseries res\+\_\+y}
+\item 
+\mbox{\Hypertarget{struct_g_buffer_storage_a8a0d56d02cc05f76d8bc74a2e79d33e9}\label{struct_g_buffer_storage_a8a0d56d02cc05f76d8bc74a2e79d33e9}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float4 $>$ {\bfseries geo}
+\item 
+\mbox{\Hypertarget{struct_g_buffer_storage_a7ca8cdb13ae66747a28951dd19a9ec1d}\label{struct_g_buffer_storage_a7ca8cdb13ae66747a28951dd19a9ec1d}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float4 $>$ {\bfseries uv}
+\item 
+\mbox{\Hypertarget{struct_g_buffer_storage_acfc75e200a8e87d7463cbaa835c7d3ed}\label{struct_g_buffer_storage_acfc75e200a8e87d7463cbaa835c7d3ed}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, uint32 $>$ {\bfseries tri}
+\item 
+\mbox{\Hypertarget{struct_g_buffer_storage_a1b31ff87d2a1b867447f4ce87762a1e1}\label{struct_g_buffer_storage_a1b31ff87d2a1b867447f4ce87762a1e1}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float $>$ {\bfseries depth}
+\item 
+\mbox{\Hypertarget{struct_g_buffer_storage_a7612491ec2c94cfb55f93e0778b247d7}\label{struct_g_buffer_storage_a7612491ec2c94cfb55f93e0778b247d7}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, uint4 $>$ {\bfseries material}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{struct_g_buffer_storage_a9d8e6e8f1dc353833e1c18ae4304561e}\label{struct_g_buffer_storage_a9d8e6e8f1dc353833e1c18ae4304561e}} 
+\index{G\+Buffer\+Storage@{G\+Buffer\+Storage}!clear@{clear}}
+\index{clear@{clear}!G\+Buffer\+Storage@{G\+Buffer\+Storage}}
+\subsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily void G\+Buffer\+Storage\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+clear the G-\/buffer with invalid bits \mbox{\Hypertarget{struct_g_buffer_storage_a4c56dec448dc48418f8e4dd47adc8e44}\label{struct_g_buffer_storage_a4c56dec448dc48418f8e4dd47adc8e44}} 
+\index{G\+Buffer\+Storage@{G\+Buffer\+Storage}!resize@{resize}}
+\index{resize@{resize}!G\+Buffer\+Storage@{G\+Buffer\+Storage}}
+\subsubsection{\texorpdfstring{resize()}{resize()}}
+{\footnotesize\ttfamily void G\+Buffer\+Storage\+::resize (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{\+\_\+res\+\_\+x,  }\item[{const uint32\+\_\+t}]{\+\_\+res\+\_\+y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+set the resolution \mbox{\Hypertarget{struct_g_buffer_storage_ad9fd298041c1d4f7b239c0242a8f8b5f}\label{struct_g_buffer_storage_ad9fd298041c1d4f7b239c0242a8f8b5f}} 
+\index{G\+Buffer\+Storage@{G\+Buffer\+Storage}!size@{size}}
+\index{size@{size}!G\+Buffer\+Storage@{G\+Buffer\+Storage}}
+\subsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily size\+\_\+t G\+Buffer\+Storage\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the total number of pixels \mbox{\Hypertarget{struct_g_buffer_storage_ade6d37a2dba46fe7b701634fe97fb7b9}\label{struct_g_buffer_storage_ade6d37a2dba46fe7b701634fe97fb7b9}} 
+\index{G\+Buffer\+Storage@{G\+Buffer\+Storage}!view@{view}}
+\index{view@{view}!G\+Buffer\+Storage@{G\+Buffer\+Storage}}
+\subsubsection{\texorpdfstring{view()}{view()}}
+{\footnotesize\ttfamily \hyperlink{struct_g_buffer_view}{G\+Buffer\+View} G\+Buffer\+Storage\+::view (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return a view object 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/framebuffer.\+h\end{DoxyCompactItemize}

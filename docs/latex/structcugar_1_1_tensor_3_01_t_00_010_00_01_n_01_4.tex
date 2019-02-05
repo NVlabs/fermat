@@ -1,0 +1,53 @@
+\hypertarget{structcugar_1_1_tensor_3_01_t_00_010_00_01_n_01_4}{}\section{cugar\+:\+:Tensor$<$ T, 0, N $>$ Struct Template Reference}
+\label{structcugar_1_1_tensor_3_01_t_00_010_00_01_n_01_4}\index{cugar\+::\+Tensor$<$ T, 0, N $>$@{cugar\+::\+Tensor$<$ T, 0, N $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$typename T, uint32 N$>$\newline
+struct cugar\+::\+Tensor$<$ T, 0, N $>$}
+
+A generic small N$^\wedge$D tensor class with the order set at compile-\/time 
+
+{\ttfamily \#include $<$tensor.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_tensor_3_01_t_00_010_00_01_n_01_4_a45bc2ce6b6215e5989389ab976eb5b94}\label{structcugar_1_1_tensor_3_01_t_00_010_00_01_n_01_4_a45bc2ce6b6215e5989389ab976eb5b94}} 
+typedef T {\bfseries value\+\_\+type}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_tensor_3_01_t_00_010_00_01_n_01_4_a58b0b5c8c3ff92af9a588eee564d6350}\label{structcugar_1_1_tensor_3_01_t_00_010_00_01_n_01_4_a58b0b5c8c3ff92af9a588eee564d6350}} 
+typedef T {\bfseries component\+\_\+type}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_tensor_3_01_t_00_010_00_01_n_01_4_a9397e65f1b68d7e083543c6745b61531}\label{structcugar_1_1_tensor_3_01_t_00_010_00_01_n_01_4_a9397e65f1b68d7e083543c6745b61531}} 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries Tensor} (const value\+\_\+type \+\_\+d)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_tensor_3_01_t_00_010_00_01_n_01_4_a6a9f93386bff57a055bd064067b8b9b1}\label{structcugar_1_1_tensor_3_01_t_00_010_00_01_n_01_4_a6a9f93386bff57a055bd064067b8b9b1}} 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries operator value\+\_\+type} () const
+\item 
+\mbox{\Hypertarget{structcugar_1_1_tensor_3_01_t_00_010_00_01_n_01_4_aaf9c25494603f65421d4090f7faf7e3e}\label{structcugar_1_1_tensor_3_01_t_00_010_00_01_n_01_4_aaf9c25494603f65421d4090f7faf7e3e}} 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE value\+\_\+type {\bfseries operator()} () const
+\item 
+\mbox{\Hypertarget{structcugar_1_1_tensor_3_01_t_00_010_00_01_n_01_4_aa475170bd80cd889edb583144241e4fc}\label{structcugar_1_1_tensor_3_01_t_00_010_00_01_n_01_4_aa475170bd80cd889edb583144241e4fc}} 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const value\+\_\+type \& {\bfseries operator()} (\hyperlink{structcugar_1_1_tensor_index}{Tensor\+Index}$<$ 0 $>$ i) const
+\item 
+\mbox{\Hypertarget{structcugar_1_1_tensor_3_01_t_00_010_00_01_n_01_4_afb64e18da772ae0c5a89f5803074211c}\label{structcugar_1_1_tensor_3_01_t_00_010_00_01_n_01_4_afb64e18da772ae0c5a89f5803074211c}} 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE value\+\_\+type \& {\bfseries operator()} (\hyperlink{structcugar_1_1_tensor_index}{Tensor\+Index}$<$ 0 $>$ i)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_tensor_3_01_t_00_010_00_01_n_01_4_a9d23dec6d7a198d48c98bbbf870aad1f}\label{structcugar_1_1_tensor_3_01_t_00_010_00_01_n_01_4_a9d23dec6d7a198d48c98bbbf870aad1f}} 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 {\bfseries order} () const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_tensor_3_01_t_00_010_00_01_n_01_4_ab9cfe45fac1248ca186dd66b09f38111}\label{structcugar_1_1_tensor_3_01_t_00_010_00_01_n_01_4_ab9cfe45fac1248ca186dd66b09f38111}} 
+value\+\_\+type {\bfseries data}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/linalg/tensor.\+h\end{DoxyCompactItemize}

@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2008-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -201,11 +201,26 @@ namespace {
     // vertex_data points to an array where the loader can fill the vertices it loads,
     // and vertex_indices points to where indices for each triangle's vertice can
     // be filled.  Similarly for normal_data and normal_indices.
-    PlyData(float* vertex_data, float* normal_data,
-            int* vertex_indices, int* normal_indices)
-    : m_vertex_data( vertex_data ), m_normal_data( normal_data),
-      m_vertex_indices( vertex_indices ), m_normal_indices( normal_indices ),
-      m_curr_vertex_index(0), m_curr_normal_index(0), m_curr_triangle_index(0)
+    PlyData(float* vertex_data, int vertex_stride,
+			float* normal_data, int normal_stride,
+			float* texture_data, int texture_stride,
+			int* vertex_indices, int* normal_indices, int* texture_indices,
+			int vindex_stride,
+			int nindex_stride,
+			int tindex_stride)
+    : m_vertex_data( vertex_data ),
+	  m_normal_data( normal_data ),
+	  m_texture_data( texture_data ),
+      m_vertex_indices( vertex_indices ), 
+	  m_normal_indices( normal_indices ), 
+	  m_texture_indices( texture_indices ),
+      m_curr_vertex_index(0), m_curr_normal_index(0), m_curr_texture_index(0), m_curr_triangle_index(0),
+      m_vertex_stride( vertex_stride ),
+      m_normal_stride( normal_stride ),
+      m_texture_stride( texture_stride ),
+      m_vindex_stride( vindex_stride ),
+      m_nindex_stride( nindex_stride ),
+      m_tindex_stride( tindex_stride )
     { }
 
     friend int plyVertexLoadDataCB( p_ply_argument );
@@ -215,12 +230,23 @@ namespace {
 
     float* m_vertex_data;
     float* m_normal_data;
+    float* m_texture_data;
     int*   m_vertex_indices;
     int*   m_normal_indices;
+    int*   m_texture_indices;
 
     int    m_curr_vertex_index;
     int    m_curr_normal_index;
+    int    m_curr_texture_index;
     int    m_curr_triangle_index;
+
+	int	   m_vertex_stride;
+	int	   m_normal_stride;
+	int	   m_texture_stride;
+
+	int	   m_vindex_stride;
+	int	   m_nindex_stride;
+	int	   m_tindex_stride;
   };
 
 
@@ -233,8 +259,9 @@ namespace {
     ply_get_argument_user_data( argument,
                                 reinterpret_cast<void**>( data_pp ), &coord_index );
 
-    int vindex_raw = 3 * data->m_curr_vertex_index;
-    int nindex_raw = 3 * data->m_curr_normal_index;
+    int vindex_raw = data->m_vertex_stride * data->m_curr_vertex_index;
+    int nindex_raw = data->m_normal_stride * data->m_curr_normal_index;
+    int tindex_raw = data->m_texture_stride * data->m_curr_texture_index;
     float value = static_cast<float>( ply_get_argument_value( argument ) );
 
     switch( coord_index ) {
@@ -262,7 +289,16 @@ namespace {
         ++data->m_curr_normal_index;
         break;
 
-      // Silently ignore other coord_index values
+      // Texture property
+      case 6: 
+        data->m_texture_data[tindex_raw + 0] = value;
+        break;
+      case 7:
+        data->m_texture_data[tindex_raw + 1] = value;
+        ++data->m_curr_texture_index;
+        break;
+		
+		// Silently ignore other coord_index values
     }
     return 1;
   }
@@ -277,26 +313,32 @@ namespace {
     int num_verts, which_vertex;
     ply_get_argument_property( argument, NULL, &num_verts, &which_vertex );
     
-    int trindex_raw = 3 * data->m_curr_triangle_index;
+    int trindex_raw = data->m_curr_triangle_index;
     int value = static_cast<int>( ply_get_argument_value(argument) );
 
     // num_verts is disregarded; we assume only triangles are given
 
     switch( which_vertex ) {
       case 0:
-        data->m_vertex_indices[trindex_raw + 0] = value;
+        data->m_vertex_indices[data->m_vindex_stride * trindex_raw + 0] = value;
         if (data->m_normal_indices)
-			data->m_normal_indices[trindex_raw + 0] = value;
+			data->m_normal_indices[data->m_vindex_stride * trindex_raw + 0] = value;
+        if (data->m_texture_indices)
+			data->m_texture_indices[data->m_tindex_stride * trindex_raw + 0] = value;
         break;
       case 1:
-        data->m_vertex_indices[trindex_raw + 1] = value;
+        data->m_vertex_indices[data->m_vindex_stride * trindex_raw + 1] = value;
         if (data->m_normal_indices)
-			data->m_normal_indices[trindex_raw + 1] = value;
+			data->m_normal_indices[data->m_nindex_stride * trindex_raw + 1] = value;
+        if (data->m_texture_indices)
+			data->m_texture_indices[data->m_tindex_stride * trindex_raw + 1] = value;
         break;
       case 2:
-        data->m_vertex_indices[trindex_raw + 2] = value;
+        data->m_vertex_indices[data->m_vindex_stride * trindex_raw + 2] = value;
         if (data->m_normal_indices)
-			data->m_normal_indices[trindex_raw + 2] = value;
+			data->m_normal_indices[data->m_nindex_stride * trindex_raw + 2] = value;
+        if (data->m_texture_indices)
+			data->m_texture_indices[data->m_tindex_stride * trindex_raw + 2] = value;
         ++data->m_curr_triangle_index;
         break;
 
@@ -389,6 +431,10 @@ MeshBase::MeshBase() :
   m_normal_stride( 0 ),
   m_color_stride( 0 ),
   m_texture_coordinate_stride( 0 ),
+  m_vertex_index_stride(0),
+  m_normal_index_stride( 0 ),
+  m_color_index_stride( 0 ),
+  m_texture_index_stride( 0 ),
   m_num_triangles( 0 ),
   m_grouping( kKeepGroups )
 { }
@@ -556,7 +602,12 @@ void MeshBase::loadMaterials( const std::string& material_filename )
                 &staging_materials[curr_material_number].emissive[2] );
         break;
 
-      case 'm':
+      case 'f': // flags
+        fscanf( file, "%u",
+                &staging_materials[curr_material_number].flags );
+        break;
+	  
+	  case 'm':
         {
           MeshTextureMap* map;
           // Determine which type of map.
@@ -853,7 +904,6 @@ void MeshBase::loadInfoFromObj(const std::string& filename, bool insertDefaultMa
   forEachGroup( PruneEmptyGroupsFunctor(m_mesh_groups) );
 }
 
-
 //  
 //  loadDataFromObj is based on:
 //
@@ -867,6 +917,14 @@ void MeshBase::loadDataFromObj( const std::string& filename, bool insertDefaultM
 {
   ScopedFile file( openObjFile(filename) );
 
+  const int vtri_size = getVertexTriangleSize();
+  const int ntri_size = getNormalTriangleSize();
+  const int ttri_size = getTextureTriangleSize();
+
+  #define VERTEX_INDICES vtri_size
+  #define NORMAL_INDICES ntri_size
+  #define TEX_INDICES    ttri_size
+		
   int vertices_index            = 0;
   int normals_index             = 0;
   int colors_index              = 0;
@@ -877,6 +935,12 @@ void MeshBase::loadDataFromObj( const std::string& filename, bool insertDefaultM
   float*         normals             = m_normal_data;
   unsigned char* colors              = m_color_data;
   float*         texture_coordinates = m_texture_coordinate_data;
+
+  // 0 as index stride signals compact triangle indices
+  if (m_vertex_index_stride		== 0) m_vertex_index_stride		= 3;
+  if (m_normal_index_stride		== 0) m_normal_index_stride		= 3;
+  if (m_color_index_stride		== 0) m_color_index_stride		= 3;
+  if (m_texture_index_stride	== 0) m_texture_index_stride	= 3;
   
   // 0 as a stride signals compact data
   int v_stride = m_vertex_stride == 0 ? 3 : m_vertex_stride;
@@ -925,6 +989,8 @@ void MeshBase::loadDataFromObj( const std::string& filename, bool insertDefaultM
   bool uses_texture_coordinates
                      = ( m_num_texture_coordinates > 0
                          && texture_coordinates != 0 );
+
+  unsigned int DEFAULT_TRIANGLE_MASK = 0u;
 
   int   v[3], n[3], t[3];
   float f[3];
@@ -1052,10 +1118,10 @@ void MeshBase::loadDataFromObj( const std::string& filename, bool insertDefaultM
 
       case 'f':       /* face */
 
-        #define NEWEST_INDEX(indices, vertex_offset) \
-                curr_group_data->indices[3*(*curr_group_triangles_index) + (vertex_offset)]
-        #define PREVIOUS_INDEX(indices, vertex_offset) \
-                curr_group_data->indices[3*(*curr_group_triangles_index - 1) + (vertex_offset)]
+        #define NEWEST_INDEX(indices, vertex_offset, stride) \
+                curr_group_data->indices[stride*(*curr_group_triangles_index) + (vertex_offset)]
+        #define PREVIOUS_INDEX(indices, vertex_offset, stride) \
+                curr_group_data->indices[stride*(*curr_group_triangles_index - 1) + (vertex_offset)]
 
         for (int i = 0; i < 3; ++i) {
           v[i] = n[i] = t[i] = 0;
@@ -1073,19 +1139,20 @@ void MeshBase::loadDataFromObj( const std::string& filename, bool insertDefaultM
           if( is_loading_curr_group ) {
             if( uses_vertices ) {
               for (int i = 0; i < 3; ++i) {
-                NEWEST_INDEX(vertex_indices, i)
+                NEWEST_INDEX(vertex_indices, i, VERTEX_INDICES)
                   = (v[i] >= 0) ? v[i] - 1 : (vertices_index + v[i]);
               }
+			  NEWEST_INDEX(vertex_indices, 3, VERTEX_INDICES) = DEFAULT_TRIANGLE_MASK;
             }
             if( uses_normals ) {
               for (int i = 0; i < 3; ++i) {
-                NEWEST_INDEX(normal_indices, i)
+                NEWEST_INDEX(normal_indices, i, NORMAL_INDICES)
                   = (n[i] >= 0) ? n[i] - 1 : (normals_index + n[i]);
               }
             }
             if( uses_texture_coordinates ) {
               for (int i = 0; i < 3; ++i) {
-                NEWEST_INDEX(texture_coordinate_indices, i)
+                NEWEST_INDEX(texture_coordinate_indices, i, 3)
                   = MESH_ATTRIBUTE_NOT_PROVIDED;
               }
 			}
@@ -1101,20 +1168,21 @@ void MeshBase::loadDataFromObj( const std::string& filename, bool insertDefaultM
           while(fscanf(file, "%d//%d", &v[0], &n[0]) > 0) {
             if( is_loading_curr_group ) {
               if( uses_vertices ) {
-                NEWEST_INDEX(vertex_indices, 0) = PREVIOUS_INDEX(vertex_indices, 0);
-                NEWEST_INDEX(vertex_indices, 1) = PREVIOUS_INDEX(vertex_indices, 2);
-                NEWEST_INDEX(vertex_indices, 2) = (v[0] >= 0)
+                NEWEST_INDEX(vertex_indices, 0, VERTEX_INDICES) = PREVIOUS_INDEX(vertex_indices, 0, VERTEX_INDICES);
+                NEWEST_INDEX(vertex_indices, 1, VERTEX_INDICES) = PREVIOUS_INDEX(vertex_indices, 2, VERTEX_INDICES);
+                NEWEST_INDEX(vertex_indices, 2, VERTEX_INDICES) = (v[0] >= 0)
                                                 ? v[0] - 1: (vertices_index + v[0]);
+				NEWEST_INDEX(vertex_indices, 3, VERTEX_INDICES) = DEFAULT_TRIANGLE_MASK;
               }
               if( uses_normals ) {
-                NEWEST_INDEX(normal_indices, 0) = PREVIOUS_INDEX(normal_indices, 0);
-                NEWEST_INDEX(normal_indices, 1) = PREVIOUS_INDEX(normal_indices, 2);
-                NEWEST_INDEX(normal_indices, 2) = (n[0] >= 0)
+                NEWEST_INDEX(normal_indices, 0, NORMAL_INDICES) = PREVIOUS_INDEX(normal_indices, 0, NORMAL_INDICES);
+                NEWEST_INDEX(normal_indices, 1, NORMAL_INDICES) = PREVIOUS_INDEX(normal_indices, 2, NORMAL_INDICES);
+                NEWEST_INDEX(normal_indices, 2, NORMAL_INDICES) = (n[0] >= 0)
                                                 ? n[0] - 1: (normals_index + n[0]);
               }
               if( uses_texture_coordinates ) {
                 for (int i = 0; i < 3; ++i) {
-                  NEWEST_INDEX(texture_coordinate_indices, i)
+                  NEWEST_INDEX(texture_coordinate_indices, i, TEX_INDICES)
                     = MESH_ATTRIBUTE_NOT_PROVIDED;
                 }
               }
@@ -1135,19 +1203,20 @@ void MeshBase::loadDataFromObj( const std::string& filename, bool insertDefaultM
           if( is_loading_curr_group ) {
             if( uses_vertices ) {
               for( int i = 0; i < 3; ++i ) {
-                NEWEST_INDEX(vertex_indices, i)
+                NEWEST_INDEX(vertex_indices, i, VERTEX_INDICES)
                   = (v[i] >= 0) ? v[i] - 1 : (vertices_index + v[i]);
               }
+			NEWEST_INDEX(vertex_indices, 3, VERTEX_INDICES) = DEFAULT_TRIANGLE_MASK;
             }
             if( uses_normals ) {
               for( int i = 0; i < 3; ++i ) {
-                NEWEST_INDEX(normal_indices, i)
+                NEWEST_INDEX(normal_indices, i, NORMAL_INDICES)
                   = (n[i] >= 0) ? n[i] - 1 : (normals_index + n[i]);
               }
             }
             if( uses_texture_coordinates ) {
               for( int i = 0; i < 3; ++i ) {
-                NEWEST_INDEX(texture_coordinate_indices, i)
+                NEWEST_INDEX(texture_coordinate_indices, i, TEX_INDICES)
                   = (t[i] >= 0) ? t[i] - 1 : (texture_coordinates_index + t[i]);
               }
             }
@@ -1163,23 +1232,22 @@ void MeshBase::loadDataFromObj( const std::string& filename, bool insertDefaultM
           while(fscanf(file, "%d/%d/%d", &v[0], &t[0], &n[0]) > 0) {
             if( is_loading_curr_group ) {
               if( uses_vertices ) {
-                NEWEST_INDEX(vertex_indices, 0) = PREVIOUS_INDEX(vertex_indices, 0);
-                NEWEST_INDEX(vertex_indices, 1) = PREVIOUS_INDEX(vertex_indices, 2);
-                NEWEST_INDEX(vertex_indices, 2) = (v[0] >= 0)
+                NEWEST_INDEX(vertex_indices, 0, VERTEX_INDICES) = PREVIOUS_INDEX(vertex_indices, 0, VERTEX_INDICES);
+                NEWEST_INDEX(vertex_indices, 1, VERTEX_INDICES) = PREVIOUS_INDEX(vertex_indices, 2, VERTEX_INDICES);
+                NEWEST_INDEX(vertex_indices, 2, VERTEX_INDICES) = (v[0] >= 0)
                                                 ? v[0] - 1 : (vertices_index + v[0]);
+				NEWEST_INDEX(vertex_indices, 3, VERTEX_INDICES) = DEFAULT_TRIANGLE_MASK;
               }
               if( uses_normals ) {
-                NEWEST_INDEX(normal_indices, 0) = PREVIOUS_INDEX(normal_indices, 0);
-                NEWEST_INDEX(normal_indices, 1) = PREVIOUS_INDEX(normal_indices, 2);
-                NEWEST_INDEX(normal_indices, 2) = (n[0] >= 0)
+                NEWEST_INDEX(normal_indices, 0, NORMAL_INDICES) = PREVIOUS_INDEX(normal_indices, 0, NORMAL_INDICES);
+                NEWEST_INDEX(normal_indices, 1, NORMAL_INDICES) = PREVIOUS_INDEX(normal_indices, 2, NORMAL_INDICES);
+                NEWEST_INDEX(normal_indices, 2, NORMAL_INDICES) = (n[0] >= 0)
                                                 ? n[0] - 1 : (normals_index + n[0]);
               }
               if( uses_texture_coordinates ) {
-                NEWEST_INDEX(texture_coordinate_indices, 0)
-                  = PREVIOUS_INDEX(texture_coordinate_indices, 0);
-                NEWEST_INDEX(texture_coordinate_indices, 1)
-                  = PREVIOUS_INDEX(texture_coordinate_indices, 2);
-                NEWEST_INDEX(texture_coordinate_indices, 2) = (t[0] >= 0)
+                NEWEST_INDEX(texture_coordinate_indices, 0, TEX_INDICES) = PREVIOUS_INDEX(texture_coordinate_indices, 0, TEX_INDICES);
+                NEWEST_INDEX(texture_coordinate_indices, 1, TEX_INDICES) = PREVIOUS_INDEX(texture_coordinate_indices, 2, TEX_INDICES);
+                NEWEST_INDEX(texture_coordinate_indices, 2, TEX_INDICES) = (t[0] >= 0)
                                                 ? t[0] - 1 : (texture_coordinates_index + t[0]);
               }
 
@@ -1199,18 +1267,19 @@ void MeshBase::loadDataFromObj( const std::string& filename, bool insertDefaultM
           if( is_loading_curr_group ) {
             if( uses_vertices ) {
               for( int i = 0; i < 3; ++i ) {
-                NEWEST_INDEX(vertex_indices, i)
+                NEWEST_INDEX(vertex_indices, i, VERTEX_INDICES)
                   = (v[i] >= 0) ? v[i] - 1 : (vertices_index + v[i]);
               }
+			  NEWEST_INDEX(vertex_indices, 3, VERTEX_INDICES) = DEFAULT_TRIANGLE_MASK;
             }
             if( uses_normals ) {
               for( int i = 0; i < 3; ++i ) {
-                NEWEST_INDEX(normal_indices, i) = MESH_ATTRIBUTE_NOT_PROVIDED;
+                NEWEST_INDEX(normal_indices, i, NORMAL_INDICES) = MESH_ATTRIBUTE_NOT_PROVIDED;
               }
             }
             if( uses_texture_coordinates ) {
               for( int i = 0; i < 3; ++i ) {
-                NEWEST_INDEX(texture_coordinate_indices, i)
+                NEWEST_INDEX(texture_coordinate_indices, i, TEX_INDICES)
                   = (t[i] >= 0) ? t[i] - 1 : (texture_coordinates_index + t[i]);
               }
             }
@@ -1226,22 +1295,21 @@ void MeshBase::loadDataFromObj( const std::string& filename, bool insertDefaultM
           while(fscanf(file, "%d/%d", &v[0], &t[0]) > 0) {
             if( is_loading_curr_group ) {
               if( uses_vertices ) {
-                NEWEST_INDEX(vertex_indices, 0) = PREVIOUS_INDEX(vertex_indices, 0);
-                NEWEST_INDEX(vertex_indices, 1) = PREVIOUS_INDEX(vertex_indices, 2);
-                NEWEST_INDEX(vertex_indices, 2) = (v[0] >= 0)
+                NEWEST_INDEX(vertex_indices, 0, VERTEX_INDICES) = PREVIOUS_INDEX(vertex_indices, 0, VERTEX_INDICES);
+                NEWEST_INDEX(vertex_indices, 1, VERTEX_INDICES) = PREVIOUS_INDEX(vertex_indices, 2, VERTEX_INDICES);
+                NEWEST_INDEX(vertex_indices, 2, VERTEX_INDICES) = (v[0] >= 0)
                                                 ? v[0] - 1 : (vertices_index + v[0]);
+				NEWEST_INDEX(vertex_indices, 3, VERTEX_INDICES) = DEFAULT_TRIANGLE_MASK;
               }
               if( uses_normals ) {
                 for( int i = 0; i < 3; ++i ) {
-                  NEWEST_INDEX(normal_indices, i) = MESH_ATTRIBUTE_NOT_PROVIDED;
+                  NEWEST_INDEX(normal_indices, i, NORMAL_INDICES) = MESH_ATTRIBUTE_NOT_PROVIDED;
                 }
               }
               if( uses_texture_coordinates ) {
-                NEWEST_INDEX(texture_coordinate_indices, 0)
-                  = PREVIOUS_INDEX(texture_coordinate_indices, 0);
-                NEWEST_INDEX(texture_coordinate_indices, 1)
-                  = PREVIOUS_INDEX(texture_coordinate_indices, 2);
-                NEWEST_INDEX(texture_coordinate_indices, 2) = (t[0] >= 0)
+                NEWEST_INDEX(texture_coordinate_indices, 0, TEX_INDICES) = PREVIOUS_INDEX(texture_coordinate_indices, 0, TEX_INDICES);
+                NEWEST_INDEX(texture_coordinate_indices, 1, TEX_INDICES) = PREVIOUS_INDEX(texture_coordinate_indices, 2, TEX_INDICES);
+                NEWEST_INDEX(texture_coordinate_indices, 2, TEX_INDICES) = (t[0] >= 0)
                                                 ? t[0] - 1 : (texture_coordinates_index + t[0]);
               }
 			  
@@ -1262,19 +1330,19 @@ void MeshBase::loadDataFromObj( const std::string& filename, bool insertDefaultM
           if( is_loading_curr_group ) {
             if( uses_vertices ) {
               for( int i = 0; i < 3; ++i ) {
-                NEWEST_INDEX(vertex_indices, i)
+                NEWEST_INDEX(vertex_indices, i, VERTEX_INDICES)
                   = (v[i] >= 0) ? v[i] - 1 : (vertices_index + v[i]);
               }
+			  NEWEST_INDEX(vertex_indices, 3, VERTEX_INDICES) = DEFAULT_TRIANGLE_MASK;
             }
             if( uses_normals ) {
               for( int i = 0; i < 3; ++i ) {
-                NEWEST_INDEX(normal_indices, i) = MESH_ATTRIBUTE_NOT_PROVIDED;
+                NEWEST_INDEX(normal_indices, i, NORMAL_INDICES) = MESH_ATTRIBUTE_NOT_PROVIDED;
               }
             }
             if( uses_texture_coordinates ) {
               for( int i = 0; i < 3; ++i ) {
-                NEWEST_INDEX(texture_coordinate_indices, i)
-                  = MESH_ATTRIBUTE_NOT_PROVIDED;
+                NEWEST_INDEX(texture_coordinate_indices, i, TEX_INDICES) = MESH_ATTRIBUTE_NOT_PROVIDED;
               }
             }
 			
@@ -1289,20 +1357,20 @@ void MeshBase::loadDataFromObj( const std::string& filename, bool insertDefaultM
           while(fscanf(file, "%d", &v[0]) > 0) {
             if( is_loading_curr_group ) {
               if( uses_vertices ) {
-                NEWEST_INDEX(vertex_indices, 0) = PREVIOUS_INDEX(vertex_indices, 0);
-                NEWEST_INDEX(vertex_indices, 1) = PREVIOUS_INDEX(vertex_indices, 2);
-                NEWEST_INDEX(vertex_indices, 2) = (v[0] >= 0)
+                NEWEST_INDEX(vertex_indices, 0, VERTEX_INDICES) = PREVIOUS_INDEX(vertex_indices, 0, VERTEX_INDICES);
+                NEWEST_INDEX(vertex_indices, 1, VERTEX_INDICES) = PREVIOUS_INDEX(vertex_indices, 2, VERTEX_INDICES);
+                NEWEST_INDEX(vertex_indices, 2, VERTEX_INDICES) = (v[0] >= 0)
                                                 ? v[0] - 1 : (vertices_index + v[0]);
+				NEWEST_INDEX(vertex_indices, 3, VERTEX_INDICES) = DEFAULT_TRIANGLE_MASK;
               }
               if( uses_normals ) {
                 for( int i = 0; i < 3; ++i ) {
-                  NEWEST_INDEX(normal_indices, i) = MESH_ATTRIBUTE_NOT_PROVIDED;
+                  NEWEST_INDEX(normal_indices, i, NORMAL_INDICES) = MESH_ATTRIBUTE_NOT_PROVIDED;
                 }
               }
               if( uses_texture_coordinates ) {
                 for( int i = 0; i < 3; ++i ) {
-                  NEWEST_INDEX(texture_coordinate_indices, i)
-                    = MESH_ATTRIBUTE_NOT_PROVIDED;
+                  NEWEST_INDEX(texture_coordinate_indices, i, TEX_INDICES) = MESH_ATTRIBUTE_NOT_PROVIDED;
                 }
               }
 			  
@@ -1384,18 +1452,24 @@ void MeshBase::loadInfoFromPly( const std::string& filename, bool insertDefaultM
   }
 
   // Simply get the counts without setting real callbacks; that's for the second pass
-  int num_vertices = ply_set_read_cb( ply, "vertex", "x", NULL, NULL, 0 ); 
-  int num_normals  = ply_set_read_cb( ply, "vertex", "nx", NULL, NULL, 3 );
+  int num_vertices  = ply_set_read_cb( ply, "vertex", "x", NULL, NULL, 0 ); 
+  int num_normals   = ply_set_read_cb( ply, "vertex", "nx", NULL, NULL, 3 );
+  int num_textures  = ply_set_read_cb( ply, "vertex", "s", NULL, NULL, 6 );
+  if (num_textures == 0)
+      num_textures  = ply_set_read_cb( ply, "vertex", "u", NULL, NULL, 6 );
   int num_triangles = ply_set_read_cb( ply, "face", "vertex_indices", NULL, NULL, 0 );
 
-  m_num_vertices	= num_vertices;
-  m_num_normals		= num_normals;
-  m_num_triangles	= num_triangles;
+  m_num_vertices			= num_vertices;
+  m_num_normals				= num_normals;
+  m_num_texture_coordinates	= num_textures;
+  m_num_triangles			= num_triangles;
 
   initSingleGroup();
   MeshGroup& group = getFirstGroup();
   group.num_triangles = num_triangles;
   group.material_number = insertDefaultMaterial ? 0 : -1;
+
+  ply_close(ply);
 }
 
 
@@ -1413,7 +1487,12 @@ void MeshBase::loadDataFromPly( const std::string& filename )
 
   MeshGroup& group = getFirstGroup();
 
-  PlyData data( m_vertex_data, m_normal_data, group.vertex_indices, group.normal_indices );
+  PlyData data(
+	  m_vertex_data, m_vertex_stride,
+	  m_normal_data, m_normal_stride,
+	  m_texture_coordinate_data, m_texture_coordinate_stride,
+	  group.vertex_indices, group.normal_indices, group.texture_coordinate_indices,
+	  m_vertex_index_stride, m_normal_index_stride, m_texture_index_stride );
 
   ply_set_read_cb( ply, "vertex", "x", plyVertexLoadDataCB, &data, 0);
   ply_set_read_cb( ply, "vertex", "y", plyVertexLoadDataCB, &data, 1);
@@ -1425,6 +1504,15 @@ void MeshBase::loadDataFromPly( const std::string& filename )
 	  ply_set_read_cb( ply, "vertex", "ny", plyVertexLoadDataCB, &data, 4);
 	  ply_set_read_cb( ply, "vertex", "nz", plyVertexLoadDataCB, &data, 5);
   }
+
+  if (m_num_texture_coordinates)
+  {
+	  ply_set_read_cb( ply, "vertex", "s", plyVertexLoadDataCB, &data, 6);
+	  ply_set_read_cb( ply, "vertex", "t", plyVertexLoadDataCB, &data, 7);
+	  ply_set_read_cb( ply, "vertex", "u", plyVertexLoadDataCB, &data, 6);
+	  ply_set_read_cb( ply, "vertex", "v", plyVertexLoadDataCB, &data, 7);
+  }
+
   ply_set_read_cb( ply, "face", "vertex_indices", plyFaceLoadDataCB, &data, 0);
 
   if( !ply_read( ply ) ) {

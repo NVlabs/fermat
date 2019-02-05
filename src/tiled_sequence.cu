@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -30,10 +30,6 @@
 #include <random_sequence.h>
 #include <cugar/basic/cuda/arch.h>
 #include <cugar/basic/numbers.h>
-#include <cugar/sampling/latin_hypercube.h>
-#include <cugar/sampling/multijitter.h>
-
-#define N_SAMPLES (16*1024)
 
 namespace detail {
 
@@ -99,24 +95,14 @@ void TiledSequence::setup(const uint32 _n_dimensions, const uint32 _tile_size, c
 
 	// fill the tile shifts
 	m_tile_shifts = m_shifts;
-
-	m_sequence_samples.alloc(N_SAMPLES*n_dimensions);
 }
 
 void TiledSequence::set_instance(const uint32 instance)
 {
-	if ((instance % N_SAMPLES) == 0)
-	{
-		// setup the next batch of samples
-		cugar::LHSampler sampler(instance);
-
-		sampler.sample<false>(N_SAMPLES, n_dimensions, m_sequence_samples.ptr());
-	}
-
 	DomainBuffer<HOST_BUFFER, float> sequence(n_dimensions);
 
-	for (uint32 d = 0; d < n_dimensions; ++d)
-		sequence.ptr()[d] = m_sequence_samples[(instance % N_SAMPLES)*n_dimensions + d];
+	for (uint32 i = 0; i < n_dimensions; ++i)
+		sequence.ptr()[i] = cugar::randfloat(i, instance + 1);
 
 	m_sequence = sequence;
 

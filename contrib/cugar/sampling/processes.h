@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2011, NVIDIA Corporation
+ * Copyright (c) 2010-2018, NVIDIA Corporation
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,7 +33,6 @@
 
 #include <cugar/linalg/vector.h>
 #include <cugar/sampling/distributions.h>
-#include <cugar/sampling/sobol.h>
 #include <cugar/sampling/sampler.h>
 
 namespace cugar {

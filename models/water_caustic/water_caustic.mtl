@@ -1,0 +1,58 @@
+# MTL written from D:\nhull_dt_research\graphics\media\Main\water_caustic\water_caustic.obj
+newmtl Green
+Kd 0.14 0.45 0.091
+Ns 0
+d 1
+illum 2
+Ka 0 0 0
+Ks 0 0 0
+
+newmtl Red
+Kd 0.63 0.065 0.05
+Ns 0
+d 1
+illum 2
+Ka 0 0 0
+Ks 0 0 0
+
+newmtl Silver
+Kd 0.725 0.71 0.68
+Ns 5
+d 1
+illum 2
+Ka 0 0 0
+Ks 0.5 0.5 0.5
+
+newmtl Water
+Kd 0 0 0
+Ns 1024
+d 0
+illum 2
+Ka 0 0 0
+Ks 1 1 1
+
+newmtl White
+Kd 0.725 0.71 0.68
+Ns 0
+d 1
+illum 2
+Ka 0 0 0
+Ks 0 0 0
+
+newmtl Light
+Kd 0.8 0.730875 0.427549
+Ke 8000 6800 4400
+Ns 0
+d 1
+illum 2
+Ka 50 45.6797 26.7218
+Ks 0.04 0.04 0.04
+
+newmtl Light2
+Kd 0.8 0.730875 0.427549
+Ke 6000 7200 8000
+Ns 0
+d 1
+illum 2
+Ka 50 45.6797 26.7218
+Ks 0.04 0.04 0.04

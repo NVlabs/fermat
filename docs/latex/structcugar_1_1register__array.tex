@@ -1,0 +1,101 @@
+\hypertarget{structcugar_1_1register__array}{}\section{cugar\+:\+:register\+\_\+array$<$ Iterator, S\+I\+ZE $>$ Struct Template Reference}
+\label{structcugar_1_1register__array}\index{cugar\+::register\+\_\+array$<$ Iterator, S\+I\+Z\+E $>$@{cugar\+::register\+\_\+array$<$ Iterator, S\+I\+Z\+E $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$typename Iterator, uint32 S\+I\+ZE$>$\newline
+struct cugar\+::register\+\_\+array$<$ Iterator, S\+I\+Z\+E $>$}
+
+A statically sized array using registers as backing storage. The ability to be placed in registers is achieved by avoiding dynamic indexing, replacing that by an explicit O(log(\+N)) binary-\/search.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Iterator} & the base iterator type \\
+\hline
+{\em S\+I\+ZE} & the size of the array \\
+\hline
+\end{DoxyTemplParams}
+
+
+{\ttfamily \#include $<$register\+\_\+array.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1register__array_a0802b48da752a89bb1c894ac7a3ef52f}\label{structcugar_1_1register__array_a0802b48da752a89bb1c894ac7a3ef52f}} 
+typedef \hyperlink{structcugar_1_1iterator__traits}{iterator\+\_\+traits}$<$ Iterator $>$\+::reference {\bfseries reference\+\_\+type}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1register__array_a44e755faa53196a2d7abdfbd19b388ef}{register\+\_\+array} ()
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1register__array_aa8482612bb61cc0e501d1e5da1c43ab0}{register\+\_\+array} (Iterator it)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE reference\+\_\+type \hyperlink{structcugar_1_1register__array_afb81e67899d46524ae21aee528c8c7e1}{operator\mbox{[}$\,$\mbox{]}} (const uint32 i) const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1register__array_a93d2f8025d49d09013ee5b4179cb8a3f}{operator Iterator} () const
+\end{DoxyCompactItemize}
+\subsection*{Static Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE static C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE reference \hyperlink{structcugar_1_1register__array_a546daee4bb1bbc7d471367df7e74c900}{select} (const Iterator \&it, const uint32 i)
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1register__array_a9327296fac7535bcbf649abd00f9121f}\label{structcugar_1_1register__array_a9327296fac7535bcbf649abd00f9121f}} 
+Iterator {\bfseries r}
+\end{DoxyCompactItemize}
+\subsection*{Static Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1register__array_a806a1021ecaa22a16cf1838323d6e202}\label{structcugar_1_1register__array_a806a1021ecaa22a16cf1838323d6e202}} 
+static const uint32 {\bfseries D\+IM} = S\+I\+ZE
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcugar_1_1register__array_a44e755faa53196a2d7abdfbd19b388ef}\label{structcugar_1_1register__array_a44e755faa53196a2d7abdfbd19b388ef}} 
+\index{cugar\+::register\+\_\+array@{cugar\+::register\+\_\+array}!register\+\_\+array@{register\+\_\+array}}
+\index{register\+\_\+array@{register\+\_\+array}!cugar\+::register\+\_\+array@{cugar\+::register\+\_\+array}}
+\subsubsection{\texorpdfstring{register\+\_\+array()}{register\_array()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Iterator , uint32 S\+I\+ZE$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1register__array}{cugar\+::register\+\_\+array}$<$ Iterator, S\+I\+ZE $>$\+::\hyperlink{structcugar_1_1register__array}{register\+\_\+array} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor \mbox{\Hypertarget{structcugar_1_1register__array_aa8482612bb61cc0e501d1e5da1c43ab0}\label{structcugar_1_1register__array_aa8482612bb61cc0e501d1e5da1c43ab0}} 
+\index{cugar\+::register\+\_\+array@{cugar\+::register\+\_\+array}!register\+\_\+array@{register\+\_\+array}}
+\index{register\+\_\+array@{register\+\_\+array}!cugar\+::register\+\_\+array@{cugar\+::register\+\_\+array}}
+\subsubsection{\texorpdfstring{register\+\_\+array()}{register\_array()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Iterator , uint32 S\+I\+ZE$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1register__array}{cugar\+::register\+\_\+array}$<$ Iterator, S\+I\+ZE $>$\+::\hyperlink{structcugar_1_1register__array}{register\+\_\+array} (\begin{DoxyParamCaption}\item[{Iterator}]{it }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1register__array_a93d2f8025d49d09013ee5b4179cb8a3f}\label{structcugar_1_1register__array_a93d2f8025d49d09013ee5b4179cb8a3f}} 
+\index{cugar\+::register\+\_\+array@{cugar\+::register\+\_\+array}!operator Iterator@{operator Iterator}}
+\index{operator Iterator@{operator Iterator}!cugar\+::register\+\_\+array@{cugar\+::register\+\_\+array}}
+\subsubsection{\texorpdfstring{operator Iterator()}{operator Iterator()}}
+{\footnotesize\ttfamily template$<$typename Iterator , uint32 S\+I\+ZE$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1register__array}{cugar\+::register\+\_\+array}$<$ Iterator, S\+I\+ZE $>$\+::operator Iterator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+automatic conversion to iterator \mbox{\Hypertarget{structcugar_1_1register__array_afb81e67899d46524ae21aee528c8c7e1}\label{structcugar_1_1register__array_afb81e67899d46524ae21aee528c8c7e1}} 
+\index{cugar\+::register\+\_\+array@{cugar\+::register\+\_\+array}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!cugar\+::register\+\_\+array@{cugar\+::register\+\_\+array}}
+\subsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily template$<$typename Iterator , uint32 S\+I\+ZE$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE reference\+\_\+type \hyperlink{structcugar_1_1register__array}{cugar\+::register\+\_\+array}$<$ Iterator, S\+I\+ZE $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const uint32}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+indexing operator \mbox{\Hypertarget{structcugar_1_1register__array_a546daee4bb1bbc7d471367df7e74c900}\label{structcugar_1_1register__array_a546daee4bb1bbc7d471367df7e74c900}} 
+\index{cugar\+::register\+\_\+array@{cugar\+::register\+\_\+array}!select@{select}}
+\index{select@{select}!cugar\+::register\+\_\+array@{cugar\+::register\+\_\+array}}
+\subsubsection{\texorpdfstring{select()}{select()}}
+{\footnotesize\ttfamily template$<$typename Iterator , uint32 S\+I\+ZE$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE static C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE reference \hyperlink{structcugar_1_1register__array}{cugar\+::register\+\_\+array}$<$ Iterator, S\+I\+ZE $>$\+::select (\begin{DoxyParamCaption}\item[{const Iterator \&}]{it,  }\item[{const uint32}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+indexing operator 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/\hyperlink{register__array_8h}{register\+\_\+array.\+h}\end{DoxyCompactItemize}

@@ -1,0 +1,132 @@
+\hypertarget{structcugar_1_1cuda_1_1_hash_set}{}\section{cugar\+:\+:cuda\+:\+:Hash\+Set$<$ KeyT, HashT, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY $>$ Struct Template Reference}
+\label{structcugar_1_1cuda_1_1_hash_set}\index{cugar\+::cuda\+::\+Hash\+Set$<$ Key\+T, Hash\+T, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+E\+Y $>$@{cugar\+::cuda\+::\+Hash\+Set$<$ Key\+T, Hash\+T, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+E\+Y $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$typename KeyT, typename HashT, KeyT I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY = 0x\+F\+F\+F\+F\+F\+F\+FF$>$\newline
+struct cugar\+::cuda\+::\+Hash\+Set$<$ Key\+T, Hash\+T, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+E\+Y $>$}
+
+This class implements a device-\/side Hash Set, allowing arbitrary threads from potentially different C\+T\+As of a cuda kernel to add new entries at the same time.
+
+The constructor of the class accepts pointers to the arrays representing the underlying data structure\+:
+
+
+\begin{DoxyItemize}
+\item an array of hashed keys
+\item an array of unique set entries
+\item a pointer to a counter, keeping track of the number of set entries
+\end{DoxyItemize}
+
+Before starting to use the \hyperlink{structcugar_1_1cuda_1_1_hash_set}{Hash\+Set}, the array of hash slots has to be initialized to I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY.
+
+The class provides two methods\+: \begin{DoxyVerb}- HashSet::insert
+- HashSet::has
+\end{DoxyVerb}
+
+
+It\textquotesingle{}s important to notice that calls to the two methods cannot be mixed without interposing a global synchronization between them. 
+
+{\ttfamily \#include $<$hash.\+h$>$}
+
+Inheritance diagram for cugar\+:\+:cuda\+:\+:Hash\+Set$<$ KeyT, HashT, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{structcugar_1_1cuda_1_1_hash_set}
+\end{center}
+\end{figure}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1_hash_set_adc0a880b09c96a8723b7caf1c9a266fa}{Hash\+Set} ()
+\item 
+C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1_hash_set_a1fe8c1c90b9be37242999e97714998e3}{Hash\+Set} (const uint32 \+\_\+table\+\_\+size, KeyT $\ast$\+\_\+hash, KeyT $\ast$\+\_\+unique, uint32 $\ast$\+\_\+count)
+\item 
+C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1cuda_1_1_hash_set_a417db996be279f2a91dc97390021c96f}{insert} (const KeyT key, const HashT hash\+\_\+code)
+\item 
+C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structcugar_1_1cuda_1_1_hash_set_a624a256797d939b735e4aee67c352693}{size} () const
+\item 
+C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE KeyT \hyperlink{structcugar_1_1cuda_1_1_hash_set_a50361944a81d2bf60e528de63313db32}{get\+\_\+unique} (const uint32 i) const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_hash_set_a074f287fab61cd45f89c9b0487e6a8a7}\label{structcugar_1_1cuda_1_1_hash_set_a074f287fab61cd45f89c9b0487e6a8a7}} 
+uint32 {\bfseries table\+\_\+size}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_hash_set_a054f48c73abd88fea5e52a788a8b5f3c}\label{structcugar_1_1cuda_1_1_hash_set_a054f48c73abd88fea5e52a788a8b5f3c}} 
+KeyT $\ast$ {\bfseries hash}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_hash_set_a29bb540aeaae51bdcebbdbddca1a8a02}\label{structcugar_1_1cuda_1_1_hash_set_a29bb540aeaae51bdcebbdbddca1a8a02}} 
+KeyT $\ast$ {\bfseries unique}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_hash_set_aed55a50fc0654ba56940e9e56fe6dcc7}\label{structcugar_1_1cuda_1_1_hash_set_aed55a50fc0654ba56940e9e56fe6dcc7}} 
+uint32 $\ast$ {\bfseries count}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_hash_set_adc0a880b09c96a8723b7caf1c9a266fa}\label{structcugar_1_1cuda_1_1_hash_set_adc0a880b09c96a8723b7caf1c9a266fa}} 
+\index{cugar\+::cuda\+::\+Hash\+Set@{cugar\+::cuda\+::\+Hash\+Set}!Hash\+Set@{Hash\+Set}}
+\index{Hash\+Set@{Hash\+Set}!cugar\+::cuda\+::\+Hash\+Set@{cugar\+::cuda\+::\+Hash\+Set}}
+\subsubsection{\texorpdfstring{Hash\+Set()}{HashSet()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename KeyT , typename HashT , KeyT I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY = 0x\+F\+F\+F\+F\+F\+F\+FF$>$ \\
+C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1_hash_set}{cugar\+::cuda\+::\+Hash\+Set}$<$ KeyT, HashT, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY $>$\+::\hyperlink{structcugar_1_1cuda_1_1_hash_set}{Hash\+Set} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+empty constructor \mbox{\Hypertarget{structcugar_1_1cuda_1_1_hash_set_a1fe8c1c90b9be37242999e97714998e3}\label{structcugar_1_1cuda_1_1_hash_set_a1fe8c1c90b9be37242999e97714998e3}} 
+\index{cugar\+::cuda\+::\+Hash\+Set@{cugar\+::cuda\+::\+Hash\+Set}!Hash\+Set@{Hash\+Set}}
+\index{Hash\+Set@{Hash\+Set}!cugar\+::cuda\+::\+Hash\+Set@{cugar\+::cuda\+::\+Hash\+Set}}
+\subsubsection{\texorpdfstring{Hash\+Set()}{HashSet()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename KeyT , typename HashT , KeyT I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY = 0x\+F\+F\+F\+F\+F\+F\+FF$>$ \\
+C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1_hash_set}{cugar\+::cuda\+::\+Hash\+Set}$<$ KeyT, HashT, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY $>$\+::\hyperlink{structcugar_1_1cuda_1_1_hash_set}{Hash\+Set} (\begin{DoxyParamCaption}\item[{const uint32}]{\+\_\+table\+\_\+size,  }\item[{KeyT $\ast$}]{\+\_\+hash,  }\item[{KeyT $\ast$}]{\+\_\+unique,  }\item[{uint32 $\ast$}]{\+\_\+count }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\hyperlink{structcugar_1_1cuda_1_1_hash_set}{Hash\+Set} constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+table\+\_\+size} & the size of the hash table (needs to be a power of 2) \\
+\hline
+{\em \+\_\+hash} & a pointer to the array of \+\_\+table\+\_\+size hashed keys -\/ needs to be initialized to I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY before first use \\
+\hline
+{\em \+\_\+unique} & a pointer to the array where inserted entries will be stored -\/ needs to be appropriately sized to contain all unique entries \\
+\hline
+{\em \+\_\+count} & a pointer to a single counter, used to keep track of how many unique entries have been inserted \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_hash_set_a50361944a81d2bf60e528de63313db32}\label{structcugar_1_1cuda_1_1_hash_set_a50361944a81d2bf60e528de63313db32}} 
+\index{cugar\+::cuda\+::\+Hash\+Set@{cugar\+::cuda\+::\+Hash\+Set}!get\+\_\+unique@{get\+\_\+unique}}
+\index{get\+\_\+unique@{get\+\_\+unique}!cugar\+::cuda\+::\+Hash\+Set@{cugar\+::cuda\+::\+Hash\+Set}}
+\subsubsection{\texorpdfstring{get\+\_\+unique()}{get\_unique()}}
+{\footnotesize\ttfamily template$<$typename KeyT , typename HashT , KeyT I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY = 0x\+F\+F\+F\+F\+F\+F\+FF$>$ \\
+C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE KeyT \hyperlink{structcugar_1_1cuda_1_1_hash_set}{cugar\+::cuda\+::\+Hash\+Set}$<$ KeyT, HashT, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY $>$\+::get\+\_\+unique (\begin{DoxyParamCaption}\item[{const uint32}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the i-\/th unique element in the set \mbox{\Hypertarget{structcugar_1_1cuda_1_1_hash_set_a417db996be279f2a91dc97390021c96f}\label{structcugar_1_1cuda_1_1_hash_set_a417db996be279f2a91dc97390021c96f}} 
+\index{cugar\+::cuda\+::\+Hash\+Set@{cugar\+::cuda\+::\+Hash\+Set}!insert@{insert}}
+\index{insert@{insert}!cugar\+::cuda\+::\+Hash\+Set@{cugar\+::cuda\+::\+Hash\+Set}}
+\subsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily template$<$typename KeyT , typename HashT , KeyT I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY = 0x\+F\+F\+F\+F\+F\+F\+FF$>$ \\
+C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1cuda_1_1_hash_set}{cugar\+::cuda\+::\+Hash\+Set}$<$ KeyT, HashT, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY $>$\+::insert (\begin{DoxyParamCaption}\item[{const KeyT}]{key,  }\item[{const HashT}]{hash\+\_\+code }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+insert an element with its hashing value
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & the element to insert \\
+\hline
+{\em hash\+\_\+code} & the hashing value \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_hash_set_a624a256797d939b735e4aee67c352693}\label{structcugar_1_1cuda_1_1_hash_set_a624a256797d939b735e4aee67c352693}} 
+\index{cugar\+::cuda\+::\+Hash\+Set@{cugar\+::cuda\+::\+Hash\+Set}!size@{size}}
+\index{size@{size}!cugar\+::cuda\+::\+Hash\+Set@{cugar\+::cuda\+::\+Hash\+Set}}
+\subsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$typename KeyT , typename HashT , KeyT I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY = 0x\+F\+F\+F\+F\+F\+F\+FF$>$ \\
+C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structcugar_1_1cuda_1_1_hash_set}{cugar\+::cuda\+::\+Hash\+Set}$<$ KeyT, HashT, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the size of the hash set 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/cuda/hash.\+h\end{DoxyCompactItemize}

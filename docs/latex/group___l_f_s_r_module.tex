@@ -1,0 +1,28 @@
+\hypertarget{group___l_f_s_r_module}{}\section{Linear-\/\+Feedback Shift Register Generators}
+\label{group___l_f_s_r_module}\index{Linear-\/\+Feedback Shift Register Generators@{Linear-\/\+Feedback Shift Register Generators}}
+
+
+\subsection{Detailed Description}
+An implementation of the small linear feedback shift registers (L\+F\+SR) for use in a Markov chain quasi-\/\+Monte Carlo context, as described in S. Chen, M. Matsumoto, T. Nishimura, and A. Owen\+: \char`\"{}\+New inputs and methods for Markov
+ chain quasi-\/\+Monte Carlo\char`\"{}, and S. Chen\+: \char`\"{}\+Consistence and convergence rate of
+ Markov chain quasi-\/\+Monte Carlo with examples\char`\"{}. Apart from the matrix that describes the recurrence, this class is stateless, and can therefore be easily shared in a multi-\/threaded context.
+
+\href{https://en.wikipedia.org/wiki/Linear-feedback_shift_register}{\tt https\+://en.\+wikipedia.\+org/wiki/\+Linear-\/feedback\+\_\+shift\+\_\+register} \subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classcugar_1_1_l_f_s_r_generator_matrix}{cugar\+::\+L\+F\+S\+R\+Generator\+Matrix}
+\item 
+struct \hyperlink{structcugar_1_1_l_f_s_r_random_stream}{cugar\+::\+L\+F\+S\+R\+Random\+Stream}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___l_f_s_r_module_ga7b58f7ad5554b1864e18f0d6a1a25904}\label{group___l_f_s_r_module_ga7b58f7ad5554b1864e18f0d6a1a25904}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE {\bfseries cugar\+::\+L\+F\+S\+R\+Generator\+Matrix\+::\+L\+F\+S\+R\+Generator\+Matrix} (uint32 m, Offset\+\_\+type offset\+\_\+type=G\+O\+O\+D\+\_\+\+P\+R\+O\+J\+E\+C\+T\+I\+O\+NS)
+\item 
+\mbox{\Hypertarget{group___l_f_s_r_module_ga9ba403012a906545d7dabc9cb40533f7}\label{group___l_f_s_r_module_ga9ba403012a906545d7dabc9cb40533f7}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float {\bfseries cugar\+::\+L\+F\+S\+R\+Generator\+Matrix\+::next} (uint32 scramble, uint32 $\ast$state) const
+\item 
+\mbox{\Hypertarget{group___l_f_s_r_module_ga4c07178354761f8ac8cfe6a712ebb69d}\label{group___l_f_s_r_module_ga4c07178354761f8ac8cfe6a712ebb69d}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float {\bfseries cugar\+::\+L\+F\+S\+R\+Random\+Stream\+::next} ()
+\end{DoxyCompactItemize}

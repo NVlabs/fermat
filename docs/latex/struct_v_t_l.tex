@@ -1,0 +1,53 @@
+\hypertarget{struct_v_t_l}{}\section{V\+TL Struct Reference}
+\label{struct_v_t_l}\index{V\+TL@{V\+TL}}
+
+
+\subsection{Detailed description}
+Represent a Virtual Triangular \hyperlink{struct_light}{Light} 
+
+{\ttfamily \#include $<$vtl.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_v_t_l_ab1ced26e0c81827d6838ae73dc2a84cb}\label{struct_v_t_l_ab1ced26e0c81827d6838ae73dc2a84cb}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE {\bfseries V\+TL} (const uint32 \+\_\+prim\+\_\+id, const float2 \+\_\+uv0, const float2 \+\_\+uv1, const float2 \+\_\+uv2, const float \+\_\+area)
+\item 
+\mbox{\Hypertarget{struct_v_t_l_a77b478dfa98bb60b61e55b982c4c35e7}\label{struct_v_t_l_a77b478dfa98bb60b61e55b982c4c35e7}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE void {\bfseries interpolate\+\_\+positions} (\hyperlink{struct_mesh_view}{Mesh\+View} mesh, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&p0, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&p1, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&p2) const
+\item 
+\mbox{\Hypertarget{struct_v_t_l_a26ee50ff4504c2bca6aad0c785b0e717}\label{struct_v_t_l_a26ee50ff4504c2bca6aad0c785b0e717}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE void {\bfseries interpolate\+\_\+tex\+\_\+coords} (\hyperlink{struct_mesh_view}{Mesh\+View} mesh, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} \&t0, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} \&t1, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} \&t2) const
+\item 
+\mbox{\Hypertarget{struct_v_t_l_a15329f4b5d8557baa3c5b3d603eb7747}\label{struct_v_t_l_a15329f4b5d8557baa3c5b3d603eb7747}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} {\bfseries interpolate\+\_\+uv} (const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} \&uv) const
+\item 
+\mbox{\Hypertarget{struct_v_t_l_ae400f21873e4afb763c14b823d6d5299}\label{struct_v_t_l_ae400f21873e4afb763c14b823d6d5299}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} {\bfseries uv\+\_\+centroid} () const
+\item 
+\mbox{\Hypertarget{struct_v_t_l_a7a2425a9670795ba12fa96b7f797eac4}\label{struct_v_t_l_a7a2425a9670795ba12fa96b7f797eac4}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} {\bfseries centroid} (\hyperlink{struct_mesh_view}{Mesh\+View} mesh) const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_v_t_l_a27d7173085410a6a83655bbaa2de22c3}\label{struct_v_t_l_a27d7173085410a6a83655bbaa2de22c3}} 
+uint32 {\bfseries prim\+\_\+id}
+\item 
+\mbox{\Hypertarget{struct_v_t_l_a6eefebb73496108dd301c17ab332981a}\label{struct_v_t_l_a6eefebb73496108dd301c17ab332981a}} 
+float {\bfseries area}
+\item 
+\mbox{\Hypertarget{struct_v_t_l_a5df43f944c0eabccb48643c57eb46a30}\label{struct_v_t_l_a5df43f944c0eabccb48643c57eb46a30}} 
+\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} {\bfseries uv0}
+\item 
+\mbox{\Hypertarget{struct_v_t_l_a07c9e491b80779b9ec0b21587cb925d6}\label{struct_v_t_l_a07c9e491b80779b9ec0b21587cb925d6}} 
+\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} {\bfseries uv1}
+\item 
+\mbox{\Hypertarget{struct_v_t_l_abffda8b518bbab8f22ee093b0fba05ee}\label{struct_v_t_l_abffda8b518bbab8f22ee093b0fba05ee}} 
+\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} {\bfseries uv2}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/vtl.\+h\end{DoxyCompactItemize}

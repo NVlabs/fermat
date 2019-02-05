@@ -1,0 +1,82 @@
+\hypertarget{struct_bsdf_inverse}{}\section{Bsdf\+Inverse Struct Reference}
+\label{struct_bsdf_inverse}\index{Bsdf\+Inverse@{Bsdf\+Inverse}}
+
+
+\subsection{Detailed description}
+A bsdf inverter 
+
+{\ttfamily \#include $<$path\+\_\+inversion.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_bsdf_inverse_abda5691f28fa1c181ab7be7ef63f1cd3}\label{struct_bsdf_inverse_abda5691f28fa1c181ab7be7ef63f1cd3}} 
+enum {\bfseries Component\+Selection\+Strategy} \{ \newline
+{\bfseries k\+Weighted\+Component\+Selection} = 0, 
+{\bfseries k\+Uniform\+Component\+Selection} = 1, 
+{\bfseries k\+Pdf\+Component\+Selection} = 3, 
+{\bfseries k\+Weighted\+Pdf\+Component\+Selection} = 4, 
+\newline
+{\bfseries k\+Brdf\+Component\+Selection} = 5
+ \}
+\item 
+\mbox{\Hypertarget{struct_bsdf_inverse_a40413bf752e595596da56c6c3e3368b0}\label{struct_bsdf_inverse_a40413bf752e595596da56c6c3e3368b0}} 
+enum {\bfseries Pdf\+Type} \{ {\bfseries k\+Direct\+Transform\+Pdf} = 0, 
+{\bfseries k\+Inverse\+Transform\+Pdf} = 1
+ \}
+\item 
+\mbox{\Hypertarget{struct_bsdf_inverse_a0bc1cfb21d55aada21eb4f57b142da50}\label{struct_bsdf_inverse_a0bc1cfb21d55aada21eb4f57b142da50}} 
+enum {\bfseries Order} \{ {\bfseries DR} = Bsdf\+:\+:k\+Diffuse\+Reflection\+Index, 
+{\bfseries DT} = Bsdf\+:\+:k\+Diffuse\+Transmission\+Index, 
+{\bfseries GR} = Bsdf\+:\+:k\+Glossy\+Reflection\+Index, 
+{\bfseries GT} = Bsdf\+:\+:k\+Glossy\+Transmission\+Index
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE void \hyperlink{group___path_module_gaecfd88fd5ceeaef4df9d86387855e78c}{setup} (Component\+Selection\+Strategy \+\_\+strategy, const \hyperlink{struct_bsdf}{Bsdf} \&bsdf, const \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} \&geom, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&in, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&out, const bool \+\_\+\+RR=false)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type} \hyperlink{group___path_module_gab7b0d8544e315f99452e7798fe812be4}{sample\+\_\+component} (const float v) const
+\item 
+{\footnotesize template$<$typename T\+Random\+Generator $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool \hyperlink{group___path_module_gabf86c201c8bc8e874d935f3eeae66269}{invert} (const \hyperlink{struct_bsdf}{Bsdf} \&bsdf, const \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} \&geom, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&in, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&out, T\+Random\+Generator \&\hyperlink{group___sampling_module_gaec17bbbfd36295353081b7b4480d933d}{random}, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&z, Bsdf\+Inverse\+::\+Pdf\+Type pdf\+\_\+type=Bsdf\+Inverse\+::k\+Direct\+Transform\+Pdf, float $\ast$p=N\+U\+LL, float $\ast$p\+\_\+proj=N\+U\+LL)
+\item 
+{\footnotesize template$<$typename T\+Random\+Generator $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool \hyperlink{group___path_module_gae150d5775f0c5c69fc21b8ab50680db6}{invert\+\_\+component} (const \hyperlink{struct_bsdf}{Bsdf} \&bsdf, const \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} \&geom, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&in, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&out, const \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type} out\+\_\+comp, T\+Random\+Generator \&\hyperlink{group___sampling_module_gaec17bbbfd36295353081b7b4480d933d}{random}, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&z, const bool output\+\_\+global\+\_\+coordinates=true)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float \hyperlink{group___path_module_gae689ddf830059ea1ebe7a235c954b25f}{pdf} (const \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type} out\+\_\+comp, cugar\+::\+Spherical\+Measure measure=cugar\+::k\+Projected\+Solid\+Angle, const bool weighted=false) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float \hyperlink{group___path_module_gaad6ea81c789229423f13731f4d7b1088}{pdf\+\_\+comp} (const \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type} out\+\_\+comp) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float \hyperlink{group___path_module_ga26ab6168a450774594081beba929f9fa}{weight} (const \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type} out\+\_\+comp) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool {\bfseries precompute\+\_\+component\+\_\+selection\+\_\+coefficients} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_bsdf_inverse_a262472545c30b129c240bc31161dc2a9}\label{struct_bsdf_inverse_a262472545c30b129c240bc31161dc2a9}} 
+Component\+Selection\+Strategy {\bfseries strategy}
+\item 
+\mbox{\Hypertarget{struct_bsdf_inverse_a01686ca07cef7e3267806e88df91a5ec}\label{struct_bsdf_inverse_a01686ca07cef7e3267806e88df91a5ec}} 
+float {\bfseries w} \mbox{[}4\mbox{]}
+\item 
+\mbox{\Hypertarget{struct_bsdf_inverse_a8759d5a6a5ba7f1ffcb0e3747dd85b6a}\label{struct_bsdf_inverse_a8759d5a6a5ba7f1ffcb0e3747dd85b6a}} 
+float {\bfseries p\+\_\+comp} \mbox{[}4\mbox{]}
+\item 
+\mbox{\Hypertarget{struct_bsdf_inverse_a4c5942103d3810e77315e95988be0354}\label{struct_bsdf_inverse_a4c5942103d3810e77315e95988be0354}} 
+float {\bfseries p\+\_\+comp\+\_\+proj} \mbox{[}4\mbox{]}
+\item 
+\mbox{\Hypertarget{struct_bsdf_inverse_a7a8268fc09c2e9eaa9518475538b51de}\label{struct_bsdf_inverse_a7a8268fc09c2e9eaa9518475538b51de}} 
+float {\bfseries p\+\_\+sel} \mbox{[}4\mbox{]}
+\item 
+\mbox{\Hypertarget{struct_bsdf_inverse_a51b8bdeaf33391fa01ea60f00745a009}\label{struct_bsdf_inverse_a51b8bdeaf33391fa01ea60f00745a009}} 
+\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} {\bfseries f\+\_\+comp} \mbox{[}4\mbox{]}
+\item 
+\mbox{\Hypertarget{struct_bsdf_inverse_a9c8e5333ce731adee5f2025e9aa011af}\label{struct_bsdf_inverse_a9c8e5333ce731adee5f2025e9aa011af}} 
+bool {\bfseries RR}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/path\+\_\+inversion.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,859 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGUID>{DB8A2C8B-6739-38D1-8800-E4C41A3CD08F}</ProjectGUID>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>assimp</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+    <PropertyGroup>
+      <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\code\Debug\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">assimp.dir\Debug\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">assimp-vc140-mt</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.dll</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\code\Release\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">assimp.dir\Release\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">assimp-vc140-mt</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.dll</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\code\MinSizeRel\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">assimp.dir\MinSizeRel\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">assimp-vc140-mt</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.dll</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\code\RelWithDebInfo\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">assimp.dir\RelWithDebInfo\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">assimp-vc140-mt</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.dll</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+    </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\.;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\rapidjson\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\unzip;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\openddlparser\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;WIN32_LEAN_AND_MEAN;OPENDDL_NO_USE_CPP11;ASSIMP_BUILD_NO_C4D_IMPORTER;ASSIMP_IMPORTER_GLTF_USE_OPEN3DGC=1;ASSIMP_BUILD_DLL_EXPORT;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;OPENDDLPARSER_BUILD;CMAKE_INTDIR="Debug";assimp_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;WIN32_LEAN_AND_MEAN;OPENDDL_NO_USE_CPP11;ASSIMP_BUILD_NO_C4D_IMPORTER;ASSIMP_IMPORTER_GLTF_USE_OPEN3DGC=1;ASSIMP_BUILD_DLL_EXPORT;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;OPENDDLPARSER_BUILD;CMAKE_INTDIR=\"Debug\";assimp_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\.;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\rapidjson\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\unzip;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\openddlparser\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\.;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\rapidjson\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\unzip;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\openddlparser\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions> /machine:x64 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;..\contrib\zlib\Debug\zlibstaticd.lib;..\contrib\irrXML\Debug\IrrXML.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>Debug</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/build/code/Debug/assimp-vc140-mt.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/build/code/Debug/assimp-vc140-mt.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\.;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\rapidjson\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\unzip;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\openddlparser\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;OPENDDL_NO_USE_CPP11;ASSIMP_BUILD_NO_C4D_IMPORTER;ASSIMP_IMPORTER_GLTF_USE_OPEN3DGC=1;ASSIMP_BUILD_DLL_EXPORT;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;OPENDDLPARSER_BUILD;CMAKE_INTDIR="Release";assimp_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat></DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;OPENDDL_NO_USE_CPP11;ASSIMP_BUILD_NO_C4D_IMPORTER;ASSIMP_IMPORTER_GLTF_USE_OPEN3DGC=1;ASSIMP_BUILD_DLL_EXPORT;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;OPENDDLPARSER_BUILD;CMAKE_INTDIR=\"Release\";assimp_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\.;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\rapidjson\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\unzip;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\openddlparser\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\.;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\rapidjson\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\unzip;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\openddlparser\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions> /machine:x64 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;..\contrib\zlib\Release\zlibstatic.lib;..\contrib\irrXML\Release\IrrXML.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>No</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/build/code/Release/assimp-vc140-mt.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/build/code/Release/assimp-vc140-mt.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\.;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\rapidjson\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\unzip;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\openddlparser\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;OPENDDL_NO_USE_CPP11;ASSIMP_BUILD_NO_C4D_IMPORTER;ASSIMP_IMPORTER_GLTF_USE_OPEN3DGC=1;ASSIMP_BUILD_DLL_EXPORT;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;OPENDDLPARSER_BUILD;CMAKE_INTDIR="MinSizeRel";assimp_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat></DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;OPENDDL_NO_USE_CPP11;ASSIMP_BUILD_NO_C4D_IMPORTER;ASSIMP_IMPORTER_GLTF_USE_OPEN3DGC=1;ASSIMP_BUILD_DLL_EXPORT;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;OPENDDLPARSER_BUILD;CMAKE_INTDIR=\"MinSizeRel\";assimp_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\.;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\rapidjson\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\unzip;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\openddlparser\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\.;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\rapidjson\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\unzip;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\openddlparser\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions> /machine:x64 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;..\contrib\zlib\MinSizeRel\zlibstatic.lib;..\contrib\irrXML\MinSizeRel\IrrXML.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>No</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/build/code/MinSizeRel/assimp-vc140-mt.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/build/code/MinSizeRel/assimp-vc140-mt.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\.;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\rapidjson\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\unzip;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\openddlparser\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;OPENDDL_NO_USE_CPP11;ASSIMP_BUILD_NO_C4D_IMPORTER;ASSIMP_IMPORTER_GLTF_USE_OPEN3DGC=1;ASSIMP_BUILD_DLL_EXPORT;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;OPENDDLPARSER_BUILD;CMAKE_INTDIR="RelWithDebInfo";assimp_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;OPENDDL_NO_USE_CPP11;ASSIMP_BUILD_NO_C4D_IMPORTER;ASSIMP_IMPORTER_GLTF_USE_OPEN3DGC=1;ASSIMP_BUILD_DLL_EXPORT;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;OPENDDLPARSER_BUILD;CMAKE_INTDIR=\"RelWithDebInfo\";assimp_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\.;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\rapidjson\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\unzip;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\openddlparser\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\.;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\rapidjson\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\unzip;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..\contrib\openddlparser\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions> /machine:x64 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;..\contrib\zlib\RelWithDebInfo\zlibstatic.lib;..\contrib\irrXML\RelWithDebInfo\IrrXML.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>Debug</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/build/code/RelWithDebInfo/assimp-vc140-mt.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/build/code/RelWithDebInfo/assimp-vc140-mt.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/code/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0 -BC:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/build --check-stamp-file C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\code\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/code/CMakeLists.txt;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\CMakeLists.txt;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\cmake-modules\FindRT.cmake;C:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\code\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/code/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0 -BC:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/build --check-stamp-file C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\code\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/code/CMakeLists.txt;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\CMakeLists.txt;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\cmake-modules\FindRT.cmake;C:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\code\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/code/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0 -BC:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/build --check-stamp-file C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\code\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/code/CMakeLists.txt;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\CMakeLists.txt;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\cmake-modules\FindRT.cmake;C:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\code\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/code/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0 -BC:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/build --check-stamp-file C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\code\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/code/CMakeLists.txt;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\CMakeLists.txt;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\cmake-modules\FindRT.cmake;C:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\code\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\fast_atof.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\qnan.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\BaseImporter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\BaseProcess.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\Importer.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ScenePrivate.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ByteSwapper.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\DefaultProgressHandler.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\CInterfaceIOWrapper.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\Hash.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\IFF.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MemoryIOWrapper.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ParsingUtils.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\StreamReader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\StreamWriter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\StringComparison.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\StringUtils.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\SGSpatialSort.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\VertexTriangleAdjacency.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\GenericProperty.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\SpatialSort.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ScenePreprocessor.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\SkeletonMeshBuilder.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\SplitByBoneCountProcess.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ScaleProcess.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\SmoothingGroups.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\StandardShapes.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\TargetAnimation.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\RemoveComments.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\Subdivision.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\Vertex.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\LineSplitter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\TinyFormatter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\Profiler.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\LogAux.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\Bitmap.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\XMLTools.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\IOStreamBuffer.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\CreateAnimMesh.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\DefaultLogger.hpp" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\LogStream.hpp" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\Logger.hpp" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\NullLogger.hpp" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\Win32DebugLogStream.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FileLogStream.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\StdOStreamLogStream.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\BlobIOSystem.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\CalcTangentsProcess.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ComputeUVMappingProcess.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ConvertToLHProcess.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FindDegenerates.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FindInstancesProcess.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FindInvalidDataProcess.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FixNormalsStep.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\GenFaceNormalsProcess.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\GenVertexNormalsProcess.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\PretransformVertices.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ImproveCacheLocality.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\JoinVerticesProcess.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\LimitBoneWeightsProcess.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\RemoveRedundantMaterials.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\RemoveVCProcess.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\SortByPTypeProcess.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\SplitLargeMeshes.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\TextureTransform.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\TriangulateProcess.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ValidateDataStructure.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\OptimizeGraph.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\OptimizeMeshes.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\DeboneProcess.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ProcessHelper.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\PolyTools.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MakeVerboseFormat.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MaterialSystem.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\StepExporter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\AMFImporter.hpp" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\AMFImporter_Macro.hpp" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\AMFImporter_Node.hpp" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\3DSHelper.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\3DSLoader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\3DSExporter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ACLoader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ASELoader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ASEParser.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\AssbinExporter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\AssbinLoader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\AssxmlExporter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\B3DImporter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\BVHLoader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ColladaHelper.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ColladaLoader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ColladaParser.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ColladaExporter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\DXFLoader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\DXFHelper.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\CSMLoader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\HMPFileData.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\HMPLoader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\HalfLifeFileData.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\IRRMeshLoader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\IRRShared.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\IRRLoader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\LWOAnimation.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\LWOFileData.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\LWOLoader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\LWSLoader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MD2FileData.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MD2Loader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MD2NormalTable.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MD3FileData.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MD3Loader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MD5Loader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MD5Parser.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MDCFileData.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MDCLoader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MDCNormalTable.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MDLDefaultColorMap.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MDLFileData.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MDLLoader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\NFFLoader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\NDOLoader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\OFFLoader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ObjFileData.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ObjFileImporter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ObjFileMtlImporter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ObjFileParser.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ObjTools.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ObjExporter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\OgreImporter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\OgreStructs.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\OgreParsingUtils.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\OgreBinarySerializer.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\OgreXmlSerializer.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\OpenGEXExporter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\OpenGEXImporter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\OpenGEXStructs.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\PlyLoader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\PlyParser.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\PlyExporter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MS3DLoader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\COBLoader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\COBScene.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\BlenderLoader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\BlenderDNA.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\BlenderDNA.inl" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\BlenderScene.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\BlenderSceneGen.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\BlenderIntermediate.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\BlenderModifier.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\BlenderBMesh.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\BlenderTessellator.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\IFCLoader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\IFCReaderGen.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\IFCUtil.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\STEPFile.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\STEPFileReader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\STEPFileEncoding.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\XGLLoader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FBXCompileConfig.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FBXImporter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FBXParser.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FBXTokenizer.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FBXImportSettings.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FBXConverter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FBXUtil.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FBXDocument.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FBXProperties.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FBXMeshGeometry.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\Q3DLoader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\Q3BSPFileData.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\Q3BSPFileParser.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\Q3BSPFileImporter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\Q3BSPZipArchive.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\RawLoader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\SIBImporter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\SMDLoader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\STLLoader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\STLExporter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\TerragenLoader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\UnrealLoader.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\XFileHelper.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\XFileImporter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\XFileParser.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\XFileExporter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\X3DExporter.hpp" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\X3DImporter.hpp" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\X3DImporter_Macro.hpp" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\X3DImporter_Node.hpp" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FIReader.hpp" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\glTFAsset.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\glTFAsset.inl" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\glTFAssetWriter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\glTFAssetWriter.inl" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\glTFImporter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\glTFExporter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\glTF2Asset.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\glTF2Asset.inl" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\glTF2AssetWriter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\glTF2AssetWriter.inl" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\glTF2Importer.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\glTF2Exporter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\D3MFImporter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\D3MFExporter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\D3MFOpcPackage.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\3MFXmlTags.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MMDCpp14.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MMDImporter.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MMDPmdParser.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MMDPmxParser.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MMDVmdParser.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\irrXMLWrapper.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\unzip\crypt.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\unzip\ioapi.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\unzip\unzip.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\poly2tri\poly2tri\common\shapes.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\poly2tri\poly2tri\common\utils.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\poly2tri\poly2tri\sweep\advancing_front.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\poly2tri\poly2tri\sweep\cdt.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\poly2tri\poly2tri\sweep\sweep.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\poly2tri\poly2tri\sweep\sweep_context.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\clipper\clipper.hpp" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\openddlparser\include\openddlparser\OpenDDLParser.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\openddlparser\include\openddlparser\OpenDDLParserUtils.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\openddlparser\include\openddlparser\OpenDDLCommon.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\openddlparser\include\openddlparser\OpenDDLExport.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\openddlparser\include\openddlparser\OpenDDLStream.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\openddlparser\include\openddlparser\DDLNode.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\openddlparser\include\openddlparser\Value.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\Open3DGC\o3dgcAdjacencyInfo.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\Open3DGC\o3dgcArithmeticCodec.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\Open3DGC\o3dgcBinaryStream.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\Open3DGC\o3dgcCommon.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\Open3DGC\o3dgcDVEncodeParams.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\Open3DGC\o3dgcDynamicVectorDecoder.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\Open3DGC\o3dgcDynamicVectorEncoder.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\Open3DGC\o3dgcDynamicVector.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\Open3DGC\o3dgcFIFO.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\Open3DGC\o3dgcIndexedFaceSet.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\Open3DGC\o3dgcIndexedFaceSet.inl" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\Open3DGC\o3dgcSC3DMCDecoder.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\Open3DGC\o3dgcSC3DMCDecoder.inl" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\Open3DGC\o3dgcSC3DMCEncodeParams.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\Open3DGC\o3dgcSC3DMCEncoder.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\Open3DGC\o3dgcSC3DMCEncoder.inl" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\Open3DGC\o3dgcTimer.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\Open3DGC\o3dgcTriangleFans.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\Open3DGC\o3dgcTriangleListDecoder.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\Open3DGC\o3dgcTriangleListDecoder.inl" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\Open3DGC\o3dgcTriangleListEncoder.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\Open3DGC\o3dgcTriangleListEncoder.inl" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\Open3DGC\o3dgcVector.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\Open3DGC\o3dgcVector.inl" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zip\src\miniz.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zip\src\zip.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\anim.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\ai_assert.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\camera.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\color4.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\color4.inl" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\include\assimp\config.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\defs.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\Defines.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\cfileio.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\light.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\material.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\material.inl" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\matrix3x3.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\matrix3x3.inl" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\matrix4x4.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\matrix4x4.inl" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\mesh.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\postprocess.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\quaternion.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\quaternion.inl" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\scene.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\metadata.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\texture.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\types.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\vector2.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\vector2.inl" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\vector3.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\vector3.inl" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\version.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\cimport.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\importerdesc.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\Importer.hpp" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\ProgressHandler.hpp" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\IOStream.hpp" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\IOSystem.hpp" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\cexport.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\Exporter.hpp" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\DefaultIOStream.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\DefaultIOSystem.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\SceneCombiner.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\Compiler\pushpack1.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\Compiler\poppack1.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include\assimp\Compiler\pstdint.h" />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\Assimp.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\BaseImporter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\BaseProcess.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\PostStepRegistry.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ImporterRegistry.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\DefaultIOStream.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\DefaultIOSystem.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\CInterfaceIOWrapper.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\Importer.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\SGSpatialSort.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\VertexTriangleAdjacency.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\SpatialSort.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\SceneCombiner.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ScenePreprocessor.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\SkeletonMeshBuilder.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\SplitByBoneCountProcess.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ScaleProcess.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\StandardShapes.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\TargetAnimation.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\RemoveComments.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\Subdivision.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\scene.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\Bitmap.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\Version.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\CreateAnimMesh.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\DefaultLogger.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\Exporter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\AssimpCExport.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\CalcTangentsProcess.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ComputeUVMappingProcess.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ConvertToLHProcess.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FindDegenerates.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FindInstancesProcess.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FindInvalidDataProcess.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FixNormalsStep.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\GenFaceNormalsProcess.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\GenVertexNormalsProcess.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\PretransformVertices.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ImproveCacheLocality.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\JoinVerticesProcess.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\LimitBoneWeightsProcess.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\RemoveRedundantMaterials.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\RemoveVCProcess.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\SortByPTypeProcess.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\SplitLargeMeshes.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\TextureTransform.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\TriangulateProcess.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ValidateDataStructure.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\OptimizeGraph.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\OptimizeMeshes.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\DeboneProcess.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ProcessHelper.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MakeVerboseFormat.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MaterialSystem.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\StepExporter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\AMFImporter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\AMFImporter_Geometry.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\AMFImporter_Material.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\AMFImporter_Postprocess.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\3DSConverter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\3DSLoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\3DSExporter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ACLoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ASELoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ASEParser.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\AssbinExporter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\AssbinLoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\AssxmlExporter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\B3DImporter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\BVHLoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ColladaLoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ColladaParser.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ColladaExporter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\DXFLoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\CSMLoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\HMPLoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\IRRMeshLoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\IRRShared.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\IRRLoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\LWOAnimation.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\LWOBLoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\LWOLoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\LWOMaterial.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\LWSLoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MD2Loader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MD3Loader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MD5Loader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MD5Parser.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MDCLoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MDLLoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MDLMaterialLoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\NFFLoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\NDOLoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\OFFLoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ObjFileImporter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ObjFileMtlImporter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ObjFileParser.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\ObjExporter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\OgreImporter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\OgreStructs.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\OgreBinarySerializer.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\OgreXmlSerializer.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\OgreMaterial.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\OpenGEXExporter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\OpenGEXImporter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\PlyLoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\PlyParser.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\PlyExporter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MS3DLoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\COBLoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\BlenderLoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\BlenderDNA.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\BlenderScene.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\BlenderModifier.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\BlenderBMesh.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\BlenderTessellator.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\IFCLoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\IFCReaderGen1.cpp" >
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> /bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'"> /bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'"> /bigobj %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\IFCReaderGen2.cpp" >
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> /bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'"> /bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'"> /bigobj %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\IFCUtil.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\IFCGeometry.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\IFCMaterial.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\IFCProfile.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\IFCCurve.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\IFCBoolean.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\IFCOpenings.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\STEPFileReader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\STEPFileEncoding.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\XGLLoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FBXImporter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FBXParser.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FBXTokenizer.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FBXConverter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FBXUtil.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FBXDocument.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FBXProperties.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FBXMeshGeometry.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FBXMaterial.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FBXModel.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FBXAnimation.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FBXNodeAttribute.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FBXDeformer.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FBXBinaryTokenizer.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FBXDocumentUtil.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\Q3DLoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\Q3BSPFileParser.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\Q3BSPFileImporter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\Q3BSPZipArchive.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\RawLoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\SIBImporter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\SMDLoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\STLLoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\STLExporter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\TerragenLoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\UnrealLoader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\XFileImporter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\XFileParser.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\XFileExporter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\X3DExporter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\X3DImporter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\X3DImporter_Geometry2D.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\X3DImporter_Geometry3D.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\X3DImporter_Group.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\X3DImporter_Light.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\X3DImporter_Metadata.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\X3DImporter_Networking.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\X3DImporter_Postprocess.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\X3DImporter_Rendering.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\X3DImporter_Shape.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\X3DImporter_Texturing.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\FIReader.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\X3DVocabulary.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\glTFImporter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\glTFExporter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\glTF2Importer.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\glTF2Exporter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\D3MFImporter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\D3MFExporter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\D3MFOpcPackage.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MMDImporter.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\code\MMDPmxParser.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\unzip\ioapi.c" >
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">CompileAsC</CompileAs>
+    </ClCompile>
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\unzip\unzip.c" >
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">CompileAsC</CompileAs>
+    </ClCompile>
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\poly2tri\poly2tri\common\shapes.cc"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\poly2tri\poly2tri\sweep\advancing_front.cc"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\poly2tri\poly2tri\sweep\cdt.cc"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\poly2tri\poly2tri\sweep\sweep.cc"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\poly2tri\poly2tri\sweep\sweep_context.cc"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\clipper\clipper.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\openddlparser\code\OpenDDLParser.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\openddlparser\code\DDLNode.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\openddlparser\code\OpenDDLCommon.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\openddlparser\code\OpenDDLExport.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\openddlparser\code\Value.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\openddlparser\code\OpenDDLStream.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\Open3DGC\o3dgcArithmeticCodec.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\Open3DGC\o3dgcDynamicVectorDecoder.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\Open3DGC\o3dgcDynamicVectorEncoder.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\Open3DGC\o3dgcTools.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\Open3DGC\o3dgcTriangleFans.cpp"  />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zip\src\zip.c" >
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">CompileAsC</CompileAs>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/build/ZERO_CHECK.vcxproj">
+      <Project>2608C3F9-BDF9-38F5-805E-2A60A84DBAA0</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/build/contrib/irrXML/IrrXML.vcxproj">
+      <Project>EDFCF9EA-B92D-378D-909E-1AE9720BC720</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/build/contrib/zlib/zlibstatic.vcxproj">
+      <Project>BACF1A62-289F-33CC-BB57-1E10779AB96E</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

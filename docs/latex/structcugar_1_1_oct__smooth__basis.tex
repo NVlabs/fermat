@@ -1,0 +1,129 @@
+\hypertarget{structcugar_1_1_oct__smooth__basis}{}\section{cugar\+:\+:Oct\+\_\+smooth\+\_\+basis Struct Reference}
+\label{structcugar_1_1_oct__smooth__basis}\index{cugar\+::\+Oct\+\_\+smooth\+\_\+basis@{cugar\+::\+Oct\+\_\+smooth\+\_\+basis}}
+
+
+\subsection{Detailed description}
+A smoothed octahedral basis\+: the basis functions overlap and are not orthogonal. As a consequence, projection requires solving a least squares problem. 
+
+{\ttfamily \#include $<$oct.\+h$>$}
+
+\subsection*{Static Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+static C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_oct__smooth__basis_a310ec19b1ced8812b5fe4f415a721773}{eval} (const int32 i, const \hyperlink{structcugar_1_1_vector}{Vector3f} \&d)
+\item 
+static C\+U\+G\+A\+R\+\_\+\+A\+PI void \hyperlink{structcugar_1_1_oct__smooth__basis_ac4eea8a92288ccfe69b7630de035c3a5}{clamped\+\_\+cosine} (const \hyperlink{structcugar_1_1_vector}{Vector3f} \&normal, const float w, float $\ast$coeffs)
+\item 
+static void \hyperlink{structcugar_1_1_oct__smooth__basis_aef676cab73d6b500f859ee03881ef59a}{constant} (float k, float $\ast$coeffs)
+\item 
+static float \hyperlink{structcugar_1_1_oct__smooth__basis_afdbf96838ebf4a79dfbbde82566ef711}{integral} (const float $\ast$coeffs)
+\item 
+{\footnotesize template$<$typename Vector\+\_\+type $>$ }\\static float \hyperlink{structcugar_1_1_oct__smooth__basis_ac946455effe71333ecd1bfe51868196d}{integral} (const Vector\+\_\+type \&coeffs)
+\item 
+static float \hyperlink{structcugar_1_1_oct__smooth__basis_ac7edf7dee897a7a8b6fc204f83c90a70}{G} (const int32 i, const int32 j)
+\item 
+static C\+U\+G\+A\+R\+\_\+\+A\+PI void \hyperlink{structcugar_1_1_oct__smooth__basis_afae1fc0e9cb48f9f7e938830fb74b8e1}{solve} (float $\ast$coeffs)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_oct__smooth__basis_aa76a6be3dfe77fa800a6fc5b2b41b042}\label{structcugar_1_1_oct__smooth__basis_aa76a6be3dfe77fa800a6fc5b2b41b042}} 
+static const int32 {\bfseries C\+O\+E\+F\+FS} = 8
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1_oct__smooth__basis_ac4eea8a92288ccfe69b7630de035c3a5}\label{structcugar_1_1_oct__smooth__basis_ac4eea8a92288ccfe69b7630de035c3a5}} 
+\index{cugar\+::\+Oct\+\_\+smooth\+\_\+basis@{cugar\+::\+Oct\+\_\+smooth\+\_\+basis}!clamped\+\_\+cosine@{clamped\+\_\+cosine}}
+\index{clamped\+\_\+cosine@{clamped\+\_\+cosine}!cugar\+::\+Oct\+\_\+smooth\+\_\+basis@{cugar\+::\+Oct\+\_\+smooth\+\_\+basis}}
+\subsubsection{\texorpdfstring{clamped\+\_\+cosine()}{clamped\_cosine()}}
+{\footnotesize\ttfamily void cugar\+::\+Oct\+\_\+smooth\+\_\+basis\+::clamped\+\_\+cosine (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f} \&}]{normal,  }\item[{const float}]{w,  }\item[{float $\ast$}]{coeffs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+add a weighted basis expansion of a clamped cosine lobe to a given set of coefficients
+
+
+\begin{DoxyParams}{Parameters}
+{\em normal} & input normal \\
+\hline
+{\em w} & scalar weight \\
+\hline
+{\em coeffs} & input/output coefficients \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1_oct__smooth__basis_aef676cab73d6b500f859ee03881ef59a}\label{structcugar_1_1_oct__smooth__basis_aef676cab73d6b500f859ee03881ef59a}} 
+\index{cugar\+::\+Oct\+\_\+smooth\+\_\+basis@{cugar\+::\+Oct\+\_\+smooth\+\_\+basis}!constant@{constant}}
+\index{constant@{constant}!cugar\+::\+Oct\+\_\+smooth\+\_\+basis@{cugar\+::\+Oct\+\_\+smooth\+\_\+basis}}
+\subsubsection{\texorpdfstring{constant()}{constant()}}
+{\footnotesize\ttfamily static void cugar\+::\+Oct\+\_\+smooth\+\_\+basis\+::constant (\begin{DoxyParamCaption}\item[{float}]{k,  }\item[{float $\ast$}]{coeffs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+return the basis expansion of a constant
+
+
+\begin{DoxyParams}{Parameters}
+{\em k} & input constant \\
+\hline
+{\em coeffs} & output coefficients \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1_oct__smooth__basis_a310ec19b1ced8812b5fe4f415a721773}\label{structcugar_1_1_oct__smooth__basis_a310ec19b1ced8812b5fe4f415a721773}} 
+\index{cugar\+::\+Oct\+\_\+smooth\+\_\+basis@{cugar\+::\+Oct\+\_\+smooth\+\_\+basis}!eval@{eval}}
+\index{eval@{eval}!cugar\+::\+Oct\+\_\+smooth\+\_\+basis@{cugar\+::\+Oct\+\_\+smooth\+\_\+basis}}
+\subsubsection{\texorpdfstring{eval()}{eval()}}
+{\footnotesize\ttfamily static C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float cugar\+::\+Oct\+\_\+smooth\+\_\+basis\+::eval (\begin{DoxyParamCaption}\item[{const int32}]{i,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f} \&}]{d }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+evaluate the i-\/th octahedral function
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & function index \\
+\hline
+{\em d} & input direction vector \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1_oct__smooth__basis_ac7edf7dee897a7a8b6fc204f83c90a70}\label{structcugar_1_1_oct__smooth__basis_ac7edf7dee897a7a8b6fc204f83c90a70}} 
+\index{cugar\+::\+Oct\+\_\+smooth\+\_\+basis@{cugar\+::\+Oct\+\_\+smooth\+\_\+basis}!G@{G}}
+\index{G@{G}!cugar\+::\+Oct\+\_\+smooth\+\_\+basis@{cugar\+::\+Oct\+\_\+smooth\+\_\+basis}}
+\subsubsection{\texorpdfstring{G()}{G()}}
+{\footnotesize\ttfamily static float cugar\+::\+Oct\+\_\+smooth\+\_\+basis\+::G (\begin{DoxyParamCaption}\item[{const int32}]{i,  }\item[{const int32}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+return the dot product of the i-\/th and j-\/th basis functions
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & first function index \\
+\hline
+{\em j} & second functio index \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1_oct__smooth__basis_afdbf96838ebf4a79dfbbde82566ef711}\label{structcugar_1_1_oct__smooth__basis_afdbf96838ebf4a79dfbbde82566ef711}} 
+\index{cugar\+::\+Oct\+\_\+smooth\+\_\+basis@{cugar\+::\+Oct\+\_\+smooth\+\_\+basis}!integral@{integral}}
+\index{integral@{integral}!cugar\+::\+Oct\+\_\+smooth\+\_\+basis@{cugar\+::\+Oct\+\_\+smooth\+\_\+basis}}
+\subsubsection{\texorpdfstring{integral()}{integral()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily static float cugar\+::\+Oct\+\_\+smooth\+\_\+basis\+::integral (\begin{DoxyParamCaption}\item[{const float $\ast$}]{coeffs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+return the integral of a spherical hamonics function \mbox{\Hypertarget{structcugar_1_1_oct__smooth__basis_ac946455effe71333ecd1bfe51868196d}\label{structcugar_1_1_oct__smooth__basis_ac946455effe71333ecd1bfe51868196d}} 
+\index{cugar\+::\+Oct\+\_\+smooth\+\_\+basis@{cugar\+::\+Oct\+\_\+smooth\+\_\+basis}!integral@{integral}}
+\index{integral@{integral}!cugar\+::\+Oct\+\_\+smooth\+\_\+basis@{cugar\+::\+Oct\+\_\+smooth\+\_\+basis}}
+\subsubsection{\texorpdfstring{integral()}{integral()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Vector\+\_\+type $>$ \\
+static float cugar\+::\+Oct\+\_\+smooth\+\_\+basis\+::integral (\begin{DoxyParamCaption}\item[{const Vector\+\_\+type \&}]{coeffs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+return the integral of a spherical hamonics function \mbox{\Hypertarget{structcugar_1_1_oct__smooth__basis_afae1fc0e9cb48f9f7e938830fb74b8e1}\label{structcugar_1_1_oct__smooth__basis_afae1fc0e9cb48f9f7e938830fb74b8e1}} 
+\index{cugar\+::\+Oct\+\_\+smooth\+\_\+basis@{cugar\+::\+Oct\+\_\+smooth\+\_\+basis}!solve@{solve}}
+\index{solve@{solve}!cugar\+::\+Oct\+\_\+smooth\+\_\+basis@{cugar\+::\+Oct\+\_\+smooth\+\_\+basis}}
+\subsubsection{\texorpdfstring{solve()}{solve()}}
+{\footnotesize\ttfamily void cugar\+::\+Oct\+\_\+smooth\+\_\+basis\+::solve (\begin{DoxyParamCaption}\item[{float $\ast$}]{coeffs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+solve the linear least squares projection for a set of coefficients
+
+
+\begin{DoxyParams}{Parameters}
+{\em coeffs} & input projection coefficients \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/spherical/\hyperlink{oct_8h}{oct.\+h}\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/spherical/oct.\+cpp\end{DoxyCompactItemize}

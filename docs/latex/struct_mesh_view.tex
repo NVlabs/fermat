@@ -1,0 +1,140 @@
+\hypertarget{struct_mesh_view}{}\section{Mesh\+View Struct Reference}
+\label{struct_mesh_view}\index{Mesh\+View@{Mesh\+View}}
+
+
+\subsection{Detailed description}
+This class provides basic Mesh view 
+
+{\ttfamily \#include $<$Mesh\+View.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_ae8076032b3e9eeb53d2eeb9f2e9cdd01}\label{struct_mesh_view_ae8076032b3e9eeb53d2eeb9f2e9cdd01}} 
+typedef int4 {\bfseries vertex\+\_\+triangle}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_ab6eca703281163bd033394ea3c65754f}\label{struct_mesh_view_ab6eca703281163bd033394ea3c65754f}} 
+typedef int4 {\bfseries normal\+\_\+triangle}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_a890976ab989b5ffbd6e7b8d976bab28a}\label{struct_mesh_view_a890976ab989b5ffbd6e7b8d976bab28a}} 
+typedef int4 {\bfseries texture\+\_\+triangle}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_ae1caf379aba0f7fe439d56de0b2d7845}\label{struct_mesh_view_ae1caf379aba0f7fe439d56de0b2d7845}} 
+typedef int4 {\bfseries lightmap\+\_\+triangle}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_a9b693b46e9294cbb014f1246b2ea4f9c}\label{struct_mesh_view_a9b693b46e9294cbb014f1246b2ea4f9c}} 
+typedef float4 {\bfseries vertex\+\_\+type}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_acf49dfbcd2c5a98a2094b34ec1270206}\label{struct_mesh_view_acf49dfbcd2c5a98a2094b34ec1270206}} 
+typedef float3 {\bfseries normal\+\_\+type}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_a4ce8bcdca8b64f83aea010fd510895e0}\label{struct_mesh_view_a4ce8bcdca8b64f83aea010fd510895e0}} 
+typedef float2 {\bfseries texture\+\_\+coord\+\_\+type}
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_a1d2be80f42dd616945403e26351cb035}\label{struct_mesh_view_a1d2be80f42dd616945403e26351cb035}} 
+int {\bfseries num\+\_\+vertices}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_a9f722af89780c11bd1fec4fee6ab6a08}\label{struct_mesh_view_a9f722af89780c11bd1fec4fee6ab6a08}} 
+int {\bfseries num\+\_\+normals}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_a33cad2c7038009342cba62e3ffae964d}\label{struct_mesh_view_a33cad2c7038009342cba62e3ffae964d}} 
+int {\bfseries num\+\_\+texture\+\_\+coordinates}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_a09b785140c361095c56a0ffcef673538}\label{struct_mesh_view_a09b785140c361095c56a0ffcef673538}} 
+int {\bfseries num\+\_\+triangles}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_a0d44f18a3e788e6973841d26d74571a1}\label{struct_mesh_view_a0d44f18a3e788e6973841d26d74571a1}} 
+int {\bfseries num\+\_\+groups}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_ae8ecdcbccd9ebaaad944a2e2d754f219}\label{struct_mesh_view_ae8ecdcbccd9ebaaad944a2e2d754f219}} 
+int {\bfseries num\+\_\+materials}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_a9163977ed16cb879125c876523c8de5b}\label{struct_mesh_view_a9163977ed16cb879125c876523c8de5b}} 
+int {\bfseries vertex\+\_\+stride}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_ae72e84a92ade1bcc760c4821bbcf6353}\label{struct_mesh_view_ae72e84a92ade1bcc760c4821bbcf6353}} 
+int {\bfseries normal\+\_\+stride}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_aed9289964688ae7e4fa2b9f2fa0a9781}\label{struct_mesh_view_aed9289964688ae7e4fa2b9f2fa0a9781}} 
+int {\bfseries texture\+\_\+stride}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_a2016746ef28ae331c0ad382431d86186}\label{struct_mesh_view_a2016746ef28ae331c0ad382431d86186}} 
+float2 {\bfseries tex\+\_\+bias}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_a3395a28dbbf37b7d435809122d977c90}\label{struct_mesh_view_a3395a28dbbf37b7d435809122d977c90}} 
+float2 {\bfseries tex\+\_\+scale}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_af3f6b4f5f73cbb24480c6713fe702132}\label{struct_mesh_view_af3f6b4f5f73cbb24480c6713fe702132}} 
+float2 {\bfseries lm\+\_\+bias}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_a390dd3aab42adc20b29843687a62bc39}\label{struct_mesh_view_a390dd3aab42adc20b29843687a62bc39}} 
+float2 {\bfseries lm\+\_\+scale}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_aa3695b4a204b8b96b9c5eed5895d85d9}\label{struct_mesh_view_aa3695b4a204b8b96b9c5eed5895d85d9}} 
+int $\ast$ {\bfseries vertex\+\_\+indices}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_adbf63d359a15657668027cd254198343}\label{struct_mesh_view_adbf63d359a15657668027cd254198343}} 
+int $\ast$ {\bfseries normal\+\_\+indices}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_a42f7987b178d45376317cc05723f443d}\label{struct_mesh_view_a42f7987b178d45376317cc05723f443d}} 
+int $\ast$ {\bfseries normal\+\_\+indices\+\_\+comp}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_a5116b7871a9617f0a54364e21ab32ccf}\label{struct_mesh_view_a5116b7871a9617f0a54364e21ab32ccf}} 
+int $\ast$ {\bfseries material\+\_\+indices}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_ab9848de70d99e8d8fa822f87f644872f}\label{struct_mesh_view_ab9848de70d99e8d8fa822f87f644872f}} 
+int $\ast$ {\bfseries texture\+\_\+indices}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_a0401128df7804f5744abd2ef142c0316}\label{struct_mesh_view_a0401128df7804f5744abd2ef142c0316}} 
+int $\ast$ {\bfseries texture\+\_\+indices\+\_\+comp}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_ab259af332edf18ee28cbd4475913b2e1}\label{struct_mesh_view_ab259af332edf18ee28cbd4475913b2e1}} 
+int $\ast$ {\bfseries group\+\_\+offsets}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_a626ac6327fef3e23794164b333e0f495}\label{struct_mesh_view_a626ac6327fef3e23794164b333e0f495}} 
+float $\ast$ {\bfseries vertex\+\_\+data}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_a9513a6e261a498716dca43727ba0d497}\label{struct_mesh_view_a9513a6e261a498716dca43727ba0d497}} 
+float $\ast$ {\bfseries normal\+\_\+data}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_a6c51683fc14da70a0bfec4f50d312227}\label{struct_mesh_view_a6c51683fc14da70a0bfec4f50d312227}} 
+uint32 $\ast$ {\bfseries normal\+\_\+data\+\_\+comp}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_af5841aa407db1afda0ea9091a45a77f4}\label{struct_mesh_view_af5841aa407db1afda0ea9091a45a77f4}} 
+float $\ast$ {\bfseries texture\+\_\+data}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_a6c5904a0b897a76eb3d02c84caabd694}\label{struct_mesh_view_a6c5904a0b897a76eb3d02c84caabd694}} 
+int $\ast$ {\bfseries lightmap\+\_\+indices}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_a67a0c9a5c568543d50f522ded8743aad}\label{struct_mesh_view_a67a0c9a5c568543d50f522ded8743aad}} 
+int $\ast$ {\bfseries lightmap\+\_\+indices\+\_\+comp}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_ae5fadc96e7350d86e43647d0c9b37c61}\label{struct_mesh_view_ae5fadc96e7350d86e43647d0c9b37c61}} 
+float $\ast$ {\bfseries lightmap\+\_\+data}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_a01037f25f4854a61f84c00b311c4f935}\label{struct_mesh_view_a01037f25f4854a61f84c00b311c4f935}} 
+\hyperlink{struct_mesh_material}{Mesh\+Material} $\ast$ {\bfseries materials}
+\end{DoxyCompactItemize}
+\subsection*{Static Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_mesh_view_a6f59ead0f10e169321d1a4b68754169c}\label{struct_mesh_view_a6f59ead0f10e169321d1a4b68754169c}} 
+static const uint32 {\bfseries V\+E\+R\+T\+E\+X\+\_\+\+T\+R\+I\+A\+N\+G\+L\+E\+\_\+\+S\+I\+ZE} = 4
+\item 
+\mbox{\Hypertarget{struct_mesh_view_a20a6c2bd559b1c8fccdab6da140b1308}\label{struct_mesh_view_a20a6c2bd559b1c8fccdab6da140b1308}} 
+static const uint32 {\bfseries N\+O\+R\+M\+A\+L\+\_\+\+T\+R\+I\+A\+N\+G\+L\+E\+\_\+\+S\+I\+ZE} = 4
+\item 
+\mbox{\Hypertarget{struct_mesh_view_a26a9d99c414485205667ddb845ebc9ba}\label{struct_mesh_view_a26a9d99c414485205667ddb845ebc9ba}} 
+static const uint32 {\bfseries T\+E\+X\+T\+U\+R\+E\+\_\+\+T\+R\+I\+A\+N\+G\+L\+E\+\_\+\+S\+I\+ZE} = 4
+\item 
+\mbox{\Hypertarget{struct_mesh_view_a6befda8c973116fb4e0f0c33597df90c}\label{struct_mesh_view_a6befda8c973116fb4e0f0c33597df90c}} 
+static const uint32 {\bfseries L\+I\+G\+H\+T\+M\+A\+P\+\_\+\+T\+R\+I\+A\+N\+G\+L\+E\+\_\+\+S\+I\+ZE} = 4
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/mesh/Mesh\+View.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,146 @@
+\hypertarget{class_mesh_loader}{}\section{Mesh\+Loader Class Reference}
+\label{class_mesh_loader}\index{Mesh\+Loader@{Mesh\+Loader}}
+Inheritance diagram for Mesh\+Loader\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_mesh_loader}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_mesh_loader_1_1_allocate_groups_functor}{Allocate\+Groups\+Functor}
+\item 
+struct \hyperlink{struct_mesh_loader_1_1_assign_materials_functor}{Assign\+Materials\+Functor}
+\end{DoxyCompactItemize}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_mesh_loader_a0873ba1926f051adc9bbc6afab1ed4de}\label{class_mesh_loader_a0873ba1926f051adc9bbc6afab1ed4de}} 
+typedef \hyperlink{class_mesh_base}{Mesh\+Base} {\bfseries Base}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_mesh_loader_ad2479b75e00ebecb8a4e3954eb1673aa}\label{class_mesh_loader_ad2479b75e00ebecb8a4e3954eb1673aa}} 
+{\bfseries Mesh\+Loader} (\hyperlink{class_mesh_storage}{Mesh\+Storage} $\ast$mesh)
+\item 
+int \hyperlink{class_mesh_loader_a3e228f5e2fbb1261cd76871ee07e4f58}{get\+Vertex\+Triangle\+Size} () const
+\item 
+\mbox{\Hypertarget{class_mesh_loader_ab09fa780b990617917aabfcf3aa0fc25}\label{class_mesh_loader_ab09fa780b990617917aabfcf3aa0fc25}} 
+int {\bfseries get\+Normal\+Triangle\+Size} () const
+\item 
+\mbox{\Hypertarget{class_mesh_loader_a6692b77e125599e802307a7ec265724c}\label{class_mesh_loader_a6692b77e125599e802307a7ec265724c}} 
+int {\bfseries get\+Texture\+Triangle\+Size} () const
+\item 
+\mbox{\Hypertarget{class_mesh_loader_aadcdc2263c72eb06febe0f53666601dc}\label{class_mesh_loader_aadcdc2263c72eb06febe0f53666601dc}} 
+int $\ast$ {\bfseries get\+Vertex\+Indices} ()
+\item 
+\mbox{\Hypertarget{class_mesh_loader_aa511e240655b63fbb375a10db79d1a2a}\label{class_mesh_loader_aa511e240655b63fbb375a10db79d1a2a}} 
+const int $\ast$ {\bfseries get\+Vertex\+Indices} () const
+\item 
+\mbox{\Hypertarget{class_mesh_loader_ac634529b630cb2af557a91be234bebe4}\label{class_mesh_loader_ac634529b630cb2af557a91be234bebe4}} 
+int $\ast$ {\bfseries get\+Normal\+Indices} ()
+\item 
+\mbox{\Hypertarget{class_mesh_loader_af3c9decc51f14a7cc1029d27a10bbce4}\label{class_mesh_loader_af3c9decc51f14a7cc1029d27a10bbce4}} 
+const int $\ast$ {\bfseries get\+Normal\+Indices} () const
+\item 
+\mbox{\Hypertarget{class_mesh_loader_ab5fd2fe3eaf2cddb4f21470712553456}\label{class_mesh_loader_ab5fd2fe3eaf2cddb4f21470712553456}} 
+int $\ast$ {\bfseries get\+Color\+Indices} ()
+\item 
+\mbox{\Hypertarget{class_mesh_loader_a524488590c3fd1d29c8bf3ad5b26545d}\label{class_mesh_loader_a524488590c3fd1d29c8bf3ad5b26545d}} 
+const int $\ast$ {\bfseries get\+Color\+Indices} () const
+\item 
+\mbox{\Hypertarget{class_mesh_loader_aa5b401f352733edc86e564cb799ced8f}\label{class_mesh_loader_aa5b401f352733edc86e564cb799ced8f}} 
+int $\ast$ {\bfseries get\+Texture\+Coordinate\+Indices} ()
+\item 
+\mbox{\Hypertarget{class_mesh_loader_af5a9b7daa098c2adf6894c2197c7778b}\label{class_mesh_loader_af5a9b7daa098c2adf6894c2197c7778b}} 
+const int $\ast$ {\bfseries get\+Texture\+Coordinate\+Indices} () const
+\item 
+\mbox{\Hypertarget{class_mesh_loader_af1d9d097876866af05a5ff7909250842}\label{class_mesh_loader_af1d9d097876866af05a5ff7909250842}} 
+void {\bfseries set\+Group\+Name} (const uint32 i, const std\+::string \&group\+\_\+name)
+\end{DoxyCompactItemize}
+\subsection*{Proteced Methods}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_mesh_loader_ad9c636920b31629f1c271b20a5fdc29b}{pre\+Process} ()
+\item 
+virtual void \hyperlink{class_mesh_loader_a8bdf8e0894e147be8d3e287f46feff6a}{allocate\+Data} ()
+\item 
+virtual void \hyperlink{class_mesh_loader_a18379e41707d8127947aa17a622d2807}{start\+Writing\+Data} ()
+\item 
+virtual void \hyperlink{class_mesh_loader_a83a3c78a6c2df1087c9f9e28c63e6d51}{post\+Process} ()
+\item 
+virtual void \hyperlink{class_mesh_loader_a65847db267f07f637deab0889c283bfa}{finish\+Writing\+Data} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_mesh_loader_a8bdf8e0894e147be8d3e287f46feff6a}\label{class_mesh_loader_a8bdf8e0894e147be8d3e287f46feff6a}} 
+\index{Mesh\+Loader@{Mesh\+Loader}!allocate\+Data@{allocate\+Data}}
+\index{allocate\+Data@{allocate\+Data}!Mesh\+Loader@{Mesh\+Loader}}
+\subsubsection{\texorpdfstring{allocate\+Data()}{allocateData()}}
+{\footnotesize\ttfamily void Mesh\+Loader\+::allocate\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+Call this to allocate all data for the mesh after setting num\+\_\+vertices, num\+\_\+normals, num\+\_\+colors, and num\+\_\+texture\+\_\+coordinates, as well as num\+\_\+triangles for all the groups. 
+
+Implements \hyperlink{class_mesh_base_a30c0ef8b3faabc9b41520b85dd9413bb}{Mesh\+Base}.
+
+\mbox{\Hypertarget{class_mesh_loader_a65847db267f07f637deab0889c283bfa}\label{class_mesh_loader_a65847db267f07f637deab0889c283bfa}} 
+\index{Mesh\+Loader@{Mesh\+Loader}!finish\+Writing\+Data@{finish\+Writing\+Data}}
+\index{finish\+Writing\+Data@{finish\+Writing\+Data}!Mesh\+Loader@{Mesh\+Loader}}
+\subsubsection{\texorpdfstring{finish\+Writing\+Data()}{finishWritingData()}}
+{\footnotesize\ttfamily void Mesh\+Loader\+::finish\+Writing\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+Call this when done writing to data or group data. 
+
+Implements \hyperlink{class_mesh_base_a000796d7b04985f137d5a1368e90bcc6}{Mesh\+Base}.
+
+\mbox{\Hypertarget{class_mesh_loader_a3e228f5e2fbb1261cd76871ee07e4f58}\label{class_mesh_loader_a3e228f5e2fbb1261cd76871ee07e4f58}} 
+\index{Mesh\+Loader@{Mesh\+Loader}!get\+Vertex\+Triangle\+Size@{get\+Vertex\+Triangle\+Size}}
+\index{get\+Vertex\+Triangle\+Size@{get\+Vertex\+Triangle\+Size}!Mesh\+Loader@{Mesh\+Loader}}
+\subsubsection{\texorpdfstring{get\+Vertex\+Triangle\+Size()}{getVertexTriangleSize()}}
+{\footnotesize\ttfamily int Mesh\+Loader\+::get\+Vertex\+Triangle\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+These pure virtual functions allow subclasses to control much about the loading behavior. 
+
+Implements \hyperlink{class_mesh_base_a508fde807d380849192391f28465fee4}{Mesh\+Base}.
+
+\mbox{\Hypertarget{class_mesh_loader_a83a3c78a6c2df1087c9f9e28c63e6d51}\label{class_mesh_loader_a83a3c78a6c2df1087c9f9e28c63e6d51}} 
+\index{Mesh\+Loader@{Mesh\+Loader}!post\+Process@{post\+Process}}
+\index{post\+Process@{post\+Process}!Mesh\+Loader@{Mesh\+Loader}}
+\subsubsection{\texorpdfstring{post\+Process()}{postProcess()}}
+{\footnotesize\ttfamily void Mesh\+Loader\+::post\+Process (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+An injection point for subclasses to do load postprocessing 
+
+Implements \hyperlink{class_mesh_base_a49ec1a25d18103982974f424b77fadc0}{Mesh\+Base}.
+
+\mbox{\Hypertarget{class_mesh_loader_ad9c636920b31629f1c271b20a5fdc29b}\label{class_mesh_loader_ad9c636920b31629f1c271b20a5fdc29b}} 
+\index{Mesh\+Loader@{Mesh\+Loader}!pre\+Process@{pre\+Process}}
+\index{pre\+Process@{pre\+Process}!Mesh\+Loader@{Mesh\+Loader}}
+\subsubsection{\texorpdfstring{pre\+Process()}{preProcess()}}
+{\footnotesize\ttfamily void Mesh\+Loader\+::pre\+Process (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+An injection point for subclasses to do any prep before file info is loaded 
+
+Implements \hyperlink{class_mesh_base_a25e192211e37cb69f9b5ce9aea25989a}{Mesh\+Base}.
+
+\mbox{\Hypertarget{class_mesh_loader_a18379e41707d8127947aa17a622d2807}\label{class_mesh_loader_a18379e41707d8127947aa17a622d2807}} 
+\index{Mesh\+Loader@{Mesh\+Loader}!start\+Writing\+Data@{start\+Writing\+Data}}
+\index{start\+Writing\+Data@{start\+Writing\+Data}!Mesh\+Loader@{Mesh\+Loader}}
+\subsubsection{\texorpdfstring{start\+Writing\+Data()}{startWritingData()}}
+{\footnotesize\ttfamily void Mesh\+Loader\+::start\+Writing\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+Call this before writing any data to the mesh, to set up correct pointer values to write to for vertex\+\_\+data, normal\+\_\+data, etc., as well as vertex\+\_\+indices, normal\+\_\+indices, etc. for each of the groups.
+
+Call \hyperlink{class_mesh_loader_a65847db267f07f637deab0889c283bfa}{finish\+Writing\+Data()} when done. 
+
+Implements \hyperlink{class_mesh_base_a67eb9bc7c4f6b074626078fe7779a8a4}{Mesh\+Base}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/mesh/Mesh\+Loader.\+h\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/mesh/Mesh\+Loader.\+cpp\end{DoxyCompactItemize}

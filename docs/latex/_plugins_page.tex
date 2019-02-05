@@ -1,0 +1,15 @@
+Top\+: \hyperlink{_overture_contents_page}{Contents}
+
+\begin{DoxyParagraph}{}
+Fermat supports plugins written as separate dynamically loaded libraries (D\+L\+Ls). Writing such a library requires linking to Fermat, and implementing a single exported function with the following signature\+: ~\newline
+
+\begin{DoxyCode}
+\textcolor{keyword}{extern} \textcolor{stringliteral}{"C"} uint32 \_\_declspec(dllexport) \_\_stdcall register\_plugin(
+      \hyperlink{struct_rendering_context}{RenderingContext}& renderer)
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+This function is responsible for registering a new \hyperlink{struct_renderer_interface}{Renderer\+Interface} factory and returning the assigned id. In the next chapter we\textquotesingle{}ll go through a step-\/by-\/step introduction to writing such a plugin.
+\end{DoxyParagraph}
+Next\+: \hyperlink{_hello_renderer_page}{Hello Renderer!} 

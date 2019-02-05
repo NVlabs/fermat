@@ -1,0 +1,33 @@
+\begin{DoxyParagraph}{}
+This \hyperlink{group__bvh}{module} implements data-\/structures and functions to store, build and manipulate B\+V\+Hs.
+\end{DoxyParagraph}
+
+\begin{DoxyItemize}
+\item \hyperlink{structcugar_1_1_bvh__node}{Bvh\+\_\+node}
+\item \hyperlink{structcugar_1_1_bvh__node__3d}{Bvh\+\_\+node\+\_\+3d}
+\item \hyperlink{structcugar_1_1_bvh}{Bvh}
+\item \hyperlink{classcugar_1_1_bvh__builder}{Bvh\+\_\+builder}
+\item \hyperlink{classcugar_1_1_bvh__sah__builder}{Bvh\+\_\+sah\+\_\+builder}
+\item \hyperlink{structcugar_1_1cuda_1_1_l_b_v_h__builder}{cuda\+::\+L\+B\+V\+H\+\_\+builder}
+\end{DoxyItemize}
+
+\begin{DoxyParagraph}{}
+As an example, consider the following code to create an L\+B\+VH tree over a set of points, in parallel, on the device\+: 
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <\hyperlink{lbvh__builder_8h}{cugar/bvh/cuda/lbvh\_builder.h}>}
+
+thrust::device\_vector<Vector3f> points;
+... \textcolor{comment}{// code to fill the input vector of points}
+
+thrust::device\_vector<Bvh\_node> bvh\_nodes;
+thrust::device\_vector<uint32>   bvh\_index;
+
+\hyperlink{structcugar_1_1cuda_1_1_l_b_v_h__builder}{cugar::cuda::LBVH\_builder<uint64>} builder( &bvh\_nodes, &bvh\_index );
+builder.build(
+    Bbox3f( Vector3f(0.0f), Vector3f(1.0f) ),   \textcolor{comment}{// suppose all bboxes are in [0,1]^3}
+    points.begin(),                             \textcolor{comment}{// begin iterator}
+    points.end(),                               \textcolor{comment}{// end iterator}
+    4 );                                        \textcolor{comment}{// target 4 objects per leaf}
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}

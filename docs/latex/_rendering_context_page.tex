@@ -1,0 +1,124 @@
+Top\+: \hyperlink{_overture_contents_page}{Contents}
+
+\begin{DoxyParagraph}{}
+A central object in Fermat is the \hyperlink{struct_rendering_context}{Rendering\+Context}, a class encapsulating all there is to know about a scene\textquotesingle{}s to render, including\+: ~\newline
+
+\begin{DoxyItemize}
+\item the camera,
+\item the framebuffer,
+\item the scene database, including lights, geometry and textures,
+\item the ray tracing context,
+\item some precomputed tables to help with material simulation and such,
+\item the actual renderer, 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+We\textquotesingle{}ll now go through this list step by step.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The camera with which to render the current scene is specified by\+: ~\newline
+
+\begin{DoxyCode}
+\hyperlink{struct_camera}{Camera}& \hyperlink{struct_rendering_context_aa23f799fc75e822740e23cbe4ffabc64}{RenderingContext::get\_camera}()
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The framebuffer and its attributes are specified by\+: ~\newline
+
+\begin{DoxyCode}
+\textcolor{comment}{// get the frame buffer}
+\textcolor{comment}{//}
+\hyperlink{struct_f_buffer_storage}{FBufferStorage}& \hyperlink{struct_rendering_context_a916dc69fc808c2a2c302513bd34d9601}{RenderingContext::get\_frame\_buffer}()
+
+\textcolor{comment}{// get the target resolution}
+\textcolor{comment}{//}
+uint2 \hyperlink{struct_rendering_context}{RenderingContext}::get\_res() const
+
+\textcolor{comment}{// get the target aspect ratio}
+\textcolor{comment}{//}
+\textcolor{keywordtype}{float} \hyperlink{struct_rendering_context}{RenderingContext}::get\_aspect\_ratio() const
+
+\textcolor{comment}{// get the target exposure}
+\textcolor{comment}{//}
+\textcolor{keywordtype}{float} \hyperlink{struct_rendering_context}{RenderingContext}::get\_exposure() const
+
+\textcolor{comment}{// get the target gamma}
+\textcolor{comment}{//}
+\textcolor{keywordtype}{float} \hyperlink{struct_rendering_context}{RenderingContext}::get\_gamma() const
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The mesh geometry is specified by\+: ~\newline
+
+\begin{DoxyCode}
+\textcolor{comment}{// get a device-resident version of the scene's mesh}
+\textcolor{comment}{//}
+\hyperlink{class_device_mesh_storage}{DeviceMeshStorage}& \hyperlink{struct_rendering_context_a5be673e01646a32822c372ec32f701bd}{RenderingContext::get\_device\_mesh}()
+
+\textcolor{comment}{// get a host-resident version of the scene's mesh}
+\textcolor{comment}{//}
+HostMeshStorage& \hyperlink{struct_rendering_context}{RenderingContext}::get\_host\_mesh()
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The light sources are specified by\+: ~\newline
+
+\begin{DoxyCode}
+\textcolor{comment}{// return the number of directional lights}
+\textcolor{comment}{//}
+uint32 RenderingContext::get\_directional\_lights\_count() const
+
+\textcolor{comment}{// return the host-side list of directional lights}
+\textcolor{comment}{//}
+const \hyperlink{struct_directional_light}{DirectionalLight}* \hyperlink{struct_rendering_context}{RenderingContext}::get\_host\_directional\_lights() 
+      const
+
+\textcolor{comment}{// return the device-side list of directional lights}
+\textcolor{comment}{//}
+const \hyperlink{struct_directional_light}{DirectionalLight}* \hyperlink{struct_rendering_context}{RenderingContext}::get\_device\_directional\_lights() 
+      const
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+and\+: ~\newline
+
+\begin{DoxyCode}
+\textcolor{comment}{// return the mesh emitters}
+\textcolor{comment}{//}
+\hyperlink{struct_mesh_lights_storage}{MeshLightsStorage}& \hyperlink{struct_rendering_context_a076d2a2c86696da228fc6a49d55910ee}{RenderingContext::get\_mesh\_lights}()
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Notice that this is a host-\/side class holding the device-\/side storage needed to sample mesh emitters on the device. Its \hyperlink{_fermat_host_device_page_FermatPlainViewsSection}{view} is just a \hyperlink{struct_mesh_light}{Mesh\+Light}, i.\+e. a class with the \hyperlink{struct_light}{Light} interface.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The ray tracing context is specified by\+: ~\newline
+
+\begin{DoxyCode}
+\textcolor{comment}{// return the ray tracing context for the scene's geometry}
+\textcolor{comment}{//}
+\hyperlink{struct_r_t_context}{RTContext}& \hyperlink{struct_rendering_context_af12ae90cc453d139f6f8ae35791e6563}{RenderingContext::get\_rt\_context}()
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Finally, Fermat allows plugins to register new renderers with the following call\+: ~\newline
+
+\begin{DoxyCode}
+\textcolor{comment}{// register a new rendering interface type}
+\textcolor{comment}{//}
+uint32 register\_renderer(\textcolor{keyword}{const} \textcolor{keywordtype}{char}* name, RendererFactoryFunction factory)
+\end{DoxyCode}
+ The factory is just a fuction/method returning a pointer to a new \hyperlink{struct_renderer_interface}{Renderer\+Interface} object\+: ~\newline
+
+\begin{DoxyCode}
+\textcolor{keyword}{typedef} \hyperlink{struct_renderer_interface}{RendererInterface}* (*RendererFactoryFunction)();
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+Next\+: \hyperlink{_renderer_interface_page}{The Renderer Interface} 

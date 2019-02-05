@@ -1,0 +1,73 @@
+\hypertarget{struct_mesh_v_t_l_storage_impl}{}\section{Mesh\+V\+T\+L\+Storage\+Impl Struct Reference}
+\label{struct_mesh_v_t_l_storage_impl}\index{Mesh\+V\+T\+L\+Storage\+Impl@{Mesh\+V\+T\+L\+Storage\+Impl}}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_mesh_v_t_l_storage_impl_ab8974dddf2edc083626431055da92e84}\label{struct_mesh_v_t_l_storage_impl_ab8974dddf2edc083626431055da92e84}} 
+void {\bfseries init} (const uint32 n\+\_\+vpls, \hyperlink{struct_mesh_view}{Mesh\+View} h\+\_\+mesh, \hyperlink{struct_mesh_view}{Mesh\+View} d\+\_\+mesh, const \hyperlink{struct_mip_map_view}{Mip\+Map\+View} $\ast$h\+\_\+textures, const \hyperlink{struct_mip_map_view}{Mip\+Map\+View} $\ast$d\+\_\+textures, const uint32 instance=0)
+\item 
+\mbox{\Hypertarget{struct_mesh_v_t_l_storage_impl_a4bebac4f884b643c7d03c7b01eadf840}\label{struct_mesh_v_t_l_storage_impl_a4bebac4f884b643c7d03c7b01eadf840}} 
+void {\bfseries init} (const uint32 n\+\_\+vpls, \hyperlink{struct_rendering_context}{Rendering\+Context} \&renderer, const uint32 instance=0)
+\item 
+\mbox{\Hypertarget{struct_mesh_v_t_l_storage_impl_af214b0429e69e1e26ec324ff9cc1b9f3}\label{struct_mesh_v_t_l_storage_impl_af214b0429e69e1e26ec324ff9cc1b9f3}} 
+\hyperlink{struct_v_t_l_mesh_view}{V\+T\+L\+Mesh\+View} {\bfseries view} () const
+\item 
+\mbox{\Hypertarget{struct_mesh_v_t_l_storage_impl_aefaf3a6a1f2f32846d667d0808e81e89}\label{struct_mesh_v_t_l_storage_impl_aefaf3a6a1f2f32846d667d0808e81e89}} 
+uint32 {\bfseries get\+\_\+bvh\+\_\+nodes\+\_\+count} () const
+\item 
+\mbox{\Hypertarget{struct_mesh_v_t_l_storage_impl_a8926cfbaa890115b939190c3928a1b69}\label{struct_mesh_v_t_l_storage_impl_a8926cfbaa890115b939190c3928a1b69}} 
+uint32 {\bfseries get\+\_\+bvh\+\_\+clusters\+\_\+count} () const
+\item 
+\mbox{\Hypertarget{struct_mesh_v_t_l_storage_impl_ad263c3ca230e5ceba2fdbaa34f1011a5}\label{struct_mesh_v_t_l_storage_impl_ad263c3ca230e5ceba2fdbaa34f1011a5}} 
+const \hyperlink{structcugar_1_1_bvh__node__3d}{cugar\+::\+Bvh\+\_\+node\+\_\+3d} $\ast$ {\bfseries get\+\_\+bvh\+\_\+nodes} () const
+\item 
+\mbox{\Hypertarget{struct_mesh_v_t_l_storage_impl_a35d3b7ab31c69c6b35edff8f742394c7}\label{struct_mesh_v_t_l_storage_impl_a35d3b7ab31c69c6b35edff8f742394c7}} 
+const uint32 $\ast$ {\bfseries get\+\_\+bvh\+\_\+parents} () const
+\item 
+\mbox{\Hypertarget{struct_mesh_v_t_l_storage_impl_a5c967b119986fc49398d9571a16585be}\label{struct_mesh_v_t_l_storage_impl_a5c967b119986fc49398d9571a16585be}} 
+const uint2 $\ast$ {\bfseries get\+\_\+bvh\+\_\+ranges} () const
+\item 
+\mbox{\Hypertarget{struct_mesh_v_t_l_storage_impl_a52e556211d4444552eacf83677ab7a38}\label{struct_mesh_v_t_l_storage_impl_a52e556211d4444552eacf83677ab7a38}} 
+const uint32 $\ast$ {\bfseries get\+\_\+bvh\+\_\+clusters} () const
+\item 
+\mbox{\Hypertarget{struct_mesh_v_t_l_storage_impl_a6b095f4090c1c74d1892d16faa9a4a91}\label{struct_mesh_v_t_l_storage_impl_a6b095f4090c1c74d1892d16faa9a4a91}} 
+const uint32 $\ast$ {\bfseries get\+\_\+bvh\+\_\+cluster\+\_\+offsets} () const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_mesh_v_t_l_storage_impl_aadf81b3e06e1cf32999635e6e1d3156d}\label{struct_mesh_v_t_l_storage_impl_aadf81b3e06e1cf32999635e6e1d3156d}} 
+\hyperlink{struct_mesh_view}{Mesh\+View} {\bfseries mesh}
+\item 
+\mbox{\Hypertarget{struct_mesh_v_t_l_storage_impl_a3de1802b917295882ac94380dd3db321}\label{struct_mesh_v_t_l_storage_impl_a3de1802b917295882ac94380dd3db321}} 
+const \hyperlink{struct_mip_map_view}{Mip\+Map\+View} $\ast$ {\bfseries textures}
+\item 
+\mbox{\Hypertarget{struct_mesh_v_t_l_storage_impl_a8fdd12300b29324e053d39d4955f8f45}\label{struct_mesh_v_t_l_storage_impl_a8fdd12300b29324e053d39d4955f8f45}} 
+\hyperlink{structcugar_1_1vector}{cugar\+::vector}$<$ \hyperlink{structcugar_1_1device__tag}{cugar\+::device\+\_\+tag}, \hyperlink{struct_v_t_l}{V\+TL} $>$ {\bfseries vtls}
+\item 
+\mbox{\Hypertarget{struct_mesh_v_t_l_storage_impl_aac016b1abacbed6e1a6af608388bcde0}\label{struct_mesh_v_t_l_storage_impl_aac016b1abacbed6e1a6af608388bcde0}} 
+float {\bfseries normalization\+\_\+coeff}
+\item 
+\mbox{\Hypertarget{struct_mesh_v_t_l_storage_impl_ad7713cbd22a0ab7ab3d369f0dff7a1a8}\label{struct_mesh_v_t_l_storage_impl_ad7713cbd22a0ab7ab3d369f0dff7a1a8}} 
+\hyperlink{struct_u_v_bvh}{Device\+U\+V\+Bvh} {\bfseries uvbvh}
+\item 
+\mbox{\Hypertarget{struct_mesh_v_t_l_storage_impl_abc09a1d2e48705cdb3b3b7fe14fde569}\label{struct_mesh_v_t_l_storage_impl_abc09a1d2e48705cdb3b3b7fe14fde569}} 
+\hyperlink{structcugar_1_1vector}{cugar\+::vector}$<$ \hyperlink{structcugar_1_1device__tag}{cugar\+::device\+\_\+tag}, \hyperlink{structcugar_1_1_bvh__node__3d}{cugar\+::\+Bvh\+\_\+node\+\_\+3d} $>$ {\bfseries bvh\+\_\+nodes}
+\item 
+\mbox{\Hypertarget{struct_mesh_v_t_l_storage_impl_a4409fd4697cc4398e9c4c4632da9d18e}\label{struct_mesh_v_t_l_storage_impl_a4409fd4697cc4398e9c4c4632da9d18e}} 
+\hyperlink{structcugar_1_1vector}{cugar\+::vector}$<$ \hyperlink{structcugar_1_1device__tag}{cugar\+::device\+\_\+tag}, uint32 $>$ {\bfseries bvh\+\_\+parents}
+\item 
+\mbox{\Hypertarget{struct_mesh_v_t_l_storage_impl_af14169c8d22bd3611c29d27a4e1d2191}\label{struct_mesh_v_t_l_storage_impl_af14169c8d22bd3611c29d27a4e1d2191}} 
+\hyperlink{structcugar_1_1vector}{cugar\+::vector}$<$ \hyperlink{structcugar_1_1device__tag}{cugar\+::device\+\_\+tag}, uint2 $>$ {\bfseries bvh\+\_\+ranges}
+\item 
+\mbox{\Hypertarget{struct_mesh_v_t_l_storage_impl_a20e0a7c569c421795d1b7e3f81968580}\label{struct_mesh_v_t_l_storage_impl_a20e0a7c569c421795d1b7e3f81968580}} 
+\hyperlink{structcugar_1_1vector}{cugar\+::vector}$<$ \hyperlink{structcugar_1_1device__tag}{cugar\+::device\+\_\+tag}, uint32 $>$ {\bfseries bvh\+\_\+clusters}
+\item 
+\mbox{\Hypertarget{struct_mesh_v_t_l_storage_impl_a86a8ffd0e3efe6382b266d133f681022}\label{struct_mesh_v_t_l_storage_impl_a86a8ffd0e3efe6382b266d133f681022}} 
+\hyperlink{structcugar_1_1vector}{cugar\+::vector}$<$ \hyperlink{structcugar_1_1device__tag}{cugar\+::device\+\_\+tag}, uint32 $>$ {\bfseries bvh\+\_\+cluster\+\_\+offsets}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/mesh\+\_\+lights\+\_\+impl.\+h\end{DoxyCompactItemize}

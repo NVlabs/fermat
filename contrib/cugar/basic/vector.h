@@ -360,6 +360,74 @@ void make_room(vector<domain_tag, T>& vec, const size_t min_size)
 		vec.resize(min_size);
 }
 
+/// A container for device variables
+///
+template <typename T>
+struct device_var
+{
+	typedef typename thrust::device_vector<T>::const_reference	const_reference;
+	typedef typename thrust::device_vector<T>::reference			  reference;
+
+	/// constructor
+	///
+	device_var(const T val = T())
+	{
+		x.resize(1);
+		x[0] = val;
+	}
+
+	/// assignment
+	///
+	device_var<T>& operator= (const T& val)
+	{
+		x[0] = val;
+		return *this;
+	}
+
+	/// assignment
+	///
+	device_var<T>& operator+= (const T& val)
+	{
+		x[0] += val;
+		return *this;
+	}
+
+	/// assignment
+	///
+	device_var<T>& operator-= (const T& val)
+	{
+		x[0] += val;
+		return *this;
+	}
+
+	/// automatic conversion
+	///
+	operator T() const
+	{
+		return x[0];
+	}
+
+	/// return the device pointer
+	///
+	const T* ptr() const { return cugar::raw_pointer(x); }
+
+	/// return the device pointer
+	///
+	T* ptr() { return cugar::raw_pointer(x); }
+
+	device_vector<T>	x;
+};
+
+/// return the plain view of a device_var
+///
+template <typename T>
+const T* raw_pointer(const device_var<T>& var) { return var.ptr(); }
+
+/// return the plain view of a device_var
+///
+template <typename T>
+T* raw_pointer(device_var<T>& var) { return var.ptr(); }
+
 ///@} Basic
 
 } // namespace cugar

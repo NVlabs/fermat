@@ -1,0 +1,463 @@
+Top\+: \hyperlink{_overture_contents_page}{Contents}
+
+\hyperlink{group___b_p_t_lib}{B\+P\+T\+Lib} is a flexible bidirectional path tracing library, thought to be as performant as possible and yet vastly configurable at compile-\/time. The module is organized into a host library of parallel kernels, \hyperlink{group___b_p_t_lib}{B\+P\+T\+Lib}, and a core module of device-\/side functions, \hyperlink{group___b_p_t_lib_core}{B\+P\+T\+Lib\+Core}. The underlying idea is that all the bidirectional sampling functions and kernels are designed to use a wavefront scheduling approach, in which ray tracing queries are queued from shading kernels, and get processed in separate waves.\hypertarget{_b_p_t_lib_page_BPTLibCoreSection}{}\section{B\+P\+T\+Lib\+Core Description}\label{_b_p_t_lib_page_BPTLibCoreSection}
+\begin{DoxyParagraph}{}
+\hyperlink{group___b_p_t_lib_core}{B\+P\+T\+Lib\+Core} provides functions to\+:
+\begin{DoxyItemize}
+\item generate primary light vertices, i.\+e. vertices on the light source surfaces, each accompanied by a sampled outgoing direction
+\item process secondary light vertices, starting from ray hits corresponding to the sampled outgoing direction at the previous vertex
+\item generate primary eye vertices, i.\+e. vertices on the camera, each accompanied by a sampled outgoing direction
+\item process secondary eye vertices, starting from ray hits corresponding to the sampled outgoing direction at the previous vertex 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+In order to make the whole process configurable, all the functions accept the following template interfaces\+: 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+\label{_b_p_t_lib_page_TBPTContext}%
+\Hypertarget{_b_p_t_lib_page_TBPTContext}%
+
+\begin{DoxyEnumerate}
+\item a context interface, holding members describing the current path tracer state, including all the necessary queues, a set of options, and the storage for recording all generated light vertices; this class needs to inherit from \hyperlink{struct_b_p_t_context_base}{B\+P\+T\+Context\+Base} \+: ~\newline
+
+\begin{DoxyCodeInclude}
+\textcolor{keyword}{template} <\textcolor{keyword}{typename} TBPTOptions>
+\textcolor{keyword}{struct }\hyperlink{struct_b_p_t_context_base}{BPTContextBase}
+\{
+    \hyperlink{struct_b_p_t_context_base}{BPTContextBase}() :
+        in\_bounce(0) \{\}
+
+    \hyperlink{struct_b_p_t_context_base}{BPTContextBase}(
+        \textcolor{keyword}{const} \hyperlink{struct_rendering_context_view}{RenderingContextView}& \_renderer,
+        \textcolor{keyword}{const} \hyperlink{struct_vertex_storage_view}{VertexStorageView}&   \_light\_vertices,
+        \textcolor{keyword}{const} \hyperlink{struct_b_p_t_queues_view}{BPTQueuesView}&       \_queues,
+        \textcolor{keyword}{const} TBPTOptions           \_options = TBPTOptions()) :
+        in\_bounce(0),
+        light\_vertices(\_light\_vertices),
+        in\_queue(\_queues.in\_queue),
+        shadow\_queue(\_queues.shadow\_queue),
+        scatter\_queue(\_queues.scatter\_queue),
+        options(\_options)
+    \{
+        set\_camera(\_renderer.camera, \_renderer.res\_x, \_renderer.res\_y, \_renderer.aspect);
+    \}
+
+    \textcolor{comment}{// precompute some camera-related quantities}
+    \textcolor{keywordtype}{void} set\_camera(\textcolor{keyword}{const} \hyperlink{struct_camera}{Camera}& camera, \textcolor{keyword}{const} uint32 res\_x, \textcolor{keyword}{const} uint32 res\_y, \textcolor{keyword}{const} \textcolor{keywordtype}{float} 
+      aspect\_ratio)
+    \{
+        \hyperlink{group___camera_module_gaac6a57c4883a499e09399d5f617eccaf}{camera\_frame}(camera, aspect\_ratio, camera\_U, camera\_V, camera\_W);
+
+        camera\_W\_len = \hyperlink{group___basic_ga6a0f89325f62dc313d300e36f2a26b55}{cugar::length}(camera\_W);
+
+        \textcolor{comment}{//camera\_square\_focal\_length = camera.square\_pixel\_focal\_length(res\_x, res\_y);}
+        camera\_square\_focal\_length = camera.square\_screen\_focal\_length();
+    \}
+
+    uint32              in\_bounce;
+    \hyperlink{struct_ray_queue}{RayQueue}            in\_queue;
+    \hyperlink{struct_ray_queue}{RayQueue}            shadow\_queue;
+    \hyperlink{struct_ray_queue}{RayQueue}            scatter\_queue;
+
+    \hyperlink{struct_vertex_storage_view}{VertexStorageView}  light\_vertices;
+
+    \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}      camera\_U;
+    \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}      camera\_V;
+    \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}      camera\_W;
+    \textcolor{keywordtype}{float}               camera\_W\_len;
+    \textcolor{keywordtype}{float}               camera\_square\_focal\_length;
+
+    TBPTOptions         options;
+\};
+\end{DoxyCodeInclude}
+~\newline
+\label{_b_p_t_lib_page_TBPTConfig}%
+\Hypertarget{_b_p_t_lib_page_TBPTConfig}%
+
+\item a user defined \char`\"{}policy\char`\"{} class, configuring the path sampling process; this class is responsible for deciding what exactly to do at and with each eye and light subpath vertex, and needs to provide the following interface\+: ~\newline
+
+\begin{DoxyCode}
+\textcolor{keyword}{struct }TBPTConfig
+\{
+   uint32  max\_path\_length         : 10;
+   uint32  light\_sampling          : 1;
+   uint32  light\_ordering          : 1;
+   uint32  eye\_sampling            : 1;
+   uint32  use\_vpls                : 1;
+   uint32  use\_rr                  : 1;
+   uint32  direct\_lighting\_nee     : 1;
+   uint32  direct\_lighting\_bsdf    : 1;
+   uint32  indirect\_lighting\_nee   : 1;
+   uint32  indirect\_lighting\_bsdf  : 1;
+   uint32  visible\_lights          : 1;
+   \textcolor{keywordtype}{float}   \hyperlink{group___b_p_t_lib_ga497e0940986e5f948a9dcf42242d39c7}{light\_tracing};
+
+   \textcolor{comment}{// decide whether to terminate a given light subpath}
+   \textcolor{comment}{//}
+   \textcolor{comment}{// \(\backslash\)param path\_id           index of the light subpath}
+   \textcolor{comment}{// \(\backslash\)param s             vertex number along the light subpath}
+   FERMAT\_HOST\_DEVICE FERMAT\_FORCEINLINE
+   \textcolor{keywordtype}{bool} terminate\_light\_subpath(\textcolor{keyword}{const} uint32 path\_id, \textcolor{keyword}{const} uint32 s) \textcolor{keyword}{const};
+
+   \textcolor{comment}{// decide whether to terminate a given eye subpath}
+   \textcolor{comment}{//}
+   \textcolor{comment}{// \(\backslash\)param path\_id           index of the eye subpath}
+   \textcolor{comment}{// \(\backslash\)param s             vertex number along the eye subpath}
+   FERMAT\_HOST\_DEVICE FERMAT\_FORCEINLINE
+   \textcolor{keywordtype}{bool} terminate\_eye\_subpath(\textcolor{keyword}{const} uint32 path\_id, \textcolor{keyword}{const} uint32 t) \textcolor{keyword}{const};
+
+   \textcolor{comment}{// decide whether to store a given light vertex}
+   \textcolor{comment}{//}
+   \textcolor{comment}{// \(\backslash\)param path\_id           index of the light subpath}
+   \textcolor{comment}{// \(\backslash\)param s             vertex number along the light subpath}
+   FERMAT\_HOST\_DEVICE FERMAT\_FORCEINLINE
+   \textcolor{keywordtype}{bool} store\_light\_vertex(\textcolor{keyword}{const} uint32 path\_id, \textcolor{keyword}{const} uint32 s, \textcolor{keyword}{const} \textcolor{keywordtype}{bool} absorbed) \textcolor{keyword}{const};
+
+   \textcolor{comment}{// decide whether to perform a bidirectional connection}
+   \textcolor{comment}{//}
+   \textcolor{comment}{// \(\backslash\)param eye\_path\_id       index of the eye subpath}
+   \textcolor{comment}{// \(\backslash\)param t             vertex number along the eye subpath}
+   \textcolor{comment}{// \(\backslash\)param absorbed          true if the eye subpath has been absorbed/terminated here}
+   FERMAT\_HOST\_DEVICE FERMAT\_FORCEINLINE
+   \textcolor{keywordtype}{bool} perform\_connection(\textcolor{keyword}{const} uint32 eye\_path\_id, \textcolor{keyword}{const} uint32 t, \textcolor{keyword}{const} \textcolor{keywordtype}{bool} absorbed) \textcolor{keyword}{const};
+
+   \textcolor{comment}{// decide whether to accumulate an emissive sample from a pure (eye) path tracing estimator}
+   \textcolor{comment}{//}
+   \textcolor{comment}{// \(\backslash\)param eye\_path\_id       index of the eye subpath}
+   \textcolor{comment}{// \(\backslash\)param t             vertex number along the eye subpath}
+   \textcolor{comment}{// \(\backslash\)param absorbed          true if the eye subpath has been absorbed/terminated here}
+   FERMAT\_HOST\_DEVICE FERMAT\_FORCEINLINE
+   \textcolor{keywordtype}{bool} accumulate\_emissive(\textcolor{keyword}{const} uint32 eye\_path\_id, \textcolor{keyword}{const} uint32 t, \textcolor{keyword}{const} \textcolor{keywordtype}{bool} absorbed) \textcolor{keyword}{const};
+
+   \textcolor{comment}{// process/store the given light vertex}
+   \textcolor{comment}{//}
+   FERMAT\_HOST\_DEVICE FERMAT\_FORCEINLINE
+   \textcolor{keywordtype}{void} visit\_light\_vertex(
+       \textcolor{keyword}{const} uint32            light\_path\_id,
+       \textcolor{keyword}{const} uint32            depth,
+       \textcolor{keyword}{const} \hyperlink{struct_vertex_geometry_id}{VertexGeometryId}  v\_id,
+       TBPTContext&            context,
+       \hyperlink{struct_rendering_context_view}{RenderingContextView}&   renderer) \textcolor{keyword}{const};
+
+   \textcolor{comment}{// process/store the given eye vertex}
+   \textcolor{comment}{//}
+   FERMAT\_HOST\_DEVICE FERMAT\_FORCEINLINE
+   \textcolor{keywordtype}{void} visit\_eye\_vertex(
+       \textcolor{keyword}{const} uint32            eye\_path\_id,
+       \textcolor{keyword}{const} uint32            depth,
+       \textcolor{keyword}{const} \hyperlink{struct_vertex_geometry_id}{VertexGeometryId}  v\_id,
+       \textcolor{keyword}{const} \hyperlink{struct_eye_vertex}{EyeVertex}&        v,
+       TBPTContext&            context,
+       \hyperlink{struct_rendering_context_view}{RenderingContextView}&   renderer) \textcolor{keyword}{const};
+\};
+\end{DoxyCode}
+ ~\newline
+In practice, an implementation can inherit from the pre-\/packaged \hyperlink{struct_b_p_t_config_base}{B\+P\+T\+Config\+Base} class and override any of its methods. ~\newline
+~\newline
+\label{_b_p_t_lib_page_TSampleSink}%
+\Hypertarget{_b_p_t_lib_page_TSampleSink}%
+
+\item a user defined sample \char`\"{}sink\char`\"{} class, specifying what to do with all the generated bidirectional path samples (i.\+e. full paths); this class needs to expose the same interface as \hyperlink{struct_sample_sink_base}{Sample\+Sink\+Base} \+: ~\newline
+
+\begin{DoxyCodeInclude}
+\textcolor{keyword}{struct }\hyperlink{struct_sample_sink_base}{SampleSinkBase}
+\{
+    \textcolor{keyword}{template} <\textcolor{keyword}{typename} TBPTContext>
+    FERMAT\_HOST\_DEVICE
+    \textcolor{keywordtype}{void} \hyperlink{struct_sample_sink_base_ab34316c125cab0da36ea2ae41e67f98f}{sink}(
+        \textcolor{keyword}{const} uint32            channel,
+        \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector4f}    value,
+        \textcolor{keyword}{const} uint32            light\_path\_id,
+        \textcolor{keyword}{const} uint32            eye\_path\_id,
+        \textcolor{keyword}{const} uint32            s,
+        \textcolor{keyword}{const} uint32            t,
+        TBPTContext&            context,
+        \hyperlink{struct_rendering_context_view}{RenderingContextView}&   renderer)
+    \{\}
+
+    \textcolor{keyword}{template} <\textcolor{keyword}{typename} TBPTContext>
+    FERMAT\_HOST\_DEVICE
+    \textcolor{keywordtype}{void} \hyperlink{struct_sample_sink_base_ac96fd485e8196264c43115c68a0bbc25}{sink\_eye\_scattering\_event}(
+        \textcolor{keyword}{const} \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf::ComponentType}    component,
+        \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector4f}        value,
+        \textcolor{keyword}{const} uint32                eye\_path\_id,
+        \textcolor{keyword}{const} uint32                t,
+        TBPTContext&                context,
+        \hyperlink{struct_rendering_context_view}{RenderingContextView}&       renderer)
+    \{\}
+\};
+\end{DoxyCodeInclude}
+~\newline
+\label{_b_p_t_lib_page_TPrimaryCoordinates}%
+\Hypertarget{_b_p_t_lib_page_TPrimaryCoordinates}%
+
+\item a user defined class specifying the primary sample space coordinates of the generated subpaths; this class needs to expose the following itnerface\+: ~\newline
+
+\begin{DoxyCode}
+\textcolor{keyword}{struct }TPrimaryCoords
+\{
+   \textcolor{comment}{// return the primary sample space coordinate of the d-th component of the j-th vertex}
+   \textcolor{comment}{// of the i-th subpath}
+   \textcolor{comment}{//}
+   \textcolor{comment}{// \(\backslash\)param idx       the subpath index 'i'}
+   \textcolor{comment}{// \(\backslash\)param vertex    the vertex index 'j' in the given subpath}
+   \textcolor{comment}{// \(\backslash\)param dim       the index of the dimension 'd' of the given subpath vertex}
+   FERMAT\_HOST\_DEVICE FERMAT\_FORCEINLINE
+   \textcolor{keywordtype}{float} sample(\textcolor{keyword}{const} uint32 idx, \textcolor{keyword}{const} uint32 vertex, \textcolor{keyword}{const} uint32 dim) \textcolor{keyword}{const};
+\};
+\end{DoxyCode}
+ 
+\end{DoxyEnumerate}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The complete list of functions can be found in the \hyperlink{group___b_p_t_lib_core}{B\+P\+T\+Lib\+Core} module documentation.
+\end{DoxyParagraph}
+\hypertarget{_b_p_t_lib_page_BPTLibSection}{}\section{B\+P\+T\+Lib Description}\label{_b_p_t_lib_page_BPTLibSection}
+\begin{DoxyParagraph}{}
+\hyperlink{group___b_p_t_lib}{B\+P\+T\+Lib} contains the definition of the full bidirectional path tracing pipeline; as for the lower level \hyperlink{group___b_p_t_lib_core}{B\+P\+T\+Lib\+Core} functions, the pipeline is customizable through a \hyperlink{_b_p_t_lib_page_TBPTConfig}{T\+B\+P\+T\+Config} policy class, a \hyperlink{_b_p_t_lib_page_TSampleSink}{T\+Sample\+Sink}, and a set of \hyperlink{_b_p_t_lib_page_TPrimaryCoordinates}{T\+Primary\+Coordinates}. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+While the module itself defines all separate stages of the pipeline, the entire pipeline can be instanced with a single host function call to\+:
+\end{DoxyParagraph}
+\label{_b_p_t_lib_page_sample_paths_anchor}%
+\Hypertarget{_b_p_t_lib_page_sample_paths_anchor}%
+
+\begin{DoxyCode}
+\textcolor{comment}{// A host function dispatching a series of kernels to sample a given number of full paths.}
+\textcolor{comment}{// The generated paths are controlled by two user-defined sets of primary space coordinates, one}
+\textcolor{comment}{// for eye and light subpaths sampling.}
+\textcolor{comment}{// Specifically, this function executes the following two functions:}
+\textcolor{comment}{//}
+\textcolor{comment}{// - \(\backslash\)ref sample\_light\_subpaths()}
+\textcolor{comment}{// - \(\backslash\)ref sample\_eye\_subpaths()}
+\textcolor{comment}{//}
+\textcolor{comment}{// \(\backslash\)tparam TEyePrimaryCoordinates       a set of primary space coordinates, see TPrimaryCoordinates}
+\textcolor{comment}{// \(\backslash\)tparam TLightPrimaryCoordinates     a set of primary space coordinates, see TPrimaryCoordinates}
+\textcolor{comment}{// \(\backslash\)tparam TSampleSink                  a sample sink, specifying what to do with each generated path
+       sample}
+\textcolor{comment}{// \(\backslash\)tparam TBPTContext                  a bidirectional path tracing context clas}
+\textcolor{comment}{// \(\backslash\)tparam TBPTConfig                   a policy class controlling the behaviour of the path sampling
+       process}
+\textcolor{comment}{//}
+\textcolor{comment}{// \(\backslash\)param n\_eye\_paths               the number of eye subpaths to sample}
+\textcolor{comment}{// \(\backslash\)param n\_light\_paths             the number of light subpaths to sample}
+\textcolor{comment}{// \(\backslash\)param eye\_primary\_coords        the set of primary sample space coordinates used to generate eye
+       subpaths}
+\textcolor{comment}{// \(\backslash\)param light\_primary\_coords      the set of primary sample space coordinates used to generate light
+       subpaths}
+\textcolor{comment}{// \(\backslash\)param sample\_sink               the sample sink}
+\textcolor{comment}{// \(\backslash\)param context                   the bidirectional path tracing context}
+\textcolor{comment}{// \(\backslash\)param config                    the config policy}
+\textcolor{comment}{// \(\backslash\)param renderer                  the host-side rendering context}
+\textcolor{comment}{// \(\backslash\)param renderer\_view             a view of the rendering context}
+\textcolor{comment}{// \(\backslash\)param lazy\_shadows              a flag indicating whether to resolve shadows lazily, after generating}
+\textcolor{comment}{//                                  all light and eye vertices, or right away as each wave of new vertices
+       is processed}
+\textcolor{keyword}{template} <
+  \textcolor{keyword}{typename} TEyePrimaryCoordinates,
+  \textcolor{keyword}{typename} TLightPrimaryCoordinates,
+  \textcolor{keyword}{typename} TSampleSink,
+  \textcolor{keyword}{typename} TBPTContext,
+  \textcolor{keyword}{typename} TBPTConfig>
+\textcolor{keywordtype}{void} \hyperlink{group___b_p_t_lib_ga4c1164d859ed146eb306e8b7b178c7e7}{sample\_paths}(
+   \textcolor{keyword}{const} uint32                n\_eye\_paths,
+   \textcolor{keyword}{const} uint32                n\_light\_paths,
+   TEyePrimaryCoordinates      eye\_primary\_coords,
+   TLightPrimaryCoordinates    light\_primary\_coords,
+   TSampleSink                 sample\_sink,
+   TBPTContext&                context,
+   \textcolor{keyword}{const} TBPTConfig&           config,
+   \hyperlink{struct_rendering_context}{RenderingContext}&           renderer,
+   \hyperlink{struct_rendering_context_view}{RenderingContextView}&       renderer\_view,
+   \textcolor{keyword}{const} \textcolor{keywordtype}{bool}                  lazy\_shadows = \textcolor{keyword}{false})
+\end{DoxyCode}
+
+
+\begin{DoxyParagraph}{}
+\hyperlink{group___b_p_t_lib_ga4c1164d859ed146eb306e8b7b178c7e7}{sample\+\_\+paths()} generates bidirectional paths with at least two eye vertices, i.\+e. t=2 in Veach\textquotesingle{}s terminology. A separate function allows to process paths with t=1, connecting directly to a vertex on the lens\+:
+\end{DoxyParagraph}
+\label{_b_p_t_lib_page_light_tracing_anchor}%
+\Hypertarget{_b_p_t_lib_page_light_tracing_anchor}%
+
+\begin{DoxyCode}
+\textcolor{comment}{// A host function dispatching a series of kernels to process pure light tracing paths.}
+\textcolor{comment}{// Specifically, this function executes the following two functions:}
+\textcolor{comment}{//}
+\textcolor{comment}{// - \(\backslash\)ref light\_tracing()}
+\textcolor{comment}{// - \(\backslash\)ref solve\_shadows()}
+\textcolor{comment}{//}
+\textcolor{comment}{// This function needs to be called <i>after</i> a previous call to \(\backslash\)ref generate\_light\_subpaths(), as it
+       assumes}
+\textcolor{comment}{// a set of light subpaths have already been sampled and it is possible to connect them to the camera.}
+\textcolor{comment}{//}
+\textcolor{comment}{// \(\backslash\)tparam TSampleSink                 a sample sink, specifying what to do with each generated path
+       sample, see \(\backslash\)ref SampleSinkAnchor}
+\textcolor{comment}{// \(\backslash\)tparam TBPTContext                 a bidirectional path tracing context class, see \(\backslash\)ref BPTContextBase}
+\textcolor{comment}{// \(\backslash\)tparam TBPTConfig                  a policy class controlling the behaviour of the path sampling
+       process, see \(\backslash\)ref BPTConfigBase}
+\textcolor{comment}{//}
+\textcolor{keyword}{template} <
+  \textcolor{keyword}{typename} TSampleSink,
+  \textcolor{keyword}{typename} TBPTContext,
+  \textcolor{keyword}{typename} TBPTConfig>
+\textcolor{keywordtype}{void} \hyperlink{group___b_p_t_lib_ga497e0940986e5f948a9dcf42242d39c7}{light\_tracing}(
+   \textcolor{keyword}{const} uint32            n\_light\_paths,
+   TSampleSink             sample\_sink,
+   TBPTContext&            context,
+   \textcolor{keyword}{const} TBPTConfig&       config,
+   \hyperlink{struct_rendering_context}{RenderingContext}&       renderer,
+   \hyperlink{struct_rendering_context_view}{RenderingContextView}&   renderer\_view)
+\end{DoxyCode}
+\hypertarget{_b_p_t_lib_page_BPTExampleSection}{}\section{An Example}\label{_b_p_t_lib_page_BPTExampleSection}
+\begin{DoxyParagraph}{}
+At this point, it might be useful to take a look at the implementation of the \hyperlink{struct_b_p_t}{B\+PT} renderer to see how this is used. We\textquotesingle{}ll start from the implementation of the render method\+:
+\end{DoxyParagraph}
+
+\begin{DoxyCodeInclude}
+\textcolor{keywordtype}{void} \hyperlink{struct_b_p_t_af9e940aca306f186cadfabc095590d88}{BPT::render}(\textcolor{keyword}{const} uint32 instance, \hyperlink{struct_rendering_context}{RenderingContext}& renderer)
+\{
+    \textcolor{comment}{// pre-multiply the previous frame for blending}
+    renderer.\hyperlink{struct_rendering_context_a332a91e18bd96ae06973cc897c34ff07}{multiply\_frame}(\textcolor{keywordtype}{float}(instance) / \textcolor{keywordtype}{float}(instance + 1));
+
+    \hyperlink{structcugar_1_1_timer}{cugar::Timer} timer;
+    timer.\hyperlink{structcugar_1_1_timer_a337264814110dc99fd8b78b1267589d7}{start}();
+
+    \textcolor{comment}{// get a view of the renderer}
+    \hyperlink{struct_rendering_context_view}{RenderingContextView} renderer\_view = renderer.\hyperlink{struct_rendering_context_a591062fd1887b069a015ede456dcaa93}{view}(instance);
+    
+    \textcolor{comment}{// initialize the sampling sequence for this frame}
+    m\_sequence.set\_instance(instance);
+    
+    \textcolor{comment}{// setup our BPT context}
+    \hyperlink{struct_b_p_t_context}{BPTContext} context(*\textcolor{keyword}{this},renderer\_view);
+
+    \textcolor{comment}{// setup our BPT configuration}
+    BPTConfig config(context);
+    
+    \textcolor{comment}{// sample a set of bidirectional paths corresponding to our current primary coordinates}
+    \hyperlink{struct_tiled_light_subpath_primary_coords}{TiledLightSubpathPrimaryCoords} light\_primary\_coords(context.sequence);
+
+    \hyperlink{struct_per_pixel_eye_subpath_primary_coords}{PerPixelEyeSubpathPrimaryCoords} eye\_primary\_coords(context.sequence, 
+      renderer.\hyperlink{struct_rendering_context_ad1a58510bdaf6f373080835abf5db2db}{res}().x, renderer.\hyperlink{struct_rendering_context_ad1a58510bdaf6f373080835abf5db2db}{res}().y);
+
+    ConnectionsSink<false> sink;
+    
+    \textcolor{comment}{// debug only: regenerate the VPLs}
+    \textcolor{comment}{//regenerate\_primary\_light\_vertices(instance, renderer);}
+
+    \hyperlink{group___b_p_t_lib_ga4c1164d859ed146eb306e8b7b178c7e7}{bpt::sample\_paths}(
+        m\_n\_eye\_subpaths,
+        m\_n\_light\_subpaths,
+        eye\_primary\_coords,
+        light\_primary\_coords,
+        sink,
+        context,
+        config,
+        renderer,
+        renderer\_view);
+
+    \textcolor{comment}{// solve pure light tracing occlusions}
+    \{
+        ConnectionsSink<true> atomic\_sink;
+
+        \hyperlink{group___b_p_t_lib_ga497e0940986e5f948a9dcf42242d39c7}{bpt::light\_tracing}(
+            m\_n\_light\_subpaths,
+            atomic\_sink,
+            context,
+            config,
+            renderer,
+            renderer\_view);
+    \}
+
+    timer.\hyperlink{structcugar_1_1_timer_a5422f0db9e2758449a30ba41a4480f6d}{stop}();
+    \textcolor{keyword}{const} \textcolor{keywordtype}{float} time = timer.seconds();
+
+    \textcolor{comment}{// clear the global timer at instance zero}
+    m\_time = (instance == 0) ? time : time + m\_time;
+
+    fprintf(stderr, \textcolor{stringliteral}{"\(\backslash\)r  %.1fs (%.1fms)        "},
+        m\_time,
+        time * 1000.0f);
+\}
+\end{DoxyCodeInclude}
+ \begin{DoxyParagraph}{}
+Besides some boilerplate, this function instantiates a context, a config, some light and eye primary sample coordinate generators (\hyperlink{struct_tiled_light_subpath_primary_coords}{Tiled\+Light\+Subpath\+Primary\+Coords} and \hyperlink{struct_per_pixel_eye_subpath_primary_coords}{Per\+Pixel\+Eye\+Subpath\+Primary\+Coords}), and executes the \hyperlink{group___b_p_t_lib_ga4c1164d859ed146eb306e8b7b178c7e7}{sample\+\_\+paths()} and \hyperlink{group___b_p_t_lib_ga497e0940986e5f948a9dcf42242d39c7}{light\+\_\+tracing()} functions above. What is interesting now is taking a look at the definition of the sample sink class\+:
+\end{DoxyParagraph}
+
+\begin{DoxyCodeInclude}
+    \textcolor{keyword}{template} <\textcolor{keywordtype}{bool} USE\_ATOMICS>
+    \textcolor{keyword}{struct }ConnectionsSink : \hyperlink{struct_sample_sink_base}{SampleSinkBase}
+    \{
+        FERMAT\_HOST\_DEVICE
+        ConnectionsSink() \{\}
+
+        \textcolor{comment}{// accumulate a bidirectional sample}
+        \textcolor{comment}{//}
+        FERMAT\_HOST\_DEVICE
+        \textcolor{keywordtype}{void} \hyperlink{struct_sample_sink_base_ab34316c125cab0da36ea2ae41e67f98f}{sink}(
+            \textcolor{keyword}{const} uint32            channel,
+            \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector4f}    value,
+            \textcolor{keyword}{const} uint32            light\_path\_id,
+            \textcolor{keyword}{const} uint32            eye\_path\_id,
+            \textcolor{keyword}{const} uint32            s,
+            \textcolor{keyword}{const} uint32            t,
+            \hyperlink{struct_b_p_t_context}{BPTContext}&               context,
+            \hyperlink{struct_rendering_context_view}{RenderingContextView}&   renderer)
+        \{
+            \textcolor{keyword}{const} \textcolor{keywordtype}{float} frame\_weight = 1.0f / float(renderer.instance + 1);
+
+            \textcolor{keywordflow}{if} (USE\_ATOMICS)
+            \{
+                \hyperlink{group___atomics_ga0c9d949be7ac5b6f27a232c7cd27a05c}{cugar::atomic\_add}(&renderer.fb(FBufferDesc::COMPOSITED\_C, eye\_path\_id).x, 
+      value.x * frame\_weight);
+                \hyperlink{group___atomics_ga0c9d949be7ac5b6f27a232c7cd27a05c}{cugar::atomic\_add}(&renderer.fb(FBufferDesc::COMPOSITED\_C, eye\_path\_id).y, 
+      value.y * frame\_weight);
+                \hyperlink{group___atomics_ga0c9d949be7ac5b6f27a232c7cd27a05c}{cugar::atomic\_add}(&renderer.fb(FBufferDesc::COMPOSITED\_C, eye\_path\_id).z, 
+      value.z * frame\_weight);
+
+                \textcolor{keywordflow}{if} (channel != FBufferDesc::COMPOSITED\_C)
+                \{
+                    \hyperlink{group___atomics_ga0c9d949be7ac5b6f27a232c7cd27a05c}{cugar::atomic\_add}(&renderer.fb(channel, eye\_path\_id).x, value.x * 
+      frame\_weight);
+                    \hyperlink{group___atomics_ga0c9d949be7ac5b6f27a232c7cd27a05c}{cugar::atomic\_add}(&renderer.fb(channel, eye\_path\_id).y, value.y * 
+      frame\_weight);
+                    \hyperlink{group___atomics_ga0c9d949be7ac5b6f27a232c7cd27a05c}{cugar::atomic\_add}(&renderer.fb(channel, eye\_path\_id).z, value.z * 
+      frame\_weight);
+                \}
+            \}
+            \textcolor{keywordflow}{else}
+            \{
+                renderer.fb(FBufferDesc::COMPOSITED\_C, eye\_path\_id) += value * frame\_weight;
+
+                \textcolor{keywordflow}{if} (channel != FBufferDesc::COMPOSITED\_C)
+                    renderer.fb(channel, eye\_path\_id) += value * frame\_weight;
+            \}
+        \}
+
+        \textcolor{comment}{// record an eye scattering event}
+        \textcolor{comment}{//}
+        FERMAT\_HOST\_DEVICE
+        \textcolor{keywordtype}{void} \hyperlink{struct_sample_sink_base_ac96fd485e8196264c43115c68a0bbc25}{sink\_eye\_scattering\_event}(
+            \textcolor{keyword}{const} \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf::ComponentType}    component,
+            \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector4f}        value,
+            \textcolor{keyword}{const} uint32                eye\_path\_id,
+            \textcolor{keyword}{const} uint32                t,
+            \hyperlink{struct_b_p_t_context}{BPTContext}&                   context,
+            \hyperlink{struct_rendering_context_view}{RenderingContextView}&       renderer)
+        \{
+            \textcolor{keywordflow}{if} (t == 2) \textcolor{comment}{// accumulate the albedo of visible surfaces}
+            \{
+                \textcolor{keyword}{const} \textcolor{keywordtype}{float} frame\_weight = 1.0f / float(renderer.instance + 1);
+
+                \textcolor{keywordflow}{if} (component == Bsdf::kDiffuseReflection)
+                    renderer.fb(FBufferDesc::DIFFUSE\_A, eye\_path\_id) += value * frame\_weight;
+                \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (component == Bsdf::kGlossyReflection)
+                    renderer.fb(FBufferDesc::SPECULAR\_A, eye\_path\_id) += value * frame\_weight;
+            \}
+        \}
+    \};
+\end{DoxyCodeInclude}
+ \begin{DoxyParagraph}{}
+As you may notice, this implementation is simply taking each sample, and accumulating its contribution to the corresponding pixel in the target framebuffer. Here, we are using the fact that the eye path index corresponds exactly to the pixel index, a consequence of using the \hyperlink{struct_per_pixel_eye_subpath_primary_coords}{Per\+Pixel\+Eye\+Subpath\+Primary\+Coords} class.
+\end{DoxyParagraph}
+ 

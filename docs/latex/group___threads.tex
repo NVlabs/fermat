@@ -1,0 +1,33 @@
+\hypertarget{group___threads}{}\section{Threads}
+\label{group___threads}\index{Threads@{Threads}}
+
+
+\subsection{Detailed Description}
+This module implements basic host thread and work-\/queue objects. \subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classcugar_1_1_thread_base}{cugar\+::\+Thread\+Base}
+\item 
+class \hyperlink{classcugar_1_1_thread}{cugar\+::\+Thread$<$ Derived\+Thread\+Type $>$}
+\item 
+class \hyperlink{classcugar_1_1_mutex}{cugar\+::\+Mutex}
+\item 
+class \hyperlink{classcugar_1_1_scoped_lock}{cugar\+::\+Scoped\+Lock}
+\item 
+class \hyperlink{classcugar_1_1_work_queue}{cugar\+::\+Work\+Queue$<$ Work\+Item\+T, Progress\+Callback\+T $>$}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___threads_ga897e37d326e8d86f61cb8d967bdbd539}\label{group___threads_ga897e37d326e8d86f61cb8d967bdbd539}} 
+uint32 {\bfseries cugar\+::num\+\_\+physical\+\_\+cores} ()
+\item 
+\mbox{\Hypertarget{group___threads_ga0ca3bd554490bbc2aaa120320f588d79}\label{group___threads_ga0ca3bd554490bbc2aaa120320f588d79}} 
+uint32 {\bfseries cugar\+::num\+\_\+logical\+\_\+cores} ()
+\item 
+\mbox{\Hypertarget{group___threads_gabd840f91a015ca8c052ba4601fda2a73}\label{group___threads_gabd840f91a015ca8c052ba4601fda2a73}} 
+uint32 \hyperlink{group___threads_gabd840f91a015ca8c052ba4601fda2a73}{cugar\+::balance\+\_\+batch\+\_\+size} (uint32 batch\+\_\+size, uint32 total\+\_\+count, uint32 thread\+\_\+count)
+\begin{DoxyCompactList}\small\item\em return a number close to batch\+\_\+size that achieves best threading balance \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___threads_ga3a367b425880556896d91533bf34befe}\label{group___threads_ga3a367b425880556896d91533bf34befe}} 
+void {\bfseries cugar\+::yield} ()
+\end{DoxyCompactItemize}

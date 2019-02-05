@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -95,7 +95,7 @@ struct BPTQueuesStorage
 		r.shadow_queue.weights		= r.scatter_queue.weights + n_rays;
 		r.shadow_queue.probs		= r.scatter_queue.probs + n_rays;
 		r.shadow_queue.pixels		= r.scatter_queue.pixels + n_rays;
-		r.shadow_queue.path_weights = NULL;
+		r.shadow_queue.path_weights = r.scatter_queue.path_weights + n_rays;
 		r.shadow_queue.size			= r.scatter_queue.size + 1;
 
 		return r;

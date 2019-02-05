@@ -1,0 +1,49 @@
+\hypertarget{classcugar_1_1internals_1_1_weak_count}{}\section{cugar\+:\+:internals\+:\+:Weak\+Count$<$ CounterT $>$ Class Template Reference}
+\label{classcugar_1_1internals_1_1_weak_count}\index{cugar\+::internals\+::\+Weak\+Count$<$ Counter\+T $>$@{cugar\+::internals\+::\+Weak\+Count$<$ Counter\+T $>$}}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_weak_count_ac224cbfc38ec64a447dd772f15e54538}\label{classcugar_1_1internals_1_1_weak_count_ac224cbfc38ec64a447dd772f15e54538}} 
+typedef \hyperlink{classcugar_1_1internals_1_1_counted_base}{Counted\+Base}$<$ CounterT $>$\+::Counter\+\_\+\+Type {\bfseries Counter\+\_\+\+Type}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_weak_count_a80668f04da0bc3b06a820ee4bd236f29}\label{classcugar_1_1internals_1_1_weak_count_a80668f04da0bc3b06a820ee4bd236f29}} 
+{\bfseries Weak\+Count} (const \hyperlink{classcugar_1_1internals_1_1_shared_count}{Shared\+Count}$<$ CounterT $>$ \&sc)
+\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_weak_count_a0bd9a8982f58fdd85c2ca31285564e10}\label{classcugar_1_1internals_1_1_weak_count_a0bd9a8982f58fdd85c2ca31285564e10}} 
+{\bfseries Weak\+Count} (const \hyperlink{classcugar_1_1internals_1_1_weak_count}{Weak\+Count} \&wc)
+\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_weak_count_a3bb59281655c657304d7469a12fdec41}\label{classcugar_1_1internals_1_1_weak_count_a3bb59281655c657304d7469a12fdec41}} 
+\hyperlink{classcugar_1_1internals_1_1_weak_count}{Weak\+Count} \& {\bfseries operator=} (const \hyperlink{classcugar_1_1internals_1_1_shared_count}{Shared\+Count}$<$ CounterT $>$ \&sc)
+\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_weak_count_a69a891d1c92dd31ac1c6fb59ef1ab478}\label{classcugar_1_1internals_1_1_weak_count_a69a891d1c92dd31ac1c6fb59ef1ab478}} 
+\hyperlink{classcugar_1_1internals_1_1_weak_count}{Weak\+Count} \& {\bfseries operator=} (const \hyperlink{classcugar_1_1internals_1_1_weak_count}{Weak\+Count} \&wc)
+\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_weak_count_a861d47a5eb760451f845e26b74c759ac}\label{classcugar_1_1internals_1_1_weak_count_a861d47a5eb760451f845e26b74c759ac}} 
+void {\bfseries swap} (\hyperlink{classcugar_1_1internals_1_1_weak_count}{Weak\+Count} \&wc)
+\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_weak_count_a0985d32c1268585ddfedfc550d676ee1}\label{classcugar_1_1internals_1_1_weak_count_a0985d32c1268585ddfedfc550d676ee1}} 
+Counter\+\_\+\+Type {\bfseries use\+\_\+count} () const
+\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_weak_count_a49059c59780ce6c22789d9259c98a148}\label{classcugar_1_1internals_1_1_weak_count_a49059c59780ce6c22789d9259c98a148}} 
+void $\ast$ {\bfseries get\+\_\+deleter} (const std\+::type\+\_\+info \&ti) const
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_weak_count_a60805c1be43dc7945dfac5ee18c5d799}\label{classcugar_1_1internals_1_1_weak_count_a60805c1be43dc7945dfac5ee18c5d799}} 
+class {\bfseries Shared\+Count$<$ Counter\+T $>$}
+\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_weak_count_aa53a4b9c79501730eac7e08b3cfabb45}\label{classcugar_1_1internals_1_1_weak_count_aa53a4b9c79501730eac7e08b3cfabb45}} 
+bool {\bfseries operator==} (const \hyperlink{classcugar_1_1internals_1_1_weak_count}{Weak\+Count} \&a, const \hyperlink{classcugar_1_1internals_1_1_weak_count}{Weak\+Count} \&b)
+\item 
+\mbox{\Hypertarget{classcugar_1_1internals_1_1_weak_count_aca3ea396c7d5e1a0be7a5bac88e44182}\label{classcugar_1_1internals_1_1_weak_count_aca3ea396c7d5e1a0be7a5bac88e44182}} 
+bool {\bfseries operator$<$} (const \hyperlink{classcugar_1_1internals_1_1_weak_count}{Weak\+Count} \&a, const \hyperlink{classcugar_1_1internals_1_1_weak_count}{Weak\+Count} \&b)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/shared\+\_\+pointer.\+h\end{DoxyCompactItemize}

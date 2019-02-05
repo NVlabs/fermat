@@ -1,0 +1,299 @@
+\hypertarget{class_mesh_base}{}\section{Mesh\+Base Class Reference}
+\label{class_mesh_base}\index{Mesh\+Base@{Mesh\+Base}}
+Inheritance diagram for Mesh\+Base\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_mesh_base}
+\end{center}
+\end{figure}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_mesh_base_a7280f0d6bacd225bb2d0263f17c05e8f}{load\+Model} (const std\+::string \&filename, bool insert\+Default\+Material=true, const \hyperlink{class_mesh_material_params}{Mesh\+Material\+Params} \&default\+Material=\hyperlink{class_mesh_material_params}{Mesh\+Material\+Params}())
+\item 
+{\footnotesize template$<$class Functor $>$ }\\void \hyperlink{class_mesh_base_a63937b1025ad3f9b4b2a4733a7409ff0}{for\+Each\+Group} (Functor functor) const
+\item 
+\mbox{\Hypertarget{class_mesh_base_a42fa472a3674008ac76ff1d4779f626f}\label{class_mesh_base_a42fa472a3674008ac76ff1d4779f626f}} 
+{\footnotesize template$<$class Functor $>$ }\\void {\bfseries for\+Each\+Group} (Functor functor)
+\item 
+\mbox{\Hypertarget{class_mesh_base_a37b7b4a3e6240858d04074492b5196a1}\label{class_mesh_base_a37b7b4a3e6240858d04074492b5196a1}} 
+int {\bfseries get\+Num\+Vertices} () const
+\item 
+\mbox{\Hypertarget{class_mesh_base_a8a3c2ae360ac491677a08d5dd1d6a70d}\label{class_mesh_base_a8a3c2ae360ac491677a08d5dd1d6a70d}} 
+int {\bfseries get\+Num\+Normals} () const
+\item 
+\mbox{\Hypertarget{class_mesh_base_abc6eb296a90a5d6b0459fcf8be694c73}\label{class_mesh_base_abc6eb296a90a5d6b0459fcf8be694c73}} 
+int {\bfseries get\+Num\+Colors} () const
+\item 
+\mbox{\Hypertarget{class_mesh_base_abeef82c768a229d566e646cf87a40972}\label{class_mesh_base_abeef82c768a229d566e646cf87a40972}} 
+int {\bfseries get\+Num\+Texture\+Coordinates} () const
+\item 
+\mbox{\Hypertarget{class_mesh_base_ae3c47be68bf007cdfa0eedd019fb7f6f}\label{class_mesh_base_ae3c47be68bf007cdfa0eedd019fb7f6f}} 
+int {\bfseries get\+Num\+Triangles} () const
+\item 
+\mbox{\Hypertarget{class_mesh_base_a05df5823f6b7b8bddc51c52d774d8c37}\label{class_mesh_base_a05df5823f6b7b8bddc51c52d774d8c37}} 
+int {\bfseries get\+Num\+Groups} () const
+\item 
+\mbox{\Hypertarget{class_mesh_base_ad7d9d7ad3d442611cbd981bc28e16a3a}\label{class_mesh_base_ad7d9d7ad3d442611cbd981bc28e16a3a}} 
+float $\ast$ {\bfseries get\+Vertex\+Data} ()
+\item 
+\mbox{\Hypertarget{class_mesh_base_aafcd96a999e70db59afb18963fcc0da9}\label{class_mesh_base_aafcd96a999e70db59afb18963fcc0da9}} 
+const float $\ast$ {\bfseries get\+Vertex\+Data} () const
+\item 
+\mbox{\Hypertarget{class_mesh_base_a3f54fa8530f04fb7ca5f65a5926d096d}\label{class_mesh_base_a3f54fa8530f04fb7ca5f65a5926d096d}} 
+float $\ast$ {\bfseries get\+Normal\+Data} ()
+\item 
+\mbox{\Hypertarget{class_mesh_base_a4889f21846770166952806dce1b6cb02}\label{class_mesh_base_a4889f21846770166952806dce1b6cb02}} 
+const float $\ast$ {\bfseries get\+Normal\+Data} () const
+\item 
+\mbox{\Hypertarget{class_mesh_base_a1d33890b0671efeab525e60dcd865f8d}\label{class_mesh_base_a1d33890b0671efeab525e60dcd865f8d}} 
+unsigned char $\ast$ {\bfseries get\+Color\+Data} ()
+\item 
+\mbox{\Hypertarget{class_mesh_base_ab87576c8d231a10f25646c7ac928aabd}\label{class_mesh_base_ab87576c8d231a10f25646c7ac928aabd}} 
+const unsigned char $\ast$ {\bfseries get\+Color\+Data} () const
+\item 
+\mbox{\Hypertarget{class_mesh_base_a0e7351cf40de55390a3738f84e65b4b0}\label{class_mesh_base_a0e7351cf40de55390a3738f84e65b4b0}} 
+float $\ast$ {\bfseries get\+Texture\+Coordinate\+Data} ()
+\item 
+\mbox{\Hypertarget{class_mesh_base_a08d10718a469776ce607ec81ba88b377}\label{class_mesh_base_a08d10718a469776ce607ec81ba88b377}} 
+const float $\ast$ {\bfseries get\+Texture\+Coordinate\+Data} () const
+\item 
+\mbox{\Hypertarget{class_mesh_base_afaea93d4ed2236c7233cb6e19c26696c}\label{class_mesh_base_afaea93d4ed2236c7233cb6e19c26696c}} 
+int {\bfseries get\+Vertex\+Stride} () const
+\item 
+\mbox{\Hypertarget{class_mesh_base_a1ba9f0d3dde4a27c62c83f69282b60fb}\label{class_mesh_base_a1ba9f0d3dde4a27c62c83f69282b60fb}} 
+int {\bfseries get\+Normal\+Stride} () const
+\item 
+\mbox{\Hypertarget{class_mesh_base_aac85eda0950200f6b82e1d519677c749}\label{class_mesh_base_aac85eda0950200f6b82e1d519677c749}} 
+int {\bfseries get\+Color\+Stride} () const
+\item 
+\mbox{\Hypertarget{class_mesh_base_ab38712efa2b4a0644375409843109767}\label{class_mesh_base_ab38712efa2b4a0644375409843109767}} 
+int {\bfseries get\+Texture\+Coordinate\+Stride} () const
+\item 
+\mbox{\Hypertarget{class_mesh_base_a3f462666ec028e4db6588218c6859614}\label{class_mesh_base_a3f462666ec028e4db6588218c6859614}} 
+const float $\ast$ {\bfseries get\+B\+Box\+Min} () const
+\item 
+\mbox{\Hypertarget{class_mesh_base_a2523965279aad48d2ec9d1c6dad52dd6}\label{class_mesh_base_a2523965279aad48d2ec9d1c6dad52dd6}} 
+const float $\ast$ {\bfseries get\+B\+Box\+Max} () const
+\item 
+\mbox{\Hypertarget{class_mesh_base_a3d1adf4bf4df703213bbffca0c11dc7e}\label{class_mesh_base_a3d1adf4bf4df703213bbffca0c11dc7e}} 
+void {\bfseries update\+B\+Box} ()
+\item 
+\mbox{\Hypertarget{class_mesh_base_a8f4908284b81877b9d2c228dd431fba9}\label{class_mesh_base_a8f4908284b81877b9d2c228dd431fba9}} 
+const std\+::string \& {\bfseries get\+Material\+Library\+Name} () const
+\item 
+\mbox{\Hypertarget{class_mesh_base_a34a34bb6274bc30fbd6b2f604067a112}\label{class_mesh_base_a34a34bb6274bc30fbd6b2f604067a112}} 
+\hyperlink{class_mesh_group}{Mesh\+Group} \& {\bfseries get\+Mesh\+Group} (const std\+::string \&group\+\_\+name)
+\item 
+\mbox{\Hypertarget{class_mesh_base_a4388d065bac6275d4302129118a91270}\label{class_mesh_base_a4388d065bac6275d4302129118a91270}} 
+const \hyperlink{class_mesh_group}{Mesh\+Group} \& {\bfseries get\+Mesh\+Group} (const std\+::string \&group\+\_\+name) const
+\item 
+\mbox{\Hypertarget{class_mesh_base_a886536a107777458b46f9542ec942f03}\label{class_mesh_base_a886536a107777458b46f9542ec942f03}} 
+size\+\_\+t {\bfseries get\+Material\+Count} () const
+\item 
+\mbox{\Hypertarget{class_mesh_base_a12b8c0065ea9c86fcb6788dc86197dc0}\label{class_mesh_base_a12b8c0065ea9c86fcb6788dc86197dc0}} 
+void {\bfseries set\+Mesh\+Material\+Params} (int i, const \hyperlink{class_mesh_material_params}{Mesh\+Material\+Params} \&params)
+\item 
+\mbox{\Hypertarget{class_mesh_base_a49ce5e8227d6e83fcf2d38d71ae88300}\label{class_mesh_base_a49ce5e8227d6e83fcf2d38d71ae88300}} 
+\hyperlink{class_mesh_material_params}{Mesh\+Material\+Params} \& {\bfseries get\+Mesh\+Material\+Params} (int i)
+\item 
+\mbox{\Hypertarget{class_mesh_base_af8481fb32c036f76c336f7ac6b605820}\label{class_mesh_base_af8481fb32c036f76c336f7ac6b605820}} 
+const \hyperlink{class_mesh_material_params}{Mesh\+Material\+Params} \& {\bfseries get\+Mesh\+Material\+Params} (int i) const
+\item 
+\mbox{\Hypertarget{class_mesh_base_ad5332b0f81d76300422e37c2553a202a}\label{class_mesh_base_ad5332b0f81d76300422e37c2553a202a}} 
+void {\bfseries set\+Mesh\+Grouping} (Mesh\+Grouping grouping)
+\item 
+\mbox{\Hypertarget{class_mesh_base_abddf7bcbe3c82b31488665ddd8d9f488}\label{class_mesh_base_abddf7bcbe3c82b31488665ddd8d9f488}} 
+Mesh\+Grouping {\bfseries get\+Mesh\+Grouping} () const
+\item 
+\mbox{\Hypertarget{class_mesh_base_a58df3c198977e2068ab6008f24ff2b46}\label{class_mesh_base_a58df3c198977e2068ab6008f24ff2b46}} 
+void {\bfseries load\+From\+Obj} (const std\+::string \&filename, bool insert\+Default\+Material, const \hyperlink{class_mesh_material_params}{Mesh\+Material\+Params} \&default\+Material)
+\item 
+void \hyperlink{class_mesh_base_a2abeac2d137eaea650ef5252cf81997a}{load\+Materials} (const std\+::string \&material\+\_\+filename)
+\item 
+void \hyperlink{class_mesh_base_a19e620f5497a82ac5508ee5fa2a8adce}{load\+From\+Ply} (const std\+::string \&filename, bool insert\+Default\+Material, const \hyperlink{class_mesh_material_params}{Mesh\+Material\+Params} \&default\+Material)
+\end{DoxyCompactItemize}
+\subsection*{Proteced Methods}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_mesh_base_aa982e061ba3880ebdec15cff5310123b}{set\+Vertex\+Data} (float $\ast$vertex\+\_\+data)
+\item 
+\mbox{\Hypertarget{class_mesh_base_ae6bd7dcaded6875a6fbc80fe09d517d3}\label{class_mesh_base_ae6bd7dcaded6875a6fbc80fe09d517d3}} 
+void {\bfseries set\+Normal\+Data} (float $\ast$normal\+\_\+data)
+\item 
+\mbox{\Hypertarget{class_mesh_base_a54f3706536926f73fa7ceb48c93613ba}\label{class_mesh_base_a54f3706536926f73fa7ceb48c93613ba}} 
+void {\bfseries set\+Color\+Data} (unsigned char $\ast$color\+\_\+data)
+\item 
+\mbox{\Hypertarget{class_mesh_base_a50a2d578f5ca8551a223c005d73eeb05}\label{class_mesh_base_a50a2d578f5ca8551a223c005d73eeb05}} 
+void {\bfseries set\+Texture\+Coordinate\+Data} (float $\ast$texture\+\_\+coordinate\+\_\+data)
+\item 
+\mbox{\Hypertarget{class_mesh_base_ac64e89644f2de5341e41b05ea161f642}\label{class_mesh_base_ac64e89644f2de5341e41b05ea161f642}} 
+void {\bfseries set\+Material\+Indices} (int $\ast$material\+\_\+indices)
+\item 
+\mbox{\Hypertarget{class_mesh_base_ab5dcf66aca578fe503a4c6bc850bd81e}\label{class_mesh_base_ab5dcf66aca578fe503a4c6bc850bd81e}} 
+void {\bfseries set\+Vertex\+Stride} (int vertex\+\_\+stride)
+\item 
+\mbox{\Hypertarget{class_mesh_base_ad7b51e2e6058a8d79ec0896136da0034}\label{class_mesh_base_ad7b51e2e6058a8d79ec0896136da0034}} 
+void {\bfseries set\+Normal\+Stride} (int normal\+\_\+stride)
+\item 
+\mbox{\Hypertarget{class_mesh_base_a6e93b05a9521bb14fcb68d9ce1771cfa}\label{class_mesh_base_a6e93b05a9521bb14fcb68d9ce1771cfa}} 
+void {\bfseries set\+Color\+Stride} (int color\+\_\+stride)
+\item 
+\mbox{\Hypertarget{class_mesh_base_a85b5140f3641d28e2468f6547ba365c1}\label{class_mesh_base_a85b5140f3641d28e2468f6547ba365c1}} 
+void {\bfseries set\+Texture\+Coordinate\+Stride} (int texture\+\_\+coordinate\+\_\+stride)
+\item 
+\mbox{\Hypertarget{class_mesh_base_a2ed368cf25b8c43ac18824c6dd980efa}\label{class_mesh_base_a2ed368cf25b8c43ac18824c6dd980efa}} 
+void {\bfseries set\+Vertex\+Index\+Stride} (int index\+\_\+stride)
+\item 
+\mbox{\Hypertarget{class_mesh_base_aa3541f6e43c78bf78bada0aed22515e4}\label{class_mesh_base_aa3541f6e43c78bf78bada0aed22515e4}} 
+void {\bfseries set\+Normal\+Index\+Stride} (int index\+\_\+stride)
+\item 
+\mbox{\Hypertarget{class_mesh_base_ae0f218a5d46a946dbd131321f3ecb6c5}\label{class_mesh_base_ae0f218a5d46a946dbd131321f3ecb6c5}} 
+void {\bfseries set\+Color\+Index\+Stride} (int index\+\_\+stride)
+\item 
+\mbox{\Hypertarget{class_mesh_base_a9406f179533bc966d60ca7a0d8f124b9}\label{class_mesh_base_a9406f179533bc966d60ca7a0d8f124b9}} 
+void {\bfseries set\+Texture\+Index\+Stride} (int index\+\_\+stride)
+\item 
+\mbox{\Hypertarget{class_mesh_base_a3be83f6c6a41e7b786c804eda9b9f247}\label{class_mesh_base_a3be83f6c6a41e7b786c804eda9b9f247}} 
+const std\+::string \& {\bfseries get\+Filename} () const
+\item 
+\mbox{\Hypertarget{class_mesh_base_a91f01999b6fa0fe764db833fdf3b17b1}\label{class_mesh_base_a91f01999b6fa0fe764db833fdf3b17b1}} 
+const std\+::string \& {\bfseries get\+Path\+Name} () const
+\item 
+virtual int \hyperlink{class_mesh_base_a508fde807d380849192391f28465fee4}{get\+Vertex\+Triangle\+Size} () const =0
+\item 
+\mbox{\Hypertarget{class_mesh_base_a249856ea8eb734ae36bdf51ea4bdbdd7}\label{class_mesh_base_a249856ea8eb734ae36bdf51ea4bdbdd7}} 
+virtual int {\bfseries get\+Normal\+Triangle\+Size} () const =0
+\item 
+\mbox{\Hypertarget{class_mesh_base_aa8b94fe22c0d261357d2386cf2b5624c}\label{class_mesh_base_aa8b94fe22c0d261357d2386cf2b5624c}} 
+virtual int {\bfseries get\+Texture\+Triangle\+Size} () const =0
+\item 
+virtual void \hyperlink{class_mesh_base_a25e192211e37cb69f9b5ce9aea25989a}{pre\+Process} ()=0
+\item 
+virtual void \hyperlink{class_mesh_base_a30c0ef8b3faabc9b41520b85dd9413bb}{allocate\+Data} ()=0
+\item 
+virtual void \hyperlink{class_mesh_base_a67eb9bc7c4f6b074626078fe7779a8a4}{start\+Writing\+Data} ()=0
+\item 
+virtual void \hyperlink{class_mesh_base_a49ec1a25d18103982974f424b77fadc0}{post\+Process} ()=0
+\item 
+virtual void \hyperlink{class_mesh_base_a000796d7b04985f137d5a1368e90bcc6}{finish\+Writing\+Data} ()=0
+\item 
+\mbox{\Hypertarget{class_mesh_base_acd4ecf54012593c422da74efb8afd49d}\label{class_mesh_base_acd4ecf54012593c422da74efb8afd49d}} 
+void {\bfseries compute\+Aabb} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_mesh_base_a30c0ef8b3faabc9b41520b85dd9413bb}\label{class_mesh_base_a30c0ef8b3faabc9b41520b85dd9413bb}} 
+\index{Mesh\+Base@{Mesh\+Base}!allocate\+Data@{allocate\+Data}}
+\index{allocate\+Data@{allocate\+Data}!Mesh\+Base@{Mesh\+Base}}
+\subsubsection{\texorpdfstring{allocate\+Data()}{allocateData()}}
+{\footnotesize\ttfamily virtual void Mesh\+Base\+::allocate\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+Call this to allocate all data for the mesh after setting num\+\_\+vertices, num\+\_\+normals, num\+\_\+colors, and num\+\_\+texture\+\_\+coordinates, as well as num\+\_\+triangles for all the groups. 
+
+Implemented in \hyperlink{class_mesh_loader_a8bdf8e0894e147be8d3e287f46feff6a}{Mesh\+Loader}.
+
+\mbox{\Hypertarget{class_mesh_base_a000796d7b04985f137d5a1368e90bcc6}\label{class_mesh_base_a000796d7b04985f137d5a1368e90bcc6}} 
+\index{Mesh\+Base@{Mesh\+Base}!finish\+Writing\+Data@{finish\+Writing\+Data}}
+\index{finish\+Writing\+Data@{finish\+Writing\+Data}!Mesh\+Base@{Mesh\+Base}}
+\subsubsection{\texorpdfstring{finish\+Writing\+Data()}{finishWritingData()}}
+{\footnotesize\ttfamily virtual void Mesh\+Base\+::finish\+Writing\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+Call this when done writing to data or group data. 
+
+Implemented in \hyperlink{class_mesh_loader_a65847db267f07f637deab0889c283bfa}{Mesh\+Loader}.
+
+\mbox{\Hypertarget{class_mesh_base_a63937b1025ad3f9b4b2a4733a7409ff0}\label{class_mesh_base_a63937b1025ad3f9b4b2a4733a7409ff0}} 
+\index{Mesh\+Base@{Mesh\+Base}!for\+Each\+Group@{for\+Each\+Group}}
+\index{for\+Each\+Group@{for\+Each\+Group}!Mesh\+Base@{Mesh\+Base}}
+\subsubsection{\texorpdfstring{for\+Each\+Group()}{forEachGroup()}}
+{\footnotesize\ttfamily template$<$class Functor $>$ \\
+void Mesh\+Base\+::for\+Each\+Group (\begin{DoxyParamCaption}\item[{Functor}]{functor }\end{DoxyParamCaption}) const}
+
+Calls functor( group ) for each group in the mesh, where \textquotesingle{}group\textquotesingle{} is of the type \hyperlink{class_mesh_group}{Mesh\+Group}. \mbox{\Hypertarget{class_mesh_base_a508fde807d380849192391f28465fee4}\label{class_mesh_base_a508fde807d380849192391f28465fee4}} 
+\index{Mesh\+Base@{Mesh\+Base}!get\+Vertex\+Triangle\+Size@{get\+Vertex\+Triangle\+Size}}
+\index{get\+Vertex\+Triangle\+Size@{get\+Vertex\+Triangle\+Size}!Mesh\+Base@{Mesh\+Base}}
+\subsubsection{\texorpdfstring{get\+Vertex\+Triangle\+Size()}{getVertexTriangleSize()}}
+{\footnotesize\ttfamily virtual int Mesh\+Base\+::get\+Vertex\+Triangle\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+These pure virtual functions allow subclasses to control much about the loading behavior. 
+
+Implemented in \hyperlink{class_mesh_loader_a3e228f5e2fbb1261cd76871ee07e4f58}{Mesh\+Loader}.
+
+\mbox{\Hypertarget{class_mesh_base_a19e620f5497a82ac5508ee5fa2a8adce}\label{class_mesh_base_a19e620f5497a82ac5508ee5fa2a8adce}} 
+\index{Mesh\+Base@{Mesh\+Base}!load\+From\+Ply@{load\+From\+Ply}}
+\index{load\+From\+Ply@{load\+From\+Ply}!Mesh\+Base@{Mesh\+Base}}
+\subsubsection{\texorpdfstring{load\+From\+Ply()}{loadFromPly()}}
+{\footnotesize\ttfamily void Mesh\+Base\+::load\+From\+Ply (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename,  }\item[{bool}]{insert\+Default\+Material,  }\item[{const \hyperlink{class_mesh_material_params}{Mesh\+Material\+Params} \&}]{default\+Material }\end{DoxyParamCaption})}
+
+Similar to load\+From\+Obj() bur for .ply files \mbox{\Hypertarget{class_mesh_base_a2abeac2d137eaea650ef5252cf81997a}\label{class_mesh_base_a2abeac2d137eaea650ef5252cf81997a}} 
+\index{Mesh\+Base@{Mesh\+Base}!load\+Materials@{load\+Materials}}
+\index{load\+Materials@{load\+Materials}!Mesh\+Base@{Mesh\+Base}}
+\subsubsection{\texorpdfstring{load\+Materials()}{loadMaterials()}}
+{\footnotesize\ttfamily void Mesh\+Base\+::load\+Materials (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{material\+\_\+filename }\end{DoxyParamCaption})}
+
+Load a material library \mbox{\Hypertarget{class_mesh_base_a7280f0d6bacd225bb2d0263f17c05e8f}\label{class_mesh_base_a7280f0d6bacd225bb2d0263f17c05e8f}} 
+\index{Mesh\+Base@{Mesh\+Base}!load\+Model@{load\+Model}}
+\index{load\+Model@{load\+Model}!Mesh\+Base@{Mesh\+Base}}
+\subsubsection{\texorpdfstring{load\+Model()}{loadModel()}}
+{\footnotesize\ttfamily void Mesh\+Base\+::load\+Model (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename,  }\item[{bool}]{insert\+Default\+Material = {\ttfamily true},  }\item[{const \hyperlink{class_mesh_material_params}{Mesh\+Material\+Params} \&}]{default\+Material = {\ttfamily \hyperlink{class_mesh_material_params}{Mesh\+Material\+Params}()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+The \hyperlink{group___c_u_d_a_module_ga2786ba75af2a254c03f272b6211b6379}{load()} method provides the overall model loading algorithm, which calls upon pure virtual functions which must override. The algorithm is as follows, where \textquotesingle{}function()\textquotesingle{} indicates a call to one of the pure virtual functions\+:
+
+
+\begin{DoxyItemize}
+\item \hyperlink{class_mesh_base_a25e192211e37cb69f9b5ce9aea25989a}{pre\+Process()}
+\item Does a first pass on the model file to collect information about the number of vertices, normals, colors, and texture coordinates in the file, which it stores in the mesh\textquotesingle{}s fields \textquotesingle{}num\+\_\+vertices\textquotesingle{}, \textquotesingle{}num\+\_\+normals\textquotesingle{}, etc. The first pass also creates the \textquotesingle{}groups\textquotesingle{} structure with \textquotesingle{}num\+\_\+triangles\textquotesingle{} set for each group\textquotesingle{}.
+\item \hyperlink{class_mesh_base_a30c0ef8b3faabc9b41520b85dd9413bb}{allocate\+Data()}, which allocates arrays, buffers, or whatever may be required for the subclass to own the data; the numbers collected during the \char`\"{}first pass\char`\"{} can be used for allocation sizes.
+\item \hyperlink{class_mesh_base_a67eb9bc7c4f6b074626078fe7779a8a4}{start\+Writing\+Data()}, which is useful for cases where the subclass must first prepare for being written to, such as mapping Buffers, in the case of OptiX buffers.
+\item The second pass, in which it actually loads the data from the model file and stores it in the array pointers vertex\+\_\+data, normal\+\_\+data, color\+\_\+data, and texture\+\_\+coordinate\+\_\+data, which should have been properly initalized to receive writes, either during \hyperlink{class_mesh_base_a30c0ef8b3faabc9b41520b85dd9413bb}{allocate\+Data()} or \hyperlink{class_mesh_base_a67eb9bc7c4f6b074626078fe7779a8a4}{start\+Writing\+Data()}. If any of these $\ast$\+\_\+data pointers are \textquotesingle{}0\textquotesingle{}, they will not be written to. Each group in the groups structure should also have had its field pointers vertex\+\_\+indices, normal\+\_\+indices, etc. initialized.
+\item Computes the bounding box on the model.
+\item \hyperlink{class_mesh_base_a49ec1a25d18103982974f424b77fadc0}{post\+Process()},
+\item \hyperlink{class_mesh_base_a000796d7b04985f137d5a1368e90bcc6}{finish\+Writing\+Data()}, for any cleanup that must be done, such as unmapping OptiX buffers.
+\end{DoxyItemize}
+
+Note that for uniformity with .ply loading, and for the accuracy of external algorithms that iterate over vertices (such as bounding box computation), or other alforithms that require an accurate count of the number of vertices actually used, 1-\/based indexing in .obj files is translated to 0-\/based indexing. \mbox{\Hypertarget{class_mesh_base_a49ec1a25d18103982974f424b77fadc0}\label{class_mesh_base_a49ec1a25d18103982974f424b77fadc0}} 
+\index{Mesh\+Base@{Mesh\+Base}!post\+Process@{post\+Process}}
+\index{post\+Process@{post\+Process}!Mesh\+Base@{Mesh\+Base}}
+\subsubsection{\texorpdfstring{post\+Process()}{postProcess()}}
+{\footnotesize\ttfamily virtual void Mesh\+Base\+::post\+Process (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+An injection point for subclasses to do load postprocessing 
+
+Implemented in \hyperlink{class_mesh_loader_a83a3c78a6c2df1087c9f9e28c63e6d51}{Mesh\+Loader}.
+
+\mbox{\Hypertarget{class_mesh_base_a25e192211e37cb69f9b5ce9aea25989a}\label{class_mesh_base_a25e192211e37cb69f9b5ce9aea25989a}} 
+\index{Mesh\+Base@{Mesh\+Base}!pre\+Process@{pre\+Process}}
+\index{pre\+Process@{pre\+Process}!Mesh\+Base@{Mesh\+Base}}
+\subsubsection{\texorpdfstring{pre\+Process()}{preProcess()}}
+{\footnotesize\ttfamily virtual void Mesh\+Base\+::pre\+Process (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+An injection point for subclasses to do any prep before file info is loaded 
+
+Implemented in \hyperlink{class_mesh_loader_ad9c636920b31629f1c271b20a5fdc29b}{Mesh\+Loader}.
+
+\mbox{\Hypertarget{class_mesh_base_aa982e061ba3880ebdec15cff5310123b}\label{class_mesh_base_aa982e061ba3880ebdec15cff5310123b}} 
+\index{Mesh\+Base@{Mesh\+Base}!set\+Vertex\+Data@{set\+Vertex\+Data}}
+\index{set\+Vertex\+Data@{set\+Vertex\+Data}!Mesh\+Base@{Mesh\+Base}}
+\subsubsection{\texorpdfstring{set\+Vertex\+Data()}{setVertexData()}}
+{\footnotesize\ttfamily void Mesh\+Base\+::set\+Vertex\+Data (\begin{DoxyParamCaption}\item[{float $\ast$}]{vertex\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+Accessors for derived classes \mbox{\Hypertarget{class_mesh_base_a67eb9bc7c4f6b074626078fe7779a8a4}\label{class_mesh_base_a67eb9bc7c4f6b074626078fe7779a8a4}} 
+\index{Mesh\+Base@{Mesh\+Base}!start\+Writing\+Data@{start\+Writing\+Data}}
+\index{start\+Writing\+Data@{start\+Writing\+Data}!Mesh\+Base@{Mesh\+Base}}
+\subsubsection{\texorpdfstring{start\+Writing\+Data()}{startWritingData()}}
+{\footnotesize\ttfamily virtual void Mesh\+Base\+::start\+Writing\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+Call this before writing any data to the mesh, to set up correct pointer values to write to for vertex\+\_\+data, normal\+\_\+data, etc., as well as vertex\+\_\+indices, normal\+\_\+indices, etc. for each of the groups.
+
+Call \hyperlink{class_mesh_base_a000796d7b04985f137d5a1368e90bcc6}{finish\+Writing\+Data()} when done. 
+
+Implemented in \hyperlink{class_mesh_loader_a18379e41707d8127947aa17a622d2807}{Mesh\+Loader}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/mesh/Mesh\+Base.\+h\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/mesh/Mesh\+Base.\+cpp\end{DoxyCompactItemize}

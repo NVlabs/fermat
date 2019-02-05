@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2011, NVIDIA Corporation
+ * Copyright (c) 2010-2018, NVIDIA Corporation
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -232,9 +232,9 @@ void Kd_builder<Integer>::build(
     // compute the Morton code for each point
   #if 1
 	{
-		const uint32 blockSize = (uint32)cugar::cuda::max_blocksize_with_highest_occupancy(kd::morton_kernel< Iterator,Integer,morton_functor<Integer,DIM> >, 0u);
+		const uint32 blockSize = (uint32)cugar::cuda::max_blocksize_with_highest_occupancy(kd::morton_kernel< Iterator,Integer,morton_functor<Integer,DIM,BboxType> >, 0u);
 		const dim3 gridSize(cugar::divide_ri(n_points, blockSize));
-		kd::morton_kernel<<< gridSize, blockSize >>> (n_points, points_begin, raw_pointer(m_codes), morton_functor<Integer,DIM>( bbox ));
+		kd::morton_kernel<<< gridSize, blockSize >>> (n_points, points_begin, raw_pointer(m_codes), morton_functor<Integer,DIM,BboxType>( bbox ));
 	}
 	//cuda::sync_and_check_error("morton codes");
   #else
@@ -242,7 +242,7 @@ void Kd_builder<Integer>::build(
         points_begin,
         points_begin + n_points,
         m_codes.begin(),
-        morton_functor<Integer,DIM>( bbox ) );
+        morton_functor<Integer,DIM,BboxType>( bbox ) );
   #endif
 
     // setup the point indices, from 0 to n_points-1

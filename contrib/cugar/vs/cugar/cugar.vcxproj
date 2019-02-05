@@ -23,6 +23,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>cugar</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <CudaToolkitCustomDir>$(CUDA_PATH)</CudaToolkitCustomDir>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -53,7 +54,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
-    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 9.2.props" />
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 10.0.props" />
   </ImportGroup>
   <ImportGroup Label="Shared">
   </ImportGroup>
@@ -98,16 +99,21 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;CUGAR_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;CUGAR_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\..\..\;..\..\contrib;%(AdditionalIncludeDirectories);$(CudaToolkitIncludeDir)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <CudaCompile>
+      <CodeGeneration>compute_52,sm_52</CodeGeneration>
+    </CudaCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -133,7 +139,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\..\..\;..\..\contrib;%(AdditionalIncludeDirectories);$(CudaToolkitIncludeDir)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
@@ -148,6 +154,7 @@
     <CudaCompile>
       <CodeGeneration>compute_70,sm_70</CodeGeneration>
       <TargetMachinePlatform>64</TargetMachinePlatform>
+      <PtxAsOptionV>true</PtxAsOptionV>
     </CudaCompile>
     <CustomBuildStep>
       <Command>copy $(TargetPath)/cugar.lib ../../win64/</Command>
@@ -160,6 +167,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\analysis\diff.h" />
     <ClInclude Include="..\..\analysis\project.h" />
     <ClInclude Include="..\..\basic\algorithms.h" />
     <ClInclude Include="..\..\basic\atomics.h" />
@@ -182,6 +190,7 @@
     <ClInclude Include="..\..\basic\primitives_inl.h" />
     <ClInclude Include="..\..\basic\priority_queue.h" />
     <ClInclude Include="..\..\basic\priority_queue_inline.h" />
+    <ClInclude Include="..\..\basic\register_array.h" />
     <ClInclude Include="..\..\basic\shared_pointer.h" />
     <ClInclude Include="..\..\basic\strided_iterator.h" />
     <ClInclude Include="..\..\basic\threads.h" />
@@ -197,10 +206,12 @@
     <ClInclude Include="..\..\bits\bitmask.h" />
     <ClInclude Include="..\..\bits\morton.h" />
     <ClInclude Include="..\..\bits\popcount.h" />
+    <ClInclude Include="..\..\bsdf\blend.h" />
     <ClInclude Include="..\..\bsdf\differential_geometry.h" />
     <ClInclude Include="..\..\bsdf\ggx.h" />
     <ClInclude Include="..\..\bsdf\ggx_common.h" />
     <ClInclude Include="..\..\bsdf\ggx_smith.h" />
+    <ClInclude Include="..\..\bsdf\bsdf_test.h" />
     <ClInclude Include="..\..\bsdf\lambert.h" />
     <ClInclude Include="..\..\bsdf\lambert_edf.h" />
     <ClInclude Include="..\..\bsdf\lambert_trans.h" />
@@ -214,8 +225,10 @@
     <ClInclude Include="..\..\bvh\cuda\lbvh_builder_inline.h" />
     <ClInclude Include="..\..\bvh\cuda\lbvh_test.h" />
     <ClInclude Include="..\..\bvh\cuda\packing.h" />
+    <ClInclude Include="..\..\color\hsv.h" />
     <ClInclude Include="..\..\color\rgbe.h" />
     <ClInclude Include="..\..\image\tga.h" />
+    <ClInclude Include="..\..\image\tga_utils.h" />
     <ClInclude Include="..\..\kd\cuda\kd_builder.h" />
     <ClInclude Include="..\..\kd\cuda\kd_builder_inline.h" />
     <ClInclude Include="..\..\kd\cuda\kd_context.h" />
@@ -227,6 +240,8 @@
     <ClInclude Include="..\..\linalg\linear.h" />
     <ClInclude Include="..\..\linalg\matrix.h" />
     <ClInclude Include="..\..\linalg\matrix_inline.h" />
+    <ClInclude Include="..\..\linalg\tensor.h" />
+    <ClInclude Include="..\..\linalg\tensor_inl.h" />
     <ClInclude Include="..\..\linalg\vector.h" />
     <ClInclude Include="..\..\linalg\vector_inl.h" />
     <ClInclude Include="..\..\radixtree\cuda\radixtree.h" />
@@ -239,8 +254,6 @@
     <ClInclude Include="..\..\sampling\em.h" />
     <ClInclude Include="..\..\sampling\em_inl.h" />
     <ClInclude Include="..\..\sampling\em_test.h" />
-    <ClInclude Include="..\..\sampling\latin_hypercube.h" />
-    <ClInclude Include="..\..\sampling\latin_hypercube_inline.h" />
     <ClInclude Include="..\..\sampling\lfsr.h" />
     <ClInclude Include="..\..\sampling\mixtures.h" />
     <ClInclude Include="..\..\sampling\multijitter.h" />
@@ -263,6 +276,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\analysis\diff_test.cpp" />
     <ClCompile Include="..\..\basic\atomics.cpp" />
     <ClCompile Include="..\..\basic\cuda\allocator.cpp" />
     <ClCompile Include="..\..\basic\cuda\arch.cpp" />
@@ -298,6 +312,7 @@
   <ItemGroup>
     <CudaCompile Include="..\..\basic\cuda\sort.cu" />
     <CudaCompile Include="..\..\bsdf\ltc_test.cu" />
+    <CudaCompile Include="..\..\bvh\cuda\lbvh_test_range_query.cu" />
     <CudaCompile Include="..\..\kd\cuda\kd_test.cu" />
   </ItemGroup>
   <ItemGroup>
@@ -305,6 +320,6 @@
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 9.2.targets" />
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 10.0.targets" />
   </ImportGroup>
 </Project>

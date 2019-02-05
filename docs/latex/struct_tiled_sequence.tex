@@ -1,0 +1,60 @@
+\hypertarget{struct_tiled_sequence}{}\section{Tiled\+Sequence Struct Reference}
+\label{struct_tiled_sequence}\index{Tiled\+Sequence@{Tiled\+Sequence}}
+
+
+\subsection{Detailed description}
+A tiled sample sequence.
+
+\begin{DoxyParagraph}{}
+Basically, represents a tiled 2d grid of N-\/dimensional sample sequences, which can be conveniently \char`\"{}sliced\char`\"{} in 1d or 2d sections (each such slice representing a 2d grid of 1d or 2d samples). The per-\/pixel sequences are constructed by \char`\"{}offsetting\char`\"{} a base, common sequence using a set of per-\/pixel N-\/dimensional shifts. The offsetting process is a regular Cranley-\/\+Patterson rotation, i.\+e. the {\itshape d}-\/th coordinate of the final sequence for pixel {\itshape p} is given by\+: ~\newline
+
+\begin{DoxyCode}
+sequence(p,d) = \hyperlink{group___basic_gaa6ea8810d6e0f5f42d49be632566378c}{mod}( base\_sequence[d] + shift[p][d], 1 );
+\end{DoxyCode}
+ The sequence has a further {\itshape time} dimension that can be used for progressive rendering, which can be advanced calling the Tiled\+Sequence\+::set\+\_\+instance() method. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Notice this is a host container for a device-\/side sequence. Once it is set up, the device-\/side view can be queried using the Tiled\+Sequence\+::view() method. 
+\end{DoxyParagraph}
+
+
+{\ttfamily \#include $<$tiled\+\_\+sequence.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_tiled_sequence_a5260fe70f7d5c3aa736efccce4f4bc1c}\label{struct_tiled_sequence_a5260fe70f7d5c3aa736efccce4f4bc1c}} 
+void {\bfseries setup} (const uint32 \+\_\+n\+\_\+dimensions, const uint32 \+\_\+tile\+\_\+size, const bool \+\_\+random=false)
+\item 
+\mbox{\Hypertarget{struct_tiled_sequence_a4b7fa2dedf87c00b86d87b8e00ecb947}\label{struct_tiled_sequence_a4b7fa2dedf87c00b86d87b8e00ecb947}} 
+void {\bfseries set\+\_\+instance} (const uint32 instance)
+\item 
+\mbox{\Hypertarget{struct_tiled_sequence_ab5b65e36837cc7cd30d45b78e316447a}\label{struct_tiled_sequence_ab5b65e36837cc7cd30d45b78e316447a}} 
+\hyperlink{struct_tiled_sequence_view}{Tiled\+Sequence\+View} {\bfseries view} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_tiled_sequence_acc4eff780fa87d92e5f7d9d76162fbc7}\label{struct_tiled_sequence_acc4eff780fa87d92e5f7d9d76162fbc7}} 
+uint32 {\bfseries n\+\_\+dimensions}
+\item 
+\mbox{\Hypertarget{struct_tiled_sequence_a2aa4489d03e4ee0e57e8dbcbc55fdeb3}\label{struct_tiled_sequence_a2aa4489d03e4ee0e57e8dbcbc55fdeb3}} 
+uint32 {\bfseries tile\+\_\+size}
+\item 
+\mbox{\Hypertarget{struct_tiled_sequence_a76da4c191405ced146640d5c3845f14a}\label{struct_tiled_sequence_a76da4c191405ced146640d5c3845f14a}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float $>$ {\bfseries m\+\_\+shifts}
+\item 
+\mbox{\Hypertarget{struct_tiled_sequence_a8e42e7644c7fbd0c1405f2e3423bb9af}\label{struct_tiled_sequence_a8e42e7644c7fbd0c1405f2e3423bb9af}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float $>$ {\bfseries m\+\_\+tile\+\_\+shifts}
+\item 
+\mbox{\Hypertarget{struct_tiled_sequence_abc0f33464eb2635f82f75795161016d1}\label{struct_tiled_sequence_abc0f33464eb2635f82f75795161016d1}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float $>$ {\bfseries m\+\_\+samples}
+\item 
+\mbox{\Hypertarget{struct_tiled_sequence_af9c60d31fcf96d55746961c588efa6b5}\label{struct_tiled_sequence_af9c60d31fcf96d55746961c588efa6b5}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float $>$ {\bfseries m\+\_\+sequence}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/tiled\+\_\+sequence.\+h\end{DoxyCompactItemize}

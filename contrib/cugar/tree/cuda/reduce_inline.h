@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2011, NVIDIA Corporation
+ * Copyright (c) 2010-2018, NVIDIA Corporation
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -115,7 +115,7 @@ void reduce_with_leaf_pointers(
 
     caching_device_vector<uint32> visited( n_nodes, 0u );
 
-    reduce_from_leaves_kernel<BLOCK_SIZE> <<<n_blocks,BLOCK_SIZE>>> (
+    reduce_from_leaves_kernel<BLOCK_SIZE> <<<uint32(n_blocks),BLOCK_SIZE>>> (
         tree,
         in_values,
         out_values,
@@ -209,7 +209,7 @@ void reduce_without_leaf_pointers(
 
     caching_device_vector<uint32> visited( n_nodes, 0u );
 
-    reduce_from_nodes_kernel<BLOCK_SIZE, LEAF_REDUCTION> <<<n_blocks,BLOCK_SIZE>>> (
+    reduce_from_nodes_kernel<BLOCK_SIZE, LEAF_REDUCTION> <<<uint32(n_blocks),BLOCK_SIZE>>> (
         tree,
         in_values,
         out_values,

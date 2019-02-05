@@ -1,0 +1,38 @@
+\hypertarget{structcugar_1_1_l_f_s_r_random_stream}{}\section{cugar\+:\+:L\+F\+S\+R\+Random\+Stream Struct Reference}
+\label{structcugar_1_1_l_f_s_r_random_stream}\index{cugar\+::\+L\+F\+S\+R\+Random\+Stream@{cugar\+::\+L\+F\+S\+R\+Random\+Stream}}
+
+
+\subsection{Detailed description}
+An implementation of the small linear feedback shift registers (L\+F\+SR) for use in a Markov chain quasi-\/\+Monte Carlo context, as described in S. Chen, M. Matsumoto, T. Nishimura, and A. Owen\+: \char`\"{}\+New inputs and methods for Markov
+chain quasi-\/\+Monte Carlo\char`\"{}, and S. Chen\+: \char`\"{}\+Consistence and convergence rate of
+\+Markov chain quasi-\/\+Monte Carlo with examples\char`\"{}. Apart from the matrix that describes the recurrence, this class is stateless, and can therefore be easily shared in a multi-\/threaded context.
+
+\href{https://en.wikipedia.org/wiki/Linear-feedback_shift_register}{\tt https\+://en.\+wikipedia.\+org/wiki/\+Linear-\/feedback\+\_\+shift\+\_\+register} 
+
+{\ttfamily \#include $<$lfsr.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_l_f_s_r_random_stream_a941ae605b20b4e0a3663ec6c2a8226c8}\label{structcugar_1_1_l_f_s_r_random_stream_a941ae605b20b4e0a3663ec6c2a8226c8}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE {\bfseries L\+F\+S\+R\+Random\+Stream} (\hyperlink{classcugar_1_1_l_f_s_r_generator_matrix}{L\+F\+S\+R\+Generator\+Matrix} $\ast$matrix, const uint32 state, const uint32 scramble=1361u)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float {\bfseries next} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_l_f_s_r_random_stream_ae1f628c733a9bc00e1b8defbfd801d6e}\label{structcugar_1_1_l_f_s_r_random_stream_ae1f628c733a9bc00e1b8defbfd801d6e}} 
+\hyperlink{classcugar_1_1_l_f_s_r_generator_matrix}{L\+F\+S\+R\+Generator\+Matrix} $\ast$ {\bfseries m\+\_\+matrix}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_l_f_s_r_random_stream_a989706e7a76a3f61d31e4c51fb4d83eb}\label{structcugar_1_1_l_f_s_r_random_stream_a989706e7a76a3f61d31e4c51fb4d83eb}} 
+uint32 {\bfseries m\+\_\+state}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_l_f_s_r_random_stream_a0ce7689c37576066a22526271ce30d85}\label{structcugar_1_1_l_f_s_r_random_stream_a0ce7689c37576066a22526271ce30d85}} 
+uint32 {\bfseries m\+\_\+scramble}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/sampling/\hyperlink{lfsr_8h}{lfsr.\+h}\end{DoxyCompactItemize}

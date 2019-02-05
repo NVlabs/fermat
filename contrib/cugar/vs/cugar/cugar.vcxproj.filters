@@ -153,11 +153,29 @@
     <ClInclude Include="..\..\sampling\em_test.h">
       <Filter>Source Files\cugar\sampling</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\sampling\latin_hypercube.h">
-      <Filter>Source Files\cugar\sampling</Filter>
+    <ClInclude Include="..\..\image\tga_utils.h">
+      <Filter>Source Files\cugar\image</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\sampling\latin_hypercube_inline.h">
-      <Filter>Source Files\cugar\sampling</Filter>
+    <ClInclude Include="..\..\color\hsv.h">
+      <Filter>Source Files\cugar\color</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\bsdf\blend.h">
+      <Filter>Source Files\cugar\bsdf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\basic\register_array.h">
+      <Filter>Source Files\cugar\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\analysis\diff.h">
+      <Filter>Source Files\cugar\analysis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\linalg\tensor.h">
+      <Filter>Source Files\cugar\linalg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\linalg\tensor_inl.h">
+      <Filter>Source Files\cugar\linalg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\bsdf\bsdf_test.h">
+      <Filter>Source Files\cugar\bsdf</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -401,6 +419,9 @@
     <ClCompile Include="..\..\sampling\em_test.cpp">
       <Filter>Source Files\cugar\sampling</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\analysis\diff_test.cpp">
+      <Filter>Source Files\cugar\analysis</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\basic\timer.cpp">
@@ -434,6 +455,9 @@
     </CudaCompile>
     <CudaCompile Include="..\..\kd\cuda\kd_test.cu">
       <Filter>Source Files\cugar\kd\cuda</Filter>
+    </CudaCompile>
+    <CudaCompile Include="..\..\bvh\cuda\lbvh_test_range_query.cu">
+      <Filter>Source Files\cugar\bvh\cuda</Filter>
     </CudaCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,52 @@
+Top\+: \hyperlink{_overture_contents_page}{Contents}
+
+ \begin{DoxyParagraph}{}
+
+\footnotesize \textquotesingle{}Modern Hall, at dusk\textquotesingle{}, based on a \href{http://www.blendswap.com/blends/view/51997}{\tt model} by {\itshape New\+See2l035}
+\normalsize 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Nearly all physically based rendering algorithms necessitate to perform ray tracing queries against some geometry. In Fermat this happens through a ray tracing context, which provides the following interface\+: ~\newline
+
+\begin{DoxyCode}
+\textcolor{comment}{// A class defining core ray tracing functionality, ranging from geometry setup to}
+\textcolor{comment}{// performing actual ray tracing queries.}
+\textcolor{comment}{//}
+\textcolor{keyword}{struct }\hyperlink{struct_r_t_context}{RTContext}
+\{
+   \textcolor{comment}{// create a ray tracing context on the given triangle mesh}
+   \textcolor{comment}{//}
+   \textcolor{keywordtype}{void} create\_geometry(
+       \textcolor{keyword}{const} uint32    tri\_count,
+       \textcolor{keyword}{const} \textcolor{keywordtype}{int}*      index\_ptr,
+       \textcolor{keyword}{const} uint32    vertex\_count,
+       \textcolor{keyword}{const} \textcolor{keywordtype}{float}*    vertex\_ptr,
+       \textcolor{keyword}{const} \textcolor{keywordtype}{int}*      normal\_index\_ptr,
+       \textcolor{keyword}{const} \textcolor{keywordtype}{float}*    normal\_vertex\_ptr,
+       \textcolor{keyword}{const} \textcolor{keywordtype}{int}*      tex\_index\_ptr,
+       \textcolor{keyword}{const} \textcolor{keywordtype}{float}*    tex\_vertex\_ptr,
+       \textcolor{keyword}{const} \textcolor{keywordtype}{int}*      material\_index\_ptr);
+
+   \textcolor{comment}{// trace a set of rays, returning a full hit}
+   \textcolor{comment}{//}
+   \textcolor{keywordtype}{void} trace(\textcolor{keyword}{const} uint32 count, \textcolor{keyword}{const} \hyperlink{struct_ray}{Ray}* rays, \hyperlink{struct_hit}{Hit}* hits);
+
+   \textcolor{comment}{// trace a set of masked rays, returning a full hit}
+   \textcolor{comment}{//}
+   \textcolor{keywordtype}{void} trace(\textcolor{keyword}{const} uint32 count, \textcolor{keyword}{const} \hyperlink{struct_masked_ray}{MaskedRay}* rays, \hyperlink{struct_hit}{Hit}* hits);
+
+   \textcolor{comment}{// trace a set of masked shadow rays, returning a full primitive hit}
+   \textcolor{comment}{//}
+   \textcolor{keywordtype}{void} trace\_shadow(\textcolor{keyword}{const} uint32 count, \textcolor{keyword}{const} \hyperlink{struct_masked_ray}{MaskedRay}* rays, \hyperlink{struct_hit}{Hit}* hits);
+
+   \textcolor{comment}{// trace a set of masked shadow rays, returning a single bool hit|no hit bit for each ray}
+   \textcolor{comment}{//}
+   \textcolor{keywordtype}{void} trace\_shadow(\textcolor{keyword}{const} uint32 count, \textcolor{keyword}{const} \hyperlink{struct_masked_ray}{MaskedRay}* rays, uint32* binary\_hits);
+\};
+\end{DoxyCode}
+ ~\newline
+ Notice how there are two types of rays that can be traced\+: \hyperlink{struct_ray}{Ray} and \hyperlink{struct_masked_ray}{Masked\+Ray}. The first is specified by an origin, a direction, and a full \mbox{[}{\itshape tmin}, {\itshape tmax}\mbox{]} range specifying valid intersection distances. ~\newline
+ The second is specified by an origin, a direction, a mask, and a single maximum intersection distance, {\itshape tmax}. The mask is used to allow masking out geometry at ray tracing time\+: the ray\textquotesingle{}s mask is OR\textquotesingle{}ed against the triangles masks, and triangles which result in a non-\/zero mask get discarded. ~\newline
+ The other difference is in the type of tracing queries that can be performed\+: regular trace() queries return the closest hit among all geometries, while trace\+\_\+shadow() queries may return upon the first hit encountered during the traversal process, in practice simply answering the question\+: \char`\"{}is the given ray segment shadowed?\char`\"{}.
+\end{DoxyParagraph}
+Next\+: \hyperlink{_rendering_context_page}{The Rendering Context} 

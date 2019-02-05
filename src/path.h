@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -40,7 +40,13 @@
 ///@addtogroup Fermat
 ///@{
 
-///@addtogroup PathModule
+///@defgroup PathModule
+///\par
+/// This module defines the basic classes used to represent and manipulate light paths throughout Fermat,
+/// particularly:
+///\par
+/// - Path : represent a light path in compact form, storing its vertex ids only
+/// - BidirPath : represent a bidirectional path in compact form, storing its vertex ids only
 ///@{
 
 ///
@@ -91,7 +97,7 @@ struct Path
 	}
 
 	FERMAT_HOST_DEVICE
-	float G(const uint32 i, const RendererView& renderer) const
+	float G(const uint32 i, const RenderingContextView& renderer) const
 	{
 		VertexGeometry v;
 		VertexGeometry v_next;
@@ -109,7 +115,7 @@ struct Path
 	}
 
 	FERMAT_HOST_DEVICE
-	cugar::Vector3f edge_L(const uint32 i, const RendererView& renderer) const
+	cugar::Vector3f edge_L(const uint32 i, const RenderingContextView& renderer) const
 	{
 		return
 			interpolate_position(renderer.mesh, v_L(i + 1)) -
@@ -117,7 +123,7 @@ struct Path
 	}
 
 	FERMAT_HOST_DEVICE
-	cugar::Vector3f edge_E(const uint32 i, const RendererView& renderer) const
+	cugar::Vector3f edge_E(const uint32 i, const RenderingContextView& renderer) const
 	{
 		return
 			interpolate_position(renderer.mesh, v_E(i + 1)) -
@@ -188,7 +194,7 @@ struct BidirPath
 	}
 
 	FERMAT_HOST_DEVICE
-	float G(const uint32 i, const RendererView& renderer) const
+	float G(const uint32 i, const RenderingContextView& renderer) const
 	{
 		VertexGeometry v;
 		VertexGeometry v_next;
@@ -206,7 +212,7 @@ struct BidirPath
 	}
 
 	FERMAT_HOST_DEVICE
-	cugar::Vector3f edge_L(const uint32 i, const RendererView& renderer) const
+	cugar::Vector3f edge_L(const uint32 i, const RenderingContextView& renderer) const
 	{
 		return
 			interpolate_position(renderer.mesh, v_L(i + 1)) -
@@ -214,11 +220,61 @@ struct BidirPath
 	}
 
 	FERMAT_HOST_DEVICE
-	cugar::Vector3f edge_E(const uint32 i, const RendererView& renderer) const
+	cugar::Vector3f edge_E(const uint32 i, const RenderingContextView& renderer) const
 	{
 		return
 			interpolate_position(renderer.mesh, v_E(i + 1)) -
 			interpolate_position(renderer.mesh, v_E(i));
+	}
+};
+
+
+///
+/// A class to represent a cached quantity associated with light paths
+///
+template <typename T>
+struct PathCache
+{
+	T*			vertices;
+	uint32		n_vertices;
+	uint32		stride;
+
+	FERMAT_HOST_DEVICE
+	PathCache() {}
+
+	FERMAT_HOST_DEVICE
+	PathCache(const uint32 _n_vertices, T* _verts, const uint32 _stride) :
+		vertices(_verts),
+		n_vertices(_n_vertices),
+		stride(_stride)
+	{}
+
+	FERMAT_HOST_DEVICE
+	const T& v_L(const uint32 i) const
+	{
+		FERMAT_ASSERT(i < n_vertices);
+		return vertices[i * stride];
+	}
+
+	FERMAT_HOST_DEVICE
+	const T& v_E(const uint32 i) const
+	{
+		FERMAT_ASSERT(i < n_vertices);
+		return vertices[(n_vertices - i - 1) * stride];
+	}
+
+	FERMAT_HOST_DEVICE
+	T& v_L(const uint32 i)
+	{
+		FERMAT_ASSERT(i < n_vertices);
+		return vertices[i * stride];
+	}
+
+	FERMAT_HOST_DEVICE
+	T& v_E(const uint32 i)
+	{
+		FERMAT_ASSERT(i < n_vertices);
+		return vertices[(n_vertices - i - 1) * stride];
 	}
 };
 

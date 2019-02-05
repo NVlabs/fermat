@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -36,7 +36,7 @@
 
 // A class encpasulating our GLUT renderer
 //
-struct GlutViewer : public Renderer
+struct GlutViewer : public RenderingContext
 {
 	enum Orientation { X_UP, Y_UP, Z_UP };
 
@@ -50,14 +50,15 @@ struct GlutViewer : public Renderer
 
 	GLuint					m_texture;
 	Camera					m_camera_o;
-	DiskLight				m_light_o;
+	DirectionalLight		m_light_o;
 	int2					m_mouse;
+	float					m_mouse_depth;
 	bool					m_dollying;
 	bool					m_panning;
 	bool					m_walking;
 	bool					m_zooming;
 	bool					m_moving_selection;
-	bool					m_light_zooming;
+	bool					m_light_rotation;
 	Orientation				m_orientation;
 	bool					m_dirty;
 	bool					m_dirty_geo;
@@ -68,9 +69,13 @@ struct GlutViewer : public Renderer
 	FILE*					m_camera_path;
 	bool					m_record;
 	bool					m_playback;
+	bool					m_accumulation;
 
 	cugar::Mutex mutex;
 };
 
-// global Renderer instance
+// global RenderingContext instance
 extern GlutViewer* s_renderer;
+
+// main entry point to start the viewer
+FERMAT_API void start_glut_viewer(int argc, char** argv);

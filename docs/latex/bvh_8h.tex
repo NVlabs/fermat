@@ -1,0 +1,43 @@
+\hypertarget{bvh_8h}{}\section{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bvh/bvh.h File Reference}
+\label{bvh_8h}\index{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bvh/bvh.\+h@{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bvh/bvh.\+h}}
+
+
+Entry point to the generic Bounding Volume Hierarchy library.  
+
+
+{\ttfamily \#include $<$cugar/bvh/bvh\+\_\+node.\+h$>$}\newline
+{\ttfamily \#include $<$cugar/bintree/bintree\+\_\+node.\+h$>$}\newline
+{\ttfamily \#include $<$cugar/linalg/vector.\+h$>$}\newline
+{\ttfamily \#include $<$cugar/linalg/bbox.\+h$>$}\newline
+{\ttfamily \#include $<$cugar/basic/cuda/pointers.\+h$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$stack$>$}\newline
+{\ttfamily \#include $<$cugar/bvh/bvh\+\_\+inline.\+h$>$}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcugar_1_1_bvh}{cugar\+::\+Bvh$<$ D\+I\+M $>$}
+\item 
+class \hyperlink{classcugar_1_1_bvh__builder}{cugar\+::\+Bvh\+\_\+builder$<$ D\+I\+M $>$}
+\item 
+struct \hyperlink{structcugar_1_1_bvh__node__3d__bbox__iterator}{cugar\+::\+Bvh\+\_\+node\+\_\+3d\+\_\+bbox\+\_\+iterator}
+\item 
+struct \hyperlink{structcugar_1_1_bvh__node__3d__bbox__iterator_1_1_reference}{cugar\+::\+Bvh\+\_\+node\+\_\+3d\+\_\+bbox\+\_\+iterator\+::\+Reference}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespacecugar}{cugar}
+\begin{DoxyCompactList}\small\item\em Define a \hyperlink{structcugar_1_1vector__view}{vector\+\_\+view} P\+OD type and \hyperlink{namespacecugar_a347f91de482f0cb8dcba21c086b0aa46}{plain\+\_\+view()} for std\+::vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{group__bvh_ga3f50a853dcace7bd0d1a8503f0ef00fe}{cugar\+::compute\+\_\+sah\+\_\+cost} (const Bvh$<$ 3 $>$ \&bvh, uint32 node\+\_\+index=0)
+\begin{DoxyCompactList}\small\item\em compute S\+AH cost of a subtree \end{DoxyCompactList}\item 
+void \hyperlink{group__bvh_ga0b0f275e25ece0b073a2b866a31cf9e2}{cugar\+::build\+\_\+skip\+\_\+nodes} (const Bvh\+\_\+node $\ast$nodes, uint32 $\ast$skip\+\_\+nodes)
+\begin{DoxyCompactList}\small\item\em build skip nodes for a tree \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Entry point to the generic Bounding Volume Hierarchy library. 
+

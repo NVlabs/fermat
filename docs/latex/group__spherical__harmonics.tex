@@ -1,0 +1,179 @@
+\hypertarget{group__spherical__harmonics}{}\section{Spherical and Zonal Harmonics}
+\label{group__spherical__harmonics}\index{Spherical and Zonal Harmonics@{Spherical and Zonal Harmonics}}
+
+
+\subsection{Detailed Description}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcugar_1_1_s_h__basis}{cugar\+::\+S\+H\+\_\+basis$<$ L $>$}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Vector3 $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{group__spherical__harmonics_ga4a19db33e0259a49e5d872f18d7996c2}{cugar\+::sh} (const int32 l, const int32 m, const Vector3 \&v)
+\item 
+{\footnotesize template$<$int32 l, typename Vector3 $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{group__spherical__harmonics_gacbaf1fe0a158310ce09117940766f617}{cugar\+::sh} (const int32 m, const Vector3 \&v)
+\item 
+{\footnotesize template$<$int32 l, int32 m, typename Vector3 $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{group__spherical__harmonics_ga41a8f3c96516611a04d677c1af75c542}{cugar\+::sh} (const Vector3 \&v)
+\item 
+{\footnotesize template$<$typename Z\+H\+Vector , typename S\+H\+Vector , typename Vector3 $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group__spherical__harmonics_ga5d1edfb2dfc7c53051c512e0d7c6d21d}{cugar\+::rotate\+\_\+\+ZH} (const int32 L, const Z\+H\+Vector \&zh\+\_\+coeff, const Vector3 \&d, S\+H\+Vector \&sh\+\_\+coeff)
+\item 
+{\footnotesize template$<$int32 L, typename Z\+H\+Vector , typename S\+H\+Vector , typename Vector3 $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group__spherical__harmonics_ga26fd25de1095f8c798028bce5bcf3922}{cugar\+::rotate\+\_\+\+ZH} (const Z\+H\+Vector \&zh\+\_\+coeff, const Vector3 \&d, S\+H\+Vector \&sh\+\_\+coeff)
+\item 
+{\footnotesize template$<$int32 l, int32 m, typename Vector3 $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{group__spherical__harmonics_gafb4e2ee177fc0d4bf43999edd3aed697}{cugar\+::rotate\+\_\+\+ZH} (const float zh\+\_\+l, const Vector3 \&d)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{group__spherical__harmonics_ga42386bd8275ff973952f8d88e6c58cbf}{cugar\+::sh\+\_\+legendre\+\_\+polynomial} (const uint32 l, const uint32 m, const float x, const float y)
+\item 
+{\footnotesize template$<$typename Output\+Iterator $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group__spherical__harmonics_ga609b7d6a3f4d56d1d111b6d50a8d82a7}{cugar\+::sh\+\_\+legendre\+\_\+integrals} (const uint32 n, const float x, Output\+Iterator r)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{group__spherical__harmonics_ga8018a68e82e9f27c253af9880d70f98d}{cugar\+::sh\+\_\+polar\+\_\+integral} (const int32 m, const float phi)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__spherical__harmonics_ga5d1edfb2dfc7c53051c512e0d7c6d21d}\label{group__spherical__harmonics_ga5d1edfb2dfc7c53051c512e0d7c6d21d}} 
+\index{Spherical and Zonal Harmonics@{Spherical and Zonal Harmonics}!rotate\+\_\+\+ZH@{rotate\+\_\+\+ZH}}
+\index{rotate\+\_\+\+ZH@{rotate\+\_\+\+ZH}!Spherical and Zonal Harmonics@{Spherical and Zonal Harmonics}}
+\subsubsection{\texorpdfstring{rotate\+\_\+\+Z\+H()}{rotate\_ZH()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename Z\+H\+Vector , typename S\+H\+Vector , typename Vector3 $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void cugar\+::rotate\+\_\+\+ZH (\begin{DoxyParamCaption}\item[{const int32}]{L,  }\item[{const Z\+H\+Vector \&}]{zh\+\_\+coeff,  }\item[{const Vector3 \&}]{d,  }\item[{S\+H\+Vector \&}]{sh\+\_\+coeff }\end{DoxyParamCaption})}
+
+rotate a zonal harmonics to an arbitrary direction vector
+
+
+\begin{DoxyParams}{Parameters}
+{\em L} & number of bands \\
+\hline
+{\em zh\+\_\+coeff} & input Zonal Harmonics coefficients \\
+\hline
+{\em d} & input vector \\
+\hline
+{\em sh\+\_\+coeff} & output Spherical Harmonics coefficients \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__spherical__harmonics_ga26fd25de1095f8c798028bce5bcf3922}\label{group__spherical__harmonics_ga26fd25de1095f8c798028bce5bcf3922}} 
+\index{Spherical and Zonal Harmonics@{Spherical and Zonal Harmonics}!rotate\+\_\+\+ZH@{rotate\+\_\+\+ZH}}
+\index{rotate\+\_\+\+ZH@{rotate\+\_\+\+ZH}!Spherical and Zonal Harmonics@{Spherical and Zonal Harmonics}}
+\subsubsection{\texorpdfstring{rotate\+\_\+\+Z\+H()}{rotate\_ZH()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$int32 L, typename Z\+H\+Vector , typename S\+H\+Vector , typename Vector3 $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void cugar\+::rotate\+\_\+\+ZH (\begin{DoxyParamCaption}\item[{const Z\+H\+Vector \&}]{zh\+\_\+coeff,  }\item[{const Vector3 \&}]{d,  }\item[{S\+H\+Vector \&}]{sh\+\_\+coeff }\end{DoxyParamCaption})}
+
+rotate a zonal harmonics to an arbitrary direction vector, with the number of bands specified at compile-\/time.
+
+
+\begin{DoxyParams}{Parameters}
+{\em zh\+\_\+coeff} & input Zonal Harmonics coefficients \\
+\hline
+{\em d} & input vector \\
+\hline
+{\em sh\+\_\+coeff} & output Spherical Harmonics coefficients \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__spherical__harmonics_gafb4e2ee177fc0d4bf43999edd3aed697}\label{group__spherical__harmonics_gafb4e2ee177fc0d4bf43999edd3aed697}} 
+\index{Spherical and Zonal Harmonics@{Spherical and Zonal Harmonics}!rotate\+\_\+\+ZH@{rotate\+\_\+\+ZH}}
+\index{rotate\+\_\+\+ZH@{rotate\+\_\+\+ZH}!Spherical and Zonal Harmonics@{Spherical and Zonal Harmonics}}
+\subsubsection{\texorpdfstring{rotate\+\_\+\+Z\+H()}{rotate\_ZH()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$int32 l, int32 m, typename Vector3 $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float cugar\+::rotate\+\_\+\+ZH (\begin{DoxyParamCaption}\item[{const float}]{zh\+\_\+l,  }\item[{const Vector3 \&}]{d }\end{DoxyParamCaption})}
+
+return the (l,m) spherical harmonics coefficient of a zonal harmonics function rotated to match a given axis.
+
+
+\begin{DoxyParams}{Parameters}
+{\em zh\+\_\+l} & l-\/band zonal harmonics coefficient \\
+\hline
+{\em d} & input vector \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__spherical__harmonics_ga4a19db33e0259a49e5d872f18d7996c2}\label{group__spherical__harmonics_ga4a19db33e0259a49e5d872f18d7996c2}} 
+\index{Spherical and Zonal Harmonics@{Spherical and Zonal Harmonics}!sh@{sh}}
+\index{sh@{sh}!Spherical and Zonal Harmonics@{Spherical and Zonal Harmonics}}
+\subsubsection{\texorpdfstring{sh()}{sh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename Vector3 $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float cugar\+::sh (\begin{DoxyParamCaption}\item[{const int32}]{l,  }\item[{const int32}]{m,  }\item[{const Vector3 \&}]{v }\end{DoxyParamCaption})}
+
+evaluate the (l,m)-\/th basis function on a given vector
+
+
+\begin{DoxyParams}{Parameters}
+{\em l} & band index \\
+\hline
+{\em m} & subband index \\
+\hline
+{\em v} & input vector \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__spherical__harmonics_gacbaf1fe0a158310ce09117940766f617}\label{group__spherical__harmonics_gacbaf1fe0a158310ce09117940766f617}} 
+\index{Spherical and Zonal Harmonics@{Spherical and Zonal Harmonics}!sh@{sh}}
+\index{sh@{sh}!Spherical and Zonal Harmonics@{Spherical and Zonal Harmonics}}
+\subsubsection{\texorpdfstring{sh()}{sh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$int32 l, typename Vector3 $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float cugar\+::sh (\begin{DoxyParamCaption}\item[{const int32}]{m,  }\item[{const Vector3 \&}]{v }\end{DoxyParamCaption})}
+
+evaluate the (l,m)-\/th basis function on a given vector, where l is determined at compile-\/time.
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & subband index \\
+\hline
+{\em v} & input vector \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__spherical__harmonics_ga41a8f3c96516611a04d677c1af75c542}\label{group__spherical__harmonics_ga41a8f3c96516611a04d677c1af75c542}} 
+\index{Spherical and Zonal Harmonics@{Spherical and Zonal Harmonics}!sh@{sh}}
+\index{sh@{sh}!Spherical and Zonal Harmonics@{Spherical and Zonal Harmonics}}
+\subsubsection{\texorpdfstring{sh()}{sh()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$int32 l, int32 m, typename Vector3 $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float cugar\+::sh (\begin{DoxyParamCaption}\item[{const Vector3 \&}]{v }\end{DoxyParamCaption})}
+
+evaluate the (l,m)-\/th basis function on a given vector, where l and m are determined at compile-\/time.
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & input vector \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__spherical__harmonics_ga609b7d6a3f4d56d1d111b6d50a8d82a7}\label{group__spherical__harmonics_ga609b7d6a3f4d56d1d111b6d50a8d82a7}} 
+\index{Spherical and Zonal Harmonics@{Spherical and Zonal Harmonics}!sh\+\_\+legendre\+\_\+integrals@{sh\+\_\+legendre\+\_\+integrals}}
+\index{sh\+\_\+legendre\+\_\+integrals@{sh\+\_\+legendre\+\_\+integrals}!Spherical and Zonal Harmonics@{Spherical and Zonal Harmonics}}
+\subsubsection{\texorpdfstring{sh\+\_\+legendre\+\_\+integrals()}{sh\_legendre\_integrals()}}
+{\footnotesize\ttfamily template$<$typename Output\+Iterator $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void cugar\+::sh\+\_\+legendre\+\_\+integrals (\begin{DoxyParamCaption}\item[{const uint32}]{n,  }\item[{const float}]{x,  }\item[{Output\+Iterator}]{r }\end{DoxyParamCaption})}
+
+evaluate the associated Legendre integrals for a basis of order n see Algorithm 1 in\+:
+
+Importance Sampling Spherical Harmonics, W.\+Jarosz, N.\+Carr, H.\+W.\+Jensen
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & SH order \\
+\hline
+{\em x} & cos(theta), the point of evaluation of the associated (indefinite) Legendre integrals \\
+\hline
+{\em r} & a pointer to the output evaluations for all (l,m) with (0 $<$= l $<$ n), (0 $<$= m $<$= l) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__spherical__harmonics_ga42386bd8275ff973952f8d88e6c58cbf}\label{group__spherical__harmonics_ga42386bd8275ff973952f8d88e6c58cbf}} 
+\index{Spherical and Zonal Harmonics@{Spherical and Zonal Harmonics}!sh\+\_\+legendre\+\_\+polynomial@{sh\+\_\+legendre\+\_\+polynomial}}
+\index{sh\+\_\+legendre\+\_\+polynomial@{sh\+\_\+legendre\+\_\+polynomial}!Spherical and Zonal Harmonics@{Spherical and Zonal Harmonics}}
+\subsubsection{\texorpdfstring{sh\+\_\+legendre\+\_\+polynomial()}{sh\_legendre\_polynomial()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float cugar\+::sh\+\_\+legendre\+\_\+polynomial (\begin{DoxyParamCaption}\item[{const uint32}]{l,  }\item[{const uint32}]{m,  }\item[{const float}]{x,  }\item[{const float}]{y }\end{DoxyParamCaption})}
+
+evaluate the associated Legendre polynomial P\+\_\+l$^\wedge$m on x = cos(theta), y = sin(theta) = sqrt(1 -\/ x$\ast$x) \mbox{\Hypertarget{group__spherical__harmonics_ga8018a68e82e9f27c253af9880d70f98d}\label{group__spherical__harmonics_ga8018a68e82e9f27c253af9880d70f98d}} 
+\index{Spherical and Zonal Harmonics@{Spherical and Zonal Harmonics}!sh\+\_\+polar\+\_\+integral@{sh\+\_\+polar\+\_\+integral}}
+\index{sh\+\_\+polar\+\_\+integral@{sh\+\_\+polar\+\_\+integral}!Spherical and Zonal Harmonics@{Spherical and Zonal Harmonics}}
+\subsubsection{\texorpdfstring{sh\+\_\+polar\+\_\+integral()}{sh\_polar\_integral()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float cugar\+::sh\+\_\+polar\+\_\+integral (\begin{DoxyParamCaption}\item[{const int32}]{m,  }\item[{const float}]{phi }\end{DoxyParamCaption})}
+
+evaluate the integral of the polar angle function Phi$^\wedge$m(phi) see equation 14 in\+:
+
+Importance Sampling Spherical Harmonics, W.\+Jarosz, N.\+Carr, H.\+W.\+Jensen
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & required order \\
+\hline
+{\em phi} & the point of evaluation, in angular coordinates \\
+\hline
+\end{DoxyParams}

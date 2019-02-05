@@ -46,8 +46,8 @@
 /// The choice of CUDA C++ has been made for various reasons: the first was to allow the highest level of expression and
 /// flexibility in terms of programmability (for example, with template based meta-programming); the second was perhaps
 /// historical: when Fermat's development was started, other ray tracing platforms like Microsoft DXR did not exist yet.
-/// The ray tracing core employed by Fermat is OptiX Prime - though it is highly likely that future versions will switch
-/// to OptiX, or even offer a DXR backend.
+/// The ray tracing core employed by Fermat is OptiX - though it is possible that future versions might also
+/// offer a DXR or a Vulkan backend.
 ///\n
 /// Fermat is built on top of another library co-developed for this project: \ref cugar_page - CUDA Graphics AcceleratoR.
 /// This is a template library of low-level graphics tools, including algorithms for BVH, Kd-tree and octree construction,
@@ -66,7 +66,13 @@
 /// Currently, the list of available renderers include:
 ///\n
 /// - PathTracer (<i>PT</i>): a simple forward path tracer with next-event estimation
+/// - PSFPT: a path space filtering path tracer, following ideas first developed by Sascha Fricke, Nikolaus Binder and Alex Keller:
+///   <a href="https://dl.acm.org/citation.cfm?id=3214806">Fast path space filtering by jittered spatial hashing</a>,
+///   Binder et al, ACM SIGGRAPH 2018 Talks.
 /// - BPT: a bidirectional path tracer
+/// - MLT: a path space Metropolis sampler, inspired by the original formulation from Eric Veach:
+///   <a href="https://graphics.stanford.edu/papers/metro/metro.pdf">Metropolis light transport</a>,
+///   Veach and Guibas, Proceedings of the 24th annual conference on Computer graphics and interactive techniques, 1997 - Pages 65-76 
 /// - PSSMLT: a primary sample space Metropolis sampler, inspired by the seminal paper:
 ///   <a href="https://onlinelibrary.wiley.com/doi/pdf/10.1111/1467-8659.t01-1-00703">A Simple and Robust Mutation Strategy for the Metropolis Light Transport Algorithm</a>,
 ///   Kelemen et al, Computer Graphics Forum, Volume21, Issue3, September 2002 - Pages 531-540
@@ -77,30 +83,72 @@
 ///   EGRW '02 Proceedings of the 13th Eurographics workshop on Rendering
 ///   Pages 125-134
 ///\par
-/// All renderers are implemented on top of a single virtual interface, namely the RendererInterface.
-/// Among the various methods this class must implement (e.g. for self initialization, registering auxiliary frame-buffer channels, handling mouse and keyboard events, etc),
-/// it must implement the \ref RendererInterfaceRenderMethod "void RendererInterface::render(const uint32 instance, Renderer& renderer)" method, which takes a frame <i>instance</i> number, useful for progressive rendering, and a reference to a Renderer object:
+/// All renderers are implemented on top of a single virtual interface, namely the \ref RendererInterface.
+/// Among the various methods this class may implement (e.g. for self initialization, registering auxiliary frame-buffer channels, handling mouse and keyboard events, etc),
+/// it must implement a single method:
+///\code
+///  void RendererInterface::render(const uint32 instance, RenderingContext& rendering_context);
+///\endcode
+/// which takes a frame <i>instance</i> number, useful for progressive rendering, and a reference to a RenderingContext object:
 /// the latter encodes all the information belonging to the current rendering context, including the scene mesh, the output frame-buffer, and so on and so on.
 ///\n
-/// Finally, all bidirectional renderers are based on a common, template-based library for bidirectional path tracing, described in the \ref BPTLib module.
+/// Finally, all unidirectional renderers are based on a common, template-based library for path tracing, described in the \ref PTLib module, while
+/// all bidirectional renderers are based on a similar template-based library for bidirectional path tracing, described in the \ref BPTLib module.
 ///
-/// \section FermatModulesSection Modules
+/// \section FermatCompilationSection Compiling Fermat
 ///\par
-/// Fermat includes the following modules:
-///\n
-/// - \ref BSDFModule
-/// - \ref VertexGeometryModule
-/// - \ref PathModule
-/// - \ref BPTLib
-/// - \ref LightsModule
-/// - \ref FramebufferModule
-/// - \ref SamplingModule
-/// - \ref FilteringModule
-/// - \ref PTModule
-/// - \ref BPTModule
-/// - \ref PSSMLTModule
-/// - \ref CMLTModule
-/// - \ref RPTModule
+/// Assuming you have Windows 10.0, Visual Studio 2015, CUDA 10.0 and OptiX 6 installed (driver version 418.81 and above), compiling Fermat should be straightforward.
+/// It will be sufficient to open the VS solution located in <i>.\vs\fermat\fermat.sln</i>, and press Build -> Build Solution.
+/// Note that there are three different projects:
+///   - <b>fermatdll</b>: Fermat's core library
+///   - <b>fermat</b>: the main executable, linking fermat.dll
+///   - <b>hellopt</b>: an example plugin renderer
+///
+/// \section FermatDocumentationSection Documentation
+///
+/// \subsection FermatDelivingIntoThePitSection Delving into the Pit
+///\par
+/// If you truly want to know more about Fermat's internals you could certainly just go and look at the code, or skim through the \ref ModulesPage,
+/// though admittedly that's something that even the author would hardly ever do with somebody else's codebase.
+/// Hopefully, a much better alternative is to follow this link that will guide you through a step by step explanation
+/// which, at least in principle, pretends to be written in a more or less logical order:
+///\par
+///   \ref OvertureContentsPage  "Fermat: An Overture".
+///\par
+/// <ul>
+/// <li> 1. \ref OverturePage "Introduction"
+///   <ul>
+///    <li> 1.1. \ref MeshesSection
+///    <li> 1.2. \ref CameraSection
+///    <li> 1.3. \ref BSDFSection
+///    <li> 1.4. \ref LightSection
+///   </ul>
+/// <li> 2. \ref RTContextPage
+/// <li> 3. \ref RenderingContextPage
+/// <li> 4. \ref RendererInterfacePage
+/// <li> 5. \ref PluginsPage
+/// <li> 6. \ref HelloRendererPage
+///   <ul>
+///    <li> 6.1. \ref HelloPTGeneratingPrimaryRaysSection
+///    <li> 6.2. \ref HelloPTShadingVerticesSection
+///    <li> 6.3. \ref HelloPTSolvingOcclusionSection
+///    <li> 6.4. \ref HelloPTPluginSection
+///    <li> 6.5. \ref HelloPTDoneSection
+///   </ul>
+/// <li> 7. \ref PTLibPage
+///   <ul>
+///    <li> 7.1. \ref PTWavefrontSchedulingSection
+///   </ul>
+/// <li> 8. \ref PTPage
+/// <li> 9. \ref PSFPTPage
+/// <li> 10. \ref BPTLibPage
+///   <ul>
+///    <li> 10.1. \ref BPTLibCoreSection
+///    <li> 10.2. \ref BPTLibSection
+///    <li> 10.3. \ref BPTExampleSection
+///   </ul>
+/// <li> 11. \ref ModulesPage
+/// </ul>
 ///
 /// \section FermatDependenciesSection Dependencies
 ///\par
@@ -109,8 +157,12 @@
 /// - <a href="http://nvlabs.github.io/cub/">CUB</a> : contained in the package
 /// - a modification of Nathaniel McClatchey's <a href="https://github.com/nmcclatchey/Priority-Deque/">priority_deque</a> : contained in the package
 /// - <a href="http://freeglut.sourceforge.net/">FreeGLUT</a> : contained in the package
-/// - <a href="https://developer.nvidia.com/cuda-80-ga2-download-archive">CUDA 8.0</a> : <b>not contained</b> - it should be separately downloaded and installed on the system
-/// - <a href="https://developer.nvidia.com/optix">NVIDIA OptiX 4.0.1</a> : <b>not contained</b> - it should be separately downloaded and copied in the folder <i>contrib/OptiX</i>
+/// - <a href="http://assimp.org/">Assimp</a> : contained in the package
+/// - <a href="https://developer.nvidia.com/cuda-80-ga2-download-archive">CUDA 10.0</a> : <b>not contained</b> - it should be separately downloaded and installed on the system
+/// - <a href="https://developer.nvidia.com/optix">NVIDIA OptiX 6.0</a> : <b>not contained</b> - it should be separately downloaded and copied in the folder <i>contrib/OptiX</i>
+///
+///\par
+/// It also needs an NVIDIA Driver 418.81 or newer.
 ///
 /// \section Licensing
 ///\par
@@ -119,6 +171,30 @@
 /// \section Contributors
 ///\par
 /// <a href="https://github.com/NVlabs/fermat">Fermat</a> is made and mantained by <a href="jpantaleoni@nvidia.com">Jacopo Pantaleoni</a>.
+///
+/// \section NewsSection Versions and News
+///\par
+/// <table>
+/// <tr><td style="white-space: nowrap; vertical-align:text-top;">4/2/2019 \n Fermat 2.0</td>
+/// <td style="vertical-align:text-top;" width="90%">
+/// - <b>New Features:</b> \n
+///   * Added an OptiX 6.0 backend with full RTX support.
+///   * Added a new plugin renderer interface.
+///   * Added a path-space MLT renderer.
+///   * Added a novel \ref DirectLightingRL "reinforcement-learning based direct lighting sampler".
+///   * Added an example plugin renderer.
+///   * Added a new scene description format and support for more formats with <a href="http://assimp.org/">Assimp</a>.
+///   * Added a <a href="https://www.pbrt.org/fileformat-v3.html">pbrt</a> scene importer.
+///   * Added comprehensive documentation.
+/// </td></tr>
+/// </table>
+///\par
+/// <table>
+/// <tr><td style="white-space: nowrap; vertical-align:text-top;">20/4/2018 \n Fermat 1.0</td>
+/// <td style="vertical-align:text-top;" width="90%">
+/// - <b>First Release</b>
+/// </td></tr>
+/// </table>
 ///
 /// \section DownloadSection Download
 ///\par
@@ -135,4 +211,1563 @@
 /// &nbsp;&nbsp;
 ///\endhtmlonly
 
-/// Top: \ref mainpage
+/// \page OvertureContentsPage Contents
+/// Top: \ref index
+///
+/// <img src="escher_room.png" style="position:relative; bottom:-10px; border:0px; width:760px;"/>
+///\n
+///\par
+///
+/// <ul>
+/// <li> 1. \ref OverturePage "Introduction"
+///   <ul>
+///    <li> 1.1. \ref MeshesSection
+///    <li> 1.2. \ref CameraSection
+///    <li> 1.3. \ref BSDFSection
+///    <li> 1.4. \ref LightSection
+///   </ul>
+/// <li> 2. \ref RTContextPage
+/// <li> 3. \ref RenderingContextPage
+/// <li> 4. \ref RendererInterfacePage
+/// <li> 5. \ref PluginsPage
+/// <li> 6. \ref HelloRendererPage
+///   <ul>
+///    <li> 6.1. \ref HelloPTGeneratingPrimaryRaysSection
+///    <li> 6.2. \ref HelloPTShadingVerticesSection
+///    <li> 6.3. \ref HelloPTSolvingOcclusionSection
+///    <li> 6.4. \ref HelloPTPluginSection
+///    <li> 6.5. \ref HelloPTDoneSection
+///   </ul>
+/// <li> 7. \ref PTLibPage
+///   <ul>
+///    <li> 7.1. \ref PTWavefrontSchedulingSection
+///   </ul>
+/// <li> 8. \ref PTPage
+/// <li> 9. \ref PSFPTPage
+/// <li> 10. \ref BPTLibPage
+///   <ul>
+///    <li> 10.1. \ref BPTLibCoreSection
+///    <li> 10.2. \ref BPTLibSection
+///    <li> 10.3. \ref BPTExampleSection
+///   </ul>
+/// <li> 11. \ref ModulesPage
+/// </ul>
+
+/// \page OverturePage An Overture
+/// Top: \ref OvertureContentsPage
+///
+/// <img src="morning-coffee-bath.jpg" style="position:relative; bottom:-10px; border:0px; width:760px;"/>
+///\par
+/// <small>'Salle de bain, with coffee', based on a <a href="http://www.blendswap.com/blends/view/73937">model</a> by <i>nacimus</i></small>
+///\n
+///\par
+/// Building a physically based renderer is a subject that has already been covered by a couple great books (for example, the fantastic <a href="http://www.pbr-book.org">PBR</a>).
+/// Building a high performance, massively parallel renderer is a slightly different topic, that so far has not received much attention.
+/// While \ref Fermat doesn't pretend to be a full featured rendering system, it tries to show how to go about writing one.
+/// Here, we will try to go a little bit into its details.
+///\par
+/// Like many books out there, this overture should probably start from the ground up, describing the very basics of geometry on which the renderer is built.
+/// Since many books have already covered that subject, however, and as the vector and matrix classes used in Fermat are likely not very different from any of the others,
+/// we will just skip that part and jump onto the more interesting, rendering-related stuff.
+/// As a matter of fact, Fermat itself relies on a separate library for all of those ancillary classes and utilities: \ref cugar_page.
+///\par
+/// The one thing we will need, however, is a short digression into the <i>host</i> and <i>device</i> dichotomy present throughout all of Fermat, which is, mostly, a <i>GPU</i>
+/// renderer. In order to understand the consequences of this dichotomy, and in particular the one between the host and device memory spaces, you should go straight to this
+/// page and come back when you are done with it: \ref FermatHostDevicePage.
+///
+///\par
+/// So what is Fermat, exactly? Perhaps, the most concise explanation is that it is a collection of <i>path samplers</i> of various kinds.
+/// Like all modern physically based renderers, all of Fermat's internal rendering algorithms follow the same old recipe: throw some more or less random numbers, <i>sample</i>
+/// more or less <i>interesting light paths</i>, connecting the emitters to the eye of the virtual observer, and calculate and <i>average</i> the radiance that flows through them.
+/// This, plus or minus some denoising.
+///\par
+/// In fact, the only useful bit of basic geometry we need in order to proceed is the concept of differential vertex geometry needed to represent
+/// light path vertices.
+/// Fermat employs the following simple representation:
+///\n
+///\code
+/// // Vertex geometry.
+/// // 
+/// // Encodes the local differential surface geometry at a point, including its tangent, binormal
+/// // and normal, as well the local texture coordinates.
+/// // 
+/// struct VertexGeometry
+/// {
+/// 	cugar::Vector3f normal_s;			// shading normal
+/// 	cugar::Vector3f normal_g;			// geometric normal
+/// 	cugar::Vector3f tangent;			// local tangent
+/// 	cugar::Vector3f binormal;			// local binormal
+/// 
+/// 	cugar::Vector3f	position;			// local position
+/// 	float			padding;			// some padding
+/// 	cugar::Vector4f	texture_coords;		// local texture coordinates (2 sets)
+/// 	cugar::Vector2f lightmap_coords;	// local lightmap coordinates
+/// };
+///\endcode
+///\par
+/// The next question we need to answer when writing a renderer is: how exactly do you sample light paths?
+/// That turns out to be the subject of most rendering research of the last 20 years. In fact, if you do not know the basics already, the best possible source of information is still
+/// Eric Veach's <a href="http://graphics.stanford.edu/papers/veach_thesis/">master thesis</a> from 1997, a work of rare and exceptional clarity, that literally laid the groundwork for this entire field.
+/// Again, Fermat just tries to summarize a few of the most widely spread and a few of the most recent algorithms, while focusing on doing that <i>efficiently</i>.
+///\par
+/// Getting to the point where we can actually describe how that is performed will require some time, but overall it all starts from four basic ingredients:
+///\n
+/// - the virtual camera,
+/// - the Bidirectional Scattering Distribution Function, or <i>BSDF</i>,
+/// - the light sources, or <i>emitters</i>,
+/// - and obviously, the scene geometry, or <i>meshes</i>,
+///\par
+/// And this is exactly what we'll cover in the next few sections.
+///
+/// \section MeshesSection The Mesh Geometry
+///\par
+/// If we want to see something in our pictures, we need some geometry for light to bounce against.
+/// In order to keep things simple, Fermat supports only one type: <i>triangle meshes</i>.
+/// The internal representation is the fairly typical one of indexed triangles, where the vertices together with
+/// their normals and texture coordinates are given in separate arrays, and yet another array provides the list of triangles
+/// as triplets of indices into the vertex and attribute lists.
+///\par
+/// In practice it is all encapsulated behind a few interfaces. The first two are the classes reponsible for holding and owning the actual
+/// mesh <i>storage</i>, used on the host-side of things (i.e. on the CPU): \ref MeshStorage, to allocate and hold a mesh in host memory,
+/// and \ref DeviceMeshStorage, to allocate and hold a mesh in device memory (i.e. the GPU).
+/// The third interface, \ref MeshView, is what we call a \ref FermatPlainViewsSection "view" of the mesh: a thin class used to simply access the mesh representation,
+/// without actually owning any of its data - in practice, the moral equivalent of a pointer. This is what can be passed to device kernels
+/// to retrieve any of the relative information (without the need to dereference an <i>actual</i> pointer, which would require an expensive
+/// host memory access).
+///\par
+/// Without going into the details of its internals, we can list the free functions which provide access to its raw vertex data:
+///\n
+///\code
+/// // helper method to fetch a vertex
+/// //
+/// FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
+/// const MeshView::vertex_type& fetch_vertex(const MeshView& mesh, const uint32 vertex_idx);
+///
+/// // helper method to fetch a normal vertex
+/// //
+/// FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
+/// const MeshView::normal_type& fetch_normal(const MeshView& mesh, const uint32 vertex_idx);
+///
+/// // helper method to fetch a texture coordinate vertex
+/// //
+/// FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
+/// const MeshView::texture_coord_type& fetch_tex_coord(const MeshView& mesh, const uint32 vertex_idx);
+///\endcode
+///\par
+/// the functions to access the triangle lists:
+///\n
+///\code
+/// // helper method to fetch the vertex indices of a given triangle
+/// //
+/// FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
+/// int3 load_vertex_triangle(const int* triangle_indices, const uint32 tri_idx);
+/// 
+/// // helper method to fetch the normal indices of a given triangle
+/// //
+/// FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
+/// int3 load_normal_triangle(const int* triangle_indices, const uint32 tri_idx);
+/// 
+/// // helper method to fetch the texture coordinate indices of a given triangle
+/// //
+/// FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
+/// int3 load_texture_triangle(const int* triangle_indices, const uint32 tri_idx);
+///\endcode
+///\par
+/// and the utilities to <i>compute</i> useful information about local triangle geometry:
+///\n
+///\code
+/// // return the area of a given primitive
+/// //
+/// FERMAT_HOST_DEVICE inline
+/// float prim_area(const MeshView& mesh, const uint32 tri_id);
+///
+/// // return the differential geometry of a given point on the mesh, specified by a (prim_id, uv) pair
+/// //
+/// FERMAT_HOST_DEVICE inline
+/// void setup_differential_geometry(
+///		const MeshView&			mesh,
+///		const VertexGeometryId	v,
+///		VertexGeometry*			geom,
+///		float*					pdf = 0);
+/// 
+/// // return the interpolated position at a given point on the mesh, specified by a (prim_id, uv) pair
+/// //
+/// FERMAT_HOST_DEVICE inline
+/// cugar::Vector3f interpolate_position(const MeshView& mesh, const VertexGeometryId v, float* pdf = 0);
+/// 
+/// // return the interpolated normal at a given point on the mesh, specified by a (prim_id, uv) pair
+/// //
+/// FERMAT_HOST_DEVICE inline
+/// cugar::Vector3f interpolate_normal(const MeshView& mesh, const VertexGeometryId v, const float v);
+///\endcode
+///\par
+/// A complete list of the available functions can be found in the \ref MeshModule.
+///\par
+/// Notice how each point on the mesh surface is addressed by a small data structure, that compactly encodes all the
+/// necessary information needed to uniquely identify the point:
+///\n
+///\code
+/// // 
+/// // Encodes the minimal amount of information needed to represent a point on a surface,
+/// // or a <i>hit</i> in ray tracing parlance
+/// // 
+/// struct VertexGeometryId
+/// {
+/// 	cugar::Vector2f uv;
+/// 	uint32			prim_id;
+/// 
+/// 	FERMAT_HOST_DEVICE
+/// 	VertexGeometryId() {}
+/// 
+/// 	FERMAT_HOST_DEVICE
+/// 	VertexGeometryId(const uint32 _prim_id, const float _u, const float _v) : prim_id(_prim_id), uv(_u, _v) {}
+/// 
+/// 	FERMAT_HOST_DEVICE
+/// 	VertexGeometryId(const uint32 _prim_id, const cugar::Vector2f _uv) : prim_id(_prim_id), uv(_uv) {}
+/// };
+///\endcode
+///\par
+/// In fact, one of the tricks to high performance rendering is tightly packing <i>all</i> information,
+/// so as to consume as little bandwith and on-chip memory as possible, and this is just one of the many
+/// examples you'll find in Fermat.
+///
+/// \section CameraSection The Camera Model
+///\par
+/// Simulating a realistic camera accurately (as needed for example to match live action film) can by itself be a rather complex subject.
+/// Currently, Fermat doesn't attempt to do that, and simply models an infinitely thin pinhole camera. So simple, in fact, that it can be
+/// described by a handful of vectors and a single scalar:
+///\n
+///\code
+///	struct Camera
+///	{
+///		float3	eye;	// the eye position
+///		float3	aim;	// the aim position
+///		float3	up;		// a vector specifying where the upwards direction is relative to the camera frame
+///		float3  dx;		// a vector specifying where the right is relative to the camera frame
+///		float   fov;	// the field of view
+///	};
+///\endcode
+///\par
+/// Together with the camera itself, Fermat also provides a utility CameraSampler class:
+///\n
+///\code
+/// // A sampler for the pinhole camera model
+/// //
+/// struct CameraSampler
+/// {
+/// 	// empty constructor
+/// 	//
+/// 	FERMAT_HOST_DEVICE
+/// 	CameraSampler() {}
+/// 
+/// 	/// constructor
+/// 	///
+/// 	FERMAT_HOST_DEVICE
+/// 	CameraSampler(const Camera& camera, const float aspect_ratio);
+/// 
+/// 	// sample a direction from normalized device coordinates (NDC) in [0,1]^2
+/// 	//
+/// 	FERMAT_HOST_DEVICE
+/// 	cugar::Vector3f sample_direction(const cugar::Vector2f ndc) const;
+/// 
+/// 	// compute the direction pdf
+/// 	//
+/// 	// \param dir				the given direction
+/// 	// \param projected			whether to return the pdf in projected solid angle or solid angle measure
+/// 	FERMAT_HOST_DEVICE
+/// 	float pdf(const cugar::Vector3f direction, const bool projected = false) const;
+/// 
+/// 	// invert the camera direction sampler
+/// 	//
+/// 	// \param dir				the given direction
+/// 	// \return					the NDC coordinates corresponding to the given direction
+/// 	FERMAT_HOST_DEVICE
+/// 	cugar::Vector2f invert(const cugar::Vector3f dir) const;
+/// 
+/// 	// invert the camera direction sampler and compute its projected solid angle pdf
+/// 	//
+/// 	// \param dir				the given direction
+/// 	// \param projected			whether to return the pdf in projected solid angle or solid angle measure
+/// 	// \return					the NDC coordinates corresponding to the given direction
+/// 	FERMAT_HOST_DEVICE
+/// 	cugar::Vector2f invert(const cugar::Vector3f dir, float* pdf_proj) const;
+/// 
+/// 	cugar::Vector3f U;						// camera space +X axis in world coords
+/// 	cugar::Vector3f V;						// camera space +Y axis in world coords
+/// 	cugar::Vector3f W;						// camera space +Z axis in world coords
+/// 	float			W_len;					// precomputed length of the W vector
+/// 	float			square_focal_length;	// square focal length
+/// };
+///\endcode
+///
+/// \section BSDFSection The BSDF Model
+///\par
+/// Again, a whole book could be easily dedicated to the subject of properly simulating realistic BSDFs.
+/// Fermat does take some shortcuts there, and focuses on a single, monolithic, layered BSDF model.
+/// It is <i>very</i> simple, and yet expressive enough to represent a decent spectrum of the materials we see in everday's life.
+/// It contains four basic components:
+///\par
+/// - a diffuse reflection component
+/// - a diffuse transmission component
+/// - a glossy reflection component layered on top of the diffuse layer
+/// - a glossy transmission component layered on top of the diffuse layer
+///\par
+/// The diffuse components are purely Lambertian, while the glossy components are based on the GGX model with Smith's joint masking-shadowing function
+/// described in:
+///> [Heitz 2014, "Understanding the Masking-Shadowing Function in Microfacet-Based BRDFs"]
+///\par
+/// The BSDF uses Fresnel coefficients to determine how much light undergoes glossy reflection, and how
+/// much undergoes transmission. Part of the radiance transmitted from the upper glossy layer undergoes
+/// diffuse scattering. The interaction between the glossy layer and the underlying diffuse layer is
+/// modeled in a simplified manner, as if the layer was infinitely thin and the diffusely reflected particles
+/// were not interacting again with the upper layer.
+///\par
+/// Its basic interface looks like this:
+///\n
+///\code
+/// struct Bsdf
+/// {
+/// 	// component type bitmasks
+/// 	//
+/// 	enum ComponentType
+/// 	{
+/// 		kAbsorption				= 0u,
+/// 
+/// 		kDiffuseReflection		= 0x1u,
+/// 		kDiffuseTransmission	= 0x2u,
+/// 		kGlossyReflection		= 0x4u,
+/// 		kGlossyTransmission		= 0x8u,
+/// 
+/// 		kDiffuseMask			= 0x3u,
+/// 		kGlossyMask				= 0xCu,
+/// 
+/// 		kReflectionMask			= 0x5u,
+/// 		kTransmissionMask		= 0xAu,
+/// 		kAllComponents			= 0xFFu
+/// 	};
+/// 
+/// 	typedef cugar::LambertTransBsdf	diffuse_trans_component;
+/// 	typedef cugar::LambertBsdf		diffuse_component;
+/// 	typedef cugar::GGXSmithBsdf		glossy_component;
+/// 
+/// 	// evaluate the BSDF f(V,L)
+/// 	//
+/// 	// \param geometry				the local differential geometry
+/// 	// \param in					the incoming direction
+/// 	// \param out					the outgoing direction
+/// 	// \param components			the components to consider
+/// 	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
+/// 	cugar::Vector3f f(
+/// 		const cugar::DifferentialGeometry&	geometry,
+/// 		const cugar::Vector3f				in,
+/// 		const cugar::Vector3f				out,
+/// 		const ComponentType					components) const
+///
+/// 	// evaluate the total projected probability density p(V,L) = p(L|V)
+/// 	//
+/// 	// \param geometry				the local differential geometry
+/// 	// \param in					the incoming direction
+/// 	// \param out					the outgoing direction
+/// 	// \param measure				the spherical measure to use
+/// 	// \param RR					indicate whether to use Russian-Roulette or not
+/// 	// \param components			the components to consider
+/// 	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
+/// 	float p(
+/// 		const cugar::DifferentialGeometry&	geometry,
+/// 		const cugar::Vector3f				in,
+/// 		const cugar::Vector3f				out,
+/// 		const cugar::SphericalMeasure		measure,
+/// 		const bool							RR,
+/// 		const ComponentType					components) const
+///
+/// 	// sample an outgoing direction
+/// 	//
+/// 	// \param geometry				the local differential geometry
+/// 	// \param z						the incoming direction
+/// 	// \param in					the incoming direction
+/// 	// \param out_comp				the output component
+/// 	// \param out					the outgoing direction
+/// 	// \param out_p					the output solid angle pdf
+/// 	// \param out_p_proj			the output projected solid angle pdf
+/// 	// \param out_g					the output sample value = f/p_proj
+/// 	// \param RR					indicate whether to use Russian-Roulette or not
+/// 	// \param evaluate_full_bsdf	indicate whether to evaluate the full BSDF, or just an unbiased estimate
+/// 	// \param components			the components to consider
+/// 	FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
+/// 	bool sample(
+/// 		const cugar::DifferentialGeometry&	geometry,
+/// 		const float							z[3],
+/// 		const cugar::Vector3f				in,
+/// 		ComponentType&						out_comp,
+/// 		cugar::Vector3f&					out,
+/// 		float&								out_p,
+/// 		float&								out_p_proj,
+/// 		cugar::Vector3f&					out_g,
+/// 		bool								RR,
+/// 		bool								evaluate_full_bsdf,
+/// 		const ComponentType					components) const
+/// };
+///\endcode
+///\par
+/// In the actual \ref Bsdf class, a few more methods are present to calculate f() and p() at the same time, and to calculate
+/// both component-by-component, all in one go, as well as auxiliary methods to compute the Fresnel weights associated with each layer.
+///
+/// \section LightSection The Light Source Model
+///\par
+/// In nature, light sources are just emissive geometry.
+/// Fermat supports both emissive geometry and a bunch of other <i>primitive</i> light sources, including some that have a singular distribution
+/// (e.g. directional lights), or others that provide good analytic sampling algorithms.
+/// All of them respond to a single \ref Light interface that provides basic methods to point-sample the light source surface, and query the
+/// Emission Distribution Function, or <i>EDF</i>, at each point.
+/// The basic interface is the following:
+///\n
+///\code
+/// struct Light
+/// {
+/// 	// sample a point on the light source, given 3 random numbers
+/// 	//
+/// 	// \param Z				the input random numbers
+/// 	// \param prim_id		the output primitive index, in case the light is made of a mesh
+/// 	// \param uv			the output uv coordinates on the sampled primitive
+/// 	// \param geom			the output sample's differential geometry
+/// 	// \param pdf			the output sample's area pdf
+/// 	// \param edf			the output sample's EDF
+/// 	//
+/// 	// \return true iff the pdf is singular
+/// 	FERMAT_HOST_DEVICE
+/// 	bool sample(
+/// 		const float*		Z,
+/// 		uint32_t*			prim_id,
+/// 		cugar::Vector2f*	uv,
+/// 		VertexGeometry*		geom,
+/// 		float*				pdf,
+/// 		Edf*				edf) const;
+/// 
+/// 	// sample a point on the light source given a selected shading point (or receiver)
+/// 	//
+/// 	// \param p				the input shading point
+/// 	// \param Z				the input random numbers
+/// 	// \param prim_id		the output primitive index, in case the light is made of a mesh
+/// 	// \param uv			the output uv coordinates on the sampled primitive
+/// 	// \param geom			the output sample's differential geometry
+/// 	// \param pdf			the output sample's area pdf
+/// 	// \param edf			the output sample's EDF
+/// 	//
+/// 	// \return true iff the pdf is singular
+/// 	FERMAT_HOST_DEVICE
+/// 	bool sample(
+/// 		const cugar::Vector3f	p,
+/// 		const float*			Z,
+/// 		uint32_t*				prim_id,
+/// 		cugar::Vector2f*		uv,
+/// 		VertexGeometry*			geom,
+/// 		float*					pdf,
+/// 		Edf*					edf) const;
+/// 
+/// 	// intersect the given ray with the light source
+/// 	//
+/// 	// \param ray			the input ray
+/// 	// \param uv			the output uv coordinates on the sampled primitive
+/// 	// \param t				the output ray intersection distance
+/// 	//
+/// 	FERMAT_HOST_DEVICE
+/// 	void intersect(const Ray ray, float2* uv, float* t) const;
+/// 
+/// 	// map a (prim,uv) pair to a surface element and compute the corresponding edf/pdf
+/// 	//
+/// 	// \param prim_id		the input primitive index, in case the light is made of a mesh
+/// 	// \param uv			the input uv coordinates on the sampled primitive
+/// 	// \param geom			the output sample's differential geometry
+/// 	// \param pdf			the output sample's area pdf
+/// 	// \param edf			the output sample's EDF
+/// 	//
+/// 	FERMAT_HOST_DEVICE
+/// 	void map(const uint32_t prim_id, const cugar::Vector2f& uv, VertexGeometry* geom, float* pdf, Edf* edf) const;
+/// 
+/// 	// map a (prim,uv) pair and a (precomputed) surface element to the corresponding edf/pdf
+/// 	//
+/// 	// \param prim_id		the input primitive index, in case the light is made of a mesh
+/// 	// \param uv			the input uv coordinates on the sampled primitive
+/// 	// \param geom			the input sample's differential geometry
+/// 	// \param pdf			the output sample's area pdf
+/// 	// \param edf			the output sample's EDF
+/// 	//
+/// 	FERMAT_HOST_DEVICE
+/// 	void map(const uint32_t prim_id, const cugar::Vector2f& uv, const VertexGeometry& geom, float* pdf, Edf* edf) const;
+/// };
+///\endcode
+///\par
+/// Currently, the only supported EDF model is a simple lambertian emitter, with an interface analogous to the \ref Bsdf class
+/// (following Veach's recommended practice of treating sources and sensors as scattering events, assuming the incident direction to
+/// an EDF is a <i>virtual source vector</i> where all light comes from, see Chapter 8.3.2.1, pp. 235-237 in his
+/// <a href="http://graphics.stanford.edu/papers/veach_thesis/">thesis</a>).
+///
+/// Next: \ref RTContextPage
+
+
+
+/// \page RTContextPage Ray Tracing Contexts
+/// Top: \ref OvertureContentsPage
+///
+/// <img src="staircase2-evening.jpg" style="position:relative; bottom:-10px; border:0px; width:740px;"/>
+///\par
+/// <small>'Modern Hall, at dusk', based on a <a href="http://www.blendswap.com/blends/view/51997">model</a> by <i>NewSee2l035</i></small>
+///
+///\par
+/// Nearly all physically based rendering algorithms necessitate to perform ray tracing queries against some geometry.
+/// In Fermat this happens through a ray tracing context, which provides the following interface:
+///\n
+///\code
+/// // A class defining core ray tracing functionality, ranging from geometry setup to
+/// // performing actual ray tracing queries.
+/// //
+/// struct RTContext
+/// {
+/// 	// create a ray tracing context on the given triangle mesh
+/// 	//
+/// 	void create_geometry(
+/// 		const uint32	tri_count,
+/// 		const int*		index_ptr,
+/// 		const uint32	vertex_count,
+/// 		const float*	vertex_ptr,
+/// 		const int*		normal_index_ptr,
+/// 		const float*	normal_vertex_ptr,
+/// 		const int*		tex_index_ptr,
+/// 		const float*	tex_vertex_ptr,
+/// 		const int*		material_index_ptr);
+/// 
+/// 	// trace a set of rays, returning a full hit
+/// 	//
+/// 	void trace(const uint32 count, const Ray* rays, Hit* hits);
+///
+/// 	// trace a set of masked rays, returning a full hit
+/// 	//
+/// 	void trace(const uint32 count, const MaskedRay* rays, Hit* hits);
+///
+/// 	// trace a set of masked shadow rays, returning a full primitive hit
+/// 	//
+/// 	void trace_shadow(const uint32 count, const MaskedRay* rays, Hit* hits);
+///
+/// 	// trace a set of masked shadow rays, returning a single bool hit|no hit bit for each ray
+/// 	//
+/// 	void trace_shadow(const uint32 count, const MaskedRay* rays, uint32* binary_hits);
+/// };
+///\endcode
+///\n
+/// Notice how there are two types of rays that can be traced: \ref Ray and \ref MaskedRay.
+/// The first is specified by an origin, a direction, and a full [<i>tmin</i>, <i>tmax</i>] range specifying valid intersection distances.
+///\n
+/// The second is specified by an origin, a direction, a mask, and a single maximum intersection distance, <i>tmax</i>.
+/// The mask is used to allow masking out geometry at ray tracing time: the ray's mask is OR'ed against the triangles masks,
+/// and triangles which result in a non-zero mask get discarded.
+///\n
+/// The other difference is in the type of tracing queries that can be performed: regular trace() queries return the closest hit
+/// among all geometries, while trace_shadow() queries may return upon the first hit encountered during the traversal process,
+/// in practice simply answering the question: "is the given ray segment shadowed?".
+///
+/// Next: \ref RenderingContextPage
+
+
+
+/// \page RenderingContextPage The Rendering Context
+/// Top: \ref OvertureContentsPage
+///
+///\par
+/// A central object in Fermat is the \ref RenderingContext, a class encapsulating all there is to know about a scene's
+/// to render, including:
+///\n
+/// - the camera,
+/// - the framebuffer,
+/// - the scene database, including lights, geometry and textures,
+/// - the ray tracing context,
+/// - some precomputed tables to help with material simulation and such,
+/// - the actual renderer,
+///\par
+/// We'll now go through this list step by step.
+///
+///\par
+/// The camera with which to render the current scene is specified by:
+///\n
+///\code
+/// Camera& RenderingContext::get_camera()
+///\endcode
+///
+///\par
+/// The framebuffer and its attributes are specified by:
+///\n
+///\code
+/// // get the frame buffer
+/// //
+/// FBufferStorage& RenderingContext::get_frame_buffer()
+///
+/// // get the target resolution
+/// //
+/// uint2 RenderingContext::get_res() const
+///
+/// // get the target aspect ratio
+/// //
+/// float RenderingContext::get_aspect_ratio() const
+///
+/// // get the target exposure
+/// //
+/// float RenderingContext::get_exposure() const
+///
+/// // get the target gamma
+/// //
+/// float RenderingContext::get_gamma() const
+///\endcode
+///
+///\par
+/// The mesh geometry is specified by:
+///\n
+///\code
+/// // get a device-resident version of the scene's mesh
+/// //
+/// DeviceMeshStorage& RenderingContext::get_device_mesh()
+/// 
+/// // get a host-resident version of the scene's mesh
+/// //
+/// HostMeshStorage& RenderingContext::get_host_mesh()
+///\endcode
+///
+///\par
+/// The light sources are specified by:
+///\n
+///\code
+/// // return the number of directional lights
+/// //
+/// uint32 RenderingContext::get_directional_lights_count() const
+/// 
+/// // return the host-side list of directional lights
+/// //
+/// const DirectionalLight* RenderingContext::get_host_directional_lights() const
+/// 
+/// // return the device-side list of directional lights
+/// //
+/// const DirectionalLight* RenderingContext::get_device_directional_lights() const
+///\endcode
+///\par
+/// and:
+///\n
+///\code
+/// // return the mesh emitters
+/// //
+/// MeshLightsStorage& RenderingContext::get_mesh_lights()
+///\endcode
+///\par
+/// Notice that this is a host-side class holding the device-side storage needed to sample mesh emitters
+/// on the device. Its \ref FermatPlainViewsSection "view" is just a \ref MeshLight, i.e. a class with the \ref Light interface.
+///
+///\par
+/// The ray tracing context is specified by:
+///\n
+///\code
+/// // return the ray tracing context for the scene's geometry
+/// //
+/// RTContext& RenderingContext::get_rt_context()
+///\endcode
+///
+///\par
+/// Finally, Fermat allows plugins to register new renderers with the following call:
+///\n
+///\code
+/// // register a new rendering interface type
+/// //
+/// uint32 register_renderer(const char* name, RendererFactoryFunction factory)
+///\endcode
+/// The factory is just a fuction/method returning a pointer to a new RendererInterface object:
+///\n
+///\code
+///  typedef RendererInterface* (*RendererFactoryFunction)();
+///\endcode
+///
+/// Next: \ref RendererInterfacePage
+
+
+
+/// \page RendererInterfacePage The Renderer Interface
+/// Top: \ref OvertureContentsPage
+///
+///\par
+/// Writing a renderer is now as simple as inheriting from this interface and implementing some of its methods:
+///\n
+///\code
+/// // The abstract renderer / solver interface
+/// //
+/// struct RendererInterface
+/// {
+/// 	// this method is responsible for returning the number of auxiliary framebuffer channels needed
+/// 	// by the renderer
+/// 	//
+/// 	virtual uint32 auxiliary_channel_count() { return 0; }
+/// 
+/// 	// this method is responsible for registering the auxiliary framebuffer channels needed by the
+/// 	// renderer, starting at the specified offset
+/// 	//
+/// 	virtual void register_auxiliary_channels(FBufferStorage& fbuffer, const uint32 channel_offset) {}
+/// 
+/// 	// this method is responsible for any command options parsing / initializations the renderer might
+/// 	// need to perform
+/// 	//
+/// 	virtual void init(int argc, char** argv, RenderingContext& renderer) {}
+/// 
+/// 	// flag a scene geometry update
+/// 	//
+/// 	virtual void update_scene(RenderingContext& renderer) {}
+/// 
+/// 	// this method is responsible for rendering a given frame in a progressive rendering
+/// 	//
+/// 	// \param	instance		the frame instance
+/// 	//
+/// 	virtual void render(const uint32 instance, RenderingContext& renderer) {}
+/// 
+/// 	// this method is responsible for handling keyboard events
+/// 	//
+/// 	virtual void keyboard(unsigned char character, int x, int y, bool& invalidate) {}
+/// 
+/// 	// this method is responsible for handling mouse events
+/// 	//
+/// 	virtual void mouse(RenderingContext& renderer, int button, int state, int x, int y) {}
+/// 
+/// 	// this method is responsible for any additional UI/OpenGL drawing on screen
+/// 	//
+/// 	virtual void draw(RenderingContext& renderer) {}
+/// 
+/// 	// dump some speed stats
+/// 	//
+/// 	virtual void dump_speed_stats(FILE* stats) {}
+/// 
+/// 	// this method is responsible for destroying the object itself
+/// 	//
+/// 	virtual void destroy() {}
+/// };
+///\endcode
+///
+///\par
+/// In practice, it's often not even necessary to implement anything except for the RendererInterface::init(), RendererInterface::destroy() and the RendererInterface::render() methods.
+/// All the others are optional methods to handle events (e.g. mouse, keyboard), inform the context that the renderer
+/// might output some custom framebuffer channels, or getting informed that the geometry of the scene has been
+/// updated, in case we need to know.
+///
+///
+/// Next: \ref PluginsPage
+
+
+/// \page PluginsPage Plugins
+/// Top: \ref OvertureContentsPage
+///
+///\par
+/// Fermat supports plugins written as separate dynamically loaded libraries (DLLs).
+/// Writing such a library requires linking to Fermat, and implementing a single exported function with
+/// the following signature:
+///\n
+///\code
+/// extern "C" uint32 __declspec(dllexport) __stdcall register_plugin(RenderingContext& renderer)
+///\endcode
+///
+///\par
+/// This function is responsible for registering a new RendererInterface factory and returning the
+/// assigned id.
+/// In the next chapter we'll go through a step-by-step introduction to writing such a plugin.
+///
+///
+/// Next: \ref HelloRendererPage
+
+
+/// \page HelloRendererPage Hello Renderer!
+/// Top: \ref OvertureContentsPage
+///
+///\par
+/// We can now go on to writing our first "Hello World" renderer in Fermat.
+/// We'll start step-by-step with a renderer that implements some basic path tracing.
+///\par
+/// Let's start from the class definition:
+///\n
+///\code
+/// #include <renderer_interface.h>
+/// #include <buffers.h>
+/// #include <tiled_sequence.h>
+///
+/// << Options Declaration >>
+/// 
+/// // A "Hello Path Tracing" renderer
+/// //
+/// struct HelloPT : RendererInterface
+/// {
+///     void init(int argc, char** argv, RenderingContext& renderer);
+/// 
+///     void render(const uint32 instance, RenderingContext& renderer);
+/// 
+///     void destroy() { delete this; }
+/// 
+///     << Members Declaration >>
+/// };
+///\endcode
+///
+///\par
+///	So far, there should be hardly any surprises. We simply derived our class from the \ref RendererInterface,
+/// and declared that we'll implement both its RendererInterface::init() and RendererInterface::render() methods.
+/// Our renderer will also have some options, which we'll pack into a simple struct:
+///\n
+/// \anchor Options_Declaration_anchor
+///
+///>   <i> << Options Declaration >> := </i> 
+///>
+///\code
+/// // our "Hello Path Tracing" options
+/// //
+/// struct HelloPTOptions
+/// {
+///	    uint32 max_path_length;
+/// 
+///     // default constructor
+///     //
+///     HelloPTOptions() : max_path_length(6) {}
+/// 
+///     // do some simple option parsing
+///     //
+///     void parse(const int argc, char** argv)
+///     {
+///         for (int i = 0; i < argc; ++i)
+///         {
+///         	if (strcmp(argv[i], "-path-length") == 0)
+///         		max_path_length = atoi(argv[++i]);
+///         }
+///     }
+/// };
+///\endcode
+///
+///\par
+/// Now, we are ready to declare the members of our class: its options, some device memory buffer to hold temporary data, and a sampling sequence.
+///\n
+/// \anchor Members_Declaration_anchor
+///
+///>   <i> << Members Declaration >> := </i> 
+///>
+///\code
+///     HelloPTOptions                      m_options;      // the rendering options
+///     DomainBuffer<CUDA_BUFFER, uint8>    m_memory_pool;  // some device storage for queues and such...
+///     TiledSequence                       m_sequence;     // a nice sampling sequence
+///\endcode
+///
+///\par
+/// Once the declaration is ready, we can start with the definition of the init method:
+///\n
+///\code
+/// void HelloPT::init(int argc, char** argv, RenderingContext& renderer)
+/// {
+///     << Parse options >>
+///     << Alloc queue storage >>
+///     << Initialize sampler >>
+///     << Initialize mesh lights >>
+/// }
+///\endcode
+///
+///\par
+/// Parsing options is straightforward:
+///\n
+/// \anchor Parse_options_anchor
+///
+///>   <i> << Parse options >> := </i> 
+///>
+///\code
+///     // parse the options
+///     m_options.parse( argc, argv );
+///\endcode
+///
+///\par
+/// The next step is allocating all temporary storage we'll need. Our renderer will be organized as a pipeline of separate ray tracing and
+/// shading stages, implemented as parallel kernels communicating through global memory queues. In order to simplify our life we'll make use
+/// of some prepackaged queue definition provided by Fermat, the \ref PTRayQueue.
+/// These queues are defined by an array of rays, an array of ray hits, an array of sample weights associated to each ray, and finally
+/// an array of pixel descriptors.
+/// For reasons that will be explained later on, we'll need three such queues, and each of them will need to contain enough storage for as
+/// many pixels there are in our target framebuffer.
+///\n
+/// \anchor Alloc_queue_storage_anchor
+///
+///>   <i> << Alloc queue storage >> := </i> 
+///>
+///\code
+/// // pre-alloc some queue storage
+/// {
+///     // keep track of how much storage we'll need
+///     cugar::memory_arena arena;
+/// 
+///     PTRayQueue input_queue;
+///     PTRayQueue scatter_queue;
+///     PTRayQueue shadow_queue;
+/// 		
+///     alloc_queues( n_pixels, input_queue, scatter_queue, shadow_queue, arena );
+/// 
+///     fprintf(stderr, "  allocating queue storage: %.1f MB\n", float(arena.size) / (1024*1024));
+///     m_memory_pool.alloc(arena.size);
+/// }
+///\endcode
+///
+///\par
+/// where alloc_queues() is a utility function defined as:
+///\n
+///\snippet hellopt_impl.h HelloPT: alloc_queues
+///
+///\par
+/// Similarly, for sampling we'll use the \ref TiledSequence class, considering that we will need to allocate up to 6 random numbers per path vertex:
+///\n
+/// \anchor Initialize_sampler_anchor
+///
+///>   <i> << Initialize sampler >> := </i> 
+///>
+///\code
+///     // build the set of samples assuming 6 random numbers per path vertex and a tile size of 256 pixels
+///     const uint32 n_dimensions = 6 * (m_options.max_path_length + 1);
+///     const uint32 tile_size    = 256;
+///     fprintf(stderr, "  initializing sampler: %u dimensions\n", n_dimensions);
+///     m_sequence.setup(n_dimensions, tile_size);
+///\endcode
+///
+///\par
+/// And finally, we'll have to initialize our mesh light sampler:
+///\n
+/// \anchor Initialize_mesh_lights_anchor
+///
+///>   <i> << Initialize mesh lights >> := </i> 
+///>
+///\code
+///     // initialize the mesh lights sampler
+///     renderer.m_mesh_lights.init( n_pixels, renderer );
+///\endcode
+///
+///\par
+/// Now that we have covered initialization, we can move on the definition of the render() method.
+/// We'll start by defining a context class that will be passed down to our device kernels.
+/// This class will encapsulate the renderer state, including views of the sampler, queues and so on.
+///\n
+///\code
+/// struct HelloPTContext
+/// {
+///     HelloPTOptions		options;		// the options
+///     TiledSequenceView	sequence;		// the sampling sequence
+///     float				frame_weight;	// the weight given to samples in this frame
+///     uint32				in_bounce;		// the current path tracing bounce
+/// 
+///     PTRayQueue			in_queue;		// the input queue
+///     PTRayQueue			shadow_queue;	// the scattering queue
+///     PTRayQueue			scatter_queue;	// the shadow queue
+/// };
+///\endcode
+/// 
+///\par
+/// At this point we can start sketching the main rendering algorithm. The idea is that,
+/// after some proper initializations, we'll generate primary rays and enqueue them to the input queue,
+/// and then start executing a pipeline, where we:
+///\par
+/// 1. trace rays
+/// 2. shade the ray hits (i.e. the new path verticies), potentially generating new shadow
+///    and scattering rays
+/// 3. trace any queued shadow rays
+/// 4. shade the shadow hits
+/// 5. and swap the input and scattering queues
+///
+///\par
+/// which in code becomes:
+///\n
+///\code
+/// void HelloPT::render(const uint32 instance, RenderingContext& renderer)
+/// {
+///     << Perform initializations >>
+/// 
+///     << Generate primary rays >>
+/// 
+///     // start the path tracing loop
+///     while (1)
+///     {
+///         << Check input queue size and possibly bail-out >>
+///
+///         << Trace rays inside the input queue >>	
+///
+///         << Clear the scattering and shadow queues >>
+///
+///         << Shade ray hits >>
+///
+///         << Trace and shade shadow rays >>
+///
+///         << Swap the intput and scattering queues >>
+///     }
+/// }
+///\endcode
+///
+///\par
+/// Initializations are fairly trivial: we need to really allocate the queues out of the pre-allocated memory pool,
+/// initialize the sampling sequence, setup our context, and finally rescale the render targets containing results
+/// up to frame <i>instance</i> by a factor of <i>instance / (instance + 1)</i>, for blending in the new one:
+///\n
+/// \anchor Perform_initializations_anchor
+///
+///>   <i> << Perform initializations >> := </i> 
+///>
+///\code
+/// 	const uint2 res = renderer.res();
+/// 
+/// 	const uint32 n_pixels = res.x * res.y;
+/// 
+/// 	// carve an arena out of our pre-allocated memory pool
+/// 	cugar::memory_arena arena( m_memory_pool.ptr() );
+/// 
+/// 	// alloc all the queues
+/// 	PTRayQueue in_queue;
+/// 	PTRayQueue scatter_queue;
+/// 	PTRayQueue shadow_queue;
+/// 
+/// 	alloc_queues(
+/// 		n_pixels,
+/// 		in_queue,
+/// 		scatter_queue,
+/// 		shadow_queue,
+/// 		arena );
+/// 
+/// 	// fetch a view of the renderer
+/// 	RenderingContextView renderer_view = renderer.view(instance);
+/// 
+/// 	// fetch the ray tracing context
+/// 	RTContext* rt_context = renderer.get_rt_context();
+/// 
+/// 	// setup the samples for this frame
+/// 	m_sequence.set_instance(instance);
+///
+/// 	// setup our context
+/// 	HelloPTContext context;
+/// 	context.options       = m_options;
+/// 	context.sequence      = m_sequence.view();
+/// 	context.frame_weight  = 1.0f / (instance + 1);
+/// 	context.in_queue      = in_queue;
+/// 	context.scatter_queue = scatter_queue;
+/// 	context.shadow_queue  = shadow_queue;
+///
+/// 	// rescale the previous render targets for blending/averaging in the new one
+///		renderer.rescale_frame( instance );
+///\endcode
+///
+///\par
+/// In order to generate primary rays, we assume we have some kernel already available and a function to dispatch it:
+///\n
+/// \anchor Generate_primary_rays_anchor
+///
+///>   <i> << Generate primary rays >> := </i> 
+///>
+///\code
+/// 	// generate the primary rays
+/// 	generate_primary_rays(context, renderer_view);
+/// 	CUDA_CHECK(cugar::cuda::sync_and_check_error("generate primary rays"));
+///\endcode
+///
+///\par
+/// Now, we can start tackling the inner loop. Checking the size of the input queue is just a matter of copying
+/// the value of the queue's size field to the host:
+///\n
+/// \anchor Check_input_queue_size_and_possibly_bail-out_anchor
+///
+///>   <i> << Check input queue size and possibly bail-out >> := </i> 
+///>
+///\code
+/// 		uint32 in_queue_size;
+/// 
+/// 		// fetch the amount of tasks in the queue
+/// 		cudaMemcpy(&in_queue_size, context.in_queue.size, sizeof(uint32), cudaMemcpyDeviceToHost);
+/// 
+/// 		// check whether there's still any work left
+/// 		if (in_queue_size == 0)
+/// 			break;
+///\endcode
+///
+///\par
+/// while tracing the rays can be done with a single RTContext::trace() call:
+///\n
+/// \anchor Trace_rays_inside_the_input_queue_anchor
+///
+///>   <i> << Trace rays inside the input queue >> := </i> 
+///>
+///\code
+/// 		// trace the rays generated at the previous bounce
+/// 		//
+/// 		rt_context->trace(in_queue_size, (Ray*)context.in_queue.rays, context.in_queue.hits);
+///\endcode
+///
+///\par
+/// This step will generate a bunch of ray hit points, i.e. all we need to reconstruct the next wave of path
+/// vertices. Before we proceed to shading them, we'll have to clear the sizes of the shadow and scattering queues - again,
+/// just a matter of performing a memset in device memory:
+///\n
+/// \anchor Clear_the_scattering_and_shadow_queues_anchor
+///
+///>   <i> << Clear the scattering and shadow queues >> := </i> 
+///>
+///\code
+/// 		// reset the output queue counters
+/// 		cudaMemset(context.shadow_queue.size, 0x00, sizeof(uint32));
+/// 		cudaMemset(context.scatter_queue.size, 0x00, sizeof(uint32));
+/// 		CUDA_CHECK(cugar::cuda::check_error("memset"));
+///\endcode
+///
+///\par
+/// Finally, we can proceed to shade the new path vertices, trace any shadow rays
+/// that their shading might have generated, and finally swap the input and scattering queues.
+/// For this, we'll assume two more functions exist, \ref shade_vertices_anchor "shade_vertices()"
+/// and \ref resolve_occlusion_anchor "resolve_occlusion()".
+///\n
+/// \anchor Shade_ray_hits_anchor
+///
+///>   <i> << Shade ray hits >> := </i> 
+///>
+///\code
+/// 		// perform lighting at this bounce
+/// 		//
+/// 		shade_vertices(in_queue_size, context, renderer_view);
+/// 		CUDA_CHECK(cugar::cuda::sync_and_check_error("shade hits"));
+///\endcode
+/// \anchor Trace_and_shade_shadow_rays_anchor
+///
+///>   <i> << Trace and shade shadow rays >> := </i> 
+///>
+///\code
+/// 		// trace & accumulate occlusion queries
+/// 		{
+/// 			// fetch the amount of tasks in the queue
+/// 			uint32 shadow_queue_size;
+/// 			cudaMemcpy(&shadow_queue_size, context.shadow_queue.size, sizeof(uint32), cudaMemcpyDeviceToHost);
+/// 
+/// 			if (shadow_queue_size)
+/// 			{
+/// 				// trace the rays
+/// 				//
+/// 				rt_context->trace_shadow(shadow_queue_size, (MaskedRay*)context.shadow_queue.rays, context.shadow_queue.hits);
+/// 
+/// 				// shade the results
+/// 				//
+/// 				resolve_occlusion(shadow_queue_size, context, renderer_view);
+/// 				CUDA_CHECK(cugar::cuda::sync_and_check_error("resolve occlusion"));
+/// 			}
+/// 		}
+///\endcode
+/// \anchor Swap_the_intput_and_scattering_queues_anchor
+///
+///>   <i> << Swap the intput and scattering queues >> := </i> 
+///>
+///\code
+/// 		// swap the input and output queues
+/// 		std::swap(context.in_queue, context.scatter_queue);
+///\endcode
+///
+///\par
+/// At this point, we just need to fill in the missing details, and define the \ref HelloPT-generate_primary_rays "generate_primary_rays()",
+/// \ref shade_vertices_anchor "shade_vertices()" and \ref resolve_occlusion_anchor "resolve_occlusion()" kernels.
+///
+///\section HelloPTGeneratingPrimaryRaysSection Generating Primary Rays
+///\par
+/// Generating primary rays will require us to write a fairly simple kernel, and a function to dispatch it:
+/// \anchor HelloPT-generate_primary_rays
+///\n
+///\snippet hellopt_impl.h HelloPT: generate_primary_rays
+///
+///\section HelloPTShadingVerticesSection Shading Vertices
+///\par
+/// We'll start from a single-threaded device function that will be called each time we process a vertex.
+/// This function will receive an incoming ray and a Hit object, and use those to <i>reconstruct</i> a full path vertex.
+/// After the vertex is set up, it will proceed initializing the local sample sequence, performing next-event estimation,
+/// evaluating the local emission at the hit in the direction of the incoming ray, and finally evaluating any scattering/absorption
+/// events.
+/// \anchor shade_vertex_anchor
+///\n
+///\code
+/// // shade a path vertex
+/// //
+/// // \param pixel_index       the 1d pixel index associated with this path
+/// // \param pixel             the 2d pixel coordinates
+/// // \param ray               the incoming ray direction
+/// // \param hit               the hit point defining this vertex
+/// // \param w                 the current path weight
+/// // \param p_prev            the solid angle probability of the last scattering event
+/// //
+/// // \return                  true if the path is continued, false if it terminates here
+/// FERMAT_DEVICE
+/// bool shade_vertex(
+/// 	HelloPTContext&			context,
+/// 	RenderingContextView&	renderer,
+/// 	const uint32			pixel_index,
+/// 	const uint2				pixel,
+/// 	const MaskedRay&		ray,
+/// 	const Hit				hit,
+/// 	const cugar::Vector3f	w,
+/// 	const float				p_prev)
+/// {
+///     // check if this is a valid hit
+///     if (hit.t > 0.0f && hit.triId >= 0)
+///     {
+///         << Setup path vertex >>
+///         << Write out G-buffer on primary hits >>
+///         << Initialize sampling sequence >>
+///         << Perform Next-Event Estimation >>
+///         << Evaluate emissive hits >>
+///         << Evaluate scattering and absorption >>
+///     }
+///     else
+///     {
+///         << Evaluate sky-lighting >>
+///     }
+///     return false; // this path terminates here
+/// }
+///\endcode
+///
+///\par
+/// In order to setup the vertex, we'll use Fermat's \ref EyeVertex class, an object representing a vertex sampled from the eye
+/// (i.e. using forward path tracing), which helps interpolating vertex attributes, keep tracking of the path sampling probabilities,
+/// setting up vertex Bsdf (evaluating the material, including any textures), and so on.
+///\n
+/// \anchor Setup_path_vertex_anchor
+///
+///>   <i> << Setup path vertex >> := </i> 
+///>
+///\code
+///         // setup an eye-vertex given the input ray, hit point, and path weight
+///         EyeVertex ev;
+///         ev.setup(ray, hit, w.xyz(), cugar::Vector4f(0.0f), context.in_bounce, renderer);
+///\endcode
+///
+///\par
+/// Once we have all the vertex information, we can write out any G-buffer information on primary rays (i.e. when we
+/// are processing the zero-th bounce):
+///\n
+/// \anchor Write_out_G-buffer_on_primary_hits_anchor
+///
+///>   <i> << Write out G-buffer on primary hits >> := </i> 
+///>
+///\code
+///         // write out gbuffer information
+///         if (context.in_bounce == 0)
+///         {
+///             renderer.fb.gbuffer.geo(pixel_index)   = GBufferView::pack_geometry(ev.geom.position, ev.geom.normal_s);
+///             renderer.fb.gbuffer.uv(pixel_index)    = make_float4(hit.u, hit.v, ev.geom.texture_coords.x, ev.geom.texture_coords.y);
+///             renderer.fb.gbuffer.tri(pixel_index)   = hit.triId;
+///             renderer.fb.gbuffer.depth(pixel_index) = hit.t;
+///         }
+///\endcode
+///
+///\par
+/// Initializing the sampling coordinates requires fetching a batch 6 random numbers (3 for next-event estimation and 3 for scattering)
+/// from the \ref TiledSequenceView sampling sequence, which again, can be done using a prepackaged utility function: vertex_sample()
+///\n
+/// \anchor Initialize_sampling_sequence_anchor
+///
+///>   <i> <<  Initialize sampling sequence >> := </i> 
+///>
+///\code
+///         // initialize our shifted sampling sequence
+///         float samples[6];
+///         for (uint32 i = 0; i < 6; ++i)
+///             samples[i] = vertex_sample(pixel, context, i);
+///\endcode
+/// 
+///\subsection NextEventEstimationSection Next-Event Estimation
+///\par
+/// Next-event estimation is trickier business.
+/// It will involve four basic steps: sampling a point on the light sources (in this case, the scene's mesh), evaluating the
+/// the EDF in the direction of the current vertex and the local BSDF in the direction joining the current vertex to the sampled point,
+/// calculating the sample weight, and finally enqueuing a shadow ray to check if the sample is occluded or visible.
+/// Notice that NEE essentially adds a vertex to a path, so if we allow a maximum path length of <i>N</i>, we can only perform it
+/// if our current path is shorter than <i>N-1</i>.
+///\n
+/// \anchor Perform_Next-Event_Estimation_anchor
+///
+///>   <i> <<  Perform Next-Event Estimation >> := </i> 
+///>
+///\code
+///         // perform next-event estimation to compute direct lighting
+///         if (context.in_bounce + 2 <= context.options.max_path_length)
+///         {
+///             // fetch the sampling dimensions
+///             const float z[3] = { samples[0], samples[1], samples[2] }; // use dimensions 0,1,2
+///         
+///             VertexGeometryId light_vertex;
+///             VertexGeometry   light_vertex_geom;
+///             float            light_pdf;
+///             Edf              light_edf;
+///         
+///             // sample the light source surface
+///             renderer.mesh_light.sample(z, &light_vertex.prim_id, &light_vertex.uv, &light_vertex_geom, &light_pdf, &light_edf);
+///            
+///            // join the light sample with the current vertex
+///            cugar::Vector3f out = (light_vertex_geom.position - ev.geom.position);
+///            						
+///            const float d2 = fmaxf(1.0e-8f, cugar::square_length(out));
+///            
+///            // normalize the outgoing direction
+///            out *= rsqrtf(d2);
+///            
+///            // evaluate the light's EDF, predivided by the sample pdf
+///            const cugar::Vector3f f_L = light_edf.f(light_vertex_geom, light_vertex_geom.position, -out) / light_pdf;
+/// 
+///            cugar::Vector3f f_s(0.0f);
+///            float           p_s(0.0f);
+///            
+///            // evaluate the surface BSDF f() and its sampling pdf p() in one go
+///            ev.bsdf.f_and_p(ev.geom, ev.in, out, f_s, p_s, cugar::kProjectedSolidAngle);
+///            
+///            << Compute the sample value >>
+///            << Enqueue a shadow ray >>
+///        }
+///\endcode
+///
+///\par
+/// Computing the sample value would require multiplying together the current path weight, <i>w</i>, the EDF, <i>f_L</i>, the BSDF, <i>f_s</i>
+/// and the geometric throughput term, <i>G</i>, and divide everything by the sample pdf.
+/// In practice, we have pre-divided <i>f_L</i> by the pdf <i>light_pdf</i>, so we can now avoid this last division.
+/// However, as our path sampler will also be able to hit the light sources, we'll use multiple importance sampling (in short, MIS)
+/// between NEE and the possibility of hitting the same light on the same point.
+///\n
+/// \anchor Compute_the_sample_value_anchor
+///
+///>   <i> <<  Compute the sample value >> := </i> 
+///>
+///\code
+///            // evaluate the geometric term
+///            const float G = fabsf(cugar::dot(out, ev.geom.normal_s) * cugar::dot(out, light_vertex_geom.normal_s)) / d2;
+///            
+///            // perform MIS with the possibility of directly hitting the light source
+///            const float p1 = light_pdf;
+///            const float p2 = p_s * G;
+///            const float mis_w = context.in_bounce > 0 ? mis_heuristic<MIS_HEURISTIC>(p1, p2) : 1.0f;
+///            
+///            // calculate the cumulative sample weight, equal to f_L * f_s * G / p
+///            const cugar::Vector3f out_w = w.xyz() * f_L * f_s * G * mis_w;
+///\endcode
+///
+///\par
+/// Finally, we can enqueue a shadow ray, carrying the pixel index and sample weight together with the ray itself.
+///\n
+/// \anchor Enqueue_a_shadow_ray_anchor
+///
+///>   <i> <<  Enqueue a shadow ray >> := </i> 
+///>
+///\code
+///            if (cugar::max_comp(out_w) > 0.0f && cugar::is_finite(out_w))
+///            {
+///                // enqueue the output ray
+///                MaskedRay out_ray;
+///                out_ray.origin   = ev.geom.position - ray.dir * 1.0e-4f; // shift back in space along the viewing direction
+///                out_ray.dir      = (light_vertex_geom.position - out_ray.origin); //out;
+///                out_ray.mask     = 0x2u;
+///                out_ray.tmax     = 0.9999f; //d * 0.9999f;
+///                
+///                // append the ray to the shadow queue
+///                context.shadow_queue.warp_append( pixel_index, out_ray, cugar::Vector4f(out_w, 0.0f) );
+///            }
+///\endcode
+///
+///\subsection EvaluatingEmissiveHitsSection Evaluating Emissive Hits
+///\par
+/// Evaluating emissive surface hits allows us to have a second technique to form complete light paths joining
+/// the camera to the light sources, which is often far more efficient than NEE when the BSDF is glossy or close to specular.
+/// In principle, it is very similar to evaluating NEE, except that sampling a point on the light source has to be replaced
+/// by evaluating the pdf of generating it, which again we'll need to perform MIS.
+/// Also, in this case we will not need to enqueue any additional rays (since we have already landed on a light source), and
+/// can just add the weighted sample contribution to the framebuffer.
+/// Notice that we will further weight the sample by <i>frame_weight = 1 / (instance + 1)</i>, in order to average together
+/// this pass with all the previous ones.
+///\n
+/// \anchor Evaluate_emissive_hits_anchor
+///
+///>   <i> << Evaluate emissive hits >> := </i> 
+///>
+///\snippet hellopt_impl.h HelloPT: accumulate emissive
+///
+///\subsection EvaluatingScatteringAbsorptionSection Evaluating Scattering and Absorption
+///\par
+/// The last bit of \ref shade_vertex_anchor "shade_vertex()" involves sampling a scattering or an absorption event.
+/// For this, we will use the last 3 of the random numbers we chose, and rely on the \ref scatter()
+/// utility function.
+/// This function will sample the BSDF, and return both the BSDF value, predivided by the projected
+/// sampling pdf, as well as the pdf itself and a Bsdf::ComponentType flag telling us which
+/// component has been sampled. If the flag is equal to Bsdf::kAbsorption, the path should be
+/// terminated.
+///\n
+/// \anchor Evaluate_scattering_and_absorption_anchor
+///
+///>   <i> << Evaluate scattering and absorption >> := </i> 
+///>
+///\snippet hellopt_impl.h HelloPT: evaluate scattering/absorption
+///
+///\subsection HelloPTPackagingAllTogetherSection Packaging it All Together
+///\par
+/// Now that our \ref shade_vertex_anchor "shade_vertex()" function is complete, it remains to package it into a kernel
+/// which fetches tasks (i.e. vertices to be shaded) from the input queue, and executes them.
+/// Again, this is nothing complex: we'll spawn one thread per queue entry, and have each thread fetch one queue item
+/// and pass it to \ref shade_vertex_anchor "shade_vertex()".
+/// \anchor shade_vertices_anchor
+///\n
+///\snippet hellopt_impl.h HelloPT: shade_vertices
+///
+///\section HelloPTSolvingOcclusionSection Resolving Occlusion
+///\par
+/// The next and last bit of our pipeline is a kernel that takes tasks from the shadow queue, representing next-event samples,
+/// and resolves their occlusion using the corresponding ray hits.
+/// If the samples are not occluded, they will be accumulated to their originating pixel.
+/// \anchor resolve_occlusion_anchor
+///\n
+///\snippet hellopt_impl.h HelloPT: resolve_occlusion
+/// 
+///\section HelloPTPluginSection The Plugin
+///
+///\par
+/// In order to get the new renderer picked up by the Fermat executable (fermat.exe), we need to write a plugin DLL
+/// that can be loaded at runtime.
+/// As anticipated, this DLL needs to export a single function, in this case registering the new HelloPT factory:
+///\n
+///>   <i> hellopt_plugin.cpp </i> 
+///>
+///\snippet hellopt_plugin.cpp HelloPT: hellopt_plugin.cpp
+///
+///\section HelloPTDoneSection We're Done!
+///
+///\par
+/// Pat yourself on the shoulder, we have just finished writing our first sample path tracer in Fermat! \n
+/// I am sure you'll have some unanswered questions in your head, though hopefully they are not way too
+/// many...
+///\par
+/// In fact, if you have already compiled the entire Fermat solution, and you have the dll placed in the same directory as Fermat's executable,
+/// you should be able to run the HelloPT plugin renderer interactively
+/// by just launching:
+///\n
+///\verbatim
+/// fermat.exe -view -plugin hellopt.dll -path-length 6 -i ../../models/bathroom2/bathroom.obj -c ../../models/bathroom2/camera2.txt -o output/hellopt.tga
+///\endverbatim
+///\par
+/// and if all goes well, waiting long enough you should get an image like this:
+///
+/// <img src="bathroom.png" style="position:relative; bottom:-10px; border:0px; width:760px;"/>
+///
+///\n
+///\par
+/// Despite the fact that a lot of details were hidden behind some helper functions and classes (e.g. for
+/// sampling and evaluating BSDFs, or mesh emitters), this example is still rather low level.
+/// In the following pages we'll see that Fermat provides much higher level constructs and libraries to
+/// implement both forward and bidirectional path tracers, based on the realization that the underlying
+/// structure of these path samplers is more or less always the same, and that one typically only needs
+/// to <i>customize</i> their behaviour at specific points (e.g. specifying how exactly NEE is performed,
+/// or performing a custom action, like checking a cache, any time a new vertex is generated, or again
+/// specifying how the samples are weighted and finally consumed).
+/// We will also see that Fermat typically splits these libraries into two distinct components: a <i>core</i>
+/// library of singled-threaded device or host/device functions (i.e. functions meant to be called by and operate
+/// within an individual thread, that are still completely thread-safe - so there could be millions such threads
+/// working in parallel), and a higher level library of <i>parallel kernels</i> and host dispatch functions,
+/// typically providing a generalized skeleton of the queue-based pipeline mechanism we just described here.
+///
+/// 
+/// Next: \ref PTLibPage
+
+
+/// \page FermatHostDevicePage Host & Device
+///\par
+/// The user of \ref index and \ref cugar_page needs to familiarize with the fact that on a GPU equipped system
+/// there is both a <i>host</i>, controlled by a <i>CPU</i>, and one or multiple <i>GPU</i> <i>devices</i>,
+/// with distinct memory spaces.
+/// Hence, there can be several types of functions and data-structures:
+///\par
+/// - single-threaded functions that can be called by a host thread
+/// - single-threaded functions that can be called by a device thread
+/// - single-threaded functions that can be called both on the host and the device
+/// - parallel functions that can be called by a host thread, and spawn one or more sets of host threads
+/// - parallel functions that can be called by a host thread, but spawn one or more sets of device threads
+///\par
+/// - data-structures that encapsulate host data and are meant to be used on the host
+///   (e.g. a resizable host vector, cugar::vector<host_tag,T>)
+/// - data-structures that encapsulate device data but are meant to be used on the host
+///   (e.g. a resizable device vector, cugar::vector<device_tag,T>)
+/// - data-structures that encapsulate device data and are meant to be used on the device
+///\par
+/// Unified Virtual Memory (coming with the NVIDIA Maxwell generation) already allows
+/// to use any data-structure anywhere, but given the buses between CPUs and GPUs, it is still
+/// useful to sometimes have complete control of where the data lives.
+///
+/// \section FermatPlainViewsSection Plain Views
+///\par
+/// The fact that some data structures contain device data but can only be used from the host,
+/// coupled with the fact that dereferencing host side references from a device kernel would require going
+/// through a bus to access slow CPU memory, makes it advantageous to rethink how to communicate data
+/// between the two, and introduce the concept of
+/// <i>plain views</i>: in \ref cugar_page's (and \ref index's) speech, a plain view of an object is essentially a <i>shallow reference</i>
+/// to an object's data encapsulated in a POD data structure that can be passed as a kernel parameter.
+///\par
+/// \ref \ref cugar_page defines the generic function plain_view() to obtain the view of a given object.
+/// Analogously it defines the meta function plain_view_subtype<T>::type to get the type of the
+/// plain view of any given type T (where defined).
+/// Moreover, as a convention \ref cugar_page's data structures T define the subtype T::plain_view_type and
+/// T::const_plain_view_type to identify their plain view types.
+///\par
+/// As an example consider the following situation, where on the host you have created a large device vector
+/// you want to be filled by a device kernel.
+/// Ideally, you'd want to simply pass a reference to the vector to your kernel, as in:
+///\code
+/// __global__ void my_kernel(                   // the CUDA kernel
+///     cugar::vector<device_tag,uint32>& vec)   // ideally, receive a reference: doesn't work without UVM!
+/// {
+///     const uint32 tid = threadIdx.x + blockIdx.x * blockDim.x; // compute a linear thread id
+///     if (tid < vec.size())
+///         vec[tid] = tid * 10;
+/// }
+///
+/// int main()
+/// {
+///     cugar::vector<device_tag,uint32> vec( 1000000 );
+///
+///     const uint32 blockdim = 128;
+///     const uint32 n_blocks = util::divide_ri( vec.size(), blockdim ); 
+///     my_kernel<<<n_blocks,blockdim>>>( vec );
+/// }
+///\endcode
+///\par
+/// However, this won't be possible in CUDA until UVM is finally available. With Fermat, you'd do this instead:
+///\code
+/// __global__ void my_kernel(                   // the CUDA kernel
+///     cugar::vector_view<uint32> vec)          // Fermat's surrogate of a reference
+/// {
+///     const uint32 tid = threadIdx.x + blockIdx.x * blockDim.x; // compute a linear thread id
+///     if (tid < vec.size())
+///         vec[tid] = tid * 10;
+/// }
+///
+/// int main()
+/// {
+///     cugar::vector<device_tag,uint32> vec( 1000000 );
+///
+///     const uint32 blockdim = 128;
+///     const uint32 n_blocks = util::divide_ri( vec.size(), blockdim );
+///     my_kernel<<<n_blocks,blockdim>>>( cugar::plain_view( vec ) );
+/// }
+///\endcode
+///\par
+/// This basic pattern can be applied to all of \ref cugar_page "CUGAR"'s and \ref index "Fermat"'s data structures that are meant to be setup from the
+/// host and accessed from the device.
+///
+/// Top: \ref OverturePage
+
+/// \page ModulesPage Module List
+/// Top: \ref OvertureContentsPage
+///
+///\par
+/// For reference, here is the complete list of modules in Fermat:
+///\n
+/// - \ref BSDFModule "BSDFModule"
+/// - \ref VertexGeometryModule
+/// - \ref PathModule
+/// - \ref PTLibPage
+/// - \ref BPTLib
+/// - \ref LightsModule
+/// - \ref FramebufferModule
+/// - \ref SamplingModule
+/// - \ref FilteringModule
+/// - \ref PTModule
+/// - \ref PSFPTModule
+/// - \ref BPTModule
+/// - \ref PSSMLTModule
+/// - \ref CMLTModule
+/// - \ref RPTModule "RPTModule"
+///

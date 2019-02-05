@@ -1,0 +1,92 @@
+\hypertarget{structcugar_1_1_time_series}{}\section{cugar\+:\+:Time\+Series Struct Reference}
+\label{structcugar_1_1_time_series}\index{cugar\+::\+Time\+Series@{cugar\+::\+Time\+Series}}
+
+
+\subsection{Detailed description}
+A class used to keep track of several timing statistics for repeating kernel or function calls 
+
+{\ttfamily \#include $<$timer.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structcugar_1_1_time_series_aaf2e2067f2e771cb6d4540b4554fb86a}{Time\+Series} ()
+\item 
+void \hyperlink{structcugar_1_1_time_series_aed1636551337b044109839b64aef31ad}{add} (const uint32 c, const float t, const float dt=0.\+0f)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_time_series_a08aa28ed19bceb199cd873755efb4dfd}\label{structcugar_1_1_time_series_a08aa28ed19bceb199cd873755efb4dfd}} 
+float {\bfseries avg\+\_\+speed} () const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_time_series_acafafa4a5704deb8e8a5ad57d0e453e8}\label{structcugar_1_1_time_series_acafafa4a5704deb8e8a5ad57d0e453e8}} 
+std\+::string {\bfseries name}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_time_series_ae63db7f4a561b5c3a3979f802b7b52a0}\label{structcugar_1_1_time_series_ae63db7f4a561b5c3a3979f802b7b52a0}} 
+std\+::string {\bfseries units}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_time_series_aba9fcac6928f74efccb093d7582b45c4}\label{structcugar_1_1_time_series_aba9fcac6928f74efccb093d7582b45c4}} 
+uint32 {\bfseries num}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_time_series_a917a14de8fe3fa646496a780bc7ff20a}\label{structcugar_1_1_time_series_a917a14de8fe3fa646496a780bc7ff20a}} 
+uint64 {\bfseries calls}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_time_series_ae676a0b8e9c2f2ed7e831cb82d8670eb}\label{structcugar_1_1_time_series_ae676a0b8e9c2f2ed7e831cb82d8670eb}} 
+float {\bfseries time}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_time_series_a192f838667b82c6f7bd34726e6a51abc}\label{structcugar_1_1_time_series_a192f838667b82c6f7bd34726e6a51abc}} 
+float {\bfseries device\+\_\+time}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_time_series_a03b8ed43834d782bfebe9727de3be417}\label{structcugar_1_1_time_series_a03b8ed43834d782bfebe9727de3be417}} 
+float {\bfseries max\+\_\+speed}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_time_series_af0c518dff882eb255cd79aa3ab2018f7}\label{structcugar_1_1_time_series_af0c518dff882eb255cd79aa3ab2018f7}} 
+uint32 {\bfseries bin\+\_\+calls} \mbox{[}32\mbox{]}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_time_series_af73d2692e4e8bf3ca8efa7f7b84e4782}\label{structcugar_1_1_time_series_af73d2692e4e8bf3ca8efa7f7b84e4782}} 
+uint64 {\bfseries bin\+\_\+items} \mbox{[}32\mbox{]}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_time_series_a8d180b3902ad8d6565e4b5a386daf2a8}\label{structcugar_1_1_time_series_a8d180b3902ad8d6565e4b5a386daf2a8}} 
+float {\bfseries bin\+\_\+time} \mbox{[}32\mbox{]}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_time_series_afb534083663714d21e3ff38662cccae2}\label{structcugar_1_1_time_series_afb534083663714d21e3ff38662cccae2}} 
+float {\bfseries bin\+\_\+speed} \mbox{[}32\mbox{]}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_time_series_a7f9f98040a50036c133248696ecdf044}\label{structcugar_1_1_time_series_a7f9f98040a50036c133248696ecdf044}} 
+std\+::deque$<$ std\+::pair$<$ uint32, float $>$ $>$ {\bfseries info}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcugar_1_1_time_series_aaf2e2067f2e771cb6d4540b4554fb86a}\label{structcugar_1_1_time_series_aaf2e2067f2e771cb6d4540b4554fb86a}} 
+\index{cugar\+::\+Time\+Series@{cugar\+::\+Time\+Series}!Time\+Series@{Time\+Series}}
+\index{Time\+Series@{Time\+Series}!cugar\+::\+Time\+Series@{cugar\+::\+Time\+Series}}
+\subsubsection{\texorpdfstring{Time\+Series()}{TimeSeries()}}
+{\footnotesize\ttfamily cugar\+::\+Time\+Series\+::\+Time\+Series (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1_time_series_aed1636551337b044109839b64aef31ad}\label{structcugar_1_1_time_series_aed1636551337b044109839b64aef31ad}} 
+\index{cugar\+::\+Time\+Series@{cugar\+::\+Time\+Series}!add@{add}}
+\index{add@{add}!cugar\+::\+Time\+Series@{cugar\+::\+Time\+Series}}
+\subsubsection{\texorpdfstring{add()}{add()}}
+{\footnotesize\ttfamily void cugar\+::\+Time\+Series\+::add (\begin{DoxyParamCaption}\item[{const uint32}]{c,  }\item[{const float}]{t,  }\item[{const float}]{dt = {\ttfamily 0.0f} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+add a sample
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & the number of calls / items processed \\
+\hline
+{\em t} & the amount of time spent \\
+\hline
+{\em dt} & the amount of device-\/time spent \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/timer.\+h\end{DoxyCompactItemize}

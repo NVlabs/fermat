@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2011, NVIDIA Corporation
+ * Copyright (c) 2010-2018, NVIDIA Corporation
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -156,22 +156,25 @@ CUGAR_FORCEINLINE CUGAR_HOST_DEVICE uint64 morton_code60(
 
 /// a convenience functor to compute the Morton code of a point sequences
 /// relative to a given bounding box
-template <typename Integer, uint32 DIM>
+template <typename Integer, uint32 DIM, typename BboxType>
 struct morton_functor {};
 
 /// a convenience functor to compute the Morton code of a point sequences
 /// relative to a given bounding box
-template <>
-struct morton_functor<uint32, 2u>
+template <typename BboxType>
+struct morton_functor<uint32, 2u, BboxType>
 {
-    /// constructor
+	typedef typename BboxType::value_type  value_type;
+	typedef typename BboxType::vector_type vector_type;
+	
+	/// constructor
     ///
     /// \param bbox     global bounding box
     CUGAR_HOST_DEVICE morton_functor(const Bbox2f& bbox) :
         m_base( bbox[0] ),
         m_inv(
-            1.0f / (bbox[1][0] - bbox[0][0]),
-            1.0f / (bbox[1][1] - bbox[0][1]) )
+            value_type(1.0) / (bbox[1][0] - bbox[0][0]),
+            value_type(1.0) / (bbox[1][1] - bbox[0][1]) )
     {}
 
     template <typename Point_type>
@@ -183,23 +186,26 @@ struct morton_functor<uint32, 2u>
         return morton_code( x, y );
     }
 
-    const Vector2f m_base;
-    const Vector2f m_inv;
+    const vector_type m_base;
+    const vector_type m_inv;
 };
 
 /// a convenience functor to compute the Morton code of a point sequences
 /// relative to a given bounding box
-template <>
-struct morton_functor<uint64, 2u>
+template <typename BboxType>
+struct morton_functor<uint64, 2u, BboxType>
 {
-    /// constructor
+	typedef typename BboxType::value_type  value_type;
+	typedef typename BboxType::vector_type vector_type;
+
+	/// constructor
     ///
     /// \param bbox     global bounding box
     CUGAR_HOST_DEVICE morton_functor(const Bbox2f& bbox) :
         m_base( bbox[0] ),
         m_inv(
-            1.0f / (bbox[1][0] - bbox[0][0]),
-            1.0f / (bbox[1][1] - bbox[0][1]) )
+            value_type(1.0) / (bbox[1][0] - bbox[0][0]),
+            value_type(1.0) / (bbox[1][1] - bbox[0][1]) )
     {}
 
     template <typename Point_type>
@@ -211,24 +217,27 @@ struct morton_functor<uint64, 2u>
         return morton_code60( x, y );
     }
 
-    const Vector2f m_base;
-    const Vector2f m_inv;
+    const vector_type m_base;
+    const vector_type m_inv;
 };
 
 /// a convenience functor to compute the Morton code of a point sequences
 /// relative to a given bounding box
-template <>
-struct morton_functor<uint32, 3u>
+template <typename BboxType>
+struct morton_functor<uint32, 3u, BboxType>
 {
-    /// constructor
+	typedef typename BboxType::value_type  value_type;
+	typedef typename BboxType::vector_type vector_type;
+
+	/// constructor
     ///
     /// \param bbox     global bounding box
-    CUGAR_HOST_DEVICE morton_functor(const Bbox3f& bbox) :
+    CUGAR_HOST_DEVICE morton_functor(const BboxType& bbox) :
         m_base( bbox[0] ),
         m_inv(
-            1.0f / (bbox[1][0] - bbox[0][0]),
-            1.0f / (bbox[1][1] - bbox[0][1]),
-            1.0f / (bbox[1][2] - bbox[0][2]) )
+            value_type(1.0) / (bbox[1][0] - bbox[0][0]),
+            value_type(1.0) / (bbox[1][1] - bbox[0][1]),
+            value_type(1.0) / (bbox[1][2] - bbox[0][2]) )
     {}
 
     template <typename Point_type>
@@ -241,24 +250,27 @@ struct morton_functor<uint32, 3u>
         return morton_code( x, y, z );
     }
 
-    const Vector3f m_base;
-    const Vector3f m_inv;
+    const vector_type m_base;
+    const vector_type m_inv;
 };
 
 /// a convenience functor to compute the Morton code of a point sequences
 /// relative to a given bounding box
-template <>
-struct morton_functor<uint64, 3u>
+template <typename BboxType>
+struct morton_functor<uint64, 3u, BboxType>
 {
-    /// constructor
+	typedef typename BboxType::value_type  value_type;
+	typedef typename BboxType::vector_type vector_type;
+
+	/// constructor
     ///
     /// \param bbox     global bounding box
-    CUGAR_HOST_DEVICE morton_functor(const Bbox3f& bbox) :
+    CUGAR_HOST_DEVICE morton_functor(const BboxType& bbox) :
         m_base( bbox[0] ),
         m_inv(
-            1.0f / (bbox[1][0] - bbox[0][0]),
-            1.0f / (bbox[1][1] - bbox[0][1]),
-            1.0f / (bbox[1][2] - bbox[0][2]) )
+            value_type(1.0) / (bbox[1][0] - bbox[0][0]),
+            value_type(1.0) / (bbox[1][1] - bbox[0][1]),
+            value_type(1.0) / (bbox[1][2] - bbox[0][2]) )
     {}
 
     template <typename Point_type>
@@ -271,8 +283,8 @@ struct morton_functor<uint64, 3u>
         return morton_code60( x, y, z );
     }
 
-    const Vector3f m_base;
-    const Vector3f m_inv;
+    const vector_type m_base;
+    const vector_type m_inv;
 };
 
 ///@} BitsModule

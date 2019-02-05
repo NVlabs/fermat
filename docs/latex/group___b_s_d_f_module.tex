@@ -1,0 +1,168 @@
+\hypertarget{group___b_s_d_f_module}{}\section{B\+S\+DF}
+\label{group___b_s_d_f_module}\index{B\+S\+DF@{B\+S\+DF}}
+
+
+\subsection{Detailed Description}
+\begin{DoxyParagraph}{}
+This module defines the Bidirectional Scattering Distribution Function employed throughout Fermat. At present time, this model is rather simple, and consists of four layered components only\+: 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+
+\begin{DoxyItemize}
+\item a diffuse reflection component
+\item a diffuse transmission component
+\item a glossy reflection component layered on top of the diffuse layer
+\item a glossy transmission component layered on top of the diffuse layer 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The diffuse model is purely Lambertian, while the glossy components are based on the G\+GX model with Smith\textquotesingle{}s joint masking-\/shadowing function described in\+: \begin{quote}
+\mbox{[}Heitz 2014, \char`\"{}\+Understanding the Masking-\/\+Shadowing Function in Microfacet-\/\+Based B\+R\+D\+Fs\char`\"{}\mbox{]}\end{quote}
+
+\end{DoxyParagraph}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_bsdf}{Bsdf}
+\item 
+struct \hyperlink{struct_edf}{Edf}
+\item 
+struct \hyperlink{structcugar_1_1_blend_bsdf}{cugar\+::\+Blend\+Bsdf$<$ T\+Bsdf1, T\+Bsdf2 $>$}
+\item 
+struct \hyperlink{structcugar_1_1_differential_geometry}{cugar\+::\+Differential\+Geometry}
+\item 
+struct \hyperlink{structcugar_1_1_g_g_x_v_cavity_microfacet_distribution}{cugar\+::\+G\+G\+X\+V\+Cavity\+Microfacet\+Distribution}
+\item 
+struct \hyperlink{structcugar_1_1_g_g_x_bsdf}{cugar\+::\+G\+G\+X\+Bsdf}
+\item 
+struct \hyperlink{structcugar_1_1_g_g_x_smith_microfacet_distribution}{cugar\+::\+G\+G\+X\+Smith\+Microfacet\+Distribution}
+\item 
+struct \hyperlink{structcugar_1_1_g_g_x_smith_bsdf}{cugar\+::\+G\+G\+X\+Smith\+Bsdf}
+\item 
+struct \hyperlink{structcugar_1_1_lambert_bsdf}{cugar\+::\+Lambert\+Bsdf}
+\item 
+struct \hyperlink{structcugar_1_1_lambert_edf}{cugar\+::\+Lambert\+Edf}
+\item 
+struct \hyperlink{structcugar_1_1_lambert_trans_bsdf}{cugar\+::\+Lambert\+Trans\+Bsdf}
+\item 
+struct \hyperlink{structcugar_1_1_l_t_c_bsdf}{cugar\+::\+L\+T\+C\+Bsdf}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{group___b_s_d_f_module_gaca1e72535e7f260e54ed8bbf984dade9}{Transport\+Type} \{ {\bfseries k\+Radiance\+Transport} = 0, 
+{\bfseries k\+Particle\+Transport} = 1
+ \}
+\item 
+\mbox{\Hypertarget{group___b_s_d_f_module_ga31d5c3496d9630777d98ec49f397cbfd}\label{group___b_s_d_f_module_ga31d5c3496d9630777d98ec49f397cbfd}} 
+enum {\bfseries Spherical\+Measure} \{ {\bfseries k\+Solid\+Angle} = 0, 
+{\bfseries k\+Projected\+Solid\+Angle} = 1
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___b_s_d_f_module_ga452befdd31de89c5de5863c06d2cc901}\label{group___b_s_d_f_module_ga452befdd31de89c5de5863c06d2cc901}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float {\bfseries pow5} (const float x)
+\item 
+\mbox{\Hypertarget{group___b_s_d_f_module_gad2e2716498c2e506ddb0346bcd76a577}\label{group___b_s_d_f_module_gad2e2716498c2e506ddb0346bcd76a577}} 
+void {\bfseries precompute\+\_\+glossy\+\_\+reflectance} (const uint32 S, float $\ast$tables)
+\item 
+\mbox{\Hypertarget{group___b_s_d_f_module_ga406d45267a7c015d38cd6db45c8391fb}\label{group___b_s_d_f_module_ga406d45267a7c015d38cd6db45c8391fb}} 
+bool {\bfseries cugar\+::bsdf\+\_\+test} (uint32 test\+\_\+index, const \hyperlink{structcugar_1_1_g_g_x_smith_bsdf}{G\+G\+X\+Smith\+Bsdf} \&bsdf)
+\item 
+bool \hyperlink{group___b_s_d_f_module_ga6f553010172240343aa0890f04b7192c}{cugar\+::bsdf\+\_\+test} ()
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector3f} \hyperlink{group___b_s_d_f_module_gae47d332728711dde1d05b721b74267f7}{cugar\+::microfacet} (const \hyperlink{structcugar_1_1_vector}{Vector3f} V, const \hyperlink{structcugar_1_1_vector}{Vector3f} L, const \hyperlink{structcugar_1_1_vector}{Vector3f} N, const float inv\+\_\+eta)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector3f} \hyperlink{group___b_s_d_f_module_gaa871796466d7998c178e28e2eccd7248}{cugar\+::vndf\+\_\+microfacet} (const \hyperlink{structcugar_1_1_vector}{Vector3f} V, const \hyperlink{structcugar_1_1_vector}{Vector3f} L, const \hyperlink{structcugar_1_1_vector}{Vector3f} N, const float inv\+\_\+eta)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{group___b_s_d_f_module_ga985268a447aa898cd2f2e1c792d9ddff}{cugar\+::hvd\+\_\+ggx\+\_\+eval} (const float2 \&inv\+\_\+alpha, const float nh, const float ht, const float hb)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float3 \hyperlink{group___b_s_d_f_module_ga49eab615e64e73c409bb285fd95c56c3}{cugar\+::hvd\+\_\+ggx\+\_\+sample} (const float2 \&samples, const float inv\+\_\+alpha)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float3 \hyperlink{group___b_s_d_f_module_gaa94fad7af98e50d2b2abe6801df8bd93}{cugar\+::hvd\+\_\+ggx\+\_\+sample} (const float2 \&samples, const float2 \&inv\+\_\+alpha)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float2 \hyperlink{group___b_s_d_f_module_ga009dbdc5ba0035fc161335607c2b328d}{cugar\+::hvd\+\_\+ggx\+\_\+invert} (const float3 H, const float2 inv\+\_\+alpha)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float3 \hyperlink{group___b_s_d_f_module_gaae32e76bc82f281f61485ea552aba53a}{cugar\+::vndf\+\_\+ggx\+\_\+smith\+\_\+sample} (const float2 samples, const float2 alpha, const \hyperlink{structcugar_1_1_vector}{Vector3f} \+\_\+V)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float2 \hyperlink{group___b_s_d_f_module_gabe2116f566e70937f1abb126140afae8}{cugar\+::vndf\+\_\+ggx\+\_\+smith\+\_\+invert} (const \hyperlink{structcugar_1_1_vector}{Vector3f} \+\_\+N, const float2 alpha, const \hyperlink{structcugar_1_1_vector}{Vector3f} \+\_\+V)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{group___b_s_d_f_module_ga0ddbffc856042ea191e9ed868fe58ca9}{cugar\+::clip\+\_\+quad\+\_\+to\+\_\+horizon} (\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} L\mbox{[}5\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{group___b_s_d_f_module_gaca1e72535e7f260e54ed8bbf984dade9}\label{group___b_s_d_f_module_gaca1e72535e7f260e54ed8bbf984dade9}} 
+\index{B\+S\+DF@{B\+S\+DF}!Transport\+Type@{Transport\+Type}}
+\index{Transport\+Type@{Transport\+Type}!B\+S\+DF@{B\+S\+DF}}
+\subsubsection{\texorpdfstring{Transport\+Type}{TransportType}}
+{\footnotesize\ttfamily enum \hyperlink{group___b_s_d_f_module_gaca1e72535e7f260e54ed8bbf984dade9}{Transport\+Type}}
+
+transport type\+: defines whether we are tracing rays, or particles, i.\+e. whether the quantity being transported is radiance or power. 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___b_s_d_f_module_ga6f553010172240343aa0890f04b7192c}\label{group___b_s_d_f_module_ga6f553010172240343aa0890f04b7192c}} 
+\index{B\+S\+DF@{B\+S\+DF}!bsdf\+\_\+test@{bsdf\+\_\+test}}
+\index{bsdf\+\_\+test@{bsdf\+\_\+test}!B\+S\+DF@{B\+S\+DF}}
+\subsubsection{\texorpdfstring{bsdf\+\_\+test()}{bsdf\_test()}}
+{\footnotesize\ttfamily bool cugar\+::bsdf\+\_\+test (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+unit test \mbox{\Hypertarget{group___b_s_d_f_module_ga0ddbffc856042ea191e9ed868fe58ca9}\label{group___b_s_d_f_module_ga0ddbffc856042ea191e9ed868fe58ca9}} 
+\index{B\+S\+DF@{B\+S\+DF}!clip\+\_\+quad\+\_\+to\+\_\+horizon@{clip\+\_\+quad\+\_\+to\+\_\+horizon}}
+\index{clip\+\_\+quad\+\_\+to\+\_\+horizon@{clip\+\_\+quad\+\_\+to\+\_\+horizon}!B\+S\+DF@{B\+S\+DF}}
+\subsubsection{\texorpdfstring{clip\+\_\+quad\+\_\+to\+\_\+horizon()}{clip\_quad\_to\_horizon()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 cugar\+::clip\+\_\+quad\+\_\+to\+\_\+horizon (\begin{DoxyParamCaption}\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{L\mbox{[}5\mbox{]} }\end{DoxyParamCaption})}
+
+clip a quad to the plane z = 0 \mbox{\Hypertarget{group___b_s_d_f_module_ga985268a447aa898cd2f2e1c792d9ddff}\label{group___b_s_d_f_module_ga985268a447aa898cd2f2e1c792d9ddff}} 
+\index{B\+S\+DF@{B\+S\+DF}!hvd\+\_\+ggx\+\_\+eval@{hvd\+\_\+ggx\+\_\+eval}}
+\index{hvd\+\_\+ggx\+\_\+eval@{hvd\+\_\+ggx\+\_\+eval}!B\+S\+DF@{B\+S\+DF}}
+\subsubsection{\texorpdfstring{hvd\+\_\+ggx\+\_\+eval()}{hvd\_ggx\_eval()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float cugar\+::hvd\+\_\+ggx\+\_\+eval (\begin{DoxyParamCaption}\item[{const float2 \&}]{inv\+\_\+alpha,  }\item[{const float}]{nh,  }\item[{const float}]{ht,  }\item[{const float}]{hb }\end{DoxyParamCaption})}
+
+evaluate anisotropic G\+GX / Trowbridge-\/\+Reitz distribution on the non-\/projected hemisphere
+
+\mbox{[}Walter et al. 2007, \char`\"{}\+Microfacet models for refraction through rough surfaces\char`\"{}\mbox{]} nh \mbox{\Hypertarget{group___b_s_d_f_module_ga009dbdc5ba0035fc161335607c2b328d}\label{group___b_s_d_f_module_ga009dbdc5ba0035fc161335607c2b328d}} 
+\index{B\+S\+DF@{B\+S\+DF}!hvd\+\_\+ggx\+\_\+invert@{hvd\+\_\+ggx\+\_\+invert}}
+\index{hvd\+\_\+ggx\+\_\+invert@{hvd\+\_\+ggx\+\_\+invert}!B\+S\+DF@{B\+S\+DF}}
+\subsubsection{\texorpdfstring{hvd\+\_\+ggx\+\_\+invert()}{hvd\_ggx\_invert()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float2 cugar\+::hvd\+\_\+ggx\+\_\+invert (\begin{DoxyParamCaption}\item[{const float3}]{H,  }\item[{const float2}]{inv\+\_\+alpha }\end{DoxyParamCaption})}
+
+invert the the half-\/vector anisotropic G\+GX distribution sampling function \mbox{\Hypertarget{group___b_s_d_f_module_ga49eab615e64e73c409bb285fd95c56c3}\label{group___b_s_d_f_module_ga49eab615e64e73c409bb285fd95c56c3}} 
+\index{B\+S\+DF@{B\+S\+DF}!hvd\+\_\+ggx\+\_\+sample@{hvd\+\_\+ggx\+\_\+sample}}
+\index{hvd\+\_\+ggx\+\_\+sample@{hvd\+\_\+ggx\+\_\+sample}!B\+S\+DF@{B\+S\+DF}}
+\subsubsection{\texorpdfstring{hvd\+\_\+ggx\+\_\+sample()}{hvd\_ggx\_sample()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float3 cugar\+::hvd\+\_\+ggx\+\_\+sample (\begin{DoxyParamCaption}\item[{const float2 \&}]{samples,  }\item[{const float}]{inv\+\_\+alpha }\end{DoxyParamCaption})}
+
+sample isotropic G\+GX distribution on the non-\/projected hemisphere \mbox{\Hypertarget{group___b_s_d_f_module_gaa94fad7af98e50d2b2abe6801df8bd93}\label{group___b_s_d_f_module_gaa94fad7af98e50d2b2abe6801df8bd93}} 
+\index{B\+S\+DF@{B\+S\+DF}!hvd\+\_\+ggx\+\_\+sample@{hvd\+\_\+ggx\+\_\+sample}}
+\index{hvd\+\_\+ggx\+\_\+sample@{hvd\+\_\+ggx\+\_\+sample}!B\+S\+DF@{B\+S\+DF}}
+\subsubsection{\texorpdfstring{hvd\+\_\+ggx\+\_\+sample()}{hvd\_ggx\_sample()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float3 cugar\+::hvd\+\_\+ggx\+\_\+sample (\begin{DoxyParamCaption}\item[{const float2 \&}]{samples,  }\item[{const float2 \&}]{inv\+\_\+alpha }\end{DoxyParamCaption})}
+
+sample the half-\/vector anisotropic G\+GX distribution on the non-\/projected hemisphere \mbox{\Hypertarget{group___b_s_d_f_module_gae47d332728711dde1d05b721b74267f7}\label{group___b_s_d_f_module_gae47d332728711dde1d05b721b74267f7}} 
+\index{B\+S\+DF@{B\+S\+DF}!microfacet@{microfacet}}
+\index{microfacet@{microfacet}!B\+S\+DF@{B\+S\+DF}}
+\subsubsection{\texorpdfstring{microfacet()}{microfacet()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector3f} cugar\+::microfacet (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{V,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{L,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{N,  }\item[{const float}]{inv\+\_\+eta }\end{DoxyParamCaption})}
+
+return the microfacet normal for a given pair of incident and outgoing direction vectors \mbox{\Hypertarget{group___b_s_d_f_module_gabe2116f566e70937f1abb126140afae8}\label{group___b_s_d_f_module_gabe2116f566e70937f1abb126140afae8}} 
+\index{B\+S\+DF@{B\+S\+DF}!vndf\+\_\+ggx\+\_\+smith\+\_\+invert@{vndf\+\_\+ggx\+\_\+smith\+\_\+invert}}
+\index{vndf\+\_\+ggx\+\_\+smith\+\_\+invert@{vndf\+\_\+ggx\+\_\+smith\+\_\+invert}!B\+S\+DF@{B\+S\+DF}}
+\subsubsection{\texorpdfstring{vndf\+\_\+ggx\+\_\+smith\+\_\+invert()}{vndf\_ggx\_smith\_invert()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float2 cugar\+::vndf\+\_\+ggx\+\_\+smith\+\_\+invert (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{\+\_\+N,  }\item[{const float2}]{alpha,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{\+\_\+V }\end{DoxyParamCaption})}
+
+Inversion function for \char`\"{}\+A Simpler and Exact Sampling Routine for the G\+G\+X Distribution of Visible Normals\char`\"{} \href{https://hal.archives-ouvertes.fr/hal-01509746}{\tt https\+://hal.\+archives-\/ouvertes.\+fr/hal-\/01509746} \mbox{\Hypertarget{group___b_s_d_f_module_gaae32e76bc82f281f61485ea552aba53a}\label{group___b_s_d_f_module_gaae32e76bc82f281f61485ea552aba53a}} 
+\index{B\+S\+DF@{B\+S\+DF}!vndf\+\_\+ggx\+\_\+smith\+\_\+sample@{vndf\+\_\+ggx\+\_\+smith\+\_\+sample}}
+\index{vndf\+\_\+ggx\+\_\+smith\+\_\+sample@{vndf\+\_\+ggx\+\_\+smith\+\_\+sample}!B\+S\+DF@{B\+S\+DF}}
+\subsubsection{\texorpdfstring{vndf\+\_\+ggx\+\_\+smith\+\_\+sample()}{vndf\_ggx\_smith\_sample()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float3 cugar\+::vndf\+\_\+ggx\+\_\+smith\+\_\+sample (\begin{DoxyParamCaption}\item[{const float2}]{samples,  }\item[{const float2}]{alpha,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{\+\_\+V }\end{DoxyParamCaption})}
+
+A Simpler and Exact Sampling Routine for the G\+GX Distribution of Visible Normals \href{https://hal.archives-ouvertes.fr/hal-01509746}{\tt https\+://hal.\+archives-\/ouvertes.\+fr/hal-\/01509746} \mbox{\Hypertarget{group___b_s_d_f_module_gaa871796466d7998c178e28e2eccd7248}\label{group___b_s_d_f_module_gaa871796466d7998c178e28e2eccd7248}} 
+\index{B\+S\+DF@{B\+S\+DF}!vndf\+\_\+microfacet@{vndf\+\_\+microfacet}}
+\index{vndf\+\_\+microfacet@{vndf\+\_\+microfacet}!B\+S\+DF@{B\+S\+DF}}
+\subsubsection{\texorpdfstring{vndf\+\_\+microfacet()}{vndf\_microfacet()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector3f} cugar\+::vndf\+\_\+microfacet (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{V,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{L,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{N,  }\item[{const float}]{inv\+\_\+eta }\end{DoxyParamCaption})}
+
+return the microfacet normal for a given pair of incident and outgoing direction vectors 

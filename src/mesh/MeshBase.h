@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2008-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -312,6 +312,11 @@ protected:
   void setColorStride( int color_stride ) { m_color_stride = color_stride; }
   void setTextureCoordinateStride( int texture_coordinate_stride ) { m_texture_coordinate_stride = texture_coordinate_stride; }
 
+  void setVertexIndexStride( int index_stride ) { m_vertex_index_stride = index_stride; }
+  void setNormalIndexStride( int index_stride ) { m_normal_index_stride = index_stride; }
+  void setColorIndexStride( int index_stride ) { m_color_index_stride = index_stride; }
+  void setTextureIndexStride( int index_stride ) { m_texture_index_stride = index_stride; }
+
   const std::string& getFilename() const { return m_filename; }
   const std::string& getPathName() const { return m_pathname; }
 
@@ -321,6 +326,10 @@ protected:
    */
 
   //virtual int addMaterial(MeshMaterialParams& params) = 0;
+
+  virtual int getVertexTriangleSize() const = 0;
+  virtual int getNormalTriangleSize() const = 0;
+  virtual int getTextureTriangleSize() const = 0;
 
   /**
    * An injection point for subclasses to do any prep before file info
@@ -432,6 +441,13 @@ private:
   int m_normal_stride;
   int m_color_stride;
   int m_texture_coordinate_stride;
+
+  /* Measured in 'ints' per triangle.  0 indicates compacted data, equivalent to '3'.
+   */
+  int m_vertex_index_stride;
+  int m_normal_index_stride;
+  int m_color_index_stride;
+  int m_texture_index_stride;
 
   int m_num_triangles;
 

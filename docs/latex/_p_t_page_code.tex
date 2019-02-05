@@ -1,0 +1,345 @@
+
+\begin{DoxyCodeInclude}
+\textcolor{comment}{/*}
+\textcolor{comment}{ * Fermat}
+\textcolor{comment}{ *}
+\textcolor{comment}{ * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.}
+\textcolor{comment}{ * }
+\textcolor{comment}{ * Redistribution and use in source and binary forms, with or without}
+\textcolor{comment}{ * modification, are permitted provided that the following conditions are met:}
+\textcolor{comment}{ *    * Redistributions of source code must retain the above copyright}
+\textcolor{comment}{ *      notice, this list of conditions and the following disclaimer.}
+\textcolor{comment}{ *    * Redistributions in binary form must reproduce the above copyright}
+\textcolor{comment}{ *      notice, this list of conditions and the following disclaimer in the}
+\textcolor{comment}{ *      documentation and/or other materials provided with the distribution.}
+\textcolor{comment}{ *    * Neither the name of the NVIDIA CORPORATION nor the}
+\textcolor{comment}{ *      names of its contributors may be used to endorse or promote products}
+\textcolor{comment}{ *      derived from this software without specific prior written permission.}
+\textcolor{comment}{ * }
+\textcolor{comment}{ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND}
+\textcolor{comment}{ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED}
+\textcolor{comment}{ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE}
+\textcolor{comment}{ * DISCLAIMED. IN NO EVENT SHALL NVIDIA CORPORATION BE LIABLE FOR ANY}
+\textcolor{comment}{ * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES}
+\textcolor{comment}{ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;}
+\textcolor{comment}{ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND}
+\textcolor{comment}{ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT}
+\textcolor{comment}{ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS}
+\textcolor{comment}{ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.}
+\textcolor{comment}{ */}
+
+\textcolor{preprocessor}{#pragma once}
+
+\textcolor{preprocessor}{#include <pathtracer.h>}
+\textcolor{preprocessor}{#include <renderer.h>}
+\textcolor{preprocessor}{#include <rt.h>}
+\textcolor{preprocessor}{#include <mesh/MeshStorage.h>}
+\textcolor{preprocessor}{#include <cugar/basic/timer.h>}
+\textcolor{preprocessor}{#include <cugar/basic/primitives.h>}
+\textcolor{preprocessor}{#include <cugar/basic/memory\_arena.h>}
+\textcolor{preprocessor}{#include <pathtracer\_core.h>}
+\textcolor{preprocessor}{#include <pathtracer\_queues.h>}
+\textcolor{preprocessor}{#include <pathtracer\_kernels.h>}
+\textcolor{preprocessor}{#include <pathtracer\_vertex\_processor.h>}
+
+\textcolor{preprocessor}{#define SHIFT\_RES   256}
+
+
+
+
+\textcolor{keyword}{namespace }\{
+
+    \textcolor{comment}{// the internal path tracing context}
+    \textcolor{comment}{//}
+    \textcolor{keyword}{template} <\textcolor{keyword}{typename} TDirectLightingSampler>
+    \textcolor{keyword}{struct }PathTracingContext : \hyperlink{struct_p_t_context_base}{PTContextBase}<PTOptions>, 
+      \hyperlink{struct_p_t_context_queues}{PTContextQueues}
+    \{
+        TDirectLightingSampler dl;
+    \};
+
+    \textcolor{comment}{// initialize the RL storage for mesh VTLs}
+    \textcolor{keywordtype}{void} init(\hyperlink{struct_clustered_r_l_storage}{ClusteredRLStorage}* vtls\_rl, \textcolor{keyword}{const} 
+      \hyperlink{struct_mesh_v_t_l_storage}{MeshVTLStorage}* mesh\_vtls)
+    \{
+        vtls\_rl->init(
+            VTL\_RL\_HASH\_SIZE,
+            mesh\_vtls->get\_bvh\_clusters\_count(),
+            mesh\_vtls->get\_bvh\_cluster\_offsets());
+    \}
+    \textcolor{comment}{// initialize the RL storage for mesh VTLs}
+    \textcolor{keywordtype}{void} init(\hyperlink{struct_adaptive_clustered_r_l_storage}{AdaptiveClusteredRLStorage}* vtls\_rl, \textcolor{keyword}{const} 
+      \hyperlink{struct_mesh_v_t_l_storage}{MeshVTLStorage}* mesh\_vtls)
+    \{
+        vtls\_rl->init(
+            VTL\_RL\_HASH\_SIZE,
+            mesh\_vtls->get\_bvh\_nodes(),
+            mesh\_vtls->get\_bvh\_parents(),
+            mesh\_vtls->get\_bvh\_ranges(),
+            mesh\_vtls->get\_bvh\_clusters\_count(),
+            mesh\_vtls->get\_bvh\_clusters(),
+            mesh\_vtls->get\_bvh\_cluster\_offsets());
+    \}
+
+\} \textcolor{comment}{// anonymous namespace}
+
+PathTracer::PathTracer() :
+    m\_generator(32, \hyperlink{namespacecugar}{cugar}::LFSRGeneratorMatrix::GOOD\_PROJECTIONS),
+    m\_random(&m\_generator, 1u, 1351u)
+\{
+    m\_mesh\_vtls = \textcolor{keyword}{new} \hyperlink{struct_mesh_v_t_l_storage}{MeshVTLStorage};
+    m\_vtls\_rl = \textcolor{keyword}{new} VTLRLStorage;
+\}
+
+\textcolor{keywordtype}{void} \hyperlink{group___p_t_module_details_ga923b8d146b23f93356f6c74971c4d6f7}{PathTracer::init}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}** argv, \hyperlink{struct_rendering_context}{RenderingContext}& renderer)
+\{
+    \textcolor{keyword}{const} uint2 res = renderer.\hyperlink{struct_rendering_context_ad1a58510bdaf6f373080835abf5db2db}{res}();
+    \textcolor{keyword}{const} uint32 n\_pixels = res.x * res.y;
+
+    \textcolor{comment}{// parse the options}
+    m\_options.\hyperlink{struct_hello_p_t_options_a540d006dee6aff8ee5e8b3cfc8b0fa0b}{parse}(argc, argv);
+
+    \textcolor{keyword}{const} \textcolor{keywordtype}{char}* nee\_alg[] = \{ \textcolor{stringliteral}{"mesh"}, \textcolor{stringliteral}{"vpl"}, \textcolor{stringliteral}{"rl"} \};
+
+    fprintf(stderr, \textcolor{stringliteral}{"  PT settings:\(\backslash\)n"});
+    fprintf(stderr, \textcolor{stringliteral}{"    path-length     : %u\(\backslash\)n"}, m\_options.max\_path\_length);
+    fprintf(stderr, \textcolor{stringliteral}{"    direct-nee      : %u\(\backslash\)n"}, m\_options.direct\_lighting\_nee ? 1 : 0);
+    fprintf(stderr, \textcolor{stringliteral}{"    direct-bsdf     : %u\(\backslash\)n"}, m\_options.direct\_lighting\_bsdf ? 1 : 0);
+    fprintf(stderr, \textcolor{stringliteral}{"    indirect-nee    : %u\(\backslash\)n"}, m\_options.indirect\_lighting\_nee ? 1 : 0);
+    fprintf(stderr, \textcolor{stringliteral}{"    indirect-bsdf   : %u\(\backslash\)n"}, m\_options.indirect\_lighting\_bsdf ? 1 : 0);
+    fprintf(stderr, \textcolor{stringliteral}{"    visible-lights  : %u\(\backslash\)n"}, m\_options.visible\_lights ? 1 : 0);
+    fprintf(stderr, \textcolor{stringliteral}{"    direct lighting : %u\(\backslash\)n"}, m\_options.direct\_lighting ? 1 : 0);
+    fprintf(stderr, \textcolor{stringliteral}{"    diffuse         : %u\(\backslash\)n"}, m\_options.diffuse\_scattering ? 1 : 0);
+    fprintf(stderr, \textcolor{stringliteral}{"    glossy          : %u\(\backslash\)n"}, m\_options.glossy\_scattering ? 1 : 0);
+    fprintf(stderr, \textcolor{stringliteral}{"    indirect glossy : %u\(\backslash\)n"}, m\_options.indirect\_glossy ? 1 : 0);
+    fprintf(stderr, \textcolor{stringliteral}{"    RR              : %u\(\backslash\)n"}, m\_options.rr ? 1 : 0);
+    fprintf(stderr, \textcolor{stringliteral}{"    nee algorithm   : %s\(\backslash\)n"}, nee\_alg[ m\_options.nee\_type ]);
+
+    \textcolor{comment}{// pre-alloc queue storage}
+    \{
+        \textcolor{comment}{// determine how much storage we will need}
+        \hyperlink{structcugar_1_1memory__arena}{cugar::memory\_arena} arena;
+
+        \hyperlink{struct_p_t_ray_queue}{PTRayQueue}    input\_queue;
+        \hyperlink{struct_p_t_ray_queue}{PTRayQueue}    scatter\_queue;
+        \hyperlink{struct_p_t_ray_queue}{PTRayQueue}    shadow\_queue;
+
+        \hyperlink{group___p_t_lib_gaf8daef8b815f7712ff692edbaa628881}{alloc\_queues}(
+            m\_options,
+            n\_pixels,
+            input\_queue,
+            scatter\_queue,
+            shadow\_queue,
+            arena );
+
+        \textcolor{comment}{// alloc space for device timers}
+        arena.\hyperlink{structcugar_1_1memory__arena_afcbc6673ae3fa3e61368495ed2041621}{alloc}<int64>( 16 );
+
+        fprintf(stderr, \textcolor{stringliteral}{"  allocating queue storage: %.1f MB\(\backslash\)n"}, \textcolor{keywordtype}{float}(arena.size) / (1024*1024));
+        m\_memory\_pool.alloc(arena.size);
+    \}
+
+    \textcolor{comment}{// build the set of shifts}
+    \textcolor{keyword}{const} uint32 n\_dimensions = 6 * (m\_options.max\_path\_length + 1);
+    fprintf(stderr, \textcolor{stringliteral}{"  initializing sampler: %u dimensions\(\backslash\)n"}, n\_dimensions);
+    m\_sequence.setup(n\_dimensions, SHIFT\_RES);
+
+    \textcolor{keyword}{const} uint32 n\_light\_paths = n\_pixels;
+
+    fprintf(stderr, \textcolor{stringliteral}{"  creating mesh lights... started\(\backslash\)n"});
+
+    \textcolor{comment}{// initialize the mesh lights sampler}
+    renderer.\hyperlink{struct_rendering_context_a076d2a2c86696da228fc6a49d55910ee}{get\_mesh\_lights}().init( n\_light\_paths, renderer, 0u );
+
+    fprintf(stderr, \textcolor{stringliteral}{"  creating mesh lights... done\(\backslash\)n"});
+
+    \textcolor{comment}{// compute the scene bbox}
+    m\_bbox = renderer.\hyperlink{struct_rendering_context_acb44a2881eb6cf851f53428705a3351f}{compute\_bbox}();
+
+    \textcolor{comment}{// disable smart algorithms if there are no emissive surfaces}
+    \textcolor{keywordflow}{if} (renderer.\hyperlink{struct_rendering_context_a076d2a2c86696da228fc6a49d55910ee}{get\_mesh\_lights}().get\_vpl\_count() == 0)
+        m\_options.nee\_type = NEE\_ALGORITHM\_MESH;
+
+    if (m\_options.nee\_type == NEE\_ALGORITHM\_RL)
+    \{
+        fprintf(stderr, \textcolor{stringliteral}{"  creating mesh VTLs... started\(\backslash\)n"});
+        m\_mesh\_vtls->init(n\_light\_paths, renderer, 0u );
+        fprintf(stderr, \textcolor{stringliteral}{"  creating mesh VTLs... done (%u VTLs, %u clusters)\(\backslash\)n"}, m\_mesh\_vtls->get\_vtl\_count
+      (), m\_mesh\_vtls->get\_bvh\_clusters\_count());
+
+        fprintf(stderr, \textcolor{stringliteral}{"  initializing VTLs RL... started\(\backslash\)n"});
+        ::init( m\_vtls\_rl, m\_mesh\_vtls );
+        fprintf(stderr, \textcolor{stringliteral}{"  initializing VTLs RL... done (%.1f MB)\(\backslash\)n"}, m\_vtls\_rl->needed\_bytes(
+      VTL\_RL\_HASH\_SIZE, m\_mesh\_vtls->get\_bvh\_clusters\_count()) / \textcolor{keywordtype}{float}(1024*1024));
+    \}
+\}
+
+\textcolor{keywordtype}{void} PathTracer::update\_vtls\_rl(\textcolor{keyword}{const} uint32 instance)
+\{
+    \textcolor{keywordflow}{if} ((instance % 32) == 0)
+    \{
+        \textcolor{comment}{// clear the RL hash tables after a bunch of iterations to avoid overflow...}
+        m\_vtls\_rl->clear();
+    \}
+    \textcolor{keywordflow}{else}
+    \{
+        \textcolor{comment}{// update the vtl cdfs}
+        m\_vtls\_rl->update();
+        CUDA\_CHECK(cugar::cuda::sync\_and\_check\_error(\textcolor{stringliteral}{"vtl-rl update"}));
+    \}
+\}
+
+\textcolor{keywordtype}{void} \hyperlink{group___p_t_module_details_ga3e6317495ea6c761968a893b3a54824e}{PathTracer::render}(\textcolor{keyword}{const} uint32 instance, 
+      \hyperlink{struct_rendering_context}{RenderingContext}& renderer)
+\{
+    \textcolor{comment}{// pre-multiply the previous frame for blending}
+    renderer.\hyperlink{struct_rendering_context_a6fb940a3b78a8a3faf82676c95ab1e6f}{rescale\_frame}( instance );
+
+    \textcolor{comment}{//fprintf(stderr, "render started (%u)\(\backslash\)n", instance);}
+    \textcolor{keyword}{const} uint2 res = renderer.\hyperlink{struct_rendering_context_ad1a58510bdaf6f373080835abf5db2db}{res}();
+    \textcolor{keyword}{const} uint32 n\_pixels = res.x * res.y;
+
+    \hyperlink{structcugar_1_1memory__arena}{cugar::memory\_arena} arena( m\_memory\_pool.ptr() );
+
+    \hyperlink{struct_p_t_ray_queue}{PTRayQueue} in\_queue;
+    \hyperlink{struct_p_t_ray_queue}{PTRayQueue} scatter\_queue;
+    \hyperlink{struct_p_t_ray_queue}{PTRayQueue} shadow\_queue;
+
+    \hyperlink{group___p_t_lib_gaf8daef8b815f7712ff692edbaa628881}{alloc\_queues}(
+        m\_options,
+        n\_pixels,
+        in\_queue,
+        scatter\_queue,
+        shadow\_queue,
+        arena );
+
+    \textcolor{comment}{// fetch a view of the renderer}
+    \hyperlink{struct_rendering_context_view}{RenderingContextView} renderer\_view = renderer.\hyperlink{struct_rendering_context_a591062fd1887b069a015ede456dcaa93}{view}(instance);
+
+    \textcolor{comment}{// instantiate the vertex processor}
+    \hyperlink{struct_p_s_f_p_t_vertex_processor}{PSFPTVertexProcessor} vertex\_processor( m\_options.firefly\_filter );
+
+    \textcolor{comment}{// alloc space for device timers}
+    uint64* device\_timers = arena.\hyperlink{structcugar_1_1memory__arena_afcbc6673ae3fa3e61368495ed2041621}{alloc}<uint64>( 16 );
+
+    \hyperlink{structcugar_1_1_timer}{cugar::Timer} timer;
+    timer.\hyperlink{structcugar_1_1_timer_a337264814110dc99fd8b78b1267589d7}{start}();
+
+    \hyperlink{struct_p_t_loop_stats}{PTLoopStats} stats;
+
+    \textcolor{comment}{// update the direct-lighting VTLs Reinforcement-Learning tables}
+    \textcolor{keywordflow}{if} (m\_options.nee\_type == NEE\_ALGORITHM\_RL)
+        update\_vtls\_rl( instance );
+
+    \textcolor{comment}{// setup the samples for this frame}
+    m\_sequence.set\_instance(instance);
+
+    \textcolor{comment}{// use our PTLib pathtracer}
+    \{
+        \textcolor{comment}{// use the Reinforcement-Learning direct-lighting sampler}
+        \textcolor{keywordflow}{if} (m\_options.nee\_type == NEE\_ALGORITHM\_RL)
+        \{
+            \textcolor{comment}{// initialize the path-tracing context}
+            PathTracingContext<DirectLightingRL> context;
+            context.options         = m\_options;
+            context.in\_bounce       = 0;
+            context.in\_queue        = in\_queue;
+            context.scatter\_queue   = scatter\_queue;
+            context.shadow\_queue    = shadow\_queue;
+            context.sequence        = m\_sequence.view();
+            context.frame\_weight    = 1.0f / float(renderer\_view.instance + 1);
+            context.device\_timers   = device\_timers;
+            context.bbox            = m\_bbox;
+            context.dl              = \hyperlink{struct_direct_lighting_r_l}{DirectLightingRL}(
+                view( *m\_vtls\_rl ),
+                m\_mesh\_vtls->view() );
+
+            \textcolor{comment}{// instantiate the actual path tracing loop}
+            \hyperlink{group___p_t_lib_gadbd6e824e2ecdd07fae235bddebcd1d8}{path\_trace\_loop}( context, vertex\_processor, renderer, renderer\_view, stats );
+        \}
+        \textcolor{keywordflow}{else} \textcolor{comment}{// use the regular mesh emitter direct-lighting sampler}
+        \{
+            \textcolor{comment}{// select which instantiation of the mesh light to use (VPLs or the plain mesh)}
+            \hyperlink{struct_mesh_light}{MeshLight} mesh\_light = m\_options.nee\_type == NEE\_ALGORITHM\_VPL ? renderer\_view.
+      mesh\_vpls : renderer\_view.mesh\_light;
+
+            \textcolor{comment}{// initialize the path-tracing context}
+            PathTracingContext<DirectLightingMesh> context;
+            context.options         = m\_options;
+            context.in\_bounce       = 0;
+            context.in\_queue        = in\_queue;
+            context.scatter\_queue   = scatter\_queue;
+            context.shadow\_queue    = shadow\_queue;
+            context.sequence        = m\_sequence.view();
+            context.frame\_weight    = 1.0f / float(renderer\_view.instance + 1);
+            context.device\_timers   = device\_timers;
+            context.bbox            = m\_bbox;
+            context.dl              = \hyperlink{struct_direct_lighting_mesh}{DirectLightingMesh}( mesh\_light );
+
+            \textcolor{comment}{// instantiate the actual path tracing loop}
+            \hyperlink{group___p_t_lib_gadbd6e824e2ecdd07fae235bddebcd1d8}{path\_trace\_loop}( context, vertex\_processor, renderer, renderer\_view, stats );
+        \}
+    \}
+    timer.stop();
+    \textcolor{keyword}{const} \textcolor{keywordtype}{float} time = timer.seconds();
+    \textcolor{comment}{// clear the global timer at instance zero}
+    \textcolor{keywordflow}{if} (instance == 0)
+        m\_time = time;
+    \textcolor{keywordflow}{else}
+        m\_time += time;
+
+    fprintf(stderr, \textcolor{stringliteral}{"\(\backslash\)r  %.1fs (%.1fms = rt[%.1fms + %.1fms + %.1fms] + shade[%.1fms + %.1fms] - %uK cells)
+              "},
+        m\_time,
+        time * 1000.0f,
+        stats.\hyperlink{struct_p_t_loop_stats_ab7baca90104144060965e61d1b5bcf18}{primary\_rt\_time} * 1000.0f,
+        stats.\hyperlink{struct_p_t_loop_stats_a33ccf3868ebd610edd7b3abd92b453c9}{path\_rt\_time} * 1000.0f,
+        stats.\hyperlink{struct_p_t_loop_stats_a91346d29eeed7279d3e4ee99f7ec6a01}{shadow\_rt\_time} * 1000.0f,
+        stats.\hyperlink{struct_p_t_loop_stats_a7dd32c4ed7d12b660187926e1a7dec3d}{path\_shade\_time} * 1000.0f,
+        stats.\hyperlink{struct_p_t_loop_stats_afa261a3e16b9576525e056da19cc6209}{shadow\_shade\_time} * 1000.0f,
+        m\_options.nee\_type == NEE\_ALGORITHM\_RL ? m\_vtls\_rl->size() / 1000 : 0);
+
+\textcolor{preprocessor}{#if defined(DEVICE\_TIMING) && DEVICE\_TIMING}
+    \textcolor{keywordflow}{if} (instance % 64 == 0)
+        print\_timer\_stats( device\_timers, stats );
+\textcolor{preprocessor}{#endif}
+
+    \textcolor{keywordflow}{if} (instance) \textcolor{comment}{// skip the first frame}
+    \{
+        m\_stats.primary\_rt\_time += stats.\hyperlink{struct_p_t_loop_stats_ab7baca90104144060965e61d1b5bcf18}{primary\_rt\_time};
+        m\_stats.path\_rt\_time += stats.\hyperlink{struct_p_t_loop_stats_a33ccf3868ebd610edd7b3abd92b453c9}{path\_rt\_time};
+        m\_stats.shadow\_rt\_time += stats.\hyperlink{struct_p_t_loop_stats_a91346d29eeed7279d3e4ee99f7ec6a01}{shadow\_rt\_time};
+        m\_stats.path\_shade\_time += stats.\hyperlink{struct_p_t_loop_stats_a7dd32c4ed7d12b660187926e1a7dec3d}{path\_shade\_time};
+        m\_stats.shadow\_shade\_time += stats.\hyperlink{struct_p_t_loop_stats_afa261a3e16b9576525e056da19cc6209}{shadow\_shade\_time};
+    \}
+    renderer.\hyperlink{struct_rendering_context_a1dc21b9ad58b2192a2ec472c96d7e4b0}{update\_variances}( instance );
+\}
+
+
+\textcolor{keywordtype}{void} \hyperlink{group___p_t_module_details_gad08f55d7ba075e0b71a4aa729c07986d}{PathTracer::keyboard}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} character, \textcolor{keywordtype}{int} x, \textcolor{keywordtype}{int} y, \textcolor{keywordtype}{bool}& invalidate)
+\{
+    invalidate = \textcolor{keyword}{false};
+
+    \textcolor{keywordflow}{switch} (character)
+    \{
+    \textcolor{keywordflow}{case} \textcolor{charliteral}{'i'}:
+        m\_options.direct\_lighting = !m\_options.direct\_lighting;
+        invalidate = \textcolor{keyword}{true};
+        \textcolor{keywordflow}{break};
+    \}
+\}
+
+\textcolor{comment}{// dump some speed stats}
+\textcolor{comment}{//}
+\textcolor{keywordtype}{void} \hyperlink{group___p_t_module_details_gaae1782405577d0072ff78570ec0025cc}{PathTracer::dump\_speed\_stats}(FILE* stats)
+\{
+    fprintf(stats, \textcolor{stringliteral}{"%f, %f, %f, %f, %f\(\backslash\)n"},
+        m\_stats.primary\_rt\_time.mean() * 1000.0f,
+        m\_stats.path\_rt\_time.mean() * 1000.0f,
+        m\_stats.shadow\_rt\_time.mean() * 1000.0f,
+        m\_stats.path\_shade\_time.mean() * 1000.0f,
+        m\_stats.shadow\_shade\_time.mean() * 1000.0f);
+\}
+
+\end{DoxyCodeInclude}
+ 

@@ -1,0 +1,182 @@
+\hypertarget{class_device_mesh_storage}{}\section{Device\+Mesh\+Storage Class Reference}
+\label{class_device_mesh_storage}\index{Device\+Mesh\+Storage@{Device\+Mesh\+Storage}}
+
+
+\subsection{Detailed description}
+This class provides basic Mesh storage for either the host or device 
+
+{\ttfamily \#include $<$Mesh\+Storage.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a5db77e3c9ee56937d6c6e60e0191b466}\label{class_device_mesh_storage_a5db77e3c9ee56937d6c6e60e0191b466}} 
+S\+U\+T\+I\+L\+A\+PI \hyperlink{class_device_mesh_storage}{Device\+Mesh\+Storage} \& {\bfseries operator=} (\hyperlink{class_mesh_storage}{Mesh\+Storage} \&mesh)
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a1ebdcdd010e65a9481e98a5cb58e454b}\label{class_device_mesh_storage_a1ebdcdd010e65a9481e98a5cb58e454b}} 
+S\+U\+T\+I\+L\+A\+PI int {\bfseries get\+Num\+Vertices} () const
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a5d1e05d7428995a1c91ad0c4160a4984}\label{class_device_mesh_storage_a5d1e05d7428995a1c91ad0c4160a4984}} 
+S\+U\+T\+I\+L\+A\+PI int {\bfseries get\+Num\+Normals} () const
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a7722196fb7e42488e8edb839eeca23da}\label{class_device_mesh_storage_a7722196fb7e42488e8edb839eeca23da}} 
+S\+U\+T\+I\+L\+A\+PI int {\bfseries get\+Num\+Texture\+Coordinates} () const
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_adbe8e23c4ac35cb7989ba2cfa7bd87a6}\label{class_device_mesh_storage_adbe8e23c4ac35cb7989ba2cfa7bd87a6}} 
+S\+U\+T\+I\+L\+A\+PI int {\bfseries get\+Num\+Triangles} () const
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_ab460298be542213b1158137a680b6f22}\label{class_device_mesh_storage_ab460298be542213b1158137a680b6f22}} 
+S\+U\+T\+I\+L\+A\+PI int {\bfseries get\+Num\+Materials} () const
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a8c25e783114d3ac28d538c15c7c8161c}\label{class_device_mesh_storage_a8c25e783114d3ac28d538c15c7c8161c}} 
+S\+U\+T\+I\+L\+A\+PI int {\bfseries get\+Vertex\+Stride} () const
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a4e9565ae57a457f58642aec29c0ea710}\label{class_device_mesh_storage_a4e9565ae57a457f58642aec29c0ea710}} 
+S\+U\+T\+I\+L\+A\+PI int {\bfseries get\+Normal\+Stride} () const
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a2baa5c4be243b7faa579baab890ea087}\label{class_device_mesh_storage_a2baa5c4be243b7faa579baab890ea087}} 
+S\+U\+T\+I\+L\+A\+PI int {\bfseries get\+Texture\+Coordinate\+Stride} () const
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_af53b40a8f1fe947c80feb23ffcde088f}\label{class_device_mesh_storage_af53b40a8f1fe947c80feb23ffcde088f}} 
+S\+U\+T\+I\+L\+A\+PI int $\ast$ {\bfseries get\+Vertex\+Indices} ()
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a029473df5667ed374ee8d1870c8fba0e}\label{class_device_mesh_storage_a029473df5667ed374ee8d1870c8fba0e}} 
+S\+U\+T\+I\+L\+A\+PI const int $\ast$ {\bfseries get\+Vertex\+Indices} () const
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a45a5476b381c5bdd8cd857db6c231ec5}\label{class_device_mesh_storage_a45a5476b381c5bdd8cd857db6c231ec5}} 
+S\+U\+T\+I\+L\+A\+PI int $\ast$ {\bfseries get\+Normal\+Indices} ()
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a0997aa57e0c2cec214c6d98aff3c22d4}\label{class_device_mesh_storage_a0997aa57e0c2cec214c6d98aff3c22d4}} 
+S\+U\+T\+I\+L\+A\+PI const int $\ast$ {\bfseries get\+Normal\+Indices} () const
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a081399bdc7d0607cd2eb0d7c661d2f70}\label{class_device_mesh_storage_a081399bdc7d0607cd2eb0d7c661d2f70}} 
+S\+U\+T\+I\+L\+A\+PI int $\ast$ {\bfseries get\+Material\+Indices} ()
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a29cfb1aad691384efb9eaf21bf317cd5}\label{class_device_mesh_storage_a29cfb1aad691384efb9eaf21bf317cd5}} 
+S\+U\+T\+I\+L\+A\+PI const int $\ast$ {\bfseries get\+Material\+Indices} () const
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_adb7582b59fcd27c40cd62098c1c7b0eb}\label{class_device_mesh_storage_adb7582b59fcd27c40cd62098c1c7b0eb}} 
+S\+U\+T\+I\+L\+A\+PI int $\ast$ {\bfseries get\+Texture\+Coordinate\+Indices} ()
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_ad19eb08b6926e4b2da078aa3368f06c6}\label{class_device_mesh_storage_ad19eb08b6926e4b2da078aa3368f06c6}} 
+S\+U\+T\+I\+L\+A\+PI const int $\ast$ {\bfseries get\+Texture\+Coordinate\+Indices} () const
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a010ad802183570a9c24fa9686f415ed8}\label{class_device_mesh_storage_a010ad802183570a9c24fa9686f415ed8}} 
+S\+U\+T\+I\+L\+A\+PI int $\ast$ {\bfseries get\+Lightmap\+Indices} ()
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_ac1a1ab44d979a609cf0deafa09d5188f}\label{class_device_mesh_storage_ac1a1ab44d979a609cf0deafa09d5188f}} 
+S\+U\+T\+I\+L\+A\+PI const int $\ast$ {\bfseries get\+Lightmap\+Indices} () const
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a47b325cf483f5f8941b3989badfaaf4d}\label{class_device_mesh_storage_a47b325cf483f5f8941b3989badfaaf4d}} 
+S\+U\+T\+I\+L\+A\+PI float $\ast$ {\bfseries get\+Vertex\+Data} ()
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a762f2f3164413b170a19b29830f52b2c}\label{class_device_mesh_storage_a762f2f3164413b170a19b29830f52b2c}} 
+S\+U\+T\+I\+L\+A\+PI const float $\ast$ {\bfseries get\+Vertex\+Data} () const
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a28dca83f4d3ae78b9ae2b7ef7a56e6df}\label{class_device_mesh_storage_a28dca83f4d3ae78b9ae2b7ef7a56e6df}} 
+S\+U\+T\+I\+L\+A\+PI float $\ast$ {\bfseries get\+Normal\+Data} ()
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_ae23197fbc7a54cd3d29e94dde0f14f2e}\label{class_device_mesh_storage_ae23197fbc7a54cd3d29e94dde0f14f2e}} 
+S\+U\+T\+I\+L\+A\+PI const float $\ast$ {\bfseries get\+Normal\+Data} () const
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a41a162aa6974c6dac6512db488572438}\label{class_device_mesh_storage_a41a162aa6974c6dac6512db488572438}} 
+S\+U\+T\+I\+L\+A\+PI float $\ast$ {\bfseries get\+Texture\+Coordinate\+Data} ()
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_ae24b455728b1492ca0ee410b7ed27c17}\label{class_device_mesh_storage_ae24b455728b1492ca0ee410b7ed27c17}} 
+S\+U\+T\+I\+L\+A\+PI const float $\ast$ {\bfseries get\+Texture\+Coordinate\+Data} () const
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a515a39bfd1474ee493e1f8760b3c988e}\label{class_device_mesh_storage_a515a39bfd1474ee493e1f8760b3c988e}} 
+S\+U\+T\+I\+L\+A\+PI \hyperlink{struct_mesh_view}{Mesh\+View} {\bfseries view} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a9f9b39c63a81b64d2450f2c4aa2909bd}\label{class_device_mesh_storage_a9f9b39c63a81b64d2450f2c4aa2909bd}} 
+int {\bfseries m\+\_\+num\+\_\+vertices}
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a734ffd8a9685581471db6c8acb0366fa}\label{class_device_mesh_storage_a734ffd8a9685581471db6c8acb0366fa}} 
+int {\bfseries m\+\_\+num\+\_\+normals}
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_ac2bdded37e52480ad7278cb73c707d57}\label{class_device_mesh_storage_ac2bdded37e52480ad7278cb73c707d57}} 
+int {\bfseries m\+\_\+num\+\_\+texture\+\_\+coordinates}
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_ac3268ee1454ebd09eb7a0270c48f8d83}\label{class_device_mesh_storage_ac3268ee1454ebd09eb7a0270c48f8d83}} 
+int {\bfseries m\+\_\+num\+\_\+lightmap\+\_\+coordinates}
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a42ceda0e3bc01e50ece499cc0d25571e}\label{class_device_mesh_storage_a42ceda0e3bc01e50ece499cc0d25571e}} 
+int {\bfseries m\+\_\+num\+\_\+triangles}
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_ac867f321d31a0dd60d9a2de0e45bb3a6}\label{class_device_mesh_storage_ac867f321d31a0dd60d9a2de0e45bb3a6}} 
+int {\bfseries m\+\_\+num\+\_\+groups}
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_ab4744001ea0bee3f705e887deda7bc74}\label{class_device_mesh_storage_ab4744001ea0bee3f705e887deda7bc74}} 
+int {\bfseries m\+\_\+vertex\+\_\+stride}
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_ae6e08f3322455f61e1d050ecb2cfdddd}\label{class_device_mesh_storage_ae6e08f3322455f61e1d050ecb2cfdddd}} 
+int {\bfseries m\+\_\+normal\+\_\+stride}
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a5ed7ac11433776bbea06698897b30dbe}\label{class_device_mesh_storage_a5ed7ac11433776bbea06698897b30dbe}} 
+int {\bfseries m\+\_\+texture\+\_\+stride}
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_aedde80e76f45c8266205c002868fc184}\label{class_device_mesh_storage_aedde80e76f45c8266205c002868fc184}} 
+float2 {\bfseries m\+\_\+tex\+\_\+bias}
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a27af8333811b06f13ce9cab6bd132474}\label{class_device_mesh_storage_a27af8333811b06f13ce9cab6bd132474}} 
+float2 {\bfseries m\+\_\+tex\+\_\+scale}
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a17696794ea9e5db8892ed811d1dcca99}\label{class_device_mesh_storage_a17696794ea9e5db8892ed811d1dcca99}} 
+float2 {\bfseries m\+\_\+lm\+\_\+bias}
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a294c50b54ed48f7b19c0184ff8ba2a1c}\label{class_device_mesh_storage_a294c50b54ed48f7b19c0184ff8ba2a1c}} 
+float2 {\bfseries m\+\_\+lm\+\_\+scale}
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a775e7c8e6f70e38cfbaeade8654ec558}\label{class_device_mesh_storage_a775e7c8e6f70e38cfbaeade8654ec558}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, int $>$ {\bfseries m\+\_\+vertex\+\_\+indices}
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_ac17c11ead9316420565a31f1e021bcf4}\label{class_device_mesh_storage_ac17c11ead9316420565a31f1e021bcf4}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, int $>$ {\bfseries m\+\_\+normal\+\_\+indices}
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_abffffc1986968e01b082dd1c386f798f}\label{class_device_mesh_storage_abffffc1986968e01b082dd1c386f798f}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, int $>$ {\bfseries m\+\_\+normal\+\_\+indices\+\_\+comp}
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a79d1a5a4d3aff01dc0942ea804dc4f51}\label{class_device_mesh_storage_a79d1a5a4d3aff01dc0942ea804dc4f51}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, int $>$ {\bfseries m\+\_\+material\+\_\+indices}
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a4c7e30214e463d8ba9f67c6cf0df11ee}\label{class_device_mesh_storage_a4c7e30214e463d8ba9f67c6cf0df11ee}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, int $>$ {\bfseries m\+\_\+texture\+\_\+indices}
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a684d54c92a49b680fd3077caadf109d7}\label{class_device_mesh_storage_a684d54c92a49b680fd3077caadf109d7}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, int $>$ {\bfseries m\+\_\+texture\+\_\+indices\+\_\+comp}
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a07aeb81d730fbaff3f2400486ee8ab51}\label{class_device_mesh_storage_a07aeb81d730fbaff3f2400486ee8ab51}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, int $>$ {\bfseries m\+\_\+lightmap\+\_\+indices}
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_ad29ad0dc19dff6f0621404d7e02e31c3}\label{class_device_mesh_storage_ad29ad0dc19dff6f0621404d7e02e31c3}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, int $>$ {\bfseries m\+\_\+lightmap\+\_\+indices\+\_\+comp}
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_ad9cc7b55238244e49c3f9e9aeda79e52}\label{class_device_mesh_storage_ad9cc7b55238244e49c3f9e9aeda79e52}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, int $>$ {\bfseries m\+\_\+group\+\_\+offsets}
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_af23dc55b297be2a6f446519f4a4a7f7e}\label{class_device_mesh_storage_af23dc55b297be2a6f446519f4a4a7f7e}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float $>$ {\bfseries m\+\_\+vertex\+\_\+data}
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_aa9b07c98ab2fdc07b2402898e81bc27f}\label{class_device_mesh_storage_aa9b07c98ab2fdc07b2402898e81bc27f}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float $>$ {\bfseries m\+\_\+normal\+\_\+data}
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a3ec75d5db93c98580f7337cde9dff56f}\label{class_device_mesh_storage_a3ec75d5db93c98580f7337cde9dff56f}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, uint32 $>$ {\bfseries m\+\_\+normal\+\_\+data\+\_\+comp}
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_accca2e64f5d363bc23589953d8c5c10e}\label{class_device_mesh_storage_accca2e64f5d363bc23589953d8c5c10e}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float $>$ {\bfseries m\+\_\+texture\+\_\+data}
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a1acd6c7282fbf66bb1e85b5a04a526e3}\label{class_device_mesh_storage_a1acd6c7282fbf66bb1e85b5a04a526e3}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float $>$ {\bfseries m\+\_\+lightmap\+\_\+data}
+\item 
+\mbox{\Hypertarget{class_device_mesh_storage_a5783dc3cb26f35aefb65277b2b8ea04b}\label{class_device_mesh_storage_a5783dc3cb26f35aefb65277b2b8ea04b}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, \hyperlink{struct_mesh_material}{Mesh\+Material} $>$ {\bfseries m\+\_\+materials}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/mesh/Mesh\+Storage.\+h\end{DoxyCompactItemize}

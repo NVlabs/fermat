@@ -1,0 +1,50 @@
+\hypertarget{structcugar_1_1_g_g_x_v_cavity_microfacet_distribution}{}\section{cugar\+:\+:G\+G\+X\+V\+Cavity\+Microfacet\+Distribution Struct Reference}
+\label{structcugar_1_1_g_g_x_v_cavity_microfacet_distribution}\index{cugar\+::\+G\+G\+X\+V\+Cavity\+Microfacet\+Distribution@{cugar\+::\+G\+G\+X\+V\+Cavity\+Microfacet\+Distribution}}
+
+
+\subsection{Detailed description}
+Implements the G\+GX microfacet distribution with the V-\/cavities shadow-\/masking model, using the importance sampling scheme described in {\itshape Algorithm 3} of\+:
+
+\href{https://hal.inria.fr/hal-00996995v1/document}{\tt https\+://hal.\+inria.\+fr/hal-\/00996995v1/document} 
+
+{\ttfamily \#include $<$ggx.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_g_g_x_v_cavity_microfacet_distribution_a52ba0e718af5304feb075936398270a4}\label{structcugar_1_1_g_g_x_v_cavity_microfacet_distribution_a52ba0e718af5304feb075936398270a4}} 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries G\+G\+X\+V\+Cavity\+Microfacet\+Distribution} (const float \+\_\+roughness)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_g_g_x_v_cavity_microfacet_distribution_ad7ae12c7575dedd7365af16044376fef}{p} (const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&geometry, const \hyperlink{structcugar_1_1_vector}{Vector3f} V, const \hyperlink{structcugar_1_1_vector}{Vector3f} H) const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1_g_g_x_v_cavity_microfacet_distribution_a2e4cf51c893c14ecb072d8266f942880}{sample} (const \hyperlink{structcugar_1_1_vector}{Vector3f} u, const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&geometry, const \hyperlink{structcugar_1_1_vector}{Vector3f} V, \hyperlink{structcugar_1_1_vector}{Vector3f} \&H, float \&\hyperlink{structcugar_1_1_g_g_x_v_cavity_microfacet_distribution_ad7ae12c7575dedd7365af16044376fef}{p}) const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_g_g_x_v_cavity_microfacet_distribution_a8127b958045cdf4000da62b998a68d50}\label{structcugar_1_1_g_g_x_v_cavity_microfacet_distribution_a8127b958045cdf4000da62b998a68d50}} 
+float {\bfseries roughness}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_g_g_x_v_cavity_microfacet_distribution_ae30ccd8917611dbb1cae833fcdc1501d}\label{structcugar_1_1_g_g_x_v_cavity_microfacet_distribution_ae30ccd8917611dbb1cae833fcdc1501d}} 
+float {\bfseries inv\+\_\+roughness}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1_g_g_x_v_cavity_microfacet_distribution_ad7ae12c7575dedd7365af16044376fef}\label{structcugar_1_1_g_g_x_v_cavity_microfacet_distribution_ad7ae12c7575dedd7365af16044376fef}} 
+\index{cugar\+::\+G\+G\+X\+V\+Cavity\+Microfacet\+Distribution@{cugar\+::\+G\+G\+X\+V\+Cavity\+Microfacet\+Distribution}!p@{p}}
+\index{p@{p}!cugar\+::\+G\+G\+X\+V\+Cavity\+Microfacet\+Distribution@{cugar\+::\+G\+G\+X\+V\+Cavity\+Microfacet\+Distribution}}
+\subsubsection{\texorpdfstring{p()}{p()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float cugar\+::\+G\+G\+X\+V\+Cavity\+Microfacet\+Distribution\+::p (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&}]{geometry,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{V,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{H }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+evaluate the pdf of sampling H given V, p(H$\vert$V) = p(\+V,\+H) \mbox{\Hypertarget{structcugar_1_1_g_g_x_v_cavity_microfacet_distribution_a2e4cf51c893c14ecb072d8266f942880}\label{structcugar_1_1_g_g_x_v_cavity_microfacet_distribution_a2e4cf51c893c14ecb072d8266f942880}} 
+\index{cugar\+::\+G\+G\+X\+V\+Cavity\+Microfacet\+Distribution@{cugar\+::\+G\+G\+X\+V\+Cavity\+Microfacet\+Distribution}!sample@{sample}}
+\index{sample@{sample}!cugar\+::\+G\+G\+X\+V\+Cavity\+Microfacet\+Distribution@{cugar\+::\+G\+G\+X\+V\+Cavity\+Microfacet\+Distribution}}
+\subsubsection{\texorpdfstring{sample()}{sample()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void cugar\+::\+G\+G\+X\+V\+Cavity\+Microfacet\+Distribution\+::sample (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{u,  }\item[{const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&}]{geometry,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{V,  }\item[{\hyperlink{structcugar_1_1_vector}{Vector3f} \&}]{H,  }\item[{float \&}]{p }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+sample H given V and return the pdf p 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bsdf/\hyperlink{ggx_8h}{ggx.\+h}\end{DoxyCompactItemize}

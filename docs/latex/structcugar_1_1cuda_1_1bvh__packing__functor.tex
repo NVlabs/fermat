@@ -1,0 +1,29 @@
+\hypertarget{structcugar_1_1cuda_1_1bvh__packing__functor}{}\section{cugar\+:\+:cuda\+:\+:bvh\+\_\+packing\+\_\+functor Struct Reference}
+\label{structcugar_1_1cuda_1_1bvh__packing__functor}\index{cugar\+::cuda\+::bvh\+\_\+packing\+\_\+functor@{cugar\+::cuda\+::bvh\+\_\+packing\+\_\+functor}}
+
+
+\subsection{Detailed description}
+utility functor to pack a tuple formed by a (4d) bbox and a node into a single bbox. 
+
+{\ttfamily \#include $<$packing.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1bvh__packing__functor_a9a5ac7e10774cb4898e3abec32e330a4}\label{structcugar_1_1cuda_1_1bvh__packing__functor_a9a5ac7e10774cb4898e3abec32e330a4}} 
+typedef \hyperlink{structcugar_1_1_bbox}{Bbox4f} {\bfseries result\+\_\+type}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1bvh__packing__functor_a6b94ea9009dffb1233c2cdf74bb9875a}\label{structcugar_1_1cuda_1_1bvh__packing__functor_a6b94ea9009dffb1233c2cdf74bb9875a}} 
+typedef thrust\+::tuple$<$ \hyperlink{structcugar_1_1_bbox}{Bbox4f}, \hyperlink{structcugar_1_1_bvh__node}{Bvh\+\_\+node} $>$ {\bfseries argument\+\_\+type}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1bvh__packing__functor_a692a1787c99cfc435e1d525a1533c967}\label{structcugar_1_1cuda_1_1bvh__packing__functor_a692a1787c99cfc435e1d525a1533c967}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_bbox}{Bbox4f} {\bfseries operator()} (const argument\+\_\+type arg) const
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bvh/cuda/\hyperlink{packing_8h}{packing.\+h}\end{DoxyCompactItemize}

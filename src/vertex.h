@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -43,18 +43,65 @@
 ///@addtogroup Fermat
 ///@{
 
-///@addtogroup VertexGeometryModule
+///@defgroup VertexGeometryModule
+///\par
+/// One of the tricks to high performance rendering is tightly packing all necessary information,
+/// so as to consume as little bandwith and on-chip memory as possible.
+/// This module introduces two structures to do so to represent path vertex geometry:
+///\par
+/// - VertexGeometryId: to encode the minimal amount of information needed to represent a point on a surface,
+///   or a <i>hit</i> in ray tracing parlance;
+/// - VertexGeometry: to encode a slightly expanded version on the local differential surface geometry at a point,
+///   including its tangent, binormal and normal, as well the local texture coordinates;
 ///@{
 
 ///
 /// Vertex geometry.
 ///
+/// Encodes the local differential surface geometry at a point, including its tangent, binormal
+/// and normal, as well the local texture coordinates.
+///
+#if defined(OPTIX_COMPILATION)
+// NOTE:
+// with OptiX, we need to avoid inheritance here, as otherwise the compiler sees
+// this struct as having dynamic constructors... (even if, in theory, it should be a POD)
+//
+struct VertexGeometry
+{
+	cugar::Vector3f normal_s;		// shading normal
+	cugar::Vector3f normal_g;		// geometric normal
+	cugar::Vector3f tangent;		// local tangent
+	cugar::Vector3f binormal;		// local binormal
+
+	cugar::Vector3f	position;
+	float			padding;
+	cugar::Vector4f	texture_coords;
+	cugar::Vector2f lightmap_coords;
+
+	FERMAT_HOST_DEVICE operator cugar::DifferentialGeometry() const
+	{
+		cugar::DifferentialGeometry r;
+		r.normal_s = normal_s;
+		r.normal_g = normal_g;
+		r.tangent  = tangent;
+		r.binormal = binormal;
+		return r;
+	}
+};
+#else
 struct VertexGeometry : public cugar::DifferentialGeometry
 {
 	cugar::Vector3f	position;
+	float			padding;
 	cugar::Vector4f	texture_coords;
+	cugar::Vector2f lightmap_coords;
 };
+#endif
 
+///
+/// Encodes the minimal amount of information needed to represent a point on a surface,
+/// or a <i>hit</i> in ray tracing parlance;
+///
 struct VertexGeometryId
 {
 	cugar::Vector2f uv;
@@ -92,6 +139,8 @@ cugar::Vector3f unpack_direction(const uint32 packed_dir)
 	return cugar::uniform_square_to_sphere( sdir );
 }
 
+#if defined(__CUDACC__)
+
 /// pack a normalized direction vector in 32-bits
 ///
 FERMAT_DEVICE FERMAT_FORCEINLINE
@@ -119,6 +168,8 @@ cugar::Vector3f unpack_hemispherical_direction(const uint32 packed_dir)
 
 	return cugar::Vector3f(u.x * m, u.y * m, l * 2 - 1);
 }
+
+#endif
 
 ///@} VertexGeometryModule
 ///@} Fermat

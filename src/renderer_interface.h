@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -29,16 +29,20 @@
 #pragma once
 
 #include <types.h>
+#include <stdio.h>
 
-struct Renderer;
+struct RenderingContext;
 struct FBufferStorage;
+struct RendererInterface;
+
+typedef RendererInterface* (*RendererFactoryFunction)();
 
 ///@addtogroup Fermat
 ///@{
 
 /// The abstract renderer / solver interface
 ///
-struct RendererInterface
+struct FERMAT_API RendererInterface
 {
 	/// this method is responsible for returning the number of auxiliary framebuffer channels needed by the renderer
 	///
@@ -50,14 +54,17 @@ struct RendererInterface
 
 	/// this method is responsible for any command options parsing / initializations the renderer might need to perform
 	///
-	virtual void init(int argc, char** argv, Renderer& renderer) {}
+	virtual void init(int argc, char** argv, RenderingContext& renderer) {}
 
-	///\anchor RendererInterfaceRenderMethod
+	/// flag a scene geometry update
+	///
+	virtual void update_scene(RenderingContext& renderer) {}
+
 	/// this method is responsible for rendering a given frame in a progressive rendering
 	///
 	/// \param	instance		the frame instance
 	///
-	virtual void render(const uint32 instance, Renderer& renderer) {}
+	virtual void render(const uint32 instance, RenderingContext& renderer) {}
 
 	/// this method is responsible for handling keyboard events
 	///
@@ -69,11 +76,15 @@ struct RendererInterface
 
 	/// this method is responsible for handling mouse events
 	///
-	virtual void mouse(Renderer& renderer, int button, int state, int x, int y) {}
+	virtual void mouse(RenderingContext& renderer, int button, int state, int x, int y) {}
 
 	/// this method is responsible for any additional UI/OpenGL drawing on screen
 	///
-	virtual void draw(Renderer& renderer) {}
+	virtual void draw(RenderingContext& renderer) {}
+
+	/// dump some speed stats
+	///
+	virtual void dump_speed_stats(FILE* stats) {}
 };
 
 ///@} Fermat

@@ -1,0 +1,53 @@
+\hypertarget{structcugar_1_1_g_g_x_smith_microfacet_distribution}{}\section{cugar\+:\+:G\+G\+X\+Smith\+Microfacet\+Distribution Struct Reference}
+\label{structcugar_1_1_g_g_x_smith_microfacet_distribution}\index{cugar\+::\+G\+G\+X\+Smith\+Microfacet\+Distribution@{cugar\+::\+G\+G\+X\+Smith\+Microfacet\+Distribution}}
+
+
+\subsection{Detailed description}
+Implements the G\+GX microfacet distribution with the Smith shadow-\/masking model, as described in\+:
+
+\href{https://hal.archives-ouvertes.fr/hal-01509746/document}{\tt https\+://hal.\+archives-\/ouvertes.\+fr/hal-\/01509746/document} 
+
+{\ttfamily \#include $<$ggx\+\_\+smith.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_g_g_x_smith_microfacet_distribution_a5f01aafd344fd8d2f700f133b4eda0d2}\label{structcugar_1_1_g_g_x_smith_microfacet_distribution_a5f01aafd344fd8d2f700f133b4eda0d2}} 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries G\+G\+X\+Smith\+Microfacet\+Distribution} (const float \+\_\+roughness)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_g_g_x_smith_microfacet_distribution_a5c3fe2084e477686847a5235b1c15c2c}\label{structcugar_1_1_g_g_x_smith_microfacet_distribution_a5c3fe2084e477686847a5235b1c15c2c}} 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float {\bfseries Smith\+G1V} (const float NoV) const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_g_g_x_smith_microfacet_distribution_a5ab852daebbd282ab41c8003bbf02c51}{p} (const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&geometry, const \hyperlink{structcugar_1_1_vector}{Vector3f} V, const \hyperlink{structcugar_1_1_vector}{Vector3f} H) const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1_g_g_x_smith_microfacet_distribution_ad985938cdb73621b83bd28664395dc0e}{sample} (const \hyperlink{structcugar_1_1_vector}{Vector3f} u, const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&geometry, const \hyperlink{structcugar_1_1_vector}{Vector3f} V, \hyperlink{structcugar_1_1_vector}{Vector3f} \&H, float \&\hyperlink{structcugar_1_1_g_g_x_smith_microfacet_distribution_a5ab852daebbd282ab41c8003bbf02c51}{p}) const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_g_g_x_smith_microfacet_distribution_a7a150226563be81c10b2dec2aa0384e9}\label{structcugar_1_1_g_g_x_smith_microfacet_distribution_a7a150226563be81c10b2dec2aa0384e9}} 
+float {\bfseries roughness}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_g_g_x_smith_microfacet_distribution_a771e0e5255287fd44206448daaeb2dc1}\label{structcugar_1_1_g_g_x_smith_microfacet_distribution_a771e0e5255287fd44206448daaeb2dc1}} 
+float {\bfseries inv\+\_\+roughness}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1_g_g_x_smith_microfacet_distribution_a5ab852daebbd282ab41c8003bbf02c51}\label{structcugar_1_1_g_g_x_smith_microfacet_distribution_a5ab852daebbd282ab41c8003bbf02c51}} 
+\index{cugar\+::\+G\+G\+X\+Smith\+Microfacet\+Distribution@{cugar\+::\+G\+G\+X\+Smith\+Microfacet\+Distribution}!p@{p}}
+\index{p@{p}!cugar\+::\+G\+G\+X\+Smith\+Microfacet\+Distribution@{cugar\+::\+G\+G\+X\+Smith\+Microfacet\+Distribution}}
+\subsubsection{\texorpdfstring{p()}{p()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float cugar\+::\+G\+G\+X\+Smith\+Microfacet\+Distribution\+::p (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&}]{geometry,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{V,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{H }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+evaluate the pdf of sampling H given V, p(H$\vert$V) = p(\+V,\+H) \mbox{\Hypertarget{structcugar_1_1_g_g_x_smith_microfacet_distribution_ad985938cdb73621b83bd28664395dc0e}\label{structcugar_1_1_g_g_x_smith_microfacet_distribution_ad985938cdb73621b83bd28664395dc0e}} 
+\index{cugar\+::\+G\+G\+X\+Smith\+Microfacet\+Distribution@{cugar\+::\+G\+G\+X\+Smith\+Microfacet\+Distribution}!sample@{sample}}
+\index{sample@{sample}!cugar\+::\+G\+G\+X\+Smith\+Microfacet\+Distribution@{cugar\+::\+G\+G\+X\+Smith\+Microfacet\+Distribution}}
+\subsubsection{\texorpdfstring{sample()}{sample()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void cugar\+::\+G\+G\+X\+Smith\+Microfacet\+Distribution\+::sample (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{u,  }\item[{const \hyperlink{structcugar_1_1_differential_geometry}{Differential\+Geometry} \&}]{geometry,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector3f}}]{V,  }\item[{\hyperlink{structcugar_1_1_vector}{Vector3f} \&}]{H,  }\item[{float \&}]{p }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+sample H given V and return the pdf p 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bsdf/ggx\+\_\+smith.\+h\end{DoxyCompactItemize}

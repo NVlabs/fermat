@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -49,6 +49,19 @@ struct Ray
   float  tmax;
 };
 
+/// 
+///  Ray struct
+///
+struct MaskedRay
+{
+  static const RTPbufferformat format = RTP_BUFFER_FORMAT_RAY_ORIGIN_MASK_DIRECTION_TMAX;
+
+  float3 origin;
+  uint32 mask;
+  float3 dir;
+  float  tmax;
+};
+
 ///
 /// Ray-tracing hit
 ///
@@ -75,5 +88,50 @@ struct HitInstancing
   float u;
   float v;
 };
+
+FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
+Ray make_ray(
+	const float3 origin,
+	const float3 dir,
+	const float tmin,
+	const float tmax)
+{
+	Ray r;
+	r.origin	= origin;
+	r.tmin		= tmin;
+	r.dir		= dir;
+	r.tmax		= tmax;
+	return r;
+}
+
+FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
+MaskedRay make_ray(
+	const float3 origin,
+	const float3 dir,
+	const uint32 mask,
+	const float tmax)
+{
+	MaskedRay r;
+	r.origin	= origin;
+	r.mask		= mask;
+	r.dir		= dir;
+	r.tmax		= tmax;
+	return r;
+}
+
+FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
+Hit make_hit(
+	const float t,
+	const int   triId,
+	const float u,
+	const float v)
+{
+	Hit r;
+	r.t		= t;
+	r.triId	= triId;
+	r.u		= u;
+	r.v		= v;
+	return r;
+}
 
 ///@} Fermat

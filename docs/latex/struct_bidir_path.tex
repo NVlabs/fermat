@@ -1,0 +1,62 @@
+\hypertarget{struct_bidir_path}{}\section{Bidir\+Path Struct Reference}
+\label{struct_bidir_path}\index{Bidir\+Path@{Bidir\+Path}}
+
+
+\subsection{Detailed description}
+A class to represent light paths in compact form, storing only the vertex ids. 
+
+{\ttfamily \#include $<$path.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_bidir_path_a4643f77b09c2a1faeb185bc04b3613df}\label{struct_bidir_path_a4643f77b09c2a1faeb185bc04b3613df}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries Bidir\+Path} (const uint32 \+\_\+l\+\_\+vertices, const uint32 \+\_\+e\+\_\+vertices, \hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id} $\ast$\+\_\+l\+\_\+verts, \hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id} $\ast$\+\_\+e\+\_\+verts, const uint32 \+\_\+stride)
+\item 
+\mbox{\Hypertarget{struct_bidir_path_abd3d2d7b295f0d269eb0d4845c7ee637}\label{struct_bidir_path_abd3d2d7b295f0d269eb0d4845c7ee637}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const \hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id} \& {\bfseries v\+\_\+L} (const uint32 i) const
+\item 
+\mbox{\Hypertarget{struct_bidir_path_ab0bf814ab5bf4caa2b9ffcf6044fb23d}\label{struct_bidir_path_ab0bf814ab5bf4caa2b9ffcf6044fb23d}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const \hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id} \& {\bfseries v\+\_\+E} (const uint32 i) const
+\item 
+\mbox{\Hypertarget{struct_bidir_path_a5e725b0e53cb8eac269b11584d1f3ceb}\label{struct_bidir_path_a5e725b0e53cb8eac269b11584d1f3ceb}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id} \& {\bfseries v\+\_\+L} (const uint32 i)
+\item 
+\mbox{\Hypertarget{struct_bidir_path_aa28aac59260048299854b7e10a10e6d1}\label{struct_bidir_path_aa28aac59260048299854b7e10a10e6d1}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id} \& {\bfseries v\+\_\+E} (const uint32 i)
+\item 
+\mbox{\Hypertarget{struct_bidir_path_a3bfa276f8827d5fce6386376d609d7fc}\label{struct_bidir_path_a3bfa276f8827d5fce6386376d609d7fc}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float {\bfseries G} (const uint32 i, const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer) const
+\item 
+\mbox{\Hypertarget{struct_bidir_path_a5f6e5994ffcf0616ba6c64ffea4881df}\label{struct_bidir_path_a5f6e5994ffcf0616ba6c64ffea4881df}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} {\bfseries edge\+\_\+L} (const uint32 i, const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer) const
+\item 
+\mbox{\Hypertarget{struct_bidir_path_ac29fb04ac1348b6bed02a506701ae6ed}\label{struct_bidir_path_ac29fb04ac1348b6bed02a506701ae6ed}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} {\bfseries edge\+\_\+E} (const uint32 i, const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer) const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_bidir_path_a703d1dd91d148b8bd87ef34ae00e2f19}\label{struct_bidir_path_a703d1dd91d148b8bd87ef34ae00e2f19}} 
+\hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id} $\ast$ {\bfseries l\+\_\+vertex\+\_\+ids}
+\item 
+\mbox{\Hypertarget{struct_bidir_path_ae7d4e6360eb4a6301775c798c53d16db}\label{struct_bidir_path_ae7d4e6360eb4a6301775c798c53d16db}} 
+\hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id} $\ast$ {\bfseries e\+\_\+vertex\+\_\+ids}
+\item 
+\mbox{\Hypertarget{struct_bidir_path_a5886363130c68a71077094cb81446d0c}\label{struct_bidir_path_a5886363130c68a71077094cb81446d0c}} 
+uint32 {\bfseries l\+\_\+vertices}
+\item 
+\mbox{\Hypertarget{struct_bidir_path_ae086812bce22f2da3e69f5129ef58cd6}\label{struct_bidir_path_ae086812bce22f2da3e69f5129ef58cd6}} 
+uint32 {\bfseries e\+\_\+vertices}
+\item 
+\mbox{\Hypertarget{struct_bidir_path_a5afbcddf1256b231b65fe95ab1c9c067}\label{struct_bidir_path_a5afbcddf1256b231b65fe95ab1c9c067}} 
+uint32 {\bfseries n\+\_\+vertices}
+\item 
+\mbox{\Hypertarget{struct_bidir_path_ac9d532ad1c5720cea9f0fec0884801c7}\label{struct_bidir_path_ac9d532ad1c5720cea9f0fec0884801c7}} 
+uint32 {\bfseries stride}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/path.\+h\end{DoxyCompactItemize}

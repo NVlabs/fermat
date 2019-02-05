@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -30,11 +30,19 @@
 
 #include "types.h"
 
-#include <optix_prime/optix_primepp.h>
 #include <optixu/optixu_matrix.h>
 
 #include <cugar/linalg/vector.h>
 
+///@addtogroup Fermat
+///@{
+
+///@defgroup CameraModule
+/// This module defines a basic camera model
+///@{
+
+/// A simple pinhole camera model
+///
 struct Camera
 {
 	float3	eye;
@@ -43,7 +51,8 @@ struct Camera
 	float3  dx;
 	float   fov;
 
-	Camera() :
+#if !defined(OPTIX_COMPILATION)
+	FERMAT_HOST_DEVICE Camera() :
 		fov(60.0f * float(M_PI) / 180.0f)
 	{
 		eye = make_float3(0, -1, 0);
@@ -51,8 +60,9 @@ struct Camera
 		up = make_float3(0, 0, 1);
 		dx = make_float3(1, 0, 0);
 	}
+#endif
 
-	Camera rotate(const float2 rot) const
+	FERMAT_HOST_DEVICE Camera rotate(const float2 rot) const
 	{
 		Camera r;
 		optix::Matrix<4, 4> rot_X = optix::Matrix<4, 4>::rotate(rot.x, dx);
@@ -75,17 +85,17 @@ struct Camera
 		r.fov = fov;
 		return r;
 	}
-	Camera walk(const float delta) const
+	FERMAT_HOST_DEVICE Camera walk(const float delta) const
 	{
 		Camera r;
 		r.eye = eye + (aim - eye)*delta;
-		r.aim = aim /*+ (aim - eye)*delta*/;
+		r.aim = aim + (aim - eye)*delta;
 		r.up  = up;
 		r.dx  = normalize(cross(r.aim - r.eye, r.up));
 		r.fov = fov;
 		return r;
 	}
-	Camera pan(const float2 delta) const
+	FERMAT_HOST_DEVICE Camera pan(const float2 delta) const
 	{
 		Camera r;
 		r.eye = eye + up*delta.y - dx * delta.x;
@@ -95,7 +105,7 @@ struct Camera
 		r.fov = fov;
 		return r;
 	}
-	Camera zoom(const float delta) const
+	FERMAT_HOST_DEVICE Camera zoom(const float delta) const
 	{
 		Camera r;
 		r.eye = eye;
@@ -126,67 +136,8 @@ struct Camera
 	}
 };
 
-FERMAT_HOST_DEVICE
-inline cugar::Vector2f invert_camera_sampler(const cugar::Vector3f& U, const cugar::Vector3f& V, const cugar::Vector3f& W, const float W_len, const cugar::Vector3f out)
-{
-	const float t = cugar::dot(out, cugar::Vector3f(W)) / (W_len*W_len);
-	if (t < 0.0f)
-		return 0.0f;
-
-	const cugar::Vector3f I = out / t - W;
-	const float Ix = dot(I, U) / cugar::square_length(U);
-	const float Iy = dot(I, V) / cugar::square_length(V);
-
-	return cugar::Vector2f( Ix*0.5f + 0.5f, Iy*0.5f + 0.5f );
-}
-
-FERMAT_HOST_DEVICE
-inline float camera_direction_pdf(const cugar::Vector3f& U, const cugar::Vector3f& V, const cugar::Vector3f& W, const float W_len, const float square_focal_length, const cugar::Vector3f out, float* out_x = 0, float* out_y = 0)
-{
-	const float t = cugar::dot(out, cugar::Vector3f(W)) / (W_len*W_len);
-	if (t < 0.0f)
-		return 0.0f;
-
-	const cugar::Vector3f I = out / t - W;
-	const float Ix = dot(I, U) / cugar::square_length(U);
-	const float Iy = dot(I, V) / cugar::square_length(V);
-
-	if (Ix >= -1.0f && Ix <= 1.0f &&
-		Iy >= -1.0f && Iy <= 1.0f)
-	{
-		if (out_x) *out_x = Ix;
-		if (out_y) *out_y = Iy;
-
-		const float cos_theta = dot(out, W) / W_len;
-		return square_focal_length / (cos_theta * cos_theta * cos_theta * cos_theta);
-	}
-
-	return 0.0f;
-}
-
-FERMAT_HOST_DEVICE
-inline float camera_direction_pdf(const cugar::Vector3f& U, const cugar::Vector3f& V, const cugar::Vector3f& W, const float W_len, const float square_focal_length, const cugar::Vector3f out, bool projected = false)
-{
-	const float t = cugar::dot(out, cugar::Vector3f(W)) / (W_len*W_len);
-	if (t < 0.0f)
-		return 0.0f;
-
-	const cugar::Vector3f I = out / t - W;
-	const float Ix = dot(I, U) / cugar::square_length(U);
-	const float Iy = dot(I, V) / cugar::square_length(V);
-
-	if (Ix >= -1.0f && Ix <= 1.0f &&
-		Iy >= -1.0f && Iy <= 1.0f)
-	{
-		const float cos_theta = dot(out, W) / W_len;
-		return projected ?
-			square_focal_length / (cos_theta * cos_theta * cos_theta * cos_theta) :
-			square_focal_length / (cos_theta * cos_theta * cos_theta);
-	}
-
-	return 0.0f;
-}
-
+/// Compute the camera frame
+///
 FERMAT_HOST_DEVICE
 inline void camera_frame(cugar::Vector3f eye, cugar::Vector3f lookat, cugar::Vector3f up, float hfov, float aspect_ratio, cugar::Vector3f& U, cugar::Vector3f& V, cugar::Vector3f& W)
 {
@@ -211,8 +162,180 @@ inline void camera_frame(cugar::Vector3f eye, cugar::Vector3f lookat, cugar::Vec
 	V.z *= vlen;
 }
 
+/// Compute the camera frame
+///
 FERMAT_HOST_DEVICE
 inline void camera_frame(const Camera camera, float aspect_ratio, cugar::Vector3f& U, cugar::Vector3f& V, cugar::Vector3f& W)
 {
 	camera_frame(camera.eye, camera.aim, camera.up, camera.fov, aspect_ratio, U, V, W);
 }
+
+/// Sample a direction from the camera frame
+///
+FERMAT_HOST_DEVICE
+inline cugar::Vector3f sample_camera_direction(
+	const cugar::Vector2f	ndc,
+	const cugar::Vector3f	U,
+	const cugar::Vector3f	V,
+	const cugar::Vector3f	W)
+{
+	const cugar::Vector2f d = ndc * 2.f - 1.f;
+
+	return d.x*U + d.y*V + W;
+}
+
+/// Invert the camera direction sampler
+///
+FERMAT_HOST_DEVICE
+inline cugar::Vector2f invert_camera_sampler(const cugar::Vector3f& U, const cugar::Vector3f& V, const cugar::Vector3f& W, const float W_len, const cugar::Vector3f out)
+{
+	const float t = cugar::dot(out, cugar::Vector3f(W)) / (W_len*W_len);
+	if (t < 0.0f)
+		return cugar::Vector2f(-1.0f); // out of bounds
+
+	const cugar::Vector3f I = out / t - W;
+	const float Ix = dot(I, U) / cugar::square_length(U);
+	const float Iy = dot(I, V) / cugar::square_length(V);
+
+	return cugar::Vector2f( Ix*0.5f + 0.5f, Iy*0.5f + 0.5f );
+}
+
+/// Compute the solid angle pdf of the camera direction sampler
+///
+FERMAT_HOST_DEVICE
+inline float camera_direction_pdf(const cugar::Vector3f& U, const cugar::Vector3f& V, const cugar::Vector3f& W, const float W_len, const float square_focal_length, const cugar::Vector3f out, float* out_x = 0, float* out_y = 0)
+{
+	const float t = cugar::dot(out, cugar::Vector3f(W)) / (W_len*W_len);
+	if (t < 0.0f)
+		return 0.0f;
+
+	const cugar::Vector3f I = out / t - W;
+	const float Ix = dot(I, U) / cugar::square_length(U);
+	const float Iy = dot(I, V) / cugar::square_length(V);
+
+	if (Ix >= -1.0f && Ix <= 1.0f &&
+		Iy >= -1.0f && Iy <= 1.0f)
+	{
+		if (out_x) *out_x = Ix;
+		if (out_y) *out_y = Iy;
+
+		const float cos_theta = dot(out, W) / W_len;
+		return square_focal_length / (cos_theta * cos_theta * cos_theta * cos_theta);
+	}
+
+	return 0.0f;
+}
+
+/// Compute the solid angle pdf of the camera direction sampler
+///
+FERMAT_HOST_DEVICE
+inline float camera_direction_pdf(const cugar::Vector3f& U, const cugar::Vector3f& V, const cugar::Vector3f& W, const float W_len, const float square_focal_length, const cugar::Vector3f out, bool projected = false)
+{
+	const float t = cugar::dot(out, cugar::Vector3f(W)) / (W_len*W_len);
+	if (t < 0.0f)
+		return 0.0f;
+
+	const cugar::Vector3f I = out / t - W;
+	const float Ix = dot(I, U) / cugar::square_length(U);
+	const float Iy = dot(I, V) / cugar::square_length(V);
+
+	if (Ix >= -1.0f && Ix <= 1.0f &&
+		Iy >= -1.0f && Iy <= 1.0f)
+	{
+		const float cos_theta = dot(out, W) / W_len;
+		return projected ?
+			square_focal_length / (cos_theta * cos_theta * cos_theta * cos_theta) :
+			square_focal_length / (cos_theta * cos_theta * cos_theta);
+	}
+
+	return 0.0f;
+}
+
+/// A sampler for the pinhole camera model
+///
+struct CameraSampler
+{
+	/// empty constructor
+	///
+	FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
+	CameraSampler() {}
+
+	/// constructor
+	///
+	FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
+	CameraSampler(const Camera& camera, const float aspect_ratio)
+	{
+		camera_frame( camera, aspect_ratio, U, V, W );
+
+		W_len = cugar::length(W);
+
+		square_focal_length = camera.square_screen_focal_length();
+	}
+
+	/// sample a direction from normalized device coordinates (NDC) in [0,1]^2
+	///
+	FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
+	cugar::Vector3f sample_direction(const cugar::Vector2f ndc) const
+	{
+		return sample_camera_direction( ndc, U, V, W );
+	}
+
+	/// compute the direction pdf
+	///
+	FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
+	float pdf(const cugar::Vector3f out, const bool projected = false) const
+	{
+		return camera_direction_pdf( U, V, W, W_len, square_focal_length, out, projected );
+	}
+
+	/// compute the importance
+	///
+	FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
+	float W_e(const cugar::Vector3f out) const
+	{
+		return camera_direction_pdf( U, V, W, W_len, square_focal_length, out, true );
+	}
+
+	/// invert the camera direction sampler
+	///
+	/// \param out				the given direction
+	/// \param projected		whether to return the pdf in projected solid angle or solid angle measure
+	/// \return					the NDC coordinates corresponding to the given direction
+	FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
+	cugar::Vector2f invert(const cugar::Vector3f out) const
+	{
+		return invert_camera_sampler( U, V, W, W_len, out );
+	}
+
+	/// invert the camera direction sampler and compute its projected pdf
+	///
+	/// \param out				the given direction
+	/// \param projected		whether to return the pdf in projected solid angle or solid angle measure
+	/// \return					the NDC coordinates corresponding to the given direction
+	FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
+	cugar::Vector2f invert(const cugar::Vector3f out, float* pdf_proj) const
+	{
+		const cugar::Vector2f ndc = invert_camera_sampler( U, V, W, W_len, out );
+
+		if (ndc.x >= 0.0f && ndc.x <= 1.0f &&
+			ndc.y >= 0.0f && ndc.y <= 1.0f)
+		{
+			const float cos_theta = dot(out, W) / W_len;
+			*pdf_proj = square_focal_length / (cos_theta * cos_theta * cos_theta * cos_theta);
+		}
+		else
+			*pdf_proj = 0.0f;
+
+		return ndc;
+	}
+
+	cugar::Vector3f U;						// camera space +X axis in world coords
+	cugar::Vector3f V;						// camera space +Y axis in world coords
+	cugar::Vector3f W;						// camera space +Z axis in world coords
+	float			W_len;					// precomputed length of the W vector
+	float			square_focal_length;	// square focal length
+};
+
+
+///@} CameraModule
+///@} Fermat

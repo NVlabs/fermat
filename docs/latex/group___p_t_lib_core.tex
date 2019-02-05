@@ -1,0 +1,192 @@
+\hypertarget{group___p_t_lib_core}{}\section{P\+T\+Lib\+Core}
+\label{group___p_t_lib_core}\index{P\+T\+Lib\+Core@{P\+T\+Lib\+Core}}
+
+
+\subsection{Detailed Description}
+A module defining core path tracing functions to process path vertices, perform N\+EE and process its generated samples \subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+union \hyperlink{union_pixel_info}{Pixel\+Info}
+\item 
+struct \hyperlink{struct_p_t_context_base}{P\+T\+Context\+Base$<$ T\+P\+T\+Options $>$}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___p_t_lib_core_ga466e8418027036766993ca8d1fa56f72}\label{group___p_t_lib_core_ga466e8418027036766993ca8d1fa56f72}} 
+F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE void {\bfseries per\+\_\+warp\+\_\+atomic\+\_\+add} (uint64 $\ast$ptr, uint64 val)
+\item 
+{\footnotesize template$<$typename T\+P\+T\+Context $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___p_t_lib_core_gae5f75dfb6260b3548edccfbf9a48392b}{compute\+\_\+per\+\_\+bounce\+\_\+options} (T\+P\+T\+Context \&context, const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer)
+\item 
+{\footnotesize template$<$typename T\+P\+T\+Context $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{struct_masked_ray}{Masked\+Ray} \hyperlink{group___p_t_lib_core_ga28fe33ab0663b2331fe607662ed07349}{generate\+\_\+primary\+\_\+ray} (T\+P\+T\+Context \&context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer, const uint2 pixel, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} U, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} V, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} W)
+\item 
+{\footnotesize template$<$typename T\+P\+T\+Context $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{struct_masked_ray}{Masked\+Ray} \hyperlink{group___p_t_lib_core_gad7631579fff5bf25e126c0f3aa01925b}{generate\+\_\+primary\+\_\+ray} (T\+P\+T\+Context \&context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer, const uint2 pixel)
+\item 
+{\footnotesize template$<$typename T\+P\+T\+Context , typename T\+P\+T\+Vertex\+Processor $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___p_t_lib_core_gaf412a8df33284bc708b0a6d90262bc69}{solve\+\_\+occlusion} (T\+P\+T\+Context \&context, T\+P\+T\+Vertex\+Processor \&vertex\+\_\+processor, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer, const bool shadow\+\_\+hit, const \hyperlink{union_pixel_info}{Pixel\+Info} pixel\+\_\+info, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} w, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} w\+\_\+d, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} w\+\_\+g, const uint32 vertex\+\_\+info=uint32(-\/1), const uint32 nee\+\_\+vertex\+\_\+id=uint32(-\/1), const uint32 nee\+\_\+sample\+\_\+id=uint32(-\/1))
+\item 
+{\footnotesize template$<$typename T\+P\+T\+Context $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{group___p_t_lib_core_ga4881c06f23dccad0fc8972bda8de1b40}{vertex\+\_\+sample} (const uint2 pixel, T\+P\+T\+Context \&context, const uint32 i)
+\item 
+{\footnotesize template$<$typename T\+P\+T\+Context , typename T\+P\+T\+Vertex\+Processor $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{group___p_t_lib_core_ga9b8be237ade285e6db792a9ea7bf900e}{shade\+\_\+vertex} (T\+P\+T\+Context \&context, T\+P\+T\+Vertex\+Processor \&vertex\+\_\+processor, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer, const uint32 bounce, const \hyperlink{union_pixel_info}{Pixel\+Info} pixel\+\_\+info, const uint2 pixel, const \hyperlink{struct_masked_ray}{Masked\+Ray} \&ray, const \hyperlink{struct_hit}{Hit} hit, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector4f} w, const uint32 prev\+\_\+vertex\+\_\+info=uint32(-\/1), const uint32 prev\+\_\+nee\+\_\+vertex\+\_\+id=uint32(-\/1), const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} cone=\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f}(0))
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___p_t_lib_core_gae5f75dfb6260b3548edccfbf9a48392b}\label{group___p_t_lib_core_gae5f75dfb6260b3548edccfbf9a48392b}} 
+\index{P\+T\+Lib\+Core@{P\+T\+Lib\+Core}!compute\+\_\+per\+\_\+bounce\+\_\+options@{compute\+\_\+per\+\_\+bounce\+\_\+options}}
+\index{compute\+\_\+per\+\_\+bounce\+\_\+options@{compute\+\_\+per\+\_\+bounce\+\_\+options}!P\+T\+Lib\+Core@{P\+T\+Lib\+Core}}
+\subsubsection{\texorpdfstring{compute\+\_\+per\+\_\+bounce\+\_\+options()}{compute\_per\_bounce\_options()}}
+{\footnotesize\ttfamily template$<$typename T\+P\+T\+Context $>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void compute\+\_\+per\+\_\+bounce\+\_\+options (\begin{DoxyParamCaption}\item[{T\+P\+T\+Context \&}]{context,  }\item[{const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&}]{renderer }\end{DoxyParamCaption})}
+
+compute options relative to the current bounce and set them in the \hyperlink{_p_t_lib_page_TPTContext}{T\+P\+T\+Context} class\+: \begin{DoxyParagraph}{}
+
+\begin{DoxyItemize}
+\item T\+P\+T\+Context\+::do\+\_\+nee \+: whether to perform N\+EE
+\item T\+P\+T\+Context\+::do\+\_\+accumulate\+\_\+emissive \+: whether to accumulate emissive surface hits
+\item T\+P\+T\+Context\+::do\+\_\+scatter \+: whether to perform scattering 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\mbox{\Hypertarget{group___p_t_lib_core_ga28fe33ab0663b2331fe607662ed07349}\label{group___p_t_lib_core_ga28fe33ab0663b2331fe607662ed07349}} 
+\index{P\+T\+Lib\+Core@{P\+T\+Lib\+Core}!generate\+\_\+primary\+\_\+ray@{generate\+\_\+primary\+\_\+ray}}
+\index{generate\+\_\+primary\+\_\+ray@{generate\+\_\+primary\+\_\+ray}!P\+T\+Lib\+Core@{P\+T\+Lib\+Core}}
+\subsubsection{\texorpdfstring{generate\+\_\+primary\+\_\+ray()}{generate\_primary\_ray()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T\+P\+T\+Context $>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{struct_masked_ray}{Masked\+Ray} generate\+\_\+primary\+\_\+ray (\begin{DoxyParamCaption}\item[{T\+P\+T\+Context \&}]{context,  }\item[{\hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&}]{renderer,  }\item[{const uint2}]{pixel,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{U,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{V,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{W }\end{DoxyParamCaption})}
+
+generate a primary ray based on the given pixel index
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T\+P\+T\+Context} & A path tracing context\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em context} & the path tracing context \\
+\hline
+{\em renderer} & the rendering context \\
+\hline
+{\em pixel} & the unpacked 2d pixel index \\
+\hline
+{\em U} & the horizontal (+X) camera frame vector \\
+\hline
+{\em V} & the vertical (+Y) camera frame vector \\
+\hline
+{\em W} & the depth (+Z) camera frame vector \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___p_t_lib_core_gad7631579fff5bf25e126c0f3aa01925b}\label{group___p_t_lib_core_gad7631579fff5bf25e126c0f3aa01925b}} 
+\index{P\+T\+Lib\+Core@{P\+T\+Lib\+Core}!generate\+\_\+primary\+\_\+ray@{generate\+\_\+primary\+\_\+ray}}
+\index{generate\+\_\+primary\+\_\+ray@{generate\+\_\+primary\+\_\+ray}!P\+T\+Lib\+Core@{P\+T\+Lib\+Core}}
+\subsubsection{\texorpdfstring{generate\+\_\+primary\+\_\+ray()}{generate\_primary\_ray()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T\+P\+T\+Context $>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{struct_masked_ray}{Masked\+Ray} generate\+\_\+primary\+\_\+ray (\begin{DoxyParamCaption}\item[{T\+P\+T\+Context \&}]{context,  }\item[{\hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&}]{renderer,  }\item[{const uint2}]{pixel }\end{DoxyParamCaption})}
+
+generate a primary ray based on the given pixel index
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T\+P\+T\+Context} & A path tracing context\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em context} & the path tracing context \\
+\hline
+{\em renderer} & the rendering context \\
+\hline
+{\em pixel} & the unpacked 2d pixel index \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___p_t_lib_core_ga9b8be237ade285e6db792a9ea7bf900e}\label{group___p_t_lib_core_ga9b8be237ade285e6db792a9ea7bf900e}} 
+\index{P\+T\+Lib\+Core@{P\+T\+Lib\+Core}!shade\+\_\+vertex@{shade\+\_\+vertex}}
+\index{shade\+\_\+vertex@{shade\+\_\+vertex}!P\+T\+Lib\+Core@{P\+T\+Lib\+Core}}
+\subsubsection{\texorpdfstring{shade\+\_\+vertex()}{shade\_vertex()}}
+{\footnotesize\ttfamily template$<$typename T\+P\+T\+Context , typename T\+P\+T\+Vertex\+Processor $>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE bool shade\+\_\+vertex (\begin{DoxyParamCaption}\item[{T\+P\+T\+Context \&}]{context,  }\item[{T\+P\+T\+Vertex\+Processor \&}]{vertex\+\_\+processor,  }\item[{\hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&}]{renderer,  }\item[{const uint32}]{bounce,  }\item[{const \hyperlink{union_pixel_info}{Pixel\+Info}}]{pixel\+\_\+info,  }\item[{const uint2}]{pixel,  }\item[{const \hyperlink{struct_masked_ray}{Masked\+Ray} \&}]{ray,  }\item[{const \hyperlink{struct_hit}{Hit}}]{hit,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector4f}}]{w,  }\item[{const uint32}]{prev\+\_\+vertex\+\_\+info = {\ttfamily uint32(-\/1)},  }\item[{const uint32}]{prev\+\_\+nee\+\_\+vertex\+\_\+id = {\ttfamily uint32(-\/1)},  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f}}]{cone = {\ttfamily \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f}(0)} }\end{DoxyParamCaption})}
+
+processes a path vertex, performing the following three steps\+: \begin{DoxyParagraph}{}
+
+\begin{DoxyItemize}
+\item sampling N\+EE
+\item accumulating emissive surface hits
+\item scattering
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T\+P\+T\+Context} & A path tracing context, which must adhere to the \hyperlink{_p_t_lib_page_TPTContext}{T\+P\+T\+Context} interface \\
+\hline
+{\em T\+P\+T\+Vertex\+Processor} & A vertex processor, which must adhere to the \hyperlink{_p_t_lib_page_TPTVertexProcessor}{T\+P\+T\+Vertex\+Processor} interface\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em context} & the path tracing context \\
+\hline
+{\em vertex\+\_\+processor} & the vertex processor \\
+\hline
+{\em renderer} & the rendering context \\
+\hline
+{\em pixel\+\_\+info} & the packed pixel info \\
+\hline
+{\em pixel} & the unpacked 2d pixel index \\
+\hline
+{\em ray} & the incoming ray \\
+\hline
+{\em hit} & the hit information \\
+\hline
+{\em w} & the current path weight \\
+\hline
+{\em prev\+\_\+nee\+\_\+vertex\+\_\+id} & the N\+EE slot corresponding to the previous vertex \\
+\hline
+{\em cone} & the incoming ray cone \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___p_t_lib_core_gaf412a8df33284bc708b0a6d90262bc69}\label{group___p_t_lib_core_gaf412a8df33284bc708b0a6d90262bc69}} 
+\index{P\+T\+Lib\+Core@{P\+T\+Lib\+Core}!solve\+\_\+occlusion@{solve\+\_\+occlusion}}
+\index{solve\+\_\+occlusion@{solve\+\_\+occlusion}!P\+T\+Lib\+Core@{P\+T\+Lib\+Core}}
+\subsubsection{\texorpdfstring{solve\+\_\+occlusion()}{solve\_occlusion()}}
+{\footnotesize\ttfamily template$<$typename T\+P\+T\+Context , typename T\+P\+T\+Vertex\+Processor $>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE void solve\+\_\+occlusion (\begin{DoxyParamCaption}\item[{T\+P\+T\+Context \&}]{context,  }\item[{T\+P\+T\+Vertex\+Processor \&}]{vertex\+\_\+processor,  }\item[{\hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&}]{renderer,  }\item[{const bool}]{shadow\+\_\+hit,  }\item[{const \hyperlink{union_pixel_info}{Pixel\+Info}}]{pixel\+\_\+info,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{w,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{w\+\_\+d,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{w\+\_\+g,  }\item[{const uint32}]{vertex\+\_\+info = {\ttfamily uint32(-\/1)},  }\item[{const uint32}]{nee\+\_\+vertex\+\_\+id = {\ttfamily uint32(-\/1)},  }\item[{const uint32}]{nee\+\_\+sample\+\_\+id = {\ttfamily uint32(-\/1)} }\end{DoxyParamCaption})}
+
+processes a N\+EE sample, using occlusion information
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T\+P\+T\+Context} & A path tracing context, which must adhere to the \hyperlink{_p_t_lib_page_TPTContext}{T\+P\+T\+Context} interface \\
+\hline
+{\em T\+P\+T\+Vertex\+Processor} & A vertex processor, which must adhere to the \hyperlink{_p_t_lib_page_TPTVertexProcessor}{T\+P\+T\+Vertex\+Processor} interface\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em context} & the path tracing context \\
+\hline
+{\em vertex\+\_\+processor} & the vertex processor \\
+\hline
+{\em renderer} & the rendering context \\
+\hline
+{\em shadow\+\_\+hit} & a bit indicating whether the sample is occluded or not \\
+\hline
+{\em pixel\+\_\+info} & the packed pixel info \\
+\hline
+{\em w} & the total sample weight \\
+\hline
+{\em w\+\_\+d} & the diffuse sample weight \\
+\hline
+{\em w\+\_\+g} & the glossy sample weight \\
+\hline
+{\em nee\+\_\+vertex\+\_\+id} & the current N\+EE slot computed by the direct lighting engine \\
+\hline
+{\em nee\+\_\+sample\+\_\+id} & the current N\+EE cluster computed by the direct lighting engine \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___p_t_lib_core_ga4881c06f23dccad0fc8972bda8de1b40}\label{group___p_t_lib_core_ga4881c06f23dccad0fc8972bda8de1b40}} 
+\index{P\+T\+Lib\+Core@{P\+T\+Lib\+Core}!vertex\+\_\+sample@{vertex\+\_\+sample}}
+\index{vertex\+\_\+sample@{vertex\+\_\+sample}!P\+T\+Lib\+Core@{P\+T\+Lib\+Core}}
+\subsubsection{\texorpdfstring{vertex\+\_\+sample()}{vertex\_sample()}}
+{\footnotesize\ttfamily template$<$typename T\+P\+T\+Context $>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE float vertex\+\_\+sample (\begin{DoxyParamCaption}\item[{const uint2}]{pixel,  }\item[{T\+P\+T\+Context \&}]{context,  }\item[{const uint32}]{i }\end{DoxyParamCaption})}
+
+return the i-\/th dimensional sample for this vertex, with i in \mbox{[}0,6\mbox{[} 

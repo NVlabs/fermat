@@ -46,7 +46,7 @@ inline CUGAR_HOST CUGAR_DEVICE Vector2f to_spherical_coords(const Vector3f& vec)
 		phi = 0.0f;
 	else {
 		phi = atan2f( vec[1], vec[0] );
-		phi = phi<0.0f ? phi+2.0f*float(M_PI) : phi;
+		phi = phi<0.0f ? phi+2.0f*M_PIf : phi;
 	}
     theta = acosf( vec[2] );
 	return Vector2f(phi,theta);
@@ -126,7 +126,7 @@ inline CUGAR_HOST CUGAR_DEVICE Vector3f square_to_cosine_hemisphere(const Vector
         sqrtf( max(1.0f - r2,0.0f) ) );
 //	const float cosTheta = sqrtf(std::max(uv[1],0.0f));
 //	const float sinTheta = sqrtf(std::max(1.0f - cosTheta*cosTheta,0.0f));
-//	const float phi = uv[0] * 2.0f * float(M_PI);
+//	const float phi = uv[0] * 2.0f * M_PIf;
 //
 //	return Vector3f(
 //		cosf(phi)*sinTheta,
@@ -138,12 +138,32 @@ inline CUGAR_HOST CUGAR_DEVICE Vector2f cosine_hemisphere_to_square(const Vector
 {
 	return unit_disk_to_square( Vector2f( dir[0], dir[1] ) );
 }
+
+// maps the unit square to the hemisphere with a uniform distribution
+inline CUGAR_HOST CUGAR_DEVICE Vector3f square_to_uniform_hemisphere(const Vector2f& uv)
+{
+	const Vector2f disk = square_to_unit_disk( uv );
+	const float r2 = disk[0]*disk[0] + disk[1]*disk[1];
+	return Vector3f(
+		disk[0] * sqrtf(2 - r2),
+		disk[1] * sqrtf(2 - r2),
+        max(1.0f - r2,0.0f) );
+}
+// inverts the square to uniform hemisphere mapping
+inline CUGAR_HOST CUGAR_DEVICE Vector2f uniform_hemisphere_to_square(const Vector3f& dir)
+{
+	const float r2 = 1 - dir.z;
+	const float u = dir[0] / sqrtf(2 - r2);
+	const float v = dir[1] / sqrtf(2 - r2);
+	return unit_disk_to_square( Vector2f( u, v ) );
+}
+
 // maps the unit square to the sphere with a uniform distribution
 inline CUGAR_HOST CUGAR_DEVICE Vector3f uniform_square_to_sphere(const Vector2f& uv)
 {
-	const float cosTheta = uv[1]*2.0f - 1.0f;
+	const float cosTheta = uv.y*2.0f - 1.0f;
 	const float sinTheta = fast_sqrt(max(1.0f - cosTheta*cosTheta,0.0f));
-	const float phi = uv[0] * 2.0f * float(M_PI);
+	const float phi = uv.x * M_TWO_PIf;
 
 	return Vector3f(
 		fast_cos(phi)*sinTheta,
@@ -159,9 +179,49 @@ inline CUGAR_HOST CUGAR_DEVICE Vector2f uniform_sphere_to_square(const Vector3f&
 		phi = 0.0f;
 	else {
 		phi = atan2f( vec[1], vec[0] );
-		phi = phi<0.0f ? phi+2.0f*float(M_PI) : phi;
+		phi = phi<0.0f ? phi+2.0f*M_PIf : phi;
 	}
-	return Vector2f(phi/(2.0f*float(M_PI)),(cosTheta+1.0f)*0.5f);
+	return Vector2f(phi/(2.0f*M_PIf),(cosTheta+1.0f)*0.5f);
 }
+
+// Assume normalized input on +Z hemisphere.
+// Output is on [-1, 1].
+inline CUGAR_HOST CUGAR_DEVICE Vector2f hemisphere_to_hemioct(Vector3f v)
+{
+	// Project the hemisphere onto the hemi-octahedron,
+	// and then into the xy plane
+	Vector2f p = v.xy() * (1.0f / (fabsf(v.x) + fabsf(v.y) + v.z));
+	// Rotate and scale the center diamond to the unit square
+	return Vector2f(p.x + p.y, p.x - p.y);
+}
+inline CUGAR_HOST CUGAR_DEVICE Vector3f hemioct_to_hemisphere(Vector2f e)
+{
+	// Rotate and scale the unit square back to the center diamond
+	Vector2f temp = Vector2f(e.x + e.y, e.x - e.y) * 0.5f;
+	Vector3f v = Vector3f(temp, 1.0f - fabsf(temp.x) - fabsf(temp.y));
+	return normalize(v);
+}
+
+// Returns ±1
+inline CUGAR_HOST CUGAR_DEVICE 
+Vector2f signNotZero(Vector2f v)
+{
+	return Vector2f((v.x >= 0.0) ? +1.0f : -1.0f, (v.y >= 0.0f) ? +1.0f : -1.0f);
+}
+// Assume normalized input. Output is on [-1, 1] for each component.
+inline CUGAR_HOST CUGAR_DEVICE Vector2f sphere_to_oct(Vector3f v)
+{
+	// Project the sphere onto the octahedron, and then onto the xy plane
+	Vector2f p = v.xy() * (1.0f / (abs(v.x) + abs(v.y) + abs(v.z)));
+	// Reflect the folds of the lower hemisphere over the diagonals
+	return (v.z <= 0.0) ? ((Vector2f(1.0f) - abs(p.yx())) * signNotZero(p)) : p;
+}
+inline CUGAR_HOST CUGAR_DEVICE Vector3f oct_to_sphere(Vector2f e)
+{
+	Vector3f v = Vector3f(e.xy(), 1.0f - abs(e.x) - abs(e.y));
+	if (v.z < 0) v.xy() = (Vector2f(1.0f) - abs(v.yx())) * signNotZero(v.xy());
+	return normalize(v);
+}
+
 
 } // namespace cugar

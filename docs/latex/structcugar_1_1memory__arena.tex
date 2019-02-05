@@ -1,0 +1,75 @@
+\hypertarget{structcugar_1_1memory__arena}{}\section{cugar\+:\+:memory\+\_\+arena Struct Reference}
+\label{structcugar_1_1memory__arena}\index{cugar\+::memory\+\_\+arena@{cugar\+::memory\+\_\+arena}}
+
+
+\subsection{Detailed description}
+A simple memory pool, carving out space from a pre-\/allocated arena 
+
+{\ttfamily \#include $<$memory\+\_\+arena.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1memory__arena_a45eb7c6eccc45c97658c841b4cf7380a}{memory\+\_\+arena} (uint8 $\ast$\+\_\+ptr=N\+U\+LL)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint8 $\ast$ \hyperlink{structcugar_1_1memory__arena_a8c3be4a3e7e2ccd71e044263fa3302d8}{byte\+\_\+alloc} (const uint64 sz, const uint64 alignment=1u)
+\item 
+{\footnotesize template$<$typename T $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE T $\ast$ \hyperlink{structcugar_1_1memory__arena_afcbc6673ae3fa3e61368495ed2041621}{alloc} (const uint64 sz, const uint64 alignment=sizeof(T))
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1memory__arena_a503c9731f981510adc9b5ad18f7cf903}\label{structcugar_1_1memory__arena_a503c9731f981510adc9b5ad18f7cf903}} 
+uint8 $\ast$ {\bfseries ptr}
+\item 
+\mbox{\Hypertarget{structcugar_1_1memory__arena_aeb81e2bc41df3ae065af94637063b9b4}\label{structcugar_1_1memory__arena_aeb81e2bc41df3ae065af94637063b9b4}} 
+uint64 {\bfseries size}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcugar_1_1memory__arena_a45eb7c6eccc45c97658c841b4cf7380a}\label{structcugar_1_1memory__arena_a45eb7c6eccc45c97658c841b4cf7380a}} 
+\index{cugar\+::memory\+\_\+arena@{cugar\+::memory\+\_\+arena}!memory\+\_\+arena@{memory\+\_\+arena}}
+\index{memory\+\_\+arena@{memory\+\_\+arena}!cugar\+::memory\+\_\+arena@{cugar\+::memory\+\_\+arena}}
+\subsubsection{\texorpdfstring{memory\+\_\+arena()}{memory\_arena()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE cugar\+::memory\+\_\+arena\+::memory\+\_\+arena (\begin{DoxyParamCaption}\item[{uint8 $\ast$}]{\+\_\+ptr = {\ttfamily NULL} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1memory__arena_afcbc6673ae3fa3e61368495ed2041621}\label{structcugar_1_1memory__arena_afcbc6673ae3fa3e61368495ed2041621}} 
+\index{cugar\+::memory\+\_\+arena@{cugar\+::memory\+\_\+arena}!alloc@{alloc}}
+\index{alloc@{alloc}!cugar\+::memory\+\_\+arena@{cugar\+::memory\+\_\+arena}}
+\subsubsection{\texorpdfstring{alloc()}{alloc()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE T$\ast$ cugar\+::memory\+\_\+arena\+::alloc (\begin{DoxyParamCaption}\item[{const uint64}]{sz,  }\item[{const uint64}]{alignment = {\ttfamily sizeof(T)} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+typed-\/allocation
+
+
+\begin{DoxyParams}{Parameters}
+{\em sz} & the number of items to alloc \\
+\hline
+{\em alignment} & the requested byte alignment \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1memory__arena_a8c3be4a3e7e2ccd71e044263fa3302d8}\label{structcugar_1_1memory__arena_a8c3be4a3e7e2ccd71e044263fa3302d8}} 
+\index{cugar\+::memory\+\_\+arena@{cugar\+::memory\+\_\+arena}!byte\+\_\+alloc@{byte\+\_\+alloc}}
+\index{byte\+\_\+alloc@{byte\+\_\+alloc}!cugar\+::memory\+\_\+arena@{cugar\+::memory\+\_\+arena}}
+\subsubsection{\texorpdfstring{byte\+\_\+alloc()}{byte\_alloc()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint8$\ast$ cugar\+::memory\+\_\+arena\+::byte\+\_\+alloc (\begin{DoxyParamCaption}\item[{const uint64}]{sz,  }\item[{const uint64}]{alignment = {\ttfamily 1u} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+byte-\/allocation
+
+
+\begin{DoxyParams}{Parameters}
+{\em sz} & the number of bytes to alloc \\
+\hline
+{\em alignment} & the requested byte alignment \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/memory\+\_\+arena.\+h\end{DoxyCompactItemize}

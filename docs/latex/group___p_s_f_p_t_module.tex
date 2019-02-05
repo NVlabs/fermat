@@ -1,0 +1,18 @@
+\hypertarget{group___p_s_f_p_t_module}{}\section{P\+S\+F\+P\+T\+Module}
+\label{group___p_s_f_p_t_module}\index{P\+S\+F\+P\+T\+Module@{P\+S\+F\+P\+T\+Module}}
+
+
+\subsection{Detailed Description}
+This module defines an implementation of a path tracer using a simplified version of \hyperlink{struct_path}{Path} Space Filtering. Unlike the original implementation, this version is not progressive, and relies on efficient spatial hashing for defining accumulation neighborhoods, following ideas first developed by Sascha Fricke, Nikolaus Binder and Alex Keller\+:
+
+\begin{quote}
+\href{https://dl.acm.org/citation.cfm?id=3214806}{\tt Fast path space filtering by jittered spatial hashing}, Binder et al, A\+CM S\+I\+G\+G\+R\+A\+PH 2018 Talks.\end{quote}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_p_s_f_p_t_vertex_processor}{P\+S\+F\+P\+T\+Vertex\+Processor}
+\item 
+struct \hyperlink{struct_p_s_f_p_t_options}{P\+S\+F\+P\+T\+Options}
+\item 
+struct \hyperlink{struct_p_s_f_p_t}{P\+S\+F\+PT}
+\end{DoxyCompactItemize}

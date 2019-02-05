@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2011, NVIDIA Corporation
+ * Copyright (c) 2010-2018, NVIDIA Corporation
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -63,6 +63,7 @@ public:
 public:
 CUGAR_HOST_DEVICE inline                      Matrix     ();
 CUGAR_HOST_DEVICE inline        explicit      Matrix     (const T s);
+CUGAR_HOST_DEVICE inline        explicit      Matrix     (const Vector<T,M>& v);
 CUGAR_HOST_DEVICE inline                      Matrix     (const Matrix<T,N,M>&);
 CUGAR_HOST_DEVICE inline                      Matrix     (const Vector<T,M> *v);
 CUGAR_HOST_DEVICE inline                      Matrix     (const T *v);
@@ -80,7 +81,7 @@ CUGAR_HOST_DEVICE inline        Vector<T,M>&       operator [] (int);
 CUGAR_HOST_DEVICE inline        const Vector<T,M>& get (int) const;
 CUGAR_HOST_DEVICE inline        void               set (int, const Vector<T,M>&);
 
-CUGAR_HOST_DEVICE inline        T           operator () (int i, int j) const;
+CUGAR_HOST_DEVICE inline        const T&    operator () (int i, int j) const;
 CUGAR_HOST_DEVICE inline        T&          operator () (int i, int j);
 
 CUGAR_HOST_DEVICE inline        T           det() const;
@@ -112,6 +113,8 @@ typedef Matrix<float,4,4>  Matrix4x4f;
 typedef Matrix<double,4,4> Matrix4x4d;
 typedef Matrix<float,2,3>  Matrix2x3f;
 typedef Matrix<float,3,2>  Matrix3x2f;
+typedef Matrix<double,2,3>  Matrix2x3d;
+typedef Matrix<double,3,2>  Matrix3x2d;
 
 template <typename T, int N, int M, int Q> CUGAR_HOST_DEVICE Matrix<T,N,Q>& multiply   (const Matrix<T,N,M>&,  const Matrix<T,M,Q>&,  Matrix<T,N,Q>&);
 template <typename T, int N, int M, int Q> CUGAR_HOST_DEVICE Matrix<T,N,Q>  operator * (const Matrix<T,N,M>&,  const Matrix<T,M,Q>&);
@@ -122,6 +125,10 @@ template <typename T, int N, int M> CUGAR_HOST_DEVICE Matrix<T,M,N>&   transpose
 template <typename T, int N, int M> CUGAR_HOST_DEVICE bool             invert      (const Matrix<T,N,M>&,  Matrix<T,M,N>&); // gives inv(A^t * A)*A^t
 template <typename T, int N, int M> CUGAR_HOST_DEVICE T                det         (const Matrix<T,N,M>&);
 template <typename T>               CUGAR_HOST_DEVICE void             cholesky    (const Matrix<T,2,2>&, Matrix<T,2,2>&);
+
+/// Outer product of two vectors
+///
+template <typename T, uint32 N, uint32 M> CUGAR_API_CS CUGAR_HOST_DEVICE Matrix<T,N,M> outer_product(const Vector<T,N> op1, const Vector<T,M> op2);
 
 /// build a 3d translation matrix
 ///
@@ -191,6 +198,58 @@ CUGAR_HOST_DEVICE inline void svd(
 	Matrix2x2f&			u,
 	Vector2f&			s,
 	Matrix2x2f&			v);
+
+/// a generic outer product functor:
+/// this class is not an STL binary functor, in the sense it does not define
+/// its argument and result types
+///
+struct GenericOuterProduct
+{
+	CUGAR_HOST_DEVICE CUGAR_FORCEINLINE
+	float operator() (const float op1, const float op2) const { return op1 * op2; }
+
+	template <typename T, uint32 N, uint32 M> 
+	CUGAR_HOST_DEVICE CUGAR_FORCEINLINE
+	Matrix<T,N,M> operator() (const Vector<T,N> op1, const Vector<T,M> op2) const
+	{
+		return outer_product( op1, op2 );
+	}
+};
+
+/// an outer product functor
+///
+template <typename T, uint32 N, uint32 M> 
+struct OuterProduct
+{
+	CUGAR_HOST_DEVICE CUGAR_FORCEINLINE
+	Matrix<T,N,M> operator() (const Vector<T,N> op1, const Vector<T,M> op2) const
+	{
+		return outer_product( op1, op2 );
+	}
+};
+
+/// outer product functor specialization
+///
+template <typename T> 
+struct OuterProduct<T,1,1>
+{
+	CUGAR_HOST_DEVICE CUGAR_FORCEINLINE
+	T operator() (const T op1, const T op2) const { return op1 * op2; }
+};
+
+typedef OuterProduct<float,2,2> OuterProduct2x2f;
+typedef OuterProduct<float,3,3> OuterProduct3x3f;
+typedef OuterProduct<float,4,4> OuterProduct4x4f;
+
+typedef OuterProduct<float,2,3> OuterProduct2x3f;
+typedef OuterProduct<float,3,2> OuterProduct3x2f;
+
+typedef OuterProduct<double,2,2> OuterProduct2x2d;
+typedef OuterProduct<double,3,3> OuterProduct3x3d;
+typedef OuterProduct<double,4,4> OuterProduct4x4d;
+
+typedef OuterProduct<double,2,3> OuterProduct2x3d;
+typedef OuterProduct<double,3,2> OuterProduct3x2d;
 
 ///@} MatricesModule
 ///@} LinalgModule

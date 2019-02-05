@@ -1,0 +1,110 @@
+\hypertarget{classcugar_1_1_bvh__sah__builder}{}\section{cugar\+:\+:Bvh\+\_\+sah\+\_\+builder Class Reference}
+\label{classcugar_1_1_bvh__sah__builder}\index{cugar\+::\+Bvh\+\_\+sah\+\_\+builder@{cugar\+::\+Bvh\+\_\+sah\+\_\+builder}}
+
+
+\subsection{Detailed description}
+An S\+A\+H-\/based bvh builder for 3d bboxes 
+
+{\ttfamily \#include $<$bvh\+\_\+sah\+\_\+builder.\+h$>$}
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classcugar_1_1_bvh__sah__builder_1_1_index_sort_predicate}{Index\+Sort\+Predicate}
+\item 
+class \hyperlink{classcugar_1_1_bvh__sah__builder_1_1_predicate}{Predicate}
+\item 
+struct \hyperlink{structcugar_1_1_bvh__sah__builder_1_1_stats}{Stats}
+\end{DoxyCompactItemize}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcugar_1_1_bvh__sah__builder_a106375bb58b503da322d0ee5c3cbe9cc}\label{classcugar_1_1_bvh__sah__builder_a106375bb58b503da322d0ee5c3cbe9cc}} 
+typedef \hyperlink{structcugar_1_1_vector}{Vector3f} {\bfseries vector\+\_\+type}
+\item 
+\mbox{\Hypertarget{classcugar_1_1_bvh__sah__builder_a8ce26c3257e7164ab775873a99b5595d}\label{classcugar_1_1_bvh__sah__builder_a8ce26c3257e7164ab775873a99b5595d}} 
+typedef \hyperlink{structcugar_1_1_bbox}{Bbox3f} {\bfseries bbox\+\_\+type}
+\item 
+\mbox{\Hypertarget{classcugar_1_1_bvh__sah__builder_a7e9f359d67fc61239208506992ee5d13}\label{classcugar_1_1_bvh__sah__builder_a7e9f359d67fc61239208506992ee5d13}} 
+typedef \hyperlink{structcugar_1_1_bvh}{Bvh}$<$ 3u $>$ {\bfseries bvh\+\_\+type}
+\item 
+\mbox{\Hypertarget{classcugar_1_1_bvh__sah__builder_af9820a9d0d14c983ed10447b9f1fa456}\label{classcugar_1_1_bvh__sah__builder_af9820a9d0d14c983ed10447b9f1fa456}} 
+typedef \hyperlink{structcugar_1_1_bvh__node}{Bvh\+\_\+node} {\bfseries bvh\+\_\+node\+\_\+type}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcugar_1_1_bvh__sah__builder_a3b6da808634d49961463b686bf29ca3c}\label{classcugar_1_1_bvh__sah__builder_a3b6da808634d49961463b686bf29ca3c}} 
+\hyperlink{classcugar_1_1_bvh__sah__builder_a3b6da808634d49961463b686bf29ca3c}{Bvh\+\_\+sah\+\_\+builder} ()
+\begin{DoxyCompactList}\small\item\em constructor \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcugar_1_1_bvh__sah__builder_af625f11b29c4bd6b55ac0bd215f0f49d}\label{classcugar_1_1_bvh__sah__builder_af625f11b29c4bd6b55ac0bd215f0f49d}} 
+void \hyperlink{classcugar_1_1_bvh__sah__builder_af625f11b29c4bd6b55ac0bd215f0f49d}{set\+\_\+max\+\_\+leaf\+\_\+size} (const uint32 max\+\_\+leaf\+\_\+size)
+\begin{DoxyCompactList}\small\item\em set bvh parameters \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcugar_1_1_bvh__sah__builder_a960e29c62bb431f0623b515251468e83}\label{classcugar_1_1_bvh__sah__builder_a960e29c62bb431f0623b515251468e83}} 
+void \hyperlink{classcugar_1_1_bvh__sah__builder_a960e29c62bb431f0623b515251468e83}{set\+\_\+force\+\_\+splitting} (const bool flag)
+\begin{DoxyCompactList}\small\item\em set force splitting \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcugar_1_1_bvh__sah__builder_a38007d9e650d0dfced01fce266bc77ae}\label{classcugar_1_1_bvh__sah__builder_a38007d9e650d0dfced01fce266bc77ae}} 
+void \hyperlink{classcugar_1_1_bvh__sah__builder_a38007d9e650d0dfced01fce266bc77ae}{set\+\_\+force\+\_\+alignment} (const bool flag)
+\begin{DoxyCompactList}\small\item\em set force \textquotesingle{}max leaf size\textquotesingle{}-\/aligned splits \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcugar_1_1_bvh__sah__builder_a41aae31b7766827a2034bc092f3ca2f0}\label{classcugar_1_1_bvh__sah__builder_a41aae31b7766827a2034bc092f3ca2f0}} 
+void \hyperlink{classcugar_1_1_bvh__sah__builder_a41aae31b7766827a2034bc092f3ca2f0}{set\+\_\+single\+\_\+axis\+\_\+threshold} (const uint32 v)
+\begin{DoxyCompactList}\small\item\em set single axis test threshold \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Iterator $>$ }\\void \hyperlink{classcugar_1_1_bvh__sah__builder_a8a64c0b8144ac205dbc1b0879e3b41d1}{build} (Iterator \hyperlink{namespacecugar_a2121df08f967e232ea5fe0ee378dee67}{begin}, Iterator end, \hyperlink{structcugar_1_1_bvh}{bvh\+\_\+type} $\ast$bvh, \hyperlink{structcugar_1_1_bvh__sah__builder_1_1_stats}{Stats} $\ast$stats=N\+U\+LL)
+\item 
+{\footnotesize template$<$typename Iterator , typename Cost\+Iterator $>$ }\\void \hyperlink{classcugar_1_1_bvh__sah__builder_a2f0ebff9b2d6d0f9ada366c64689dc4e}{build} (Iterator \hyperlink{namespacecugar_a2121df08f967e232ea5fe0ee378dee67}{begin}, Iterator end, Cost\+Iterator cost\+\_\+begin, \hyperlink{structcugar_1_1_bvh}{bvh\+\_\+type} $\ast$bvh, \hyperlink{structcugar_1_1_bvh__sah__builder_1_1_stats}{Stats} $\ast$stats=N\+U\+LL)
+\item 
+\mbox{\Hypertarget{classcugar_1_1_bvh__sah__builder_aad8a449457ea218c106bbc626efe9334}\label{classcugar_1_1_bvh__sah__builder_aad8a449457ea218c106bbc626efe9334}} 
+uint32 \hyperlink{classcugar_1_1_bvh__sah__builder_aad8a449457ea218c106bbc626efe9334}{index} (const uint32 i) const
+\begin{DoxyCompactList}\small\item\em remapped point index \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcugar_1_1_bvh__sah__builder_a69f50ef39b8fd35d2ee03c5421360d63}\label{classcugar_1_1_bvh__sah__builder_a69f50ef39b8fd35d2ee03c5421360d63}} 
+{\footnotesize template$<$typename Iterator $>$ }\\void {\bfseries build} (const Iterator \hyperlink{namespacecugar_a2121df08f967e232ea5fe0ee378dee67}{begin}, const Iterator end, \hyperlink{structcugar_1_1_bvh}{bvh\+\_\+type} $\ast$bvh)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcugar_1_1_bvh__sah__builder_a8a64c0b8144ac205dbc1b0879e3b41d1}\label{classcugar_1_1_bvh__sah__builder_a8a64c0b8144ac205dbc1b0879e3b41d1}} 
+\index{cugar\+::\+Bvh\+\_\+sah\+\_\+builder@{cugar\+::\+Bvh\+\_\+sah\+\_\+builder}!build@{build}}
+\index{build@{build}!cugar\+::\+Bvh\+\_\+sah\+\_\+builder@{cugar\+::\+Bvh\+\_\+sah\+\_\+builder}}
+\subsubsection{\texorpdfstring{build()}{build()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Iterator $>$ \\
+void cugar\+::\+Bvh\+\_\+sah\+\_\+builder\+::build (\begin{DoxyParamCaption}\item[{Iterator}]{begin,  }\item[{Iterator}]{end,  }\item[{\hyperlink{structcugar_1_1_bvh}{bvh\+\_\+type} $\ast$}]{bvh,  }\item[{\hyperlink{structcugar_1_1_bvh__sah__builder_1_1_stats}{Stats} $\ast$}]{stats = {\ttfamily NULL} }\end{DoxyParamCaption})}
+
+build
+
+Iterator is supposed to dereference to a Bbox3f
+
+
+\begin{DoxyParams}{Parameters}
+{\em begin} & first point \\
+\hline
+{\em end} & last point \\
+\hline
+{\em bvh} & output bvh \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcugar_1_1_bvh__sah__builder_a2f0ebff9b2d6d0f9ada366c64689dc4e}\label{classcugar_1_1_bvh__sah__builder_a2f0ebff9b2d6d0f9ada366c64689dc4e}} 
+\index{cugar\+::\+Bvh\+\_\+sah\+\_\+builder@{cugar\+::\+Bvh\+\_\+sah\+\_\+builder}!build@{build}}
+\index{build@{build}!cugar\+::\+Bvh\+\_\+sah\+\_\+builder@{cugar\+::\+Bvh\+\_\+sah\+\_\+builder}}
+\subsubsection{\texorpdfstring{build()}{build()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Iterator , typename Cost\+Iterator $>$ \\
+void cugar\+::\+Bvh\+\_\+sah\+\_\+builder\+::build (\begin{DoxyParamCaption}\item[{Iterator}]{begin,  }\item[{Iterator}]{end,  }\item[{Cost\+Iterator}]{cost\+\_\+begin,  }\item[{\hyperlink{structcugar_1_1_bvh}{bvh\+\_\+type} $\ast$}]{bvh,  }\item[{\hyperlink{structcugar_1_1_bvh__sah__builder_1_1_stats}{Stats} $\ast$}]{stats = {\ttfamily NULL} }\end{DoxyParamCaption})}
+
+build
+
+Iterator is supposed to dereference to a Bbox3f
+
+
+\begin{DoxyParams}{Parameters}
+{\em begin} & first point \\
+\hline
+{\em end} & last point \\
+\hline
+{\em bvh} & output bvh \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bvh/bvh\+\_\+sah\+\_\+builder.\+h\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bvh/bvh\+\_\+sah\+\_\+builder\+\_\+inline.\+h\end{DoxyCompactItemize}

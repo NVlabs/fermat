@@ -1,0 +1,56 @@
+\hypertarget{structcugar_1_1cuda_1_1kd_1_1_kd__context_1_1_context}{}\section{cugar\+:\+:cuda\+:\+:kd\+:\+:Kd\+\_\+context$<$ D\+IM, Bbox\+Type, Integer, Output\+Tree $>$\+:\+:Context Struct Reference}
+\label{structcugar_1_1cuda_1_1kd_1_1_kd__context_1_1_context}\index{cugar\+::cuda\+::kd\+::\+Kd\+\_\+context$<$ D\+I\+M, Bbox\+Type, Integer, Output\+Tree $>$\+::\+Context@{cugar\+::cuda\+::kd\+::\+Kd\+\_\+context$<$ D\+I\+M, Bbox\+Type, Integer, Output\+Tree $>$\+::\+Context}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$uint32 D\+IM, typename Bbox\+Type, typename Integer, typename Output\+Tree$>$\newline
+struct cugar\+::cuda\+::kd\+::\+Kd\+\_\+context$<$ D\+I\+M, Bbox\+Type, Integer, Output\+Tree $>$\+::\+Context}
+
+Cuda accessor struct. 
+
+{\ttfamily \#include $<$kd\+\_\+builder\+\_\+inline.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1kd_1_1_kd__context_1_1_context_a3878d0bf036f3f48fabcee2cfade83f8}\label{structcugar_1_1cuda_1_1kd_1_1_kd__context_1_1_context_a3878d0bf036f3f48fabcee2cfade83f8}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries Context} (const Base\+Context context, const Integer $\ast$codes, Bbox\+Type bbox)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1cuda_1_1kd_1_1_kd__context_1_1_context_a62ebef4047ff66f5e575fbcf48786e87}{write\+\_\+node} (const uint32 node, const uint32 parent, bool p1, bool p2, const uint32 offset, const uint32 skip\+\_\+node, const uint32 level, const uint32 \hyperlink{namespacecugar_a2121df08f967e232ea5fe0ee378dee67}{begin}, const uint32 end, const uint32 split\+\_\+index)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1cuda_1_1kd_1_1_kd__context_1_1_context_a6ae8f1b91a2d3d60fcb1d3092e9575de}{write\+\_\+leaf} (const uint32 leaf\+\_\+index, const uint32 node\+\_\+index, const uint32 \hyperlink{namespacecugar_a2121df08f967e232ea5fe0ee378dee67}{begin}, const uint32 end)
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1kd_1_1_kd__context_1_1_context_a124766fb2813a8a0fcfc7d1115c5cd0a}\label{structcugar_1_1cuda_1_1kd_1_1_kd__context_1_1_context_a124766fb2813a8a0fcfc7d1115c5cd0a}} 
+Base\+Context {\bfseries m\+\_\+context}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1kd_1_1_kd__context_1_1_context_ab3063fce2ff33ee780aeed68f8d00c48}\label{structcugar_1_1cuda_1_1kd_1_1_kd__context_1_1_context_ab3063fce2ff33ee780aeed68f8d00c48}} 
+const Integer $\ast$ {\bfseries m\+\_\+codes}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1kd_1_1_kd__context_1_1_context_abbc1095b788582a1eb47e51d4a758f92}\label{structcugar_1_1cuda_1_1kd_1_1_kd__context_1_1_context_abbc1095b788582a1eb47e51d4a758f92}} 
+Bbox\+Type {\bfseries m\+\_\+bbox}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1kd_1_1_kd__context_1_1_context_a6ae8f1b91a2d3d60fcb1d3092e9575de}\label{structcugar_1_1cuda_1_1kd_1_1_kd__context_1_1_context_a6ae8f1b91a2d3d60fcb1d3092e9575de}} 
+\index{cugar\+::cuda\+::kd\+::\+Kd\+\_\+context\+::\+Context@{cugar\+::cuda\+::kd\+::\+Kd\+\_\+context\+::\+Context}!write\+\_\+leaf@{write\+\_\+leaf}}
+\index{write\+\_\+leaf@{write\+\_\+leaf}!cugar\+::cuda\+::kd\+::\+Kd\+\_\+context\+::\+Context@{cugar\+::cuda\+::kd\+::\+Kd\+\_\+context\+::\+Context}}
+\subsubsection{\texorpdfstring{write\+\_\+leaf()}{write\_leaf()}}
+{\footnotesize\ttfamily template$<$uint32 D\+IM, typename Bbox\+Type , typename Integer , typename Output\+Tree $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1cuda_1_1kd_1_1_kd__context}{cugar\+::cuda\+::kd\+::\+Kd\+\_\+context}$<$ D\+IM, Bbox\+Type, Integer, Output\+Tree $>$\+::Context\+::write\+\_\+leaf (\begin{DoxyParamCaption}\item[{const uint32}]{leaf\+\_\+index,  }\item[{const uint32}]{node\+\_\+index,  }\item[{const uint32}]{begin,  }\item[{const uint32}]{end }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+write a new leaf \mbox{\Hypertarget{structcugar_1_1cuda_1_1kd_1_1_kd__context_1_1_context_a62ebef4047ff66f5e575fbcf48786e87}\label{structcugar_1_1cuda_1_1kd_1_1_kd__context_1_1_context_a62ebef4047ff66f5e575fbcf48786e87}} 
+\index{cugar\+::cuda\+::kd\+::\+Kd\+\_\+context\+::\+Context@{cugar\+::cuda\+::kd\+::\+Kd\+\_\+context\+::\+Context}!write\+\_\+node@{write\+\_\+node}}
+\index{write\+\_\+node@{write\+\_\+node}!cugar\+::cuda\+::kd\+::\+Kd\+\_\+context\+::\+Context@{cugar\+::cuda\+::kd\+::\+Kd\+\_\+context\+::\+Context}}
+\subsubsection{\texorpdfstring{write\+\_\+node()}{write\_node()}}
+{\footnotesize\ttfamily template$<$uint32 D\+IM, typename Bbox\+Type , typename Integer , typename Output\+Tree $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1cuda_1_1kd_1_1_kd__context}{cugar\+::cuda\+::kd\+::\+Kd\+\_\+context}$<$ D\+IM, Bbox\+Type, Integer, Output\+Tree $>$\+::Context\+::write\+\_\+node (\begin{DoxyParamCaption}\item[{const uint32}]{node,  }\item[{const uint32}]{parent,  }\item[{bool}]{p1,  }\item[{bool}]{p2,  }\item[{const uint32}]{offset,  }\item[{const uint32}]{skip\+\_\+node,  }\item[{const uint32}]{level,  }\item[{const uint32}]{begin,  }\item[{const uint32}]{end,  }\item[{const uint32}]{split\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+write a new node 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/kd/cuda/kd\+\_\+builder\+\_\+inline.\+h\end{DoxyCompactItemize}

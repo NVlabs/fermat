@@ -1,0 +1,666 @@
+
+
+\begin{DoxyParagraph}{}
+~\newline
+ {\bfseries C\+U\+G\+AR}, the C\+U\+DA Graphics AcceleratoR, is a library of reusable components designed to accelerate C\+U\+DA based graphics applications. Though it is specifically designed to unleash the power of {\itshape N\+V\+I\+D\+IA} {\bfseries G\+PU}s, most of its components are completely cross-\/platform and can be used both from host C++ and device C\+U\+DA code.
+\end{DoxyParagraph}
+\hypertarget{cugar_page_IntroductionSection}{}\section{Introduction}\label{cugar_page_IntroductionSection}
+
+\begin{DoxyItemize}
+\item \hyperlink{generic_programming_page}{Generic Programming}
+\item \hyperlink{host_device_page}{Host \& Device}
+\end{DoxyItemize}\hypertarget{cugar_page_ModulesSection}{}\section{Modules}\label{cugar_page_ModulesSection}
+\begin{DoxyParagraph}{}
+C\+U\+G\+AR includes the following modules\+:
+\end{DoxyParagraph}
+
+\begin{DoxyItemize}
+\item \hyperlink{basic_page}{Basic Module}
+\item \hyperlink{bits_page}{Bits Module}
+\item \hyperlink{linalg_page}{Linear Algebra Module}
+\item \hyperlink{bintree_page}{Binary Trees Module}
+\item \hyperlink{radixtree_page}{Radix Trees Module}
+\item \hyperlink{bvh_page}{B\+VH Module}
+\item \hyperlink{kd_page}{K-\/d Trees Module}
+\item \hyperlink{bsdf_page}{B\+S\+DF Module}
+\item \hyperlink{sampling_page}{Sampling Module}
+\item \hyperlink{spherical_page}{Spherical Functions Module}
+\item tree\+\_\+page
+\end{DoxyItemize}\hypertarget{cugar_page_DependenciesSection}{}\section{Dependencies}\label{cugar_page_DependenciesSection}
+\begin{DoxyParagraph}{}
+C\+U\+G\+AR depends on the following external libraries\+:
+\end{DoxyParagraph}
+
+\begin{DoxyItemize}
+\item \href{http://nvlabs.github.io/cub/}{\tt C\+UB}
+\item a modification of Nathaniel Mc\+Clatchey\textquotesingle{}s \href{https://github.com/nmcclatchey/Priority-Deque/}{\tt priority\+\_\+deque}
+\end{DoxyItemize}\hypertarget{index_Licensing}{}\section{Licensing}\label{index_Licensing}
+\begin{DoxyParagraph}{}
+C\+U\+G\+AR has been developed by \href{www.nvidia.com}{\tt N\+V\+I\+D\+IA Corporation} and is licensed under B\+SD.
+\end{DoxyParagraph}
+\hypertarget{index_Contributors}{}\section{Contributors}\label{index_Contributors}
+\begin{DoxyParagraph}{}
+C\+U\+G\+AR is made and mantained by \href{jpantaleoni@nvidia.com}{\tt Jacopo Pantaleoni}.
+\end{DoxyParagraph}
+ \hypertarget{generic_programming_page}{}\section{Generic Programming}\label{generic_programming_page}
+\begin{DoxyParagraph}{}
+Most of C\+U\+G\+AR\textquotesingle{}s functions and data structures are {\itshape C++ templates} providing the flexibility and compile-\/time code generation needed to accomodate the exponential amount of type combinations possible in typical applications. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Just as an example, consider the following code, building a K-\/d tree over a set of points\+: 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The following code snippet shows how to use this builder\+: 
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <\hyperlink{kd__builder_8h}{cugar/kd/cuda/kd\_builder.h}>}
+\textcolor{preprocessor}{#include <\hyperlink{kd__context_8h}{cugar/kd/cuda/kd\_context.h}>}
+
+thrust::device\_vector<Vector3f> points;
+... \textcolor{comment}{// code to fill the input vector of points}
+
+thrust::device\_vector<Kd\_node>  kd\_nodes;
+thrust::device\_vector<uint2>    kd\_leaves;
+thrust::device\_vector<uint32>   kd\_index;
+
+\hyperlink{structcugar_1_1cuda_1_1_kd__builder}{cugar::cuda::Kd\_builder<uint64>} builder( kd\_index );
+\hyperlink{structcugar_1_1cuda_1_1_kd__context}{cugar::cuda::Kd\_context} kd\_tree( &kd\_nodes, &kd\_leaves, NULL );
+builder.build(
+    kd\_tree,                                    \textcolor{comment}{// output tree}
+    kd\_index,                                   \textcolor{comment}{// output index}
+    Bbox3f( Vector3f(0.0f), Vector3f(1.0f) ),   \textcolor{comment}{// suppose all bboxes are in [0,1]^3}
+    points.begin(),                             \textcolor{comment}{// begin iterator}
+    points.end(),                               \textcolor{comment}{// end iterator}
+    4 );                                        \textcolor{comment}{// target 4 objects per leaf}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+In the above code, the builder stores the nodes of the resulting K-\/d tree into a flat array of Kd\+\_\+node\textquotesingle{}s. But what if we wanted to store them using a different layout? It turns out the builder itself doesn\textquotesingle{}t know anything about the actual output it produces, but rather, it delegates everything to an \hyperlink{structcugar_1_1cuda_1_1_kd__builder_KdOutputTreeAnchor}{Output\+Tree} template class which must possess the following interface\+: 
+\begin{DoxyCode}
+\textcolor{keyword}{struct }OutputTree
+\{
+   \textcolor{keywordtype}{void} reserve\_nodes(\textcolor{keyword}{const} uint32 n);  \textcolor{comment}{// reserve space for n nodes}
+   \textcolor{keywordtype}{void} reserve\_leaves(\textcolor{keyword}{const} uint32 n); \textcolor{comment}{// reserve space for n leaves}
+
+   Context get\_context();             \textcolor{comment}{// get a context to write nodes/leaves}
+
+   \textcolor{keyword}{struct }Context
+   \{
+       \textcolor{keywordtype}{void} write\_node(
+          \textcolor{keyword}{const} uint32 node,          \textcolor{comment}{// node to write}
+          \textcolor{keyword}{const} uint32 offset,        \textcolor{comment}{// child offset}
+          \textcolor{keyword}{const} uint32 skip\_node,     \textcolor{comment}{// skip node}
+          \textcolor{keyword}{const} uint32 \hyperlink{group___basic_ga7a37aba0ec0ff22738563bca83609dca}{begin},         \textcolor{comment}{// node range begin}
+          \textcolor{keyword}{const} uint32 end,           \textcolor{comment}{// node range end}
+          \textcolor{keyword}{const} uint32 split\_index,   \textcolor{comment}{// split index}
+          \textcolor{keyword}{const} uint32 split\_dim,     \textcolor{comment}{// splitting dimension}
+          \textcolor{keyword}{const} uint32 split\_plane);  \textcolor{comment}{// splitting plane}
+
+       \textcolor{keywordtype}{void} write\_node(
+          \textcolor{keyword}{const} uint32 node,          \textcolor{comment}{// node to write}
+          \textcolor{keyword}{const} uint32 offset,        \textcolor{comment}{// child offset}
+          \textcolor{keyword}{const} uint32 skip\_node,     \textcolor{comment}{// skip node}
+          \textcolor{keyword}{const} uint32 \hyperlink{group___basic_ga7a37aba0ec0ff22738563bca83609dca}{begin},         \textcolor{comment}{// node range begin}
+          \textcolor{keyword}{const} uint32 end);          \textcolor{comment}{// node range end}
+
+       \textcolor{keywordtype}{void} write\_leaf(
+          \textcolor{keyword}{const} uint32 index,         \textcolor{comment}{// leaf to write}
+          \textcolor{keyword}{const} uint32 \hyperlink{group___basic_ga7a37aba0ec0ff22738563bca83609dca}{begin},         \textcolor{comment}{// leaf range begin}
+          \textcolor{keyword}{const} uint32 end);          \textcolor{comment}{// leaf range end}
+   \};
+\};
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+allowing its behaviour to be completely customized. In this case, we just relied on the default implementation provided by \hyperlink{structcugar_1_1cuda_1_1_kd__context}{cugar\+::cuda\+::\+Kd\+\_\+context}.
+\end{DoxyParagraph}
+Next\+: \hyperlink{host_device_page}{Host \& Device} Top\+: mainpage \hypertarget{host_device_page}{}\section{Host \& Device}\label{host_device_page}
+\begin{DoxyParagraph}{}
+The user of C\+U\+G\+AR needs to familiarize with the fact that on a G\+PU equipped system there is both a {\itshape host}, controlled by a {\itshape C\+PU}, and one or multiple {\itshape G\+PU} {\itshape devices}, with distinct memory spaces. Hence, there can be several types of functions and data-\/structures\+: 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+
+\begin{DoxyItemize}
+\item single-\/threaded functions that can be called by a host thread
+\item single-\/threaded functions that can be called by a device thread
+\item single-\/threaded functions that can be called both on the host and the device
+\item parallel functions that can be called by a host thread, and spawn one or more sets of host threads
+\item parallel functions that can be called by a host thread, but spawn one or more sets of device threads 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+
+\begin{DoxyItemize}
+\item data-\/structures that encapsulate host data and are meant to be used on the host (e.\+g. a resizable host vector, cugar\+::vector$<$host\+\_\+tag,\+T$>$)
+\item data-\/structures that encapsulate device data but are meant to be used on the host (e.\+g. a resizable device vector, cugar\+::vector$<$device\+\_\+tag,\+T$>$)
+\item data-\/structures that encapsulate device data and are meant to be used on the device 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Unified Virtual Memory allows to use any data-\/structure anywhere, but for performance-\/oriented applications it can be beneficial to have explicit control of placement in the memory hierarchy.
+\end{DoxyParagraph}
+\hypertarget{host_device_page_PlainViewsSection}{}\subsection{Plain Views}\label{host_device_page_PlainViewsSection}
+\begin{DoxyParagraph}{}
+The fact that some data structures contain device data but can only be used from the host, coupled with the fact that at the moment C\+U\+DA does not allow to pass references as device kernel arguments and requires to pass P\+O\+Ds in, lends naturally to the definition of {\itshape plain views}\+: in C\+U\+G\+AR\textquotesingle{}s speech, a plain view of an object is essentially a {\itshape shallow reference} to an object\textquotesingle{}s data encapsulated in a P\+OD data structure that can be passed as kernel parameters. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+C\+U\+G\+AR defines the generic function \hyperlink{group___basic_ga6eb01f34e803fa6b384bf9930f6db426}{plain\+\_\+view()} to obtain the plain view of a given object. Analogously it defines the meta function plain\+\_\+view\+\_\+subtype$<$\+T$>$\+::type to get the type of the plain view of any given type T (where defined). Moreover, as a convention C\+U\+G\+AR\textquotesingle{}s data structures T define the subtype T\+::plain\+\_\+view\+\_\+type and T\+::const\+\_\+plain\+\_\+view\+\_\+type to identify their plain view types. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+As an example consider the following situation, where on the host you have created a large device vector you want to be filled by a device kernel. Ideally, you\textquotesingle{}d want to simply pass a reference to the vector to your kernel, as in\+: 
+\begin{DoxyCode}
+\_\_global\_\_ \textcolor{keywordtype}{void} my\_kernel(                   \textcolor{comment}{// the CUDA kernel}
+    \hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint32>}& vec)   \textcolor{comment}{// ideally, receive a
+       reference: doesn't work without UVM!}
+\{
+    \textcolor{keyword}{const} uint32 tid = threadIdx.x + blockIdx.x * blockDim.x; \textcolor{comment}{// compute a linear thread id}
+    \textcolor{keywordflow}{if} (tid < vec.size())
+        vec[tid] = tid * 10;
+\}
+
+\textcolor{keywordtype}{int} main()
+\{
+    \hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint32>} vec( 1000000 );
+
+    \textcolor{keyword}{const} uint32 blockdim = 128;
+    \textcolor{keyword}{const} uint32 n\_blocks = \hyperlink{group___basic_utils_gabb6714186dbbd864f0a9298944ba509b}{util::divide\_ri}( vec.size(), blockdim ); 
+    my\_kernel<<<n\_blocks,blockdim>>>( vec );
+\}
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+With U\+V\+M-\/capable G\+P\+Us this is technically possible, though it requires page migration. With C\+U\+G\+AR, you can do this instead\+: 
+\begin{DoxyCode}
+\_\_global\_\_ \textcolor{keywordtype}{void} my\_kernel(                   \textcolor{comment}{// the CUDA kernel}
+    \hyperlink{structcugar_1_1vector__view}{cugar::vector\_view<uint32>} vec)          \textcolor{comment}{// CUGAR's surrogate of a reference}
+\{
+    \textcolor{keyword}{const} uint32 tid = threadIdx.x + blockIdx.x * blockDim.x; \textcolor{comment}{// compute a linear thread id}
+    \textcolor{keywordflow}{if} (tid < vec.\hyperlink{structcugar_1_1vector__view_a773841d0e535b07e40a99891e22d937e}{size}())
+        vec[tid] = tid * 10;
+\}
+
+\textcolor{keywordtype}{int} main()
+\{
+    \hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint32>} vec( 1000000 );
+
+    \textcolor{keyword}{const} uint32 blockdim = 128;
+    \textcolor{keyword}{const} uint32 n\_blocks = \hyperlink{group___basic_utils_gabb6714186dbbd864f0a9298944ba509b}{util::divide\_ri}( vec.\hyperlink{structcugar_1_1vector__view_a773841d0e535b07e40a99891e22d937e}{size}(), blockdim );
+    my\_kernel<<<n\_blocks,blockdim>>>( \hyperlink{namespacecugar_a347f91de482f0cb8dcba21c086b0aa46}{cugar::plain\_view}( vec ) );
+\}
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+This basic pattern can be applied to all of C\+U\+G\+AR\textquotesingle{}s data structures that are meant to be setup from the host and accessed from the device.
+\end{DoxyParagraph}
+Next\+: hello\+\_\+cugar\+\_\+page \hypertarget{basic_page}{}\section{Basic Module}\label{basic_page}
+
+
+The {\bfseries basic} module includes general purpose data-\/structures and functionality which are not directly related to bioinformatics but can be useful for implementing all kinds of host and device algorithms. It includes the following submodules\+:\hypertarget{basic_page_ThreadingAndTiming}{}\subsection{Threading \& Timing}\label{basic_page_ThreadingAndTiming}
+
+\begin{DoxyItemize}
+\item \hyperlink{atomics_page}{Atomics}
+\item \hyperlink{threads_page}{Threads}
+\item \hyperlink{timing_page}{Timing} 
+\end{DoxyItemize}\hypertarget{basic_page_DataStructures}{}\subsection{Data Structures}\label{basic_page_DataStructures}
+
+\begin{DoxyItemize}
+\item \hyperlink{vectors_page}{Vectors}
+\item \hyperlink{vector_views_page}{Vector Views} 
+\end{DoxyItemize}\hypertarget{basic_page_Miscellaneous}{}\subsection{Miscellaneous}\label{basic_page_Miscellaneous}
+
+\begin{DoxyItemize}
+\item \hyperlink{algorithms_page}{Algorithms}
+\item \hyperlink{iterators_page}{Iterators}
+\item \hyperlink{primitives_page}{Parallel Primitives}
+\item \hyperlink{sorting_page}{Sorting}
+\item \hyperlink{utilities_page}{Utilities} 
+\end{DoxyItemize}\hypertarget{atomics_page}{}\subsection{Atomics}\label{atomics_page}
+\begin{DoxyParagraph}{}
+This \hyperlink{group___atomics}{module} implements basic host/device atomics.
+\end{DoxyParagraph}
+
+\begin{DoxyItemize}
+\item float \hyperlink{group___atomics_ga0c9d949be7ac5b6f27a232c7cd27a05c}{atomic\+\_\+add(float$\ast$ value, const float op)}
+\item int32 \hyperlink{group___atomics_ga584797bd163a76c90bf0fb5c7df58de4}{atomic\+\_\+add(int32$\ast$ value, const int32 op)}
+\item uint32 \hyperlink{group___atomics_ga130aea0c6d0c91af08bea4b52d6a8208}{atomic\+\_\+add(uint32$\ast$ value, const uint32 op)}
+\item uint64 \hyperlink{group___atomics_gaed434d4f310d826a6e39932269de15c4}{atomic\+\_\+add(uint64$\ast$ value, const uint64 op)}
+\item int32 \hyperlink{group___atomics_ga3efc1d5c63f30d1ee11887f76744bafe}{atomic\+\_\+sub(int32$\ast$ value, const int32 op)}
+\item uint32 \hyperlink{group___atomics_ga9d9415fae4e05362c8d6f43d2fd61c60}{atomic\+\_\+sub(uint32$\ast$ value, const uint32 op)}
+\item int32 \hyperlink{group___atomics_ga3034bbde9594dc3c4894fe31ad5a0b3c}{atomic\+\_\+increment(int32$\ast$ value)}
+\item int64 \hyperlink{group___atomics_ga57595e5240e01e562a47816a82e14dd2}{atomic\+\_\+increment(int64$\ast$ value)}
+\item int32 \hyperlink{group___atomics_ga60cd477d17c1ff78aa673ce06b60b569}{atomic\+\_\+decrement(int32$\ast$ value)}
+\item int64 \hyperlink{group___atomics_gae94ecfb92e8d261326f527daa39c770d}{atomic\+\_\+decrement(int64$\ast$ value)}
+\item uint32 \hyperlink{group___atomics_ga4b242819dd9c2a9986e0ea35b4883f67}{atomic\+\_\+or(uint32$\ast$ value, const uint32 op)}
+\item uint64 \hyperlink{group___atomics_ga5d15edb3c64f3cde839eb76c54aacf7c}{atomic\+\_\+or(uint64$\ast$ value, const uint64 op)} 
+\end{DoxyItemize}\hypertarget{threads_page}{}\subsection{Threads}\label{threads_page}
+This module implements basic host thread, synchronization and work-\/queue objects\+:
+
+
+\begin{DoxyItemize}
+\item \hyperlink{classcugar_1_1_thread}{Thread}
+\item \hyperlink{classcugar_1_1_mutex}{Mutex}
+\item \hyperlink{classcugar_1_1_scoped_lock}{Scoped\+Lock}
+\item \hyperlink{classcugar_1_1_work_queue}{Work\+Queue}
+\item Pipeline 
+\end{DoxyItemize}\hypertarget{timing_page}{}\subsection{Timing}\label{timing_page}
+This \hyperlink{group___timers_module}{module} implements basic some timers and timing-\/related functionality\+:
+
+
+\begin{DoxyItemize}
+\item \hyperlink{structcugar_1_1_timer}{Timer}
+\item \hyperlink{structcugar_1_1_fake_timer}{Fake\+Timer}
+\item \hyperlink{structcugar_1_1_time_series}{Time\+Series} 
+\end{DoxyItemize}\hypertarget{vectors_page}{}\subsection{Vectors}\label{vectors_page}
+This module implements host \& device vectors
+
+
+\begin{DoxyItemize}
+\item vector
+\item \hyperlink{structcugar_1_1host__vector}{host\+\_\+vector}
+\item \hyperlink{structcugar_1_1device__vector}{device\+\_\+vector}
+\item \hyperlink{structcugar_1_1caching__device__vector}{caching\+\_\+device\+\_\+vector}
+\end{DoxyItemize}\hypertarget{vectors_page_VectorsExampleSection}{}\subsubsection{Example}\label{vectors_page_VectorsExampleSection}
+
+\begin{DoxyCode}
+\textcolor{comment}{// build a host vector and copy it to the device}
+\hyperlink{structcugar_1_1vector}{cugar::vector<host\_tag,uint32>} h\_vector;
+\hyperlink{structcugar_1_1vector}{cugar::vector<host\_tag,uint32>} d\_vector;
+
+h\_vector.push\_back(3u);
+d\_vector = h\_vector;
+\end{DoxyCode}
+ \hypertarget{vector_views_page}{}\subsection{Vector Views}\label{vector_views_page}
+This module implements a vector adaptor, which allows to create an \char`\"{}std\+::vector\char`\"{}-\/like container on top of a base iterator.
+
+
+\begin{DoxyItemize}
+\item \hyperlink{structcugar_1_1vector__view}{vector\+\_\+view}
+\end{DoxyItemize}\hypertarget{vector_views_page_VectorViewExampleSection}{}\subsubsection{Example}\label{vector_views_page_VectorViewExampleSection}
+
+\begin{DoxyCode}
+\textcolor{comment}{// build a vector\_view out of a static array}
+\textcolor{keyword}{typedef} vector\_view<uint32*> vector\_type;
+
+uint32 storage[16];
+
+vector\_type vector( 0, storage );
+
+\textcolor{comment}{// use push\_back()}
+vector.push\_back( 3 );
+vector.push\_back( 7 );
+vector.push\_back( 11 );
+
+\textcolor{comment}{// use resize()}
+vector.resize( 4 );
+
+\textcolor{comment}{// use the indexing operator[]}
+vector[3] = 8;
+
+\textcolor{comment}{// use the begin() / end() iterators}
+std::sort( vector.begin(), vector.end() );
+
+\textcolor{comment}{// use front() and back()}
+printf(\textcolor{stringliteral}{"(%u, %u)\(\backslash\)n"});                       \textcolor{comment}{// -> (3,11)}
+\end{DoxyCode}
+ \hypertarget{algorithms_page}{}\subsection{Algorithms}\label{algorithms_page}
+C\+U\+G\+AR provides a few basic algorithms which can be called either from the host or the device\+:
+
+
+\begin{DoxyItemize}
+\item \hyperlink{group___algorithms_module_gaf5c0f35d93fa8af4939155b21c7e2a4f}{find\+\_\+pivot()}
+\item \hyperlink{group___algorithms_module_gab5ce2c7f834a31bc40d9101865dec5d1}{lower\+\_\+bound()}
+\item \hyperlink{group___algorithms_module_gafe7ee3a93350b3d2f7f7bb6266ee0425}{upper\+\_\+bound()}
+\item \hyperlink{group___algorithms_module_gae6ef81c9ca1cd3976caad12299e37452}{merge()}
+\item \hyperlink{group___algorithms_module_ga267a2752f3e81f521e759ec274b80561}{merge\+\_\+by\+\_\+key()} 
+\end{DoxyItemize}\hypertarget{iterators_page}{}\subsection{Iterators}\label{iterators_page}
+C\+U\+G\+AR provides a few adaptable iterator classes which can be used to construct different views on top of some underlying iterator\+:
+
+
+\begin{DoxyItemize}
+\item \hyperlink{structcugar_1_1strided__iterator}{strided\+\_\+iterator}
+\item \hyperlink{structcugar_1_1block__strided__iterator}{block\+\_\+strided\+\_\+iterator}
+\item transform\+\_\+iterator
+\item index\+\_\+transform\+\_\+iterator
+\item cached\+\_\+iterator
+\item const\+\_\+cached\+\_\+iterator 
+\end{DoxyItemize}\hypertarget{primitives_page}{}\subsection{Parallel Primitives}\label{primitives_page}
+This module provides a set of system-\/wide parallel primitives. The backend system is specified at compile-\/time by a \hyperlink{group___system_tags}{system\+\_\+tag}. All temporary storage is allocated within a single \hyperlink{structcugar_1_1vector}{cugar\+::vector} passed by the user, which can be safely reused across function calls.
+
+
+\begin{DoxyItemize}
+\item \hyperlink{group___primitives_ga71416af3e5407b31c78a10026520dbed}{cugar\+::any()}
+\item \hyperlink{group___primitives_gaa98aa06ec6a5f38dda15d74ce0c47d57}{cugar\+::all()}
+\item \hyperlink{group___primitives_gaec6f4aab196d418865686901c11a093c}{cugar\+::is\+\_\+sorted()}
+\item \hyperlink{group___primitives_ga5e6eb75d00ed617295bcee0b1db0ee3e}{cugar\+::is\+\_\+segment\+\_\+sorted()}
+\item \hyperlink{group___primitives_ga1e40de6d157d7b833f31f13a26a3bd04}{cugar\+::for\+\_\+each()}
+\item \hyperlink{structcugar_1_1for__each__enactor}{cugar\+::for\+\_\+each\+\_\+enactor}
+\item \hyperlink{group___primitives_gab584ee91ed39f9b1fec5aa0e7a0284a4}{cugar\+::transform()}
+\item \hyperlink{group___primitives_gab8f49b135164aaef1fb6b51b90874915}{cugar\+::reduce()}
+\item \hyperlink{group___primitives_ga6c5ea5be5565ce7aa2c99b3e602a7cb7}{cugar\+::inclusive\+\_\+scan()}
+\item \hyperlink{group___primitives_ga1394066fd7b6215bcae781ca56cae872}{cugar\+::exclusive\+\_\+scan()}
+\item \hyperlink{group___primitives_gaafc4aac8b44cf750c98a3a97fe72e5c6}{cugar\+::copy\+\_\+flagged()}
+\item \hyperlink{group___primitives_ga536856eaa09125bec01892d565a49f8e}{cugar\+::copy\+\_\+if()}
+\item \hyperlink{group___primitives_gae48c0c95572ea1dd13ec562eed6e2755}{cugar\+::runlength\+\_\+encode()}
+\item \hyperlink{group___algorithms_module_gafe7ee3a93350b3d2f7f7bb6266ee0425}{cugar\+::upper\+\_\+bound()}
+\item \hyperlink{group___algorithms_module_gab5ce2c7f834a31bc40d9101865dec5d1}{cugar\+::lower\+\_\+bound()}
+\item \hyperlink{group___primitives_gac4584fb9407d3d12ff3a4a1890e9b903}{cugar\+::radix\+\_\+sort()}
+\item \hyperlink{group___algorithms_module_ga267a2752f3e81f521e759ec274b80561}{cugar\+::merge\+\_\+by\+\_\+key()}
+\end{DoxyItemize}
+
+\begin{DoxyParagraph}{}
+The complete list can be found in the \hyperlink{group___primitives}{Parallel Primitives} module documentation. 
+\end{DoxyParagraph}
+\hypertarget{sorting_page}{}\subsection{Sorting}\label{sorting_page}
+\begin{DoxyParagraph}{}
+The \hyperlink{structcugar_1_1cuda_1_1_sort_enactor}{Sort\+Enactor} provides a convenient wrapper around the fastest C\+U\+DA sorting library available, allowing to perform both key-\/only and key-\/value pair sorting of arrays with the following data-\/types\+: 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+
+\begin{DoxyItemize}
+\item uint8
+\item uint16
+\item uint32
+\item uint64
+\item (uint8,uint32)
+\item (uint16,uint32)
+\item (uint32,uint32)
+\item (uint64,uint32) 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The way most parallel sorting algorithms work require having a set of ping-\/pong buffers that are exchanged at every pass through the data. In order to do this, and communicate where the sorted data lies after its work, \hyperlink{structcugar_1_1cuda_1_1_sort_enactor}{Sort\+Enactor} employs an auxiliary class, \hyperlink{structcugar_1_1cuda_1_1_sort_buffers}{Sort\+Buffers}. The following example shows their combined usage.
+\end{DoxyParagraph}
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{void} sort\_test(\textcolor{keyword}{const} uint32 n, uint32* h\_keys, uint32* h\_data)
+\{
+    \textcolor{comment}{// allocate twice as much storage as the input to accomodate for ping-pong buffers}
+    \hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint32>} d\_keys( n * 2 );
+    \hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint32>} d\_data( n * 2 );
+
+    \textcolor{comment}{// copy the test data to the host}
+    thrust::copy( h\_keys, h\_keys + n, d\_keys.begin() );
+    thrust::copy( h\_data, h\_data + n, d\_data.begin() );
+
+    \textcolor{comment}{// prepare the sorting buffers}
+    cuda::SortBuffers<uint32*,uint32*> sort\_buffers;
+    sort\_buffers.keys[0] = \hyperlink{namespacecugar_a3f6cb2c817f2ba065931cec569aa848b}{raw\_pointer}( d\_keys );
+    sort\_buffers.keys[1] = \hyperlink{namespacecugar_a3f6cb2c817f2ba065931cec569aa848b}{raw\_pointer}( d\_keys ) + n;
+    sort\_buffers.data[0] = \hyperlink{namespacecugar_a3f6cb2c817f2ba065931cec569aa848b}{raw\_pointer}( d\_data );
+    sort\_buffers.data[1] = \hyperlink{namespacecugar_a3f6cb2c817f2ba065931cec569aa848b}{raw\_pointer}( d\_data ) + n;
+
+    \textcolor{comment}{// and sort the data}
+    cuda::SortEnactor sort\_enactor;
+    sort\_enactor.sort( n, sort\_buffers );
+
+    \textcolor{comment}{// the sorted device data is now in here:}
+    uint32* d\_sorted\_keys = sort\_buffers.current\_keys();
+    uint32* d\_sorted\_data = sort\_buffers.current\_values();
+    ...
+\}
+\end{DoxyCode}
+ \hypertarget{utilities_page}{}\subsection{Utilities}\label{utilities_page}
+C\+U\+G\+AR contains various convenience functions and functors needed for every day\textquotesingle{}s work\+:
+
+
+\begin{DoxyItemize}
+\item \hyperlink{group___basic_utils}{Utilities}
+\item \hyperlink{group___basic_functors}{Basic Functors Module}
+\item \hyperlink{group___basic_meta_functions}{Meta Functions} 
+\end{DoxyItemize}\hypertarget{bits_page}{}\section{Bits Module}\label{bits_page}
+This \hyperlink{group___bits_module}{module} implements various bit-\/manipulation functions and bit-\/mask data-\/structures
+
+
+\begin{DoxyItemize}
+\item \hyperlink{group___bits_module_ga6494ab687521f35e3e28dc1524d15218}{cugar\+::morton\+\_\+code}
+\item \hyperlink{group___bits_module_ga88a87094ba5547f8896d8947adfdec58}{cugar\+::popc}
+\item \hyperlink{group___bits_module_ga4bc7fb7acba5b770553c58bfae69f5af}{cugar\+::popc4}
+\item \hyperlink{group___bits_module_ga68f09d26fa95c119a5263f856365db42}{cugar\+::ffs}
+\item \hyperlink{group___bits_module_gad2be8d91a93a10a6a9601f4f89bf752b}{cugar\+::lzc}
+\item \hyperlink{group___bits_module_ga7f02d582847e11ea8454216ad36dc77b}{cugar\+::find\+\_\+nthbit4}
+\item \hyperlink{group___bits_module_ga38b135612da4fe8202152a56dc9b9508}{cugar\+::find\+\_\+nthbit8}
+\item \hyperlink{structcugar_1_1_bitmask}{cugar\+::\+Bitmask} 
+\end{DoxyItemize}\hypertarget{linalg_page}{}\section{Linear Algebra Module}\label{linalg_page}
+This \hyperlink{group___linalg_module}{module} implements various linear-\/algebra classes and functions
+
+
+\begin{DoxyItemize}
+\item \hyperlink{structcugar_1_1_vector}{Vector}
+\item \hyperlink{structcugar_1_1_matrix}{Matrix}
+\item \hyperlink{structcugar_1_1_bbox}{Bbox} 
+\end{DoxyItemize}\hypertarget{bintree_page}{}\section{Binary Trees Module}\label{bintree_page}
+This \hyperlink{group__bintree}{module} implements binary tree concepts, such as node representations and visitor patterns.
+
+
+\begin{DoxyItemize}
+\item \hyperlink{structcugar_1_1_bintree__node}{Bintree\+\_\+node}
+\item \hyperlink{structcugar_1_1_bintree__visitor}{Bintree\+\_\+visitor}
+\item \hyperlink{structcugar_1_1_bintree__writer}{Bintree\+\_\+writer}
+\end{DoxyItemize}
+
+It also contains a submodule for the construction of radix trees\+: \hyperlink{radixtree_page}{Radix Trees Module} \hypertarget{radixtree_page}{}\subsection{Radix Trees Module}\label{radixtree_page}
+This \hyperlink{group__radixtree}{module} provides functions to build radix trees on top of sorted integer sequences. In practice, if the integers are seen as Morton codes of spatial points, the algorithms generate a middle-\/split k-\/d tree.
+
+The following code snippet shows an example of how to use such builders\+:
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <cugar/bintree/cuda/bintree\_gen.h>}
+\textcolor{preprocessor}{#include <cugar/bintree/cuda/bintree\_context.h>}
+\textcolor{preprocessor}{#include <\hyperlink{morton_8h}{cugar/bits/morton.h}>}
+
+\textcolor{keyword}{typedef} Bintree\_node<leaf\_index\_tag> node\_type;
+
+\textcolor{keyword}{const} uint32 n\_points = 1000000;
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,Vecto3f>} points( n\_points );
+... \textcolor{comment}{// generate a bunch of points here}
+
+\textcolor{comment}{// compute their Morton codes}
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint32>} codes( n\_points );
+\hyperlink{group___primitives_gab584ee91ed39f9b1fec5aa0e7a0284a4}{thrust::transform}(
+    points.begin(),
+    points.begin() + n\_points,
+    codes.begin(),
+    morton\_functor<uint32,3>() );
+
+\textcolor{comment}{// sort them}
+thrust::sort( codes.begin(), codes.end() );
+
+\textcolor{comment}{// allocate storage for a binary tree...}
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,node\_type>} nodes;
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint2>}     leaves;
+
+\textcolor{comment}{// build a tree writer}
+Bintree\_writer<node\_type, device\_tag> tree\_writer( nodes, leaves );
+
+\textcolor{comment}{// ...and generate it!}
+\hyperlink{group__radixtree_gafb888a81f085548c89a282181d74649a}{cuda::generate\_radix\_tree}(
+    n\_points,
+    thrust::raw\_pointer\_cast( &codes.front() ),
+    30u,
+    16u,
+    \textcolor{keyword}{false},
+    \textcolor{keyword}{true},
+    tree\_writer );
+\end{DoxyCode}
+ \hypertarget{radixtree_page}{}\section{Radix Trees Module}\label{radixtree_page}
+This \hyperlink{group__radixtree}{module} provides functions to build radix trees on top of sorted integer sequences. In practice, if the integers are seen as Morton codes of spatial points, the algorithms generate a middle-\/split k-\/d tree.
+
+The following code snippet shows an example of how to use such builders\+:
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <cugar/bintree/cuda/bintree\_gen.h>}
+\textcolor{preprocessor}{#include <cugar/bintree/cuda/bintree\_context.h>}
+\textcolor{preprocessor}{#include <\hyperlink{morton_8h}{cugar/bits/morton.h}>}
+
+\textcolor{keyword}{typedef} Bintree\_node<leaf\_index\_tag> node\_type;
+
+\textcolor{keyword}{const} uint32 n\_points = 1000000;
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,Vecto3f>} points( n\_points );
+... \textcolor{comment}{// generate a bunch of points here}
+
+\textcolor{comment}{// compute their Morton codes}
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint32>} codes( n\_points );
+\hyperlink{group___primitives_gab584ee91ed39f9b1fec5aa0e7a0284a4}{thrust::transform}(
+    points.begin(),
+    points.begin() + n\_points,
+    codes.begin(),
+    morton\_functor<uint32,3>() );
+
+\textcolor{comment}{// sort them}
+thrust::sort( codes.begin(), codes.end() );
+
+\textcolor{comment}{// allocate storage for a binary tree...}
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,node\_type>} nodes;
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint2>}     leaves;
+
+\textcolor{comment}{// build a tree writer}
+Bintree\_writer<node\_type, device\_tag> tree\_writer( nodes, leaves );
+
+\textcolor{comment}{// ...and generate it!}
+\hyperlink{group__radixtree_gafb888a81f085548c89a282181d74649a}{cuda::generate\_radix\_tree}(
+    n\_points,
+    thrust::raw\_pointer\_cast( &codes.front() ),
+    30u,
+    16u,
+    \textcolor{keyword}{false},
+    \textcolor{keyword}{true},
+    tree\_writer );
+\end{DoxyCode}
+ \hypertarget{bvh_page}{}\section{B\+VH Module}\label{bvh_page}
+\begin{DoxyParagraph}{}
+This \hyperlink{group__bvh}{module} implements data-\/structures and functions to store, build and manipulate B\+V\+Hs.
+\end{DoxyParagraph}
+
+\begin{DoxyItemize}
+\item \hyperlink{structcugar_1_1_bvh__node}{Bvh\+\_\+node}
+\item \hyperlink{structcugar_1_1_bvh__node__3d}{Bvh\+\_\+node\+\_\+3d}
+\item \hyperlink{structcugar_1_1_bvh}{Bvh}
+\item \hyperlink{classcugar_1_1_bvh__builder}{Bvh\+\_\+builder}
+\item \hyperlink{classcugar_1_1_bvh__sah__builder}{Bvh\+\_\+sah\+\_\+builder}
+\item \hyperlink{structcugar_1_1cuda_1_1_l_b_v_h__builder}{cuda\+::\+L\+B\+V\+H\+\_\+builder}
+\end{DoxyItemize}
+
+\begin{DoxyParagraph}{}
+As an example, consider the following code to create an L\+B\+VH tree over a set of points, in parallel, on the device\+: 
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <\hyperlink{lbvh__builder_8h}{cugar/bvh/cuda/lbvh\_builder.h}>}
+
+thrust::device\_vector<Vector3f> points;
+... \textcolor{comment}{// code to fill the input vector of points}
+
+thrust::device\_vector<Bvh\_node> bvh\_nodes;
+thrust::device\_vector<uint32>   bvh\_index;
+
+\hyperlink{structcugar_1_1cuda_1_1_l_b_v_h__builder}{cugar::cuda::LBVH\_builder<uint64>} builder( &bvh\_nodes, &bvh\_index );
+builder.build(
+    Bbox3f( Vector3f(0.0f), Vector3f(1.0f) ),   \textcolor{comment}{// suppose all bboxes are in [0,1]^3}
+    points.begin(),                             \textcolor{comment}{// begin iterator}
+    points.end(),                               \textcolor{comment}{// end iterator}
+    4 );                                        \textcolor{comment}{// target 4 objects per leaf}
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\hypertarget{kd_page}{}\section{K-\/d Trees Module}\label{kd_page}
+\begin{DoxyParagraph}{}
+This \hyperlink{group__kdtree}{module} implements data-\/structures and functions to store, build and manipulate K-\/d trees.
+\end{DoxyParagraph}
+
+\begin{DoxyItemize}
+\item \hyperlink{structcugar_1_1_kd__node}{Kd\+\_\+node}
+\item \hyperlink{structcugar_1_1cuda_1_1_kd__builder}{cugar\+::cuda\+::\+Kd\+\_\+builder}
+\end{DoxyItemize}
+
+\begin{DoxyParagraph}{}
+as well as a submodule for K-\/\+NN lookups\+: \hyperlink{group__knn}{k-\/\+Nearest Neighbors}. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+As an example, consider the following code to create a K-\/d tree on a set of points, in parallel, on the device\+: 
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <\hyperlink{kd__builder_8h}{cugar/kd/cuda/kd\_builder.h}>}
+\textcolor{preprocessor}{#include <\hyperlink{kd__context_8h}{cugar/kd/cuda/kd\_context.h}>}
+
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,Vector3f>} kd\_points;
+... \textcolor{comment}{// code to fill the input vector of points}
+
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,Kd\_node>}  kd\_nodes;
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint2>}    kd\_leaves;
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint32>}   kd\_index;
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint2>}    kd\_ranges;
+
+\hyperlink{structcugar_1_1cuda_1_1_kd__builder}{cugar::cuda::Kd\_builder<uint64>} builder( kd\_index );
+\hyperlink{structcugar_1_1cuda_1_1_kd__context}{cugar::cuda::Kd\_context} kd\_tree( &kd\_nodes, &kd\_leaves, &kd\_ranges );
+builder.build(
+    kd\_tree,                                    \textcolor{comment}{// output tree}
+    kd\_index,                                   \textcolor{comment}{// output index}
+    Bbox3f( Vector3f(0.0f), Vector3f(1.0f) ),   \textcolor{comment}{// suppose all bboxes are in [0,1]^3}
+    kd\_points.begin(),                          \textcolor{comment}{// begin iterator}
+    kd\_points.end(),                            \textcolor{comment}{// end iterator}
+    4 );                                        \textcolor{comment}{// target 4 objects per leaf}
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The following k-\/\+NN example shows how to perform k-\/\+NN lookups on such a tree\+: 
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <cugar/kd/cuda/kd\_knn.h>}
+
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,Vector4f>} query\_points;
+... \textcolor{comment}{// code to build the k-d tree and query points here...}
+    \textcolor{comment}{// NOTE: even though we're doing 3-dimensional queries,}
+    \textcolor{comment}{// we can use Vector4f arrays for better coalescing}
+
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,cuda::Kd\_knn<3>::Result}> results( 
+      query\_points.size() );
+
+\hyperlink{structcugar_1_1cuda_1_1_kd__knn}{cugar::cuda::Kd\_knn<3>} knn;
+knn.run(
+    query\_points.begin(),
+    query\_points.end(),
+    \hyperlink{namespacecugar_a3f6cb2c817f2ba065931cec569aa848b}{raw\_pointer}(kd\_nodes),
+    \hyperlink{namespacecugar_a3f6cb2c817f2ba065931cec569aa848b}{raw\_pointer}(kd\_ranges),
+    \hyperlink{namespacecugar_a3f6cb2c817f2ba065931cec569aa848b}{raw\_pointer}(kd\_leaves),
+    \hyperlink{namespacecugar_a3f6cb2c817f2ba065931cec569aa848b}{raw\_pointer}(kd\_points),
+    \hyperlink{namespacecugar_a3f6cb2c817f2ba065931cec569aa848b}{raw\_pointer}(results) );
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\hypertarget{bsdf_page}{}\section{B\+S\+DF Module}\label{bsdf_page}
+This \hyperlink{group___b_s_d_f_module}{module} provides several B\+S\+DF and E\+DF implementations.
+
+
+\begin{DoxyItemize}
+\item \hyperlink{structcugar_1_1_lambert_bsdf}{Lambert\+Bsdf}
+\item \hyperlink{structcugar_1_1_lambert_trans_bsdf}{Lambert\+Trans\+Bsdf}
+\item \hyperlink{structcugar_1_1_g_g_x_bsdf}{G\+G\+X\+Bsdf}
+\item \hyperlink{structcugar_1_1_g_g_x_smith_bsdf}{G\+G\+X\+Smith\+Bsdf}
+\item \hyperlink{structcugar_1_1_l_t_c_bsdf}{L\+T\+C\+Bsdf}
+\item \hyperlink{structcugar_1_1_lambert_edf}{Lambert\+Edf} 
+\end{DoxyItemize}\hypertarget{sampling_page}{}\section{Sampling Module}\label{sampling_page}
+\begin{DoxyParagraph}{}
+This \hyperlink{group__sampling}{module} provides all types of sampling constructs, including sampling sequences, distributions, and stochastic processes.
+\end{DoxyParagraph}
+
+\begin{DoxyItemize}
+\item \hyperlink{structcugar_1_1_i_random}{I\+Random}
+\item \hyperlink{structcugar_1_1_random}{Random}
+\item \hyperlink{group___l_f_s_r_module}{Linear-\/\+Feedback Shift Register Generators}
+\item \hyperlink{group__distributions}{Distributions}
+\item \hyperlink{group__processes}{Stochastic Processes}
+\item \hyperlink{group__multijitter}{Multi-\/\+Jittering}
+\item \hyperlink{group__cp__rotations}{Cranley-\/\+Patterson Rotations}
+\item \hyperlink{group___expectation_maximization_module}{Expectation-\/\+Maximization} 
+\end{DoxyItemize}\hypertarget{spherical_page}{}\section{Spherical Functions Module}\label{spherical_page}
+\begin{DoxyParagraph}{}
+This \hyperlink{group__spherical__functions}{module} provides several constructs to evaluate and manipulate various types of spherical functions and mappings\+:
+\end{DoxyParagraph}
+
+\begin{DoxyItemize}
+\item \hyperlink{group__spherical__harmonics}{Spherical and Zonal Harmonics}
+\item \hyperlink{group__octahedral__functions}{Octahedral Functions}
+\item \hyperlink{group__spherical__mappings}{Spherical Mappings} 
+\end{DoxyItemize}

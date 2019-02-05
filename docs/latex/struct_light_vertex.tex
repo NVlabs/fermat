@@ -1,0 +1,114 @@
+\hypertarget{struct_light_vertex}{}\section{Light\+Vertex Struct Reference}
+\label{struct_light_vertex}\index{Light\+Vertex@{Light\+Vertex}}
+
+
+\subsection{Detailed description}
+\begin{DoxyParagraph}{}
+A utility class to encapsulate all important information for a light subpath vertex 
+\end{DoxyParagraph}
+
+
+{\ttfamily \#include $<$bpt\+\_\+utils.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_light_vertex_a29e68f91cafe19c7f84cb8781c1b4ca8}\label{struct_light_vertex_a29e68f91cafe19c7f84cb8781c1b4ca8}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void {\bfseries setup} (const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector4f} \&\+\_\+pos, const uint2 \&\+\_\+packed\+\_\+info1, const uint4 \&\+\_\+packed\+\_\+info2, const \hyperlink{struct_path_weights}{Path\+Weights} \&\+\_\+weights, const uint32 \+\_\+depth, const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer)
+\item 
+\mbox{\Hypertarget{struct_light_vertex_a22ac8565e0127206de026c6dd405279f}\label{struct_light_vertex_a22ac8565e0127206de026c6dd405279f}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void {\bfseries setup} (const \hyperlink{struct_ray}{Ray} \&ray, const \hyperlink{struct_hit}{Hit} \&hit, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&\+\_\+alpha, const \hyperlink{struct_path_weights}{Path\+Weights} \&\+\_\+weights, const uint32 \+\_\+depth, const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer)
+\item 
+\mbox{\Hypertarget{struct_light_vertex_a440fe1427988cbf9547738776cccd582}\label{struct_light_vertex_a440fe1427988cbf9547738776cccd582}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void {\bfseries setup} (const \hyperlink{struct_ray}{Ray} \&ray, const \hyperlink{struct_hit}{Hit} \&hit, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&\+\_\+alpha, const \hyperlink{struct_temp_path_weights}{Temp\+Path\+Weights} \&\+\_\+weights, const uint32 \+\_\+depth, const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer)
+\item 
+\mbox{\Hypertarget{struct_light_vertex_adc19dba9e6283b4c0da2eec3237c914a}\label{struct_light_vertex_adc19dba9e6283b4c0da2eec3237c914a}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void {\bfseries setup} (const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&\+\_\+in, const \hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id} \&\+\_\+v, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&\+\_\+alpha, const \hyperlink{struct_temp_path_weights}{Temp\+Path\+Weights} \&\+\_\+weights, const uint32 \+\_\+depth, const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer)
+\item 
+\mbox{\Hypertarget{struct_light_vertex_a3fc35df12e7a88367b66c7b7020914a0}\label{struct_light_vertex_a3fc35df12e7a88367b66c7b7020914a0}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries Light\+Vertex} (const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector4f} \&\+\_\+pos, const uint2 \&\+\_\+packed\+\_\+info1, const uint4 \&\+\_\+packed\+\_\+info2, const \hyperlink{struct_path_weights}{Path\+Weights} \&\+\_\+weights, const uint32 \+\_\+depth, const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer)
+\item 
+\mbox{\Hypertarget{struct_light_vertex_a0cf76cff35be4e3d76d52c9d0b3b1d00}\label{struct_light_vertex_a0cf76cff35be4e3d76d52c9d0b3b1d00}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries Light\+Vertex} (const \hyperlink{struct_ray}{Ray} \&\+\_\+ray, const \hyperlink{struct_hit}{Hit} \&\+\_\+hit, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&\+\_\+alpha, const \hyperlink{struct_temp_path_weights}{Temp\+Path\+Weights} \&\+\_\+weights, const uint32 \+\_\+depth, const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer)
+\item 
+\mbox{\Hypertarget{struct_light_vertex_a2390fe15e94a34cd60db50e6b6cae0d1}\label{struct_light_vertex_a2390fe15e94a34cd60db50e6b6cae0d1}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries Light\+Vertex} (const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&\+\_\+in, const \hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id} \&\+\_\+v, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&\+\_\+alpha, const \hyperlink{struct_temp_path_weights}{Temp\+Path\+Weights} \&\+\_\+weights, const uint32 \+\_\+depth, const \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool \hyperlink{struct_light_vertex_a2e6fa24feb3e233f487b6a33ea5ed622}{sample} (const float z\mbox{[}3\mbox{]}, \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type} \&out\+\_\+comp, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&out, float \&out\+\_\+p, float \&out\+\_\+p\+\_\+proj, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&out\+\_\+g, bool RR=true, bool evaluate\+\_\+full\+\_\+bsdf=false, const \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type} components=Bsdf\+::k\+All\+Components) const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_light_vertex_a7cb7ba2aa0851dd91497dda73a68390d}\label{struct_light_vertex_a7cb7ba2aa0851dd91497dda73a68390d}} 
+\hyperlink{struct_vertex_geometry_id}{Vertex\+Geometry\+Id} {\bfseries geom\+\_\+id}
+\item 
+\mbox{\Hypertarget{struct_light_vertex_a2badf795ce56f304376164b0cf84e534}\label{struct_light_vertex_a2badf795ce56f304376164b0cf84e534}} 
+\hyperlink{struct_vertex_geometry}{Vertex\+Geometry} {\bfseries geom}
+\item 
+\mbox{\Hypertarget{struct_light_vertex_a822872fa560e80c7c1b6dd12ca652c91}\label{struct_light_vertex_a822872fa560e80c7c1b6dd12ca652c91}} 
+\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} {\bfseries in}
+\item 
+\mbox{\Hypertarget{struct_light_vertex_a4eefd4050f8485574d7c00af73c97bf1}\label{struct_light_vertex_a4eefd4050f8485574d7c00af73c97bf1}} 
+\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} {\bfseries alpha}
+\item 
+\mbox{\Hypertarget{struct_light_vertex_a64bfd20f3d423363c90d5e34cb85c2d1}\label{struct_light_vertex_a64bfd20f3d423363c90d5e34cb85c2d1}} 
+\hyperlink{struct_path_weights}{Path\+Weights} {\bfseries weights}
+\item 
+\mbox{\Hypertarget{struct_light_vertex_a7086aa711d49b5c135d990ec27899396}\label{struct_light_vertex_a7086aa711d49b5c135d990ec27899396}} 
+uint32 {\bfseries depth}
+\item 
+\mbox{\Hypertarget{struct_light_vertex_ac043163ef9f35add2c3b027a7aaf7ed4}\label{struct_light_vertex_ac043163ef9f35add2c3b027a7aaf7ed4}} 
+\hyperlink{struct_mesh_material}{Mesh\+Material} {\bfseries material}
+\item 
+\mbox{\Hypertarget{struct_light_vertex_a3d33ac0039f711134a2997835491951c}\label{struct_light_vertex_a3d33ac0039f711134a2997835491951c}} 
+\hyperlink{struct_edf}{Edf} {\bfseries edf}
+\item 
+\mbox{\Hypertarget{struct_light_vertex_aacab4bae157999e8b0d462fcafd0ef3a}\label{struct_light_vertex_aacab4bae157999e8b0d462fcafd0ef3a}} 
+\hyperlink{struct_bsdf}{Bsdf} {\bfseries bsdf}
+\item 
+\mbox{\Hypertarget{struct_light_vertex_abb07274d58742c761a920e8b56abf906}\label{struct_light_vertex_abb07274d58742c761a920e8b56abf906}} 
+float {\bfseries prev\+\_\+\+G\+\_\+prime}
+\item 
+\mbox{\Hypertarget{struct_light_vertex_acd84967fda170c5534f5a8b2f76b8f89}\label{struct_light_vertex_acd84967fda170c5534f5a8b2f76b8f89}} 
+float {\bfseries prev\+\_\+pG}
+\item 
+\mbox{\Hypertarget{struct_light_vertex_adff45990a4964658a0c6b059427f7ded}\label{struct_light_vertex_adff45990a4964658a0c6b059427f7ded}} 
+float {\bfseries p\+Gp\+\_\+sum}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{struct_light_vertex_a2e6fa24feb3e233f487b6a33ea5ed622}\label{struct_light_vertex_a2e6fa24feb3e233f487b6a33ea5ed622}} 
+\index{Light\+Vertex@{Light\+Vertex}!sample@{sample}}
+\index{sample@{sample}!Light\+Vertex@{Light\+Vertex}}
+\subsubsection{\texorpdfstring{sample()}{sample()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE bool Light\+Vertex\+::sample (\begin{DoxyParamCaption}\item[{const float}]{z\mbox{[}3\mbox{]},  }\item[{\hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type} \&}]{out\+\_\+comp,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{out,  }\item[{float \&}]{out\+\_\+p,  }\item[{float \&}]{out\+\_\+p\+\_\+proj,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \&}]{out\+\_\+g,  }\item[{bool}]{RR = {\ttfamily true},  }\item[{bool}]{evaluate\+\_\+full\+\_\+bsdf = {\ttfamily false},  }\item[{const \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type}}]{components = {\ttfamily Bsdf\+:\+:kAllComponents} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+sample an outgoing direction
+
+
+\begin{DoxyParams}{Parameters}
+{\em z} & the incoming direction \\
+\hline
+{\em out\+\_\+comp} & the output component \\
+\hline
+{\em out} & the outgoing direction \\
+\hline
+{\em out\+\_\+p} & the output solid angle pdf \\
+\hline
+{\em out\+\_\+p\+\_\+proj} & the output projected solid angle pdf \\
+\hline
+{\em out\+\_\+g} & the output sample value = f/p\+\_\+proj \\
+\hline
+{\em RR} & indicate whether to use Russian-\/\+Roulette or not \\
+\hline
+{\em evaluate\+\_\+full\+\_\+bsdf} & ndicate whether to evaluate the full B\+S\+DF, or just an unbiased estimate \\
+\hline
+{\em components} & the components to consider \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/bpt\+\_\+utils.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,98 @@
+\hypertarget{structcugar_1_1_bvh__node__3d}{}\section{cugar\+:\+:Bvh\+\_\+node\+\_\+3d Struct Reference}
+\label{structcugar_1_1_bvh__node__3d}\index{cugar\+::\+Bvh\+\_\+node\+\_\+3d@{cugar\+::\+Bvh\+\_\+node\+\_\+3d}}
+
+
+\subsection{Detailed description}
+3d bvh node with bounding box (note that this struct has a convenient size of 32 bytes, which can be fetched with two float4 vector loads) 
+
+{\ttfamily \#include $<$bvh\+\_\+node.\+h$>$}
+
+Inheritance diagram for cugar\+:\+:Bvh\+\_\+node\+\_\+3d\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{structcugar_1_1_bvh__node__3d}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_bvh__node__3d_aacec14cb873e98a6f4c7d71a23172520}\label{structcugar_1_1_bvh__node__3d_aacec14cb873e98a6f4c7d71a23172520}} 
+typedef \hyperlink{structcugar_1_1leaf__range__tag}{Bvh\+\_\+node\+::node\+\_\+tag} {\bfseries node\+\_\+tag}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_bvh__node__3d_a2edcfbe5625e457b0be8da7c661b441f}\label{structcugar_1_1_bvh__node__3d_a2edcfbe5625e457b0be8da7c661b441f}} 
+typedef Bvh\+\_\+node\+::internal\+\_\+type {\bfseries internal\+\_\+type}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_bvh__node__3d_a502992c44b9d7f68d99f96c0bcbe2fd3}\label{structcugar_1_1_bvh__node__3d_a502992c44b9d7f68d99f96c0bcbe2fd3}} 
+typedef Bvh\+\_\+node\+::leaf\+\_\+type {\bfseries leaf\+\_\+type}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_bvh__node__3d_a6ff41f6cb0ee5bead35d7eedbb202407}{Bvh\+\_\+node\+\_\+3d} ()
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_bvh__node__3d_a9f09a6205af9453255216eab7995472d}{Bvh\+\_\+node\+\_\+3d} (const internal\+\_\+type type, const uint32 child\+\_\+index, const uint32 range\+\_\+size=0)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_bvh__node__3d_a7e01f1b0d48cfa6930e8dc6dc66e1f29}{Bvh\+\_\+node\+\_\+3d} (const leaf\+\_\+type type, const uint32 leaf\+\_\+begin, const uint32 leaf\+\_\+end)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_bvh__node__3d_ae6b8f30f63aed22b76ec523f12380f59}{Bvh\+\_\+node\+\_\+3d} (const float4 f0, const float4 f1)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_bvh__node__3d}{Bvh\+\_\+node\+\_\+3d} \& \hyperlink{structcugar_1_1_bvh__node__3d_a23550a54c38a821438d5e7f34f863c21}{operator=} (const \hyperlink{structcugar_1_1_bintree__node}{Bintree\+\_\+node}$<$ \hyperlink{structcugar_1_1leaf__range__tag}{leaf\+\_\+range\+\_\+tag} $>$ \&base)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+static C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_bvh__node__3d}{Bvh\+\_\+node\+\_\+3d} \hyperlink{structcugar_1_1_bvh__node__3d_a765171d7b76108e44d2ec4ff9684741c}{load\+\_\+ldg} (const \hyperlink{structcugar_1_1_bvh__node__3d}{Bvh\+\_\+node\+\_\+3d} $\ast$node)
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_bvh__node__3d_a4199cd920cc01d348e2f576c92d41773}\label{structcugar_1_1_bvh__node__3d_a4199cd920cc01d348e2f576c92d41773}} 
+\hyperlink{structcugar_1_1_bbox}{Bbox}$<$ \hyperlink{structcugar_1_1_vector}{Vector3f} $>$ {\bfseries bbox}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcugar_1_1_bvh__node__3d_a6ff41f6cb0ee5bead35d7eedbb202407}\label{structcugar_1_1_bvh__node__3d_a6ff41f6cb0ee5bead35d7eedbb202407}} 
+\index{cugar\+::\+Bvh\+\_\+node\+\_\+3d@{cugar\+::\+Bvh\+\_\+node\+\_\+3d}!Bvh\+\_\+node\+\_\+3d@{Bvh\+\_\+node\+\_\+3d}}
+\index{Bvh\+\_\+node\+\_\+3d@{Bvh\+\_\+node\+\_\+3d}!cugar\+::\+Bvh\+\_\+node\+\_\+3d@{cugar\+::\+Bvh\+\_\+node\+\_\+3d}}
+\subsubsection{\texorpdfstring{Bvh\+\_\+node\+\_\+3d()}{Bvh\_node\_3d()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE cugar\+::\+Bvh\+\_\+node\+\_\+3d\+::\+Bvh\+\_\+node\+\_\+3d (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+default constructor \mbox{\Hypertarget{structcugar_1_1_bvh__node__3d_a9f09a6205af9453255216eab7995472d}\label{structcugar_1_1_bvh__node__3d_a9f09a6205af9453255216eab7995472d}} 
+\index{cugar\+::\+Bvh\+\_\+node\+\_\+3d@{cugar\+::\+Bvh\+\_\+node\+\_\+3d}!Bvh\+\_\+node\+\_\+3d@{Bvh\+\_\+node\+\_\+3d}}
+\index{Bvh\+\_\+node\+\_\+3d@{Bvh\+\_\+node\+\_\+3d}!cugar\+::\+Bvh\+\_\+node\+\_\+3d@{cugar\+::\+Bvh\+\_\+node\+\_\+3d}}
+\subsubsection{\texorpdfstring{Bvh\+\_\+node\+\_\+3d()}{Bvh\_node\_3d()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE cugar\+::\+Bvh\+\_\+node\+\_\+3d\+::\+Bvh\+\_\+node\+\_\+3d (\begin{DoxyParamCaption}\item[{const internal\+\_\+type}]{type,  }\item[{const uint32}]{child\+\_\+index,  }\item[{const uint32}]{range\+\_\+size = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+internal node constructor \mbox{\Hypertarget{structcugar_1_1_bvh__node__3d_a7e01f1b0d48cfa6930e8dc6dc66e1f29}\label{structcugar_1_1_bvh__node__3d_a7e01f1b0d48cfa6930e8dc6dc66e1f29}} 
+\index{cugar\+::\+Bvh\+\_\+node\+\_\+3d@{cugar\+::\+Bvh\+\_\+node\+\_\+3d}!Bvh\+\_\+node\+\_\+3d@{Bvh\+\_\+node\+\_\+3d}}
+\index{Bvh\+\_\+node\+\_\+3d@{Bvh\+\_\+node\+\_\+3d}!cugar\+::\+Bvh\+\_\+node\+\_\+3d@{cugar\+::\+Bvh\+\_\+node\+\_\+3d}}
+\subsubsection{\texorpdfstring{Bvh\+\_\+node\+\_\+3d()}{Bvh\_node\_3d()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE cugar\+::\+Bvh\+\_\+node\+\_\+3d\+::\+Bvh\+\_\+node\+\_\+3d (\begin{DoxyParamCaption}\item[{const leaf\+\_\+type}]{type,  }\item[{const uint32}]{leaf\+\_\+begin,  }\item[{const uint32}]{leaf\+\_\+end }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+leaf node constructor \mbox{\Hypertarget{structcugar_1_1_bvh__node__3d_ae6b8f30f63aed22b76ec523f12380f59}\label{structcugar_1_1_bvh__node__3d_ae6b8f30f63aed22b76ec523f12380f59}} 
+\index{cugar\+::\+Bvh\+\_\+node\+\_\+3d@{cugar\+::\+Bvh\+\_\+node\+\_\+3d}!Bvh\+\_\+node\+\_\+3d@{Bvh\+\_\+node\+\_\+3d}}
+\index{Bvh\+\_\+node\+\_\+3d@{Bvh\+\_\+node\+\_\+3d}!cugar\+::\+Bvh\+\_\+node\+\_\+3d@{cugar\+::\+Bvh\+\_\+node\+\_\+3d}}
+\subsubsection{\texorpdfstring{Bvh\+\_\+node\+\_\+3d()}{Bvh\_node\_3d()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE cugar\+::\+Bvh\+\_\+node\+\_\+3d\+::\+Bvh\+\_\+node\+\_\+3d (\begin{DoxyParamCaption}\item[{const float4}]{f0,  }\item[{const float4}]{f1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+construct a node from two float4\textquotesingle{}s 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1_bvh__node__3d_a765171d7b76108e44d2ec4ff9684741c}\label{structcugar_1_1_bvh__node__3d_a765171d7b76108e44d2ec4ff9684741c}} 
+\index{cugar\+::\+Bvh\+\_\+node\+\_\+3d@{cugar\+::\+Bvh\+\_\+node\+\_\+3d}!load\+\_\+ldg@{load\+\_\+ldg}}
+\index{load\+\_\+ldg@{load\+\_\+ldg}!cugar\+::\+Bvh\+\_\+node\+\_\+3d@{cugar\+::\+Bvh\+\_\+node\+\_\+3d}}
+\subsubsection{\texorpdfstring{load\+\_\+ldg()}{load\_ldg()}}
+{\footnotesize\ttfamily static C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_bvh__node__3d}{Bvh\+\_\+node\+\_\+3d} cugar\+::\+Bvh\+\_\+node\+\_\+3d\+::load\+\_\+ldg (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_bvh__node__3d}{Bvh\+\_\+node\+\_\+3d} $\ast$}]{node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+construct a node from two float4\textquotesingle{}s \mbox{\Hypertarget{structcugar_1_1_bvh__node__3d_a23550a54c38a821438d5e7f34f863c21}\label{structcugar_1_1_bvh__node__3d_a23550a54c38a821438d5e7f34f863c21}} 
+\index{cugar\+::\+Bvh\+\_\+node\+\_\+3d@{cugar\+::\+Bvh\+\_\+node\+\_\+3d}!operator=@{operator=}}
+\index{operator=@{operator=}!cugar\+::\+Bvh\+\_\+node\+\_\+3d@{cugar\+::\+Bvh\+\_\+node\+\_\+3d}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_bvh__node__3d}{Bvh\+\_\+node\+\_\+3d}\& cugar\+::\+Bvh\+\_\+node\+\_\+3d\+::operator= (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_bintree__node}{Bintree\+\_\+node}$<$ \hyperlink{structcugar_1_1leaf__range__tag}{leaf\+\_\+range\+\_\+tag} $>$ \&}]{base }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+assign the base type 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bvh/\hyperlink{bvh__node_8h}{bvh\+\_\+node.\+h}\end{DoxyCompactItemize}

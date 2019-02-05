@@ -1,0 +1,149 @@
+\hypertarget{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4}{}\section{cugar\+:\+:Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$ Struct Template Reference}
+\label{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4}\index{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$@{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$$>$\newline
+struct cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$}
+
+A \char`\"{}slim\char`\"{} binary tree node, with a single primitive index per leaf. A node can either be a leaf and have no children, or be an internal split node. If a split node, it can either have one or two children\+: for example, it can have one if a set of points is concentrated in one half-\/space. 
+
+{\ttfamily \#include $<$bintree\+\_\+node.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_a73fc70cf26b52f223b0222f9ed482bd6}\label{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_a73fc70cf26b52f223b0222f9ed482bd6}} 
+typedef \hyperlink{structcugar_1_1leaf__index__tag}{leaf\+\_\+index\+\_\+tag} {\bfseries node\+\_\+tag}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_a657e48abcb145d518e9bfd692fa66d96}{Bintree\+\_\+node} ()
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_a2524c1c7d0a050dc29fe3b44056f535c}{Bintree\+\_\+node} (bool child0, bool child1, uint32 index)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_a71208aedba4f65bc0c2002926ab78d85}{is\+\_\+leaf} () const
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_a8b6d15fa4a8e97895fbc838f01612f2d}{get\+\_\+child\+\_\+index} () const
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_a0da94a6b8fe862f4701d45a00c8b08c8}{get\+\_\+leaf\+\_\+index} () const
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_a4d169a35a72c9c85124592210b2b9412}{get\+\_\+child\+\_\+count} () const
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_a5a5689764ebf4ddedb849e527b81c279}{get\+\_\+child} (const uint32 i) const
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_aaf83c1431603af76b9f0ac619e7d4383}{has\+\_\+child} (const uint32 i) const
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_a7476106b60fc6bb7681d0f032321bab6}{get\+\_\+left} () const
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_a78388f568c1bc3d1d238f35788d539c8}{get\+\_\+right} () const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_aa6f6668d2c9c79791e373dbf4d17edee}\label{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_aa6f6668d2c9c79791e373dbf4d17edee}} 
+uint32 {\bfseries m\+\_\+packed\+\_\+info}
+\end{DoxyCompactItemize}
+\subsection*{Static Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_a61a20899e0049655baebc85105f9b9f4}\label{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_a61a20899e0049655baebc85105f9b9f4}} 
+static const uint32 {\bfseries k\+Invalid} = uint32(-\/1)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_a657e48abcb145d518e9bfd692fa66d96}\label{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_a657e48abcb145d518e9bfd692fa66d96}} 
+\index{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$@{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$}!Bintree\+\_\+node@{Bintree\+\_\+node}}
+\index{Bintree\+\_\+node@{Bintree\+\_\+node}!cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$@{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$}}
+\subsubsection{\texorpdfstring{Bintree\+\_\+node()}{Bintree\_node()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_bintree__node}{cugar\+::\+Bintree\+\_\+node}$<$ \hyperlink{structcugar_1_1leaf__index__tag}{leaf\+\_\+index\+\_\+tag} $>$\+::\hyperlink{structcugar_1_1_bintree__node}{Bintree\+\_\+node} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+empty constructor \mbox{\Hypertarget{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_a2524c1c7d0a050dc29fe3b44056f535c}\label{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_a2524c1c7d0a050dc29fe3b44056f535c}} 
+\index{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$@{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$}!Bintree\+\_\+node@{Bintree\+\_\+node}}
+\index{Bintree\+\_\+node@{Bintree\+\_\+node}!cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$@{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$}}
+\subsubsection{\texorpdfstring{Bintree\+\_\+node()}{Bintree\_node()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_bintree__node}{cugar\+::\+Bintree\+\_\+node}$<$ \hyperlink{structcugar_1_1leaf__index__tag}{leaf\+\_\+index\+\_\+tag} $>$\+::\hyperlink{structcugar_1_1_bintree__node}{Bintree\+\_\+node} (\begin{DoxyParamCaption}\item[{bool}]{child0,  }\item[{bool}]{child1,  }\item[{uint32}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+full constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em child0} & first child activation predicate \\
+\hline
+{\em child1} & second child activation predicate \\
+\hline
+{\em index} & child index \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_a5a5689764ebf4ddedb849e527b81c279}\label{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_a5a5689764ebf4ddedb849e527b81c279}} 
+\index{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$@{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$}!get\+\_\+child@{get\+\_\+child}}
+\index{get\+\_\+child@{get\+\_\+child}!cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$@{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$}}
+\subsubsection{\texorpdfstring{get\+\_\+child()}{get\_child()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structcugar_1_1_bintree__node}{cugar\+::\+Bintree\+\_\+node}$<$ \hyperlink{structcugar_1_1leaf__index__tag}{leaf\+\_\+index\+\_\+tag} $>$\+::get\+\_\+child (\begin{DoxyParamCaption}\item[{const uint32}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+get i-\/th child (among the active ones)
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & child index \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_a4d169a35a72c9c85124592210b2b9412}\label{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_a4d169a35a72c9c85124592210b2b9412}} 
+\index{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$@{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$}!get\+\_\+child\+\_\+count@{get\+\_\+child\+\_\+count}}
+\index{get\+\_\+child\+\_\+count@{get\+\_\+child\+\_\+count}!cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$@{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$}}
+\subsubsection{\texorpdfstring{get\+\_\+child\+\_\+count()}{get\_child\_count()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structcugar_1_1_bintree__node}{cugar\+::\+Bintree\+\_\+node}$<$ \hyperlink{structcugar_1_1leaf__index__tag}{leaf\+\_\+index\+\_\+tag} $>$\+::get\+\_\+child\+\_\+count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+get child count \mbox{\Hypertarget{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_a8b6d15fa4a8e97895fbc838f01612f2d}\label{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_a8b6d15fa4a8e97895fbc838f01612f2d}} 
+\index{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$@{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$}!get\+\_\+child\+\_\+index@{get\+\_\+child\+\_\+index}}
+\index{get\+\_\+child\+\_\+index@{get\+\_\+child\+\_\+index}!cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$@{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$}}
+\subsubsection{\texorpdfstring{get\+\_\+child\+\_\+index()}{get\_child\_index()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structcugar_1_1_bintree__node}{cugar\+::\+Bintree\+\_\+node}$<$ \hyperlink{structcugar_1_1leaf__index__tag}{leaf\+\_\+index\+\_\+tag} $>$\+::get\+\_\+child\+\_\+index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+get offset of the first child \mbox{\Hypertarget{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_a0da94a6b8fe862f4701d45a00c8b08c8}\label{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_a0da94a6b8fe862f4701d45a00c8b08c8}} 
+\index{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$@{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$}!get\+\_\+leaf\+\_\+index@{get\+\_\+leaf\+\_\+index}}
+\index{get\+\_\+leaf\+\_\+index@{get\+\_\+leaf\+\_\+index}!cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$@{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$}}
+\subsubsection{\texorpdfstring{get\+\_\+leaf\+\_\+index()}{get\_leaf\_index()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structcugar_1_1_bintree__node}{cugar\+::\+Bintree\+\_\+node}$<$ \hyperlink{structcugar_1_1leaf__index__tag}{leaf\+\_\+index\+\_\+tag} $>$\+::get\+\_\+leaf\+\_\+index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+get leaf index \mbox{\Hypertarget{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_a7476106b60fc6bb7681d0f032321bab6}\label{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_a7476106b60fc6bb7681d0f032321bab6}} 
+\index{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$@{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$}!get\+\_\+left@{get\+\_\+left}}
+\index{get\+\_\+left@{get\+\_\+left}!cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$@{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$}}
+\subsubsection{\texorpdfstring{get\+\_\+left()}{get\_left()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structcugar_1_1_bintree__node}{cugar\+::\+Bintree\+\_\+node}$<$ \hyperlink{structcugar_1_1leaf__index__tag}{leaf\+\_\+index\+\_\+tag} $>$\+::get\+\_\+left (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+get left partition (or k\+Invalid if not active) \mbox{\Hypertarget{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_a78388f568c1bc3d1d238f35788d539c8}\label{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_a78388f568c1bc3d1d238f35788d539c8}} 
+\index{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$@{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$}!get\+\_\+right@{get\+\_\+right}}
+\index{get\+\_\+right@{get\+\_\+right}!cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$@{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$}}
+\subsubsection{\texorpdfstring{get\+\_\+right()}{get\_right()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structcugar_1_1_bintree__node}{cugar\+::\+Bintree\+\_\+node}$<$ \hyperlink{structcugar_1_1leaf__index__tag}{leaf\+\_\+index\+\_\+tag} $>$\+::get\+\_\+right (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+get right partition (or k\+Invalid if not active) \mbox{\Hypertarget{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_aaf83c1431603af76b9f0ac619e7d4383}\label{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_aaf83c1431603af76b9f0ac619e7d4383}} 
+\index{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$@{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$}!has\+\_\+child@{has\+\_\+child}}
+\index{has\+\_\+child@{has\+\_\+child}!cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$@{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$}}
+\subsubsection{\texorpdfstring{has\+\_\+child()}{has\_child()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{structcugar_1_1_bintree__node}{cugar\+::\+Bintree\+\_\+node}$<$ \hyperlink{structcugar_1_1leaf__index__tag}{leaf\+\_\+index\+\_\+tag} $>$\+::has\+\_\+child (\begin{DoxyParamCaption}\item[{const uint32}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+is the i-\/th child active?
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & child index \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_a71208aedba4f65bc0c2002926ab78d85}\label{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4_a71208aedba4f65bc0c2002926ab78d85}} 
+\index{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$@{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$}!is\+\_\+leaf@{is\+\_\+leaf}}
+\index{is\+\_\+leaf@{is\+\_\+leaf}!cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$@{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$}}
+\subsubsection{\texorpdfstring{is\+\_\+leaf()}{is\_leaf()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structcugar_1_1_bintree__node}{cugar\+::\+Bintree\+\_\+node}$<$ \hyperlink{structcugar_1_1leaf__index__tag}{leaf\+\_\+index\+\_\+tag} $>$\+::is\+\_\+leaf (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+is a leaf? 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bintree/\hyperlink{bintree__node_8h}{bintree\+\_\+node.\+h}\end{DoxyCompactItemize}

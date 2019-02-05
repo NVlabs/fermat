@@ -1,0 +1,55 @@
+\hypertarget{structcugar_1_1cuda_1_1kd_1_1_kd__context}{}\section{cugar\+:\+:cuda\+:\+:kd\+:\+:Kd\+\_\+context$<$ D\+IM, Bbox\+Type, Integer, Output\+Tree $>$ Struct Template Reference}
+\label{structcugar_1_1cuda_1_1kd_1_1_kd__context}\index{cugar\+::cuda\+::kd\+::\+Kd\+\_\+context$<$ D\+I\+M, Bbox\+Type, Integer, Output\+Tree $>$@{cugar\+::cuda\+::kd\+::\+Kd\+\_\+context$<$ D\+I\+M, Bbox\+Type, Integer, Output\+Tree $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$uint32 D\+IM, typename Bbox\+Type, typename Integer, typename Output\+Tree$>$\newline
+struct cugar\+::cuda\+::kd\+::\+Kd\+\_\+context$<$ D\+I\+M, Bbox\+Type, Integer, Output\+Tree $>$}
+
+A simple binary tree context implementation to be used with the \hyperlink{structcugar_1_1_bvh}{Bvh} generate() function. 
+
+{\ttfamily \#include $<$kd\+\_\+builder\+\_\+inline.\+h$>$}
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcugar_1_1cuda_1_1kd_1_1_kd__context_1_1_context}{Context}
+\begin{DoxyCompactList}\small\item\em Cuda accessor struct. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1kd_1_1_kd__context_a279264d20b734023d033abf00196be08}\label{structcugar_1_1cuda_1_1kd_1_1_kd__context_a279264d20b734023d033abf00196be08}} 
+typedef Output\+Tree\+::\+Context {\bfseries Base\+Context}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1kd_1_1_kd__context_a00ec8a71f810a654a1c513c460785eb6}\label{structcugar_1_1cuda_1_1kd_1_1_kd__context_a00ec8a71f810a654a1c513c460785eb6}} 
+\hyperlink{structcugar_1_1cuda_1_1kd_1_1_kd__context_a00ec8a71f810a654a1c513c460785eb6}{Kd\+\_\+context} (Output\+Tree context, const Integer $\ast$codes, Bbox\+Type bbox)
+\begin{DoxyCompactList}\small\item\em constructor \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1kd_1_1_kd__context_aa51f244c19bc1c91b93171d1382abb6b}\label{structcugar_1_1cuda_1_1kd_1_1_kd__context_aa51f244c19bc1c91b93171d1382abb6b}} 
+void \hyperlink{structcugar_1_1cuda_1_1kd_1_1_kd__context_aa51f244c19bc1c91b93171d1382abb6b}{reserve\+\_\+nodes} (const uint32 n)
+\begin{DoxyCompactList}\small\item\em reserve space for more nodes \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1kd_1_1_kd__context_a4d8c3e0a23c2bb7f4fb9e184e453b920}\label{structcugar_1_1cuda_1_1kd_1_1_kd__context_a4d8c3e0a23c2bb7f4fb9e184e453b920}} 
+void \hyperlink{structcugar_1_1cuda_1_1kd_1_1_kd__context_a4d8c3e0a23c2bb7f4fb9e184e453b920}{reserve\+\_\+leaves} (const uint32 n)
+\begin{DoxyCompactList}\small\item\em reserve space for more leaves \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1kd_1_1_kd__context_a1236e56d6d83701f3e5666148799e500}\label{structcugar_1_1cuda_1_1kd_1_1_kd__context_a1236e56d6d83701f3e5666148799e500}} 
+\hyperlink{structcugar_1_1cuda_1_1kd_1_1_kd__context_1_1_context}{Context} \hyperlink{structcugar_1_1cuda_1_1kd_1_1_kd__context_a1236e56d6d83701f3e5666148799e500}{get\+\_\+context} ()
+\begin{DoxyCompactList}\small\item\em return a cuda context \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1kd_1_1_kd__context_a52ab77909d3881dfc42a64e547d54123}\label{structcugar_1_1cuda_1_1kd_1_1_kd__context_a52ab77909d3881dfc42a64e547d54123}} 
+Output\+Tree {\bfseries m\+\_\+context}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1kd_1_1_kd__context_ad2c8bd4db81c8d24ffe37e97245898bf}\label{structcugar_1_1cuda_1_1kd_1_1_kd__context_ad2c8bd4db81c8d24ffe37e97245898bf}} 
+const Integer $\ast$ {\bfseries m\+\_\+codes}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1kd_1_1_kd__context_a92bd2daf2f7ae63c9085fbbb4f62ec5b}\label{structcugar_1_1cuda_1_1kd_1_1_kd__context_a92bd2daf2f7ae63c9085fbbb4f62ec5b}} 
+Bbox\+Type {\bfseries m\+\_\+bbox}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/kd/cuda/kd\+\_\+builder\+\_\+inline.\+h\end{DoxyCompactItemize}

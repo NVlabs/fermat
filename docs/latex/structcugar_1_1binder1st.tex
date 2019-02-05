@@ -1,0 +1,47 @@
+\hypertarget{structcugar_1_1binder1st}{}\section{cugar\+:\+:binder1st$<$ F, C $>$ Struct Template Reference}
+\label{structcugar_1_1binder1st}\index{cugar\+::binder1st$<$ F, C $>$@{cugar\+::binder1st$<$ F, C $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$typename F, typename C$>$\newline
+struct cugar\+::binder1st$<$ F, C $>$}
+
+A functor to bind the first argument of a binary operator to a constant 
+
+{\ttfamily \#include $<$functors.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1binder1st_afc90e7eebec1fa0859221440d0db0f0e}\label{structcugar_1_1binder1st_afc90e7eebec1fa0859221440d0db0f0e}} 
+typedef \hyperlink{structcugar_1_1unary__function__tag}{unary\+\_\+function\+\_\+tag} {\bfseries function\+\_\+tag}
+\item 
+\mbox{\Hypertarget{structcugar_1_1binder1st_abfd205576211a97918cecb89d1ca16b1}\label{structcugar_1_1binder1st_abfd205576211a97918cecb89d1ca16b1}} 
+typedef F\+::first\+\_\+argument\+\_\+type {\bfseries argument\+\_\+type}
+\item 
+\mbox{\Hypertarget{structcugar_1_1binder1st_af9dfd42d98286c486df3a9070392358d}\label{structcugar_1_1binder1st_af9dfd42d98286c486df3a9070392358d}} 
+typedef F\+::result\+\_\+type {\bfseries result\+\_\+type}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1binder1st_a481275b07587ed7ad3ab8d41aa495438}\label{structcugar_1_1binder1st_a481275b07587ed7ad3ab8d41aa495438}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries binder1st} (const F \&f, const C c)
+\item 
+\mbox{\Hypertarget{structcugar_1_1binder1st_ae6861b68903fa347c19cebbb8403d3bc}\label{structcugar_1_1binder1st_ae6861b68903fa347c19cebbb8403d3bc}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 {\bfseries operator()} (const uint32 op) const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1binder1st_a49464ad5a5d5702d33cc9335923bdeb4}\label{structcugar_1_1binder1st_a49464ad5a5d5702d33cc9335923bdeb4}} 
+F {\bfseries functor}
+\item 
+\mbox{\Hypertarget{structcugar_1_1binder1st_a887b92e10090a4979ade76c005c2a79e}\label{structcugar_1_1binder1st_a887b92e10090a4979ade76c005c2a79e}} 
+C {\bfseries first}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/\hyperlink{functors_8h}{functors.\+h}\end{DoxyCompactItemize}

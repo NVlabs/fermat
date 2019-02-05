@@ -1,0 +1,215 @@
+
+
+The {\bfseries basic} module includes general purpose data-\/structures and functionality which are not directly related to bioinformatics but can be useful for implementing all kinds of host and device algorithms. It includes the following submodules\+:\hypertarget{basic_page_ThreadingAndTiming}{}\section{Threading \& Timing}\label{basic_page_ThreadingAndTiming}
+
+\begin{DoxyItemize}
+\item \hyperlink{atomics_page}{Atomics}
+\item \hyperlink{threads_page}{Threads}
+\item \hyperlink{timing_page}{Timing} 
+\end{DoxyItemize}\hypertarget{basic_page_DataStructures}{}\section{Data Structures}\label{basic_page_DataStructures}
+
+\begin{DoxyItemize}
+\item \hyperlink{vectors_page}{Vectors}
+\item \hyperlink{vector_views_page}{Vector Views} 
+\end{DoxyItemize}\hypertarget{basic_page_Miscellaneous}{}\section{Miscellaneous}\label{basic_page_Miscellaneous}
+
+\begin{DoxyItemize}
+\item \hyperlink{algorithms_page}{Algorithms}
+\item \hyperlink{iterators_page}{Iterators}
+\item \hyperlink{primitives_page}{Parallel Primitives}
+\item \hyperlink{sorting_page}{Sorting}
+\item \hyperlink{utilities_page}{Utilities} 
+\end{DoxyItemize}\hypertarget{atomics_page}{}\section{Atomics}\label{atomics_page}
+\begin{DoxyParagraph}{}
+This \hyperlink{group___atomics}{module} implements basic host/device atomics.
+\end{DoxyParagraph}
+
+\begin{DoxyItemize}
+\item float \hyperlink{group___atomics_ga0c9d949be7ac5b6f27a232c7cd27a05c}{atomic\+\_\+add(float$\ast$ value, const float op)}
+\item int32 \hyperlink{group___atomics_ga584797bd163a76c90bf0fb5c7df58de4}{atomic\+\_\+add(int32$\ast$ value, const int32 op)}
+\item uint32 \hyperlink{group___atomics_ga130aea0c6d0c91af08bea4b52d6a8208}{atomic\+\_\+add(uint32$\ast$ value, const uint32 op)}
+\item uint64 \hyperlink{group___atomics_gaed434d4f310d826a6e39932269de15c4}{atomic\+\_\+add(uint64$\ast$ value, const uint64 op)}
+\item int32 \hyperlink{group___atomics_ga3efc1d5c63f30d1ee11887f76744bafe}{atomic\+\_\+sub(int32$\ast$ value, const int32 op)}
+\item uint32 \hyperlink{group___atomics_ga9d9415fae4e05362c8d6f43d2fd61c60}{atomic\+\_\+sub(uint32$\ast$ value, const uint32 op)}
+\item int32 \hyperlink{group___atomics_ga3034bbde9594dc3c4894fe31ad5a0b3c}{atomic\+\_\+increment(int32$\ast$ value)}
+\item int64 \hyperlink{group___atomics_ga57595e5240e01e562a47816a82e14dd2}{atomic\+\_\+increment(int64$\ast$ value)}
+\item int32 \hyperlink{group___atomics_ga60cd477d17c1ff78aa673ce06b60b569}{atomic\+\_\+decrement(int32$\ast$ value)}
+\item int64 \hyperlink{group___atomics_gae94ecfb92e8d261326f527daa39c770d}{atomic\+\_\+decrement(int64$\ast$ value)}
+\item uint32 \hyperlink{group___atomics_ga4b242819dd9c2a9986e0ea35b4883f67}{atomic\+\_\+or(uint32$\ast$ value, const uint32 op)}
+\item uint64 \hyperlink{group___atomics_ga5d15edb3c64f3cde839eb76c54aacf7c}{atomic\+\_\+or(uint64$\ast$ value, const uint64 op)} 
+\end{DoxyItemize}\hypertarget{threads_page}{}\section{Threads}\label{threads_page}
+This module implements basic host thread, synchronization and work-\/queue objects\+:
+
+
+\begin{DoxyItemize}
+\item \hyperlink{classcugar_1_1_thread}{Thread}
+\item \hyperlink{classcugar_1_1_mutex}{Mutex}
+\item \hyperlink{classcugar_1_1_scoped_lock}{Scoped\+Lock}
+\item \hyperlink{classcugar_1_1_work_queue}{Work\+Queue}
+\item Pipeline 
+\end{DoxyItemize}\hypertarget{timing_page}{}\section{Timing}\label{timing_page}
+This \hyperlink{group___timers_module}{module} implements basic some timers and timing-\/related functionality\+:
+
+
+\begin{DoxyItemize}
+\item \hyperlink{structcugar_1_1_timer}{Timer}
+\item \hyperlink{structcugar_1_1_fake_timer}{Fake\+Timer}
+\item \hyperlink{structcugar_1_1_time_series}{Time\+Series} 
+\end{DoxyItemize}\hypertarget{vectors_page}{}\section{Vectors}\label{vectors_page}
+This module implements host \& device vectors
+
+
+\begin{DoxyItemize}
+\item vector
+\item \hyperlink{structcugar_1_1host__vector}{host\+\_\+vector}
+\item \hyperlink{structcugar_1_1device__vector}{device\+\_\+vector}
+\item \hyperlink{structcugar_1_1caching__device__vector}{caching\+\_\+device\+\_\+vector}
+\end{DoxyItemize}\hypertarget{vectors_page_VectorsExampleSection}{}\subsection{Example}\label{vectors_page_VectorsExampleSection}
+
+\begin{DoxyCode}
+\textcolor{comment}{// build a host vector and copy it to the device}
+\hyperlink{structcugar_1_1vector}{cugar::vector<host\_tag,uint32>} h\_vector;
+\hyperlink{structcugar_1_1vector}{cugar::vector<host\_tag,uint32>} d\_vector;
+
+h\_vector.push\_back(3u);
+d\_vector = h\_vector;
+\end{DoxyCode}
+ \hypertarget{vector_views_page}{}\section{Vector Views}\label{vector_views_page}
+This module implements a vector adaptor, which allows to create an \char`\"{}std\+::vector\char`\"{}-\/like container on top of a base iterator.
+
+
+\begin{DoxyItemize}
+\item \hyperlink{structcugar_1_1vector__view}{vector\+\_\+view}
+\end{DoxyItemize}\hypertarget{vector_views_page_VectorViewExampleSection}{}\subsection{Example}\label{vector_views_page_VectorViewExampleSection}
+
+\begin{DoxyCode}
+\textcolor{comment}{// build a vector\_view out of a static array}
+\textcolor{keyword}{typedef} vector\_view<uint32*> vector\_type;
+
+uint32 storage[16];
+
+vector\_type vector( 0, storage );
+
+\textcolor{comment}{// use push\_back()}
+vector.push\_back( 3 );
+vector.push\_back( 7 );
+vector.push\_back( 11 );
+
+\textcolor{comment}{// use resize()}
+vector.resize( 4 );
+
+\textcolor{comment}{// use the indexing operator[]}
+vector[3] = 8;
+
+\textcolor{comment}{// use the begin() / end() iterators}
+std::sort( vector.begin(), vector.end() );
+
+\textcolor{comment}{// use front() and back()}
+printf(\textcolor{stringliteral}{"(%u, %u)\(\backslash\)n"});                       \textcolor{comment}{// -> (3,11)}
+\end{DoxyCode}
+ \hypertarget{algorithms_page}{}\section{Algorithms}\label{algorithms_page}
+C\+U\+G\+AR provides a few basic algorithms which can be called either from the host or the device\+:
+
+
+\begin{DoxyItemize}
+\item \hyperlink{group___algorithms_module_gaf5c0f35d93fa8af4939155b21c7e2a4f}{find\+\_\+pivot()}
+\item \hyperlink{group___algorithms_module_gab5ce2c7f834a31bc40d9101865dec5d1}{lower\+\_\+bound()}
+\item \hyperlink{group___algorithms_module_gafe7ee3a93350b3d2f7f7bb6266ee0425}{upper\+\_\+bound()}
+\item \hyperlink{group___algorithms_module_gae6ef81c9ca1cd3976caad12299e37452}{merge()}
+\item \hyperlink{group___algorithms_module_ga267a2752f3e81f521e759ec274b80561}{merge\+\_\+by\+\_\+key()} 
+\end{DoxyItemize}\hypertarget{iterators_page}{}\section{Iterators}\label{iterators_page}
+C\+U\+G\+AR provides a few adaptable iterator classes which can be used to construct different views on top of some underlying iterator\+:
+
+
+\begin{DoxyItemize}
+\item \hyperlink{structcugar_1_1strided__iterator}{strided\+\_\+iterator}
+\item \hyperlink{structcugar_1_1block__strided__iterator}{block\+\_\+strided\+\_\+iterator}
+\item transform\+\_\+iterator
+\item index\+\_\+transform\+\_\+iterator
+\item cached\+\_\+iterator
+\item const\+\_\+cached\+\_\+iterator 
+\end{DoxyItemize}\hypertarget{primitives_page}{}\section{Parallel Primitives}\label{primitives_page}
+This module provides a set of system-\/wide parallel primitives. The backend system is specified at compile-\/time by a \hyperlink{group___system_tags}{system\+\_\+tag}. All temporary storage is allocated within a single \hyperlink{structcugar_1_1vector}{cugar\+::vector} passed by the user, which can be safely reused across function calls.
+
+
+\begin{DoxyItemize}
+\item \hyperlink{group___primitives_ga71416af3e5407b31c78a10026520dbed}{cugar\+::any()}
+\item \hyperlink{group___primitives_gaa98aa06ec6a5f38dda15d74ce0c47d57}{cugar\+::all()}
+\item \hyperlink{group___primitives_gaec6f4aab196d418865686901c11a093c}{cugar\+::is\+\_\+sorted()}
+\item \hyperlink{group___primitives_ga5e6eb75d00ed617295bcee0b1db0ee3e}{cugar\+::is\+\_\+segment\+\_\+sorted()}
+\item \hyperlink{group___primitives_ga1e40de6d157d7b833f31f13a26a3bd04}{cugar\+::for\+\_\+each()}
+\item \hyperlink{structcugar_1_1for__each__enactor}{cugar\+::for\+\_\+each\+\_\+enactor}
+\item \hyperlink{group___primitives_gab584ee91ed39f9b1fec5aa0e7a0284a4}{cugar\+::transform()}
+\item \hyperlink{group___primitives_gab8f49b135164aaef1fb6b51b90874915}{cugar\+::reduce()}
+\item \hyperlink{group___primitives_ga6c5ea5be5565ce7aa2c99b3e602a7cb7}{cugar\+::inclusive\+\_\+scan()}
+\item \hyperlink{group___primitives_ga1394066fd7b6215bcae781ca56cae872}{cugar\+::exclusive\+\_\+scan()}
+\item \hyperlink{group___primitives_gaafc4aac8b44cf750c98a3a97fe72e5c6}{cugar\+::copy\+\_\+flagged()}
+\item \hyperlink{group___primitives_ga536856eaa09125bec01892d565a49f8e}{cugar\+::copy\+\_\+if()}
+\item \hyperlink{group___primitives_gae48c0c95572ea1dd13ec562eed6e2755}{cugar\+::runlength\+\_\+encode()}
+\item \hyperlink{group___algorithms_module_gafe7ee3a93350b3d2f7f7bb6266ee0425}{cugar\+::upper\+\_\+bound()}
+\item \hyperlink{group___algorithms_module_gab5ce2c7f834a31bc40d9101865dec5d1}{cugar\+::lower\+\_\+bound()}
+\item \hyperlink{group___primitives_gac4584fb9407d3d12ff3a4a1890e9b903}{cugar\+::radix\+\_\+sort()}
+\item \hyperlink{group___algorithms_module_ga267a2752f3e81f521e759ec274b80561}{cugar\+::merge\+\_\+by\+\_\+key()}
+\end{DoxyItemize}
+
+\begin{DoxyParagraph}{}
+The complete list can be found in the \hyperlink{group___primitives}{Parallel Primitives} module documentation. 
+\end{DoxyParagraph}
+\hypertarget{sorting_page}{}\section{Sorting}\label{sorting_page}
+\begin{DoxyParagraph}{}
+The \hyperlink{structcugar_1_1cuda_1_1_sort_enactor}{Sort\+Enactor} provides a convenient wrapper around the fastest C\+U\+DA sorting library available, allowing to perform both key-\/only and key-\/value pair sorting of arrays with the following data-\/types\+: 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+
+\begin{DoxyItemize}
+\item uint8
+\item uint16
+\item uint32
+\item uint64
+\item (uint8,uint32)
+\item (uint16,uint32)
+\item (uint32,uint32)
+\item (uint64,uint32) 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The way most parallel sorting algorithms work require having a set of ping-\/pong buffers that are exchanged at every pass through the data. In order to do this, and communicate where the sorted data lies after its work, \hyperlink{structcugar_1_1cuda_1_1_sort_enactor}{Sort\+Enactor} employs an auxiliary class, \hyperlink{structcugar_1_1cuda_1_1_sort_buffers}{Sort\+Buffers}. The following example shows their combined usage.
+\end{DoxyParagraph}
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{void} sort\_test(\textcolor{keyword}{const} uint32 n, uint32* h\_keys, uint32* h\_data)
+\{
+    \textcolor{comment}{// allocate twice as much storage as the input to accomodate for ping-pong buffers}
+    \hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint32>} d\_keys( n * 2 );
+    \hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint32>} d\_data( n * 2 );
+
+    \textcolor{comment}{// copy the test data to the host}
+    thrust::copy( h\_keys, h\_keys + n, d\_keys.begin() );
+    thrust::copy( h\_data, h\_data + n, d\_data.begin() );
+
+    \textcolor{comment}{// prepare the sorting buffers}
+    cuda::SortBuffers<uint32*,uint32*> sort\_buffers;
+    sort\_buffers.keys[0] = \hyperlink{namespacecugar_a3f6cb2c817f2ba065931cec569aa848b}{raw\_pointer}( d\_keys );
+    sort\_buffers.keys[1] = \hyperlink{namespacecugar_a3f6cb2c817f2ba065931cec569aa848b}{raw\_pointer}( d\_keys ) + n;
+    sort\_buffers.data[0] = \hyperlink{namespacecugar_a3f6cb2c817f2ba065931cec569aa848b}{raw\_pointer}( d\_data );
+    sort\_buffers.data[1] = \hyperlink{namespacecugar_a3f6cb2c817f2ba065931cec569aa848b}{raw\_pointer}( d\_data ) + n;
+
+    \textcolor{comment}{// and sort the data}
+    cuda::SortEnactor sort\_enactor;
+    sort\_enactor.sort( n, sort\_buffers );
+
+    \textcolor{comment}{// the sorted device data is now in here:}
+    uint32* d\_sorted\_keys = sort\_buffers.current\_keys();
+    uint32* d\_sorted\_data = sort\_buffers.current\_values();
+    ...
+\}
+\end{DoxyCode}
+ \hypertarget{utilities_page}{}\section{Utilities}\label{utilities_page}
+C\+U\+G\+AR contains various convenience functions and functors needed for every day\textquotesingle{}s work\+:
+
+
+\begin{DoxyItemize}
+\item \hyperlink{group___basic_utils}{Utilities}
+\item \hyperlink{group___basic_functors}{Basic Functors Module}
+\item \hyperlink{group___basic_meta_functions}{Meta Functions} 
+\end{DoxyItemize}

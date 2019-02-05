@@ -1,0 +1,29 @@
+\hypertarget{group___hash_maps_module}{}\section{Hash Maps}
+\label{group___hash_maps_module}\index{Hash Maps@{Hash Maps}}
+
+
+\subsection{Detailed Description}
+This module contains containers to build block-\/ and device-\/wide hash-\/sets and hash-\/maps. \subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcugar_1_1cuda_1_1_hash_set}{cugar\+::cuda\+::\+Hash\+Set$<$ Key\+T, Hash\+T, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+E\+Y $>$}
+\item 
+struct \hyperlink{structcugar_1_1cuda_1_1_block_hash_set}{cugar\+::cuda\+::\+Block\+Hash\+Set$<$ Key\+T, Hash\+T, C\+T\+A\+\_\+\+S\+I\+Z\+E, T\+A\+B\+L\+E\+\_\+\+S\+I\+Z\+E, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+E\+Y $>$}
+\item 
+struct \hyperlink{structcugar_1_1cuda_1_1_hash_map}{cugar\+::cuda\+::\+Hash\+Map$<$ Key\+T, Hash\+T, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+E\+Y $>$}
+\item 
+struct \hyperlink{structcugar_1_1cuda_1_1_block_hash_map}{cugar\+::cuda\+::\+Block\+Hash\+Map$<$ Key\+T, Hash\+T, C\+T\+A\+\_\+\+S\+I\+Z\+E, T\+A\+B\+L\+E\+\_\+\+S\+I\+Z\+E, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+E\+Y $>$}
+\item 
+struct \hyperlink{structcugar_1_1cuda_1_1_sync_free_hash_map}{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map$<$ Key\+T, Hash\+T, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+E\+Y $>$}
+\item 
+struct \hyperlink{structcugar_1_1cuda_1_1_sync_free_double_key_hash_map}{cugar\+::cuda\+::\+Sync\+Free\+Double\+Key\+Hash\+Map$<$ Key\+T, Hash\+T, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+E\+Y $>$}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___hash_maps_module_ga2cfaa543423c177aae8900693f627960}\label{group___hash_maps_module_ga2cfaa543423c177aae8900693f627960}} 
+\#define {\bfseries H\+A\+S\+H\+\_\+\+U\+N\+C\+A\+C\+H\+E\+D\+\_\+\+L\+O\+AD}(x)~load$<$L\+O\+A\+D\+\_\+\+V\+O\+L\+A\+T\+I\+LE$>$(x)
+\item 
+\mbox{\Hypertarget{group___hash_maps_module_ga6db637746c107e09fd9bb0392685a3d6}\label{group___hash_maps_module_ga6db637746c107e09fd9bb0392685a3d6}} 
+\#define {\bfseries H\+A\+S\+H\+\_\+\+U\+N\+C\+A\+C\+H\+E\+D\+\_\+\+S\+T\+O\+RE}(x,  v)~store$<$S\+T\+O\+R\+E\+\_\+\+V\+O\+L\+A\+T\+I\+LE$>$(x,v)
+\end{DoxyCompactItemize}

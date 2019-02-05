@@ -1,0 +1,73 @@
+\begin{DoxyParagraph}{}
+Most of C\+U\+G\+AR\textquotesingle{}s functions and data structures are {\itshape C++ templates} providing the flexibility and compile-\/time code generation needed to accomodate the exponential amount of type combinations possible in typical applications. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Just as an example, consider the following code, building a K-\/d tree over a set of points\+: 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The following code snippet shows how to use this builder\+: 
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <\hyperlink{kd__builder_8h}{cugar/kd/cuda/kd\_builder.h}>}
+\textcolor{preprocessor}{#include <\hyperlink{kd__context_8h}{cugar/kd/cuda/kd\_context.h}>}
+
+thrust::device\_vector<Vector3f> points;
+... \textcolor{comment}{// code to fill the input vector of points}
+
+thrust::device\_vector<Kd\_node>  kd\_nodes;
+thrust::device\_vector<uint2>    kd\_leaves;
+thrust::device\_vector<uint32>   kd\_index;
+
+\hyperlink{structcugar_1_1cuda_1_1_kd__builder}{cugar::cuda::Kd\_builder<uint64>} builder( kd\_index );
+\hyperlink{structcugar_1_1cuda_1_1_kd__context}{cugar::cuda::Kd\_context} kd\_tree( &kd\_nodes, &kd\_leaves, NULL );
+builder.build(
+    kd\_tree,                                    \textcolor{comment}{// output tree}
+    kd\_index,                                   \textcolor{comment}{// output index}
+    Bbox3f( Vector3f(0.0f), Vector3f(1.0f) ),   \textcolor{comment}{// suppose all bboxes are in [0,1]^3}
+    points.begin(),                             \textcolor{comment}{// begin iterator}
+    points.end(),                               \textcolor{comment}{// end iterator}
+    4 );                                        \textcolor{comment}{// target 4 objects per leaf}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+In the above code, the builder stores the nodes of the resulting K-\/d tree into a flat array of Kd\+\_\+node\textquotesingle{}s. But what if we wanted to store them using a different layout? It turns out the builder itself doesn\textquotesingle{}t know anything about the actual output it produces, but rather, it delegates everything to an \hyperlink{structcugar_1_1cuda_1_1_kd__builder_KdOutputTreeAnchor}{Output\+Tree} template class which must possess the following interface\+: 
+\begin{DoxyCode}
+\textcolor{keyword}{struct }OutputTree
+\{
+   \textcolor{keywordtype}{void} reserve\_nodes(\textcolor{keyword}{const} uint32 n);  \textcolor{comment}{// reserve space for n nodes}
+   \textcolor{keywordtype}{void} reserve\_leaves(\textcolor{keyword}{const} uint32 n); \textcolor{comment}{// reserve space for n leaves}
+
+   Context get\_context();             \textcolor{comment}{// get a context to write nodes/leaves}
+
+   \textcolor{keyword}{struct }Context
+   \{
+       \textcolor{keywordtype}{void} write\_node(
+          \textcolor{keyword}{const} uint32 node,          \textcolor{comment}{// node to write}
+          \textcolor{keyword}{const} uint32 offset,        \textcolor{comment}{// child offset}
+          \textcolor{keyword}{const} uint32 skip\_node,     \textcolor{comment}{// skip node}
+          \textcolor{keyword}{const} uint32 \hyperlink{group___basic_ga7a37aba0ec0ff22738563bca83609dca}{begin},         \textcolor{comment}{// node range begin}
+          \textcolor{keyword}{const} uint32 end,           \textcolor{comment}{// node range end}
+          \textcolor{keyword}{const} uint32 split\_index,   \textcolor{comment}{// split index}
+          \textcolor{keyword}{const} uint32 split\_dim,     \textcolor{comment}{// splitting dimension}
+          \textcolor{keyword}{const} uint32 split\_plane);  \textcolor{comment}{// splitting plane}
+
+       \textcolor{keywordtype}{void} write\_node(
+          \textcolor{keyword}{const} uint32 node,          \textcolor{comment}{// node to write}
+          \textcolor{keyword}{const} uint32 offset,        \textcolor{comment}{// child offset}
+          \textcolor{keyword}{const} uint32 skip\_node,     \textcolor{comment}{// skip node}
+          \textcolor{keyword}{const} uint32 \hyperlink{group___basic_ga7a37aba0ec0ff22738563bca83609dca}{begin},         \textcolor{comment}{// node range begin}
+          \textcolor{keyword}{const} uint32 end);          \textcolor{comment}{// node range end}
+
+       \textcolor{keywordtype}{void} write\_leaf(
+          \textcolor{keyword}{const} uint32 index,         \textcolor{comment}{// leaf to write}
+          \textcolor{keyword}{const} uint32 \hyperlink{group___basic_ga7a37aba0ec0ff22738563bca83609dca}{begin},         \textcolor{comment}{// leaf range begin}
+          \textcolor{keyword}{const} uint32 end);          \textcolor{comment}{// leaf range end}
+   \};
+\};
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+allowing its behaviour to be completely customized. In this case, we just relied on the default implementation provided by \hyperlink{structcugar_1_1cuda_1_1_kd__context}{cugar\+::cuda\+::\+Kd\+\_\+context}.
+\end{DoxyParagraph}
+Next\+: \hyperlink{host_device_page}{Host \& Device} Top\+: mainpage 

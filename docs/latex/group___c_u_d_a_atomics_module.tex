@@ -1,0 +1,27 @@
+\hypertarget{group___c_u_d_a_atomics_module}{}\section{C\+U\+DA Atomics}
+\label{group___c_u_d_a_atomics_module}\index{C\+U\+D\+A Atomics@{C\+U\+D\+A Atomics}}
+
+
+\subsection{Detailed Description}
+This module various types of C\+U\+DA atomics \subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcugar_1_1cuda_1_1warp__static__atomic}{cugar\+::cuda\+::warp\+\_\+static\+\_\+atomic}
+\item 
+struct \hyperlink{structcugar_1_1cuda_1_1warp__atomic}{cugar\+::cuda\+::warp\+\_\+atomic}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\+\_\+\+\_\+device\+\_\+\+\_\+ \+\_\+\+\_\+forceinline\+\_\+\+\_\+ unsigned int \hyperlink{group___c_u_d_a_atomics_module_gafc8e36159201dad49d48ad3d2413f971}{cugar\+::cuda\+::warp\+\_\+increment} (unsigned int $\ast$ptr)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___c_u_d_a_atomics_module_gafc8e36159201dad49d48ad3d2413f971}\label{group___c_u_d_a_atomics_module_gafc8e36159201dad49d48ad3d2413f971}} 
+\index{C\+U\+D\+A Atomics@{C\+U\+D\+A Atomics}!warp\+\_\+increment@{warp\+\_\+increment}}
+\index{warp\+\_\+increment@{warp\+\_\+increment}!C\+U\+D\+A Atomics@{C\+U\+D\+A Atomics}}
+\subsubsection{\texorpdfstring{warp\+\_\+increment()}{warp\_increment()}}
+{\footnotesize\ttfamily \+\_\+\+\_\+device\+\_\+\+\_\+ \+\_\+\+\_\+forceinline\+\_\+\+\_\+ unsigned int cugar\+::cuda\+::warp\+\_\+increment (\begin{DoxyParamCaption}\item[{unsigned int $\ast$}]{ptr }\end{DoxyParamCaption})}
+
+increment the value at ptr by 1 and return the old value 

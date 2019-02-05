@@ -1,0 +1,98 @@
+\hypertarget{group___filtering_module}{}\section{Filtering\+Module}
+\label{group___filtering_module}\index{Filtering\+Module@{Filtering\+Module}}
+
+
+\subsection{Detailed Description}
+\begin{DoxyParagraph}{}
+This module defines a set of image-\/space filters useful for denoising. 
+\end{DoxyParagraph}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_e_a_w_params}{E\+A\+W\+Params}
+\item 
+struct \hyperlink{struct_x_b_l_params}{X\+B\+L\+Params}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___filtering_module_ga38dd9d909bafda3d5fc83f49446616dc}\label{group___filtering_module_ga38dd9d909bafda3d5fc83f49446616dc}} 
+enum {\bfseries Filter\+Op} \{ \newline
+{\bfseries k\+Filter\+Op\+None} = 0x0u, 
+{\bfseries k\+Filter\+Op\+Modulate\+Input} = 0x1u, 
+{\bfseries k\+Filter\+Op\+Demodulate\+Input} = 0x2u, 
+{\bfseries k\+Filter\+Op\+Modulate\+Output} = 0x4u, 
+\newline
+{\bfseries k\+Filter\+Op\+Demodulate\+Output} = 0x8u, 
+{\bfseries k\+Filter\+Op\+Add\+Mode} = 0x10u, 
+{\bfseries k\+Filter\+Op\+Replace\+Mode} = 0x20u
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group___filtering_module_ga0ca4d81aa0d6833b3a0ecfdf891e03a6}{E\+AW} (\hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View} dst, const \hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View} img, const \hyperlink{struct_g_buffer_view}{G\+Buffer\+View} gb, const float $\ast$var, const \hyperlink{struct_e_a_w_params}{E\+A\+W\+Params} params, const uint32 step\+\_\+size)
+\item 
+void \hyperlink{group___filtering_module_ga8b74863fdff053bf5a4dae5222463b51}{E\+AW} (\hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View} dst, const Filter\+Op op, const \hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View} w\+\_\+img, const float w\+\_\+min, const \hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View} img, const \hyperlink{struct_g_buffer_view}{G\+Buffer\+View} gb, const float $\ast$var, const \hyperlink{struct_e_a_w_params}{E\+A\+W\+Params} params, const uint32 step\+\_\+size)
+\item 
+void \hyperlink{group___filtering_module_gaf515a6c5c5019b5647219ad6566323e1}{E\+AW} (const uint32 n\+\_\+iterations, uint32 \&in\+\_\+buffer, \hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View} pingpong\mbox{[}2\mbox{]}, const \hyperlink{struct_g_buffer_view}{G\+Buffer\+View} gb, const float $\ast$var, const \hyperlink{struct_e_a_w_params}{E\+A\+W\+Params} params)
+\item 
+void \hyperlink{group___filtering_module_ga55750da8e47a4f02c52581780d82b7be}{E\+AW} (const uint32 n\+\_\+iterations, \hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View} dst, const \hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View} img, const \hyperlink{struct_g_buffer_view}{G\+Buffer\+View} gb, const float $\ast$var, const \hyperlink{struct_e_a_w_params}{E\+A\+W\+Params} params, \hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View} pingpong\mbox{[}2\mbox{]})
+\item 
+void \hyperlink{group___filtering_module_ga555e254676c54ef667565bdd2ca61860}{E\+AW} (const uint32 n\+\_\+iterations, \hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View} dst, const \hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View} w\+\_\+img, const \hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View} img, const \hyperlink{struct_g_buffer_view}{G\+Buffer\+View} gb, const float $\ast$var, const \hyperlink{struct_e_a_w_params}{E\+A\+W\+Params} params, \hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View} pingpong\mbox{[}2\mbox{]})
+\item 
+\mbox{\Hypertarget{group___filtering_module_ga66cbb0d32eb5ee64e6e88016171d527e}\label{group___filtering_module_ga66cbb0d32eb5ee64e6e88016171d527e}} 
+F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} {\bfseries demodulate} (const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} f, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} c)
+\item 
+\mbox{\Hypertarget{group___filtering_module_ga37cc21fad8ca5eed0e45740ef71e2592}\label{group___filtering_module_ga37cc21fad8ca5eed0e45740ef71e2592}} 
+F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} {\bfseries modulate} (const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} f, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} c)
+\item 
+\mbox{\Hypertarget{group___filtering_module_ga73a1db0dfe883e3b04738bd2b4d475c1}\label{group___filtering_module_ga73a1db0dfe883e3b04738bd2b4d475c1}} 
+F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector4f} {\bfseries modulate} (const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector4f} f, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector4f} c)
+\item 
+void \hyperlink{group___filtering_module_gaa39afad6e4488ce8af5d5ef4f0a48f00}{X\+BL} (\hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View} dst, const Filter\+Op op, const \hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View} w\+\_\+img, const float w\+\_\+min, const \hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View} img, const \hyperlink{struct_g_buffer_view}{G\+Buffer\+View} gb, const float $\ast$var, const \hyperlink{struct_x_b_l_params}{X\+B\+L\+Params} params, const uint32 filter\+\_\+radius, const uint32 step\+\_\+size, const \hyperlink{struct_tiled_sequence_view}{Tiled\+Sequence\+View} sequence)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___filtering_module_ga0ca4d81aa0d6833b3a0ecfdf891e03a6}\label{group___filtering_module_ga0ca4d81aa0d6833b3a0ecfdf891e03a6}} 
+\index{Filtering\+Module@{Filtering\+Module}!E\+AW@{E\+AW}}
+\index{E\+AW@{E\+AW}!Filtering\+Module@{Filtering\+Module}}
+\subsubsection{\texorpdfstring{E\+A\+W()}{EAW()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily void E\+AW (\begin{DoxyParamCaption}\item[{\hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View}}]{dst,  }\item[{const \hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View}}]{img,  }\item[{const \hyperlink{struct_g_buffer_view}{G\+Buffer\+View}}]{gb,  }\item[{const float $\ast$}]{var,  }\item[{const \hyperlink{struct_e_a_w_params}{E\+A\+W\+Params}}]{params,  }\item[{const uint32}]{step\+\_\+size }\end{DoxyParamCaption})}
+
+perform a step of Edge A-\/trous Wavelet filtering \mbox{\Hypertarget{group___filtering_module_ga8b74863fdff053bf5a4dae5222463b51}\label{group___filtering_module_ga8b74863fdff053bf5a4dae5222463b51}} 
+\index{Filtering\+Module@{Filtering\+Module}!E\+AW@{E\+AW}}
+\index{E\+AW@{E\+AW}!Filtering\+Module@{Filtering\+Module}}
+\subsubsection{\texorpdfstring{E\+A\+W()}{EAW()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily void E\+AW (\begin{DoxyParamCaption}\item[{\hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View}}]{dst,  }\item[{const Filter\+Op}]{op,  }\item[{const \hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View}}]{w\+\_\+img,  }\item[{const float}]{w\+\_\+min,  }\item[{const \hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View}}]{img,  }\item[{const \hyperlink{struct_g_buffer_view}{G\+Buffer\+View}}]{gb,  }\item[{const float $\ast$}]{var,  }\item[{const \hyperlink{struct_e_a_w_params}{E\+A\+W\+Params}}]{params,  }\item[{const uint32}]{step\+\_\+size }\end{DoxyParamCaption})}
+
+perform a step of Edge A-\/trous Wavelet filtering, multiplying the result by a weight image and adding it to the output, i.\+e. solving\+:
+
+dst += w\+\_\+img $\ast$ eaw(img) \mbox{\Hypertarget{group___filtering_module_gaf515a6c5c5019b5647219ad6566323e1}\label{group___filtering_module_gaf515a6c5c5019b5647219ad6566323e1}} 
+\index{Filtering\+Module@{Filtering\+Module}!E\+AW@{E\+AW}}
+\index{E\+AW@{E\+AW}!Filtering\+Module@{Filtering\+Module}}
+\subsubsection{\texorpdfstring{E\+A\+W()}{EAW()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily void E\+AW (\begin{DoxyParamCaption}\item[{const uint32}]{n\+\_\+iterations,  }\item[{uint32 \&}]{in\+\_\+buffer,  }\item[{\hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View}}]{pingpong\mbox{[}2\mbox{]},  }\item[{const \hyperlink{struct_g_buffer_view}{G\+Buffer\+View}}]{gb,  }\item[{const float $\ast$}]{var,  }\item[{const \hyperlink{struct_e_a_w_params}{E\+A\+W\+Params}}]{params }\end{DoxyParamCaption})}
+
+perform several iterations of Edge A-\/trous Wavelet filtering \mbox{\Hypertarget{group___filtering_module_ga55750da8e47a4f02c52581780d82b7be}\label{group___filtering_module_ga55750da8e47a4f02c52581780d82b7be}} 
+\index{Filtering\+Module@{Filtering\+Module}!E\+AW@{E\+AW}}
+\index{E\+AW@{E\+AW}!Filtering\+Module@{Filtering\+Module}}
+\subsubsection{\texorpdfstring{E\+A\+W()}{EAW()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily void E\+AW (\begin{DoxyParamCaption}\item[{const uint32}]{n\+\_\+iterations,  }\item[{\hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View}}]{dst,  }\item[{const \hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View}}]{img,  }\item[{const \hyperlink{struct_g_buffer_view}{G\+Buffer\+View}}]{gb,  }\item[{const float $\ast$}]{var,  }\item[{const \hyperlink{struct_e_a_w_params}{E\+A\+W\+Params}}]{params,  }\item[{\hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View}}]{pingpong\mbox{[}2\mbox{]} }\end{DoxyParamCaption})}
+
+perform several iterations of Edge A-\/trous Wavelet filtering \mbox{\Hypertarget{group___filtering_module_ga555e254676c54ef667565bdd2ca61860}\label{group___filtering_module_ga555e254676c54ef667565bdd2ca61860}} 
+\index{Filtering\+Module@{Filtering\+Module}!E\+AW@{E\+AW}}
+\index{E\+AW@{E\+AW}!Filtering\+Module@{Filtering\+Module}}
+\subsubsection{\texorpdfstring{E\+A\+W()}{EAW()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily void E\+AW (\begin{DoxyParamCaption}\item[{const uint32}]{n\+\_\+iterations,  }\item[{\hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View}}]{dst,  }\item[{const \hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View}}]{w\+\_\+img,  }\item[{const \hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View}}]{img,  }\item[{const \hyperlink{struct_g_buffer_view}{G\+Buffer\+View}}]{gb,  }\item[{const float $\ast$}]{var,  }\item[{const \hyperlink{struct_e_a_w_params}{E\+A\+W\+Params}}]{params,  }\item[{\hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View}}]{pingpong\mbox{[}2\mbox{]} }\end{DoxyParamCaption})}
+
+perform several iterations of Edge A-\/trous Wavelet filtering \mbox{\Hypertarget{group___filtering_module_gaa39afad6e4488ce8af5d5ef4f0a48f00}\label{group___filtering_module_gaa39afad6e4488ce8af5d5ef4f0a48f00}} 
+\index{Filtering\+Module@{Filtering\+Module}!X\+BL@{X\+BL}}
+\index{X\+BL@{X\+BL}!Filtering\+Module@{Filtering\+Module}}
+\subsubsection{\texorpdfstring{X\+B\+L()}{XBL()}}
+{\footnotesize\ttfamily void X\+BL (\begin{DoxyParamCaption}\item[{\hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View}}]{dst,  }\item[{const Filter\+Op}]{op,  }\item[{const \hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View}}]{w\+\_\+img,  }\item[{const float}]{w\+\_\+min,  }\item[{const \hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View}}]{img,  }\item[{const \hyperlink{struct_g_buffer_view}{G\+Buffer\+View}}]{gb,  }\item[{const float $\ast$}]{var,  }\item[{const \hyperlink{struct_x_b_l_params}{X\+B\+L\+Params}}]{params,  }\item[{const uint32}]{filter\+\_\+radius,  }\item[{const uint32}]{step\+\_\+size,  }\item[{const \hyperlink{struct_tiled_sequence_view}{Tiled\+Sequence\+View}}]{sequence }\end{DoxyParamCaption})}
+
+perform a step of Edge A-\/trous Wavelet filtering, multiplying the result by a weight image and adding it to the output, i.\+e. solving\+:
+
+dst += w\+\_\+img $\ast$ eaw(img) 

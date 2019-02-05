@@ -1,0 +1,69 @@
+\hypertarget{structcugar_1_1_gaussian__generator}{}\section{cugar\+:\+:Gaussian\+\_\+generator Struct Reference}
+\label{structcugar_1_1_gaussian__generator}\index{cugar\+::\+Gaussian\+\_\+generator@{cugar\+::\+Gaussian\+\_\+generator}}
+
+
+\subsection{Detailed description}
+Wrapper class to generate Gaussian distributed numbers out of a uniform random number generator 
+
+{\ttfamily \#include $<$distributions.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_gaussian__generator_a9e2fcb53df5aa466152cc4cdddc7d798}{Gaussian\+\_\+generator} (const float sigma)
+\item 
+{\footnotesize template$<$typename Generator $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_gaussian__generator_a05e4e7489ee54bbcc2bbd80446f6e088}{next} (Generator \&\hyperlink{group___sampling_module_gaec17bbbfd36295353081b7b4480d933d}{random})
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_gaussian__generator_ae2234cab60f8a190b135b6e1dc0735fb}{density} (const float x) const
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcugar_1_1_gaussian__generator_a9e2fcb53df5aa466152cc4cdddc7d798}\label{structcugar_1_1_gaussian__generator_a9e2fcb53df5aa466152cc4cdddc7d798}} 
+\index{cugar\+::\+Gaussian\+\_\+generator@{cugar\+::\+Gaussian\+\_\+generator}!Gaussian\+\_\+generator@{Gaussian\+\_\+generator}}
+\index{Gaussian\+\_\+generator@{Gaussian\+\_\+generator}!cugar\+::\+Gaussian\+\_\+generator@{cugar\+::\+Gaussian\+\_\+generator}}
+\subsubsection{\texorpdfstring{Gaussian\+\_\+generator()}{Gaussian\_generator()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE cugar\+::\+Gaussian\+\_\+generator\+::\+Gaussian\+\_\+generator (\begin{DoxyParamCaption}\item[{const float}]{sigma }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em sigma} & variance \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1_gaussian__generator_ae2234cab60f8a190b135b6e1dc0735fb}\label{structcugar_1_1_gaussian__generator_ae2234cab60f8a190b135b6e1dc0735fb}} 
+\index{cugar\+::\+Gaussian\+\_\+generator@{cugar\+::\+Gaussian\+\_\+generator}!density@{density}}
+\index{density@{density}!cugar\+::\+Gaussian\+\_\+generator@{cugar\+::\+Gaussian\+\_\+generator}}
+\subsubsection{\texorpdfstring{density()}{density()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float cugar\+::\+Gaussian\+\_\+generator\+::density (\begin{DoxyParamCaption}\item[{const float}]{x }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+probability density function
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & sample location \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1_gaussian__generator_a05e4e7489ee54bbcc2bbd80446f6e088}\label{structcugar_1_1_gaussian__generator_a05e4e7489ee54bbcc2bbd80446f6e088}} 
+\index{cugar\+::\+Gaussian\+\_\+generator@{cugar\+::\+Gaussian\+\_\+generator}!next@{next}}
+\index{next@{next}!cugar\+::\+Gaussian\+\_\+generator@{cugar\+::\+Gaussian\+\_\+generator}}
+\subsubsection{\texorpdfstring{next()}{next()}}
+{\footnotesize\ttfamily template$<$typename Generator $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float cugar\+::\+Gaussian\+\_\+generator\+::next (\begin{DoxyParamCaption}\item[{Generator \&}]{random }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the next number in the sequence
+
+
+\begin{DoxyParams}{Parameters}
+{\em random} & random number generator \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/sampling/\hyperlink{distributions_8h}{distributions.\+h}\end{DoxyCompactItemize}

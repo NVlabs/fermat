@@ -1,0 +1,48 @@
+\hypertarget{mappings_8h}{}\section{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/spherical/mappings.h File Reference}
+\label{mappings_8h}\index{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/spherical/mappings.\+h@{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/spherical/mappings.\+h}}
+
+
+Defines various spherical mappings.  
+
+
+{\ttfamily \#include $<$cugar/basic/numbers.\+h$>$}\newline
+{\ttfamily \#include $<$cugar/linalg/vector.\+h$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$cugar/spherical/mappings\+\_\+inline.\+h$>$}\newline
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespacecugar}{cugar}
+\begin{DoxyCompactList}\small\item\em Define a \hyperlink{structcugar_1_1vector__view}{vector\+\_\+view} P\+OD type and \hyperlink{namespacecugar_a347f91de482f0cb8dcba21c086b0aa46}{plain\+\_\+view()} for std\+::vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+ST C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE Vector3f \hyperlink{group__spherical__mappings_gaa4a68b633ea01fccb331d1a47a8ca8d4}{cugar\+::from\+\_\+spherical\+\_\+coords} (const Vector2f \&uv)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+ST C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE Vector2f \hyperlink{group__spherical__mappings_ga180b90ffc2cc3cfcfe63e911ea51a1ab}{cugar\+::to\+\_\+spherical\+\_\+coords} (const Vector3f \&vec)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+ST C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE Vector2f \hyperlink{group__spherical__mappings_ga1c891ec8d6e220337a3e39e6dc286e9b}{cugar\+::square\+\_\+to\+\_\+unit\+\_\+disk} (const Vector2f uv)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+ST C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE Vector2f \hyperlink{group__spherical__mappings_ga76c7dc3d9379efe5b51c700e28edd8a6}{cugar\+::unit\+\_\+disk\+\_\+to\+\_\+square} (const Vector2f disk)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+ST C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE Vector3f \hyperlink{group__spherical__mappings_gab558fab9acdf1ea100f19dff7c6215c4}{cugar\+::square\+\_\+to\+\_\+cosine\+\_\+hemisphere} (const Vector2f \&uv)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+ST C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE Vector2f \hyperlink{group__spherical__mappings_ga31615ccce21cd9f1161aaabf87f89b9b}{cugar\+::cosine\+\_\+hemisphere\+\_\+to\+\_\+square} (const Vector3f \&dir)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+ST C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE Vector3f \hyperlink{group__spherical__mappings_gae75ef450df309874ff133b4ec8daee40}{cugar\+::uniform\+\_\+square\+\_\+to\+\_\+sphere} (const Vector2f \&uv)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+ST C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE Vector2f \hyperlink{group__spherical__mappings_gaf091547e7d69c8125c7b037aa2d5bd5c}{cugar\+::uniform\+\_\+sphere\+\_\+to\+\_\+square} (const Vector3f \&vec)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+ST C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE Vector2f \hyperlink{group__spherical__mappings_ga10f5d3f25177b94512dc15b59a0434bc}{cugar\+::hemisphere\+\_\+to\+\_\+hemioct} (Vector3f v)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+ST C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE Vector3f \hyperlink{group__spherical__mappings_ga8acf5ad9380c558633e1aee500d87089}{cugar\+::hemioct\+\_\+to\+\_\+hemisphere} (Vector2f e)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+ST C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE Vector2f \hyperlink{group__spherical__mappings_gad4cb74d8c6a86fdaf44bce3961fde975}{cugar\+::sphere\+\_\+to\+\_\+oct} (Vector3f v)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+ST C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE Vector3f \hyperlink{group__spherical__mappings_gad2300cdc769dfa8bb11e2b8452895545}{cugar\+::oct\+\_\+to\+\_\+sphere} (Vector2f e)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Defines various spherical mappings. 
+

@@ -1,0 +1,53 @@
+\hypertarget{ltc_8h}{}\section{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bsdf/ltc.h File Reference}
+\label{ltc_8h}\index{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bsdf/ltc.\+h@{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bsdf/ltc.\+h}}
+
+
+Defines the L\+TC B\+S\+DF.  
+
+
+{\ttfamily \#include $<$cugar/linalg/vector.\+h$>$}\newline
+{\ttfamily \#include $<$cugar/linalg/matrix.\+h$>$}\newline
+{\ttfamily \#include $<$cugar/basic/numbers.\+h$>$}\newline
+{\ttfamily \#include $<$cugar/bsdf/differential\+\_\+geometry.\+h$>$}\newline
+{\ttfamily \#include $<$cugar/spherical/mappings.\+h$>$}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcugar_1_1_l_t_c_bsdf}{cugar\+::\+L\+T\+C\+Bsdf}
+\item 
+struct \hyperlink{structcugar_1_1_l_t_c_bsdf_1_1_l_t_c}{cugar\+::\+L\+T\+C\+Bsdf\+::\+L\+TC}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespacecugar}{cugar}
+\begin{DoxyCompactList}\small\item\em Define a \hyperlink{structcugar_1_1vector__view}{vector\+\_\+view} P\+OD type and \hyperlink{namespacecugar_a347f91de482f0cb8dcba21c086b0aa46}{plain\+\_\+view()} for std\+::vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{ltc_8h_a85a5817688cb08794ad2004277252f57}\label{ltc_8h_a85a5817688cb08794ad2004277252f57}} 
+\#define {\bfseries O\+N\+E\+\_\+\+O\+V\+E\+R\+\_\+\+P\+If}~0.\+31830988618f
+\item 
+\mbox{\Hypertarget{ltc_8h_a674fc9e15c61472a4de0396d8d8761a5}\label{ltc_8h_a674fc9e15c61472a4de0396d8d8761a5}} 
+\#define {\bfseries O\+N\+E\+\_\+\+O\+V\+E\+R\+\_\+\+T\+W\+O\+\_\+\+P\+If}~0.\+15915494309f
+\item 
+\mbox{\Hypertarget{ltc_8h_abe7708df272b3cdb7b1199273f5405f5}\label{ltc_8h_abe7708df272b3cdb7b1199273f5405f5}} 
+\#define {\bfseries H\+A\+L\+F\+\_\+\+P\+If}~1.\+57079632679f
+\item 
+\mbox{\Hypertarget{ltc_8h_adba13fcfb0639a8f48faf963730673a0}\label{ltc_8h_adba13fcfb0639a8f48faf963730673a0}} 
+\#define {\bfseries O\+N\+E\+\_\+\+O\+V\+E\+R\+\_\+\+H\+A\+L\+F\+\_\+\+P\+If}~0.\+63661977236f
+\item 
+\mbox{\Hypertarget{ltc_8h_acd4eaf86b45a7f592bcccda1789d5a52}\label{ltc_8h_acd4eaf86b45a7f592bcccda1789d5a52}} 
+\#define {\bfseries L\+T\+C\+\_\+\+U\+S\+E\+\_\+\+I\+N\+V\+D\+ET}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{group___b_s_d_f_module_ga0ddbffc856042ea191e9ed868fe58ca9}{cugar\+::clip\+\_\+quad\+\_\+to\+\_\+horizon} (\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} L\mbox{[}5\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Defines the L\+TC B\+S\+DF. 
+
+This module provides a ltc B\+S\+DF implementation 

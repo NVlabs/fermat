@@ -1,0 +1,175 @@
+\hypertarget{group___bits_module}{}\section{Bits \& Tricks}
+\label{group___bits_module}\index{Bits \& Tricks@{Bits \& Tricks}}
+
+
+\subsection{Detailed Description}
+This module provides several bit-\/manipulation functions. \subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcugar_1_1_bitmask}{cugar\+::\+Bitmask$<$ W\+O\+R\+D\+S $>$}
+\item 
+struct \hyperlink{structcugar_1_1_bitmask_3_011_01_4}{cugar\+::\+Bitmask$<$ 1 $>$}
+\item 
+struct \hyperlink{structcugar_1_1_bitmask_3_012_01_4}{cugar\+::\+Bitmask$<$ 2 $>$}
+\item 
+struct \hyperlink{structcugar_1_1morton__functor}{cugar\+::morton\+\_\+functor$<$ Integer, D\+I\+M, Bbox\+Type $>$}
+\item 
+struct \hyperlink{structcugar_1_1morton__functor_3_01uint32_00_012u_00_01_bbox_type_01_4}{cugar\+::morton\+\_\+functor$<$ uint32, 2u, Bbox\+Type $>$}
+\item 
+struct \hyperlink{structcugar_1_1morton__functor_3_01uint64_00_012u_00_01_bbox_type_01_4}{cugar\+::morton\+\_\+functor$<$ uint64, 2u, Bbox\+Type $>$}
+\item 
+struct \hyperlink{structcugar_1_1morton__functor_3_01uint32_00_013u_00_01_bbox_type_01_4}{cugar\+::morton\+\_\+functor$<$ uint32, 3u, Bbox\+Type $>$}
+\item 
+struct \hyperlink{structcugar_1_1morton__functor_3_01uint64_00_013u_00_01_bbox_type_01_4}{cugar\+::morton\+\_\+functor$<$ uint64, 3u, Bbox\+Type $>$}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{group___bits_module_ga6494ab687521f35e3e28dc1524d15218}{cugar\+::morton\+\_\+code} (uint32 x, uint32 y)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{group___bits_module_ga4b9f4b0383537e421a0c7299ca64d76e}{cugar\+::morton\+\_\+code} (uint32 x, uint32 y, uint32 z)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint64 \hyperlink{group___bits_module_ga849b7e23fee1b2d3b573469a983cac3d}{cugar\+::morton\+\_\+code60} (uint32 \+\_\+x, uint32 \+\_\+y)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint64 \hyperlink{group___bits_module_ga341afe20927dde33979a1d6720d26569}{cugar\+::morton\+\_\+code60} (uint32 x, uint32 y, uint32 z)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{group___bits_module_ga88a87094ba5547f8896d8947adfdec58}{cugar\+::popc} (const int32 i)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{group___bits_module_gac8ac259ac805ab9499212e88829c6723}{cugar\+::popc} (const uint32 i)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{group___bits_module_ga073933cb13ac2d78195d52f59b3460a7}{cugar\+::popc} (const uint8 i)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{group___bits_module_ga64c0867f55f331496bc7617303b9e650}{cugar\+::popc} (const uint64 i)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{group___bits_module_ga7f02d582847e11ea8454216ad36dc77b}{cugar\+::find\+\_\+nthbit4} (const uint32 mask, const uint32 n)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{group___bits_module_ga4bc7fb7acba5b770553c58bfae69f5af}{cugar\+::popc4} (const uint32 mask)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{group___bits_module_ga38b135612da4fe8202152a56dc9b9508}{cugar\+::find\+\_\+nthbit8} (const uint32 mask, const uint32 n)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{group___bits_module_ga68f09d26fa95c119a5263f856365db42}{cugar\+::ffs} (const int32 x)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{group___bits_module_gad2be8d91a93a10a6a9601f4f89bf752b}{cugar\+::lzc} (const uint32 x)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___bits_module_ga68f09d26fa95c119a5263f856365db42}\label{group___bits_module_ga68f09d26fa95c119a5263f856365db42}} 
+\index{Bits \& Tricks@{Bits \& Tricks}!ffs@{ffs}}
+\index{ffs@{ffs}!Bits \& Tricks@{Bits \& Tricks}}
+\subsubsection{\texorpdfstring{ffs()}{ffs()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 cugar\+::ffs (\begin{DoxyParamCaption}\item[{const int32}]{x }\end{DoxyParamCaption})}
+
+find the least significant bit set \mbox{\Hypertarget{group___bits_module_ga7f02d582847e11ea8454216ad36dc77b}\label{group___bits_module_ga7f02d582847e11ea8454216ad36dc77b}} 
+\index{Bits \& Tricks@{Bits \& Tricks}!find\+\_\+nthbit4@{find\+\_\+nthbit4}}
+\index{find\+\_\+nthbit4@{find\+\_\+nthbit4}!Bits \& Tricks@{Bits \& Tricks}}
+\subsubsection{\texorpdfstring{find\+\_\+nthbit4()}{find\_nthbit4()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 cugar\+::find\+\_\+nthbit4 (\begin{DoxyParamCaption}\item[{const uint32}]{mask,  }\item[{const uint32}]{n }\end{DoxyParamCaption})}
+
+find the n-\/th bit set in a 4-\/bit mask (n in \mbox{[}1,4\mbox{]}) \mbox{\Hypertarget{group___bits_module_ga38b135612da4fe8202152a56dc9b9508}\label{group___bits_module_ga38b135612da4fe8202152a56dc9b9508}} 
+\index{Bits \& Tricks@{Bits \& Tricks}!find\+\_\+nthbit8@{find\+\_\+nthbit8}}
+\index{find\+\_\+nthbit8@{find\+\_\+nthbit8}!Bits \& Tricks@{Bits \& Tricks}}
+\subsubsection{\texorpdfstring{find\+\_\+nthbit8()}{find\_nthbit8()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 cugar\+::find\+\_\+nthbit8 (\begin{DoxyParamCaption}\item[{const uint32}]{mask,  }\item[{const uint32}]{n }\end{DoxyParamCaption})}
+
+find the n-\/th bit set in a 8-\/bit mask (n in \mbox{[}1,8\mbox{]}) \mbox{\Hypertarget{group___bits_module_gad2be8d91a93a10a6a9601f4f89bf752b}\label{group___bits_module_gad2be8d91a93a10a6a9601f4f89bf752b}} 
+\index{Bits \& Tricks@{Bits \& Tricks}!lzc@{lzc}}
+\index{lzc@{lzc}!Bits \& Tricks@{Bits \& Tricks}}
+\subsubsection{\texorpdfstring{lzc()}{lzc()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 cugar\+::lzc (\begin{DoxyParamCaption}\item[{const uint32}]{x }\end{DoxyParamCaption})}
+
+count the number of leading zeros \mbox{\Hypertarget{group___bits_module_ga6494ab687521f35e3e28dc1524d15218}\label{group___bits_module_ga6494ab687521f35e3e28dc1524d15218}} 
+\index{Bits \& Tricks@{Bits \& Tricks}!morton\+\_\+code@{morton\+\_\+code}}
+\index{morton\+\_\+code@{morton\+\_\+code}!Bits \& Tricks@{Bits \& Tricks}}
+\subsubsection{\texorpdfstring{morton\+\_\+code()}{morton\_code()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 cugar\+::morton\+\_\+code (\begin{DoxyParamCaption}\item[{uint32}]{x,  }\item[{uint32}]{y }\end{DoxyParamCaption})}
+
+compute the Morton code of a given 2d point
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & x component \\
+\hline
+{\em y} & y component \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___bits_module_ga4b9f4b0383537e421a0c7299ca64d76e}\label{group___bits_module_ga4b9f4b0383537e421a0c7299ca64d76e}} 
+\index{Bits \& Tricks@{Bits \& Tricks}!morton\+\_\+code@{morton\+\_\+code}}
+\index{morton\+\_\+code@{morton\+\_\+code}!Bits \& Tricks@{Bits \& Tricks}}
+\subsubsection{\texorpdfstring{morton\+\_\+code()}{morton\_code()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 cugar\+::morton\+\_\+code (\begin{DoxyParamCaption}\item[{uint32}]{x,  }\item[{uint32}]{y,  }\item[{uint32}]{z }\end{DoxyParamCaption})}
+
+compute the Morton code of a given 3d point
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & x component \\
+\hline
+{\em y} & y component \\
+\hline
+{\em z} & z component \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___bits_module_ga849b7e23fee1b2d3b573469a983cac3d}\label{group___bits_module_ga849b7e23fee1b2d3b573469a983cac3d}} 
+\index{Bits \& Tricks@{Bits \& Tricks}!morton\+\_\+code60@{morton\+\_\+code60}}
+\index{morton\+\_\+code60@{morton\+\_\+code60}!Bits \& Tricks@{Bits \& Tricks}}
+\subsubsection{\texorpdfstring{morton\+\_\+code60()}{morton\_code60()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint64 cugar\+::morton\+\_\+code60 (\begin{DoxyParamCaption}\item[{uint32}]{\+\_\+x,  }\item[{uint32}]{\+\_\+y }\end{DoxyParamCaption})}
+
+compute the 60-\/bit Morton code of a given 2d point
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+x} & x component \\
+\hline
+{\em \+\_\+y} & y component \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___bits_module_ga341afe20927dde33979a1d6720d26569}\label{group___bits_module_ga341afe20927dde33979a1d6720d26569}} 
+\index{Bits \& Tricks@{Bits \& Tricks}!morton\+\_\+code60@{morton\+\_\+code60}}
+\index{morton\+\_\+code60@{morton\+\_\+code60}!Bits \& Tricks@{Bits \& Tricks}}
+\subsubsection{\texorpdfstring{morton\+\_\+code60()}{morton\_code60()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint64 cugar\+::morton\+\_\+code60 (\begin{DoxyParamCaption}\item[{uint32}]{x,  }\item[{uint32}]{y,  }\item[{uint32}]{z }\end{DoxyParamCaption})}
+
+compute the 60-\/bit Morton code of a given 3d point
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & x component \\
+\hline
+{\em y} & y component \\
+\hline
+{\em z} & z component \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___bits_module_ga88a87094ba5547f8896d8947adfdec58}\label{group___bits_module_ga88a87094ba5547f8896d8947adfdec58}} 
+\index{Bits \& Tricks@{Bits \& Tricks}!popc@{popc}}
+\index{popc@{popc}!Bits \& Tricks@{Bits \& Tricks}}
+\subsubsection{\texorpdfstring{popc()}{popc()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 cugar\+::popc (\begin{DoxyParamCaption}\item[{const int32}]{i }\end{DoxyParamCaption})}
+
+int32 popcount \mbox{\Hypertarget{group___bits_module_gac8ac259ac805ab9499212e88829c6723}\label{group___bits_module_gac8ac259ac805ab9499212e88829c6723}} 
+\index{Bits \& Tricks@{Bits \& Tricks}!popc@{popc}}
+\index{popc@{popc}!Bits \& Tricks@{Bits \& Tricks}}
+\subsubsection{\texorpdfstring{popc()}{popc()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 cugar\+::popc (\begin{DoxyParamCaption}\item[{const uint32}]{i }\end{DoxyParamCaption})}
+
+uint32 popcount \mbox{\Hypertarget{group___bits_module_ga073933cb13ac2d78195d52f59b3460a7}\label{group___bits_module_ga073933cb13ac2d78195d52f59b3460a7}} 
+\index{Bits \& Tricks@{Bits \& Tricks}!popc@{popc}}
+\index{popc@{popc}!Bits \& Tricks@{Bits \& Tricks}}
+\subsubsection{\texorpdfstring{popc()}{popc()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 cugar\+::popc (\begin{DoxyParamCaption}\item[{const uint8}]{i }\end{DoxyParamCaption})}
+
+uint8 popcount \mbox{\Hypertarget{group___bits_module_ga64c0867f55f331496bc7617303b9e650}\label{group___bits_module_ga64c0867f55f331496bc7617303b9e650}} 
+\index{Bits \& Tricks@{Bits \& Tricks}!popc@{popc}}
+\index{popc@{popc}!Bits \& Tricks@{Bits \& Tricks}}
+\subsubsection{\texorpdfstring{popc()}{popc()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 cugar\+::popc (\begin{DoxyParamCaption}\item[{const uint64}]{i }\end{DoxyParamCaption})}
+
+uint64 popcount \mbox{\Hypertarget{group___bits_module_ga4bc7fb7acba5b770553c58bfae69f5af}\label{group___bits_module_ga4bc7fb7acba5b770553c58bfae69f5af}} 
+\index{Bits \& Tricks@{Bits \& Tricks}!popc4@{popc4}}
+\index{popc4@{popc4}!Bits \& Tricks@{Bits \& Tricks}}
+\subsubsection{\texorpdfstring{popc4()}{popc4()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 cugar\+::popc4 (\begin{DoxyParamCaption}\item[{const uint32}]{mask }\end{DoxyParamCaption})}
+
+compute the pop-\/count of 4-\/bit mask 

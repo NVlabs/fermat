@@ -1,0 +1,35 @@
+\hypertarget{algorithms_8h}{}\section{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/algorithms.h File Reference}
+\label{algorithms_8h}\index{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/algorithms.\+h@{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/algorithms.\+h}}
+
+
+Defines some general purpose algorithms.  
+
+
+{\ttfamily \#include $<$cugar/basic/types.\+h$>$}\newline
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespacecugar}{cugar}
+\begin{DoxyCompactList}\small\item\em Define a \hyperlink{structcugar_1_1vector__view}{vector\+\_\+view} P\+OD type and \hyperlink{namespacecugar_a347f91de482f0cb8dcba21c086b0aa46}{plain\+\_\+view()} for std\+::vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Iterator , typename Predicate $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Iterator \hyperlink{group___algorithms_module_gaf5c0f35d93fa8af4939155b21c7e2a4f}{cugar\+::find\+\_\+pivot} (Iterator begin, const uint32 n, const Predicate predicate)
+\item 
+{\footnotesize template$<$typename Iterator , typename Value , typename index\+\_\+type $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Iterator \hyperlink{group___algorithms_module_gab5ce2c7f834a31bc40d9101865dec5d1}{cugar\+::lower\+\_\+bound} (const Value x, Iterator begin, const index\+\_\+type n)
+\item 
+{\footnotesize template$<$typename Iterator , typename Value , typename index\+\_\+type $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Iterator \hyperlink{group___algorithms_module_gafe7ee3a93350b3d2f7f7bb6266ee0425}{cugar\+::upper\+\_\+bound} (const Value x, Iterator begin, const index\+\_\+type n)
+\item 
+{\footnotesize template$<$typename Iterator , typename Value , typename index\+\_\+type $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE index\+\_\+type \hyperlink{group___algorithms_module_ga43d4b89e44476e26c04a89f975e4a21e}{cugar\+::lower\+\_\+bound\+\_\+index} (const Value x, Iterator begin, const index\+\_\+type n)
+\item 
+{\footnotesize template$<$typename Iterator , typename Value , typename index\+\_\+type $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE index\+\_\+type \hyperlink{group___algorithms_module_ga8f544d88f3f11cd945933bfa50626375}{cugar\+::upper\+\_\+bound\+\_\+index} (const Value x, Iterator begin, const index\+\_\+type n)
+\item 
+{\footnotesize template$<$typename input\+\_\+iterator1 , typename input\+\_\+iterator2 , typename output\+\_\+iterator $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___algorithms_module_gae6ef81c9ca1cd3976caad12299e37452}{cugar\+::merge} (input\+\_\+iterator1 first1, input\+\_\+iterator1 end1, input\+\_\+iterator2 first2, input\+\_\+iterator2 end2, output\+\_\+iterator output)
+\item 
+{\footnotesize template$<$typename key\+\_\+iterator1 , typename key\+\_\+iterator2 , typename value\+\_\+iterator1 , typename value\+\_\+iterator2 , typename key\+\_\+iterator , typename value\+\_\+iterator $>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___algorithms_module_ga267a2752f3e81f521e759ec274b80561}{cugar\+::merge\+\_\+by\+\_\+key} (key\+\_\+iterator1 first1, key\+\_\+iterator1 end1, key\+\_\+iterator2 first2, key\+\_\+iterator2 end2, value\+\_\+iterator1 values1, value\+\_\+iterator2 values2, key\+\_\+iterator output\+\_\+keys, value\+\_\+iterator output\+\_\+values)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Defines some general purpose algorithms. 
+

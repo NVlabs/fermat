@@ -1,0 +1,35 @@
+\hypertarget{group__multijitter}{}\section{Multi-\/\+Jittering}
+\label{group__multijitter}\index{Multi-\/\+Jittering@{Multi-\/\+Jittering}}
+
+
+\subsection{Detailed Description}
+This module defines utilities to construct multi-\/jittered sampling patterns \subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcugar_1_1_correlated_m_j_sampler}{cugar\+::\+Correlated\+M\+J\+Sampler}
+\item 
+struct \hyperlink{structcugar_1_1_m_j_sampler}{cugar\+::\+M\+J\+Sampler}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float2 \hyperlink{group__multijitter_gaf3f4e367e2cdfe133eae518f82cda8b6}{cugar\+::correlated\+\_\+multijitter} (uint32 s, const uint32 m, const uint32 n, const uint32 p, bool ordered=false)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float3 \hyperlink{group__multijitter_ga23bdc35923e1dc33a8d0c35f671b5554}{cugar\+::correlated\+\_\+multijitter\+\_\+3d} (uint32 s, const uint32 X, const uint32 Y, const uint32 Z, const uint32 p)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__multijitter_gaf3f4e367e2cdfe133eae518f82cda8b6}\label{group__multijitter_gaf3f4e367e2cdfe133eae518f82cda8b6}} 
+\index{Multi-\/\+Jittering@{Multi-\/\+Jittering}!correlated\+\_\+multijitter@{correlated\+\_\+multijitter}}
+\index{correlated\+\_\+multijitter@{correlated\+\_\+multijitter}!Multi-\/\+Jittering@{Multi-\/\+Jittering}}
+\subsubsection{\texorpdfstring{correlated\+\_\+multijitter()}{correlated\_multijitter()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float2 cugar\+::correlated\+\_\+multijitter (\begin{DoxyParamCaption}\item[{uint32}]{s,  }\item[{const uint32}]{m,  }\item[{const uint32}]{n,  }\item[{const uint32}]{p,  }\item[{bool}]{ordered = {\ttfamily false} }\end{DoxyParamCaption})}
+
+The repeatable correlated multi-\/jitter function described in\+: \char`\"{}\+Correlated Multi-\/\+Jittered Sampling\char`\"{}, by Andrew Kensler \mbox{\Hypertarget{group__multijitter_ga23bdc35923e1dc33a8d0c35f671b5554}\label{group__multijitter_ga23bdc35923e1dc33a8d0c35f671b5554}} 
+\index{Multi-\/\+Jittering@{Multi-\/\+Jittering}!correlated\+\_\+multijitter\+\_\+3d@{correlated\+\_\+multijitter\+\_\+3d}}
+\index{correlated\+\_\+multijitter\+\_\+3d@{correlated\+\_\+multijitter\+\_\+3d}!Multi-\/\+Jittering@{Multi-\/\+Jittering}}
+\subsubsection{\texorpdfstring{correlated\+\_\+multijitter\+\_\+3d()}{correlated\_multijitter\_3d()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float3 cugar\+::correlated\+\_\+multijitter\+\_\+3d (\begin{DoxyParamCaption}\item[{uint32}]{s,  }\item[{const uint32}]{X,  }\item[{const uint32}]{Y,  }\item[{const uint32}]{Z,  }\item[{const uint32}]{p }\end{DoxyParamCaption})}
+
+The repeatable correlated multi-\/jitter function described in\+: \char`\"{}\+Correlated Multi-\/\+Jittered Sampling\char`\"{}, by Andrew Kensler extended to form a 3d stack of 3d points 

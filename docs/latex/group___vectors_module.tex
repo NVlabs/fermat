@@ -1,0 +1,453 @@
+\hypertarget{group___vectors_module}{}\section{Vectors}
+\label{group___vectors_module}\index{Vectors@{Vectors}}
+
+
+\subsection{Detailed Description}
+defines linear vectors structs and functions \subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector$<$ T, D\+I\+M $>$}
+\item 
+struct \hyperlink{structcugar_1_1_vector_3_01_t_00_011_01_4}{cugar\+::\+Vector$<$ T, 1 $>$}
+\item 
+struct \hyperlink{structcugar_1_1_vector_3_01_t_00_012_01_4}{cugar\+::\+Vector$<$ T, 2 $>$}
+\item 
+struct \hyperlink{structcugar_1_1_vector_3_01_t_00_013_01_4}{cugar\+::\+Vector$<$ T, 3 $>$}
+\item 
+struct \hyperlink{structcugar_1_1_vector_3_01_t_00_014_01_4}{cugar\+::\+Vector$<$ T, 4 $>$}
+\item 
+struct \hyperlink{structcugar_1_1vector__traits_3_01_vector_3_01_t_00_01_d_i_m___t_01_4_01_4}{cugar\+::vector\+\_\+traits$<$ Vector$<$ T, D\+I\+M\+\_\+\+T $>$ $>$}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___vectors_module_ga0301f64082db4a7f587bdd353096c67e}\label{group___vectors_module_ga0301f64082db4a7f587bdd353096c67e}} 
+typedef \hyperlink{structcugar_1_1_vector}{Vector}$<$ float, 2 $>$ {\bfseries cugar\+::\+Vector2f}
+\item 
+\mbox{\Hypertarget{group___vectors_module_ga7f0a6b1b2e442fa30e267afdf6ce8a8d}\label{group___vectors_module_ga7f0a6b1b2e442fa30e267afdf6ce8a8d}} 
+typedef \hyperlink{structcugar_1_1_vector}{Vector}$<$ float, 3 $>$ {\bfseries cugar\+::\+Vector3f}
+\item 
+\mbox{\Hypertarget{group___vectors_module_ga2157df797e9e3dd147c467fe98d34940}\label{group___vectors_module_ga2157df797e9e3dd147c467fe98d34940}} 
+typedef \hyperlink{structcugar_1_1_vector}{Vector}$<$ float, 4 $>$ {\bfseries cugar\+::\+Vector4f}
+\item 
+\mbox{\Hypertarget{group___vectors_module_ga98f185e4198a4414a68c07b8cc9ce8dc}\label{group___vectors_module_ga98f185e4198a4414a68c07b8cc9ce8dc}} 
+typedef \hyperlink{structcugar_1_1_vector}{Vector}$<$ double, 2 $>$ {\bfseries cugar\+::\+Vector2d}
+\item 
+\mbox{\Hypertarget{group___vectors_module_ga61e4c6ff502e14059dbdab395689c325}\label{group___vectors_module_ga61e4c6ff502e14059dbdab395689c325}} 
+typedef \hyperlink{structcugar_1_1_vector}{Vector}$<$ double, 3 $>$ {\bfseries cugar\+::\+Vector3d}
+\item 
+\mbox{\Hypertarget{group___vectors_module_ga86b6897c9a78db481b1f92679b3ad437}\label{group___vectors_module_ga86b6897c9a78db481b1f92679b3ad437}} 
+typedef \hyperlink{structcugar_1_1_vector}{Vector}$<$ double, 4 $>$ {\bfseries cugar\+::\+Vector4d}
+\item 
+\mbox{\Hypertarget{group___vectors_module_ga5bc2b64f6554ebdbd6ff926d047bde33}\label{group___vectors_module_ga5bc2b64f6554ebdbd6ff926d047bde33}} 
+typedef \hyperlink{structcugar_1_1_vector}{Vector}$<$ int, 2 $>$ {\bfseries cugar\+::\+Vector2i}
+\item 
+\mbox{\Hypertarget{group___vectors_module_ga53a45f08978c683fe984318f276a3bed}\label{group___vectors_module_ga53a45f08978c683fe984318f276a3bed}} 
+typedef \hyperlink{structcugar_1_1_vector}{Vector}$<$ int, 3 $>$ {\bfseries cugar\+::\+Vector3i}
+\item 
+\mbox{\Hypertarget{group___vectors_module_ga4639e2ce34af850907f87e934aa8f68c}\label{group___vectors_module_ga4639e2ce34af850907f87e934aa8f68c}} 
+typedef \hyperlink{structcugar_1_1_vector}{Vector}$<$ int, 4 $>$ {\bfseries cugar\+::\+Vector4i}
+\item 
+\mbox{\Hypertarget{group___vectors_module_gaa608ee5c7db90608a21d42981a7960a3}\label{group___vectors_module_gaa608ee5c7db90608a21d42981a7960a3}} 
+typedef \hyperlink{structcugar_1_1_vector}{Vector}$<$ uint32, 2 $>$ {\bfseries cugar\+::\+Vector2u}
+\item 
+\mbox{\Hypertarget{group___vectors_module_ga2ea3dbbe31f7be76dcc3fccd14ab7305}\label{group___vectors_module_ga2ea3dbbe31f7be76dcc3fccd14ab7305}} 
+typedef \hyperlink{structcugar_1_1_vector}{Vector}$<$ uint32, 3 $>$ {\bfseries cugar\+::\+Vector3u}
+\item 
+\mbox{\Hypertarget{group___vectors_module_ga4a43a2acb449c5b3fee2e6755341ed60}\label{group___vectors_module_ga4a43a2acb449c5b3fee2e6755341ed60}} 
+typedef \hyperlink{structcugar_1_1_vector}{Vector}$<$ uint32, 4 $>$ {\bfseries cugar\+::\+Vector4u}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \hyperlink{group___vectors_module_ga79019254703773ad3d352a503d3d820a}{operator-\/} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \hyperlink{group___vectors_module_ga489fb43a70bf29d1770cfe886bc225f2}{operator+} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op1, const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op2)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \& \hyperlink{group___vectors_module_gab459e58fcb21396fafa8f4a2d562a8e1}{operator+=} (\hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op1, const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op2)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \hyperlink{group___vectors_module_ga0e674f7f0f36bd82e3fec0c821114d67}{operator-\/} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op1, const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op2)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \& \hyperlink{group___vectors_module_ga91cd021cf4fdca7eb4036efe1ea0798c}{operator-\/=} (\hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op1, const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op2)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \hyperlink{group___vectors_module_ga88fb5d3e63998e36fea6139b6d042b7e}{operator$\ast$} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op1, const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op2)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \& \hyperlink{group___vectors_module_ga533de6fa3d06d8337631ef848e63a1a5}{operator$\ast$=} (\hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op1, const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op2)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \hyperlink{group___vectors_module_ga72ffd716dd8896e1d565483f4ff96a51}{operator$\ast$} (const T op1, const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op2)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \hyperlink{group___vectors_module_ga81f6bb4e3ffbaa260e0713f8891b8909}{operator$\ast$} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op1, const T op2)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \& \hyperlink{group___vectors_module_ga382f555725b86158c670437a5a4d3043}{operator$\ast$=} (\hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op1, const T op2)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \hyperlink{group___vectors_module_gae077be2185ca7f28e1fae4fc110a14bf}{operator/} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op1, const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op2)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \& \hyperlink{group___vectors_module_ga8b304f19895e1b31e9e736dcad94f019}{operator/=} (\hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op1, const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op2)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \hyperlink{group___vectors_module_ga70b345927dd31af9708e03dbc2ebac67}{operator/} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op1, const T op2)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \& \hyperlink{group___vectors_module_ga8da7e747d2c0fc0217e1a63fbad736d7}{operator/=} (\hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op1, const T op2)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \hyperlink{group___vectors_module_ga3a4f9cfc19b6a9b9a476fff354cecd59}{min} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op1, const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op2)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \hyperlink{group___vectors_module_ga2aa072c8b0380f4f584c73c56b082c6c}{max} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op1, const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op2)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \hyperlink{group___vectors_module_ga0946d89b855556e55e6712de6c8117f7}{min} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op1, const T op2)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \hyperlink{group___vectors_module_ga1a6359b28fbccfa3f5bfcea7e6fe4ea2}{max} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op1, const T op2)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \hyperlink{group___vectors_module_gaa8c18c612c2f31b5e74fc5691ad470a5}{abs} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE T \hyperlink{group___vectors_module_ga7f23c3728cf66940e1594ff0e500c980}{max\+\_\+comp} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE T \hyperlink{group___vectors_module_gab08d95708b6fb15681a6707d125bf692}{min\+\_\+comp} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{group___vectors_module_ga5460a1891f5ee6364953a20e809bfb54}{any} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{group___vectors_module_ga55cb44646b6c09c1f83053dbf45474fb}{all} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{group___vectors_module_ga04e707ea52066620e6b6d0e6672712e7}{operator==} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op1, const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op2)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{group___vectors_module_ga7d5781e9d1c69c0520c733fd15a64c32}{operator!=} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op1, const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op2)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{group___vectors_module_ga2f4af808d98e230aa470de34594eb210}{operator$<$} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op1, const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op2)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{group___vectors_module_ga22458d0373234955592695abc8d9d6f0}{operator$>$} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op1, const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op2)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{group___vectors_module_ga17776186977d2759c2ee3ea8f9ddce77}{operator$<$=} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op1, const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op2)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{group___vectors_module_ga5f00020bbec9b8d69dd1218a4ff7e78c}{operator$>$=} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op1, const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op2)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE T \hyperlink{group___vectors_module_gab7854923b97b44405c7335f0df540fd3}{dot} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op1, const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op2)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE T \hyperlink{group___vectors_module_gae8f08ae6e6dc212eb407dd3a13c06bd8}{length} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \hyperlink{group___vectors_module_ga0db9153dc023976fdf7f5d7edba12344}{normalize} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op)
+\item 
+{\footnotesize template$<$typename T $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3u $>$ \hyperlink{group___vectors_module_ga2a5c1ab56c232bc5ab7c39a2837d0ca5}{cross} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3u $>$ \&op1, const Vector$<$ T, 3u $>$ \&op2)
+\item 
+{\footnotesize template$<$typename T $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3 $>$ \hyperlink{group___vectors_module_ga562d2772848ffc2e393bf70e63e3ae1d}{reflect} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3 $>$ I, const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3 $>$ N)
+\item 
+{\footnotesize template$<$typename T $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3 $>$ \hyperlink{group___vectors_module_ga1ac246c46e1d0dd6b35a69046db3673f}{refract} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3 $>$ I, const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3 $>$ N, const float eta)
+\item 
+{\footnotesize template$<$typename T $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3 $>$ \hyperlink{group___vectors_module_ga327ba98b7cb9214bd6cf2199543fc0ee}{refraction\+\_\+normal} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3 $>$ I, const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3 $>$ T, const float eta)
+\item 
+{\footnotesize template$<$typename T $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3 $>$ \hyperlink{group___vectors_module_ga62cacaa60db461c2298a9a51ab9128bc}{faceforward} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3 $>$ N, const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3 $>$ I)
+\item 
+{\footnotesize template$<$typename T $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3 $>$ \hyperlink{group___vectors_module_gadb782eb379c7b928c89790191e3bd692}{orthogonal} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3 $>$ v)
+\item 
+{\footnotesize template$<$typename T $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{group___vectors_module_ga338c773d1de0c975ff611a6a56782976}{pack\+\_\+vector} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 2 $>$ v, const uint32 n\+\_\+bits\+\_\+comp)
+\item 
+{\footnotesize template$<$typename T $>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 2 $>$ \hyperlink{group___vectors_module_gafdac23f56276bd0a852d92a786723633}{unpack\+\_\+vector} (const uint32 u, const uint32 n\+\_\+bits\+\_\+comp)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \hyperlink{group___vectors_module_gaa57bce082b9fdb795f14b78abe5dd4f9}{mod} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op, const T m)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \hyperlink{group___vectors_module_ga82ffe653d8df9532076d7c6c9f254291}{sqrt} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op)
+\item 
+{\footnotesize template$<$typename T , uint32 D\+IM$>$ }\\C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{group___vectors_module_gaf2a8279368671ac3504889251ac8ddc6}{is\+\_\+finite} (const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&op)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___vectors_module_gaa8c18c612c2f31b5e74fc5691ad470a5}\label{group___vectors_module_gaa8c18c612c2f31b5e74fc5691ad470a5}} 
+\index{Vectors@{Vectors}!abs@{abs}}
+\index{abs@{abs}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{abs()}{abs()}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ abs (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+component-\/wise vector abs \mbox{\Hypertarget{group___vectors_module_ga55cb44646b6c09c1f83053dbf45474fb}\label{group___vectors_module_ga55cb44646b6c09c1f83053dbf45474fb}} 
+\index{Vectors@{Vectors}!all@{all}}
+\index{all@{all}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{all()}{all()}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool all (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+return true if all of the components are non-\/zero \mbox{\Hypertarget{group___vectors_module_ga5460a1891f5ee6364953a20e809bfb54}\label{group___vectors_module_ga5460a1891f5ee6364953a20e809bfb54}} 
+\index{Vectors@{Vectors}!any@{any}}
+\index{any@{any}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{any()}{any()}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool any (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+return true if any of the components is non-\/zero \mbox{\Hypertarget{group___vectors_module_ga2a5c1ab56c232bc5ab7c39a2837d0ca5}\label{group___vectors_module_ga2a5c1ab56c232bc5ab7c39a2837d0ca5}} 
+\index{Vectors@{Vectors}!cross@{cross}}
+\index{cross@{cross}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{cross()}{cross()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3u $>$ cross (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3u $>$ \&}]{op1,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3u $>$ \&}]{op2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+cross product \mbox{\Hypertarget{group___vectors_module_gab7854923b97b44405c7335f0df540fd3}\label{group___vectors_module_gab7854923b97b44405c7335f0df540fd3}} 
+\index{Vectors@{Vectors}!dot@{dot}}
+\index{dot@{dot}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{dot()}{dot()}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE T dot (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op1,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+dot product \mbox{\Hypertarget{group___vectors_module_ga62cacaa60db461c2298a9a51ab9128bc}\label{group___vectors_module_ga62cacaa60db461c2298a9a51ab9128bc}} 
+\index{Vectors@{Vectors}!faceforward@{faceforward}}
+\index{faceforward@{faceforward}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{faceforward()}{faceforward()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3 $>$ faceforward (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3 $>$}]{N,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3 $>$}]{I }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+given a vector N and an incident vector I, return sgn(dot(\+N,\+I)) $\ast$ N \mbox{\Hypertarget{group___vectors_module_gaf2a8279368671ac3504889251ac8ddc6}\label{group___vectors_module_gaf2a8279368671ac3504889251ac8ddc6}} 
+\index{Vectors@{Vectors}!is\+\_\+finite@{is\+\_\+finite}}
+\index{is\+\_\+finite@{is\+\_\+finite}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{is\+\_\+finite()}{is\_finite()}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool is\+\_\+finite (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+return true iff all components are finite \mbox{\Hypertarget{group___vectors_module_gae8f08ae6e6dc212eb407dd3a13c06bd8}\label{group___vectors_module_gae8f08ae6e6dc212eb407dd3a13c06bd8}} 
+\index{Vectors@{Vectors}!length@{length}}
+\index{length@{length}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{length()}{length()}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE T length (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+Euclidean length \mbox{\Hypertarget{group___vectors_module_ga2aa072c8b0380f4f584c73c56b082c6c}\label{group___vectors_module_ga2aa072c8b0380f4f584c73c56b082c6c}} 
+\index{Vectors@{Vectors}!max@{max}}
+\index{max@{max}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{max()}{max()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ max (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op1,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+binary component-\/wise vector max \mbox{\Hypertarget{group___vectors_module_ga1a6359b28fbccfa3f5bfcea7e6fe4ea2}\label{group___vectors_module_ga1a6359b28fbccfa3f5bfcea7e6fe4ea2}} 
+\index{Vectors@{Vectors}!max@{max}}
+\index{max@{max}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{max()}{max()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ max (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op1,  }\item[{const T}]{op2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+component-\/wise vector max \mbox{\Hypertarget{group___vectors_module_ga7f23c3728cf66940e1594ff0e500c980}\label{group___vectors_module_ga7f23c3728cf66940e1594ff0e500c980}} 
+\index{Vectors@{Vectors}!max\+\_\+comp@{max\+\_\+comp}}
+\index{max\+\_\+comp@{max\+\_\+comp}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{max\+\_\+comp()}{max\_comp()}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE T max\+\_\+comp (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+return the maximum component \mbox{\Hypertarget{group___vectors_module_ga3a4f9cfc19b6a9b9a476fff354cecd59}\label{group___vectors_module_ga3a4f9cfc19b6a9b9a476fff354cecd59}} 
+\index{Vectors@{Vectors}!min@{min}}
+\index{min@{min}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{min()}{min()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ min (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op1,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+binary component-\/wise vector min \mbox{\Hypertarget{group___vectors_module_ga0946d89b855556e55e6712de6c8117f7}\label{group___vectors_module_ga0946d89b855556e55e6712de6c8117f7}} 
+\index{Vectors@{Vectors}!min@{min}}
+\index{min@{min}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{min()}{min()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ min (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op1,  }\item[{const T}]{op2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+component-\/wise vector min \mbox{\Hypertarget{group___vectors_module_gab08d95708b6fb15681a6707d125bf692}\label{group___vectors_module_gab08d95708b6fb15681a6707d125bf692}} 
+\index{Vectors@{Vectors}!min\+\_\+comp@{min\+\_\+comp}}
+\index{min\+\_\+comp@{min\+\_\+comp}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{min\+\_\+comp()}{min\_comp()}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE T min\+\_\+comp (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+return the minimum component \mbox{\Hypertarget{group___vectors_module_gaa57bce082b9fdb795f14b78abe5dd4f9}\label{group___vectors_module_gaa57bce082b9fdb795f14b78abe5dd4f9}} 
+\index{Vectors@{Vectors}!mod@{mod}}
+\index{mod@{mod}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{mod()}{mod()}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ mod (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op,  }\item[{const T}]{m }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+component-\/wise vector modulo \mbox{\Hypertarget{group___vectors_module_ga0db9153dc023976fdf7f5d7edba12344}\label{group___vectors_module_ga0db9153dc023976fdf7f5d7edba12344}} 
+\index{Vectors@{Vectors}!normalize@{normalize}}
+\index{normalize@{normalize}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{normalize()}{normalize()}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ normalize (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+Euclidean normalization \mbox{\Hypertarget{group___vectors_module_ga7d5781e9d1c69c0520c733fd15a64c32}\label{group___vectors_module_ga7d5781e9d1c69c0520c733fd15a64c32}} 
+\index{Vectors@{Vectors}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool operator!= (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op1,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+vector inequality test \mbox{\Hypertarget{group___vectors_module_ga88fb5d3e63998e36fea6139b6d042b7e}\label{group___vectors_module_ga88fb5d3e63998e36fea6139b6d042b7e}} 
+\index{Vectors@{Vectors}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ operator$\ast$ (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op1,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+vector multiplication \mbox{\Hypertarget{group___vectors_module_ga72ffd716dd8896e1d565483f4ff96a51}\label{group___vectors_module_ga72ffd716dd8896e1d565483f4ff96a51}} 
+\index{Vectors@{Vectors}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ operator$\ast$ (\begin{DoxyParamCaption}\item[{const T}]{op1,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+vector multiplication \mbox{\Hypertarget{group___vectors_module_ga81f6bb4e3ffbaa260e0713f8891b8909}\label{group___vectors_module_ga81f6bb4e3ffbaa260e0713f8891b8909}} 
+\index{Vectors@{Vectors}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ operator$\ast$ (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op1,  }\item[{const T}]{op2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+vector multiplication by scalar \mbox{\Hypertarget{group___vectors_module_ga533de6fa3d06d8337631ef848e63a1a5}\label{group___vectors_module_ga533de6fa3d06d8337631ef848e63a1a5}} 
+\index{Vectors@{Vectors}!operator$\ast$=@{operator$\ast$=}}
+\index{operator$\ast$=@{operator$\ast$=}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{operator$\ast$=()}{operator*=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \& operator$\ast$= (\begin{DoxyParamCaption}\item[{\hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op1,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+vector multiplication \mbox{\Hypertarget{group___vectors_module_ga382f555725b86158c670437a5a4d3043}\label{group___vectors_module_ga382f555725b86158c670437a5a4d3043}} 
+\index{Vectors@{Vectors}!operator$\ast$=@{operator$\ast$=}}
+\index{operator$\ast$=@{operator$\ast$=}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{operator$\ast$=()}{operator*=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \& operator$\ast$= (\begin{DoxyParamCaption}\item[{\hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op1,  }\item[{const T}]{op2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+vector multiplication by scalar \mbox{\Hypertarget{group___vectors_module_ga489fb43a70bf29d1770cfe886bc225f2}\label{group___vectors_module_ga489fb43a70bf29d1770cfe886bc225f2}} 
+\index{Vectors@{Vectors}!operator+@{operator+}}
+\index{operator+@{operator+}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{operator+()}{operator+()}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ operator+ (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op1,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+vector addition \mbox{\Hypertarget{group___vectors_module_gab459e58fcb21396fafa8f4a2d562a8e1}\label{group___vectors_module_gab459e58fcb21396fafa8f4a2d562a8e1}} 
+\index{Vectors@{Vectors}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{operator+=()}{operator+=()}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \& operator+= (\begin{DoxyParamCaption}\item[{\hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op1,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+vector addition \mbox{\Hypertarget{group___vectors_module_ga79019254703773ad3d352a503d3d820a}\label{group___vectors_module_ga79019254703773ad3d352a503d3d820a}} 
+\index{Vectors@{Vectors}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{operator-\/()}{operator-()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ operator-\/ (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+vector negation \mbox{\Hypertarget{group___vectors_module_ga0e674f7f0f36bd82e3fec0c821114d67}\label{group___vectors_module_ga0e674f7f0f36bd82e3fec0c821114d67}} 
+\index{Vectors@{Vectors}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{operator-\/()}{operator-()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ operator-\/ (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op1,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+vector subtraction \mbox{\Hypertarget{group___vectors_module_ga91cd021cf4fdca7eb4036efe1ea0798c}\label{group___vectors_module_ga91cd021cf4fdca7eb4036efe1ea0798c}} 
+\index{Vectors@{Vectors}!operator-\/=@{operator-\/=}}
+\index{operator-\/=@{operator-\/=}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{operator-\/=()}{operator-=()}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \& operator-\/= (\begin{DoxyParamCaption}\item[{\hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op1,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+vector subtraction \mbox{\Hypertarget{group___vectors_module_gae077be2185ca7f28e1fae4fc110a14bf}\label{group___vectors_module_gae077be2185ca7f28e1fae4fc110a14bf}} 
+\index{Vectors@{Vectors}!operator/@{operator/}}
+\index{operator/@{operator/}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{operator/()}{operator/()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ operator/ (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op1,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+vector division \mbox{\Hypertarget{group___vectors_module_ga70b345927dd31af9708e03dbc2ebac67}\label{group___vectors_module_ga70b345927dd31af9708e03dbc2ebac67}} 
+\index{Vectors@{Vectors}!operator/@{operator/}}
+\index{operator/@{operator/}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{operator/()}{operator/()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ operator/ (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op1,  }\item[{const T}]{op2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+vector division by scalar \mbox{\Hypertarget{group___vectors_module_ga8b304f19895e1b31e9e736dcad94f019}\label{group___vectors_module_ga8b304f19895e1b31e9e736dcad94f019}} 
+\index{Vectors@{Vectors}!operator/=@{operator/=}}
+\index{operator/=@{operator/=}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{operator/=()}{operator/=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \& operator/= (\begin{DoxyParamCaption}\item[{\hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op1,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+vector division \mbox{\Hypertarget{group___vectors_module_ga8da7e747d2c0fc0217e1a63fbad736d7}\label{group___vectors_module_ga8da7e747d2c0fc0217e1a63fbad736d7}} 
+\index{Vectors@{Vectors}!operator/=@{operator/=}}
+\index{operator/=@{operator/=}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{operator/=()}{operator/=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \& operator/= (\begin{DoxyParamCaption}\item[{\hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op1,  }\item[{const T}]{op2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+vector division by scalar \mbox{\Hypertarget{group___vectors_module_ga2f4af808d98e230aa470de34594eb210}\label{group___vectors_module_ga2f4af808d98e230aa470de34594eb210}} 
+\index{Vectors@{Vectors}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool operator$<$ (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op1,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+lexicographic vector less \mbox{\Hypertarget{group___vectors_module_ga17776186977d2759c2ee3ea8f9ddce77}\label{group___vectors_module_ga17776186977d2759c2ee3ea8f9ddce77}} 
+\index{Vectors@{Vectors}!operator$<$=@{operator$<$=}}
+\index{operator$<$=@{operator$<$=}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{operator$<$=()}{operator<=()}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool operator$<$= (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op1,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+lexicographic vector less or equal \mbox{\Hypertarget{group___vectors_module_ga04e707ea52066620e6b6d0e6672712e7}\label{group___vectors_module_ga04e707ea52066620e6b6d0e6672712e7}} 
+\index{Vectors@{Vectors}!operator==@{operator==}}
+\index{operator==@{operator==}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op1,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+vector equality test \mbox{\Hypertarget{group___vectors_module_ga22458d0373234955592695abc8d9d6f0}\label{group___vectors_module_ga22458d0373234955592695abc8d9d6f0}} 
+\index{Vectors@{Vectors}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{operator$>$()}{operator>()}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool operator$>$ (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op1,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+lexicographic vector greater \mbox{\Hypertarget{group___vectors_module_ga5f00020bbec9b8d69dd1218a4ff7e78c}\label{group___vectors_module_ga5f00020bbec9b8d69dd1218a4ff7e78c}} 
+\index{Vectors@{Vectors}!operator$>$=@{operator$>$=}}
+\index{operator$>$=@{operator$>$=}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{operator$>$=()}{operator>=()}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool operator$>$= (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op1,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+lexicographic vector greater or equal \mbox{\Hypertarget{group___vectors_module_gadb782eb379c7b928c89790191e3bd692}\label{group___vectors_module_gadb782eb379c7b928c89790191e3bd692}} 
+\index{Vectors@{Vectors}!orthogonal@{orthogonal}}
+\index{orthogonal@{orthogonal}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{orthogonal()}{orthogonal()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3 $>$ orthogonal (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3 $>$}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+return a vector orthogonal to a given vector \mbox{\Hypertarget{group___vectors_module_ga338c773d1de0c975ff611a6a56782976}\label{group___vectors_module_ga338c773d1de0c975ff611a6a56782976}} 
+\index{Vectors@{Vectors}!pack\+\_\+vector@{pack\+\_\+vector}}
+\index{pack\+\_\+vector@{pack\+\_\+vector}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{pack\+\_\+vector()}{pack\_vector()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 pack\+\_\+vector (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 2 $>$}]{v,  }\item[{const uint32}]{n\+\_\+bits\+\_\+comp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+pack a normalized 2d vector using n bits per component \mbox{\Hypertarget{group___vectors_module_ga562d2772848ffc2e393bf70e63e3ae1d}\label{group___vectors_module_ga562d2772848ffc2e393bf70e63e3ae1d}} 
+\index{Vectors@{Vectors}!reflect@{reflect}}
+\index{reflect@{reflect}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{reflect()}{reflect()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3 $>$ reflect (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3 $>$}]{I,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3 $>$}]{N }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+reflect a vector against another N\+O\+TE\+: this function assumes the vector I is incident into the surface, i.\+e. dot(\+I,\+N) $<$ 0, so that the reflected ray will point in the opposite direction, contrarily to the custom in B\+S\+DF sampling literature of having bouth I and the reflected direction point outwards. \mbox{\Hypertarget{group___vectors_module_ga1ac246c46e1d0dd6b35a69046db3673f}\label{group___vectors_module_ga1ac246c46e1d0dd6b35a69046db3673f}} 
+\index{Vectors@{Vectors}!refract@{refract}}
+\index{refract@{refract}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{refract()}{refract()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3 $>$ refract (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3 $>$}]{I,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3 $>$}]{N,  }\item[{const float}]{eta }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+refract a vector against a normal N\+O\+TE\+: this function assumes the vector I is incident into the surface, i.\+e. dot(\+I,\+N) $<$ 0, so that the refracted ray will point in the same direction, contrarily to the custom in B\+S\+DF sampling literature of having I point outwards and the refracted direction inwards. \mbox{\Hypertarget{group___vectors_module_ga327ba98b7cb9214bd6cf2199543fc0ee}\label{group___vectors_module_ga327ba98b7cb9214bd6cf2199543fc0ee}} 
+\index{Vectors@{Vectors}!refraction\+\_\+normal@{refraction\+\_\+normal}}
+\index{refraction\+\_\+normal@{refraction\+\_\+normal}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{refraction\+\_\+normal()}{refraction\_normal()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3 $>$ refraction\+\_\+normal (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3 $>$}]{I,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 3 $>$}]{T,  }\item[{const float}]{eta }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+compute the normal responsible for refraction from I to T N\+O\+TE\+: this function assumes the vector I is incident into the surface, i.\+e. dot(\+I,\+N) $<$ 0, and that the refracted ray points in the same direction, contrarily to the custom in B\+S\+DF sampling literature of having I point outwards and T inwards. \mbox{\Hypertarget{group___vectors_module_ga82ffe653d8df9532076d7c6c9f254291}\label{group___vectors_module_ga82ffe653d8df9532076d7c6c9f254291}} 
+\index{Vectors@{Vectors}!sqrt@{sqrt}}
+\index{sqrt@{sqrt}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{sqrt()}{sqrt()}}
+{\footnotesize\ttfamily template$<$typename T , uint32 D\+IM$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ sqrt (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, D\+IM $>$ \&}]{op }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+component-\/wise vector sqrt \mbox{\Hypertarget{group___vectors_module_gafdac23f56276bd0a852d92a786723633}\label{group___vectors_module_gafdac23f56276bd0a852d92a786723633}} 
+\index{Vectors@{Vectors}!unpack\+\_\+vector@{unpack\+\_\+vector}}
+\index{unpack\+\_\+vector@{unpack\+\_\+vector}!Vectors@{Vectors}}
+\subsubsection{\texorpdfstring{unpack\+\_\+vector()}{unpack\_vector()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_vector}{Vector}$<$ T, 2 $>$ unpack\+\_\+vector (\begin{DoxyParamCaption}\item[{const uint32}]{u,  }\item[{const uint32}]{n\+\_\+bits\+\_\+comp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+unpack a normalized 2d vector using n bits per component 

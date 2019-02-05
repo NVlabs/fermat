@@ -1,0 +1,70 @@
+\hypertarget{struct_ray_queue}{}\section{Ray\+Queue Struct Reference}
+\label{struct_ray_queue}\index{Ray\+Queue@{Ray\+Queue}}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_ray_queue_aeaf37e95f34be13ed3cdd15e9a44d552}\label{struct_ray_queue_aeaf37e95f34be13ed3cdd15e9a44d552}} 
+\hyperlink{struct_ray_queue}{Ray\+Queue} {\bfseries offset} (const uint32 \+\_\+count, uint32 $\ast$\+\_\+size) const
+\item 
+\mbox{\Hypertarget{struct_ray_queue_a02b9a40bbb796acf9b295a8f12db9c3a}\label{struct_ray_queue_a02b9a40bbb796acf9b295a8f12db9c3a}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 {\bfseries append\+\_\+slot} () const
+\item 
+\mbox{\Hypertarget{struct_ray_queue_aa2c77fb7bee173caff4b72bc226b89b6}\label{struct_ray_queue_aa2c77fb7bee173caff4b72bc226b89b6}} 
+F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE uint32 {\bfseries warp\+\_\+append\+\_\+slot} () const
+\item 
+\mbox{\Hypertarget{struct_ray_queue_af9a082ee79d0ab8d3d42387f3b2e6eb9}\label{struct_ray_queue_af9a082ee79d0ab8d3d42387f3b2e6eb9}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void {\bfseries append} (const \hyperlink{union_pixel_info}{Pixel\+Info} pixel, const \hyperlink{struct_ray}{Ray} \&ray, const float4 weight, const float p)
+\item 
+\mbox{\Hypertarget{struct_ray_queue_adf98e4b3e07f815c271a76d0b19c6aa8}\label{struct_ray_queue_adf98e4b3e07f815c271a76d0b19c6aa8}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void {\bfseries append} (const \hyperlink{union_pixel_info}{Pixel\+Info} pixel, const \hyperlink{struct_ray}{Ray} \&ray, const float4 weight, const float p, float4 path\+\_\+w)
+\item 
+\mbox{\Hypertarget{struct_ray_queue_a98d8e61a3241938dcf428c7e3f0fcfaa}\label{struct_ray_queue_a98d8e61a3241938dcf428c7e3f0fcfaa}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void {\bfseries append} (const \hyperlink{union_pixel_info}{Pixel\+Info} pixel, const \hyperlink{struct_ray}{Ray} \&ray, const float4 weight, const uint32 path\+\_\+id, float4 path\+\_\+w)
+\item 
+\mbox{\Hypertarget{struct_ray_queue_a82f55fe5142c62970ee6b6eceb66fe6c}\label{struct_ray_queue_a82f55fe5142c62970ee6b6eceb66fe6c}} 
+F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE void {\bfseries warp\+\_\+append} (const \hyperlink{union_pixel_info}{Pixel\+Info} pixel, const \hyperlink{struct_ray}{Ray} \&ray, const float4 weight, const float p, float4 path\+\_\+w)
+\item 
+\mbox{\Hypertarget{struct_ray_queue_a4226fba4c9df54b6f46d4b6c2b07c1c7}\label{struct_ray_queue_a4226fba4c9df54b6f46d4b6c2b07c1c7}} 
+F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE void {\bfseries warp\+\_\+append} (const \hyperlink{union_pixel_info}{Pixel\+Info} pixel, const \hyperlink{struct_ray}{Ray} \&ray, const float4 weight, const uint32 path\+\_\+id, float4 path\+\_\+w)
+\item 
+\mbox{\Hypertarget{struct_ray_queue_a6831e6ea2631003184d190c06c62c370}\label{struct_ray_queue_a6831e6ea2631003184d190c06c62c370}} 
+F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE void {\bfseries warp\+\_\+append} (const \hyperlink{union_pixel_info}{Pixel\+Info} pixel, const \hyperlink{struct_ray}{Ray} \&ray, const float4 weight, const float p)
+\item 
+\mbox{\Hypertarget{struct_ray_queue_a97ce1f5e076558628b2d7a9f98d64b08}\label{struct_ray_queue_a97ce1f5e076558628b2d7a9f98d64b08}} 
+F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE void {\bfseries warp\+\_\+append} (const \hyperlink{union_pixel_info}{Pixel\+Info} pixel, const \hyperlink{struct_ray}{Ray} \&ray, const float4 weight, const uint32 path\+\_\+id)
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_ray_queue_a9a8e80f4e03ecbcb721696f6f8cc3c03}\label{struct_ray_queue_a9a8e80f4e03ecbcb721696f6f8cc3c03}} 
+\hyperlink{struct_ray}{Ray} $\ast$ {\bfseries rays}
+\item 
+\mbox{\Hypertarget{struct_ray_queue_ac8b8e660c40687e86eff43233e6a05e2}\label{struct_ray_queue_ac8b8e660c40687e86eff43233e6a05e2}} 
+\hyperlink{struct_hit}{Hit} $\ast$ {\bfseries hits}
+\item 
+\mbox{\Hypertarget{struct_ray_queue_ac2efa3e54c1e5da271b42568ae729c75}\label{struct_ray_queue_ac2efa3e54c1e5da271b42568ae729c75}} 
+float4 $\ast$ {\bfseries weights}
+\item 
+\mbox{\Hypertarget{struct_ray_queue_a432d6fa34e15c287c5a11f3a2502ea25}\label{struct_ray_queue_a432d6fa34e15c287c5a11f3a2502ea25}} 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\>float $\ast$ {\bfseries probs}\\
+\>uint32 $\ast$ {\bfseries light\_path\_id}\\
+\}; \\
+
+\end{tabbing}\item 
+\mbox{\Hypertarget{struct_ray_queue_a52d425734e9d815d1049ef42555a8cfa}\label{struct_ray_queue_a52d425734e9d815d1049ef42555a8cfa}} 
+uint32 $\ast$ {\bfseries pixels}
+\item 
+\mbox{\Hypertarget{struct_ray_queue_a34cb634539ab39d00bce8bab6f61bf1c}\label{struct_ray_queue_a34cb634539ab39d00bce8bab6f61bf1c}} 
+float4 $\ast$ {\bfseries path\+\_\+weights}
+\item 
+\mbox{\Hypertarget{struct_ray_queue_afc5b8c5beb64c43d042c9a8696b23b7e}\label{struct_ray_queue_afc5b8c5beb64c43d042c9a8696b23b7e}} 
+uint32 $\ast$ {\bfseries size}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/ray\+\_\+queues.\+h\end{DoxyCompactItemize}

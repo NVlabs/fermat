@@ -1,0 +1,178 @@
+\hypertarget{structcugar_1_1cuda_1_1_sync_free_hash_map}{}\section{cugar\+:\+:cuda\+:\+:Sync\+Free\+Hash\+Map$<$ KeyT, HashT, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY $>$ Struct Template Reference}
+\label{structcugar_1_1cuda_1_1_sync_free_hash_map}\index{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map$<$ Key\+T, Hash\+T, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+E\+Y $>$@{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map$<$ Key\+T, Hash\+T, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+E\+Y $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$typename KeyT, typename HashT, KeyT I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY = 0x\+F\+F\+F\+F\+F\+F\+FF$>$\newline
+struct cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map$<$ Key\+T, Hash\+T, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+E\+Y $>$}
+
+This class implements a device-\/side Hash Map, allowing arbitrary threads from potentially different C\+T\+As of a cuda kernel to add new entries at the same time.
+
+The constructor of the class accepts pointers to the arrays representing the underlying data structure\+:
+
+
+\begin{DoxyItemize}
+\item an array of hashed keys
+\item an array of unique set entries
+\item an array of slots keeping track of the unique position where each inserted key has been mapped
+\item a pointer to a counter, keeping track of the number of set entries
+\end{DoxyItemize}
+
+Before starting to use the Synchronous\+Hash\+Map, the array of hash slots has to be initialized to I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY.
+
+The difference between this class and the \hyperlink{structcugar_1_1cuda_1_1_hash_map}{Hash\+Map} is that this class allows to call both \hyperlink{structcugar_1_1cuda_1_1_sync_free_hash_map_aa3c8cdbaaeceb10563b073635b230d9c}{insert()} and \hyperlink{structcugar_1_1cuda_1_1_sync_free_hash_map_ab18b0af6061e752201eb9ca8623c963d}{find()} at the same time, without interposing a global synchronization between them\+: the price is higher overhead (due to the need to use volatile writes and add memory fences). 
+
+{\ttfamily \#include $<$hash.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1_sync_free_hash_map_a27411b5878e84ffb98ddcde4ef660409}{Sync\+Free\+Hash\+Map} ()
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1_sync_free_hash_map_abb195d74c19002c772c3ca6013e4d72f}{Sync\+Free\+Hash\+Map} (const uint32 \+\_\+table\+\_\+size, KeyT $\ast$\+\_\+hash, KeyT $\ast$\+\_\+unique, uint32 $\ast$\+\_\+slots, uint32 $\ast$\+\_\+count)
+\item 
+C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{structcugar_1_1cuda_1_1_sync_free_hash_map_a2de3977000dd6f1c4912e0e17667f014}{try\+\_\+insert} (const KeyT key, const HashT hash\+\_\+code, const uint32 n)
+\item 
+C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1cuda_1_1_sync_free_hash_map_aa3c8cdbaaeceb10563b073635b230d9c}{insert} (const KeyT key, const HashT hash\+\_\+code)
+\item 
+C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{structcugar_1_1cuda_1_1_sync_free_hash_map_a847457f92899ca5af002b7f320b6173f}{insert} (const KeyT key, const HashT hash\+\_\+code, uint32 $\ast$pos)
+\item 
+C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structcugar_1_1cuda_1_1_sync_free_hash_map_ab18b0af6061e752201eb9ca8623c963d}{find} (const KeyT key, const HashT hash\+\_\+code)
+\item 
+uint32 \hyperlink{structcugar_1_1cuda_1_1_sync_free_hash_map_a9d8de7a5b7d5fafc634866a12def9eae}{size} () const
+\item 
+KeyT \hyperlink{structcugar_1_1cuda_1_1_sync_free_hash_map_aebddbad188e72e6f6bb5697f2e758d03}{get\+\_\+unique} (const uint32 i) const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_sync_free_hash_map_a50c6949dfa588cc87ee5714aa5c39e04}\label{structcugar_1_1cuda_1_1_sync_free_hash_map_a50c6949dfa588cc87ee5714aa5c39e04}} 
+KeyT $\ast$ {\bfseries hash}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_sync_free_hash_map_aaec8b0cb43f4637002683185763db29f}\label{structcugar_1_1cuda_1_1_sync_free_hash_map_aaec8b0cb43f4637002683185763db29f}} 
+KeyT $\ast$ {\bfseries unique}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_sync_free_hash_map_a7380b9a189293d527ea985120ad9c5e1}\label{structcugar_1_1cuda_1_1_sync_free_hash_map_a7380b9a189293d527ea985120ad9c5e1}} 
+uint32 $\ast$ {\bfseries slots}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_sync_free_hash_map_a6907f1d730a0fba87abef335464e373a}\label{structcugar_1_1cuda_1_1_sync_free_hash_map_a6907f1d730a0fba87abef335464e373a}} 
+uint32 $\ast$ {\bfseries count}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_sync_free_hash_map_afd20f61eaa1f4553dfbd31c3dabff1fc}\label{structcugar_1_1cuda_1_1_sync_free_hash_map_afd20f61eaa1f4553dfbd31c3dabff1fc}} 
+uint32 {\bfseries table\+\_\+size}
+\end{DoxyCompactItemize}
+\subsection*{Static Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_sync_free_hash_map_a188d9267ec2a6589f901d0eed7044fa1}\label{structcugar_1_1cuda_1_1_sync_free_hash_map_a188d9267ec2a6589f901d0eed7044fa1}} 
+static const uint32 {\bfseries B\+U\+C\+K\+E\+T\+\_\+\+S\+I\+ZE} = 8
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_sync_free_hash_map_a27411b5878e84ffb98ddcde4ef660409}\label{structcugar_1_1cuda_1_1_sync_free_hash_map_a27411b5878e84ffb98ddcde4ef660409}} 
+\index{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map@{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map}!Sync\+Free\+Hash\+Map@{Sync\+Free\+Hash\+Map}}
+\index{Sync\+Free\+Hash\+Map@{Sync\+Free\+Hash\+Map}!cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map@{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map}}
+\subsubsection{\texorpdfstring{Sync\+Free\+Hash\+Map()}{SyncFreeHashMap()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename KeyT, typename HashT, KeyT I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY = 0x\+F\+F\+F\+F\+F\+F\+FF$>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1_sync_free_hash_map}{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map}$<$ KeyT, HashT, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY $>$\+::\hyperlink{structcugar_1_1cuda_1_1_sync_free_hash_map}{Sync\+Free\+Hash\+Map} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor \mbox{\Hypertarget{structcugar_1_1cuda_1_1_sync_free_hash_map_abb195d74c19002c772c3ca6013e4d72f}\label{structcugar_1_1cuda_1_1_sync_free_hash_map_abb195d74c19002c772c3ca6013e4d72f}} 
+\index{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map@{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map}!Sync\+Free\+Hash\+Map@{Sync\+Free\+Hash\+Map}}
+\index{Sync\+Free\+Hash\+Map@{Sync\+Free\+Hash\+Map}!cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map@{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map}}
+\subsubsection{\texorpdfstring{Sync\+Free\+Hash\+Map()}{SyncFreeHashMap()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename KeyT, typename HashT, KeyT I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY = 0x\+F\+F\+F\+F\+F\+F\+FF$>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1cuda_1_1_sync_free_hash_map}{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map}$<$ KeyT, HashT, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY $>$\+::\hyperlink{structcugar_1_1cuda_1_1_sync_free_hash_map}{Sync\+Free\+Hash\+Map} (\begin{DoxyParamCaption}\item[{const uint32}]{\+\_\+table\+\_\+size,  }\item[{KeyT $\ast$}]{\+\_\+hash,  }\item[{KeyT $\ast$}]{\+\_\+unique,  }\item[{uint32 $\ast$}]{\+\_\+slots,  }\item[{uint32 $\ast$}]{\+\_\+count }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+table\+\_\+size} & the size of the hash table (needs to be a power of 2) \\
+\hline
+{\em \+\_\+hash} & a pointer to the array of \+\_\+table\+\_\+size hashing slots -\/ needs to be initialized to I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY before first use \\
+\hline
+{\em \+\_\+unique} & a pointer to the array where inserted entries will be stored -\/ needs to be appropriately sized to contain all unique entries \\
+\hline
+{\em \+\_\+slots} & a pointer to an array of \+\_\+table\+\_\+size entries keeping track of the unique position where each inserted key has been mapped \\
+\hline
+{\em \+\_\+count} & a pointer to a single counter, used to keep track of how many unique entries have been inserted \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_sync_free_hash_map_ab18b0af6061e752201eb9ca8623c963d}\label{structcugar_1_1cuda_1_1_sync_free_hash_map_ab18b0af6061e752201eb9ca8623c963d}} 
+\index{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map@{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map}!find@{find}}
+\index{find@{find}!cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map@{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map}}
+\subsubsection{\texorpdfstring{find()}{find()}}
+{\footnotesize\ttfamily template$<$typename KeyT, typename HashT, KeyT I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY = 0x\+F\+F\+F\+F\+F\+F\+FF$>$ \\
+C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structcugar_1_1cuda_1_1_sync_free_hash_map}{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map}$<$ KeyT, HashT, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY $>$\+::find (\begin{DoxyParamCaption}\item[{const KeyT}]{key,  }\item[{const HashT}]{hash\+\_\+code }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+find the unique slot associated to an inserted key \mbox{\Hypertarget{structcugar_1_1cuda_1_1_sync_free_hash_map_aebddbad188e72e6f6bb5697f2e758d03}\label{structcugar_1_1cuda_1_1_sync_free_hash_map_aebddbad188e72e6f6bb5697f2e758d03}} 
+\index{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map@{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map}!get\+\_\+unique@{get\+\_\+unique}}
+\index{get\+\_\+unique@{get\+\_\+unique}!cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map@{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map}}
+\subsubsection{\texorpdfstring{get\+\_\+unique()}{get\_unique()}}
+{\footnotesize\ttfamily template$<$typename KeyT, typename HashT, KeyT I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY = 0x\+F\+F\+F\+F\+F\+F\+FF$>$ \\
+KeyT \hyperlink{structcugar_1_1cuda_1_1_sync_free_hash_map}{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map}$<$ KeyT, HashT, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY $>$\+::get\+\_\+unique (\begin{DoxyParamCaption}\item[{const uint32}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the i-\/th unique element in the set \mbox{\Hypertarget{structcugar_1_1cuda_1_1_sync_free_hash_map_aa3c8cdbaaeceb10563b073635b230d9c}\label{structcugar_1_1cuda_1_1_sync_free_hash_map_aa3c8cdbaaeceb10563b073635b230d9c}} 
+\index{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map@{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map}!insert@{insert}}
+\index{insert@{insert}!cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map@{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map}}
+\subsubsection{\texorpdfstring{insert()}{insert()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename KeyT, typename HashT, KeyT I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY = 0x\+F\+F\+F\+F\+F\+F\+FF$>$ \\
+C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1cuda_1_1_sync_free_hash_map}{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map}$<$ KeyT, HashT, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY $>$\+::insert (\begin{DoxyParamCaption}\item[{const KeyT}]{key,  }\item[{const HashT}]{hash\+\_\+code }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+insert an element with its hashing value
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & the element to insert \\
+\hline
+{\em hash\+\_\+code} & the hashing value \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_sync_free_hash_map_a847457f92899ca5af002b7f320b6173f}\label{structcugar_1_1cuda_1_1_sync_free_hash_map_a847457f92899ca5af002b7f320b6173f}} 
+\index{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map@{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map}!insert@{insert}}
+\index{insert@{insert}!cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map@{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map}}
+\subsubsection{\texorpdfstring{insert()}{insert()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename KeyT, typename HashT, KeyT I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY = 0x\+F\+F\+F\+F\+F\+F\+FF$>$ \\
+C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{structcugar_1_1cuda_1_1_sync_free_hash_map}{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map}$<$ KeyT, HashT, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY $>$\+::insert (\begin{DoxyParamCaption}\item[{const KeyT}]{key,  }\item[{const HashT}]{hash\+\_\+code,  }\item[{uint32 $\ast$}]{pos }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+insert an element with its hashing value and immediately get the unique slot where it\textquotesingle{}s been inserted
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & the element to insert \\
+\hline
+{\em hash\+\_\+code} & the hashing value \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_sync_free_hash_map_a9d8de7a5b7d5fafc634866a12def9eae}\label{structcugar_1_1cuda_1_1_sync_free_hash_map_a9d8de7a5b7d5fafc634866a12def9eae}} 
+\index{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map@{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map}!size@{size}}
+\index{size@{size}!cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map@{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map}}
+\subsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$typename KeyT, typename HashT, KeyT I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY = 0x\+F\+F\+F\+F\+F\+F\+FF$>$ \\
+uint32 \hyperlink{structcugar_1_1cuda_1_1_sync_free_hash_map}{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map}$<$ KeyT, HashT, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the size of the hash set \mbox{\Hypertarget{structcugar_1_1cuda_1_1_sync_free_hash_map_a2de3977000dd6f1c4912e0e17667f014}\label{structcugar_1_1cuda_1_1_sync_free_hash_map_a2de3977000dd6f1c4912e0e17667f014}} 
+\index{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map@{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map}!try\+\_\+insert@{try\+\_\+insert}}
+\index{try\+\_\+insert@{try\+\_\+insert}!cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map@{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map}}
+\subsubsection{\texorpdfstring{try\+\_\+insert()}{try\_insert()}}
+{\footnotesize\ttfamily template$<$typename KeyT, typename HashT, KeyT I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY = 0x\+F\+F\+F\+F\+F\+F\+FF$>$ \\
+C\+U\+G\+A\+R\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{structcugar_1_1cuda_1_1_sync_free_hash_map}{cugar\+::cuda\+::\+Sync\+Free\+Hash\+Map}$<$ KeyT, HashT, I\+N\+V\+A\+L\+I\+D\+\_\+\+K\+EY $>$\+::try\+\_\+insert (\begin{DoxyParamCaption}\item[{const KeyT}]{key,  }\item[{const HashT}]{hash\+\_\+code,  }\item[{const uint32}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+insert an element with its hashing value
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & the element to insert \\
+\hline
+{\em hash\+\_\+code} & the hashing value \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/cuda/hash.\+h\end{DoxyCompactItemize}

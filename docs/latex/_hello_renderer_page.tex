@@ -1,0 +1,948 @@
+Top\+: \hyperlink{_overture_contents_page}{Contents}
+
+\begin{DoxyParagraph}{}
+We can now go on to writing our first \char`\"{}\+Hello World\char`\"{} renderer in Fermat. We\textquotesingle{}ll start step-\/by-\/step with a renderer that implements some basic path tracing. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Let\textquotesingle{}s start from the class definition\+: ~\newline
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <renderer\_interface.h>}
+\textcolor{preprocessor}{#include <buffers.h>}
+\textcolor{preprocessor}{#include <tiled\_sequence.h>}
+
+<< Options Declaration >>
+
+\textcolor{comment}{// A "Hello Path Tracing" renderer}
+\textcolor{comment}{//}
+\textcolor{keyword}{struct }\hyperlink{struct_hello_p_t}{HelloPT} : \hyperlink{struct_renderer_interface}{RendererInterface}
+\{
+    \textcolor{keywordtype}{void} \hyperlink{struct_hello_p_t_a8ec59e3fac8eff801cecdd3220cd8d41}{init}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}** argv, \hyperlink{struct_rendering_context}{RenderingContext}& renderer);
+
+    \textcolor{keywordtype}{void} \hyperlink{struct_hello_p_t_af772aac0d80118742450fd8b6b3c58c2}{render}(\textcolor{keyword}{const} uint32 instance, \hyperlink{struct_rendering_context}{RenderingContext}& renderer);
+
+    \textcolor{keywordtype}{void} \hyperlink{struct_hello_p_t_ac81e09dcfb28dffc85aa6c4df06a4426}{destroy}() \{ \textcolor{keyword}{delete} \textcolor{keyword}{this}; \}
+
+    << Members Declaration >>
+\};
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+So far, there should be hardly any surprises. We simply derived our class from the \hyperlink{struct_renderer_interface}{Renderer\+Interface}, and declared that we\textquotesingle{}ll implement both its \hyperlink{struct_renderer_interface_a2ead9b943d6d48fcd32872e0005ebe63}{Renderer\+Interface\+::init()} and \hyperlink{struct_renderer_interface_aa64254dd44c94929b05092dc8d74f29d}{Renderer\+Interface\+::render()} methods. Our renderer will also have some options, which we\textquotesingle{}ll pack into a simple struct\+: ~\newline
+\label{_hello_renderer_page_Options_Declaration_anchor}%
+\Hypertarget{_hello_renderer_page_Options_Declaration_anchor}%
+ \begin{quote}
+{\itshape  $<$$<$ Options Declaration $>$$>$ \+:= }
+
+\end{quote}
+
+\begin{DoxyCode}
+\textcolor{comment}{// our "Hello Path Tracing" options}
+\textcolor{comment}{//}
+\textcolor{keyword}{struct }\hyperlink{struct_hello_p_t_options}{HelloPTOptions}
+\{
+     uint32 max\_path\_length;
+
+    \textcolor{comment}{// default constructor}
+    \textcolor{comment}{//}
+    \hyperlink{struct_hello_p_t_options_a244c96683d3c5d345bdf4b6b8aa9c249}{HelloPTOptions}() : max\_path\_length(6) \{\}
+
+    \textcolor{comment}{// do some simple option parsing}
+    \textcolor{comment}{//}
+    \textcolor{keywordtype}{void} \hyperlink{struct_hello_p_t_options_a540d006dee6aff8ee5e8b3cfc8b0fa0b}{parse}(\textcolor{keyword}{const} \textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}** argv)
+    \{
+        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < argc; ++i)
+        \{
+         \textcolor{keywordflow}{if} (strcmp(argv[i], \textcolor{stringliteral}{"-path-length"}) == 0)
+             max\_path\_length = atoi(argv[++i]);
+        \}
+    \}
+\};
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Now, we are ready to declare the members of our class\+: its options, some device memory buffer to hold temporary data, and a sampling sequence. ~\newline
+\label{_hello_renderer_page_Members_Declaration_anchor}%
+\Hypertarget{_hello_renderer_page_Members_Declaration_anchor}%
+ \begin{quote}
+{\itshape  $<$$<$ Members Declaration $>$$>$ \+:= }
+
+\end{quote}
+
+\begin{DoxyCode}
+\hyperlink{struct_hello_p_t_options}{HelloPTOptions}                      m\_options;      \textcolor{comment}{// the rendering options}
+\hyperlink{class_domain_buffer}{DomainBuffer<CUDA\_BUFFER, uint8>}    m\_memory\_pool;  \textcolor{comment}{// some device storage
+       for queues and such...}
+\hyperlink{struct_tiled_sequence}{TiledSequence}                       m\_sequence;     \textcolor{comment}{// a nice sampling sequence}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Once the declaration is ready, we can start with the definition of the init method\+: ~\newline
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{void} \hyperlink{struct_hello_p_t_a8ec59e3fac8eff801cecdd3220cd8d41}{HelloPT::init}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}** argv, \hyperlink{struct_rendering_context}{RenderingContext}& renderer)
+\{
+    << Parse options >>
+    << Alloc queue storage >>
+    << Initialize sampler >>
+    << Initialize mesh lights >>
+\}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Parsing options is straightforward\+: ~\newline
+\label{_hello_renderer_page_Parse_options_anchor}%
+\Hypertarget{_hello_renderer_page_Parse_options_anchor}%
+ \begin{quote}
+{\itshape  $<$$<$ Parse options $>$$>$ \+:= }
+
+\end{quote}
+
+\begin{DoxyCode}
+\textcolor{comment}{// parse the options}
+m\_options.\hyperlink{struct_hello_p_t_options_a540d006dee6aff8ee5e8b3cfc8b0fa0b}{parse}( argc, argv );
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The next step is allocating all temporary storage we\textquotesingle{}ll need. Our renderer will be organized as a pipeline of separate ray tracing and shading stages, implemented as parallel kernels communicating through global memory queues. In order to simplify our life we\textquotesingle{}ll make use of some prepackaged queue definition provided by Fermat, the \hyperlink{struct_p_t_ray_queue}{P\+T\+Ray\+Queue}. These queues are defined by an array of rays, an array of ray hits, an array of sample weights associated to each ray, and finally an array of pixel descriptors. For reasons that will be explained later on, we\textquotesingle{}ll need three such queues, and each of them will need to contain enough storage for as many pixels there are in our target framebuffer. ~\newline
+\label{_hello_renderer_page_Alloc_queue_storage_anchor}%
+\Hypertarget{_hello_renderer_page_Alloc_queue_storage_anchor}%
+ \begin{quote}
+{\itshape  $<$$<$ Alloc queue storage $>$$>$ \+:= }
+
+\end{quote}
+
+\begin{DoxyCode}
+\textcolor{comment}{// pre-alloc some queue storage}
+\{
+    \textcolor{comment}{// keep track of how much storage we'll need}
+    \hyperlink{structcugar_1_1memory__arena}{cugar::memory\_arena} arena;
+
+    \hyperlink{struct_p_t_ray_queue}{PTRayQueue} input\_queue;
+    \hyperlink{struct_p_t_ray_queue}{PTRayQueue} scatter\_queue;
+    \hyperlink{struct_p_t_ray_queue}{PTRayQueue} shadow\_queue;
+     
+    \hyperlink{group___p_t_lib_gaf8daef8b815f7712ff692edbaa628881}{alloc\_queues}( n\_pixels, input\_queue, scatter\_queue, shadow\_queue, arena );
+
+    fprintf(stderr, \textcolor{stringliteral}{"  allocating queue storage: %.1f MB\(\backslash\)n"}, \textcolor{keywordtype}{float}(arena.size) / (1024*1024));
+    m\_memory\_pool.alloc(arena.size);
+\}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+where \hyperlink{group___p_t_lib_gaf8daef8b815f7712ff692edbaa628881}{alloc\+\_\+queues()} is a utility function defined as\+: ~\newline
+ 
+\begin{DoxyCodeInclude}
+\textcolor{keywordtype}{void} \hyperlink{group___p_t_lib_gaf8daef8b815f7712ff692edbaa628881}{alloc\_queues}(
+    \textcolor{keyword}{const} uint32            n\_pixels,
+    \hyperlink{struct_p_t_ray_queue}{PTRayQueue}&               input\_queue,
+    \hyperlink{struct_p_t_ray_queue}{PTRayQueue}&               scatter\_queue,
+    \hyperlink{struct_p_t_ray_queue}{PTRayQueue}&               shadow\_queue,
+    \hyperlink{structcugar_1_1memory__arena}{cugar::memory\_arena}& arena)
+\{   
+    input\_queue.rays        = arena.\hyperlink{structcugar_1_1memory__arena_afcbc6673ae3fa3e61368495ed2041621}{alloc}<\hyperlink{struct_masked_ray}{MaskedRay}>(n\_pixels);
+    input\_queue.hits        = arena.\hyperlink{structcugar_1_1memory__arena_afcbc6673ae3fa3e61368495ed2041621}{alloc}<\hyperlink{struct_hit}{Hit}>(n\_pixels);
+    input\_queue.weights     = arena.\hyperlink{structcugar_1_1memory__arena_afcbc6673ae3fa3e61368495ed2041621}{alloc}<float4>(n\_pixels);
+    input\_queue.pixels      = arena.\hyperlink{structcugar_1_1memory__arena_afcbc6673ae3fa3e61368495ed2041621}{alloc}<uint4>(n\_pixels);
+    input\_queue.size        = arena.\hyperlink{structcugar_1_1memory__arena_afcbc6673ae3fa3e61368495ed2041621}{alloc}<uint32>(1);
+
+    scatter\_queue.rays      = arena.\hyperlink{structcugar_1_1memory__arena_afcbc6673ae3fa3e61368495ed2041621}{alloc}<\hyperlink{struct_masked_ray}{MaskedRay}>(n\_pixels);
+    scatter\_queue.hits      = arena.\hyperlink{structcugar_1_1memory__arena_afcbc6673ae3fa3e61368495ed2041621}{alloc}<\hyperlink{struct_hit}{Hit}>(n\_pixels);
+    scatter\_queue.weights   = arena.\hyperlink{structcugar_1_1memory__arena_afcbc6673ae3fa3e61368495ed2041621}{alloc}<float4>(n\_pixels);
+    scatter\_queue.pixels    = arena.\hyperlink{structcugar_1_1memory__arena_afcbc6673ae3fa3e61368495ed2041621}{alloc}<uint4>(n\_pixels);
+    scatter\_queue.size      = arena.\hyperlink{structcugar_1_1memory__arena_afcbc6673ae3fa3e61368495ed2041621}{alloc}<uint32>(1);
+
+    shadow\_queue.rays       = arena.\hyperlink{structcugar_1_1memory__arena_afcbc6673ae3fa3e61368495ed2041621}{alloc}<\hyperlink{struct_masked_ray}{MaskedRay}>(n\_pixels);
+    shadow\_queue.hits       = arena.\hyperlink{structcugar_1_1memory__arena_afcbc6673ae3fa3e61368495ed2041621}{alloc}<\hyperlink{struct_hit}{Hit}>(n\_pixels);
+    shadow\_queue.weights    = arena.\hyperlink{structcugar_1_1memory__arena_afcbc6673ae3fa3e61368495ed2041621}{alloc}<float4>(n\_pixels);
+    shadow\_queue.pixels     = arena.\hyperlink{structcugar_1_1memory__arena_afcbc6673ae3fa3e61368495ed2041621}{alloc}<uint4>(n\_pixels);
+    shadow\_queue.size       = arena.\hyperlink{structcugar_1_1memory__arena_afcbc6673ae3fa3e61368495ed2041621}{alloc}<uint32>(1);
+\}
+\end{DoxyCodeInclude}
+ 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Similarly, for sampling we\textquotesingle{}ll use the \hyperlink{struct_tiled_sequence}{Tiled\+Sequence} class, considering that we will need to allocate up to 6 random numbers per path vertex\+: ~\newline
+\label{_hello_renderer_page_Initialize_sampler_anchor}%
+\Hypertarget{_hello_renderer_page_Initialize_sampler_anchor}%
+ \begin{quote}
+{\itshape  $<$$<$ Initialize sampler $>$$>$ \+:= }
+
+\end{quote}
+
+\begin{DoxyCode}
+\textcolor{comment}{// build the set of samples assuming 6 random numbers per path vertex and a tile size of 256 pixels}
+\textcolor{keyword}{const} uint32 n\_dimensions = 6 * (m\_options.max\_path\_length + 1);
+\textcolor{keyword}{const} uint32 tile\_size    = 256;
+fprintf(stderr, \textcolor{stringliteral}{"  initializing sampler: %u dimensions\(\backslash\)n"}, n\_dimensions);
+m\_sequence.setup(n\_dimensions, tile\_size);
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+And finally, we\textquotesingle{}ll have to initialize our mesh light sampler\+: ~\newline
+\label{_hello_renderer_page_Initialize_mesh_lights_anchor}%
+\Hypertarget{_hello_renderer_page_Initialize_mesh_lights_anchor}%
+ \begin{quote}
+{\itshape  $<$$<$ Initialize mesh lights $>$$>$ \+:= }
+
+\end{quote}
+
+\begin{DoxyCode}
+\textcolor{comment}{// initialize the mesh lights sampler}
+renderer.m\_mesh\_lights.\hyperlink{struct_rendering_context_a5ca766a70c2def1699f2ed6fa1f8bccd}{init}( n\_pixels, renderer );
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Now that we have covered initialization, we can move on the definition of the render() method. We\textquotesingle{}ll start by defining a context class that will be passed down to our device kernels. This class will encapsulate the renderer state, including views of the sampler, queues and so on. ~\newline
+
+\begin{DoxyCode}
+\textcolor{keyword}{struct }HelloPTContext
+\{
+    \hyperlink{struct_hello_p_t_options}{HelloPTOptions}       options;        \textcolor{comment}{// the options}
+    \hyperlink{struct_tiled_sequence_view}{TiledSequenceView}    sequence;       \textcolor{comment}{// the sampling sequence}
+    \textcolor{keywordtype}{float}                frame\_weight;   \textcolor{comment}{// the weight given to samples in this frame}
+    uint32               in\_bounce;      \textcolor{comment}{// the current path tracing bounce}
+
+    \hyperlink{struct_p_t_ray_queue}{PTRayQueue}           in\_queue;       \textcolor{comment}{// the input queue}
+    \hyperlink{struct_p_t_ray_queue}{PTRayQueue}           shadow\_queue;   \textcolor{comment}{// the scattering queue}
+    \hyperlink{struct_p_t_ray_queue}{PTRayQueue}           scatter\_queue;  \textcolor{comment}{// the shadow queue}
+\};
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+At this point we can start sketching the main rendering algorithm. The idea is that, after some proper initializations, we\textquotesingle{}ll generate primary rays and enqueue them to the input queue, and then start executing a pipeline, where we\+: 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+
+\begin{DoxyEnumerate}
+\item trace rays
+\item shade the ray hits (i.\+e. the new path verticies), potentially generating new shadow and scattering rays
+\item trace any queued shadow rays
+\item shade the shadow hits
+\item and swap the input and scattering queues
+\end{DoxyEnumerate}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+which in code becomes\+: ~\newline
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{void} \hyperlink{struct_hello_p_t_af772aac0d80118742450fd8b6b3c58c2}{HelloPT::render}(\textcolor{keyword}{const} uint32 instance, \hyperlink{struct_rendering_context}{RenderingContext}& renderer)
+\{
+    << Perform initializations >>
+
+    << Generate primary rays >>
+
+    \textcolor{comment}{// start the path tracing loop}
+    \textcolor{keywordflow}{while} (1)
+    \{
+        << Check input queue size and possibly bail-out >>
+
+        << Trace rays inside the input queue >>  
+
+        << Clear the scattering and shadow queues >>
+
+        << Shade ray hits >>
+
+        << Trace and shade shadow rays >>
+
+        << Swap the intput and scattering queues >>
+    \}
+\}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Initializations are fairly trivial\+: we need to really allocate the queues out of the pre-\/allocated memory pool, initialize the sampling sequence, setup our context, and finally rescale the render targets containing results up to frame {\itshape instance} by a factor of {\itshape instance / (instance + 1)}, for blending in the new one\+: ~\newline
+\label{_hello_renderer_page_Perform_initializations_anchor}%
+\Hypertarget{_hello_renderer_page_Perform_initializations_anchor}%
+ \begin{quote}
+{\itshape  $<$$<$ Perform initializations $>$$>$ \+:= }
+
+\end{quote}
+
+\begin{DoxyCode}
+\textcolor{keyword}{const} uint2 res = renderer.\hyperlink{struct_rendering_context_ad1a58510bdaf6f373080835abf5db2db}{res}();
+
+\textcolor{keyword}{const} uint32 n\_pixels = res.x * res.y;
+
+\textcolor{comment}{// carve an arena out of our pre-allocated memory pool}
+\hyperlink{structcugar_1_1memory__arena}{cugar::memory\_arena} arena( m\_memory\_pool.ptr() );
+
+\textcolor{comment}{// alloc all the queues}
+\hyperlink{struct_p_t_ray_queue}{PTRayQueue} in\_queue;
+\hyperlink{struct_p_t_ray_queue}{PTRayQueue} scatter\_queue;
+\hyperlink{struct_p_t_ray_queue}{PTRayQueue} shadow\_queue;
+
+\hyperlink{group___p_t_lib_gaf8daef8b815f7712ff692edbaa628881}{alloc\_queues}(
+    n\_pixels,
+    in\_queue,
+    scatter\_queue,
+    shadow\_queue,
+    arena );
+
+\textcolor{comment}{// fetch a view of the renderer}
+\hyperlink{struct_rendering_context_view}{RenderingContextView} renderer\_view = renderer.\hyperlink{struct_rendering_context_a591062fd1887b069a015ede456dcaa93}{view}(instance);
+
+\textcolor{comment}{// fetch the ray tracing context}
+\hyperlink{struct_r_t_context}{RTContext}* rt\_context = renderer.\hyperlink{struct_rendering_context_af12ae90cc453d139f6f8ae35791e6563}{get\_rt\_context}();
+
+\textcolor{comment}{// setup the samples for this frame}
+m\_sequence.set\_instance(instance);
+
+\textcolor{comment}{// setup our context}
+HelloPTContext context;
+context.options       = m\_options;
+context.sequence      = m\_sequence.view();
+context.frame\_weight  = 1.0f / (instance + 1);
+context.in\_queue      = in\_queue;
+context.scatter\_queue = scatter\_queue;
+context.shadow\_queue  = shadow\_queue;
+
+\textcolor{comment}{// rescale the previous render targets for blending/averaging in the new one}
+    renderer.\hyperlink{struct_rendering_context_a6fb940a3b78a8a3faf82676c95ab1e6f}{rescale\_frame}( instance );
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+In order to generate primary rays, we assume we have some kernel already available and a function to dispatch it\+: ~\newline
+\label{_hello_renderer_page_Generate_primary_rays_anchor}%
+\Hypertarget{_hello_renderer_page_Generate_primary_rays_anchor}%
+ \begin{quote}
+{\itshape  $<$$<$ Generate primary rays $>$$>$ \+:= }
+
+\end{quote}
+
+\begin{DoxyCode}
+\textcolor{comment}{// generate the primary rays}
+\hyperlink{group___p_t_lib_ga66602a846711dc021ed0b930846ea596}{generate\_primary\_rays}(context, renderer\_view);
+CUDA\_CHECK(cugar::cuda::sync\_and\_check\_error(\textcolor{stringliteral}{"generate primary rays"}));
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Now, we can start tackling the inner loop. Checking the size of the input queue is just a matter of copying the value of the queue\textquotesingle{}s size field to the host\+: ~\newline
+\label{_hello_renderer_page_Check_input_queue_size_and_possibly_bail-out_anchor}%
+\Hypertarget{_hello_renderer_page_Check_input_queue_size_and_possibly_bail-out_anchor}%
+ \begin{quote}
+{\itshape  $<$$<$ Check input queue size and possibly bail-\/out $>$$>$ \+:= }
+
+\end{quote}
+
+\begin{DoxyCode}
+uint32 in\_queue\_size;
+
+\textcolor{comment}{// fetch the amount of tasks in the queue}
+cudaMemcpy(&in\_queue\_size, context.in\_queue.size, \textcolor{keyword}{sizeof}(uint32), cudaMemcpyDeviceToHost);
+
+\textcolor{comment}{// check whether there's still any work left}
+\textcolor{keywordflow}{if} (in\_queue\_size == 0)
+    \textcolor{keywordflow}{break};
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+while tracing the rays can be done with a single R\+T\+Context\+::trace() call\+: ~\newline
+\label{_hello_renderer_page_Trace_rays_inside_the_input_queue_anchor}%
+\Hypertarget{_hello_renderer_page_Trace_rays_inside_the_input_queue_anchor}%
+ \begin{quote}
+{\itshape  $<$$<$ Trace rays inside the input queue $>$$>$ \+:= }
+
+\end{quote}
+
+\begin{DoxyCode}
+\textcolor{comment}{// trace the rays generated at the previous bounce}
+\textcolor{comment}{//}
+rt\_context->trace(in\_queue\_size, (\hyperlink{struct_ray}{Ray}*)context.in\_queue.rays, context.in\_queue.hits);
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+This step will generate a bunch of ray hit points, i.\+e. all we need to reconstruct the next wave of path vertices. Before we proceed to shading them, we\textquotesingle{}ll have to clear the sizes of the shadow and scattering queues -\/ again, just a matter of performing a memset in device memory\+: ~\newline
+\label{_hello_renderer_page_Clear_the_scattering_and_shadow_queues_anchor}%
+\Hypertarget{_hello_renderer_page_Clear_the_scattering_and_shadow_queues_anchor}%
+ \begin{quote}
+{\itshape  $<$$<$ Clear the scattering and shadow queues $>$$>$ \+:= }
+
+\end{quote}
+
+\begin{DoxyCode}
+\textcolor{comment}{// reset the output queue counters}
+cudaMemset(context.shadow\_queue.size, 0x00, \textcolor{keyword}{sizeof}(uint32));
+cudaMemset(context.scatter\_queue.size, 0x00, \textcolor{keyword}{sizeof}(uint32));
+CUDA\_CHECK(cugar::cuda::check\_error(\textcolor{stringliteral}{"memset"}));
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Finally, we can proceed to shade the new path vertices, trace any shadow rays that their shading might have generated, and finally swap the input and scattering queues. For this, we\textquotesingle{}ll assume two more functions exist, \hyperlink{_hello_renderer_page_shade_vertices_anchor}{shade\+\_\+vertices()} and \hyperlink{_hello_renderer_page_resolve_occlusion_anchor}{resolve\+\_\+occlusion()}. ~\newline
+\label{_hello_renderer_page_Shade_ray_hits_anchor}%
+\Hypertarget{_hello_renderer_page_Shade_ray_hits_anchor}%
+ \begin{quote}
+{\itshape  $<$$<$ Shade ray hits $>$$>$ \+:= }
+
+\end{quote}
+
+\begin{DoxyCode}
+\textcolor{comment}{// perform lighting at this bounce}
+\textcolor{comment}{//}
+shade\_vertices(in\_queue\_size, context, renderer\_view);
+CUDA\_CHECK(cugar::cuda::sync\_and\_check\_error(\textcolor{stringliteral}{"shade hits"}));
+\end{DoxyCode}
+ \label{_hello_renderer_page_Trace_and_shade_shadow_rays_anchor}%
+\Hypertarget{_hello_renderer_page_Trace_and_shade_shadow_rays_anchor}%
+ \begin{quote}
+{\itshape  $<$$<$ Trace and shade shadow rays $>$$>$ \+:= }
+
+\end{quote}
+
+\begin{DoxyCode}
+\textcolor{comment}{// trace & accumulate occlusion queries}
+\{
+    \textcolor{comment}{// fetch the amount of tasks in the queue}
+    uint32 shadow\_queue\_size;
+    cudaMemcpy(&shadow\_queue\_size, context.shadow\_queue.size, \textcolor{keyword}{sizeof}(uint32), cudaMemcpyDeviceToHost);
+
+    \textcolor{keywordflow}{if} (shadow\_queue\_size)
+    \{
+        \textcolor{comment}{// trace the rays}
+        \textcolor{comment}{//}
+        rt\_context->trace\_shadow(shadow\_queue\_size, (\hyperlink{struct_masked_ray}{MaskedRay}*)context.shadow\_queue.rays, context
+      .shadow\_queue.hits);
+
+        \textcolor{comment}{// shade the results}
+        \textcolor{comment}{//}
+        resolve\_occlusion(shadow\_queue\_size, context, renderer\_view);
+        CUDA\_CHECK(cugar::cuda::sync\_and\_check\_error(\textcolor{stringliteral}{"resolve occlusion"}));
+    \}
+\}
+\end{DoxyCode}
+ \label{_hello_renderer_page_Swap_the_intput_and_scattering_queues_anchor}%
+\Hypertarget{_hello_renderer_page_Swap_the_intput_and_scattering_queues_anchor}%
+ \begin{quote}
+{\itshape  $<$$<$ Swap the intput and scattering queues $>$$>$ \+:= }
+
+\end{quote}
+
+\begin{DoxyCode}
+\textcolor{comment}{// swap the input and output queues}
+std::swap(context.in\_queue, context.scatter\_queue);
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+At this point, we just need to fill in the missing details, and define the \hyperlink{_hello_renderer_page_HelloPT-generate_primary_rays}{generate\+\_\+primary\+\_\+rays()}, \hyperlink{_hello_renderer_page_shade_vertices_anchor}{shade\+\_\+vertices()} and \hyperlink{_hello_renderer_page_resolve_occlusion_anchor}{resolve\+\_\+occlusion()} kernels.
+\end{DoxyParagraph}
+\hypertarget{_hello_renderer_page_HelloPTGeneratingPrimaryRaysSection}{}\section{Generating Primary Rays}\label{_hello_renderer_page_HelloPTGeneratingPrimaryRaysSection}
+\begin{DoxyParagraph}{}
+Generating primary rays will require us to write a fairly simple kernel, and a function to dispatch it\+: \label{_hello_renderer_page_HelloPT-generate_primary_rays}%
+\Hypertarget{_hello_renderer_page_HelloPT-generate_primary_rays}%
+ ~\newline
+ 
+\begin{DoxyCodeInclude}
+\textcolor{comment}{// a kernel to generate the primary rays }
+\textcolor{comment}{//}
+\_\_global\_\_
+\textcolor{keywordtype}{void} \hyperlink{group___p_t_lib_ga9382084c986a4fe52d55f7f225211e66}{generate\_primary\_rays\_kernel}(
+    HelloPTContext          context,
+    \hyperlink{struct_rendering_context_view}{RenderingContextView}    renderer)
+\{
+    \textcolor{comment}{// calculate the 2d pixel index given from the thread id}
+    \textcolor{keyword}{const} uint2 pixel = make\_uint2(
+        threadIdx.x + blockIdx.x*blockDim.x,
+        threadIdx.y + blockIdx.y*blockDim.y );
+
+    \textcolor{comment}{// check whether the pixel/thread is inside the render target}
+    \textcolor{keywordflow}{if} (pixel.x >= renderer.res\_x || pixel.y >= renderer.res\_y)
+        \textcolor{keywordflow}{return};
+
+    \textcolor{comment}{// calculate a 1d pixel index}
+    \textcolor{keyword}{const} \textcolor{keywordtype}{int} idx = pixel.x + pixel.y*renderer.res\_x;
+
+    \textcolor{keyword}{const} \hyperlink{struct_masked_ray}{MaskedRay} ray = \hyperlink{group___p_t_lib_core_ga28fe33ab0663b2331fe607662ed07349}{generate\_primary\_ray}( context, renderer, pixel );
+
+    \textcolor{comment}{// write the output ray}
+    context.in\_queue.rays[idx] = ray;
+
+    \textcolor{comment}{// write the path weight}
+    context.in\_queue.weights[idx] = \hyperlink{structcugar_1_1_vector}{cugar::Vector4f}(1.0f, 1.0f, 1.0f, 1.0f);
+
+    \textcolor{comment}{// write the pixel index}
+    context.in\_queue.pixels[idx] = make\_uint4( idx, uint32(-1), uint32(-1), uint32(-1) );
+
+    \textcolor{comment}{// use thread 0 write out the total number of primary rays in the queue descriptor}
+    \textcolor{keywordflow}{if} (pixel.x == 0 && pixel.y)
+        *context.in\_queue.size = renderer.res\_x * renderer.res\_y;
+\}
+
+\textcolor{comment}{// dispatch the generate\_primary\_rays kernel}
+\textcolor{comment}{//}
+\textcolor{keywordtype}{void} \hyperlink{group___p_t_lib_ga66602a846711dc021ed0b930846ea596}{generate\_primary\_rays}(
+    HelloPTContext          context,
+    \hyperlink{struct_rendering_context_view}{RenderingContextView}    renderer)
+\{
+    dim3 blockSize(32, 16);
+    dim3 gridSize(\hyperlink{group___basic_utils_gabb6714186dbbd864f0a9298944ba509b}{cugar::divide\_ri}(renderer.res\_x, blockSize.x), 
+      \hyperlink{group___basic_utils_gabb6714186dbbd864f0a9298944ba509b}{cugar::divide\_ri}(renderer.res\_y, blockSize.y));
+    generate\_primary\_rays\_kernel << < gridSize, blockSize >> > (context, renderer);
+\}
+\end{DoxyCodeInclude}
+ 
+\end{DoxyParagraph}
+\hypertarget{_hello_renderer_page_HelloPTShadingVerticesSection}{}\section{Shading Vertices}\label{_hello_renderer_page_HelloPTShadingVerticesSection}
+\begin{DoxyParagraph}{}
+We\textquotesingle{}ll start from a single-\/threaded device function that will be called each time we process a vertex. This function will receive an incoming ray and a \hyperlink{struct_hit}{Hit} object, and use those to {\itshape reconstruct} a full path vertex. After the vertex is set up, it will proceed initializing the local sample sequence, performing next-\/event estimation, evaluating the local emission at the hit in the direction of the incoming ray, and finally evaluating any scattering/absorption events. \label{_hello_renderer_page_shade_vertex_anchor}%
+\Hypertarget{_hello_renderer_page_shade_vertex_anchor}%
+ ~\newline
+
+\begin{DoxyCode}
+\textcolor{comment}{// shade a path vertex}
+\textcolor{comment}{//}
+\textcolor{comment}{// \(\backslash\)param pixel\_index       the 1d pixel index associated with this path}
+\textcolor{comment}{// \(\backslash\)param pixel             the 2d pixel coordinates}
+\textcolor{comment}{// \(\backslash\)param ray               the incoming ray direction}
+\textcolor{comment}{// \(\backslash\)param hit               the hit point defining this vertex}
+\textcolor{comment}{// \(\backslash\)param w                 the current path weight}
+\textcolor{comment}{// \(\backslash\)param p\_prev            the solid angle probability of the last scattering event}
+\textcolor{comment}{//}
+\textcolor{comment}{// \(\backslash\)return                  true if the path is continued, false if it terminates here}
+FERMAT\_DEVICE
+\textcolor{keywordtype}{bool} \hyperlink{group___p_t_lib_core_ga9b8be237ade285e6db792a9ea7bf900e}{shade\_vertex}(
+ HelloPTContext&         context,
+ \hyperlink{struct_rendering_context_view}{RenderingContextView}&   renderer,
+ \textcolor{keyword}{const} uint32            pixel\_index,
+ \textcolor{keyword}{const} uint2             pixel,
+ \textcolor{keyword}{const} \hyperlink{struct_masked_ray}{MaskedRay}&        ray,
+ \textcolor{keyword}{const} \hyperlink{struct_hit}{Hit}               hit,
+ \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}   w,
+ \textcolor{keyword}{const} \textcolor{keywordtype}{float}             p\_prev)
+\{
+    \textcolor{comment}{// check if this is a valid hit}
+    \textcolor{keywordflow}{if} (hit.t > 0.0f && hit.triId >= 0)
+    \{
+        << Setup path vertex >>
+        << Write out G-buffer on primary hits >>
+        << Initialize sampling sequence >>
+        << Perform Next-Event Estimation >>
+        << Evaluate emissive hits >>
+        << Evaluate scattering and absorption >>
+    \}
+    \textcolor{keywordflow}{else}
+    \{
+        << Evaluate sky-lighting >>
+    \}
+    \textcolor{keywordflow}{return} \textcolor{keyword}{false}; \textcolor{comment}{// this path terminates here}
+\}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+In order to setup the vertex, we\textquotesingle{}ll use Fermat\textquotesingle{}s \hyperlink{struct_eye_vertex}{Eye\+Vertex} class, an object representing a vertex sampled from the eye (i.\+e. using forward path tracing), which helps interpolating vertex attributes, keep tracking of the path sampling probabilities, setting up vertex \hyperlink{struct_bsdf}{Bsdf} (evaluating the material, including any textures), and so on. ~\newline
+\label{_hello_renderer_page_Setup_path_vertex_anchor}%
+\Hypertarget{_hello_renderer_page_Setup_path_vertex_anchor}%
+ \begin{quote}
+{\itshape  $<$$<$ Setup path vertex $>$$>$ \+:= }
+
+\end{quote}
+
+\begin{DoxyCode}
+\textcolor{comment}{// setup an eye-vertex given the input ray, hit point, and path weight}
+\hyperlink{struct_eye_vertex}{EyeVertex} ev;
+ev.setup(ray, hit, w.xyz(), \hyperlink{structcugar_1_1_vector}{cugar::Vector4f}(0.0f), context.in\_bounce, renderer);
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Once we have all the vertex information, we can write out any G-\/buffer information on primary rays (i.\+e. when we are processing the zero-\/th bounce)\+: ~\newline
+\label{_hello_renderer_page_Write_out_G-buffer_on_primary_hits_anchor}%
+\Hypertarget{_hello_renderer_page_Write_out_G-buffer_on_primary_hits_anchor}%
+ \begin{quote}
+{\itshape  $<$$<$ Write out G-\/buffer on primary hits $>$$>$ \+:= }
+
+\end{quote}
+
+\begin{DoxyCode}
+\textcolor{comment}{// write out gbuffer information}
+\textcolor{keywordflow}{if} (context.in\_bounce == 0)
+\{
+    renderer.fb.gbuffer.geo(pixel\_index)   = GBufferView::pack\_geometry(ev.geom.position, ev.geom.normal\_s)
+      ;
+    renderer.fb.gbuffer.uv(pixel\_index)    = make\_float4(hit.u, hit.v, ev.geom.texture\_coords.x, ev.geom.
+      texture\_coords.y);
+    renderer.fb.gbuffer.tri(pixel\_index)   = hit.triId;
+    renderer.fb.gbuffer.depth(pixel\_index) = hit.t;
+\}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Initializing the sampling coordinates requires fetching a batch 6 random numbers (3 for next-\/event estimation and 3 for scattering) from the \hyperlink{struct_tiled_sequence_view}{Tiled\+Sequence\+View} sampling sequence, which again, can be done using a prepackaged utility function\+: \hyperlink{group___p_t_lib_core_ga4881c06f23dccad0fc8972bda8de1b40}{vertex\+\_\+sample()} ~\newline
+\label{_hello_renderer_page_Initialize_sampling_sequence_anchor}%
+\Hypertarget{_hello_renderer_page_Initialize_sampling_sequence_anchor}%
+ \begin{quote}
+{\itshape  $<$$<$ Initialize sampling sequence $>$$>$ \+:= }
+
+\end{quote}
+
+\begin{DoxyCode}
+\textcolor{comment}{// initialize our shifted sampling sequence}
+\textcolor{keywordtype}{float} samples[6];
+\textcolor{keywordflow}{for} (uint32 i = 0; i < 6; ++i)
+    samples[i] = \hyperlink{group___p_t_lib_core_ga4881c06f23dccad0fc8972bda8de1b40}{vertex\_sample}(pixel, context, i);
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\hypertarget{_hello_renderer_page_NextEventEstimationSection}{}\subsection{Next-\/\+Event Estimation}\label{_hello_renderer_page_NextEventEstimationSection}
+\begin{DoxyParagraph}{}
+Next-\/event estimation is trickier business. It will involve four basic steps\+: sampling a point on the light sources (in this case, the scene\textquotesingle{}s mesh), evaluating the the E\+DF in the direction of the current vertex and the local B\+S\+DF in the direction joining the current vertex to the sampled point, calculating the sample weight, and finally enqueuing a shadow ray to check if the sample is occluded or visible. Notice that N\+EE essentially adds a vertex to a path, so if we allow a maximum path length of {\itshape N}, we can only perform it if our current path is shorter than {\itshape N-\/1}. ~\newline
+\label{_hello_renderer_page_Perform_Next-Event_Estimation_anchor}%
+\Hypertarget{_hello_renderer_page_Perform_Next-Event_Estimation_anchor}%
+ \begin{quote}
+{\itshape  $<$$<$ Perform Next-\/\+Event Estimation $>$$>$ \+:= }
+
+\end{quote}
+
+\begin{DoxyCode}
+ \textcolor{comment}{// perform next-event estimation to compute direct lighting}
+ \textcolor{keywordflow}{if} (context.in\_bounce + 2 <= context.options.max\_path\_length)
+ \{
+     \textcolor{comment}{// fetch the sampling dimensions}
+     \textcolor{keyword}{const} \textcolor{keywordtype}{float} z[3] = \{ samples[0], samples[1], samples[2] \}; \textcolor{comment}{// use dimensions 0,1,2}
+ 
+     \hyperlink{struct_vertex_geometry_id}{VertexGeometryId} light\_vertex;
+     \hyperlink{struct_vertex_geometry}{VertexGeometry}   light\_vertex\_geom;
+     \textcolor{keywordtype}{float}            light\_pdf;
+     \hyperlink{struct_edf}{Edf}              light\_edf;
+ 
+     \textcolor{comment}{// sample the light source surface}
+     renderer.mesh\_light.\hyperlink{group___lights_module_ga67cc240bcda4b08efd26c8727144bf16}{sample}(z, &light\_vertex.prim\_id, &light\_vertex.uv, &light\_vertex\_geom, &
+      light\_pdf, &light\_edf);
+    
+    \textcolor{comment}{// join the light sample with the current vertex}
+    \hyperlink{structcugar_1_1_vector}{cugar::Vector3f} out = (light\_vertex\_geom.position - ev.geom.position);
+                          
+    \textcolor{keyword}{const} \textcolor{keywordtype}{float} d2 = fmaxf(1.0e-8f, cugar::square\_length(out));
+    
+    \textcolor{comment}{// normalize the outgoing direction}
+    out *= rsqrtf(d2);
+    
+    \textcolor{comment}{// evaluate the light's EDF, predivided by the sample pdf}
+    \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f} f\_L = light\_edf.\hyperlink{structcugar_1_1_lambert_edf_aed2fed71aa6a7ad98e05714a0fd5f316}{f}(light\_vertex\_geom, light\_vertex\_geom.position, 
+      -out) / light\_pdf;
+
+    \hyperlink{structcugar_1_1_vector}{cugar::Vector3f} f\_s(0.0f);
+    \textcolor{keywordtype}{float}           p\_s(0.0f);
+    
+    \textcolor{comment}{// evaluate the surface BSDF f() and its sampling pdf p() in one go}
+    ev.bsdf.\hyperlink{struct_bsdf_af1ad14ad4a31c7604581a551c3fb1901}{f\_and\_p}(ev.geom, ev.in, out, f\_s, p\_s, cugar::kProjectedSolidAngle);
+    
+    << Compute the sample value >>
+    << Enqueue a shadow ray >>
+\}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Computing the sample value would require multiplying together the current path weight, {\itshape w}, the E\+DF, {\itshape f\+\_\+L}, the B\+S\+DF, {\itshape f\+\_\+s} and the geometric throughput term, {\itshape G}, and divide everything by the sample pdf. In practice, we have pre-\/divided {\itshape f\+\_\+L} by the pdf {\itshape light\+\_\+pdf}, so we can now avoid this last division. However, as our path sampler will also be able to hit the light sources, we\textquotesingle{}ll use multiple importance sampling (in short, M\+IS) between N\+EE and the possibility of hitting the same light on the same point. ~\newline
+\label{_hello_renderer_page_Compute_the_sample_value_anchor}%
+\Hypertarget{_hello_renderer_page_Compute_the_sample_value_anchor}%
+ \begin{quote}
+{\itshape  $<$$<$ Compute the sample value $>$$>$ \+:= }
+
+\end{quote}
+
+\begin{DoxyCode}
+\textcolor{comment}{// evaluate the geometric term}
+\textcolor{keyword}{const} \textcolor{keywordtype}{float} G = fabsf(cugar::dot(out, ev.geom.normal\_s) * cugar::dot(out, light\_vertex\_geom.normal\_s)) / d2
+      ;
+
+\textcolor{comment}{// perform MIS with the possibility of directly hitting the light source}
+\textcolor{keyword}{const} \textcolor{keywordtype}{float} p1 = light\_pdf;
+\textcolor{keyword}{const} \textcolor{keywordtype}{float} p2 = p\_s * G;
+\textcolor{keyword}{const} \textcolor{keywordtype}{float} mis\_w = context.in\_bounce > 0 ? mis\_heuristic<MIS\_HEURISTIC>(p1, p2) : 1.0f;
+
+\textcolor{comment}{// calculate the cumulative sample weight, equal to f\_L * f\_s * G / p}
+\textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f} out\_w = w.xyz() * f\_L * f\_s * G * mis\_w;
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Finally, we can enqueue a shadow ray, carrying the pixel index and sample weight together with the ray itself. ~\newline
+\label{_hello_renderer_page_Enqueue_a_shadow_ray_anchor}%
+\Hypertarget{_hello_renderer_page_Enqueue_a_shadow_ray_anchor}%
+ \begin{quote}
+{\itshape  $<$$<$ Enqueue a shadow ray $>$$>$ \+:= }
+
+\end{quote}
+
+\begin{DoxyCode}
+\textcolor{keywordflow}{if} (cugar::max\_comp(out\_w) > 0.0f && cugar::is\_finite(out\_w))
+\{
+    \textcolor{comment}{// enqueue the output ray}
+    \hyperlink{struct_masked_ray}{MaskedRay} out\_ray;
+    out\_ray.origin   = ev.geom.position - ray.dir * 1.0e-4f; \textcolor{comment}{// shift back in space along the viewing
+       direction}
+    out\_ray.dir      = (light\_vertex\_geom.position - out\_ray.origin); \textcolor{comment}{//out;}
+    out\_ray.mask     = 0x2u;
+    out\_ray.tmax     = 0.9999f; \textcolor{comment}{//d * 0.9999f;}
+    
+    \textcolor{comment}{// append the ray to the shadow queue}
+    context.shadow\_queue.warp\_append( pixel\_index, out\_ray, \hyperlink{structcugar_1_1_vector}{cugar::Vector4f}(out\_w, 0.0f) );
+\}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\hypertarget{_hello_renderer_page_EvaluatingEmissiveHitsSection}{}\subsection{Evaluating Emissive Hits}\label{_hello_renderer_page_EvaluatingEmissiveHitsSection}
+\begin{DoxyParagraph}{}
+Evaluating emissive surface hits allows us to have a second technique to form complete light paths joining the camera to the light sources, which is often far more efficient than N\+EE when the B\+S\+DF is glossy or close to specular. In principle, it is very similar to evaluating N\+EE, except that sampling a point on the light source has to be replaced by evaluating the pdf of generating it, which again we\textquotesingle{}ll need to perform M\+IS. Also, in this case we will not need to enqueue any additional rays (since we have already landed on a light source), and can just add the weighted sample contribution to the framebuffer. Notice that we will further weight the sample by {\itshape frame\+\_\+weight = 1 / (instance + 1)}, in order to average together this pass with all the previous ones. ~\newline
+\label{_hello_renderer_page_Evaluate_emissive_hits_anchor}%
+\Hypertarget{_hello_renderer_page_Evaluate_emissive_hits_anchor}%
+ \begin{quote}
+{\itshape  $<$$<$ Evaluate emissive hits $>$$>$ \+:= }
+
+\end{quote}
+
+\begin{DoxyCodeInclude}
+        \textcolor{comment}{// accumulate the emissive component along the incoming direction}
+        \{
+            \hyperlink{struct_vertex_geometry}{VertexGeometry}    light\_vertex\_geom = ev.geom; \textcolor{comment}{// the light source geometry IS
+       the current vertex geometry}
+            \textcolor{keywordtype}{float}           light\_pdf;
+            \hyperlink{struct_edf}{Edf}              light\_edf;
+
+            \textcolor{comment}{// calculate the pdf of sampling this point on the light source}
+            renderer.mesh\_light.\hyperlink{group___lights_module_gaf14a70f7d23b422f8953bc55d1eade44}{map}(hit.triId, \hyperlink{structcugar_1_1_vector}{cugar::Vector2f}(hit.u, hit.v), 
+      light\_vertex\_geom, &light\_pdf, &light\_edf );
+
+            \textcolor{comment}{// evaluate the edf's output along the incoming direction}
+            \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f} f\_L = light\_edf.\hyperlink{structcugar_1_1_lambert_edf_aed2fed71aa6a7ad98e05714a0fd5f316}{f}(light\_vertex\_geom, light\_vertex\_geom.
+      position, ev.in);
+
+            \textcolor{keyword}{const} \textcolor{keywordtype}{float} d2 = fmaxf(1.0e-10f, hit.t * hit.t);
+
+            \textcolor{comment}{// compute the MIS weight with next event estimation at the previous vertex}
+            \textcolor{keyword}{const} \textcolor{keywordtype}{float} G\_partial = fabsf(cugar::dot(ev.in, light\_vertex\_geom.normal\_s)) / d2;
+                \textcolor{comment}{// NOTE: G\_partial doesn't include the dot product between 'in and the normal at the
+       previous vertex}
+
+            \textcolor{keyword}{const} \textcolor{keywordtype}{float} p1 = G\_partial * p\_prev; \textcolor{comment}{// NOTE: p\_prev = p\_proj * dot(in,normal)}
+            \textcolor{keyword}{const} \textcolor{keywordtype}{float} p2 = light\_pdf;
+            \textcolor{keyword}{const} \textcolor{keywordtype}{float} mis\_w = context.in\_bounce > 0 ? mis\_heuristic<MIS\_HEURISTIC>(p1, p2) : 1.0f;
+
+            \textcolor{comment}{// and accumulate the weighted contribution}
+            \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f} out\_w  = w.xyz() * f\_L * mis\_w;
+
+            \textcolor{comment}{// and accumulate the weighted contribution}
+            \textcolor{keywordflow}{if} (cugar::max\_comp(out\_w) > 0.0f && cugar::is\_finite(out\_w))
+            \{
+                \textcolor{comment}{// accumulate the sample contribution to the image}
+                add\_in<false>(renderer.fb(FBufferDesc::COMPOSITED\_C), pixel\_index, out\_w, context.
+      frame\_weight);
+            \}
+        \}
+\end{DoxyCodeInclude}
+ 
+\end{DoxyParagraph}
+\hypertarget{_hello_renderer_page_EvaluatingScatteringAbsorptionSection}{}\subsection{Evaluating Scattering and Absorption}\label{_hello_renderer_page_EvaluatingScatteringAbsorptionSection}
+\begin{DoxyParagraph}{}
+The last bit of \hyperlink{_hello_renderer_page_shade_vertex_anchor}{shade\+\_\+vertex()} involves sampling a scattering or an absorption event. For this, we will use the last 3 of the random numbers we chose, and rely on the \hyperlink{group___b_p_t_lib_core_ga161551b8c343e47e329703e71e0aaeca}{scatter()} utility function. This function will sample the B\+S\+DF, and return both the B\+S\+DF value, predivided by the projected sampling pdf, as well as the pdf itself and a \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf\+::\+Component\+Type} flag telling us which component has been sampled. If the flag is equal to Bsdf\+::k\+Absorption, the path should be terminated. ~\newline
+\label{_hello_renderer_page_Evaluate_scattering_and_absorption_anchor}%
+\Hypertarget{_hello_renderer_page_Evaluate_scattering_and_absorption_anchor}%
+ \begin{quote}
+{\itshape  $<$$<$ Evaluate scattering and absorption $>$$>$ \+:= }
+
+\end{quote}
+
+\begin{DoxyCodeInclude}
+        \textcolor{comment}{// compute a scattering event / trace a bounce ray}
+        \textcolor{keywordflow}{if} (context.in\_bounce + 1 < context.options.max\_path\_length)
+        \{
+            \textcolor{comment}{// fetch the sampling dimensions}
+            \textcolor{keyword}{const} \textcolor{keywordtype}{float} z[3] = \{ samples[3], samples[4], samples[5] \}; \textcolor{comment}{// use dimensions 3,4,5}
+
+            \textcolor{comment}{// sample a scattering event}
+            \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}      out(0.0f);
+            \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}      g(0.0f);
+            \textcolor{keywordtype}{float}               p(0.0f);
+            \textcolor{keywordtype}{float}               p\_proj(0.0f);
+            \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{Bsdf::ComponentType} out\_comp(Bsdf::kAbsorption);
+
+            \textcolor{comment}{// compute a scattering direction}
+            \hyperlink{group___b_p_t_lib_core_ga161551b8c343e47e329703e71e0aaeca}{scatter}(ev, z, out\_comp, out, p, p\_proj, g, \textcolor{keyword}{true}, \textcolor{keyword}{false}, \textcolor{keyword}{false}, Bsdf::kAllComponents);
+
+            \textcolor{comment}{// compute the output weight}
+            \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}  out\_w = g * w.xyz();
+
+            \textcolor{keywordflow}{if} (p != 0.0f && cugar::max\_comp(out\_w) > 0.0f && cugar::is\_finite(out\_w))
+            \{
+                \textcolor{comment}{// enqueue the output ray}
+                \hyperlink{struct_masked_ray}{MaskedRay} out\_ray;
+                out\_ray.origin  = ev.geom.position;
+                out\_ray.dir     = out;
+                out\_ray.mask    = \_\_float\_as\_uint(1.0e-3f);
+                out\_ray.tmax    = 1.0e8f;
+
+                \textcolor{comment}{// track the solid angle probability of this scattering event}
+                \textcolor{keyword}{const} \textcolor{keywordtype}{float} out\_p = p;
+
+                \textcolor{comment}{// append the ray to the scattering queue}
+                \textcolor{comment}{//}
+                \textcolor{comment}{// notice that we pack the sample probability together with the sample value in a single}
+                \textcolor{comment}{// float4, so as to allow a single 16-byte write into the output queue.}
+                context.scatter\_queue.warp\_append( pixel\_index, out\_ray, 
+      \hyperlink{structcugar_1_1_vector}{cugar::Vector4f}( out\_w, out\_p ) );
+                \textcolor{keywordflow}{return} \textcolor{keyword}{true};    \textcolor{comment}{// continue the path}
+            \}
+        \}
+\end{DoxyCodeInclude}
+ 
+\end{DoxyParagraph}
+\hypertarget{_hello_renderer_page_HelloPTPackagingAllTogetherSection}{}\subsection{Packaging it All Together}\label{_hello_renderer_page_HelloPTPackagingAllTogetherSection}
+\begin{DoxyParagraph}{}
+Now that our \hyperlink{_hello_renderer_page_shade_vertex_anchor}{shade\+\_\+vertex()} function is complete, it remains to package it into a kernel which fetches tasks (i.\+e. vertices to be shaded) from the input queue, and executes them. Again, this is nothing complex\+: we\textquotesingle{}ll spawn one thread per queue entry, and have each thread fetch one queue item and pass it to \hyperlink{_hello_renderer_page_shade_vertex_anchor}{shade\+\_\+vertex()}. \label{_hello_renderer_page_shade_vertices_anchor}%
+\Hypertarget{_hello_renderer_page_shade_vertices_anchor}%
+ ~\newline
+ 
+\begin{DoxyCodeInclude}
+\textcolor{comment}{// shade vertices kernel}
+\textcolor{comment}{//}
+\_\_global\_\_
+\textcolor{keywordtype}{void} shade\_vertices\_kernel(\textcolor{keyword}{const} uint32 in\_queue\_size, HelloPTContext context, 
+      \hyperlink{struct_rendering_context_view}{RenderingContextView} renderer)
+\{
+    \textcolor{keyword}{const} uint32 thread\_id = threadIdx.x + blockIdx.x * blockDim.x;
+
+    \textcolor{keywordflow}{if} (thread\_id < in\_queue\_size) \textcolor{comment}{// *context.in\_queue.size}
+    \{
+        \textcolor{keyword}{const} uint32          pixel\_index       = context.in\_queue.pixels[thread\_id].x;
+        \textcolor{keyword}{const} \hyperlink{struct_masked_ray}{MaskedRay}          ray               = context.in\_queue.rays[thread\_id];
+        \textcolor{keyword}{const} \hyperlink{struct_hit}{Hit}              hit               = context.in\_queue.hits[thread\_id];
+        \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector4f} w                  = context.in\_queue.weights[thread\_id];
+
+        \textcolor{keyword}{const} uint2 pixel = make\_uint2(
+            pixel\_index % renderer.res\_x,
+            pixel\_index / renderer.res\_x
+        );
+
+        \hyperlink{group___p_t_lib_core_ga9b8be237ade285e6db792a9ea7bf900e}{shade\_vertex}(
+            context,
+            renderer,
+            pixel\_index,
+            pixel,
+            ray,
+            hit,
+            w.xyz(),
+            w.w );
+    \}
+\}
+
+\textcolor{comment}{// dispatch the shade hits kernel}
+\textcolor{comment}{//}
+\textcolor{keywordtype}{void} shade\_vertices(\textcolor{keyword}{const} uint32 in\_queue\_size, HelloPTContext context, 
+      \hyperlink{struct_rendering_context_view}{RenderingContextView} renderer)
+\{
+    \textcolor{keyword}{const} uint32 blockSize(64);
+    \textcolor{keyword}{const} dim3 gridSize(\hyperlink{group___basic_utils_gabb6714186dbbd864f0a9298944ba509b}{cugar::divide\_ri}(in\_queue\_size, blockSize));
+
+    shade\_vertices\_kernel<<< gridSize, blockSize >>>( in\_queue\_size, context, renderer );
+\}
+\end{DoxyCodeInclude}
+ 
+\end{DoxyParagraph}
+\hypertarget{_hello_renderer_page_HelloPTSolvingOcclusionSection}{}\section{Resolving Occlusion}\label{_hello_renderer_page_HelloPTSolvingOcclusionSection}
+\begin{DoxyParagraph}{}
+The next and last bit of our pipeline is a kernel that takes tasks from the shadow queue, representing next-\/event samples, and resolves their occlusion using the corresponding ray hits. If the samples are not occluded, they will be accumulated to their originating pixel. \label{_hello_renderer_page_resolve_occlusion_anchor}%
+\Hypertarget{_hello_renderer_page_resolve_occlusion_anchor}%
+ ~\newline
+ 
+\begin{DoxyCodeInclude}
+\textcolor{comment}{// a kernel to resolve NEE samples' occlusion}
+\textcolor{comment}{//}
+\_\_global\_\_
+\textcolor{keywordtype}{void} resolve\_occlusion\_kernel(
+    \textcolor{keyword}{const} uint32            shadow\_queue\_size,
+    HelloPTContext          context,
+    \hyperlink{struct_rendering_context_view}{RenderingContextView}    renderer)
+\{
+    \textcolor{keyword}{const} uint32 thread\_id = threadIdx.x + blockIdx.x * blockDim.x;
+
+    \textcolor{keywordflow}{if} (thread\_id < shadow\_queue\_size) \textcolor{comment}{// *context.shadow\_queue.size}
+    \{
+        \textcolor{keyword}{const} uint32          pixel\_index   = context.shadow\_queue.pixels[thread\_id].x;
+        \textcolor{keyword}{const} \hyperlink{struct_hit}{Hit}              hit           = context.shadow\_queue.hits[thread\_id];
+        \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector4f} w              = context.shadow\_queue.weights[thread\_id];
+
+        \textcolor{keywordflow}{if} (hit.t < 0.0f) \textcolor{comment}{// add this sample if and only if there was no intersection}
+            add\_in<false>( renderer.fb(FBufferDesc::COMPOSITED\_C), pixel\_index, w.xyz(), context.
+      frame\_weight );
+    \}
+\}
+
+\textcolor{comment}{// dispatch the resolve\_occlusion kernel}
+\textcolor{comment}{//}
+\textcolor{keywordtype}{void} resolve\_occlusion(
+    \textcolor{keyword}{const} uint32            shadow\_queue\_size,
+    HelloPTContext          context,
+    \hyperlink{struct_rendering_context_view}{RenderingContextView}    renderer)
+\{
+    \textcolor{keyword}{const} uint32 blockSize(64);
+    \textcolor{keyword}{const} dim3 gridSize(\hyperlink{group___basic_utils_gabb6714186dbbd864f0a9298944ba509b}{cugar::divide\_ri}(shadow\_queue\_size, blockSize));
+
+    resolve\_occlusion\_kernel<<< gridSize, blockSize >>>( shadow\_queue\_size, context, renderer );
+\}
+\end{DoxyCodeInclude}
+ 
+\end{DoxyParagraph}
+\hypertarget{_hello_renderer_page_HelloPTPluginSection}{}\section{The Plugin}\label{_hello_renderer_page_HelloPTPluginSection}
+\begin{DoxyParagraph}{}
+In order to get the new renderer picked up by the Fermat executable (fermat.\+exe), we need to write a plugin \hyperlink{struct_d_l_l}{D\+LL} that can be loaded at runtime. As anticipated, this \hyperlink{struct_d_l_l}{D\+LL} needs to export a single function, in this case registering the new \hyperlink{struct_hello_p_t}{Hello\+PT} factory\+: ~\newline
+\begin{quote}
+{\itshape  hellopt\+\_\+plugin.\+cpp }
+
+\end{quote}
+
+\begin{DoxyCodeInclude}
+
+\textcolor{preprocessor}{#include <hellopt.h>}
+\textcolor{preprocessor}{#include <renderer.h>}
+
+\textcolor{comment}{// define the plugin entry point}
+\textcolor{keyword}{extern} \textcolor{stringliteral}{"C"} uint32 \_\_declspec(dllexport) \_\_stdcall register\_plugin(
+      \hyperlink{struct_rendering_context}{RenderingContext}& renderer)
+\{
+    \textcolor{comment}{// register the new renderer factory and return the assigned id}
+    \textcolor{keywordflow}{return} renderer.\hyperlink{struct_rendering_context_a69b3e0b8c8cc4aaf4a9751529f86ca68}{register\_renderer}(\textcolor{stringliteral}{"hellopt"}, &HelloPT::factory);
+\}
+
+\end{DoxyCodeInclude}
+ 
+\end{DoxyParagraph}
+\hypertarget{_hello_renderer_page_HelloPTDoneSection}{}\section{We\textquotesingle{}re Done!}\label{_hello_renderer_page_HelloPTDoneSection}
+\begin{DoxyParagraph}{}
+Pat yourself on the shoulder, we have just finished writing our first sample path tracer in Fermat! ~\newline
+ I am sure you\textquotesingle{}ll have some unanswered questions in your head, though hopefully they are not way too many... 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+In fact, if you have already compiled the entire Fermat solution, and you have the dll placed in the same directory as Fermat\textquotesingle{}s executable, you should be able to run the \hyperlink{struct_hello_p_t}{Hello\+PT} plugin renderer interactively by just launching\+: ~\newline
+\begin{DoxyVerb}*  fermat.exe -view -plugin hellopt.dll -path-length 6 -i ../../models/bathroom2/bathroom.obj -c ../../models/bathroom2/camera2.txt -o output/hellopt.tga
+* \end{DoxyVerb}
+ 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+and if all goes well, waiting long enough you should get an image like this\+:
+\end{DoxyParagraph}
+
+
+~\newline
+ \begin{DoxyParagraph}{}
+Despite the fact that a lot of details were hidden behind some helper functions and classes (e.\+g. for sampling and evaluating B\+S\+D\+Fs, or mesh emitters), this example is still rather low level. In the following pages we\textquotesingle{}ll see that Fermat provides much higher level constructs and libraries to implement both forward and bidirectional path tracers, based on the realization that the underlying structure of these path samplers is more or less always the same, and that one typically only needs to {\itshape customize} their behaviour at specific points (e.\+g. specifying how exactly N\+EE is performed, or performing a custom action, like checking a cache, any time a new vertex is generated, or again specifying how the samples are weighted and finally consumed). We will also see that Fermat typically splits these libraries into two distinct components\+: a {\itshape core} library of singled-\/threaded device or host/device functions (i.\+e. functions meant to be called by and operate within an individual thread, that are still completely thread-\/safe -\/ so there could be millions such threads working in parallel), and a higher level library of {\itshape parallel kernels} and host dispatch functions, typically providing a generalized skeleton of the queue-\/based pipeline mechanism we just described here.
+\end{DoxyParagraph}
+Next\+: \hyperlink{_p_t_lib_page}{P\+T\+Lib} 

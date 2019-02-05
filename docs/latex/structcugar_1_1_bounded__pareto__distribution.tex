@@ -1,0 +1,78 @@
+\hypertarget{structcugar_1_1_bounded__pareto__distribution}{}\section{cugar\+:\+:Bounded\+\_\+pareto\+\_\+distribution Struct Reference}
+\label{structcugar_1_1_bounded__pareto__distribution}\index{cugar\+::\+Bounded\+\_\+pareto\+\_\+distribution@{cugar\+::\+Bounded\+\_\+pareto\+\_\+distribution}}
+
+
+\subsection{Detailed description}
+Bounded Pareto distribution 
+
+{\ttfamily \#include $<$distributions.\+h$>$}
+
+Inheritance diagram for cugar\+:\+:Bounded\+\_\+pareto\+\_\+distribution\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{structcugar_1_1_bounded__pareto__distribution}
+\end{center}
+\end{figure}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_bounded__pareto__distribution_aeaecb7792cf38321287e71626fab3cb7}{Bounded\+\_\+pareto\+\_\+distribution} (const float a, const float min, const float max)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_bounded__pareto__distribution_a91ec0f08a9d9355ec67bd176f34a1a6c}{map} (const float U) const
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{structcugar_1_1_bounded__pareto__distribution_a5f909b164a22aeae3e58b9c73571f599}{density} (const float x) const
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcugar_1_1_bounded__pareto__distribution_aeaecb7792cf38321287e71626fab3cb7}\label{structcugar_1_1_bounded__pareto__distribution_aeaecb7792cf38321287e71626fab3cb7}} 
+\index{cugar\+::\+Bounded\+\_\+pareto\+\_\+distribution@{cugar\+::\+Bounded\+\_\+pareto\+\_\+distribution}!Bounded\+\_\+pareto\+\_\+distribution@{Bounded\+\_\+pareto\+\_\+distribution}}
+\index{Bounded\+\_\+pareto\+\_\+distribution@{Bounded\+\_\+pareto\+\_\+distribution}!cugar\+::\+Bounded\+\_\+pareto\+\_\+distribution@{cugar\+::\+Bounded\+\_\+pareto\+\_\+distribution}}
+\subsubsection{\texorpdfstring{Bounded\+\_\+pareto\+\_\+distribution()}{Bounded\_pareto\_distribution()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE cugar\+::\+Bounded\+\_\+pareto\+\_\+distribution\+::\+Bounded\+\_\+pareto\+\_\+distribution (\begin{DoxyParamCaption}\item[{const float}]{a,  }\item[{const float}]{min,  }\item[{const float}]{max }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & distribution parameter \\
+\hline
+{\em min} & distribution parameter \\
+\hline
+{\em max} & distribution parameter \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1_bounded__pareto__distribution_a5f909b164a22aeae3e58b9c73571f599}\label{structcugar_1_1_bounded__pareto__distribution_a5f909b164a22aeae3e58b9c73571f599}} 
+\index{cugar\+::\+Bounded\+\_\+pareto\+\_\+distribution@{cugar\+::\+Bounded\+\_\+pareto\+\_\+distribution}!density@{density}}
+\index{density@{density}!cugar\+::\+Bounded\+\_\+pareto\+\_\+distribution@{cugar\+::\+Bounded\+\_\+pareto\+\_\+distribution}}
+\subsubsection{\texorpdfstring{density()}{density()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float cugar\+::\+Bounded\+\_\+pareto\+\_\+distribution\+::density (\begin{DoxyParamCaption}\item[{const float}]{x }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+probability density function
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & sample location \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structcugar_1_1_bounded__pareto__distribution_a91ec0f08a9d9355ec67bd176f34a1a6c}\label{structcugar_1_1_bounded__pareto__distribution_a91ec0f08a9d9355ec67bd176f34a1a6c}} 
+\index{cugar\+::\+Bounded\+\_\+pareto\+\_\+distribution@{cugar\+::\+Bounded\+\_\+pareto\+\_\+distribution}!map@{map}}
+\index{map@{map}!cugar\+::\+Bounded\+\_\+pareto\+\_\+distribution@{cugar\+::\+Bounded\+\_\+pareto\+\_\+distribution}}
+\subsubsection{\texorpdfstring{map()}{map()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float cugar\+::\+Bounded\+\_\+pareto\+\_\+distribution\+::map (\begin{DoxyParamCaption}\item[{const float}]{U }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+transform a uniformly distributed number through the distribution
+
+
+\begin{DoxyParams}{Parameters}
+{\em U} & real number to transform \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/sampling/\hyperlink{distributions_8h}{distributions.\+h}\end{DoxyCompactItemize}

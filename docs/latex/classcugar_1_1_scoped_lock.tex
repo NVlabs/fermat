@@ -1,0 +1,41 @@
+\hypertarget{classcugar_1_1_scoped_lock}{}\section{cugar\+:\+:Scoped\+Lock Class Reference}
+\label{classcugar_1_1_scoped_lock}\index{cugar\+::\+Scoped\+Lock@{cugar\+::\+Scoped\+Lock}}
+
+
+\subsection{Detailed description}
+A scoped lock, to be used to protect a code section enclosed within a scope. e.\+g.
+
+
+\begin{DoxyCode}
+\textcolor{keyword}{struct }MyThreadSafeClass
+\{
+    \textcolor{comment}{// multi-thread safe section}
+    \textcolor{keywordtype}{void} foo()
+    \{
+       bar();
+
+       \textcolor{comment}{// enter a critical section}
+       \{
+           ScopedLock(&m\_mutex);
+           ... \textcolor{comment}{// do something}
+       \}
+    \}
+\textcolor{keyword}{private}:
+    Mutex m\_mutex;
+\};
+\end{DoxyCode}
+ 
+
+{\ttfamily \#include $<$threads.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcugar_1_1_scoped_lock_a0a1da934a28160b46abde9932691bd3e}\label{classcugar_1_1_scoped_lock_a0a1da934a28160b46abde9932691bd3e}} 
+{\bfseries Scoped\+Lock} (\hyperlink{classcugar_1_1_mutex}{Mutex} $\ast$mutex)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/threads.\+h\end{DoxyCompactItemize}

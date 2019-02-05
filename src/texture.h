@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -31,6 +31,7 @@
 #include "types.h"
 #include "buffers.h"
 #include "texture_reference.h"
+#include "texture_view.h"
 
 #include <cugar/basic/types.h>
 #include <cugar/linalg/vector.h>
@@ -43,37 +44,6 @@
 
 ///@addtogroup TexturesModule
 ///@{
-
-/// A \ref TextureStorage "Texture" view object to be used within CUDA kernels
-///
-struct TextureView
-{
-	FERMAT_HOST_DEVICE float4&       operator()(const uint32 pixel)		  { return c[pixel]; }
-	FERMAT_HOST_DEVICE const float4& operator()(const uint32 pixel) const { return c[pixel]; }
-	FERMAT_HOST_DEVICE float4&       operator()(const uint32 x, const uint32 y)			{ return c[y*res_x + x]; }
-	FERMAT_HOST_DEVICE const float4& operator()(const uint32 x, const uint32 y) const	{ return c[y*res_x + x]; }
-	FERMAT_HOST_DEVICE const float4* ptr() const { return c;  }
-	FERMAT_HOST_DEVICE       float4* ptr()       { return c; }
-
-	float4* c;
-	uint32	res_x;
-	uint32	res_y;
-};
-
-/// A \ref MipMapStorageAnchor "Mip-Map" view object to be used within CUDA kernels
-///
-struct MipMapView
-{
-	FERMAT_HOST_DEVICE float4&       operator()(const uint32 pixel, const uint32 lod)       { return levels[lod](pixel); }
-	FERMAT_HOST_DEVICE const float4& operator()(const uint32 pixel, const uint32 lod) const { return levels[lod](pixel); }
-	FERMAT_HOST_DEVICE float4&       operator()(const uint32 x, const uint32 y, const uint32 lod)       { return levels[lod](x,y); }
-	FERMAT_HOST_DEVICE const float4& operator()(const uint32 x, const uint32 y, const uint32 lod) const { return levels[lod](x,y); }
-
-	TextureView* levels;
-	uint32		 n_levels;
-	uint32		 res_x;
-	uint32		 res_y;
-};
 
 /// Texture storage
 ///
@@ -146,8 +116,8 @@ struct MipMapStorage
 	uint32_t res_y;
 	uint32_t n_levels;
 
-	std::vector<TexturePtr>				levels;
-	DomainBuffer<TYPE, TextureView>		level_views;
+	DomainBuffer<HOST_BUFFER, TexturePtr>			levels;
+	DomainBuffer<TYPE,        TextureView>			level_views;
 
 	MipMapStorage() : res_x(0), res_y(0), n_levels(0) {}
 
@@ -164,7 +134,7 @@ struct MipMapStorage
 		res_y	 = other.res_y;
 		n_levels = other.n_levels;
 
-		levels.resize( n_levels );
+		levels.alloc( n_levels );
 		for (uint32 l = 0; l < n_levels; ++l)
 		{
 			levels[l] = TexturePtr(new TextureType);
@@ -195,7 +165,7 @@ struct MipMapStorage
 				l_res_y /= 2;
 			}
 		}
-		levels.resize(n_levels);
+		levels.alloc(n_levels);
 
 		if (n_levels)
 		{
@@ -226,7 +196,7 @@ struct MipMapStorage
 				l_res_y /= 2;
 			}
 		}
-		levels.resize(n_levels);
+		levels.alloc(n_levels);
 
 		// allocate levels
 		n_levels = 0;
@@ -303,28 +273,17 @@ struct MipMapStorage
 	}
 };
 
-FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
-cugar::Vector4f texture_lookup(float4 st, const TextureReference texture_ref, const MipMapView* textures, const float4 default_value)
-{
-	if (texture_ref.texture == uint32(-1) || textures[texture_ref.texture].n_levels == 0)
-		return default_value;
+FERMAT_API_EXTERN template class FERMAT_API DomainBuffer<HOST_BUFFER, MipMapStorage<HOST_BUFFER>::TexturePtr>;
+FERMAT_API_EXTERN template class FERMAT_API DomainBuffer<HOST_BUFFER, MipMapStorage<CUDA_BUFFER>::TexturePtr>;
+FERMAT_API_EXTERN template class FERMAT_API DomainBuffer<HOST_BUFFER, TextureView>;
+FERMAT_API_EXTERN template class FERMAT_API DomainBuffer<CUDA_BUFFER, TextureView>;
 
-	st.x *= texture_ref.scaling.x;
-	st.y *= texture_ref.scaling.y;
+FERMAT_API_EXTERN template struct FERMAT_API TextureStorage<HOST_BUFFER>;
+FERMAT_API_EXTERN template struct FERMAT_API TextureStorage<CUDA_BUFFER>;
 
-	st.x = cugar::mod(st.x, 1.0f);
-	st.y = cugar::mod(st.y, 1.0f);
+FERMAT_API_EXTERN template struct FERMAT_API MipMapStorage<HOST_BUFFER>;
+FERMAT_API_EXTERN template struct FERMAT_API MipMapStorage<CUDA_BUFFER>;
 
-	const MipMapView texture = textures[texture_ref.texture];
-	if (texture.n_levels > 0)
-	{
-		const uint32 x = cugar::min(uint32(st.x * texture.res_x), texture.res_x - 1);
-		const uint32 y = cugar::min(uint32(st.y * texture.res_y), texture.res_y - 1);
-		return texture(x, y, 0); // access LOD 0
-	}
-	else
-		return default_value;
-}
 
 ///@} TexturesModule
 ///@} Fermat

@@ -200,7 +200,7 @@ CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
 Vector<T,DIM> min(const Vector<T,DIM>& op1, const T op2)
 {
 	Vector<T,DIM> r;
-#pragma unroll
+	#pragma unroll
 	for (uint32 d = 0; d < DIM; ++d)
 		r[d] = cugar::min( op1[d], op2 );
 	return r;
@@ -210,7 +210,7 @@ CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
 Vector<T,DIM> max(const Vector<T,DIM>& op1, const T op2)
 {
 	Vector<T,DIM> r;
-#pragma unroll
+	#pragma unroll
 	for (uint32 d = 0; d < DIM; ++d)
 		r[d] = cugar::max( op1[d], op2 );
 	return r;
@@ -221,7 +221,7 @@ CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
 Vector<T, DIM> abs(const Vector<T, DIM>& op)
 {
 	Vector<T,DIM> r;
-#pragma unroll
+	#pragma unroll
 	for (uint32 d = 0; d < DIM; ++d)
 		r[d] = cugar::abs( op[d] );
 	return r;
@@ -320,7 +320,7 @@ template <typename T, uint32 DIM>
 CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
 T dot(const Vector<T, DIM>& op1, const Vector<T, DIM>& op2)
 {
-	T r = 0.0f;
+	T r = T(0.0f);
 	for (uint32 d = 0; d < DIM; ++d)
 		r += op1[d] * op2[d];
 	return r;
@@ -344,7 +344,7 @@ template <typename T, uint32 DIM>
 CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
 Vector<T, DIM> normalize(const Vector<T, DIM>& op)
 {
-	const float l = length(op);
+	const T l = length(op);
 	return l > T(0) ? op / l : op;
 }
 
@@ -449,6 +449,29 @@ Vector<T, DIM> mod(const Vector<T, DIM>& op, const T m)
 	return r;
 }
 
+
+template <typename T, uint32 DIM>
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+Vector<T, DIM> sqrt(const Vector<T, DIM>& op)
+{
+	Vector<T, DIM> r;
+	#pragma unroll
+	for (uint32 d = 0; d < DIM; ++d)
+		r[d] = ::sqrt(op[d]);
+	return r;
+}
+
+template <uint32 DIM>
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+Vector<float,DIM> sqrt(const Vector<float,DIM>& op)
+{
+	Vector<float,DIM> r;
+	#pragma unroll
+	for (uint32 d = 0; d < DIM; ++d)
+		r[d] = ::sqrtf(op[d]);
+	return r;
+}
+
 template <typename T, uint32 DIM>
 CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
 T max_comp(const Vector<T, DIM>& op)
@@ -496,5 +519,58 @@ bool is_finite(const Vector<T, DIM>& op)
 
 CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
 bool is_finite(const Vector3f& op) { return is_finite(op.x) && is_finite(op.y) && is_finite(op.z); }
+
+
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+Vector3f encode_normal(Vector3f N)
+{
+	return N * 0.5f + Vector3f(0.5f);
+}
+
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+Vector3f decode_normal(Vector3f N)
+{
+	return N * 2.0f - Vector3f(1.0f);
+}
+
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+uint32 float_to_uint(const float f, const uint32 n)
+{
+	return uint32( f * n );
+}
+
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+uint32 float3_to_r10g10b10(float3 unpackedInput)
+{
+	uint32 packedOutput;
+	packedOutput = (
+		(float_to_uint(saturate(unpackedInput.x), 1023)) |
+		(float_to_uint(saturate(unpackedInput.y), 1023) << 10) |
+		(float_to_uint(saturate(unpackedInput.z), 1023) << 20)
+	);
+	return packedOutput;
+}
+
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+float3 r10g10b10_to_float3(uint32 packedInput)
+{
+	float3 unpackedOutput;
+	unpackedOutput.x = (float)(packedInput & 0x000003ff) / 1023;
+	unpackedOutput.y = (float)(((packedInput >> 10) & 0x000003ff)) / 1023;
+	unpackedOutput.z = (float)(((packedInput >> 20) & 0x000003ff)) / 1023;
+	return unpackedOutput;
+}
+
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+uint32 pack_normal(Vector3f N)
+{
+	return float3_to_r10g10b10(encode_normal(N));
+}
+
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+Vector3f unpack_normal(uint32 Ni)
+{
+	return decode_normal(r10g10b10_to_float3(Ni));
+}
 
 } // namespace cugar

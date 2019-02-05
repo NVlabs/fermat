@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -36,31 +36,27 @@
 #include <lights.h>
 #include <mesh_lights.h>
 #include <mesh/MeshStorage.h>
-#include <optix_prime/optix_primepp.h>
 #include <vector>
 #include <renderer_view.h>
 #include <renderer_interface.h>
-
-#define SHADOW_BIAS		0.0f
-#define SHADOW_TMIN		1.0e-4f
+#include <tiled_sequence.h>
 
 ///@addtogroup Fermat
 ///@{
 
-struct PathTracer;
-struct RPT;
-struct BPT;
-struct MLT;
-struct CMLT;
-struct PSSMLT;
-struct PSFPT;
+struct RTContext;
+struct RenderingContextImpl;
 
 /// A class encpasulating the entire rendering context
 ///
-struct Renderer
+struct FERMAT_API RenderingContext
 {
 	typedef std::shared_ptr< MipMapStorage<HOST_BUFFER> >	HostMipMapStoragePtr;
 	typedef std::shared_ptr< MipMapStorage<CUDA_BUFFER> >	DeviceMipMapStoragePtr;
+
+	/// constructor
+	///
+	RenderingContext();
 
 	/// initialize the renderer
 	///
@@ -84,6 +80,11 @@ struct Renderer
 	/// \param instance		the sequence instance / frame number in a progressive render, used for rescaling
 	void rescale_frame(const uint32 instance);
 
+	/// clamp the output framebuffer to a given maximum
+	///
+	/// \param max_value
+	void clamp_frame(const float max_value);
+
 	/// update the variance estimates
 	///
 	/// \param instance		the sequence instance / frame number in a progressive render, used for rescaling
@@ -100,45 +101,130 @@ struct Renderer
 
 	/// return the current output resolution
 	///
-	uint2 res() const { return make_uint2(m_res_x, m_res_y); }
+	uint2 res() const;
 
 	/// return a view of the renderer
 	///
-	RendererView view(const uint32 instance);
+	RenderingContextView view(const uint32 instance);
 
-	unsigned int			m_res_x;							///< X resolution
-	unsigned int			m_res_y;							///< Y resolution
-	float					m_aspect;							///< aspect ratio
-	float					m_exposure;							///< exposure
-	float                   m_shading_rate;						///< shading rate
-    ShadingMode             m_shading_mode;						///< shading mode
+	/// return the camera
+	///
+	Camera& get_camera();
 
-	optix::prime::Context	m_context;							///< internal ray tracing context
-	MeshStorage				m_mesh;								///< host-side scene mesh representation
-	DeviceMeshStorage		m_mesh_d;							///< device-side scene mesh representation
-	MeshLightsStorage		m_mesh_lights;						///< mesh lights
-	optix::prime::Model     m_model;							///< internal ray tracing model
-    //DeviceUVBvh             m_uv_bvh;
+	/// return the directional light count
+	///
+	uint32 get_directional_light_count() const;
 
-	Camera					m_camera;							///< camera
-	DiskLight				m_light;
+	/// return the host-side directional lights
+	///
+	const DirectionalLight* get_host_directional_lights() const;
 
-	RendererType			m_renderer_type;					///< rendering engine type
-	RendererInterface*		m_renderer;							///< rendering engine
+	/// return the device-side directional lights
+	///
+	const DirectionalLight* get_device_directional_lights() const;
 
-	std::vector<HostMipMapStoragePtr>		m_textures_h;		///< host-side textures
-	std::vector<DeviceMipMapStoragePtr>		m_textures_d;		///< device-side textures
-	DomainBuffer<HOST_BUFFER, MipMapView>	m_texture_views_h;	///< host-side texture views
-	DomainBuffer<CUDA_BUFFER, MipMapView>	m_texture_views_d;	///< device-side texture views
-	DomainBuffer<CUDA_BUFFER, float4>		m_ltc_M;			///< LTC coefficients
-	DomainBuffer<CUDA_BUFFER, float4>		m_ltc_Minv;			///< LTC coefficients
-	DomainBuffer<CUDA_BUFFER, float>		m_ltc_A;			///< LTC coefficients
-	uint32									m_ltc_size;			///< LTC coefficients
+	/// set the number of directional lights
+	///
+	void set_directional_light_count(const uint32 count);
 
-	FBufferStorage							m_fb;				///< output framebuffer storage
-	FBufferChannelStorage					m_fb_temp[2];		///< temporary framebuffer storage
-	DomainBuffer<CUDA_BUFFER, float>		m_var;				///< variance framebuffer storage
-	DomainBuffer<CUDA_BUFFER, uint8>		m_rgba;				///< output 8-bit rgba storage
+	/// set a directional light
+	///
+	void set_directional_light(const uint32 i, const DirectionalLight& light);
+
+	/// return the target resolution
+	///
+	uint2 get_res() const;
+
+	/// return the target aspect ratio
+	///
+	float get_aspect_ratio() const;
+
+	/// set the target exposure
+	///
+	void set_aspect_ratio(const float v);
+
+	/// return the target exposure
+	///
+	float get_exposure() const;
+
+	/// set the target exposure
+	///
+	void set_exposure(const float v);
+
+	/// return the target gamma
+	///
+	float get_gamma() const;
+
+	/// set the target gamma
+	///
+	void set_gamma(const float v);
+
+	/// return the shading mode
+	///
+	ShadingMode& get_shading_mode();
+
+	/// return the frame buffer
+	///
+	FBufferStorage& get_frame_buffer();
+
+	/// return the frame buffer
+	///
+	uint8* get_device_rgba_buffer();
+
+	/// return the number of textures
+	///
+	uint32 get_texture_count() const;
+
+	/// return the scene's host-side textures
+	///
+	HostMipMapStoragePtr* get_host_textures();
+
+	/// return the scene's device-side textures
+	///
+	DeviceMipMapStoragePtr* get_device_textures();
+
+	/// return the scene's host-side textures
+	///
+	MipMapView* get_host_texture_views();
+
+	/// return the scene's device-side textures
+	///
+	MipMapView* get_device_texture_views();
+
+	/// return the scene's host-side mesh
+	///
+	MeshStorage& get_host_mesh();
+
+	/// return the scene's device-side mesh
+	///
+	DeviceMeshStorage& get_device_mesh();
+
+	/// return the scene's device-side mesh emitters
+	///
+	MeshLightsStorage& get_mesh_lights();
+
+	/// return the ray tracing context
+	///
+	RTContext* get_rt_context() const;
+
+	/// return the renderer
+	///
+	RendererInterface* get_renderer() const;
+
+	/// return the sampling sequence
+	///
+	TiledSequence& get_sequence();
+
+	/// register a new rendering interface type
+	///
+	uint32 register_renderer(const char* name, RendererFactoryFunction factory);
+
+	/// compute the scene's bbox
+	///
+	cugar::Bbox3f compute_bbox();
+
+private:
+	RenderingContextImpl* m_impl;
 };
 
 ///@} Fermat

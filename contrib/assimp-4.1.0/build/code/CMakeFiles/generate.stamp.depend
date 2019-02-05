@@ -1,0 +1,6 @@
+# CMake generation dependency list for this directory.
+C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/code/CMakeLists.txt
+C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/cmake-modules/FindRT.cmake
+C:/Program Files/CMake/share/cmake-3.7/Modules/FindPackageHandleStandardArgs.cmake
+C:/Program Files/CMake/share/cmake-3.7/Modules/FindPackageMessage.cmake
+C:/Program Files/CMake/share/cmake-3.7/Modules/CMakeParseArguments.cmake

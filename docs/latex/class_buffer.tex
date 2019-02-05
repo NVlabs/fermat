@@ -1,0 +1,91 @@
+\hypertarget{class_buffer}{}\section{Buffer$<$ T $>$ Class Template Reference}
+\label{class_buffer}\index{Buffer$<$ T $>$@{Buffer$<$ T $>$}}
+Inheritance diagram for Buffer$<$ T $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_buffer}
+\end{center}
+\end{figure}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_buffer_a6b5de7c51749ed2aecf4e12066bc869c}\label{class_buffer_a6b5de7c51749ed2aecf4e12066bc869c}} 
+{\bfseries Buffer} (size\+\_\+t count=0, Buffer\+Type type=H\+O\+S\+T\+\_\+\+B\+U\+F\+F\+ER, Page\+Locked\+State page\+Locked\+State=U\+N\+L\+O\+C\+K\+ED)
+\item 
+\mbox{\Hypertarget{class_buffer_ab2489e340cc0403f9f27163ecc7579a1}\label{class_buffer_ab2489e340cc0403f9f27163ecc7579a1}} 
+{\bfseries Buffer} (const \hyperlink{class_buffer}{Buffer}$<$ T $>$ \&src)
+\item 
+\mbox{\Hypertarget{class_buffer_af2fab9ed39cf9bf278de4ec76584b3c6}\label{class_buffer_af2fab9ed39cf9bf278de4ec76584b3c6}} 
+\hyperlink{class_buffer}{Buffer}$<$ T $>$ \& {\bfseries operator=} (const \hyperlink{class_buffer}{Buffer}$<$ T $>$ \&src)
+\item 
+\mbox{\Hypertarget{class_buffer_a5df8c9dee01bef8fa87a7a3655e70362}\label{class_buffer_a5df8c9dee01bef8fa87a7a3655e70362}} 
+\hyperlink{class_buffer}{Buffer}$<$ T $>$ \& {\bfseries operator=} (const \hyperlink{class_managed_buffer}{Managed\+Buffer}$<$ T $>$ \&src)
+\item 
+\mbox{\Hypertarget{class_buffer_a3924bf143f8775be409c9eb1e8d9dfba}\label{class_buffer_a3924bf143f8775be409c9eb1e8d9dfba}} 
+void {\bfseries alloc} (size\+\_\+t count)
+\item 
+\mbox{\Hypertarget{class_buffer_a1f68a9766127c1ee4858f11d18b59fa4}\label{class_buffer_a1f68a9766127c1ee4858f11d18b59fa4}} 
+void {\bfseries alloc} (size\+\_\+t count, Buffer\+Type type, Page\+Locked\+State page\+Locked\+State=U\+N\+L\+O\+C\+K\+ED)
+\item 
+\mbox{\Hypertarget{class_buffer_a0777b8a1efb8952938ffb3213c3d1987}\label{class_buffer_a0777b8a1efb8952938ffb3213c3d1987}} 
+void {\bfseries resize} (const size\+\_\+t count)
+\item 
+\mbox{\Hypertarget{class_buffer_a8ce00ff6dd7cacc009970dea7fa834d1}\label{class_buffer_a8ce00ff6dd7cacc009970dea7fa834d1}} 
+void {\bfseries copy\+\_\+from} (const size\+\_\+t count, const Buffer\+Type src\+\_\+type, const T $\ast$src, const uint32 dst\+\_\+offset=0)
+\item 
+\mbox{\Hypertarget{class_buffer_a3327c2b8a3d86b4bd8a1962c81887a4f}\label{class_buffer_a3327c2b8a3d86b4bd8a1962c81887a4f}} 
+void {\bfseries clear} (const uint8 byte)
+\item 
+\mbox{\Hypertarget{class_buffer_a02179b60bb8717e231490e2d843260c4}\label{class_buffer_a02179b60bb8717e231490e2d843260c4}} 
+void {\bfseries free} ()
+\item 
+\mbox{\Hypertarget{class_buffer_adef9e59af83cd013b6dfda4d95d3239f}\label{class_buffer_adef9e59af83cd013b6dfda4d95d3239f}} 
+size\+\_\+t {\bfseries count} () const
+\item 
+\mbox{\Hypertarget{class_buffer_a776c7872a2d9341b13844108bcd1ff0c}\label{class_buffer_a776c7872a2d9341b13844108bcd1ff0c}} 
+size\+\_\+t {\bfseries size\+In\+Bytes} () const
+\item 
+\mbox{\Hypertarget{class_buffer_ab881d770f9c273c36e4c8f50e63ba4c6}\label{class_buffer_ab881d770f9c273c36e4c8f50e63ba4c6}} 
+const T $\ast$ {\bfseries ptr} () const
+\item 
+\mbox{\Hypertarget{class_buffer_a8ad9a82901c52f4482d6af6cd0f0375b}\label{class_buffer_a8ad9a82901c52f4482d6af6cd0f0375b}} 
+T $\ast$ {\bfseries ptr} ()
+\item 
+\mbox{\Hypertarget{class_buffer_ac77086f411419c391242ac8f61e20a64}\label{class_buffer_ac77086f411419c391242ac8f61e20a64}} 
+Buffer\+Type {\bfseries type} () const
+\item 
+\mbox{\Hypertarget{class_buffer_acc2111d9bb88a798c1d1606f3a9fb22b}\label{class_buffer_acc2111d9bb88a798c1d1606f3a9fb22b}} 
+T {\bfseries operator\mbox{[}$\,$\mbox{]}} (const size\+\_\+t i) const
+\item 
+\mbox{\Hypertarget{class_buffer_abd03227a6f1750607c9047a665db9c8d}\label{class_buffer_abd03227a6f1750607c9047a665db9c8d}} 
+T \& {\bfseries operator\mbox{[}$\,$\mbox{]}} (const size\+\_\+t i)
+\item 
+\mbox{\Hypertarget{class_buffer_ac5f4d04b2bee69fe0715e4e46bf9f65f}\label{class_buffer_ac5f4d04b2bee69fe0715e4e46bf9f65f}} 
+void {\bfseries set} (const size\+\_\+t i, const T val)
+\item 
+\mbox{\Hypertarget{class_buffer_a0fb8a098a6bc993f5e019776339e525c}\label{class_buffer_a0fb8a098a6bc993f5e019776339e525c}} 
+void {\bfseries swap} (\hyperlink{class_buffer}{Buffer}$<$ T $>$ \&buf)
+\end{DoxyCompactItemize}
+\subsection*{Protected Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_buffer_aa781dd1b7d878f102a143eefb2f09ec3}\label{class_buffer_aa781dd1b7d878f102a143eefb2f09ec3}} 
+Buffer\+Type {\bfseries m\+\_\+type}
+\item 
+\mbox{\Hypertarget{class_buffer_a4ca3e715a85c41be1610a3e039e613a7}\label{class_buffer_a4ca3e715a85c41be1610a3e039e613a7}} 
+T $\ast$ {\bfseries m\+\_\+ptr}
+\item 
+\mbox{\Hypertarget{class_buffer_a57c5c20d61761a35df1cc2acaf85707e}\label{class_buffer_a57c5c20d61761a35df1cc2acaf85707e}} 
+int {\bfseries m\+\_\+device}
+\item 
+\mbox{\Hypertarget{class_buffer_a50b578484061644b57c71e20e0f192ae}\label{class_buffer_a50b578484061644b57c71e20e0f192ae}} 
+size\+\_\+t {\bfseries m\+\_\+count}
+\item 
+\mbox{\Hypertarget{class_buffer_aa721dc5a6930c3f4f549e39ea54ae1f6}\label{class_buffer_aa721dc5a6930c3f4f549e39ea54ae1f6}} 
+Page\+Locked\+State {\bfseries m\+\_\+page\+Locked\+State}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/buffers.\+h\end{DoxyCompactItemize}

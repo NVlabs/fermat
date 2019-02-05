@@ -1,0 +1,217 @@
+\hypertarget{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4}{}\section{sandbox\+:\+:Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$ Struct Template Reference}
+\label{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4}\index{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$@{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$$>$\newline
+struct sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$}
+
+Bvh node struct 
+
+{\ttfamily \#include $<$bvh3d.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a4760b7377876a0c35050900598eb6fcc}\label{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a4760b7377876a0c35050900598eb6fcc}} 
+typedef Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag {\bfseries Tag}
+\item 
+\mbox{\Hypertarget{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_af42c0e3b113e4fc548a1e94cce499208}\label{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_af42c0e3b113e4fc548a1e94cce499208}} 
+typedef uint32 {\bfseries Type}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+S\+A\+N\+D\+B\+O\+X\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_ad1bd8852582c16847eb047d9671d85df}{Bvh\+\_\+node} ()
+\item 
+S\+A\+N\+D\+B\+O\+X\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a5483abafea181c15a91f66da9e2c8580}{Bvh\+\_\+node} (const Type type, const uint32 index, const uint32 skip\+\_\+node)
+\item 
+S\+A\+N\+D\+B\+O\+X\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_aadeed3dd5e0241ed9514c6eb1e68be89}{set\+\_\+type} (const Type type)
+\item 
+S\+A\+N\+D\+B\+O\+X\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_aa5e707c983b73fc560880dcdeaae03b7}{set\+\_\+index} (const uint32 index)
+\item 
+S\+A\+N\+D\+B\+O\+X\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a5a769f5a9de50ececbecc6c1a44821ba}{is\+\_\+leaf} () const
+\item 
+S\+A\+N\+D\+B\+O\+X\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a8404398ddc749e7d9d3ab1196d16fde1}{get\+\_\+index} () const
+\item 
+S\+A\+N\+D\+B\+O\+X\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a24705a2ca7c24273af025f2400bf47e1}{get\+\_\+leaf\+\_\+index} () const
+\item 
+S\+A\+N\+D\+B\+O\+X\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_af1e3fb80fb7434c8c5234532b3be2b5e}{get\+\_\+child\+\_\+count} () const
+\item 
+S\+A\+N\+D\+B\+O\+X\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a9bce7fdafbe100901b8779683ed2b9a5}{get\+\_\+child} (const uint32 i) const
+\end{DoxyCompactItemize}
+\subsection*{Static Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+static S\+A\+N\+D\+B\+O\+X\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a7ad8f08b43b06f8f68fe786e22079857}{packed\+\_\+data} (const Type type, const uint32 index)
+\item 
+static S\+A\+N\+D\+B\+O\+X\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_aaf2ca7a89646ed6e3418ad6cffbdf28c}{set\+\_\+type} (uint32 \&\hyperlink{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a7ad8f08b43b06f8f68fe786e22079857}{packed\+\_\+data}, const Type type)
+\item 
+static S\+A\+N\+D\+B\+O\+X\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a21ff5f7d112aebb731f30e5e44a483a2}{set\+\_\+index} (uint32 \&\hyperlink{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a7ad8f08b43b06f8f68fe786e22079857}{packed\+\_\+data}, const uint32 index)
+\item 
+\mbox{\Hypertarget{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a12c2c2f60023978f9366830fc6c4c247}\label{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a12c2c2f60023978f9366830fc6c4c247}} 
+static S\+A\+N\+D\+B\+O\+X\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool {\bfseries is\+\_\+leaf} (const uint32 \hyperlink{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a7ad8f08b43b06f8f68fe786e22079857}{packed\+\_\+data})
+\item 
+\mbox{\Hypertarget{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_ae7a3c9968d597ff4d5ab9c834de4be2e}\label{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_ae7a3c9968d597ff4d5ab9c834de4be2e}} 
+static S\+A\+N\+D\+B\+O\+X\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 {\bfseries get\+\_\+index} (const uint32 \hyperlink{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a7ad8f08b43b06f8f68fe786e22079857}{packed\+\_\+data})
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a4b8506da03bd2c71870b79efde64ae1b}\label{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a4b8506da03bd2c71870b79efde64ae1b}} 
+uint32 {\bfseries m\+\_\+packed\+\_\+data}
+\end{DoxyCompactItemize}
+\subsection*{Static Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a7c504322bc1f1056a0f64377d2f6b5fb}\label{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a7c504322bc1f1056a0f64377d2f6b5fb}} 
+static const uint32 {\bfseries k\+Leaf} = (1u $<$$<$ 31u)
+\item 
+\mbox{\Hypertarget{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a2d619ed362c607fb3a114005b48b7018}\label{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a2d619ed362c607fb3a114005b48b7018}} 
+static const uint32 {\bfseries k\+Internal} = 0x00000000u
+\item 
+\mbox{\Hypertarget{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_aafa5ea630bdc1dd4f1d5bfa5eb14f5e6}\label{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_aafa5ea630bdc1dd4f1d5bfa5eb14f5e6}} 
+static const uint32 {\bfseries k\+Invalid} = uint32(-\/1)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_ad1bd8852582c16847eb047d9671d85df}\label{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_ad1bd8852582c16847eb047d9671d85df}} 
+\index{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$@{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$}!Bvh\+\_\+node@{Bvh\+\_\+node}}
+\index{Bvh\+\_\+node@{Bvh\+\_\+node}!sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$@{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$}}
+\subsubsection{\texorpdfstring{Bvh\+\_\+node()}{Bvh\_node()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily S\+A\+N\+D\+B\+O\+X\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structsandbox_1_1_bvh__node}{sandbox\+::\+Bvh\+\_\+node}$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$\+::\hyperlink{structsandbox_1_1_bvh__node}{Bvh\+\_\+node} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+empty constructor \mbox{\Hypertarget{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a5483abafea181c15a91f66da9e2c8580}\label{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a5483abafea181c15a91f66da9e2c8580}} 
+\index{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$@{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$}!Bvh\+\_\+node@{Bvh\+\_\+node}}
+\index{Bvh\+\_\+node@{Bvh\+\_\+node}!sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$@{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$}}
+\subsubsection{\texorpdfstring{Bvh\+\_\+node()}{Bvh\_node()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily S\+A\+N\+D\+B\+O\+X\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structsandbox_1_1_bvh__node}{sandbox\+::\+Bvh\+\_\+node}$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$\+::\hyperlink{structsandbox_1_1_bvh__node}{Bvh\+\_\+node} (\begin{DoxyParamCaption}\item[{const Type}]{type,  }\item[{const uint32}]{index,  }\item[{const uint32}]{skip\+\_\+node }\end{DoxyParamCaption})}
+
+full constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & node type \\
+\hline
+{\em index} & child/leaf index \\
+\hline
+{\em skip\+\_\+node} & skip node index \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a9bce7fdafbe100901b8779683ed2b9a5}\label{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a9bce7fdafbe100901b8779683ed2b9a5}} 
+\index{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$@{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$}!get\+\_\+child@{get\+\_\+child}}
+\index{get\+\_\+child@{get\+\_\+child}!sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$@{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$}}
+\subsubsection{\texorpdfstring{get\+\_\+child()}{get\_child()}}
+{\footnotesize\ttfamily S\+A\+N\+D\+B\+O\+X\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structsandbox_1_1_bvh__node}{sandbox\+::\+Bvh\+\_\+node}$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$\+::get\+\_\+child (\begin{DoxyParamCaption}\item[{const uint32}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+get i-\/th child
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & child index \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_af1e3fb80fb7434c8c5234532b3be2b5e}\label{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_af1e3fb80fb7434c8c5234532b3be2b5e}} 
+\index{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$@{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$}!get\+\_\+child\+\_\+count@{get\+\_\+child\+\_\+count}}
+\index{get\+\_\+child\+\_\+count@{get\+\_\+child\+\_\+count}!sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$@{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$}}
+\subsubsection{\texorpdfstring{get\+\_\+child\+\_\+count()}{get\_child\_count()}}
+{\footnotesize\ttfamily S\+A\+N\+D\+B\+O\+X\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structsandbox_1_1_bvh__node}{sandbox\+::\+Bvh\+\_\+node}$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$\+::get\+\_\+child\+\_\+count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+get child count \mbox{\Hypertarget{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a8404398ddc749e7d9d3ab1196d16fde1}\label{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a8404398ddc749e7d9d3ab1196d16fde1}} 
+\index{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$@{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$}!get\+\_\+index@{get\+\_\+index}}
+\index{get\+\_\+index@{get\+\_\+index}!sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$@{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$}}
+\subsubsection{\texorpdfstring{get\+\_\+index()}{get\_index()}}
+{\footnotesize\ttfamily S\+A\+N\+D\+B\+O\+X\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structsandbox_1_1_bvh__node}{sandbox\+::\+Bvh\+\_\+node}$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$\+::get\+\_\+index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+get child/leaf index \mbox{\Hypertarget{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a24705a2ca7c24273af025f2400bf47e1}\label{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a24705a2ca7c24273af025f2400bf47e1}} 
+\index{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$@{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$}!get\+\_\+leaf\+\_\+index@{get\+\_\+leaf\+\_\+index}}
+\index{get\+\_\+leaf\+\_\+index@{get\+\_\+leaf\+\_\+index}!sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$@{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$}}
+\subsubsection{\texorpdfstring{get\+\_\+leaf\+\_\+index()}{get\_leaf\_index()}}
+{\footnotesize\ttfamily S\+A\+N\+D\+B\+O\+X\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structsandbox_1_1_bvh__node}{sandbox\+::\+Bvh\+\_\+node}$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$\+::get\+\_\+leaf\+\_\+index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+get leaf index \mbox{\Hypertarget{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a5a769f5a9de50ececbecc6c1a44821ba}\label{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a5a769f5a9de50ececbecc6c1a44821ba}} 
+\index{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$@{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$}!is\+\_\+leaf@{is\+\_\+leaf}}
+\index{is\+\_\+leaf@{is\+\_\+leaf}!sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$@{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$}}
+\subsubsection{\texorpdfstring{is\+\_\+leaf()}{is\_leaf()}}
+{\footnotesize\ttfamily S\+A\+N\+D\+B\+O\+X\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{structsandbox_1_1_bvh__node}{sandbox\+::\+Bvh\+\_\+node}$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$\+::is\+\_\+leaf (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+is a leaf? \mbox{\Hypertarget{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a7ad8f08b43b06f8f68fe786e22079857}\label{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a7ad8f08b43b06f8f68fe786e22079857}} 
+\index{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$@{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$}!packed\+\_\+data@{packed\+\_\+data}}
+\index{packed\+\_\+data@{packed\+\_\+data}!sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$@{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$}}
+\subsubsection{\texorpdfstring{packed\+\_\+data()}{packed\_data()}}
+{\footnotesize\ttfamily static S\+A\+N\+D\+B\+O\+X\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structsandbox_1_1_bvh__node}{sandbox\+::\+Bvh\+\_\+node}$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$\+::packed\+\_\+data (\begin{DoxyParamCaption}\item[{const Type}]{type,  }\item[{const uint32}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+compute packed data
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & node type \\
+\hline
+{\em index} & child/leaf index \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_aa5e707c983b73fc560880dcdeaae03b7}\label{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_aa5e707c983b73fc560880dcdeaae03b7}} 
+\index{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$@{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$}!set\+\_\+index@{set\+\_\+index}}
+\index{set\+\_\+index@{set\+\_\+index}!sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$@{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$}}
+\subsubsection{\texorpdfstring{set\+\_\+index()}{set\_index()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily S\+A\+N\+D\+B\+O\+X\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structsandbox_1_1_bvh__node}{sandbox\+::\+Bvh\+\_\+node}$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$\+::set\+\_\+index (\begin{DoxyParamCaption}\item[{const uint32}]{index }\end{DoxyParamCaption})}
+
+set child/leaf index
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & child/leaf index \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a21ff5f7d112aebb731f30e5e44a483a2}\label{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_a21ff5f7d112aebb731f30e5e44a483a2}} 
+\index{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$@{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$}!set\+\_\+index@{set\+\_\+index}}
+\index{set\+\_\+index@{set\+\_\+index}!sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$@{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$}}
+\subsubsection{\texorpdfstring{set\+\_\+index()}{set\_index()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static S\+A\+N\+D\+B\+O\+X\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structsandbox_1_1_bvh__node}{sandbox\+::\+Bvh\+\_\+node}$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$\+::set\+\_\+index (\begin{DoxyParamCaption}\item[{uint32 \&}]{packed\+\_\+data,  }\item[{const uint32}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+set child/leaf index into a packed data
+
+
+\begin{DoxyParams}{Parameters}
+{\em packed\+\_\+data} & packed data \\
+\hline
+{\em index} & child/leaf index \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_aadeed3dd5e0241ed9514c6eb1e68be89}\label{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_aadeed3dd5e0241ed9514c6eb1e68be89}} 
+\index{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$@{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$}!set\+\_\+type@{set\+\_\+type}}
+\index{set\+\_\+type@{set\+\_\+type}!sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$@{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$}}
+\subsubsection{\texorpdfstring{set\+\_\+type()}{set\_type()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily S\+A\+N\+D\+B\+O\+X\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structsandbox_1_1_bvh__node}{sandbox\+::\+Bvh\+\_\+node}$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$\+::set\+\_\+type (\begin{DoxyParamCaption}\item[{const Type}]{type }\end{DoxyParamCaption})}
+
+set node type
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & node type \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_aaf2ca7a89646ed6e3418ad6cffbdf28c}\label{structsandbox_1_1_bvh__node_3_01_indexed__leaf__bvh__tag_01_4_aaf2ca7a89646ed6e3418ad6cffbdf28c}} 
+\index{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$@{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$}!set\+\_\+type@{set\+\_\+type}}
+\index{set\+\_\+type@{set\+\_\+type}!sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$@{sandbox\+::\+Bvh\+\_\+node$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$}}
+\subsubsection{\texorpdfstring{set\+\_\+type()}{set\_type()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static S\+A\+N\+D\+B\+O\+X\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structsandbox_1_1_bvh__node}{sandbox\+::\+Bvh\+\_\+node}$<$ Indexed\+\_\+leaf\+\_\+bvh\+\_\+tag $>$\+::set\+\_\+type (\begin{DoxyParamCaption}\item[{uint32 \&}]{packed\+\_\+data,  }\item[{const Type}]{type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+set node type into a packed data
+
+
+\begin{DoxyParams}{Parameters}
+{\em packed\+\_\+data} & packed data \\
+\hline
+{\em type} & node type \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bvh/bvh3d.\+h\end{DoxyCompactItemize}

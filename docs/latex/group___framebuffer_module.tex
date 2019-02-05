@@ -1,0 +1,54 @@
+\hypertarget{group___framebuffer_module}{}\section{Framebuffer\+Module}
+\label{group___framebuffer_module}\index{Framebuffer\+Module@{Framebuffer\+Module}}
+
+
+\subsection{Detailed Description}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_g_buffer_view}{G\+Buffer\+View}
+\item 
+struct \hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View}
+\item 
+struct \hyperlink{struct_g_buffer_storage}{G\+Buffer\+Storage}
+\item 
+struct \hyperlink{struct_f_buffer_channel_storage}{F\+Buffer\+Channel\+Storage}
+\item 
+struct \hyperlink{struct_f_buffer_view}{F\+Buffer\+View}
+\item 
+struct \hyperlink{struct_f_buffer_storage}{F\+Buffer\+Storage}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$bool A\+L\+P\+H\+A\+\_\+\+A\+S\+\_\+\+V\+A\+R\+I\+A\+N\+CE$>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___framebuffer_module_ga5dc81569ddc64436e1fe3638e3e031ce}{average\+\_\+in} (\hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View} \&fb, const uint32\+\_\+t pixel, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector4f} f, const float inv\+\_\+n)
+\item 
+{\footnotesize template$<$bool A\+L\+P\+H\+A\+\_\+\+A\+S\+\_\+\+V\+A\+R\+I\+A\+N\+CE$>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___framebuffer_module_ga27004dfdf67948b9846f3b70efbbca67}{average\+\_\+in} (\hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View} \&fb, const uint32\+\_\+t pixel, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} f, const float inv\+\_\+n)
+\item 
+{\footnotesize template$<$bool A\+L\+P\+H\+A\+\_\+\+A\+S\+\_\+\+V\+A\+R\+I\+A\+N\+CE$>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___framebuffer_module_ga2649fc1c7712f02ca2a7391930e4b3e8}{add\+\_\+in} (\hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View} \&fb, const uint32\+\_\+t pixel, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} f, const float inv\+\_\+n)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___framebuffer_module_ga2649fc1c7712f02ca2a7391930e4b3e8}\label{group___framebuffer_module_ga2649fc1c7712f02ca2a7391930e4b3e8}} 
+\index{Framebuffer\+Module@{Framebuffer\+Module}!add\+\_\+in@{add\+\_\+in}}
+\index{add\+\_\+in@{add\+\_\+in}!Framebuffer\+Module@{Framebuffer\+Module}}
+\subsubsection{\texorpdfstring{add\+\_\+in()}{add\_in()}}
+{\footnotesize\ttfamily template$<$bool A\+L\+P\+H\+A\+\_\+\+A\+S\+\_\+\+V\+A\+R\+I\+A\+N\+CE$>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void add\+\_\+in (\begin{DoxyParamCaption}\item[{\hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View} \&}]{fb,  }\item[{const uint32\+\_\+t}]{pixel,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{f,  }\item[{const float}]{inv\+\_\+n }\end{DoxyParamCaption})}
+
+add a sample to a frame-\/buffer channel, optionally keeping track of variance in the alpha component. Note that in order to compute statistical averages, the frame-\/buffer should be here pre-\/multiplied by (n-\/1)/n. \mbox{\Hypertarget{group___framebuffer_module_ga5dc81569ddc64436e1fe3638e3e031ce}\label{group___framebuffer_module_ga5dc81569ddc64436e1fe3638e3e031ce}} 
+\index{Framebuffer\+Module@{Framebuffer\+Module}!average\+\_\+in@{average\+\_\+in}}
+\index{average\+\_\+in@{average\+\_\+in}!Framebuffer\+Module@{Framebuffer\+Module}}
+\subsubsection{\texorpdfstring{average\+\_\+in()}{average\_in()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$bool A\+L\+P\+H\+A\+\_\+\+A\+S\+\_\+\+V\+A\+R\+I\+A\+N\+CE$>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void average\+\_\+in (\begin{DoxyParamCaption}\item[{\hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View} \&}]{fb,  }\item[{const uint32\+\_\+t}]{pixel,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector4f}}]{f,  }\item[{const float}]{inv\+\_\+n }\end{DoxyParamCaption})}
+
+add a sample to a frame-\/buffer channel, optionally keeping track of variance in the alpha component \mbox{\Hypertarget{group___framebuffer_module_ga27004dfdf67948b9846f3b70efbbca67}\label{group___framebuffer_module_ga27004dfdf67948b9846f3b70efbbca67}} 
+\index{Framebuffer\+Module@{Framebuffer\+Module}!average\+\_\+in@{average\+\_\+in}}
+\index{average\+\_\+in@{average\+\_\+in}!Framebuffer\+Module@{Framebuffer\+Module}}
+\subsubsection{\texorpdfstring{average\+\_\+in()}{average\_in()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$bool A\+L\+P\+H\+A\+\_\+\+A\+S\+\_\+\+V\+A\+R\+I\+A\+N\+CE$>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void average\+\_\+in (\begin{DoxyParamCaption}\item[{\hyperlink{struct_f_buffer_channel_view}{F\+Buffer\+Channel\+View} \&}]{fb,  }\item[{const uint32\+\_\+t}]{pixel,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{f,  }\item[{const float}]{inv\+\_\+n }\end{DoxyParamCaption})}
+
+add a sample to a frame-\/buffer channel, optionally keeping track of variance in the alpha component 

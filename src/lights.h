@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -34,6 +34,7 @@
 #include <mesh_utils.h>
 #include <texture.h>
 #include <edf.h>
+#include <vtl.h>
 #include <cugar/basic/algorithms.h>
 #include <cugar/spherical/mappings.h>
 
@@ -45,10 +46,12 @@
 
 enum class LightType
 {
-	kPoint     = 0,
-	kDisk      = 1,
-	kRectangle = 2,
-	kMesh      = 3
+	kPoint			= 0,
+	kDisk			= 1,
+	kRectangle		= 2,
+	kDirectional	= 3,
+	kMesh			= 4,
+	kVTL			= 5,
 };
 
 /// Represent a VPL
@@ -84,16 +87,29 @@ struct Light
 {
 	LightType type;
 
+#if !defined(OPTIX_COMPILATION)
 	FERMAT_HOST_DEVICE
 	Light() : type(LightType::kPoint) {}
+#else
+	FERMAT_HOST_DEVICE
+	Light() {}
+#endif
 
 	FERMAT_HOST_DEVICE
 	Light(LightType _type) : type(_type) {}
 
 	/// sample a point on the light source
 	///
+	/// \param Z				the input random numbers
+	/// \param prim_id		the output primitive index, in case the light is made of a mesh
+	/// \param uv			the output uv coordinates on the sampled primitive
+	/// \param geom			the output sample's differential geometry
+	/// \param pdf			the output sample's area pdf
+	/// \param edf			the output sample's EDF
+	///
+	/// \return true iff the pdf is singular
 	FERMAT_HOST_DEVICE
-	void sample(
+	bool sample(
 		const float*		Z,
 		uint32_t*			prim_id,
 		cugar::Vector2f*	uv,
@@ -101,17 +117,54 @@ struct Light
 		float*				pdf,
 		Edf*				edf) const;
 
+	/// sample a point on the light source given a shading point (or <i>receiver</i>)
+	///
+	/// \param p			the input shading point
+	/// \param Z			the input random numbers
+	/// \param prim_id		the output primitive index, in case the light is made of a mesh
+	/// \param uv			the output uv coordinates on the sampled primitive
+	/// \param geom			the output sample's differential geometry
+	/// \param pdf			the output sample's area pdf
+	/// \param edf			the output sample's EDF
+	///
+	/// \return true iff the pdf is singular
+	FERMAT_HOST_DEVICE
+	bool sample(
+		const cugar::Vector3f	p,
+		const float*			Z,
+		uint32_t*				prim_id,
+		cugar::Vector2f*		uv,
+		VertexGeometry*			geom,
+		float*					pdf,
+		Edf*					edf) const;
+
 	/// intersect the given ray with the light source
+	///
+	/// \param ray			the input ray
+	/// \param uv			the output uv coordinates on the sampled primitive
+	/// \param t			the output ray intersection distance
 	///
 	FERMAT_HOST_DEVICE
 	void intersect(const Ray ray, float2* uv, float* t) const;
 
 	/// map a (prim,uv) pair to a surface element
 	///
+	/// \param prim_id		the input primitive index, in case the light is made of a mesh
+	/// \param uv			the input uv coordinates on the sampled primitive
+	/// \param geom			the output sample's differential geometry
+	/// \param pdf			the output sample's area pdf
+	/// \param edf			the output sample's EDF
+	///
 	FERMAT_HOST_DEVICE
 	void map(const uint32_t prim_id, const cugar::Vector2f& uv, VertexGeometry* geom, float* pdf, Edf* edf) const;
 
-	/// map a (prim,uv) pair and a surface element to the corresponding edf/pdf
+	/// map a (prim,uv) pair and a (precomputed) surface element to the corresponding edf/pdf
+	///
+	/// \param prim_id		the input primitive index, in case the light is made of a mesh
+	/// \param uv			the input uv coordinates on the sampled primitive
+	/// \param geom			the input sample's differential geometry
+	/// \param pdf			the output sample's area pdf
+	/// \param edf			the output sample's EDF
 	///
 	FERMAT_HOST_DEVICE
 	void map(const uint32_t prim_id, const cugar::Vector2f& uv, const VertexGeometry& geom, float* pdf, Edf* edf) const;
@@ -128,13 +181,14 @@ struct DiskLight : public Light
 	cugar::Vector3f  color;
 	float			 radius;
 
+#if !defined(OPTIX_COMPILATION)
 	FERMAT_HOST_DEVICE
 	DiskLight() : Light(LightType::kDisk) {}
-
+#endif
 	/// sample a surface element on the light source
 	///
 	FERMAT_HOST_DEVICE
-	void sample_impl(
+	bool sample_impl(
 		const float*		Z,
 		uint32_t*			prim_id,
 		cugar::Vector2f*	uv,
@@ -147,6 +201,7 @@ struct DiskLight : public Light
 		*uv = cugar::Vector2f(Z[0], Z[1]);
 
 		map_impl(*prim_id, *uv, geom, pdf, edf);
+		return false;
 	}
 
 	/// intersect the given ray with the light source
@@ -189,12 +244,67 @@ struct DiskLight : public Light
 	}
 };
 
+/// Directional-light class
+///
+struct DirectionalLight : public Light
+{
+	cugar::Vector3f	 dir;
+	cugar::Vector3f  color;
+
+#if !defined(OPTIX_COMPILATION)
+	FERMAT_HOST_DEVICE
+	DirectionalLight() : Light(LightType::kDirectional) {}
+#endif
+	/// sample a surface element on the light source
+	///
+	FERMAT_HOST_DEVICE
+	bool sample_impl(
+		const float*		Z,
+		uint32_t*			prim_id,
+		cugar::Vector2f*	uv,
+		VertexGeometry*		geom,
+		float*				pdf,
+		Edf*				edf) const
+	{
+		// sample a point on the scene's projected bounding disk in direction 'dir
+		return true;
+	}
+
+	/// sample a surface element on the light source
+	///
+	FERMAT_HOST_DEVICE
+	bool sample_impl(
+		const cugar::Vector3f	p,
+		const float*			Z,
+		uint32_t*				prim_id,
+		cugar::Vector2f*		uv,
+		VertexGeometry*			geom,
+		float*					pdf,
+		Edf*					edf) const
+	{
+		const float FAR = 1.0e8f;
+
+		geom->position = p - dir * FAR;
+		geom->normal_s = geom->normal_g = dir;
+		geom->tangent  = cugar::orthogonal(dir);
+		geom->binormal = cugar::cross(dir,geom->tangent);
+		*pdf = 1.0f;
+		*edf = Edf( FAR*FAR * color ); 
+		return true;
+	}
+};
+
 /// Mesh-light class
 ///
 struct MeshLight : public Light
 {
+#if !defined(OPTIX_COMPILATION)
 	FERMAT_HOST_DEVICE
 	MeshLight() : Light(LightType::kMesh) {}
+#else
+	FERMAT_HOST_DEVICE
+	MeshLight() {}
+#endif
 
 	FERMAT_HOST_DEVICE
 	MeshLight(const uint32 _n_prims, const float* _prims_cdf, const float* _prims_inv_area, MeshView _mesh, const MipMapView* _textures, const uint32 _n_vpls, const float* _vpls_cdf, const VPL* _vpls, const float _norm) :
@@ -203,7 +313,7 @@ struct MeshLight : public Light
 	/// sample a point on the light source
 	///
 	FERMAT_HOST_DEVICE
-	void sample_impl(
+	bool sample_impl(
 		const float*		Z,
 		uint32_t*			prim_id,
 		cugar::Vector2f*	uv,
@@ -247,6 +357,7 @@ struct MeshLight : public Light
 			*pdf     = 1.0f;
 			*edf     = Edf();
 		}
+		return false;
 	}
 
 	/// intersect the given ray with the light source
@@ -374,6 +485,24 @@ struct MeshLight : public Light
 	FERMAT_HOST_DEVICE
 	VPL get_vpl(const uint32 i) const { return vpls[i]; }
 
+	/// map a given VPL to its surface and sampling info
+	///
+	FERMAT_HOST_DEVICE
+	void map_vpl(
+		const uint32			vpl_idx,
+		uint32_t*				prim_id,
+		cugar::Vector2f*		uv,
+		VertexGeometry*			geom,
+		float*					pdf,
+		Edf*					edf) const
+	{
+		// sample one of the VPLs
+		*prim_id = vpls[vpl_idx].prim_id;
+		*uv		 = vpls[vpl_idx].uv;
+
+		map_impl(*prim_id, *uv, geom, pdf, edf);
+	}
+
 	uint32				n_prims;
 	const float*		prims_cdf;
 	const float*		prims_inv_area;
@@ -385,10 +514,11 @@ struct MeshLight : public Light
 	float				norm;
 };
 
+
 // sample a point on the light source
 //
 FERMAT_HOST_DEVICE
-inline void Light::sample(
+inline bool Light::sample(
 	const float*		Z,
 	uint32_t*			prim_id,
 	cugar::Vector2f*	uv,
@@ -399,11 +529,37 @@ inline void Light::sample(
 	switch (type)
 	{
 	case LightType::kDisk:
-		reinterpret_cast<const DiskLight*>(this)->sample_impl( Z, prim_id, uv, geom, pdf, edf );
-		break;
+		return reinterpret_cast<const DiskLight*>(this)->sample_impl( Z, prim_id, uv, geom, pdf, edf );
 	case LightType::kMesh:
-		reinterpret_cast<const MeshLight*>(this)->sample_impl( Z, prim_id, uv, geom, pdf, edf );
+		return reinterpret_cast<const MeshLight*>(this)->sample_impl( Z, prim_id, uv, geom, pdf, edf );
+	case LightType::kDirectional:
+		return reinterpret_cast<const DirectionalLight*>(this)->sample_impl( Z, prim_id, uv, geom, pdf, edf );
 	}
+	return true;
+}
+
+// sample a point on the light source
+//
+FERMAT_HOST_DEVICE
+inline bool Light::sample(
+	const cugar::Vector3f	p,
+	const float*			Z,
+	uint32_t*				prim_id,
+	cugar::Vector2f*		uv,
+	VertexGeometry*			geom,
+	float*					pdf,
+	Edf*					edf) const
+{
+	switch (type)
+	{
+	case LightType::kDisk:
+		return reinterpret_cast<const DiskLight*>(this)->sample_impl( Z, prim_id, uv, geom, pdf, edf ); // NOTE: for now using the generic, non-anchored implementation
+	case LightType::kMesh:
+		return reinterpret_cast<const MeshLight*>(this)->sample_impl( Z, prim_id, uv, geom, pdf, edf ); // NOTE: for now using the generic, non-anchored implementation
+	case LightType::kDirectional:
+		return reinterpret_cast<const DirectionalLight*>(this)->sample_impl( p, Z, prim_id, uv, geom, pdf, edf );
+	}
+	return true;
 }
 
 // intersect the given ray with the light source

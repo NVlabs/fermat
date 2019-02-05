@@ -1,0 +1,83 @@
+\hypertarget{structcugar_1_1cuda_1_1_kd__context}{}\section{cugar\+:\+:cuda\+:\+:Kd\+\_\+context Struct Reference}
+\label{structcugar_1_1cuda_1_1_kd__context}\index{cugar\+::cuda\+::\+Kd\+\_\+context@{cugar\+::cuda\+::\+Kd\+\_\+context}}
+
+
+\subsection{Detailed description}
+A context to pass to k-\/d tree builders 
+
+{\ttfamily \#include $<$kd\+\_\+context.\+h$>$}
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcugar_1_1cuda_1_1_kd__context_1_1_context}{Context}
+\begin{DoxyCompactList}\small\item\em Cuda accessor struct. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structcugar_1_1cuda_1_1_kd__context_a654bb141ef5aee074a05d56cfcac3ca1}{Kd\+\_\+context} (thrust\+::device\+\_\+vector$<$ \hyperlink{structcugar_1_1_kd__node}{Kd\+\_\+node} $>$ $\ast$nodes, thrust\+::device\+\_\+vector$<$ uint2 $>$ $\ast$leaves, thrust\+::device\+\_\+vector$<$ uint2 $>$ $\ast$ranges)
+\item 
+void \hyperlink{structcugar_1_1cuda_1_1_kd__context_a5c97fca7fe7ce898fdf17f7406d5efc8}{reserve\+\_\+nodes} (const uint32 n)
+\item 
+void \hyperlink{structcugar_1_1cuda_1_1_kd__context_a7bc572a4cd5bc3879cd54d86c4735863}{reserve\+\_\+leaves} (const uint32 n)
+\item 
+\hyperlink{structcugar_1_1cuda_1_1_kd__context_1_1_context}{Context} \hyperlink{structcugar_1_1cuda_1_1_kd__context_ab5a0d97da3fcddd94a9673eb6a3c529d}{get\+\_\+context} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_kd__context_a194733e014257d08edc4f7c7b7b5b232}\label{structcugar_1_1cuda_1_1_kd__context_a194733e014257d08edc4f7c7b7b5b232}} 
+thrust\+::device\+\_\+vector$<$ \hyperlink{structcugar_1_1_kd__node}{Kd\+\_\+node} $>$ $\ast$ {\bfseries m\+\_\+nodes}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_kd__context_a3b02e2269ab2bff209644490614748f8}\label{structcugar_1_1cuda_1_1_kd__context_a3b02e2269ab2bff209644490614748f8}} 
+thrust\+::device\+\_\+vector$<$ uint2 $>$ $\ast$ {\bfseries m\+\_\+leaves}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_kd__context_aabd47af2effa3080fe02cdc4688150df}\label{structcugar_1_1cuda_1_1_kd__context_aabd47af2effa3080fe02cdc4688150df}} 
+thrust\+::device\+\_\+vector$<$ uint2 $>$ $\ast$ {\bfseries m\+\_\+ranges}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_kd__context_a654bb141ef5aee074a05d56cfcac3ca1}\label{structcugar_1_1cuda_1_1_kd__context_a654bb141ef5aee074a05d56cfcac3ca1}} 
+\index{cugar\+::cuda\+::\+Kd\+\_\+context@{cugar\+::cuda\+::\+Kd\+\_\+context}!Kd\+\_\+context@{Kd\+\_\+context}}
+\index{Kd\+\_\+context@{Kd\+\_\+context}!cugar\+::cuda\+::\+Kd\+\_\+context@{cugar\+::cuda\+::\+Kd\+\_\+context}}
+\subsubsection{\texorpdfstring{Kd\+\_\+context()}{Kd\_context()}}
+{\footnotesize\ttfamily cugar\+::cuda\+::\+Kd\+\_\+context\+::\+Kd\+\_\+context (\begin{DoxyParamCaption}\item[{thrust\+::device\+\_\+vector$<$ \hyperlink{structcugar_1_1_kd__node}{Kd\+\_\+node} $>$ $\ast$}]{nodes,  }\item[{thrust\+::device\+\_\+vector$<$ uint2 $>$ $\ast$}]{leaves,  }\item[{thrust\+::device\+\_\+vector$<$ uint2 $>$ $\ast$}]{ranges }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em nodes} & output node vector \\
+\hline
+{\em leaves} & output leaf vector \\
+\hline
+{\em ranges} & output node range vector\+: if not N\+U\+LL, the i-\/th item will be set with the range of prims corresponding to the i-\/th node. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_kd__context_ab5a0d97da3fcddd94a9673eb6a3c529d}\label{structcugar_1_1cuda_1_1_kd__context_ab5a0d97da3fcddd94a9673eb6a3c529d}} 
+\index{cugar\+::cuda\+::\+Kd\+\_\+context@{cugar\+::cuda\+::\+Kd\+\_\+context}!get\+\_\+context@{get\+\_\+context}}
+\index{get\+\_\+context@{get\+\_\+context}!cugar\+::cuda\+::\+Kd\+\_\+context@{cugar\+::cuda\+::\+Kd\+\_\+context}}
+\subsubsection{\texorpdfstring{get\+\_\+context()}{get\_context()}}
+{\footnotesize\ttfamily \hyperlink{structcugar_1_1cuda_1_1_kd__context_1_1_context}{Context} cugar\+::cuda\+::\+Kd\+\_\+context\+::get\+\_\+context (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return a cuda context \mbox{\Hypertarget{structcugar_1_1cuda_1_1_kd__context_a7bc572a4cd5bc3879cd54d86c4735863}\label{structcugar_1_1cuda_1_1_kd__context_a7bc572a4cd5bc3879cd54d86c4735863}} 
+\index{cugar\+::cuda\+::\+Kd\+\_\+context@{cugar\+::cuda\+::\+Kd\+\_\+context}!reserve\+\_\+leaves@{reserve\+\_\+leaves}}
+\index{reserve\+\_\+leaves@{reserve\+\_\+leaves}!cugar\+::cuda\+::\+Kd\+\_\+context@{cugar\+::cuda\+::\+Kd\+\_\+context}}
+\subsubsection{\texorpdfstring{reserve\+\_\+leaves()}{reserve\_leaves()}}
+{\footnotesize\ttfamily void cugar\+::cuda\+::\+Kd\+\_\+context\+::reserve\+\_\+leaves (\begin{DoxyParamCaption}\item[{const uint32}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+reserve space for more leaves \mbox{\Hypertarget{structcugar_1_1cuda_1_1_kd__context_a5c97fca7fe7ce898fdf17f7406d5efc8}\label{structcugar_1_1cuda_1_1_kd__context_a5c97fca7fe7ce898fdf17f7406d5efc8}} 
+\index{cugar\+::cuda\+::\+Kd\+\_\+context@{cugar\+::cuda\+::\+Kd\+\_\+context}!reserve\+\_\+nodes@{reserve\+\_\+nodes}}
+\index{reserve\+\_\+nodes@{reserve\+\_\+nodes}!cugar\+::cuda\+::\+Kd\+\_\+context@{cugar\+::cuda\+::\+Kd\+\_\+context}}
+\subsubsection{\texorpdfstring{reserve\+\_\+nodes()}{reserve\_nodes()}}
+{\footnotesize\ttfamily void cugar\+::cuda\+::\+Kd\+\_\+context\+::reserve\+\_\+nodes (\begin{DoxyParamCaption}\item[{const uint32}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+reserve space for more nodes 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/kd/cuda/\hyperlink{kd__context_8h}{kd\+\_\+context.\+h}\end{DoxyCompactItemize}

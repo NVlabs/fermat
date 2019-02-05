@@ -1,0 +1,44 @@
+\hypertarget{classcugar_1_1_mutex}{}\section{cugar\+:\+:Mutex Class Reference}
+\label{classcugar_1_1_mutex}\index{cugar\+::\+Mutex@{cugar\+::\+Mutex}}
+
+
+\subsection{Detailed description}
+A mutex class, to be used to provide mutual exclusion of multi-\/thread execution
+
+
+\begin{DoxyCode}
+\textcolor{keyword}{struct }MyThreadSafeClass
+\{
+    \textcolor{comment}{// multi-thread safe section}
+    \textcolor{keywordtype}{void} foo()
+    \{
+       bar();
+
+       \textcolor{comment}{// enter a critical section}
+       m\_mutex.lock();
+       ... \textcolor{comment}{// do something}
+       m\_mutex.unlock();
+    \}
+\textcolor{keyword}{private}:
+    Mutex m\_mutex;
+\};
+\end{DoxyCode}
+ 
+
+{\ttfamily \#include $<$threads.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcugar_1_1_mutex_ad9d468993b3d0c8a6271df7f609560fd}\label{classcugar_1_1_mutex_ad9d468993b3d0c8a6271df7f609560fd}} 
+void {\bfseries lock} ()
+\item 
+\mbox{\Hypertarget{classcugar_1_1_mutex_a46a8e42f0f1c4985473a7b807d67067d}\label{classcugar_1_1_mutex_a46a8e42f0f1c4985473a7b807d67067d}} 
+void {\bfseries unlock} ()
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/threads.\+h\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/threads.\+cpp\end{DoxyCompactItemize}

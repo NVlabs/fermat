@@ -1,0 +1,50 @@
+\hypertarget{struct_b_p_t_queues_storage}{}\section{B\+P\+T\+Queues\+Storage Struct Reference}
+\label{struct_b_p_t_queues_storage}\index{B\+P\+T\+Queues\+Storage@{B\+P\+T\+Queues\+Storage}}
+
+
+\subsection{Detailed description}
+\hyperlink{struct_b_p_t}{B\+PT} queues storage 
+
+{\ttfamily \#include $<$bpt\+\_\+queues.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_b_p_t_queues_storage_a6cf3cb625ed3dc5529dcc1e294c6c6f0}\label{struct_b_p_t_queues_storage_a6cf3cb625ed3dc5529dcc1e294c6c6f0}} 
+void {\bfseries alloc} (const uint32 n\+\_\+entries)
+\item 
+\mbox{\Hypertarget{struct_b_p_t_queues_storage_a9d381ccb349b7b703f8ec38d746cf27b}\label{struct_b_p_t_queues_storage_a9d381ccb349b7b703f8ec38d746cf27b}} 
+void {\bfseries alloc} (const uint32 n\+\_\+eye\+\_\+paths, const uint32 n\+\_\+light\+\_\+paths, const uint32 max\+\_\+path\+\_\+length)
+\item 
+\mbox{\Hypertarget{struct_b_p_t_queues_storage_a2f22b8ebded7c050ecbf218a855c0e80}\label{struct_b_p_t_queues_storage_a2f22b8ebded7c050ecbf218a855c0e80}} 
+\hyperlink{struct_b_p_t_queues_view}{B\+P\+T\+Queues\+View} {\bfseries view} (const uint32 n\+\_\+eye\+\_\+paths, const uint32 n\+\_\+light\+\_\+paths)
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_b_p_t_queues_storage_a363bfd42942675bc07098fc4414fbed1}\label{struct_b_p_t_queues_storage_a363bfd42942675bc07098fc4414fbed1}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, \hyperlink{struct_ray}{Ray} $>$ {\bfseries m\+\_\+rays}
+\item 
+\mbox{\Hypertarget{struct_b_p_t_queues_storage_aee3844eaf2918bbce482f69656e158d9}\label{struct_b_p_t_queues_storage_aee3844eaf2918bbce482f69656e158d9}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, \hyperlink{struct_hit}{Hit} $>$ {\bfseries m\+\_\+hits}
+\item 
+\mbox{\Hypertarget{struct_b_p_t_queues_storage_af66e8fc5d6e771c9377dcbd0328298d9}\label{struct_b_p_t_queues_storage_af66e8fc5d6e771c9377dcbd0328298d9}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float4 $>$ {\bfseries m\+\_\+weights}
+\item 
+\mbox{\Hypertarget{struct_b_p_t_queues_storage_ac0b4b456396d7558851913071e957dc2}\label{struct_b_p_t_queues_storage_ac0b4b456396d7558851913071e957dc2}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float $>$ {\bfseries m\+\_\+probs}
+\item 
+\mbox{\Hypertarget{struct_b_p_t_queues_storage_a5860fbb459eeaa1b0fcec78f2107e354}\label{struct_b_p_t_queues_storage_a5860fbb459eeaa1b0fcec78f2107e354}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float4 $>$ {\bfseries m\+\_\+path\+\_\+weights}
+\item 
+\mbox{\Hypertarget{struct_b_p_t_queues_storage_a7e01b207f19ccf145aecf10228dc1da1}\label{struct_b_p_t_queues_storage_a7e01b207f19ccf145aecf10228dc1da1}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, uint32 $>$ {\bfseries m\+\_\+pixels}
+\item 
+\mbox{\Hypertarget{struct_b_p_t_queues_storage_a3ba36359fe1503957a5118790ae27649}\label{struct_b_p_t_queues_storage_a3ba36359fe1503957a5118790ae27649}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, uint32 $>$ {\bfseries m\+\_\+counters}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/bpt\+\_\+queues.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,150 @@
+\hypertarget{struct_p_s_s_m_l_t}{}\section{P\+S\+S\+M\+LT Struct Reference}
+\label{struct_p_s_s_m_l_t}\index{P\+S\+S\+M\+LT@{P\+S\+S\+M\+LT}}
+
+
+\subsection{Detailed description}
+Primary Sample Space \hyperlink{struct_m_l_t}{M\+LT} renderer 
+
+{\ttfamily \#include $<$pssmlt.\+h$>$}
+
+Inheritance diagram for P\+S\+S\+M\+LT\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{struct_p_s_s_m_l_t}
+\end{center}
+\end{figure}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{struct_p_s_s_m_l_t_a77d66c7cc0d195f62cedb29c15f845bd}{init} (int argc, char $\ast$$\ast$argv, \hyperlink{struct_rendering_context}{Rendering\+Context} \&renderer)
+\item 
+void \hyperlink{struct_p_s_s_m_l_t_a0eddc0de7c6a6120153f9be25b8b3a22}{render} (const uint32 instance, \hyperlink{struct_rendering_context}{Rendering\+Context} \&renderer)
+\item 
+\mbox{\Hypertarget{struct_p_s_s_m_l_t_aa167d31942729aa757a22aa7750a471f}\label{struct_p_s_s_m_l_t_aa167d31942729aa757a22aa7750a471f}} 
+void {\bfseries sample\+\_\+seeds} (const uint32 n\+\_\+chains)
+\item 
+\mbox{\Hypertarget{struct_p_s_s_m_l_t_a3a9754da0e12b617448adaae2aca490d}\label{struct_p_s_s_m_l_t_a3a9754da0e12b617448adaae2aca490d}} 
+void {\bfseries recover\+\_\+primary\+\_\+coordinates} (P\+S\+S\+M\+L\+T\+Context \&context, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&renderer\+\_\+view)
+\item 
+void \hyperlink{struct_p_s_s_m_l_t_a3dea533efa6d4ffd79e336131e83ba34}{destroy} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_p_s_s_m_l_t_ae25bfda6d5f36795d7546ac131404d21}\label{struct_p_s_s_m_l_t_ae25bfda6d5f36795d7546ac131404d21}} 
+static \hyperlink{struct_renderer_interface}{Renderer\+Interface} $\ast$ {\bfseries factory} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_p_s_s_m_l_t_aa232208c5a744a2e1f23e5def0677f63}\label{struct_p_s_s_m_l_t_aa232208c5a744a2e1f23e5def0677f63}} 
+\hyperlink{struct_p_s_s_m_l_t_options}{P\+S\+S\+M\+L\+T\+Options} {\bfseries m\+\_\+options}
+\item 
+\mbox{\Hypertarget{struct_p_s_s_m_l_t_a0d616db92112a6812ac3140550c812d9}\label{struct_p_s_s_m_l_t_a0d616db92112a6812ac3140550c812d9}} 
+\hyperlink{struct_tiled_sequence}{Tiled\+Sequence} {\bfseries m\+\_\+sequence}
+\item 
+\mbox{\Hypertarget{struct_p_s_s_m_l_t_a8edcda0eef1ad84370f610b2dec4778b}\label{struct_p_s_s_m_l_t_a8edcda0eef1ad84370f610b2dec4778b}} 
+\hyperlink{struct_b_p_t_queues_storage}{B\+P\+T\+Queues\+Storage} {\bfseries m\+\_\+queues}
+\item 
+\mbox{\Hypertarget{struct_p_s_s_m_l_t_a9c2b9938bbed69e6e1c2f12fb5577bda}\label{struct_p_s_s_m_l_t_a9c2b9938bbed69e6e1c2f12fb5577bda}} 
+\hyperlink{struct_vertex_storage}{Vertex\+Storage} {\bfseries m\+\_\+light\+\_\+vertices}
+\item 
+\mbox{\Hypertarget{struct_p_s_s_m_l_t_a7b6d688cd8098420154fbba76b5fd3bc}\label{struct_p_s_s_m_l_t_a7b6d688cd8098420154fbba76b5fd3bc}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float $>$ {\bfseries m\+\_\+mut\+\_\+u}
+\item 
+\mbox{\Hypertarget{struct_p_s_s_m_l_t_a9c30d44b67779210542f9dd2c279db8f}\label{struct_p_s_s_m_l_t_a9c30d44b67779210542f9dd2c279db8f}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float $>$ {\bfseries m\+\_\+light\+\_\+u}
+\item 
+\mbox{\Hypertarget{struct_p_s_s_m_l_t_a2539a504b8cd59165271d9ce1feea2c2}\label{struct_p_s_s_m_l_t_a2539a504b8cd59165271d9ce1feea2c2}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float $>$ {\bfseries m\+\_\+eye\+\_\+u}
+\item 
+\mbox{\Hypertarget{struct_p_s_s_m_l_t_a7acc90c211c2029cc70373dbef2b4b1b}\label{struct_p_s_s_m_l_t_a7acc90c211c2029cc70373dbef2b4b1b}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float4 $>$ {\bfseries m\+\_\+path\+\_\+value}
+\item 
+\mbox{\Hypertarget{struct_p_s_s_m_l_t_a99a99191aa83c7f2c1710e5f1e586d3f}\label{struct_p_s_s_m_l_t_a99a99191aa83c7f2c1710e5f1e586d3f}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float $>$ {\bfseries m\+\_\+path\+\_\+pdf}
+\item 
+\mbox{\Hypertarget{struct_p_s_s_m_l_t_abee77399e02e5ce1fa6cb97127b9068f}\label{struct_p_s_s_m_l_t_abee77399e02e5ce1fa6cb97127b9068f}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float4 $>$ {\bfseries m\+\_\+connections\+\_\+value}
+\item 
+\mbox{\Hypertarget{struct_p_s_s_m_l_t_ae0a9cd88765ba6cd70fb7344f40472a5}\label{struct_p_s_s_m_l_t_ae0a9cd88765ba6cd70fb7344f40472a5}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float $>$ {\bfseries m\+\_\+connections\+\_\+cdf}
+\item 
+\mbox{\Hypertarget{struct_p_s_s_m_l_t_a280aa1330dddc10413d16dc5b955e3f2}\label{struct_p_s_s_m_l_t_a280aa1330dddc10413d16dc5b955e3f2}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, uint32 $>$ {\bfseries m\+\_\+seeds}
+\item 
+\mbox{\Hypertarget{struct_p_s_s_m_l_t_ab9229f332f5db89f64cf9238c4a65501}\label{struct_p_s_s_m_l_t_ab9229f332f5db89f64cf9238c4a65501}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float $>$ {\bfseries m\+\_\+st\+\_\+norms}
+\item 
+\mbox{\Hypertarget{struct_p_s_s_m_l_t_a43befefe9bc5b8476ca13db2445d9f32}\label{struct_p_s_s_m_l_t_a43befefe9bc5b8476ca13db2445d9f32}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, uint32 $>$ {\bfseries m\+\_\+rejections}
+\item 
+\mbox{\Hypertarget{struct_p_s_s_m_l_t_aac5f5435d2f3984e23c0a6e52997f44b}\label{struct_p_s_s_m_l_t_aac5f5435d2f3984e23c0a6e52997f44b}} 
+float {\bfseries m\+\_\+image\+\_\+brightness}
+\item 
+\mbox{\Hypertarget{struct_p_s_s_m_l_t_aa88f9ad534bf38922b5c7c6360dd7c2e}\label{struct_p_s_s_m_l_t_aa88f9ad534bf38922b5c7c6360dd7c2e}} 
+uint32 {\bfseries m\+\_\+n\+\_\+lights}
+\item 
+\mbox{\Hypertarget{struct_p_s_s_m_l_t_a41462b23a2a539043cf71ce9e9431198}\label{struct_p_s_s_m_l_t_a41462b23a2a539043cf71ce9e9431198}} 
+uint32 {\bfseries m\+\_\+n\+\_\+init\+\_\+light\+\_\+paths}
+\item 
+\mbox{\Hypertarget{struct_p_s_s_m_l_t_a3490424fdca36b5292eaf1c0cadbda9f}\label{struct_p_s_s_m_l_t_a3490424fdca36b5292eaf1c0cadbda9f}} 
+uint32 {\bfseries m\+\_\+n\+\_\+init\+\_\+paths}
+\item 
+\mbox{\Hypertarget{struct_p_s_s_m_l_t_acd0dcbc12ae3b141c604d88c4deeaf98}\label{struct_p_s_s_m_l_t_acd0dcbc12ae3b141c604d88c4deeaf98}} 
+uint32 {\bfseries m\+\_\+n\+\_\+connections}
+\item 
+\mbox{\Hypertarget{struct_p_s_s_m_l_t_abcc7a911d57f4b54b769bdc096cd7465}\label{struct_p_s_s_m_l_t_abcc7a911d57f4b54b769bdc096cd7465}} 
+float {\bfseries m\+\_\+time}
+\item 
+\mbox{\Hypertarget{struct_p_s_s_m_l_t_ac59ec7e07b22690bef9125f2a8d3134a}\label{struct_p_s_s_m_l_t_ac59ec7e07b22690bef9125f2a8d3134a}} 
+\hyperlink{classcugar_1_1_l_f_s_r_generator_matrix}{cugar\+::\+L\+F\+S\+R\+Generator\+Matrix} {\bfseries m\+\_\+generator}
+\item 
+\mbox{\Hypertarget{struct_p_s_s_m_l_t_a625c03f7e916d96af731f3358a849590}\label{struct_p_s_s_m_l_t_a625c03f7e916d96af731f3358a849590}} 
+\hyperlink{structcugar_1_1_l_f_s_r_random_stream}{cugar\+::\+L\+F\+S\+R\+Random\+Stream} {\bfseries m\+\_\+random}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{struct_p_s_s_m_l_t_a3dea533efa6d4ffd79e336131e83ba34}\label{struct_p_s_s_m_l_t_a3dea533efa6d4ffd79e336131e83ba34}} 
+\index{P\+S\+S\+M\+LT@{P\+S\+S\+M\+LT}!destroy@{destroy}}
+\index{destroy@{destroy}!P\+S\+S\+M\+LT@{P\+S\+S\+M\+LT}}
+\subsubsection{\texorpdfstring{destroy()}{destroy()}}
+{\footnotesize\ttfamily void P\+S\+S\+M\+L\+T\+::destroy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+this method is responsible for destroying the object itself 
+
+Reimplemented from \hyperlink{struct_renderer_interface_a7469218aafa029a3e22bac2c00dca9f5}{Renderer\+Interface}.
+
+\mbox{\Hypertarget{struct_p_s_s_m_l_t_a77d66c7cc0d195f62cedb29c15f845bd}\label{struct_p_s_s_m_l_t_a77d66c7cc0d195f62cedb29c15f845bd}} 
+\index{P\+S\+S\+M\+LT@{P\+S\+S\+M\+LT}!init@{init}}
+\index{init@{init}!P\+S\+S\+M\+LT@{P\+S\+S\+M\+LT}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void P\+S\+S\+M\+L\+T\+::init (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv,  }\item[{\hyperlink{struct_rendering_context}{Rendering\+Context} \&}]{renderer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+this method is responsible for any command options parsing / initializations the renderer might need to perform 
+
+Reimplemented from \hyperlink{struct_renderer_interface_a2ead9b943d6d48fcd32872e0005ebe63}{Renderer\+Interface}.
+
+\mbox{\Hypertarget{struct_p_s_s_m_l_t_a0eddc0de7c6a6120153f9be25b8b3a22}\label{struct_p_s_s_m_l_t_a0eddc0de7c6a6120153f9be25b8b3a22}} 
+\index{P\+S\+S\+M\+LT@{P\+S\+S\+M\+LT}!render@{render}}
+\index{render@{render}!P\+S\+S\+M\+LT@{P\+S\+S\+M\+LT}}
+\subsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void P\+S\+S\+M\+L\+T\+::render (\begin{DoxyParamCaption}\item[{const uint32}]{instance,  }\item[{\hyperlink{struct_rendering_context}{Rendering\+Context} \&}]{renderer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+this method is responsible for rendering a given frame in a progressive rendering
+
+
+\begin{DoxyParams}{Parameters}
+{\em instance} & the frame instance \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{struct_renderer_interface_aa64254dd44c94929b05092dc8d74f29d}{Renderer\+Interface}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/renderers/pssmlt.\+h\end{DoxyCompactItemize}

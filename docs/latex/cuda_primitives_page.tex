@@ -1,0 +1,15 @@
+This module provides a set of convenience wrappers to invoke device-\/wide C\+UB\textquotesingle{}s parallel primitives without worrying about the memory management. All temporary storage is in fact allocated within a single thrust\+::device\+\_\+vector passed by the user, which can be safely reused across function calls.
+
+
+\begin{DoxyItemize}
+\item \hyperlink{group___primitives_ga71416af3e5407b31c78a10026520dbed}{cuda\+::any()}
+\item \hyperlink{group___primitives_gaa98aa06ec6a5f38dda15d74ce0c47d57}{cuda\+::all()}
+\item \hyperlink{group___primitives_gaec6f4aab196d418865686901c11a093c}{cuda\+::is\+\_\+sorted()}
+\item \hyperlink{group___primitives_ga5e6eb75d00ed617295bcee0b1db0ee3e}{cuda\+::is\+\_\+segment\+\_\+sorted()}
+\item \hyperlink{group___primitives_gab8f49b135164aaef1fb6b51b90874915}{cuda\+::reduce()}
+\item \hyperlink{group___primitives_ga6c5ea5be5565ce7aa2c99b3e602a7cb7}{cuda\+::inclusive\+\_\+scan()}
+\item \hyperlink{group___primitives_ga1394066fd7b6215bcae781ca56cae872}{cuda\+::exclusive\+\_\+scan()}
+\item \hyperlink{group___primitives_gaafc4aac8b44cf750c98a3a97fe72e5c6}{cuda\+::copy\+\_\+flagged()}
+\item \hyperlink{group___primitives_ga536856eaa09125bec01892d565a49f8e}{cuda\+::copy\+\_\+if()}
+\item \hyperlink{group___primitives_gae48c0c95572ea1dd13ec562eed6e2755}{cuda\+::runlength\+\_\+encode()} 
+\end{DoxyItemize}

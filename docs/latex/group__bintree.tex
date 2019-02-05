@@ -1,0 +1,115 @@
+\hypertarget{group__bintree}{}\section{Binary Trees}
+\label{group__bintree}\index{Binary Trees@{Binary Trees}}
+
+
+\subsection{Detailed Description}
+This module defines generic binary tree concepts and objects, such as node representations and visitor patterns. \subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__radixtree}{Radix Trees}
+\end{DoxyCompactItemize}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcugar_1_1leaf__index__tag}{cugar\+::leaf\+\_\+index\+\_\+tag}
+\item 
+struct \hyperlink{structcugar_1_1leaf__range__tag}{cugar\+::leaf\+\_\+range\+\_\+tag}
+\item 
+struct \hyperlink{structcugar_1_1_bintree__node}{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+type\+\_\+tag $>$}
+\item 
+struct \hyperlink{structcugar_1_1_bintree__node_3_01leaf__index__tag_01_4}{cugar\+::\+Bintree\+\_\+node$<$ leaf\+\_\+index\+\_\+tag $>$}
+\item 
+struct \hyperlink{structcugar_1_1_bintree__visitor}{cugar\+::\+Bintree\+\_\+visitor$<$ node\+\_\+type, leaf\+\_\+type $>$}
+\item 
+struct \hyperlink{structcugar_1_1_bintree__visitor_3_01_node__type_00_01leaf__index__tag_01_4}{cugar\+::\+Bintree\+\_\+visitor$<$ Node\+\_\+type, leaf\+\_\+index\+\_\+tag $>$}
+\item 
+struct \hyperlink{structcugar_1_1_bintree__visitor_3_01_node__type_00_01leaf__range__tag_01_4}{cugar\+::\+Bintree\+\_\+visitor$<$ Node\+\_\+type, leaf\+\_\+range\+\_\+tag $>$}
+\item 
+struct \hyperlink{structcugar_1_1_bintree__writer__context}{cugar\+::\+Bintree\+\_\+writer\+\_\+context$<$ node\+\_\+type, node\+\_\+tag $>$}
+\item 
+struct \hyperlink{structcugar_1_1_bintree__writer__context_3_01node__type_00_01leaf__index__tag_01_4}{cugar\+::\+Bintree\+\_\+writer\+\_\+context$<$ node\+\_\+type, leaf\+\_\+index\+\_\+tag $>$}
+\item 
+struct \hyperlink{structcugar_1_1_bintree__writer__context_3_01node__type_00_01leaf__range__tag_01_4}{cugar\+::\+Bintree\+\_\+writer\+\_\+context$<$ node\+\_\+type, leaf\+\_\+range\+\_\+tag $>$}
+\item 
+struct \hyperlink{structcugar_1_1_bintree__writer}{cugar\+::\+Bintree\+\_\+writer$<$ node\+\_\+type, system\+\_\+tag, node\+\_\+vector, range\+\_\+vector, index\+\_\+vector $>$}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$$>$ }\\struct \hyperlink{group__bintree_ga15f38b4f0c951aae051440621b067dae}{cugar\+::\+C\+U\+G\+A\+R\+\_\+\+A\+L\+I\+G\+N\+\_\+\+B\+E\+G\+IN} (8) \hyperlink{structcugar_1_1_bintree__node}{Bintree\+\_\+node}$<$ \hyperlink{structcugar_1_1leaf__range__tag}{leaf\+\_\+range\+\_\+tag} $>$
+\item 
+\mbox{\Hypertarget{group__bintree_ga6bb1185e3d62c115156210e8e0b1f80f}\label{group__bintree_ga6bb1185e3d62c115156210e8e0b1f80f}} 
+{\footnotesize template$<$typename bvh\+\_\+visitor\+\_\+type $>$ }\\void {\bfseries cugar\+::check\+\_\+tree\+\_\+rec} (const uint32 node\+\_\+id, const uint32 parent\+\_\+id, const bvh\+\_\+visitor\+\_\+type \&visitor, const uint32 n\+\_\+prims, const uint32 max\+\_\+leaf\+\_\+size)
+\item 
+{\footnotesize template$<$typename node\+\_\+type , typename leaf\+\_\+type $>$ }\\void \hyperlink{group__bintree_ga70e603ed21666cc3c7fc15fde631c356}{cugar\+::check\+\_\+tree} (const \hyperlink{structcugar_1_1_bintree__visitor}{Bintree\+\_\+visitor}$<$ node\+\_\+type, leaf\+\_\+type $>$ \&visitor, const uint32 n\+\_\+prims, const uint32 max\+\_\+leaf\+\_\+size=uint32(-\/1))
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__bintree_ga70e603ed21666cc3c7fc15fde631c356}\label{group__bintree_ga70e603ed21666cc3c7fc15fde631c356}} 
+\index{Binary Trees@{Binary Trees}!check\+\_\+tree@{check\+\_\+tree}}
+\index{check\+\_\+tree@{check\+\_\+tree}!Binary Trees@{Binary Trees}}
+\subsubsection{\texorpdfstring{check\+\_\+tree()}{check\_tree()}}
+{\footnotesize\ttfamily template$<$typename node\+\_\+type , typename leaf\+\_\+type $>$ \\
+void cugar\+::check\+\_\+tree (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_bintree__visitor}{Bintree\+\_\+visitor}$<$ node\+\_\+type, leaf\+\_\+type $>$ \&}]{visitor,  }\item[{const uint32}]{n\+\_\+prims,  }\item[{const uint32}]{max\+\_\+leaf\+\_\+size = {\ttfamily uint32(-\/1)} }\end{DoxyParamCaption})}
+
+A function to check a host binary tree \mbox{\Hypertarget{group__bintree_ga15f38b4f0c951aae051440621b067dae}\label{group__bintree_ga15f38b4f0c951aae051440621b067dae}} 
+\index{Binary Trees@{Binary Trees}!C\+U\+G\+A\+R\+\_\+\+A\+L\+I\+G\+N\+\_\+\+B\+E\+G\+IN@{C\+U\+G\+A\+R\+\_\+\+A\+L\+I\+G\+N\+\_\+\+B\+E\+G\+IN}}
+\index{C\+U\+G\+A\+R\+\_\+\+A\+L\+I\+G\+N\+\_\+\+B\+E\+G\+IN@{C\+U\+G\+A\+R\+\_\+\+A\+L\+I\+G\+N\+\_\+\+B\+E\+G\+IN}!Binary Trees@{Binary Trees}}
+\subsubsection{\texorpdfstring{C\+U\+G\+A\+R\+\_\+\+A\+L\+I\+G\+N\+\_\+\+B\+E\+G\+I\+N()}{CUGAR\_ALIGN\_BEGIN()}}
+{\footnotesize\ttfamily template$<$$>$ \\
+struct cugar\+::\+C\+U\+G\+A\+R\+\_\+\+A\+L\+I\+G\+N\+\_\+\+B\+E\+G\+IN (\begin{DoxyParamCaption}\item[{8}]{ }\end{DoxyParamCaption})}
+
+A \char`\"{}fat\char`\"{} binary tree node, specifying a whole primitive range per leaf. A node can either be a leaf and have no children, or be an internal split node. If a split node, it can either have one or two children. The ability for an internal node to have one children is useful to represent singletons in a radix trie. empty constructor
+
+full constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em child0} & first child activation predicate \\
+\hline
+{\em child1} & second child activation predicate \\
+\hline
+{\em index} & child index\\
+\hline
+\end{DoxyParams}
+leaf constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & leaf range begin \\
+\hline
+{\em index} & leaf range end\\
+\hline
+\end{DoxyParams}
+is a leaf?
+
+get offset of the first child
+
+get leaf offset
+
+get range size
+
+get leaf range
+
+get leaf size
+
+get child count
+
+get i-\/th child (among the active ones)
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & child index\\
+\hline
+\end{DoxyParams}
+is the i-\/th child active?
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & child index\\
+\hline
+\end{DoxyParams}
+get left partition (or k\+Invalid if not active)
+
+get right partition (or k\+Invalid if not active)

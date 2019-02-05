@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2011, NVIDIA Corporation
+ * Copyright (c) 2010-2019, NVIDIA Corporation
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -257,6 +257,31 @@ struct Bounded_exponential : Base_distribution<Bounded_exponential>
 		return U < 0.5f ?
 			+m_s2 * expf( m_ln*(0.5f - U)*2.0f ) :
 			-m_s2 * expf( m_ln*(U - 0.5f)*2.0f );
+	}
+	/// probability density function
+    ///
+    /// \param x    sample location
+	inline CUGAR_HOST_DEVICE float density(const float x) const
+	{
+		// positive x:
+		// => x / s2 = exp( ln * (0.5 - U) * 2
+		// => log( x / s2 ) = ln * (0.5 - U) * 2
+		// => log( x / s2 ) / (2 * ln) = (0.5 - U)
+		// => U = 0.5 - log( x / s2 ) / (2 * ln)
+		// => CDF(x) = 1 - (0.5 - log( x / s2 ) / (2 * ln))
+		// => PDF(x) = 1 / (x * 2 * ln) 
+
+		// negative x:
+		// => -x / s2 = exp( ln * (U - 0.5) * 2
+		// => log( -x / s2 ) = ln * (U - 0.5) * 2
+		// => log( -x / s2 ) / (2 * ln) = (U - 0.5)
+		// => U = log( -x / s2 ) / (2 * ln) + 0.5
+		// => CDF(x) = 1 - (log( -x / s2 ) / (2 * ln) + 0.5)
+		// => PDF(x) = -1 / (x * 2 * ln)
+		return
+			x > +m_s2 ?  0.5f / (x * 2 * m_ln) :
+			x < -m_s2 ? -0.5f / (x * 2 * m_ln) :
+						 0.0f;
 	}
 
 private:

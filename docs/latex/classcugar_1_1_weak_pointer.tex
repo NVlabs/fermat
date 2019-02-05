@@ -1,0 +1,58 @@
+\hypertarget{classcugar_1_1_weak_pointer}{}\section{cugar\+:\+:Weak\+Pointer$<$ T, CounterT $>$ Class Template Reference}
+\label{classcugar_1_1_weak_pointer}\index{cugar\+::\+Weak\+Pointer$<$ T, Counter\+T $>$@{cugar\+::\+Weak\+Pointer$<$ T, Counter\+T $>$}}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcugar_1_1_weak_pointer_ac0e868d8e0818f36b32f187e0ba98aff}\label{classcugar_1_1_weak_pointer_ac0e868d8e0818f36b32f187e0ba98aff}} 
+typedef T {\bfseries element\+\_\+type}
+\item 
+\mbox{\Hypertarget{classcugar_1_1_weak_pointer_af921b1265878f3fda683072de5ff5336}\label{classcugar_1_1_weak_pointer_af921b1265878f3fda683072de5ff5336}} 
+typedef \hyperlink{classcugar_1_1internals_1_1_shared_count}{internals\+::\+Shared\+Count}$<$ CounterT $>$\+::Counter\+\_\+\+Type {\bfseries Counter\+\_\+\+Type}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcugar_1_1_weak_pointer_a3cfe11ef32bb82dc632ca2fe35663911}\label{classcugar_1_1_weak_pointer_a3cfe11ef32bb82dc632ca2fe35663911}} 
+{\footnotesize template$<$typename U $>$ }\\{\bfseries Weak\+Pointer} (const \hyperlink{classcugar_1_1_weak_pointer}{Weak\+Pointer}$<$ U $>$ \&other)
+\item 
+\mbox{\Hypertarget{classcugar_1_1_weak_pointer_a19651964946b8d3aeec2758fa7628925}\label{classcugar_1_1_weak_pointer_a19651964946b8d3aeec2758fa7628925}} 
+{\footnotesize template$<$typename U $>$ }\\{\bfseries Weak\+Pointer} (const \hyperlink{classcugar_1_1_shared_pointer}{Shared\+Pointer}$<$ U, CounterT $>$ \&other)
+\item 
+\mbox{\Hypertarget{classcugar_1_1_weak_pointer_a741feaa01a7cd545698630dffc352b18}\label{classcugar_1_1_weak_pointer_a741feaa01a7cd545698630dffc352b18}} 
+{\footnotesize template$<$typename U $>$ }\\\hyperlink{classcugar_1_1_weak_pointer}{Weak\+Pointer} \& {\bfseries operator=} (const \hyperlink{classcugar_1_1_weak_pointer}{Weak\+Pointer}$<$ U $>$ \&other)
+\item 
+\mbox{\Hypertarget{classcugar_1_1_weak_pointer_a87d9bb88e2bf842ee631d07c2c2303e1}\label{classcugar_1_1_weak_pointer_a87d9bb88e2bf842ee631d07c2c2303e1}} 
+{\footnotesize template$<$typename U $>$ }\\\hyperlink{classcugar_1_1_weak_pointer}{Weak\+Pointer} \& {\bfseries operator=} (const \hyperlink{classcugar_1_1_shared_pointer}{Shared\+Pointer}$<$ U $>$ \&other)
+\item 
+\mbox{\Hypertarget{classcugar_1_1_weak_pointer_a9be1ca97673c2fbf680acf24000a3d18}\label{classcugar_1_1_weak_pointer_a9be1ca97673c2fbf680acf24000a3d18}} 
+\hyperlink{classcugar_1_1_shared_pointer}{Shared\+Pointer}$<$ element\+\_\+type $>$ {\bfseries lock} () const
+\item 
+\mbox{\Hypertarget{classcugar_1_1_weak_pointer_a51c84b884be51777d1e05ca5f51cdc52}\label{classcugar_1_1_weak_pointer_a51c84b884be51777d1e05ca5f51cdc52}} 
+Counter\+\_\+\+Type {\bfseries use\+\_\+count} () const
+\item 
+\mbox{\Hypertarget{classcugar_1_1_weak_pointer_acdece2d64c0062cbaba862b6d066f8c5}\label{classcugar_1_1_weak_pointer_acdece2d64c0062cbaba862b6d066f8c5}} 
+bool {\bfseries expired} () const
+\item 
+\mbox{\Hypertarget{classcugar_1_1_weak_pointer_aa52aa750c80a5a13569c4e67aa2d979e}\label{classcugar_1_1_weak_pointer_aa52aa750c80a5a13569c4e67aa2d979e}} 
+void {\bfseries reset} ()
+\item 
+\mbox{\Hypertarget{classcugar_1_1_weak_pointer_a4340244dfd25b8a04a80d8331111dcf4}\label{classcugar_1_1_weak_pointer_a4340244dfd25b8a04a80d8331111dcf4}} 
+void {\bfseries swap} (\hyperlink{classcugar_1_1_weak_pointer}{Weak\+Pointer} \&other)
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcugar_1_1_weak_pointer_a59e9c78b2bbf73f285138119bff21311}\label{classcugar_1_1_weak_pointer_a59e9c78b2bbf73f285138119bff21311}} 
+{\footnotesize template$<$typename U , typename U\+CounterT $>$ }\\class {\bfseries Shared\+Pointer}
+\item 
+\mbox{\Hypertarget{classcugar_1_1_weak_pointer_a43397458ccacac480f107a9680e1e7dd}\label{classcugar_1_1_weak_pointer_a43397458ccacac480f107a9680e1e7dd}} 
+{\footnotesize template$<$typename U , typename U\+CounterT $>$ }\\class {\bfseries Weak\+Pointer}
+\item 
+\mbox{\Hypertarget{classcugar_1_1_weak_pointer_a7d43c9c0e2a633c8dce6d25113423964}\label{classcugar_1_1_weak_pointer_a7d43c9c0e2a633c8dce6d25113423964}} 
+{\footnotesize template$<$typename U $>$ }\\bool {\bfseries operator$<$} (const \hyperlink{classcugar_1_1_weak_pointer}{Weak\+Pointer} \&a, const \hyperlink{classcugar_1_1_weak_pointer}{Weak\+Pointer}$<$ U $>$ \&b)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/shared\+\_\+pointer.\+h\end{DoxyCompactItemize}

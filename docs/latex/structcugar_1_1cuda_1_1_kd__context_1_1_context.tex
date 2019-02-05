@@ -1,0 +1,41 @@
+\hypertarget{structcugar_1_1cuda_1_1_kd__context_1_1_context}{}\section{cugar\+:\+:cuda\+:\+:Kd\+\_\+context\+:\+:Context Struct Reference}
+\label{structcugar_1_1cuda_1_1_kd__context_1_1_context}\index{cugar\+::cuda\+::\+Kd\+\_\+context\+::\+Context@{cugar\+::cuda\+::\+Kd\+\_\+context\+::\+Context}}
+
+
+\subsection{Detailed description}
+Cuda accessor struct. 
+
+{\ttfamily \#include $<$kd\+\_\+context.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_kd__context_1_1_context_aee1e8f81d04c41d3cc6f2f33ef16dc02}\label{structcugar_1_1cuda_1_1_kd__context_1_1_context_aee1e8f81d04c41d3cc6f2f33ef16dc02}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries Context} (\hyperlink{structcugar_1_1_kd__node}{Kd\+\_\+node} $\ast$nodes, uint2 $\ast$leaves, uint2 $\ast$ranges)
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_kd__context_1_1_context_af334cf590f3a2438f3bf332c131ee6f8}\label{structcugar_1_1cuda_1_1_kd__context_1_1_context_af334cf590f3a2438f3bf332c131ee6f8}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1cuda_1_1_kd__context_1_1_context_af334cf590f3a2438f3bf332c131ee6f8}{write\+\_\+node} (const uint32 node, const uint32 offset, const uint32 skip\+\_\+node, const uint32 \hyperlink{namespacecugar_a2121df08f967e232ea5fe0ee378dee67}{begin}, const uint32 end, const uint32 split\+\_\+index, const uint32 split\+\_\+dim, const float split\+\_\+plane)
+\begin{DoxyCompactList}\small\item\em write a new node \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_kd__context_1_1_context_ab0ee0b93db5dff207418fe94ecbb5f68}\label{structcugar_1_1cuda_1_1_kd__context_1_1_context_ab0ee0b93db5dff207418fe94ecbb5f68}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1cuda_1_1_kd__context_1_1_context_ab0ee0b93db5dff207418fe94ecbb5f68}{write\+\_\+node} (const uint32 node, const uint32 offset, const uint32 skip\+\_\+node, const uint32 \hyperlink{namespacecugar_a2121df08f967e232ea5fe0ee378dee67}{begin}, const uint32 end)
+\begin{DoxyCompactList}\small\item\em write a new node \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_kd__context_1_1_context_aee926e3f601065f962ee58b9cc6712ea}\label{structcugar_1_1cuda_1_1_kd__context_1_1_context_aee926e3f601065f962ee58b9cc6712ea}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1cuda_1_1_kd__context_1_1_context_aee926e3f601065f962ee58b9cc6712ea}{write\+\_\+leaf} (const uint32 index, const uint32 \hyperlink{namespacecugar_a2121df08f967e232ea5fe0ee378dee67}{begin}, const uint32 end)
+\begin{DoxyCompactList}\small\item\em write a new leaf \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_kd__context_1_1_context_a2ef7ab3f73c3efbcf1889676cc49f147}\label{structcugar_1_1cuda_1_1_kd__context_1_1_context_a2ef7ab3f73c3efbcf1889676cc49f147}} 
+\hyperlink{structcugar_1_1_kd__node}{Kd\+\_\+node} $\ast$ \hyperlink{structcugar_1_1cuda_1_1_kd__context_1_1_context_a2ef7ab3f73c3efbcf1889676cc49f147}{m\+\_\+nodes}
+\begin{DoxyCompactList}\small\item\em node pointer \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_kd__context_1_1_context_a829a7e246b527d525e4f652afc60dcde}\label{structcugar_1_1cuda_1_1_kd__context_1_1_context_a829a7e246b527d525e4f652afc60dcde}} 
+uint2 $\ast$ \hyperlink{structcugar_1_1cuda_1_1_kd__context_1_1_context_a829a7e246b527d525e4f652afc60dcde}{m\+\_\+leaves}
+\begin{DoxyCompactList}\small\item\em leaf pointer \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_kd__context_1_1_context_a1b85cc5cdb6febf1e3256e5ed7f4db10}\label{structcugar_1_1cuda_1_1_kd__context_1_1_context_a1b85cc5cdb6febf1e3256e5ed7f4db10}} 
+uint2 $\ast$ \hyperlink{structcugar_1_1cuda_1_1_kd__context_1_1_context_a1b85cc5cdb6febf1e3256e5ed7f4db10}{m\+\_\+ranges}
+\begin{DoxyCompactList}\small\item\em range pointer \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/kd/cuda/\hyperlink{kd__context_8h}{kd\+\_\+context.\+h}\end{DoxyCompactItemize}

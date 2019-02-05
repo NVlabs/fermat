@@ -1,0 +1,51 @@
+\hypertarget{struct_directional_light}{}\section{Directional\+Light Struct Reference}
+\label{struct_directional_light}\index{Directional\+Light@{Directional\+Light}}
+
+
+\subsection{Detailed description}
+Directional-\/light class 
+
+{\ttfamily \#include $<$lights.\+h$>$}
+
+Inheritance diagram for Directional\+Light\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{struct_directional_light}
+\end{center}
+\end{figure}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{struct_directional_light_af94d1e48aece7a3811f791fdabcbb11d}{sample\+\_\+impl} (const float $\ast$Z, uint32\+\_\+t $\ast$prim\+\_\+id, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} $\ast$uv, \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} $\ast$geom, float $\ast$pdf, \hyperlink{struct_edf}{Edf} $\ast$edf) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{struct_directional_light_a0f13eac548f1e19cb3098668ab2a8fcc}{sample\+\_\+impl} (const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} p, const float $\ast$Z, uint32\+\_\+t $\ast$prim\+\_\+id, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} $\ast$uv, \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} $\ast$geom, float $\ast$pdf, \hyperlink{struct_edf}{Edf} $\ast$edf) const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_directional_light_ae53baeb58a17876a8cdb9f6df60ca5c0}\label{struct_directional_light_ae53baeb58a17876a8cdb9f6df60ca5c0}} 
+\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} {\bfseries dir}
+\item 
+\mbox{\Hypertarget{struct_directional_light_a0baf7b8cb5a7b58e8724c159c4849651}\label{struct_directional_light_a0baf7b8cb5a7b58e8724c159c4849651}} 
+\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} {\bfseries color}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{struct_directional_light_af94d1e48aece7a3811f791fdabcbb11d}\label{struct_directional_light_af94d1e48aece7a3811f791fdabcbb11d}} 
+\index{Directional\+Light@{Directional\+Light}!sample\+\_\+impl@{sample\+\_\+impl}}
+\index{sample\+\_\+impl@{sample\+\_\+impl}!Directional\+Light@{Directional\+Light}}
+\subsubsection{\texorpdfstring{sample\+\_\+impl()}{sample\_impl()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool Directional\+Light\+::sample\+\_\+impl (\begin{DoxyParamCaption}\item[{const float $\ast$}]{Z,  }\item[{uint32\+\_\+t $\ast$}]{prim\+\_\+id,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} $\ast$}]{uv,  }\item[{\hyperlink{struct_vertex_geometry}{Vertex\+Geometry} $\ast$}]{geom,  }\item[{float $\ast$}]{pdf,  }\item[{\hyperlink{struct_edf}{Edf} $\ast$}]{edf }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+sample a surface element on the light source \mbox{\Hypertarget{struct_directional_light_a0f13eac548f1e19cb3098668ab2a8fcc}\label{struct_directional_light_a0f13eac548f1e19cb3098668ab2a8fcc}} 
+\index{Directional\+Light@{Directional\+Light}!sample\+\_\+impl@{sample\+\_\+impl}}
+\index{sample\+\_\+impl@{sample\+\_\+impl}!Directional\+Light@{Directional\+Light}}
+\subsubsection{\texorpdfstring{sample\+\_\+impl()}{sample\_impl()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool Directional\+Light\+::sample\+\_\+impl (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{p,  }\item[{const float $\ast$}]{Z,  }\item[{uint32\+\_\+t $\ast$}]{prim\+\_\+id,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} $\ast$}]{uv,  }\item[{\hyperlink{struct_vertex_geometry}{Vertex\+Geometry} $\ast$}]{geom,  }\item[{float $\ast$}]{pdf,  }\item[{\hyperlink{struct_edf}{Edf} $\ast$}]{edf }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+sample a surface element on the light source 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/lights.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,34 @@
+\hypertarget{group___register_arrays_module}{}\section{Register Arrays}
+\label{group___register_arrays_module}\index{Register Arrays@{Register Arrays}}
+
+
+\subsection{Detailed Description}
+This module implements a statically sized array using registers as backing storage. The ability to be placed in registers is achieved by avoiding dynamic indexing, replacing that by an explicit O(log(\+N)) binary-\/search. \subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcugar_1_1register__array}{cugar\+::register\+\_\+array$<$ Iterator, S\+I\+Z\+E $>$}
+\item 
+struct \hyperlink{structcugar_1_1register__array_3_01_iterator_00_014_01_4}{cugar\+::register\+\_\+array$<$ Iterator, 4 $>$}
+\item 
+struct \hyperlink{structcugar_1_1register__array_3_01_iterator_00_015_01_4}{cugar\+::register\+\_\+array$<$ Iterator, 5 $>$}
+\item 
+struct \hyperlink{structcugar_1_1register__array_3_01_iterator_00_018_01_4}{cugar\+::register\+\_\+array$<$ Iterator, 8 $>$}
+\item 
+struct \hyperlink{structcugar_1_1register__array_3_01_iterator_00_0116_01_4}{cugar\+::register\+\_\+array$<$ Iterator, 16 $>$}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$uint32 S\+I\+ZE, typename iterator\+\_\+type $>$ }\\\hyperlink{structcugar_1_1iterator__traits}{iterator\+\_\+traits}$<$ iterator\+\_\+type $>$\+::reference \hyperlink{group___register_arrays_module_ga312bfb0737a477266b603285bac022df}{cugar\+::dynamic\+\_\+index} (const iterator\+\_\+type \&T, const uint32 i)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___register_arrays_module_ga312bfb0737a477266b603285bac022df}\label{group___register_arrays_module_ga312bfb0737a477266b603285bac022df}} 
+\index{Register Arrays@{Register Arrays}!dynamic\+\_\+index@{dynamic\+\_\+index}}
+\index{dynamic\+\_\+index@{dynamic\+\_\+index}!Register Arrays@{Register Arrays}}
+\subsubsection{\texorpdfstring{dynamic\+\_\+index()}{dynamic\_index()}}
+{\footnotesize\ttfamily template$<$uint32 S\+I\+ZE, typename iterator\+\_\+type $>$ \\
+\hyperlink{structcugar_1_1iterator__traits}{iterator\+\_\+traits}$<$iterator\+\_\+type$>$\+::reference cugar\+::dynamic\+\_\+index (\begin{DoxyParamCaption}\item[{const iterator\+\_\+type \&}]{T,  }\item[{const uint32}]{i }\end{DoxyParamCaption})}
+
+a free function to perform dynamic indexing on vectors / iterators using a statically compiled binary search 

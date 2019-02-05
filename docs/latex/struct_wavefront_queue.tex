@@ -1,0 +1,118 @@
+\hypertarget{struct_wavefront_queue}{}\section{Wavefront\+Queue Struct Reference}
+\label{struct_wavefront_queue}\index{Wavefront\+Queue@{Wavefront\+Queue}}
+Inheritance diagram for Wavefront\+Queue\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{struct_wavefront_queue}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_wavefront_queue_a6389d1990931241d636424b323219e7b}\label{struct_wavefront_queue_a6389d1990931241d636424b323219e7b}} 
+typedef uint32 {\bfseries Entry}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{struct_wavefront_queue_a72e7cde3303ee1b9e5feefe1e9509d7b}{Wavefront\+Queue} ()
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{struct_wavefront_queue_a36ce24d3826d182bce55280ddb4326c2}{setup} (const \hyperlink{struct_queue_descriptor}{Queue\+Descriptor} \&\+\_\+desc, const uint32 \+\_\+capacity)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{struct_wavefront_queue_a52f11e946e67999d653b56a8adb86b37}{byte\+\_\+size} () const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{struct_wavefront_queue_ae6763ab00a424dd1dbfe10f489ca1bb2}{alloc} (uint8 $\ast$\+\_\+ptr, uint32 $\ast$\+\_\+size)
+\item 
+{\footnotesize template$<$uint32 m, typename T $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE T $\ast$ \hyperlink{struct_wavefront_queue_a9eff696988c46605850fbe533f41ef77}{member\+\_\+base} () const
+\item 
+{\footnotesize template$<$uint32 m, typename T $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const T \& \hyperlink{struct_wavefront_queue_a3940005c37bd9db240f4adbcdfebd246}{member} (const uint32 slot) const
+\item 
+{\footnotesize template$<$uint32 m, typename T $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE T \& \hyperlink{struct_wavefront_queue_a26d5b5f09cbb494c6df903b0811b77de}{member} (const uint32 slot)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{struct_wavefront_queue_af2c7120756267c5cd6bf51b0d98465fd}{append} ()
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{struct_wavefront_queue_a460794255be37c42cace2c69422f19b1}{set\+\_\+size} (const uint32 \+\_\+size)
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_wavefront_queue_a3b193994354ff57ba61d03dcc41d6edf}\label{struct_wavefront_queue_a3b193994354ff57ba61d03dcc41d6edf}} 
+uint8 $\ast$ {\bfseries ptr}
+\item 
+\mbox{\Hypertarget{struct_wavefront_queue_ab9460d5193b04937fc3978f2d2996199}\label{struct_wavefront_queue_ab9460d5193b04937fc3978f2d2996199}} 
+uint32 $\ast$ {\bfseries size}
+\item 
+\mbox{\Hypertarget{struct_wavefront_queue_a4e2a9af43df8fa3648b5a7d5e13339e0}\label{struct_wavefront_queue_a4e2a9af43df8fa3648b5a7d5e13339e0}} 
+uint32 {\bfseries capacity}
+\item 
+\mbox{\Hypertarget{struct_wavefront_queue_a3cb9d06781ec50bc15172f54e003bdd0}\label{struct_wavefront_queue_a3cb9d06781ec50bc15172f54e003bdd0}} 
+uint32 {\bfseries offsets} \mbox{[}16\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{struct_wavefront_queue_a72e7cde3303ee1b9e5feefe1e9509d7b}\label{struct_wavefront_queue_a72e7cde3303ee1b9e5feefe1e9509d7b}} 
+\index{Wavefront\+Queue@{Wavefront\+Queue}!Wavefront\+Queue@{Wavefront\+Queue}}
+\index{Wavefront\+Queue@{Wavefront\+Queue}!Wavefront\+Queue@{Wavefront\+Queue}}
+\subsubsection{\texorpdfstring{Wavefront\+Queue()}{WavefrontQueue()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Wavefront\+Queue\+::\+Wavefront\+Queue (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{struct_wavefront_queue_ae6763ab00a424dd1dbfe10f489ca1bb2}\label{struct_wavefront_queue_ae6763ab00a424dd1dbfe10f489ca1bb2}} 
+\index{Wavefront\+Queue@{Wavefront\+Queue}!alloc@{alloc}}
+\index{alloc@{alloc}!Wavefront\+Queue@{Wavefront\+Queue}}
+\subsubsection{\texorpdfstring{alloc()}{alloc()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void Wavefront\+Queue\+::alloc (\begin{DoxyParamCaption}\item[{uint8 $\ast$}]{\+\_\+ptr,  }\item[{uint32 $\ast$}]{\+\_\+size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+setup the baking storage \mbox{\Hypertarget{struct_wavefront_queue_af2c7120756267c5cd6bf51b0d98465fd}\label{struct_wavefront_queue_af2c7120756267c5cd6bf51b0d98465fd}} 
+\index{Wavefront\+Queue@{Wavefront\+Queue}!append@{append}}
+\index{append@{append}!Wavefront\+Queue@{Wavefront\+Queue}}
+\subsubsection{\texorpdfstring{append()}{append()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE uint32 Wavefront\+Queue\+::append (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return a free slot \mbox{\Hypertarget{struct_wavefront_queue_a52f11e946e67999d653b56a8adb86b37}\label{struct_wavefront_queue_a52f11e946e67999d653b56a8adb86b37}} 
+\index{Wavefront\+Queue@{Wavefront\+Queue}!byte\+\_\+size@{byte\+\_\+size}}
+\index{byte\+\_\+size@{byte\+\_\+size}!Wavefront\+Queue@{Wavefront\+Queue}}
+\subsubsection{\texorpdfstring{byte\+\_\+size()}{byte\_size()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 Wavefront\+Queue\+::byte\+\_\+size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the element size \mbox{\Hypertarget{struct_wavefront_queue_a3940005c37bd9db240f4adbcdfebd246}\label{struct_wavefront_queue_a3940005c37bd9db240f4adbcdfebd246}} 
+\index{Wavefront\+Queue@{Wavefront\+Queue}!member@{member}}
+\index{member@{member}!Wavefront\+Queue@{Wavefront\+Queue}}
+\subsubsection{\texorpdfstring{member()}{member()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$uint32 m, typename T $>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const T\& Wavefront\+Queue\+::member (\begin{DoxyParamCaption}\item[{const uint32}]{slot }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the offset of the i-\/th entry \mbox{\Hypertarget{struct_wavefront_queue_a26d5b5f09cbb494c6df903b0811b77de}\label{struct_wavefront_queue_a26d5b5f09cbb494c6df903b0811b77de}} 
+\index{Wavefront\+Queue@{Wavefront\+Queue}!member@{member}}
+\index{member@{member}!Wavefront\+Queue@{Wavefront\+Queue}}
+\subsubsection{\texorpdfstring{member()}{member()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$uint32 m, typename T $>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE T\& Wavefront\+Queue\+::member (\begin{DoxyParamCaption}\item[{const uint32}]{slot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the offset of the i-\/th entry \mbox{\Hypertarget{struct_wavefront_queue_a9eff696988c46605850fbe533f41ef77}\label{struct_wavefront_queue_a9eff696988c46605850fbe533f41ef77}} 
+\index{Wavefront\+Queue@{Wavefront\+Queue}!member\+\_\+base@{member\+\_\+base}}
+\index{member\+\_\+base@{member\+\_\+base}!Wavefront\+Queue@{Wavefront\+Queue}}
+\subsubsection{\texorpdfstring{member\+\_\+base()}{member\_base()}}
+{\footnotesize\ttfamily template$<$uint32 m, typename T $>$ \\
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE T$\ast$ Wavefront\+Queue\+::member\+\_\+base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the offset of the i-\/th entry \mbox{\Hypertarget{struct_wavefront_queue_a460794255be37c42cace2c69422f19b1}\label{struct_wavefront_queue_a460794255be37c42cace2c69422f19b1}} 
+\index{Wavefront\+Queue@{Wavefront\+Queue}!set\+\_\+size@{set\+\_\+size}}
+\index{set\+\_\+size@{set\+\_\+size}!Wavefront\+Queue@{Wavefront\+Queue}}
+\subsubsection{\texorpdfstring{set\+\_\+size()}{set\_size()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void Wavefront\+Queue\+::set\+\_\+size (\begin{DoxyParamCaption}\item[{const uint32}]{\+\_\+size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+explicitly write the size \mbox{\Hypertarget{struct_wavefront_queue_a36ce24d3826d182bce55280ddb4326c2}\label{struct_wavefront_queue_a36ce24d3826d182bce55280ddb4326c2}} 
+\index{Wavefront\+Queue@{Wavefront\+Queue}!setup@{setup}}
+\index{setup@{setup}!Wavefront\+Queue@{Wavefront\+Queue}}
+\subsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void Wavefront\+Queue\+::setup (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_queue_descriptor}{Queue\+Descriptor} \&}]{\+\_\+desc,  }\item[{const uint32}]{\+\_\+capacity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+setup the descriptor 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/wavefront\+\_\+queues.\+h\end{DoxyCompactItemize}

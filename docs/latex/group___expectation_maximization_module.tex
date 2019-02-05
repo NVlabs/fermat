@@ -1,0 +1,172 @@
+\hypertarget{group___expectation_maximization_module}{}\section{Expectation-\/\+Maximization}
+\label{group___expectation_maximization_module}\index{Expectation-\/\+Maximization@{Expectation-\/\+Maximization}}
+
+
+\subsection{Detailed Description}
+This module provides functions for performing Expectation-\/\+Maximization, both offline, online and with step-\/wise algorithms \subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$uint32 N, uint32 N\+C\+O\+M\+P\+O\+N\+E\+N\+TS$>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___expectation_maximization_module_ga64c58392bf17c4bf5c654e1f508f9850}{cugar\+::\+EM} (\hyperlink{structcugar_1_1_mixture}{Mixture}$<$ \hyperlink{structcugar_1_1_gaussian__distribution__2d}{Gaussian\+\_\+distribution\+\_\+2d}, N\+C\+O\+M\+P\+O\+N\+E\+N\+TS $>$ \&mixture, const float eta, const \hyperlink{structcugar_1_1_vector}{Vector2f} $\ast$x, const float $\ast$w)
+\item 
+{\footnotesize template$<$uint32 N\+C\+O\+M\+P\+O\+N\+E\+N\+TS$>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___expectation_maximization_module_gaeb4d0f1ac6a25feb55e2433477ab8670}{cugar\+::joint\+\_\+entropy\+\_\+\+EM} (\hyperlink{structcugar_1_1_mixture}{Mixture}$<$ \hyperlink{structcugar_1_1_gaussian__distribution__2d}{Gaussian\+\_\+distribution\+\_\+2d}, N\+C\+O\+M\+P\+O\+N\+E\+N\+TS $>$ \&mixture, const float eta, const \hyperlink{structcugar_1_1_vector}{Vector2f} x, const float w=1.\+0f)
+\item 
+{\footnotesize template$<$uint32 N\+C\+O\+M\+P\+O\+N\+E\+N\+TS$>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___expectation_maximization_module_ga25d3aceabebc1f90ef6a8e0f2a50d24d}{cugar\+::joint\+\_\+entropy\+\_\+\+EM} (\hyperlink{structcugar_1_1_mixture}{Mixture}$<$ \hyperlink{structcugar_1_1_gaussian__distribution__2d}{Gaussian\+\_\+distribution\+\_\+2d}, N\+C\+O\+M\+P\+O\+N\+E\+N\+TS $>$ \&mixture, const float eta, const uint32 N, const \hyperlink{structcugar_1_1_vector}{Vector2f} $\ast$x, const float $\ast$w)
+\item 
+{\footnotesize template$<$uint32 N\+C\+O\+M\+P\+O\+N\+E\+N\+TS$>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___expectation_maximization_module_ga3504464ade0e67e978a8f8a91eb20f6b}{cugar\+::stepwise\+\_\+E} (\hyperlink{structcugar_1_1_mixture}{Mixture}$<$ \hyperlink{structcugar_1_1_gaussian__distribution__2d}{Gaussian\+\_\+distribution\+\_\+2d}, N\+C\+O\+M\+P\+O\+N\+E\+N\+TS $>$ \&mixture, const float eta, const \hyperlink{structcugar_1_1_vector}{Vector2f} x, const float w, \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ float, N\+C\+O\+M\+P\+O\+N\+E\+N\+TS, 8 $>$ \&u)
+\item 
+{\footnotesize template$<$uint32 N\+C\+O\+M\+P\+O\+N\+E\+N\+TS$>$ }\\C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___expectation_maximization_module_ga53b8d4d4e5fe664aa12144c359034b35}{cugar\+::stepwise\+\_\+M} (\hyperlink{structcugar_1_1_mixture}{Mixture}$<$ \hyperlink{structcugar_1_1_gaussian__distribution__2d}{Gaussian\+\_\+distribution\+\_\+2d}, N\+C\+O\+M\+P\+O\+N\+E\+N\+TS $>$ \&mixture, const \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ float, N\+C\+O\+M\+P\+O\+N\+E\+N\+TS, 8 $>$ \&u, const uint32 N)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___expectation_maximization_module_ga64c58392bf17c4bf5c654e1f508f9850}\label{group___expectation_maximization_module_ga64c58392bf17c4bf5c654e1f508f9850}} 
+\index{Expectation-\/\+Maximization@{Expectation-\/\+Maximization}!EM@{EM}}
+\index{EM@{EM}!Expectation-\/\+Maximization@{Expectation-\/\+Maximization}}
+\subsubsection{\texorpdfstring{E\+M()}{EM()}}
+{\footnotesize\ttfamily template$<$uint32 N, uint32 N\+C\+O\+M\+P\+O\+N\+E\+N\+TS$>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void cugar\+::\+EM (\begin{DoxyParamCaption}\item[{\hyperlink{structcugar_1_1_mixture}{Mixture}$<$ \hyperlink{structcugar_1_1_gaussian__distribution__2d}{Gaussian\+\_\+distribution\+\_\+2d}, N\+C\+O\+M\+P\+O\+N\+E\+N\+TS $>$ \&}]{mixture,  }\item[{const float}]{eta,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector2f} $\ast$}]{x,  }\item[{const float $\ast$}]{w }\end{DoxyParamCaption})}
+
+Traditional Expectation Maximization for a statically-\/sized batch. This algorithm can also be called over and over to refine the same mixture in step-\/wise fashion, on fixed size mini-\/batches.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em N} & batch size \\
+\hline
+{\em N\+C\+O\+M\+P\+O\+N\+E\+N\+TS} & number of mixture components\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em mixture} & input/output mixture to be learned \\
+\hline
+{\em eta} & learning factor, typically in the range \mbox{[}1,2) \\
+\hline
+{\em x} & samples \\
+\hline
+{\em w} & sample weights \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___expectation_maximization_module_gaeb4d0f1ac6a25feb55e2433477ab8670}\label{group___expectation_maximization_module_gaeb4d0f1ac6a25feb55e2433477ab8670}} 
+\index{Expectation-\/\+Maximization@{Expectation-\/\+Maximization}!joint\+\_\+entropy\+\_\+\+EM@{joint\+\_\+entropy\+\_\+\+EM}}
+\index{joint\+\_\+entropy\+\_\+\+EM@{joint\+\_\+entropy\+\_\+\+EM}!Expectation-\/\+Maximization@{Expectation-\/\+Maximization}}
+\subsubsection{\texorpdfstring{joint\+\_\+entropy\+\_\+\+E\+M()}{joint\_entropy\_EM()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$uint32 N\+C\+O\+M\+P\+O\+N\+E\+N\+TS$>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void cugar\+::joint\+\_\+entropy\+\_\+\+EM (\begin{DoxyParamCaption}\item[{\hyperlink{structcugar_1_1_mixture}{Mixture}$<$ \hyperlink{structcugar_1_1_gaussian__distribution__2d}{Gaussian\+\_\+distribution\+\_\+2d}, N\+C\+O\+M\+P\+O\+N\+E\+N\+TS $>$ \&}]{mixture,  }\item[{const float}]{eta,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector2f}}]{x,  }\item[{const float}]{w = {\ttfamily 1.0f} }\end{DoxyParamCaption})}
+
+Online joint-\/entropy Expectation Maximization, as described in\+:
+
+\begin{quote}
+{\bfseries Batch and On-\/line Parameter Estimation of Gaussian Mixtures Based on the Joint Entropy}, Yoram Singer, Manfred K. Warmuth \end{quote}
+
+
+and further extended to support importance sampling weights w.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em N\+C\+O\+M\+P\+O\+N\+E\+N\+TS} & number of mixture components\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em mixture} & input/output mixture to be learned \\
+\hline
+{\em eta} & learning factor\+: can start in the range \mbox{[}1,2) and follow a decaying schedule \\
+\hline
+{\em x} & sample \\
+\hline
+{\em w} & sample weight \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___expectation_maximization_module_ga25d3aceabebc1f90ef6a8e0f2a50d24d}\label{group___expectation_maximization_module_ga25d3aceabebc1f90ef6a8e0f2a50d24d}} 
+\index{Expectation-\/\+Maximization@{Expectation-\/\+Maximization}!joint\+\_\+entropy\+\_\+\+EM@{joint\+\_\+entropy\+\_\+\+EM}}
+\index{joint\+\_\+entropy\+\_\+\+EM@{joint\+\_\+entropy\+\_\+\+EM}!Expectation-\/\+Maximization@{Expectation-\/\+Maximization}}
+\subsubsection{\texorpdfstring{joint\+\_\+entropy\+\_\+\+E\+M()}{joint\_entropy\_EM()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$uint32 N\+C\+O\+M\+P\+O\+N\+E\+N\+TS$>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void cugar\+::joint\+\_\+entropy\+\_\+\+EM (\begin{DoxyParamCaption}\item[{\hyperlink{structcugar_1_1_mixture}{Mixture}$<$ \hyperlink{structcugar_1_1_gaussian__distribution__2d}{Gaussian\+\_\+distribution\+\_\+2d}, N\+C\+O\+M\+P\+O\+N\+E\+N\+TS $>$ \&}]{mixture,  }\item[{const float}]{eta,  }\item[{const uint32}]{N,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector2f} $\ast$}]{x,  }\item[{const float $\ast$}]{w }\end{DoxyParamCaption})}
+
+Online step-\/wise joint-\/entropy Expectation Maximization, as described in\+:
+
+\begin{quote}
+{\bfseries Batch and On-\/line Parameter Estimation of Gaussian Mixtures Based on the Joint Entropy}, Yoram Singer, Manfred K. Warmuth \end{quote}
+
+
+and further extended to support importance sampling weights w.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em N\+C\+O\+M\+P\+O\+N\+E\+N\+TS} & number of mixture components\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em mixture} & input/output mixture to be learned \\
+\hline
+{\em eta} & learning factor, typically in the range \mbox{[}1,2) \\
+\hline
+{\em x} & samples \\
+\hline
+{\em w} & sample weights \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___expectation_maximization_module_ga3504464ade0e67e978a8f8a91eb20f6b}\label{group___expectation_maximization_module_ga3504464ade0e67e978a8f8a91eb20f6b}} 
+\index{Expectation-\/\+Maximization@{Expectation-\/\+Maximization}!stepwise\+\_\+E@{stepwise\+\_\+E}}
+\index{stepwise\+\_\+E@{stepwise\+\_\+E}!Expectation-\/\+Maximization@{Expectation-\/\+Maximization}}
+\subsubsection{\texorpdfstring{stepwise\+\_\+\+E()}{stepwise\_E()}}
+{\footnotesize\ttfamily template$<$uint32 N\+C\+O\+M\+P\+O\+N\+E\+N\+TS$>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void cugar\+::stepwise\+\_\+E (\begin{DoxyParamCaption}\item[{\hyperlink{structcugar_1_1_mixture}{Mixture}$<$ \hyperlink{structcugar_1_1_gaussian__distribution__2d}{Gaussian\+\_\+distribution\+\_\+2d}, N\+C\+O\+M\+P\+O\+N\+E\+N\+TS $>$ \&}]{mixture,  }\item[{const float}]{eta,  }\item[{const \hyperlink{structcugar_1_1_vector}{Vector2f}}]{x,  }\item[{const float}]{w,  }\item[{\hyperlink{structcugar_1_1_matrix}{Matrix}$<$ float, N\+C\+O\+M\+P\+O\+N\+E\+N\+TS, 8 $>$ \&}]{u }\end{DoxyParamCaption})}
+
+Online step-\/wise Expectation-\/\+Maximization E-\/\+Step, as described in\+:
+
+\begin{quote}
+{\bfseries On-\/line Learning of Parametric \hyperlink{structcugar_1_1_mixture}{Mixture} Models for \hyperlink{struct_light}{Light} Transport Simulation}, Vorba et al. \end{quote}
+
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em N\+C\+O\+M\+P\+O\+N\+E\+N\+TS} & number of mixture components\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em mixture} & input/output mixture to be learned \\
+\hline
+{\em eta} & learning factor\+: must follow a schedule equal to i$^\wedge$-\/alpha where i is the sample index, and alpha is in \mbox{[}0.\+6,0.\+9\mbox{]} \\
+\hline
+{\em x} & sample \\
+\hline
+{\em w} & sample weight \\
+\hline
+{\em u} & sufficient statistics \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___expectation_maximization_module_ga53b8d4d4e5fe664aa12144c359034b35}\label{group___expectation_maximization_module_ga53b8d4d4e5fe664aa12144c359034b35}} 
+\index{Expectation-\/\+Maximization@{Expectation-\/\+Maximization}!stepwise\+\_\+M@{stepwise\+\_\+M}}
+\index{stepwise\+\_\+M@{stepwise\+\_\+M}!Expectation-\/\+Maximization@{Expectation-\/\+Maximization}}
+\subsubsection{\texorpdfstring{stepwise\+\_\+\+M()}{stepwise\_M()}}
+{\footnotesize\ttfamily template$<$uint32 N\+C\+O\+M\+P\+O\+N\+E\+N\+TS$>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void cugar\+::stepwise\+\_\+M (\begin{DoxyParamCaption}\item[{\hyperlink{structcugar_1_1_mixture}{Mixture}$<$ \hyperlink{structcugar_1_1_gaussian__distribution__2d}{Gaussian\+\_\+distribution\+\_\+2d}, N\+C\+O\+M\+P\+O\+N\+E\+N\+TS $>$ \&}]{mixture,  }\item[{const \hyperlink{structcugar_1_1_matrix}{Matrix}$<$ float, N\+C\+O\+M\+P\+O\+N\+E\+N\+TS, 8 $>$ \&}]{u,  }\item[{const uint32}]{N }\end{DoxyParamCaption})}
+
+Online step-\/wise Expectation-\/\+Maximization M-\/\+Step, as described in\+:
+
+\begin{quote}
+{\bfseries On-\/line Learning of Parametric \hyperlink{structcugar_1_1_mixture}{Mixture} Models for \hyperlink{struct_light}{Light} Transport Simulation}, Vorba et al. \end{quote}
+
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em N\+C\+O\+M\+P\+O\+N\+E\+N\+TS} & number of mixture components\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em mixture} & input/output mixture to be learned \\
+\hline
+{\em eta} & learning factor\+: must follow a schedule equal to i$^\wedge$-\/alpha where i is the sample index, and alpha is in \mbox{[}0.\+6,0.\+9\mbox{]} \\
+\hline
+{\em x} & sample \\
+\hline
+{\em w} & sample weight \\
+\hline
+{\em u} & sufficient statistics \\
+\hline
+\end{DoxyParams}

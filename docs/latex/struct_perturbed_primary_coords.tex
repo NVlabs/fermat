@@ -1,0 +1,65 @@
+\hypertarget{struct_perturbed_primary_coords}{}\section{Perturbed\+Primary\+Coords Struct Reference}
+\label{struct_perturbed_primary_coords}\index{Perturbed\+Primary\+Coords@{Perturbed\+Primary\+Coords}}
+
+
+\subsection{Detailed description}
+A perturbation sampler 
+
+{\ttfamily \#include $<$bpt\+\_\+samplers.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_perturbed_primary_coords_a9bbcc445564834746ae6b9324d55537f}\label{struct_perturbed_primary_coords_a9bbcc445564834746ae6b9324d55537f}} 
+enum {\bfseries Type} \{ {\bfseries Null} = 0x0, 
+{\bfseries Cauchy\+Perturbation} = 0x1, 
+{\bfseries Independent\+Sample} = 0x2
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_perturbed_primary_coords_a922ff6ce8a957c076f402ef55c8d4810}\label{struct_perturbed_primary_coords_a922ff6ce8a957c076f402ef55c8d4810}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE uint32 {\bfseries chain\+\_\+coordinate\+\_\+index} (const uint32 idx, const uint32 dim) const
+\item 
+\mbox{\Hypertarget{struct_perturbed_primary_coords_a59337b148ab94665bfb84eee02a3bd7d}\label{struct_perturbed_primary_coords_a59337b148ab94665bfb84eee02a3bd7d}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE {\bfseries Perturbed\+Primary\+Coords} (const uint32 \+\_\+n\+\_\+chains, float $\ast$\+\_\+path\+\_\+u, const uint32 \+\_\+path\+\_\+vertex\+\_\+offset, float $\ast$\+\_\+mut\+\_\+u, const uint32 \+\_\+mut\+\_\+vertex\+\_\+offset, const Type \+\_\+type, const float \+\_\+radius=0.\+01f)
+\item 
+\mbox{\Hypertarget{struct_perturbed_primary_coords_af51dcfdfba46e5043deab4ad880721c7}\label{struct_perturbed_primary_coords_af51dcfdfba46e5043deab4ad880721c7}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float {\bfseries sample} (const uint32 idx, const uint32 vertex, const uint32 dim) const
+\item 
+\mbox{\Hypertarget{struct_perturbed_primary_coords_a587274d5c8f87f0f406bed2f916908a7}\label{struct_perturbed_primary_coords_a587274d5c8f87f0f406bed2f916908a7}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float {\bfseries u\+\_\+m} (const uint32 chain\+\_\+id, const uint32 dim) const
+\item 
+\mbox{\Hypertarget{struct_perturbed_primary_coords_a7020dd85fcb52ceb418d469a370fc1e8}\label{struct_perturbed_primary_coords_a7020dd85fcb52ceb418d469a370fc1e8}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float \& {\bfseries u} (const uint32 chain\+\_\+id, const uint32 dim)
+\item 
+\mbox{\Hypertarget{struct_perturbed_primary_coords_a8ab27760f5ff92596d531c3ea41b880e}\label{struct_perturbed_primary_coords_a8ab27760f5ff92596d531c3ea41b880e}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE const float \& {\bfseries u} (const uint32 chain\+\_\+id, const uint32 dim) const
+\item 
+\mbox{\Hypertarget{struct_perturbed_primary_coords_ab76cb15e84cbe45884b1ec26a33daeac}\label{struct_perturbed_primary_coords_ab76cb15e84cbe45884b1ec26a33daeac}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float {\bfseries perturbed\+\_\+u} (const uint32 chain\+\_\+id, const uint32 dim) const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_perturbed_primary_coords_af8518880c5c9a630f84ce70af7dd986f}\label{struct_perturbed_primary_coords_af8518880c5c9a630f84ce70af7dd986f}} 
+float $\ast$ {\bfseries path\+\_\+u}
+\item 
+\mbox{\Hypertarget{struct_perturbed_primary_coords_a3a086d65a10fdcf1996586d618731dc2}\label{struct_perturbed_primary_coords_a3a086d65a10fdcf1996586d618731dc2}} 
+float $\ast$ {\bfseries mut\+\_\+u}
+\item 
+\mbox{\Hypertarget{struct_perturbed_primary_coords_aafe430370b8692648c5c7e7ff110be6c}\label{struct_perturbed_primary_coords_aafe430370b8692648c5c7e7ff110be6c}} 
+uint32 {\bfseries n\+\_\+chains}
+\item 
+\mbox{\Hypertarget{struct_perturbed_primary_coords_adc1a077d19c2ed1552c4846e6906527a}\label{struct_perturbed_primary_coords_adc1a077d19c2ed1552c4846e6906527a}} 
+Type {\bfseries type}
+\item 
+\mbox{\Hypertarget{struct_perturbed_primary_coords_a62c1c9ed571a359efb473ace671d6ee0}\label{struct_perturbed_primary_coords_a62c1c9ed571a359efb473ace671d6ee0}} 
+float {\bfseries radius}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/bpt\+\_\+samplers.\+h\end{DoxyCompactItemize}

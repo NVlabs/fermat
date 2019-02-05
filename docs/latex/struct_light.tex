@@ -1,0 +1,44 @@
+\hypertarget{struct_light}{}\section{Light Struct Reference}
+\label{struct_light}\index{Light@{Light}}
+
+
+\subsection{Detailed description}
+Base light interface.
+
+This class implements \char`\"{}software\char`\"{} inheritance by dispatching its methods to implementations provided by its derived classes. This is useful to allow this class to avoid virtual method calls, and hence allow it to work both on the host and the device. Note that since the methods are manually dispatched, all calls can be inlined. 
+
+{\ttfamily \#include $<$lights.\+h$>$}
+
+Inheritance diagram for Light\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{struct_light}
+\end{center}
+\end{figure}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_light_af075d1d5e2a8d9449d0ba7f9c32f0e70}\label{struct_light_af075d1d5e2a8d9449d0ba7f9c32f0e70}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries Light} (Light\+Type \+\_\+type)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{group___lights_module_ga67cc240bcda4b08efd26c8727144bf16}{sample} (const float $\ast$Z, uint32\+\_\+t $\ast$prim\+\_\+id, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} $\ast$uv, \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} $\ast$geom, float $\ast$pdf, \hyperlink{struct_edf}{Edf} $\ast$edf) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{group___lights_module_gaa3cac39418d2c62c2faaa4cb7c380ff7}{sample} (const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} p, const float $\ast$Z, uint32\+\_\+t $\ast$prim\+\_\+id, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} $\ast$uv, \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} $\ast$geom, float $\ast$pdf, \hyperlink{struct_edf}{Edf} $\ast$edf) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___lights_module_ga6a7452cab8b733d48174016b845f8d53}{intersect} (const \hyperlink{struct_ray}{Ray} ray, float2 $\ast$uv, float $\ast$t) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___lights_module_gaf14a70f7d23b422f8953bc55d1eade44}{map} (const uint32\+\_\+t prim\+\_\+id, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} \&uv, \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} $\ast$geom, float $\ast$pdf, \hyperlink{struct_edf}{Edf} $\ast$edf) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{group___lights_module_ga96c94d76b5464c0433e8e071645cfe48}{map} (const uint32\+\_\+t prim\+\_\+id, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} \&uv, const \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} \&geom, float $\ast$pdf, \hyperlink{struct_edf}{Edf} $\ast$edf) const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_light_a86e648b4a80a5c1e194c97ef52f9efc6}\label{struct_light_a86e648b4a80a5c1e194c97ef52f9efc6}} 
+Light\+Type {\bfseries type}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/lights.\+h\end{DoxyCompactItemize}

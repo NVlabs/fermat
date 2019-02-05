@@ -1,0 +1,57 @@
+\hypertarget{classcugar_1_1_work_queue}{}\section{cugar\+:\+:Work\+Queue$<$ Work\+ItemT, Progress\+CallbackT $>$ Class Template Reference}
+\label{classcugar_1_1_work_queue}\index{cugar\+::\+Work\+Queue$<$ Work\+Item\+T, Progress\+Callback\+T $>$@{cugar\+::\+Work\+Queue$<$ Work\+Item\+T, Progress\+Callback\+T $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$typename Work\+ItemT, typename Progress\+CallbackT$>$\newline
+class cugar\+::\+Work\+Queue$<$ Work\+Item\+T, Progress\+Callback\+T $>$}
+
+A host work queue class
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Work\+ItemT} & the type of work items \\
+\hline
+{\em Progress\+CallbackT} & a callback used to report progress, with the following interface\+: 
+\begin{DoxyCode}
+\textcolor{keywordtype}{void} callback(uint32 queue\_entry, uint32 total\_queue\_size);
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyTemplParams}
+
+
+{\ttfamily \#include $<$threads.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcugar_1_1_work_queue_a986b0aa05ad206295ec982e6df38ac23}\label{classcugar_1_1_work_queue_a986b0aa05ad206295ec982e6df38ac23}} 
+typedef Work\+ItemT {\bfseries Work\+Item}
+\item 
+\mbox{\Hypertarget{classcugar_1_1_work_queue_ad69e364a8ebe7e0d536288502f5c1d5f}\label{classcugar_1_1_work_queue_ad69e364a8ebe7e0d536288502f5c1d5f}} 
+typedef Progress\+CallbackT {\bfseries Progress\+Callback}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcugar_1_1_work_queue_aa464fb31a0b0b69df0f19a817d5afb03}\label{classcugar_1_1_work_queue_aa464fb31a0b0b69df0f19a817d5afb03}} 
+\hyperlink{classcugar_1_1_work_queue_aa464fb31a0b0b69df0f19a817d5afb03}{Work\+Queue} ()
+\begin{DoxyCompactList}\small\item\em empty constructor \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcugar_1_1_work_queue_a1c2a90b956e4c693d3068f0a9ff8e69f}\label{classcugar_1_1_work_queue_a1c2a90b956e4c693d3068f0a9ff8e69f}} 
+void \hyperlink{classcugar_1_1_work_queue_a1c2a90b956e4c693d3068f0a9ff8e69f}{push} (const Work\+Item work)
+\begin{DoxyCompactList}\small\item\em push a work item in the queue \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcugar_1_1_work_queue_accd39d4d02c7b0b6481513c863523773}\label{classcugar_1_1_work_queue_accd39d4d02c7b0b6481513c863523773}} 
+void \hyperlink{classcugar_1_1_work_queue_accd39d4d02c7b0b6481513c863523773}{locked\+\_\+push} (const Work\+Item work)
+\begin{DoxyCompactList}\small\item\em push a work item in the queue \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcugar_1_1_work_queue_af8de50e138bf9470329060fd7f30e5b6}\label{classcugar_1_1_work_queue_af8de50e138bf9470329060fd7f30e5b6}} 
+bool \hyperlink{classcugar_1_1_work_queue_af8de50e138bf9470329060fd7f30e5b6}{pop} (Work\+Item \&work)
+\begin{DoxyCompactList}\small\item\em pop the next work item from the queue \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcugar_1_1_work_queue_a775926d30fb6b79e6d0bc57fa1dc8420}\label{classcugar_1_1_work_queue_a775926d30fb6b79e6d0bc57fa1dc8420}} 
+void \hyperlink{classcugar_1_1_work_queue_a775926d30fb6b79e6d0bc57fa1dc8420}{set\+\_\+callback} (const Progress\+Callback callback)
+\begin{DoxyCompactList}\small\item\em set a callback \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/threads.\+h\end{DoxyCompactItemize}

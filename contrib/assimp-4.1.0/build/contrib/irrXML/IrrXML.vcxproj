@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGUID>{EDFCF9EA-B92D-378D-909E-1AE9720BC720}</ProjectGUID>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>IrrXML</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+    <PropertyGroup>
+      <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\irrXML\Debug\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">IrrXML.dir\Debug\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">IrrXML</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\irrXML\Release\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">IrrXML.dir\Release\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">IrrXML</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\irrXML\MinSizeRel\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">IrrXML.dir\MinSizeRel\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">IrrXML</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\irrXML\RelWithDebInfo\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">IrrXML.dir\RelWithDebInfo\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">IrrXML</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
+    </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\.;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;WIN32_LEAN_AND_MEAN;OPENDDL_NO_USE_CPP11;ASSIMP_BUILD_NO_C4D_IMPORTER;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;WIN32_LEAN_AND_MEAN;OPENDDL_NO_USE_CPP11;ASSIMP_BUILD_NO_C4D_IMPORTER;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\.;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\.;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions> /machine:x64 %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\.;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;OPENDDL_NO_USE_CPP11;ASSIMP_BUILD_NO_C4D_IMPORTER;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat></DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;OPENDDL_NO_USE_CPP11;ASSIMP_BUILD_NO_C4D_IMPORTER;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\.;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\.;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions> /machine:x64 %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\.;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;OPENDDL_NO_USE_CPP11;ASSIMP_BUILD_NO_C4D_IMPORTER;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat></DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;OPENDDL_NO_USE_CPP11;ASSIMP_BUILD_NO_C4D_IMPORTER;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\.;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\.;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions> /machine:x64 %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\.;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;OPENDDL_NO_USE_CPP11;ASSIMP_BUILD_NO_C4D_IMPORTER;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;OPENDDL_NO_USE_CPP11;ASSIMP_BUILD_NO_C4D_IMPORTER;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\.;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\.;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\include;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\zlib;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions> /machine:x64 %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/contrib/irrXML/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0 -BC:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/build --check-stamp-file C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\irrXML\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/contrib/irrXML/CMakeLists.txt;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML\CMakeLists.txt;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\irrXML\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/contrib/irrXML/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0 -BC:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/build --check-stamp-file C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\irrXML\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/contrib/irrXML/CMakeLists.txt;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML\CMakeLists.txt;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\irrXML\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/contrib/irrXML/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0 -BC:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/build --check-stamp-file C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\irrXML\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/contrib/irrXML/CMakeLists.txt;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML\CMakeLists.txt;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\irrXML\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/contrib/irrXML/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0 -BC:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/build --check-stamp-file C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\irrXML\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/contrib/irrXML/CMakeLists.txt;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML\CMakeLists.txt;C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\build\contrib\irrXML\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML\CXMLReaderImpl.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML\heapsort.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML\irrArray.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML\irrString.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML\irrTypes.h" />
+    <ClInclude Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML\irrXML.h" />
+    <ClCompile Include="C:\p4research\research\jpantaleoni\Fermat\contrib\assimp-4.1.0\contrib\irrXML\irrXML.cpp"  />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/build/ZERO_CHECK.vcxproj">
+      <Project>2608C3F9-BDF9-38F5-805E-2A60A84DBAA0</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

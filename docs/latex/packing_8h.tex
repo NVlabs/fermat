@@ -1,0 +1,30 @@
+\hypertarget{packing_8h}{}\section{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bvh/cuda/packing.h File Reference}
+\label{packing_8h}\index{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bvh/cuda/packing.\+h@{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bvh/cuda/packing.\+h}}
+
+
+Defines utility functions to pack a set of bvh nodes and their bboxes into a single set of 4d bboxes.  
+
+
+{\ttfamily \#include $<$cugar/bvh/bvh.\+h$>$}\newline
+{\ttfamily \#include $<$thrust/transform.\+h$>$}\newline
+{\ttfamily \#include $<$thrust/tuple.\+h$>$}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcugar_1_1cuda_1_1bvh__packing__functor}{cugar\+::cuda\+::bvh\+\_\+packing\+\_\+functor}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespacecugar}{cugar}
+\begin{DoxyCompactList}\small\item\em Define a \hyperlink{structcugar_1_1vector__view}{vector\+\_\+view} P\+OD type and \hyperlink{namespacecugar_a347f91de482f0cb8dcba21c086b0aa46}{plain\+\_\+view()} for std\+::vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Node\+\_\+iterator , typename Bbox\+\_\+iterator , typename Output\+\_\+iterator $>$ }\\void \hyperlink{group__bvh_ga5cb2a6a87d661a3ffe43c31ab025b9fa}{cugar\+::cuda\+::pack} (const uint32 n\+\_\+nodes, Node\+\_\+iterator nodes, Bbox\+\_\+iterator bboxes, Output\+\_\+iterator packed\+\_\+nodes)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Defines utility functions to pack a set of bvh nodes and their bboxes into a single set of 4d bboxes. 
+

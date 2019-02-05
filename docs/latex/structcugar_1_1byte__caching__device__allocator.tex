@@ -1,0 +1,72 @@
+\hypertarget{structcugar_1_1byte__caching__device__allocator}{}\section{cugar\+:\+:byte\+\_\+caching\+\_\+device\+\_\+allocator Struct Reference}
+\label{structcugar_1_1byte__caching__device__allocator}\index{cugar\+::byte\+\_\+caching\+\_\+device\+\_\+allocator@{cugar\+::byte\+\_\+caching\+\_\+device\+\_\+allocator}}
+
+
+\subsection{Detailed description}
+Implements a caching device allocator based on C\+UB\textquotesingle{}s 
+
+{\ttfamily \#include $<$allocator.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1byte__caching__device__allocator_ac6ae65c9ca6bf948fdb247638bdeb3e3}\label{structcugar_1_1byte__caching__device__allocator_ac6ae65c9ca6bf948fdb247638bdeb3e3}} 
+typedef char {\bfseries value\+\_\+type}
+\item 
+\mbox{\Hypertarget{structcugar_1_1byte__caching__device__allocator_a30f1dc8ae6ba139a880309cc455d193f}\label{structcugar_1_1byte__caching__device__allocator_a30f1dc8ae6ba139a880309cc455d193f}} 
+typedef char $\ast$ {\bfseries pointer}
+\item 
+\mbox{\Hypertarget{structcugar_1_1byte__caching__device__allocator_ac282243dad2b6f1d14c749ef6e84c55a}\label{structcugar_1_1byte__caching__device__allocator_ac282243dad2b6f1d14c749ef6e84c55a}} 
+typedef const char $\ast$ {\bfseries const\+\_\+pointer}
+\item 
+\mbox{\Hypertarget{structcugar_1_1byte__caching__device__allocator_aa0251e96fadf86087978cb858fb7ac38}\label{structcugar_1_1byte__caching__device__allocator_aa0251e96fadf86087978cb858fb7ac38}} 
+typedef char \& {\bfseries reference}
+\item 
+\mbox{\Hypertarget{structcugar_1_1byte__caching__device__allocator_aed8279ffe4f81c0a85618462029c8945}\label{structcugar_1_1byte__caching__device__allocator_aed8279ffe4f81c0a85618462029c8945}} 
+typedef const char \& {\bfseries const\+\_\+reference}
+\item 
+\mbox{\Hypertarget{structcugar_1_1byte__caching__device__allocator_a12e20445552de344a632da9d6d4db288}\label{structcugar_1_1byte__caching__device__allocator_a12e20445552de344a632da9d6d4db288}} 
+typedef size\+\_\+t {\bfseries size\+\_\+type}
+\item 
+\mbox{\Hypertarget{structcugar_1_1byte__caching__device__allocator_a175505dd27404427e03448294ea5778a}\label{structcugar_1_1byte__caching__device__allocator_a175505dd27404427e03448294ea5778a}} 
+typedef int64 {\bfseries difference\+\_\+type}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE char $\ast$ \hyperlink{structcugar_1_1byte__caching__device__allocator_a7ef892be080f82d6701aeb2542603d2b}{allocate} (size\+\_\+type num\+\_\+bytes)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1byte__caching__device__allocator_af8abeecb89e6f5df9b2b625d1eee27ea}{deallocate} (char $\ast$ptr, size\+\_\+type n)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{structcugar_1_1byte__caching__device__allocator_a9d2afe2f2942d71f1924aac1d13bcd03}{init} (const size\+\_\+t max\+\_\+cached\+\_\+bytes=128u $\ast$1024u $\ast$1024u)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1byte__caching__device__allocator_a7ef892be080f82d6701aeb2542603d2b}\label{structcugar_1_1byte__caching__device__allocator_a7ef892be080f82d6701aeb2542603d2b}} 
+\index{cugar\+::byte\+\_\+caching\+\_\+device\+\_\+allocator@{cugar\+::byte\+\_\+caching\+\_\+device\+\_\+allocator}!allocate@{allocate}}
+\index{allocate@{allocate}!cugar\+::byte\+\_\+caching\+\_\+device\+\_\+allocator@{cugar\+::byte\+\_\+caching\+\_\+device\+\_\+allocator}}
+\subsubsection{\texorpdfstring{allocate()}{allocate()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE char$\ast$ cugar\+::byte\+\_\+caching\+\_\+device\+\_\+allocator\+::allocate (\begin{DoxyParamCaption}\item[{size\+\_\+type}]{num\+\_\+bytes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+allocate a new chunk \mbox{\Hypertarget{structcugar_1_1byte__caching__device__allocator_af8abeecb89e6f5df9b2b625d1eee27ea}\label{structcugar_1_1byte__caching__device__allocator_af8abeecb89e6f5df9b2b625d1eee27ea}} 
+\index{cugar\+::byte\+\_\+caching\+\_\+device\+\_\+allocator@{cugar\+::byte\+\_\+caching\+\_\+device\+\_\+allocator}!deallocate@{deallocate}}
+\index{deallocate@{deallocate}!cugar\+::byte\+\_\+caching\+\_\+device\+\_\+allocator@{cugar\+::byte\+\_\+caching\+\_\+device\+\_\+allocator}}
+\subsubsection{\texorpdfstring{deallocate()}{deallocate()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void cugar\+::byte\+\_\+caching\+\_\+device\+\_\+allocator\+::deallocate (\begin{DoxyParamCaption}\item[{char $\ast$}]{ptr,  }\item[{size\+\_\+type}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+deallocate a previously allocated chunk \mbox{\Hypertarget{structcugar_1_1byte__caching__device__allocator_a9d2afe2f2942d71f1924aac1d13bcd03}\label{structcugar_1_1byte__caching__device__allocator_a9d2afe2f2942d71f1924aac1d13bcd03}} 
+\index{cugar\+::byte\+\_\+caching\+\_\+device\+\_\+allocator@{cugar\+::byte\+\_\+caching\+\_\+device\+\_\+allocator}!init@{init}}
+\index{init@{init}!cugar\+::byte\+\_\+caching\+\_\+device\+\_\+allocator@{cugar\+::byte\+\_\+caching\+\_\+device\+\_\+allocator}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily static void cugar\+::byte\+\_\+caching\+\_\+device\+\_\+allocator\+::init (\begin{DoxyParamCaption}\item[{const size\+\_\+t}]{max\+\_\+cached\+\_\+bytes = {\ttfamily 128u$\ast$1024u$\ast$1024u} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+initialize the global pooled allocator 
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/cuda/allocator.\+h\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/cuda/allocator.\+cpp\end{DoxyCompactItemize}

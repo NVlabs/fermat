@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2008-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -35,7 +35,14 @@ MeshLoader::MeshLoader(MeshStorage* mesh) :
   m_normal_indices( 0 ),
   m_color_indices( 0 ),
   m_texture_coordinate_indices( 0 )
-{ }
+{
+	setVertexStride(mesh->m_vertex_stride);
+	setNormalStride(mesh->m_normal_stride);
+	setTextureCoordinateStride(mesh->m_texture_stride);
+	setVertexIndexStride(MeshView::VERTEX_TRIANGLE_SIZE);
+	setNormalIndexStride(MeshView::NORMAL_TRIANGLE_SIZE);
+	setTextureIndexStride(MeshView::TEXTURE_TRIANGLE_SIZE);
+}
 
 
 MeshLoader::~MeshLoader()
@@ -60,9 +67,9 @@ struct MeshLoader::AllocateGroupsFunctor
 
   // Assumes that m_mesh.vertex_indices, etc., have already been initialized
   void operator()( MeshGroup& group ) {
-    group.vertex_indices			 = m_mesh.m_vertex_indices				+ m_triangles_index * 3;
-	group.normal_indices			 = m_mesh.m_normal_indices				+ m_triangles_index * 3;
-	group.texture_coordinate_indices = m_mesh.m_texture_coordinate_indices  + m_triangles_index * 3;
+    group.vertex_indices			 = m_mesh.m_vertex_indices				+ m_triangles_index * MeshStorage::VERTEX_TRIANGLE_SIZE;
+	group.normal_indices			 = m_mesh.m_normal_indices				+ m_triangles_index * MeshStorage::NORMAL_TRIANGLE_SIZE;
+	group.texture_coordinate_indices = m_mesh.m_texture_coordinate_indices  + m_triangles_index * MeshStorage::TEXTURE_TRIANGLE_SIZE;
 	group.material_indices           = m_mesh.m_material_indices			+ m_triangles_index;
 
 	m_mesh.m_group_offsets[ m_group_index ] = m_triangles_index;
@@ -100,9 +107,6 @@ void MeshLoader::allocateData()
 
 	// write the sentinel group offset
 	m_group_offsets[ getNumGroups() ] = getNumTriangles();
-
-	// Vertices should be stored compactly
-	setVertexStride( 0 );
 }
 
 
@@ -130,11 +134,11 @@ struct MeshLoader::AssignMaterialsFunctor
 	{
 		for (int i = 0; i < group.num_triangles; ++i)
 		{
-			if (group.material_indices[i] != group.material_number)
-			{
-				fprintf(stderr, "at group %s, tri %d, mat %d != %d\n", group.name.c_str(), i, group.material_indices[i], group.material_number);
-				exit(1);
-			}
+			//if (group.material_indices[i] != group.material_number)
+			//{
+			//	fprintf(stderr, "at group %s, tri %d, mat %d != %d\n", group.name.c_str(), i, group.material_indices[i], group.material_number);
+			//	exit(1);
+			//}
 		}
 	}
 };

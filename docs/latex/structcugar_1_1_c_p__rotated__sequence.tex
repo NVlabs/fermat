@@ -1,0 +1,87 @@
+\hypertarget{structcugar_1_1_c_p__rotated__sequence}{}\section{cugar\+:\+:C\+P\+\_\+rotated\+\_\+sequence$<$ Sample\+\_\+sequence, Iterator $>$ Struct Template Reference}
+\label{structcugar_1_1_c_p__rotated__sequence}\index{cugar\+::\+C\+P\+\_\+rotated\+\_\+sequence$<$ Sample\+\_\+sequence, Iterator $>$@{cugar\+::\+C\+P\+\_\+rotated\+\_\+sequence$<$ Sample\+\_\+sequence, Iterator $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$typename Sample\+\_\+sequence, typename Iterator = const float$\ast$$>$\newline
+struct cugar\+::\+C\+P\+\_\+rotated\+\_\+sequence$<$ Sample\+\_\+sequence, Iterator $>$}
+
+Wrapper class to rotate the samples coming from a sample sequence with a set of Cranley-\/\+Patterson rotations. 
+
+{\ttfamily \#include $<$cp\+\_\+rotations.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_c_p__rotated__sequence_a894951bf501a32979a836eead10b4667}\label{structcugar_1_1_c_p__rotated__sequence_a894951bf501a32979a836eead10b4667}} 
+typedef \hyperlink{structcugar_1_1_c_p__rotator}{C\+P\+\_\+rotator}$<$ typename Sample\+\_\+sequence\+::\+Sampler\+\_\+type, Iterator $>$ {\bfseries Sampler\+\_\+type}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_c_p__rotated__sequence_a89118c80f2c2e00189cc2c1f130e29c2}{C\+P\+\_\+rotated\+\_\+sequence} (Sample\+\_\+sequence \&sequence, const uint32 dims, Iterator rot, uint32 size)
+\item 
+\hyperlink{structcugar_1_1_c_p__rotator}{Sampler\+\_\+type} C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_c_p__rotated__sequence_a8d1e472dbd3a1e681a3617f7abedd103}{instance} (const uint32 index, const uint32 copy) const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_c_p__rotated__sequence_ae89cb3ff2b68c56e67e0d8801871602e}\label{structcugar_1_1_c_p__rotated__sequence_ae89cb3ff2b68c56e67e0d8801871602e}} 
+Sample\+\_\+sequence \& {\bfseries m\+\_\+sequence}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_c_p__rotated__sequence_a13ce8bb76ae49fb10b4ab685945ff403}\label{structcugar_1_1_c_p__rotated__sequence_a13ce8bb76ae49fb10b4ab685945ff403}} 
+Iterator {\bfseries m\+\_\+rot}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_c_p__rotated__sequence_ad441ef2dde3c643f1c96a04ebb99b580}\label{structcugar_1_1_c_p__rotated__sequence_ad441ef2dde3c643f1c96a04ebb99b580}} 
+uint32 {\bfseries m\+\_\+size}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_c_p__rotated__sequence_a89d9b172106c9693abb1bde2eabd6da0}\label{structcugar_1_1_c_p__rotated__sequence_a89d9b172106c9693abb1bde2eabd6da0}} 
+uint32 {\bfseries m\+\_\+dims}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcugar_1_1_c_p__rotated__sequence_a89118c80f2c2e00189cc2c1f130e29c2}\label{structcugar_1_1_c_p__rotated__sequence_a89118c80f2c2e00189cc2c1f130e29c2}} 
+\index{cugar\+::\+C\+P\+\_\+rotated\+\_\+sequence@{cugar\+::\+C\+P\+\_\+rotated\+\_\+sequence}!C\+P\+\_\+rotated\+\_\+sequence@{C\+P\+\_\+rotated\+\_\+sequence}}
+\index{C\+P\+\_\+rotated\+\_\+sequence@{C\+P\+\_\+rotated\+\_\+sequence}!cugar\+::\+C\+P\+\_\+rotated\+\_\+sequence@{cugar\+::\+C\+P\+\_\+rotated\+\_\+sequence}}
+\subsubsection{\texorpdfstring{C\+P\+\_\+rotated\+\_\+sequence()}{CP\_rotated\_sequence()}}
+{\footnotesize\ttfamily template$<$typename Sample\+\_\+sequence , typename Iterator  = const float$\ast$$>$ \\
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_c_p__rotated__sequence}{cugar\+::\+C\+P\+\_\+rotated\+\_\+sequence}$<$ Sample\+\_\+sequence, Iterator $>$\+::\hyperlink{structcugar_1_1_c_p__rotated__sequence}{C\+P\+\_\+rotated\+\_\+sequence} (\begin{DoxyParamCaption}\item[{Sample\+\_\+sequence \&}]{sequence,  }\item[{const uint32}]{dims,  }\item[{Iterator}]{rot,  }\item[{uint32}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em sequence} & sample sequence \\
+\hline
+{\em dims} & dimensionality of the sequence \\
+\hline
+{\em rot} & rotation set \\
+\hline
+{\em size} & size of the rotation set \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1_c_p__rotated__sequence_a8d1e472dbd3a1e681a3617f7abedd103}\label{structcugar_1_1_c_p__rotated__sequence_a8d1e472dbd3a1e681a3617f7abedd103}} 
+\index{cugar\+::\+C\+P\+\_\+rotated\+\_\+sequence@{cugar\+::\+C\+P\+\_\+rotated\+\_\+sequence}!instance@{instance}}
+\index{instance@{instance}!cugar\+::\+C\+P\+\_\+rotated\+\_\+sequence@{cugar\+::\+C\+P\+\_\+rotated\+\_\+sequence}}
+\subsubsection{\texorpdfstring{instance()}{instance()}}
+{\footnotesize\ttfamily template$<$typename Sample\+\_\+sequence , typename Iterator  = const float$\ast$$>$ \\
+\hyperlink{structcugar_1_1_c_p__rotator}{Sampler\+\_\+type} C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_c_p__rotated__sequence}{cugar\+::\+C\+P\+\_\+rotated\+\_\+sequence}$<$ Sample\+\_\+sequence, Iterator $>$\+::instance (\begin{DoxyParamCaption}\item[{const uint32}]{index,  }\item[{const uint32}]{copy }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+instance
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & sequence index \\
+\hline
+{\em copy} & sequence instance \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/sampling/\hyperlink{cp__rotations_8h}{cp\+\_\+rotations.\+h}\end{DoxyCompactItemize}

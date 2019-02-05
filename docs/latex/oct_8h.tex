@@ -1,0 +1,37 @@
+\hypertarget{oct_8h}{}\section{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/spherical/oct.h File Reference}
+\label{oct_8h}\index{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/spherical/oct.\+h@{C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/spherical/oct.\+h}}
+
+
+Octahedral basis definitions and helper functions.  
+
+
+{\ttfamily \#include $<$cugar/basic/numbers.\+h$>$}\newline
+{\ttfamily \#include $<$cugar/linalg/vector.\+h$>$}\newline
+{\ttfamily \#include $<$cugar/linalg/matrix.\+h$>$}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcugar_1_1_oct__basis}{cugar\+::\+Oct\+\_\+basis}
+\item 
+struct \hyperlink{structcugar_1_1_oct__smooth__basis}{cugar\+::\+Oct\+\_\+smooth\+\_\+basis}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespacecugar}{cugar}
+\begin{DoxyCompactList}\small\item\em Define a \hyperlink{structcugar_1_1vector__view}{vector\+\_\+view} P\+OD type and \hyperlink{namespacecugar_a347f91de482f0cb8dcba21c086b0aa46}{plain\+\_\+view()} for std\+::vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+A\+PI C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{group__octahedral__functions_gab5a718bf9c2f681d6ee998cdc429f5ef}{cugar\+::oct\+\_\+basis} (const int32 i, const Vector3f \&d)
+\item 
+C\+U\+G\+A\+R\+\_\+\+A\+PI C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{group__octahedral__functions_ga71566a5a9606f7c37b4b04c9b6c8bac5}{cugar\+::oct\+\_\+smooth\+\_\+basis} (const int32 i, const Vector3f \&omega)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Octahedral basis definitions and helper functions. 
+
+Defines a set of 8 orthogonal functions on the sphere, where each function is constant over one of the faces of a octahedron and zero outside.
+
+Additionally, introduces a smoothed version of these functions which form a non-\/orthogonal system. 

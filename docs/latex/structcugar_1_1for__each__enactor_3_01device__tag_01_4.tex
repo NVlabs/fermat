@@ -1,0 +1,53 @@
+\hypertarget{structcugar_1_1for__each__enactor_3_01device__tag_01_4}{}\section{cugar\+:\+:for\+\_\+each\+\_\+enactor$<$ device\+\_\+tag $>$ Struct Template Reference}
+\label{structcugar_1_1for__each__enactor_3_01device__tag_01_4}\index{cugar\+::for\+\_\+each\+\_\+enactor$<$ device\+\_\+tag $>$@{cugar\+::for\+\_\+each\+\_\+enactor$<$ device\+\_\+tag $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$$>$\newline
+struct cugar\+::for\+\_\+each\+\_\+enactor$<$ device\+\_\+tag $>$}
+
+A stateful for\+\_\+each enactor class that optimizes the kernel launches at run-\/time, using per-\/launch statistics 
+
+{\ttfamily \#include $<$primitives.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structcugar_1_1for__each__enactor_3_01device__tag_01_4_a09149f7e19d5228d4cb45d5f741df386}{for\+\_\+each\+\_\+enactor} ()
+\item 
+{\footnotesize template$<$typename Iterator , typename Functor $>$ }\\void \hyperlink{structcugar_1_1for__each__enactor_3_01device__tag_01_4_a560ef3acdf14e7bbccbdaea7cdae0049}{operator()} (const uint64 n, const Iterator in, Functor functor)
+\item 
+{\footnotesize template$<$typename Functor $>$ }\\void \hyperlink{structcugar_1_1for__each__enactor_3_01device__tag_01_4_a5ebd67b9c8303c8d3692dc8dbd336893}{operator()} (const uint64 n, Functor functor)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcugar_1_1for__each__enactor_3_01device__tag_01_4_a09149f7e19d5228d4cb45d5f741df386}\label{structcugar_1_1for__each__enactor_3_01device__tag_01_4_a09149f7e19d5228d4cb45d5f741df386}} 
+\index{cugar\+::for\+\_\+each\+\_\+enactor$<$ device\+\_\+tag $>$@{cugar\+::for\+\_\+each\+\_\+enactor$<$ device\+\_\+tag $>$}!for\+\_\+each\+\_\+enactor@{for\+\_\+each\+\_\+enactor}}
+\index{for\+\_\+each\+\_\+enactor@{for\+\_\+each\+\_\+enactor}!cugar\+::for\+\_\+each\+\_\+enactor$<$ device\+\_\+tag $>$@{cugar\+::for\+\_\+each\+\_\+enactor$<$ device\+\_\+tag $>$}}
+\subsubsection{\texorpdfstring{for\+\_\+each\+\_\+enactor()}{for\_each\_enactor()}}
+{\footnotesize\ttfamily \hyperlink{structcugar_1_1for__each__enactor}{cugar\+::for\+\_\+each\+\_\+enactor}$<$ \hyperlink{structcugar_1_1device__tag}{device\+\_\+tag} $>$\+::\hyperlink{structcugar_1_1for__each__enactor}{for\+\_\+each\+\_\+enactor} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1for__each__enactor_3_01device__tag_01_4_a560ef3acdf14e7bbccbdaea7cdae0049}\label{structcugar_1_1for__each__enactor_3_01device__tag_01_4_a560ef3acdf14e7bbccbdaea7cdae0049}} 
+\index{cugar\+::for\+\_\+each\+\_\+enactor$<$ device\+\_\+tag $>$@{cugar\+::for\+\_\+each\+\_\+enactor$<$ device\+\_\+tag $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!cugar\+::for\+\_\+each\+\_\+enactor$<$ device\+\_\+tag $>$@{cugar\+::for\+\_\+each\+\_\+enactor$<$ device\+\_\+tag $>$}}
+\subsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Iterator , typename Functor $>$ \\
+void \hyperlink{structcugar_1_1for__each__enactor}{cugar\+::for\+\_\+each\+\_\+enactor}$<$ \hyperlink{structcugar_1_1device__tag}{device\+\_\+tag} $>$\+::operator() (\begin{DoxyParamCaption}\item[{const uint64}]{n,  }\item[{const Iterator}]{in,  }\item[{Functor}]{functor }\end{DoxyParamCaption})}
+
+enact the for\+\_\+each \mbox{\Hypertarget{structcugar_1_1for__each__enactor_3_01device__tag_01_4_a5ebd67b9c8303c8d3692dc8dbd336893}\label{structcugar_1_1for__each__enactor_3_01device__tag_01_4_a5ebd67b9c8303c8d3692dc8dbd336893}} 
+\index{cugar\+::for\+\_\+each\+\_\+enactor$<$ device\+\_\+tag $>$@{cugar\+::for\+\_\+each\+\_\+enactor$<$ device\+\_\+tag $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!cugar\+::for\+\_\+each\+\_\+enactor$<$ device\+\_\+tag $>$@{cugar\+::for\+\_\+each\+\_\+enactor$<$ device\+\_\+tag $>$}}
+\subsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Functor $>$ \\
+void \hyperlink{structcugar_1_1for__each__enactor}{cugar\+::for\+\_\+each\+\_\+enactor}$<$ \hyperlink{structcugar_1_1device__tag}{device\+\_\+tag} $>$\+::operator() (\begin{DoxyParamCaption}\item[{const uint64}]{n,  }\item[{Functor}]{functor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+enact the for\+\_\+each 
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/primitives.\+h\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/primitives\+\_\+inl.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,137 @@
+\hypertarget{group___fermat}{}\section{Fermat}
+\label{group___fermat}\index{Fermat@{Fermat}}
+
+
+\subsection{Detailed Description}
+\subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group___b_p_t_lib}{B\+P\+T\+Lib}
+\item 
+\hyperlink{group___b_s_d_f_module}{B\+S\+DF}
+\item 
+\hyperlink{group___camera_module}{Camera\+Module}
+\item 
+\hyperlink{group___clustered_r_l_module}{Clustered RL}
+\item 
+\hyperlink{group___filtering_module}{Filtering\+Module}
+\item 
+\hyperlink{group___path_module}{Path\+Module}
+\item 
+\hyperlink{group___b_p_t_module}{B\+P\+T\+Module}
+\item 
+\hyperlink{group___c_m_l_t_module}{C\+M\+L\+T\+Module}
+\item 
+\hyperlink{group___hello_p_t_module}{Hello\+P\+T\+Module}
+\item 
+\hyperlink{group___p_t_module}{P\+T\+Module}
+\item 
+\hyperlink{group___p_s_f_p_t_module}{P\+S\+F\+P\+T\+Module}
+\item 
+\hyperlink{group___r_p_t_module}{Reuse-\/based Path Tracer Module}
+\item 
+\hyperlink{group___r_t_module}{Ray-\/\+Tracing Module}
+\item 
+\hyperlink{group___vertex_geometry_module}{Vertex\+Geometry\+Module}
+\item 
+\hyperlink{group___p_t_lib}{P\+T\+Lib}
+\item 
+\hyperlink{group___framebuffer_module}{Framebuffer\+Module}
+\item 
+\hyperlink{group___lights_module}{Lights\+Module}
+\item 
+\hyperlink{group___mesh_module}{Mesh\+Module}
+\item 
+\hyperlink{group___p_s_s_m_l_t_module}{P\+S\+S\+M\+L\+T\+Module}
+\item 
+\hyperlink{group___spatial_hash_module}{Spatial\+Hash\+Module}
+\item 
+\hyperlink{group___textures_module}{Textures\+Module}
+\item 
+\hyperlink{group___sampling_module}{Sampling\+Module}
+\item 
+\hyperlink{group___wavefront_queues}{Wavefront\+Queues}
+\end{DoxyCompactItemize}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_ray}{Ray}
+\item 
+struct \hyperlink{struct_masked_ray}{Masked\+Ray}
+\item 
+struct \hyperlink{struct_hit}{Hit}
+\item 
+struct \hyperlink{struct_hit_instancing}{Hit\+Instancing}
+\item 
+struct \hyperlink{struct_rendering_context}{Rendering\+Context}
+\item 
+struct \hyperlink{struct_rendering_context_impl}{Rendering\+Context\+Impl}
+\item 
+struct \hyperlink{struct_renderer_interface}{Renderer\+Interface}
+\item 
+struct \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View}
+\item 
+struct \hyperlink{struct_f_buffer_desc}{F\+Buffer\+Desc}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___fermat_ga358c09f983ea18262d1fd3410d4b3ddb}\label{group___fermat_ga358c09f983ea18262d1fd3410d4b3ddb}} 
+\#define {\bfseries S\+H\+A\+D\+O\+W\+\_\+\+B\+I\+AS}~1.\+0e-\/4f
+\item 
+\mbox{\Hypertarget{group___fermat_ga32be64d7300651da16f30997ac20d2d5}\label{group___fermat_ga32be64d7300651da16f30997ac20d2d5}} 
+\#define {\bfseries S\+H\+A\+D\+O\+W\+\_\+\+T\+M\+IN}~0.\+0f
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___fermat_gae9c668e3a273ce92b9f4e134d0cbd6ce}\label{group___fermat_gae9c668e3a273ce92b9f4e134d0cbd6ce}} 
+enum {\bfseries Renderer\+Type} \{ \newline
+{\bfseries k\+PT} = 0, 
+{\bfseries k\+B\+PT} = 1, 
+{\bfseries k\+C\+M\+LT} = 2, 
+{\bfseries k\+M\+LT} = 3, 
+\newline
+{\bfseries k\+P\+S\+S\+M\+LT} = 4, 
+{\bfseries k\+R\+PT} = 5, 
+{\bfseries k\+P\+S\+F\+PT} = 6, 
+{\bfseries k\+R\+L\+PT} = 7, 
+\newline
+{\bfseries k\+T\+R\+PT} = 8, 
+{\bfseries k\+Game\+PT} = 9, 
+{\bfseries k\+User\+Renderer} = 10
+ \}
+\item 
+\mbox{\Hypertarget{group___fermat_ga474716bb9224d44d614704a0bd331d99}\label{group___fermat_ga474716bb9224d44d614704a0bd331d99}} 
+enum {\bfseries Shading\+Mode} \{ \newline
+{\bfseries k\+Shaded} = 0, 
+{\bfseries k\+UV} = 1, 
+{\bfseries k\+U\+V\+Stretch} = 2, 
+{\bfseries k\+Charts} = 3, 
+\newline
+{\bfseries k\+Albedo} = 4, 
+{\bfseries k\+Diffuse\+Albedo} = 5, 
+{\bfseries k\+Specular\+Albedo} = 6, 
+{\bfseries k\+Diffuse\+Color} = 7, 
+\newline
+{\bfseries k\+Specular\+Color} = 8, 
+{\bfseries k\+Direct\+Lighting} = 9, 
+{\bfseries k\+Filtered} = 10, 
+{\bfseries k\+Variance} = 11, 
+\newline
+{\bfseries k\+Normal} = 12, 
+{\bfseries k\+Aux0} = 13
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___fermat_ga966fba6ceb2c5ddeb4fae8833cd18b0d}\label{group___fermat_ga966fba6ceb2c5ddeb4fae8833cd18b0d}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{struct_ray}{Ray} {\bfseries make\+\_\+ray} (const float3 origin, const float3 dir, const float tmin, const float tmax)
+\item 
+\mbox{\Hypertarget{group___fermat_ga75478c522214d4e81e1cdb734926b23c}\label{group___fermat_ga75478c522214d4e81e1cdb734926b23c}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{struct_masked_ray}{Masked\+Ray} {\bfseries make\+\_\+ray} (const float3 origin, const float3 dir, const uint32 mask, const float tmax)
+\item 
+\mbox{\Hypertarget{group___fermat_ga49721ef14701a3b24f2f3d0cfe8a98de}\label{group___fermat_ga49721ef14701a3b24f2f3d0cfe8a98de}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{struct_hit}{Hit} {\bfseries make\+\_\+hit} (const float t, const int tri\+Id, const float u, const float v)
+\end{DoxyCompactItemize}

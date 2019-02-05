@@ -1,0 +1,92 @@
+\hypertarget{classcugar_1_1_weyl__sampler__opt}{}\section{cugar\+:\+:Weyl\+\_\+sampler\+\_\+opt Class Reference}
+\label{classcugar_1_1_weyl__sampler__opt}\index{cugar\+::\+Weyl\+\_\+sampler\+\_\+opt@{cugar\+::\+Weyl\+\_\+sampler\+\_\+opt}}
+
+
+\subsection{Detailed description}
+A Weyl equidistributed sequence sampler class optimized for a given number of dimensions (see \href{http://extremelearning.com.au/unreasonable-effectiveness-of-quasirandom-sequences}{\tt http\+://extremelearning.\+com.\+au/unreasonable-\/effectiveness-\/of-\/quasirandom-\/sequences})
+
+Weyl\textquotesingle{}s equidistribution theorem says that the sequence of all multiples of an irrational number r is equidistributed modulo 1. This sampler uses such a generator for each dimension of a multi-\/dimensional sequence, where r is varied for each dimension. 
+
+{\ttfamily \#include $<$weyl.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{classcugar_1_1_weyl__sampler__opt_abe246c4e21c96b5b0a53fdc112f5438e}{Weyl\+\_\+sampler\+\_\+opt} (unsigned int n\+\_\+dims=1, unsigned int instance=0, float seed=0.\+0f)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float \hyperlink{classcugar_1_1_weyl__sampler__opt_aec87ab41207bf714c3d6c9a0ad846568}{sample} ()
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float \hyperlink{classcugar_1_1_weyl__sampler__opt_a1b17dcdc362e66be807938d691455d11}{next} ()
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE unsigned int \hyperlink{classcugar_1_1_weyl__sampler__opt_a3f3762ed4fd1a0b3bc9ca163f15b8fb9}{next\+\_\+instance} ()
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE unsigned int \hyperlink{classcugar_1_1_weyl__sampler__opt_a08292e9f6053315e5be2419ed54c4069}{next\+\_\+dim} ()
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE void \hyperlink{classcugar_1_1_weyl__sampler__opt_ab6248f98d32ea51e4b7f803474bb05e3}{set\+\_\+instance} (unsigned int i)
+\item 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE void \hyperlink{classcugar_1_1_weyl__sampler__opt_a1120c5c45ac2dec8669de86767eaca08}{set\+\_\+dim} (unsigned int d)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcugar_1_1_weyl__sampler__opt_abe246c4e21c96b5b0a53fdc112f5438e}\label{classcugar_1_1_weyl__sampler__opt_abe246c4e21c96b5b0a53fdc112f5438e}} 
+\index{cugar\+::\+Weyl\+\_\+sampler\+\_\+opt@{cugar\+::\+Weyl\+\_\+sampler\+\_\+opt}!Weyl\+\_\+sampler\+\_\+opt@{Weyl\+\_\+sampler\+\_\+opt}}
+\index{Weyl\+\_\+sampler\+\_\+opt@{Weyl\+\_\+sampler\+\_\+opt}!cugar\+::\+Weyl\+\_\+sampler\+\_\+opt@{cugar\+::\+Weyl\+\_\+sampler\+\_\+opt}}
+\subsubsection{\texorpdfstring{Weyl\+\_\+sampler\+\_\+opt()}{Weyl\_sampler\_opt()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE cugar\+::\+Weyl\+\_\+sampler\+\_\+opt\+::\+Weyl\+\_\+sampler\+\_\+opt (\begin{DoxyParamCaption}\item[{unsigned int}]{n\+\_\+dims = {\ttfamily 1},  }\item[{unsigned int}]{instance = {\ttfamily 0},  }\item[{float}]{seed = {\ttfamily 0.0f} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em n\+\_\+dims} & total number of dimensions \\
+\hline
+{\em instance} & instance number \\
+\hline
+{\em seed} & randomization seed \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcugar_1_1_weyl__sampler__opt_a1b17dcdc362e66be807938d691455d11}\label{classcugar_1_1_weyl__sampler__opt_a1b17dcdc362e66be807938d691455d11}} 
+\index{cugar\+::\+Weyl\+\_\+sampler\+\_\+opt@{cugar\+::\+Weyl\+\_\+sampler\+\_\+opt}!next@{next}}
+\index{next@{next}!cugar\+::\+Weyl\+\_\+sampler\+\_\+opt@{cugar\+::\+Weyl\+\_\+sampler\+\_\+opt}}
+\subsubsection{\texorpdfstring{next()}{next()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float cugar\+::\+Weyl\+\_\+sampler\+\_\+opt\+::next (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return next sample (iterating over dimensions) \mbox{\Hypertarget{classcugar_1_1_weyl__sampler__opt_a08292e9f6053315e5be2419ed54c4069}\label{classcugar_1_1_weyl__sampler__opt_a08292e9f6053315e5be2419ed54c4069}} 
+\index{cugar\+::\+Weyl\+\_\+sampler\+\_\+opt@{cugar\+::\+Weyl\+\_\+sampler\+\_\+opt}!next\+\_\+dim@{next\+\_\+dim}}
+\index{next\+\_\+dim@{next\+\_\+dim}!cugar\+::\+Weyl\+\_\+sampler\+\_\+opt@{cugar\+::\+Weyl\+\_\+sampler\+\_\+opt}}
+\subsubsection{\texorpdfstring{next\+\_\+dim()}{next\_dim()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE unsigned int cugar\+::\+Weyl\+\_\+sampler\+\_\+opt\+::next\+\_\+dim (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+advance to the next dimension \mbox{\Hypertarget{classcugar_1_1_weyl__sampler__opt_a3f3762ed4fd1a0b3bc9ca163f15b8fb9}\label{classcugar_1_1_weyl__sampler__opt_a3f3762ed4fd1a0b3bc9ca163f15b8fb9}} 
+\index{cugar\+::\+Weyl\+\_\+sampler\+\_\+opt@{cugar\+::\+Weyl\+\_\+sampler\+\_\+opt}!next\+\_\+instance@{next\+\_\+instance}}
+\index{next\+\_\+instance@{next\+\_\+instance}!cugar\+::\+Weyl\+\_\+sampler\+\_\+opt@{cugar\+::\+Weyl\+\_\+sampler\+\_\+opt}}
+\subsubsection{\texorpdfstring{next\+\_\+instance()}{next\_instance()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE unsigned int cugar\+::\+Weyl\+\_\+sampler\+\_\+opt\+::next\+\_\+instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+advance to the next instance \mbox{\Hypertarget{classcugar_1_1_weyl__sampler__opt_aec87ab41207bf714c3d6c9a0ad846568}\label{classcugar_1_1_weyl__sampler__opt_aec87ab41207bf714c3d6c9a0ad846568}} 
+\index{cugar\+::\+Weyl\+\_\+sampler\+\_\+opt@{cugar\+::\+Weyl\+\_\+sampler\+\_\+opt}!sample@{sample}}
+\index{sample@{sample}!cugar\+::\+Weyl\+\_\+sampler\+\_\+opt@{cugar\+::\+Weyl\+\_\+sampler\+\_\+opt}}
+\subsubsection{\texorpdfstring{sample()}{sample()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float cugar\+::\+Weyl\+\_\+sampler\+\_\+opt\+::sample (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return next sample (iterating over dimensions) \mbox{\Hypertarget{classcugar_1_1_weyl__sampler__opt_a1120c5c45ac2dec8669de86767eaca08}\label{classcugar_1_1_weyl__sampler__opt_a1120c5c45ac2dec8669de86767eaca08}} 
+\index{cugar\+::\+Weyl\+\_\+sampler\+\_\+opt@{cugar\+::\+Weyl\+\_\+sampler\+\_\+opt}!set\+\_\+dim@{set\+\_\+dim}}
+\index{set\+\_\+dim@{set\+\_\+dim}!cugar\+::\+Weyl\+\_\+sampler\+\_\+opt@{cugar\+::\+Weyl\+\_\+sampler\+\_\+opt}}
+\subsubsection{\texorpdfstring{set\+\_\+dim()}{set\_dim()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE void cugar\+::\+Weyl\+\_\+sampler\+\_\+opt\+::set\+\_\+dim (\begin{DoxyParamCaption}\item[{unsigned int}]{d }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+set the dimension index \mbox{\Hypertarget{classcugar_1_1_weyl__sampler__opt_ab6248f98d32ea51e4b7f803474bb05e3}\label{classcugar_1_1_weyl__sampler__opt_ab6248f98d32ea51e4b7f803474bb05e3}} 
+\index{cugar\+::\+Weyl\+\_\+sampler\+\_\+opt@{cugar\+::\+Weyl\+\_\+sampler\+\_\+opt}!set\+\_\+instance@{set\+\_\+instance}}
+\index{set\+\_\+instance@{set\+\_\+instance}!cugar\+::\+Weyl\+\_\+sampler\+\_\+opt@{cugar\+::\+Weyl\+\_\+sampler\+\_\+opt}}
+\subsubsection{\texorpdfstring{set\+\_\+instance()}{set\_instance()}}
+{\footnotesize\ttfamily C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE void cugar\+::\+Weyl\+\_\+sampler\+\_\+opt\+::set\+\_\+instance (\begin{DoxyParamCaption}\item[{unsigned int}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+set the instance number 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/sampling/\hyperlink{weyl_8h}{weyl.\+h}\end{DoxyCompactItemize}

@@ -1,0 +1,421 @@
+\hypertarget{struct_rendering_context_impl}{}\section{Rendering\+Context\+Impl Struct Reference}
+\label{struct_rendering_context_impl}\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+
+
+\subsection{Detailed description}
+A class encpasulating the entire rendering context 
+
+{\ttfamily \#include $<$renderer\+\_\+impl.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a36ddcdb0916070d6530bb6b75a0c3d76}\label{struct_rendering_context_impl_a36ddcdb0916070d6530bb6b75a0c3d76}} 
+typedef Rendering\+Context\+::\+Host\+Mip\+Map\+Storage\+Ptr {\bfseries Host\+Mip\+Map\+Storage\+Ptr}
+\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a6eae16124dd25a5ac91e61bcd43c708a}\label{struct_rendering_context_impl_a6eae16124dd25a5ac91e61bcd43c708a}} 
+typedef Rendering\+Context\+::\+Device\+Mip\+Map\+Storage\+Ptr {\bfseries Device\+Mip\+Map\+Storage\+Ptr}
+\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_ad2b2e40046387a990b451a29eca29b79}\label{struct_rendering_context_impl_ad2b2e40046387a990b451a29eca29b79}} 
+typedef \hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ H\+O\+S\+T\+\_\+\+B\+U\+F\+F\+ER, \hyperlink{struct_directional_light}{Directional\+Light} $>$ {\bfseries Host\+Directional\+Light\+Vector}
+\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_aa10fd58aedb4c70c457695b00dca708e}\label{struct_rendering_context_impl_aa10fd58aedb4c70c457695b00dca708e}} 
+typedef \hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, \hyperlink{struct_directional_light}{Directional\+Light} $>$ {\bfseries Device\+Directional\+Light\+Vector}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_rendering_context_impl_a03c8ddb57af7c91c41637c7fd0467b3b}{Rendering\+Context\+Impl} (\hyperlink{struct_rendering_context}{Rendering\+Context} $\ast$\+\_\+context)
+\item 
+void \hyperlink{struct_rendering_context_impl_a6ed8abe2a35f936c642254279c635a45}{init} (int argc, char $\ast$$\ast$argv)
+\item 
+void \hyperlink{struct_rendering_context_impl_aaf8b4f561e0beee260fbccddece3d96d}{render} (const uint32 instance)
+\item 
+void \hyperlink{struct_rendering_context_impl_af2a6da1af1cbc483eeeb47ac63bcb30c}{clear} ()
+\item 
+void \hyperlink{struct_rendering_context_impl_af5083af72cc3e226381c4b2a5562375a}{multiply\+\_\+frame} (const float scale)
+\item 
+void \hyperlink{struct_rendering_context_impl_a12645d5a60a56769cd816a3e4733687b}{rescale\+\_\+frame} (const uint32 instance)
+\item 
+void \hyperlink{struct_rendering_context_impl_af0fb958dc3632540d622ad580487ef1f}{clamp\+\_\+frame} (const float max\+\_\+value)
+\item 
+void \hyperlink{struct_rendering_context_impl_aa6239f554359fcd6fb8c52343ef6e8ab}{update\+\_\+variances} (const uint32 instance)
+\item 
+void \hyperlink{struct_rendering_context_impl_a56fb48c6ec74446e25a8c3cc95a291c7}{update\+\_\+model} ()
+\item 
+void \hyperlink{struct_rendering_context_impl_a8c5fa978dc9a84c80828b493f17853bf}{filter} (const uint32 instance)
+\item 
+uint2 \hyperlink{struct_rendering_context_impl_a6481f4a2884fda739feecf503a7b9266}{res} () const
+\item 
+\hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \hyperlink{struct_rendering_context_impl_a0c673e0e6bc116a9c035b4ae90973036}{view} (const uint32 instance)
+\item 
+\hyperlink{struct_camera}{Camera} \& \hyperlink{struct_rendering_context_impl_ac5cd84771571ce603c28a6a725b2e6e5}{get\+\_\+camera} ()
+\item 
+uint2 \hyperlink{struct_rendering_context_impl_a691288ce177e1411abfcc6589d47e788}{get\+\_\+res} () const
+\item 
+float \hyperlink{struct_rendering_context_impl_abef1aefa9f7fa7773c747652572436b7}{get\+\_\+aspect\+\_\+ratio} () const
+\item 
+float \hyperlink{struct_rendering_context_impl_a0f6fa3a9316c81d4eb600d9a28a8c16f}{get\+\_\+exposure} () const
+\item 
+float \hyperlink{struct_rendering_context_impl_ac804ff79fc0aa3d56d8fa39b41b9e565}{get\+\_\+gamma} () const
+\item 
+\hyperlink{struct_f_buffer_storage}{F\+Buffer\+Storage} \& \hyperlink{struct_rendering_context_impl_a1d6e1170e3e7871ba9771979f8b99fd1}{get\+\_\+frame\+\_\+buffer} ()
+\item 
+std\+::vector$<$ Host\+Mip\+Map\+Storage\+Ptr $>$ \& \hyperlink{struct_rendering_context_impl_a5190f91ce9171181e4facc2200d22476}{get\+\_\+host\+\_\+textures} ()
+\item 
+std\+::vector$<$ Device\+Mip\+Map\+Storage\+Ptr $>$ \& \hyperlink{struct_rendering_context_impl_ad467c9e4c5b65a58b141a0d7febd95c2}{get\+\_\+device\+\_\+textures} ()
+\item 
+\hyperlink{struct_mip_map_view}{Mip\+Map\+View} $\ast$ \hyperlink{struct_rendering_context_impl_a5ec508e02415e7aa656a2acc1cb64036}{get\+\_\+host\+\_\+texture\+\_\+views} ()
+\item 
+\hyperlink{struct_mip_map_view}{Mip\+Map\+View} $\ast$ \hyperlink{struct_rendering_context_impl_ad714840abda6dcddadbcd0ac0e3f7747}{get\+\_\+device\+\_\+texture\+\_\+views} ()
+\item 
+\hyperlink{class_mesh_storage}{Mesh\+Storage} \& \hyperlink{struct_rendering_context_impl_a5177f69850820b3b44dabf24970fc0dd}{get\+\_\+host\+\_\+mesh} ()
+\item 
+\hyperlink{class_device_mesh_storage}{Device\+Mesh\+Storage} \& \hyperlink{struct_rendering_context_impl_a65114b3198ce34505ab2c5ecb7748d94}{get\+\_\+device\+\_\+mesh} ()
+\item 
+\hyperlink{struct_mesh_lights_storage}{Mesh\+Lights\+Storage} \& \hyperlink{struct_rendering_context_impl_a4bcf377c3712cba875dea054d6c106ef}{get\+\_\+mesh\+\_\+lights} ()
+\item 
+\hyperlink{struct_r_t_context}{R\+T\+Context} $\ast$ \hyperlink{struct_rendering_context_impl_a4bed878e13b19b2193983682499a6dc2}{get\+\_\+rt\+\_\+context} () const
+\item 
+\hyperlink{struct_renderer_interface}{Renderer\+Interface} $\ast$ \hyperlink{struct_rendering_context_impl_ab124c479feb26e431288df7fc20804a2}{get\+\_\+renderer} () const
+\item 
+uint32 \hyperlink{struct_rendering_context_impl_ad709ac4ebdc451032743aef6be0f99d6}{register\+\_\+renderer} (const char $\ast$name, Renderer\+Factory\+Function factory)
+\item 
+uint32 \hyperlink{struct_rendering_context_impl_a36ba5e435c947a71fd5cb4a98f3375fc}{load\+\_\+plugin} (const char $\ast$plugin\+\_\+name)
+\item 
+\hyperlink{structcugar_1_1_bbox}{cugar\+::\+Bbox3f} \hyperlink{struct_rendering_context_impl_a0cca8173d0b80d0469a838a0613aa0af}{compute\+\_\+bbox} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a51a02ab6ca58e796428ab025d1bfc25f}\label{struct_rendering_context_impl_a51a02ab6ca58e796428ab025d1bfc25f}} 
+\hyperlink{struct_rendering_context}{Rendering\+Context} $\ast$ {\bfseries m\+\_\+this}
+\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_ad22487db19c74fd32cf57c36c51400d6}\label{struct_rendering_context_impl_ad22487db19c74fd32cf57c36c51400d6}} 
+unsigned int \hyperlink{struct_rendering_context_impl_ad22487db19c74fd32cf57c36c51400d6}{m\+\_\+res\+\_\+x}
+\begin{DoxyCompactList}\small\item\em X resolution. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a76d8276777dda70c215cbd3628bfbb94}\label{struct_rendering_context_impl_a76d8276777dda70c215cbd3628bfbb94}} 
+unsigned int \hyperlink{struct_rendering_context_impl_a76d8276777dda70c215cbd3628bfbb94}{m\+\_\+res\+\_\+y}
+\begin{DoxyCompactList}\small\item\em Y resolution. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a353f5a6a005886684eb913f3eaef1f8c}\label{struct_rendering_context_impl_a353f5a6a005886684eb913f3eaef1f8c}} 
+float \hyperlink{struct_rendering_context_impl_a353f5a6a005886684eb913f3eaef1f8c}{m\+\_\+aspect}
+\begin{DoxyCompactList}\small\item\em aspect ratio \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a6529c750a9f4df55aab9799b7426f6b9}\label{struct_rendering_context_impl_a6529c750a9f4df55aab9799b7426f6b9}} 
+float \hyperlink{struct_rendering_context_impl_a6529c750a9f4df55aab9799b7426f6b9}{m\+\_\+exposure}
+\begin{DoxyCompactList}\small\item\em exposure \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a9fd7c9aca8db5b2fb107555744b69928}\label{struct_rendering_context_impl_a9fd7c9aca8db5b2fb107555744b69928}} 
+float \hyperlink{struct_rendering_context_impl_a9fd7c9aca8db5b2fb107555744b69928}{m\+\_\+gamma}
+\begin{DoxyCompactList}\small\item\em gamma \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a29088434d951bde9115bee3ba0aebb25}\label{struct_rendering_context_impl_a29088434d951bde9115bee3ba0aebb25}} 
+float \hyperlink{struct_rendering_context_impl_a29088434d951bde9115bee3ba0aebb25}{m\+\_\+shading\+\_\+rate}
+\begin{DoxyCompactList}\small\item\em shading rate \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a8e97f158c2fb75f0392386fbd488f294}\label{struct_rendering_context_impl_a8e97f158c2fb75f0392386fbd488f294}} 
+Shading\+Mode \hyperlink{struct_rendering_context_impl_a8e97f158c2fb75f0392386fbd488f294}{m\+\_\+shading\+\_\+mode}
+\begin{DoxyCompactList}\small\item\em shading mode \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a2291014810c8d03fab4d825a6d555f1b}\label{struct_rendering_context_impl_a2291014810c8d03fab4d825a6d555f1b}} 
+\hyperlink{class_mesh_storage}{Mesh\+Storage} \hyperlink{struct_rendering_context_impl_a2291014810c8d03fab4d825a6d555f1b}{m\+\_\+mesh}
+\begin{DoxyCompactList}\small\item\em host-\/side scene mesh representation \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a3d2beb1932f9859de7c58ccec6ea713a}\label{struct_rendering_context_impl_a3d2beb1932f9859de7c58ccec6ea713a}} 
+\hyperlink{class_device_mesh_storage}{Device\+Mesh\+Storage} \hyperlink{struct_rendering_context_impl_a3d2beb1932f9859de7c58ccec6ea713a}{m\+\_\+mesh\+\_\+d}
+\begin{DoxyCompactList}\small\item\em device-\/side scene mesh representation \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a77836a03b00ec8a772550cb0135b3c47}\label{struct_rendering_context_impl_a77836a03b00ec8a772550cb0135b3c47}} 
+\hyperlink{struct_mesh_lights_storage}{Mesh\+Lights\+Storage} \hyperlink{struct_rendering_context_impl_a77836a03b00ec8a772550cb0135b3c47}{m\+\_\+mesh\+\_\+lights}
+\begin{DoxyCompactList}\small\item\em mesh lights \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_ab3dfe96b7797317880756b7b6b385dbd}\label{struct_rendering_context_impl_ab3dfe96b7797317880756b7b6b385dbd}} 
+\hyperlink{struct_r_t_context}{R\+T\+Context} $\ast$ \hyperlink{struct_rendering_context_impl_ab3dfe96b7797317880756b7b6b385dbd}{m\+\_\+rt\+\_\+context}
+\begin{DoxyCompactList}\small\item\em internal optix ray tracing context \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a4718a91d360f194831cc8c782d4ccd7d}\label{struct_rendering_context_impl_a4718a91d360f194831cc8c782d4ccd7d}} 
+\hyperlink{struct_camera}{Camera} \hyperlink{struct_rendering_context_impl_a4718a91d360f194831cc8c782d4ccd7d}{m\+\_\+camera}
+\begin{DoxyCompactList}\small\item\em camera \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a6f941d21101655cbbb7f04ab6a3f4e96}\label{struct_rendering_context_impl_a6f941d21101655cbbb7f04ab6a3f4e96}} 
+\hyperlink{struct_directional_light}{Directional\+Light} {\bfseries m\+\_\+light}
+\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a75e7a4755cd5db921f83cc6c0adf12b0}\label{struct_rendering_context_impl_a75e7a4755cd5db921f83cc6c0adf12b0}} 
+\hyperlink{class_domain_buffer}{Host\+Directional\+Light\+Vector} \hyperlink{struct_rendering_context_impl_a75e7a4755cd5db921f83cc6c0adf12b0}{m\+\_\+dir\+\_\+lights\+\_\+h}
+\begin{DoxyCompactList}\small\item\em host-\/side directional lights \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a5ca656b451f9c39e20081dcda1a6d182}\label{struct_rendering_context_impl_a5ca656b451f9c39e20081dcda1a6d182}} 
+\hyperlink{class_domain_buffer}{Device\+Directional\+Light\+Vector} \hyperlink{struct_rendering_context_impl_a5ca656b451f9c39e20081dcda1a6d182}{m\+\_\+dir\+\_\+lights\+\_\+d}
+\begin{DoxyCompactList}\small\item\em device-\/side directional lights \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a737fbc51dc349dbc81e3dccae57a2f1d}\label{struct_rendering_context_impl_a737fbc51dc349dbc81e3dccae57a2f1d}} 
+uint32 \hyperlink{struct_rendering_context_impl_a737fbc51dc349dbc81e3dccae57a2f1d}{m\+\_\+renderer\+\_\+type}
+\begin{DoxyCompactList}\small\item\em rendering engine type \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a58169e24ba86e1c5373af062f1681e89}\label{struct_rendering_context_impl_a58169e24ba86e1c5373af062f1681e89}} 
+\hyperlink{struct_renderer_interface}{Renderer\+Interface} $\ast$ \hyperlink{struct_rendering_context_impl_a58169e24ba86e1c5373af062f1681e89}{m\+\_\+renderer}
+\begin{DoxyCompactList}\small\item\em rendering engine \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a85f13da5bca0172ddd9535d811421a35}\label{struct_rendering_context_impl_a85f13da5bca0172ddd9535d811421a35}} 
+std\+::vector$<$ Host\+Mip\+Map\+Storage\+Ptr $>$ \hyperlink{struct_rendering_context_impl_a85f13da5bca0172ddd9535d811421a35}{m\+\_\+textures\+\_\+h}
+\begin{DoxyCompactList}\small\item\em host-\/side textures \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a1609a8e3ff5a6d43b90b7b9ac773364b}\label{struct_rendering_context_impl_a1609a8e3ff5a6d43b90b7b9ac773364b}} 
+std\+::vector$<$ Device\+Mip\+Map\+Storage\+Ptr $>$ \hyperlink{struct_rendering_context_impl_a1609a8e3ff5a6d43b90b7b9ac773364b}{m\+\_\+textures\+\_\+d}
+\begin{DoxyCompactList}\small\item\em device-\/side textures \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a390a67d54ac7af5ab7e9d014dafb1c3e}\label{struct_rendering_context_impl_a390a67d54ac7af5ab7e9d014dafb1c3e}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ H\+O\+S\+T\+\_\+\+B\+U\+F\+F\+ER, \hyperlink{struct_mip_map_view}{Mip\+Map\+View} $>$ \hyperlink{struct_rendering_context_impl_a390a67d54ac7af5ab7e9d014dafb1c3e}{m\+\_\+texture\+\_\+views\+\_\+h}
+\begin{DoxyCompactList}\small\item\em host-\/side texture views \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a06fe79c0728808089dff0e3971ecdbad}\label{struct_rendering_context_impl_a06fe79c0728808089dff0e3971ecdbad}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, \hyperlink{struct_mip_map_view}{Mip\+Map\+View} $>$ \hyperlink{struct_rendering_context_impl_a06fe79c0728808089dff0e3971ecdbad}{m\+\_\+texture\+\_\+views\+\_\+d}
+\begin{DoxyCompactList}\small\item\em device-\/side texture views \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a565b381e96eb7010c40c57204b021c9f}\label{struct_rendering_context_impl_a565b381e96eb7010c40c57204b021c9f}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float4 $>$ \hyperlink{struct_rendering_context_impl_a565b381e96eb7010c40c57204b021c9f}{m\+\_\+ltc\+\_\+M}
+\begin{DoxyCompactList}\small\item\em L\+TC coefficients. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a1f8f820100b16266f80f11746686628a}\label{struct_rendering_context_impl_a1f8f820100b16266f80f11746686628a}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float4 $>$ \hyperlink{struct_rendering_context_impl_a1f8f820100b16266f80f11746686628a}{m\+\_\+ltc\+\_\+\+Minv}
+\begin{DoxyCompactList}\small\item\em L\+TC coefficients. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a8c21753b20c5ce0d906804e602ba11b5}\label{struct_rendering_context_impl_a8c21753b20c5ce0d906804e602ba11b5}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float $>$ \hyperlink{struct_rendering_context_impl_a8c21753b20c5ce0d906804e602ba11b5}{m\+\_\+ltc\+\_\+A}
+\begin{DoxyCompactList}\small\item\em L\+TC coefficients. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a102e9af310802a0628561bb3faa6be20}\label{struct_rendering_context_impl_a102e9af310802a0628561bb3faa6be20}} 
+uint32 \hyperlink{struct_rendering_context_impl_a102e9af310802a0628561bb3faa6be20}{m\+\_\+ltc\+\_\+size}
+\begin{DoxyCompactList}\small\item\em L\+TC coefficients. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a92406f18fb81f56aff284e04ddf7c79a}\label{struct_rendering_context_impl_a92406f18fb81f56aff284e04ddf7c79a}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float $>$ \hyperlink{struct_rendering_context_impl_a92406f18fb81f56aff284e04ddf7c79a}{m\+\_\+glossy\+\_\+reflectance}
+\begin{DoxyCompactList}\small\item\em glossy reflectance/albedo profile \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a22fb9fddd3be4c290d0c2df6102c4e71}\label{struct_rendering_context_impl_a22fb9fddd3be4c290d0c2df6102c4e71}} 
+\hyperlink{struct_f_buffer_storage}{F\+Buffer\+Storage} \hyperlink{struct_rendering_context_impl_a22fb9fddd3be4c290d0c2df6102c4e71}{m\+\_\+fb}
+\begin{DoxyCompactList}\small\item\em output framebuffer storage \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a4ad4f92108c2b2a667339bd1cf99ad53}\label{struct_rendering_context_impl_a4ad4f92108c2b2a667339bd1cf99ad53}} 
+\hyperlink{struct_f_buffer_channel_storage}{F\+Buffer\+Channel\+Storage} \hyperlink{struct_rendering_context_impl_a4ad4f92108c2b2a667339bd1cf99ad53}{m\+\_\+fb\+\_\+temp} \mbox{[}4\mbox{]}
+\begin{DoxyCompactList}\small\item\em temporary framebuffer storage \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_af5ac9b517fc9a57af475a4f9e808597b}\label{struct_rendering_context_impl_af5ac9b517fc9a57af475a4f9e808597b}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float $>$ \hyperlink{struct_rendering_context_impl_af5ac9b517fc9a57af475a4f9e808597b}{m\+\_\+var}
+\begin{DoxyCompactList}\small\item\em variance framebuffer storage \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a34f297ac55dc2cc8f3e1d7e8a3ddd8cd}\label{struct_rendering_context_impl_a34f297ac55dc2cc8f3e1d7e8a3ddd8cd}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, uint8 $>$ \hyperlink{struct_rendering_context_impl_a34f297ac55dc2cc8f3e1d7e8a3ddd8cd}{m\+\_\+rgba}
+\begin{DoxyCompactList}\small\item\em output 8-\/bit rgba storage \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a4981a9ed723e66fd6848a5a138d2a191}\label{struct_rendering_context_impl_a4981a9ed723e66fd6848a5a138d2a191}} 
+\hyperlink{struct_tiled_sequence}{Tiled\+Sequence} \hyperlink{struct_rendering_context_impl_a4981a9ed723e66fd6848a5a138d2a191}{m\+\_\+sequence}
+\begin{DoxyCompactList}\small\item\em a tiled sequence \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_ad85c627c35d1d6652ff87790fc6d0146}\label{struct_rendering_context_impl_ad85c627c35d1d6652ff87790fc6d0146}} 
+std\+::vector$<$ std\+::string $>$ \hyperlink{struct_rendering_context_impl_ad85c627c35d1d6652ff87790fc6d0146}{m\+\_\+renderer\+\_\+names}
+\begin{DoxyCompactList}\small\item\em plugin renderer names \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a0927853d476eeda89f817a5379ea7470}\label{struct_rendering_context_impl_a0927853d476eeda89f817a5379ea7470}} 
+std\+::vector$<$ Renderer\+Factory\+Function $>$ \hyperlink{struct_rendering_context_impl_a0927853d476eeda89f817a5379ea7470}{m\+\_\+renderer\+\_\+factories}
+\begin{DoxyCompactList}\small\item\em plugin renderer factories \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_rendering_context_impl_a2adf159a41b9613421cc480503168af0}\label{struct_rendering_context_impl_a2adf159a41b9613421cc480503168af0}} 
+std\+::vector$<$ \hyperlink{struct_d_l_l}{D\+LL} $>$ \hyperlink{struct_rendering_context_impl_a2adf159a41b9613421cc480503168af0}{m\+\_\+plugins}
+\begin{DoxyCompactList}\small\item\em plugin D\+L\+Ls \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{struct_rendering_context_impl_a03c8ddb57af7c91c41637c7fd0467b3b}\label{struct_rendering_context_impl_a03c8ddb57af7c91c41637c7fd0467b3b}} 
+\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}!Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}!Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+\subsubsection{\texorpdfstring{Rendering\+Context\+Impl()}{RenderingContextImpl()}}
+{\footnotesize\ttfamily Rendering\+Context\+Impl\+::\+Rendering\+Context\+Impl (\begin{DoxyParamCaption}\item[{\hyperlink{struct_rendering_context}{Rendering\+Context} $\ast$}]{\+\_\+context }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{struct_rendering_context_impl_af0fb958dc3632540d622ad580487ef1f}\label{struct_rendering_context_impl_af0fb958dc3632540d622ad580487ef1f}} 
+\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}!clamp\+\_\+frame@{clamp\+\_\+frame}}
+\index{clamp\+\_\+frame@{clamp\+\_\+frame}!Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+\subsubsection{\texorpdfstring{clamp\+\_\+frame()}{clamp\_frame()}}
+{\footnotesize\ttfamily void Rendering\+Context\+Impl\+::clamp\+\_\+frame (\begin{DoxyParamCaption}\item[{const float}]{max\+\_\+value }\end{DoxyParamCaption})}
+
+clamp the output framebuffer to a given maximum
+
+
+\begin{DoxyParams}{Parameters}
+{\em max\+\_\+value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{struct_rendering_context_impl_af2a6da1af1cbc483eeeb47ac63bcb30c}\label{struct_rendering_context_impl_af2a6da1af1cbc483eeeb47ac63bcb30c}} 
+\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}!clear@{clear}}
+\index{clear@{clear}!Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+\subsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily void Rendering\+Context\+Impl\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+clear all framebuffers \mbox{\Hypertarget{struct_rendering_context_impl_a0cca8173d0b80d0469a838a0613aa0af}\label{struct_rendering_context_impl_a0cca8173d0b80d0469a838a0613aa0af}} 
+\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}!compute\+\_\+bbox@{compute\+\_\+bbox}}
+\index{compute\+\_\+bbox@{compute\+\_\+bbox}!Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+\subsubsection{\texorpdfstring{compute\+\_\+bbox()}{compute\_bbox()}}
+{\footnotesize\ttfamily \hyperlink{structcugar_1_1_bbox}{cugar\+::\+Bbox3f} Rendering\+Context\+Impl\+::compute\+\_\+bbox (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+compute the scene\textquotesingle{}s bbox \mbox{\Hypertarget{struct_rendering_context_impl_a8c5fa978dc9a84c80828b493f17853bf}\label{struct_rendering_context_impl_a8c5fa978dc9a84c80828b493f17853bf}} 
+\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}!filter@{filter}}
+\index{filter@{filter}!Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+\subsubsection{\texorpdfstring{filter()}{filter()}}
+{\footnotesize\ttfamily void Rendering\+Context\+Impl\+::filter (\begin{DoxyParamCaption}\item[{const uint32}]{instance }\end{DoxyParamCaption})}
+
+perform filtering
+
+
+\begin{DoxyParams}{Parameters}
+{\em instance} & the sequence instance / frame number in a progressive render \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{struct_rendering_context_impl_abef1aefa9f7fa7773c747652572436b7}\label{struct_rendering_context_impl_abef1aefa9f7fa7773c747652572436b7}} 
+\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}!get\+\_\+aspect\+\_\+ratio@{get\+\_\+aspect\+\_\+ratio}}
+\index{get\+\_\+aspect\+\_\+ratio@{get\+\_\+aspect\+\_\+ratio}!Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+\subsubsection{\texorpdfstring{get\+\_\+aspect\+\_\+ratio()}{get\_aspect\_ratio()}}
+{\footnotesize\ttfamily float Rendering\+Context\+Impl\+::get\+\_\+aspect\+\_\+ratio (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the target aspect ratio \mbox{\Hypertarget{struct_rendering_context_impl_ac5cd84771571ce603c28a6a725b2e6e5}\label{struct_rendering_context_impl_ac5cd84771571ce603c28a6a725b2e6e5}} 
+\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}!get\+\_\+camera@{get\+\_\+camera}}
+\index{get\+\_\+camera@{get\+\_\+camera}!Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+\subsubsection{\texorpdfstring{get\+\_\+camera()}{get\_camera()}}
+{\footnotesize\ttfamily \hyperlink{struct_camera}{Camera}\& Rendering\+Context\+Impl\+::get\+\_\+camera (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the camera \mbox{\Hypertarget{struct_rendering_context_impl_a65114b3198ce34505ab2c5ecb7748d94}\label{struct_rendering_context_impl_a65114b3198ce34505ab2c5ecb7748d94}} 
+\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}!get\+\_\+device\+\_\+mesh@{get\+\_\+device\+\_\+mesh}}
+\index{get\+\_\+device\+\_\+mesh@{get\+\_\+device\+\_\+mesh}!Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+\subsubsection{\texorpdfstring{get\+\_\+device\+\_\+mesh()}{get\_device\_mesh()}}
+{\footnotesize\ttfamily \hyperlink{class_device_mesh_storage}{Device\+Mesh\+Storage}\& Rendering\+Context\+Impl\+::get\+\_\+device\+\_\+mesh (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the scene\textquotesingle{}s device-\/side mesh \mbox{\Hypertarget{struct_rendering_context_impl_ad714840abda6dcddadbcd0ac0e3f7747}\label{struct_rendering_context_impl_ad714840abda6dcddadbcd0ac0e3f7747}} 
+\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}!get\+\_\+device\+\_\+texture\+\_\+views@{get\+\_\+device\+\_\+texture\+\_\+views}}
+\index{get\+\_\+device\+\_\+texture\+\_\+views@{get\+\_\+device\+\_\+texture\+\_\+views}!Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+\subsubsection{\texorpdfstring{get\+\_\+device\+\_\+texture\+\_\+views()}{get\_device\_texture\_views()}}
+{\footnotesize\ttfamily \hyperlink{struct_mip_map_view}{Mip\+Map\+View}$\ast$ Rendering\+Context\+Impl\+::get\+\_\+device\+\_\+texture\+\_\+views (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the scene\textquotesingle{}s device-\/side textures \mbox{\Hypertarget{struct_rendering_context_impl_ad467c9e4c5b65a58b141a0d7febd95c2}\label{struct_rendering_context_impl_ad467c9e4c5b65a58b141a0d7febd95c2}} 
+\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}!get\+\_\+device\+\_\+textures@{get\+\_\+device\+\_\+textures}}
+\index{get\+\_\+device\+\_\+textures@{get\+\_\+device\+\_\+textures}!Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+\subsubsection{\texorpdfstring{get\+\_\+device\+\_\+textures()}{get\_device\_textures()}}
+{\footnotesize\ttfamily std\+::vector$<$Device\+Mip\+Map\+Storage\+Ptr$>$\& Rendering\+Context\+Impl\+::get\+\_\+device\+\_\+textures (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the scene\textquotesingle{}s device-\/side textures \mbox{\Hypertarget{struct_rendering_context_impl_a0f6fa3a9316c81d4eb600d9a28a8c16f}\label{struct_rendering_context_impl_a0f6fa3a9316c81d4eb600d9a28a8c16f}} 
+\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}!get\+\_\+exposure@{get\+\_\+exposure}}
+\index{get\+\_\+exposure@{get\+\_\+exposure}!Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+\subsubsection{\texorpdfstring{get\+\_\+exposure()}{get\_exposure()}}
+{\footnotesize\ttfamily float Rendering\+Context\+Impl\+::get\+\_\+exposure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the target exposure \mbox{\Hypertarget{struct_rendering_context_impl_a1d6e1170e3e7871ba9771979f8b99fd1}\label{struct_rendering_context_impl_a1d6e1170e3e7871ba9771979f8b99fd1}} 
+\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}!get\+\_\+frame\+\_\+buffer@{get\+\_\+frame\+\_\+buffer}}
+\index{get\+\_\+frame\+\_\+buffer@{get\+\_\+frame\+\_\+buffer}!Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+\subsubsection{\texorpdfstring{get\+\_\+frame\+\_\+buffer()}{get\_frame\_buffer()}}
+{\footnotesize\ttfamily \hyperlink{struct_f_buffer_storage}{F\+Buffer\+Storage}\& Rendering\+Context\+Impl\+::get\+\_\+frame\+\_\+buffer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the frame buffer \mbox{\Hypertarget{struct_rendering_context_impl_ac804ff79fc0aa3d56d8fa39b41b9e565}\label{struct_rendering_context_impl_ac804ff79fc0aa3d56d8fa39b41b9e565}} 
+\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}!get\+\_\+gamma@{get\+\_\+gamma}}
+\index{get\+\_\+gamma@{get\+\_\+gamma}!Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+\subsubsection{\texorpdfstring{get\+\_\+gamma()}{get\_gamma()}}
+{\footnotesize\ttfamily float Rendering\+Context\+Impl\+::get\+\_\+gamma (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the target gamma \mbox{\Hypertarget{struct_rendering_context_impl_a5177f69850820b3b44dabf24970fc0dd}\label{struct_rendering_context_impl_a5177f69850820b3b44dabf24970fc0dd}} 
+\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}!get\+\_\+host\+\_\+mesh@{get\+\_\+host\+\_\+mesh}}
+\index{get\+\_\+host\+\_\+mesh@{get\+\_\+host\+\_\+mesh}!Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+\subsubsection{\texorpdfstring{get\+\_\+host\+\_\+mesh()}{get\_host\_mesh()}}
+{\footnotesize\ttfamily \hyperlink{class_mesh_storage}{Mesh\+Storage}\& Rendering\+Context\+Impl\+::get\+\_\+host\+\_\+mesh (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the scene\textquotesingle{}s host-\/side mesh \mbox{\Hypertarget{struct_rendering_context_impl_a5ec508e02415e7aa656a2acc1cb64036}\label{struct_rendering_context_impl_a5ec508e02415e7aa656a2acc1cb64036}} 
+\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}!get\+\_\+host\+\_\+texture\+\_\+views@{get\+\_\+host\+\_\+texture\+\_\+views}}
+\index{get\+\_\+host\+\_\+texture\+\_\+views@{get\+\_\+host\+\_\+texture\+\_\+views}!Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+\subsubsection{\texorpdfstring{get\+\_\+host\+\_\+texture\+\_\+views()}{get\_host\_texture\_views()}}
+{\footnotesize\ttfamily \hyperlink{struct_mip_map_view}{Mip\+Map\+View}$\ast$ Rendering\+Context\+Impl\+::get\+\_\+host\+\_\+texture\+\_\+views (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the scene\textquotesingle{}s host-\/side textures \mbox{\Hypertarget{struct_rendering_context_impl_a5190f91ce9171181e4facc2200d22476}\label{struct_rendering_context_impl_a5190f91ce9171181e4facc2200d22476}} 
+\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}!get\+\_\+host\+\_\+textures@{get\+\_\+host\+\_\+textures}}
+\index{get\+\_\+host\+\_\+textures@{get\+\_\+host\+\_\+textures}!Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+\subsubsection{\texorpdfstring{get\+\_\+host\+\_\+textures()}{get\_host\_textures()}}
+{\footnotesize\ttfamily std\+::vector$<$Host\+Mip\+Map\+Storage\+Ptr$>$\& Rendering\+Context\+Impl\+::get\+\_\+host\+\_\+textures (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the scene\textquotesingle{}s host-\/side textures \mbox{\Hypertarget{struct_rendering_context_impl_a4bcf377c3712cba875dea054d6c106ef}\label{struct_rendering_context_impl_a4bcf377c3712cba875dea054d6c106ef}} 
+\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}!get\+\_\+mesh\+\_\+lights@{get\+\_\+mesh\+\_\+lights}}
+\index{get\+\_\+mesh\+\_\+lights@{get\+\_\+mesh\+\_\+lights}!Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+\subsubsection{\texorpdfstring{get\+\_\+mesh\+\_\+lights()}{get\_mesh\_lights()}}
+{\footnotesize\ttfamily \hyperlink{struct_mesh_lights_storage}{Mesh\+Lights\+Storage}\& Rendering\+Context\+Impl\+::get\+\_\+mesh\+\_\+lights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the scene\textquotesingle{}s device-\/side mesh emitters \mbox{\Hypertarget{struct_rendering_context_impl_ab124c479feb26e431288df7fc20804a2}\label{struct_rendering_context_impl_ab124c479feb26e431288df7fc20804a2}} 
+\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}!get\+\_\+renderer@{get\+\_\+renderer}}
+\index{get\+\_\+renderer@{get\+\_\+renderer}!Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+\subsubsection{\texorpdfstring{get\+\_\+renderer()}{get\_renderer()}}
+{\footnotesize\ttfamily \hyperlink{struct_renderer_interface}{Renderer\+Interface}$\ast$ Rendering\+Context\+Impl\+::get\+\_\+renderer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the renderer \mbox{\Hypertarget{struct_rendering_context_impl_a691288ce177e1411abfcc6589d47e788}\label{struct_rendering_context_impl_a691288ce177e1411abfcc6589d47e788}} 
+\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}!get\+\_\+res@{get\+\_\+res}}
+\index{get\+\_\+res@{get\+\_\+res}!Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+\subsubsection{\texorpdfstring{get\+\_\+res()}{get\_res()}}
+{\footnotesize\ttfamily uint2 Rendering\+Context\+Impl\+::get\+\_\+res (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the target resolution \mbox{\Hypertarget{struct_rendering_context_impl_a4bed878e13b19b2193983682499a6dc2}\label{struct_rendering_context_impl_a4bed878e13b19b2193983682499a6dc2}} 
+\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}!get\+\_\+rt\+\_\+context@{get\+\_\+rt\+\_\+context}}
+\index{get\+\_\+rt\+\_\+context@{get\+\_\+rt\+\_\+context}!Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+\subsubsection{\texorpdfstring{get\+\_\+rt\+\_\+context()}{get\_rt\_context()}}
+{\footnotesize\ttfamily \hyperlink{struct_r_t_context}{R\+T\+Context}$\ast$ Rendering\+Context\+Impl\+::get\+\_\+rt\+\_\+context (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the ray tracing context \mbox{\Hypertarget{struct_rendering_context_impl_a6ed8abe2a35f936c642254279c635a45}\label{struct_rendering_context_impl_a6ed8abe2a35f936c642254279c635a45}} 
+\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}!init@{init}}
+\index{init@{init}!Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void Rendering\+Context\+Impl\+::init (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+initialize the renderer \mbox{\Hypertarget{struct_rendering_context_impl_a36ba5e435c947a71fd5cb4a98f3375fc}\label{struct_rendering_context_impl_a36ba5e435c947a71fd5cb4a98f3375fc}} 
+\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}!load\+\_\+plugin@{load\+\_\+plugin}}
+\index{load\+\_\+plugin@{load\+\_\+plugin}!Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+\subsubsection{\texorpdfstring{load\+\_\+plugin()}{load\_plugin()}}
+{\footnotesize\ttfamily uint32 Rendering\+Context\+Impl\+::load\+\_\+plugin (\begin{DoxyParamCaption}\item[{const char $\ast$}]{plugin\+\_\+name }\end{DoxyParamCaption})}
+
+load a plugin \mbox{\Hypertarget{struct_rendering_context_impl_af5083af72cc3e226381c4b2a5562375a}\label{struct_rendering_context_impl_af5083af72cc3e226381c4b2a5562375a}} 
+\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}!multiply\+\_\+frame@{multiply\+\_\+frame}}
+\index{multiply\+\_\+frame@{multiply\+\_\+frame}!Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+\subsubsection{\texorpdfstring{multiply\+\_\+frame()}{multiply\_frame()}}
+{\footnotesize\ttfamily void Rendering\+Context\+Impl\+::multiply\+\_\+frame (\begin{DoxyParamCaption}\item[{const float}]{scale }\end{DoxyParamCaption})}
+
+rescale the output framebuffer by a constant \mbox{\Hypertarget{struct_rendering_context_impl_ad709ac4ebdc451032743aef6be0f99d6}\label{struct_rendering_context_impl_ad709ac4ebdc451032743aef6be0f99d6}} 
+\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}!register\+\_\+renderer@{register\+\_\+renderer}}
+\index{register\+\_\+renderer@{register\+\_\+renderer}!Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+\subsubsection{\texorpdfstring{register\+\_\+renderer()}{register\_renderer()}}
+{\footnotesize\ttfamily uint32 Rendering\+Context\+Impl\+::register\+\_\+renderer (\begin{DoxyParamCaption}\item[{const char $\ast$}]{name,  }\item[{Renderer\+Factory\+Function}]{factory }\end{DoxyParamCaption})}
+
+register a new rendering interface type \mbox{\Hypertarget{struct_rendering_context_impl_aaf8b4f561e0beee260fbccddece3d96d}\label{struct_rendering_context_impl_aaf8b4f561e0beee260fbccddece3d96d}} 
+\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}!render@{render}}
+\index{render@{render}!Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+\subsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void Rendering\+Context\+Impl\+::render (\begin{DoxyParamCaption}\item[{const uint32}]{instance }\end{DoxyParamCaption})}
+
+render a frame
+
+
+\begin{DoxyParams}{Parameters}
+{\em instance} & the sequence instance / frame number in a progressive render \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{struct_rendering_context_impl_a6481f4a2884fda739feecf503a7b9266}\label{struct_rendering_context_impl_a6481f4a2884fda739feecf503a7b9266}} 
+\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}!res@{res}}
+\index{res@{res}!Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+\subsubsection{\texorpdfstring{res()}{res()}}
+{\footnotesize\ttfamily uint2 Rendering\+Context\+Impl\+::res (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the current output resolution \mbox{\Hypertarget{struct_rendering_context_impl_a12645d5a60a56769cd816a3e4733687b}\label{struct_rendering_context_impl_a12645d5a60a56769cd816a3e4733687b}} 
+\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}!rescale\+\_\+frame@{rescale\+\_\+frame}}
+\index{rescale\+\_\+frame@{rescale\+\_\+frame}!Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+\subsubsection{\texorpdfstring{rescale\+\_\+frame()}{rescale\_frame()}}
+{\footnotesize\ttfamily void Rendering\+Context\+Impl\+::rescale\+\_\+frame (\begin{DoxyParamCaption}\item[{const uint32}]{instance }\end{DoxyParamCaption})}
+
+rescale the output framebuffer by n/(n-\/1)
+
+
+\begin{DoxyParams}{Parameters}
+{\em instance} & the sequence instance / frame number in a progressive render, used for rescaling \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{struct_rendering_context_impl_a56fb48c6ec74446e25a8c3cc95a291c7}\label{struct_rendering_context_impl_a56fb48c6ec74446e25a8c3cc95a291c7}} 
+\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}!update\+\_\+model@{update\+\_\+model}}
+\index{update\+\_\+model@{update\+\_\+model}!Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+\subsubsection{\texorpdfstring{update\+\_\+model()}{update\_model()}}
+{\footnotesize\ttfamily void Rendering\+Context\+Impl\+::update\+\_\+model (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+update the internal data-\/structures (e.\+g. B\+V\+Hs) associated to the geometry \mbox{\Hypertarget{struct_rendering_context_impl_aa6239f554359fcd6fb8c52343ef6e8ab}\label{struct_rendering_context_impl_aa6239f554359fcd6fb8c52343ef6e8ab}} 
+\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}!update\+\_\+variances@{update\+\_\+variances}}
+\index{update\+\_\+variances@{update\+\_\+variances}!Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+\subsubsection{\texorpdfstring{update\+\_\+variances()}{update\_variances()}}
+{\footnotesize\ttfamily void Rendering\+Context\+Impl\+::update\+\_\+variances (\begin{DoxyParamCaption}\item[{const uint32}]{instance }\end{DoxyParamCaption})}
+
+update the variance estimates
+
+
+\begin{DoxyParams}{Parameters}
+{\em instance} & the sequence instance / frame number in a progressive render, used for rescaling \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{struct_rendering_context_impl_a0c673e0e6bc116a9c035b4ae90973036}\label{struct_rendering_context_impl_a0c673e0e6bc116a9c035b4ae90973036}} 
+\index{Rendering\+Context\+Impl@{Rendering\+Context\+Impl}!view@{view}}
+\index{view@{view}!Rendering\+Context\+Impl@{Rendering\+Context\+Impl}}
+\subsubsection{\texorpdfstring{view()}{view()}}
+{\footnotesize\ttfamily \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} Rendering\+Context\+Impl\+::view (\begin{DoxyParamCaption}\item[{const uint32}]{instance }\end{DoxyParamCaption})}
+
+return a view of the renderer 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/renderer\+\_\+impl.\+h\end{DoxyCompactItemize}

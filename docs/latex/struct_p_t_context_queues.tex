@@ -1,0 +1,35 @@
+\hypertarget{struct_p_t_context_queues}{}\section{P\+T\+Context\+Queues Struct Reference}
+\label{struct_p_t_context_queues}\index{P\+T\+Context\+Queues@{P\+T\+Context\+Queues}}
+
+
+\subsection{Detailed description}
+A class encapsulating all the queues needed by the \hyperlink{group___p_t_lib}{P\+T\+Lib} module wavefront scheduler kernels, and defining the basic \hyperlink{_p_t_lib_page_TPTContext}{T\+P\+T\+Context} trace methods 
+
+{\ttfamily \#include $<$pathtracer\+\_\+kernels.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_p_t_context_queues_aa9fc6e82db6ce42635aad1dd8bbe00d2}\label{struct_p_t_context_queues_aa9fc6e82db6ce42635aad1dd8bbe00d2}} 
+{\footnotesize template$<$typename T\+P\+T\+Vertex\+Processor $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE void {\bfseries trace\+\_\+ray} (T\+P\+T\+Vertex\+Processor \&\+\_\+vertex\+\_\+processor, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&\+\_\+renderer, const \hyperlink{union_pixel_info}{Pixel\+Info} \+\_\+pixel, const \hyperlink{struct_masked_ray}{Masked\+Ray} \+\_\+ray, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector4f} \+\_\+weight, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} \+\_\+cone=\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f}(0), const uint32 \+\_\+vertex\+\_\+info=uint32(-\/1), const uint32 \+\_\+nee\+\_\+slot=uint32(-\/1))
+\item 
+\mbox{\Hypertarget{struct_p_t_context_queues_ac58a4fe68d7ebc8805218c22a4017f30}\label{struct_p_t_context_queues_ac58a4fe68d7ebc8805218c22a4017f30}} 
+{\footnotesize template$<$typename T\+P\+T\+Vertex\+Processor $>$ }\\F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE void {\bfseries trace\+\_\+shadow\+\_\+ray} (T\+P\+T\+Vertex\+Processor \&\+\_\+vertex\+\_\+processor, \hyperlink{struct_rendering_context_view}{Rendering\+Context\+View} \&\+\_\+renderer, const \hyperlink{union_pixel_info}{Pixel\+Info} \+\_\+pixel, const \hyperlink{struct_masked_ray}{Masked\+Ray} \+\_\+ray, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \+\_\+weight, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \+\_\+weight\+\_\+d, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} \+\_\+weight\+\_\+g, const uint32 \+\_\+vertex\+\_\+info=uint32(-\/1), const uint32 \+\_\+nee\+\_\+slot=uint32(-\/1), const uint32 \+\_\+nee\+\_\+sample=uint32(-\/1))
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_p_t_context_queues_abd67af1117a145256e9f1ddeab981c52}\label{struct_p_t_context_queues_abd67af1117a145256e9f1ddeab981c52}} 
+\hyperlink{struct_p_t_ray_queue}{P\+T\+Ray\+Queue} {\bfseries in\+\_\+queue}
+\item 
+\mbox{\Hypertarget{struct_p_t_context_queues_a261be8f0db1550539ad3afff81fe2ab0}\label{struct_p_t_context_queues_a261be8f0db1550539ad3afff81fe2ab0}} 
+\hyperlink{struct_p_t_ray_queue}{P\+T\+Ray\+Queue} {\bfseries shadow\+\_\+queue}
+\item 
+\mbox{\Hypertarget{struct_p_t_context_queues_abea56162a6ad0052adf0fc597b0f961b}\label{struct_p_t_context_queues_abea56162a6ad0052adf0fc597b0f961b}} 
+\hyperlink{struct_p_t_ray_queue}{P\+T\+Ray\+Queue} {\bfseries scatter\+\_\+queue}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/pathtracer\+\_\+kernels.\+h\end{DoxyCompactItemize}

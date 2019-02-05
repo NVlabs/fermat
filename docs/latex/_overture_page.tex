@@ -1,0 +1,447 @@
+Top\+: \hyperlink{_overture_contents_page}{Contents}
+
+ \begin{DoxyParagraph}{}
+
+\footnotesize \textquotesingle{}Salle de bain, with coffee\textquotesingle{}, based on a \href{http://www.blendswap.com/blends/view/73937}{\tt model} by {\itshape nacimus}
+\normalsize  ~\newline
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Building a physically based renderer is a subject that has already been covered by a couple great books (for example, the fantastic \href{http://www.pbr-book.org}{\tt P\+BR}). Building a high performance, massively parallel renderer is a slightly different topic, that so far has not received much attention. While \hyperlink{group___fermat}{Fermat} doesn\textquotesingle{}t pretend to be a full featured rendering system, it tries to show how to go about writing one. Here, we will try to go a little bit into its details. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Like many books out there, this overture should probably start from the ground up, describing the very basics of geometry on which the renderer is built. Since many books have already covered that subject, however, and as the vector and matrix classes used in Fermat are likely not very different from any of the others, we will just skip that part and jump onto the more interesting, rendering-\/related stuff. As a matter of fact, Fermat itself relies on a separate library for all of those ancillary classes and utilities\+: \hyperlink{cugar_page}{C\+U\+G\+AR}. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The one thing we will need, however, is a short digression into the {\itshape host} and {\itshape device} dichotomy present throughout all of Fermat, which is, mostly, a {\itshape G\+PU} renderer. In order to understand the consequences of this dichotomy, and in particular the one between the host and device memory spaces, you should go straight to this page and come back when you are done with it\+: \hyperlink{_fermat_host_device_page}{Host \& Device}.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+So what is Fermat, exactly? Perhaps, the most concise explanation is that it is a collection of {\itshape path samplers} of various kinds. Like all modern physically based renderers, all of Fermat\textquotesingle{}s internal rendering algorithms follow the same old recipe\+: throw some more or less random numbers, {\itshape sample} more or less {\itshape interesting light paths}, connecting the emitters to the eye of the virtual observer, and calculate and {\itshape average} the radiance that flows through them. This, plus or minus some denoising. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+In fact, the only useful bit of basic geometry we need in order to proceed is the concept of differential vertex geometry needed to represent light path vertices. Fermat employs the following simple representation\+: ~\newline
+
+\begin{DoxyCode}
+\textcolor{comment}{// Vertex geometry.}
+\textcolor{comment}{// }
+\textcolor{comment}{// Encodes the local differential surface geometry at a point, including its tangent, binormal}
+\textcolor{comment}{// and normal, as well the local texture coordinates.}
+\textcolor{comment}{// }
+\textcolor{keyword}{struct }\hyperlink{struct_vertex_geometry}{VertexGeometry}
+\{
+   \hyperlink{structcugar_1_1_vector}{cugar::Vector3f} normal\_s;           \textcolor{comment}{// shading normal}
+   \hyperlink{structcugar_1_1_vector}{cugar::Vector3f} normal\_g;           \textcolor{comment}{// geometric normal}
+   \hyperlink{structcugar_1_1_vector}{cugar::Vector3f} tangent;            \textcolor{comment}{// local tangent}
+   \hyperlink{structcugar_1_1_vector}{cugar::Vector3f} binormal;           \textcolor{comment}{// local binormal}
+
+   \hyperlink{structcugar_1_1_vector}{cugar::Vector3f} position;           \textcolor{comment}{// local position}
+   \textcolor{keywordtype}{float}           padding;            \textcolor{comment}{// some padding}
+   \hyperlink{structcugar_1_1_vector}{cugar::Vector4f} texture\_coords;     \textcolor{comment}{// local texture coordinates (2 sets)}
+   \hyperlink{structcugar_1_1_vector}{cugar::Vector2f} lightmap\_coords;    \textcolor{comment}{// local lightmap coordinates}
+\};
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The next question we need to answer when writing a renderer is\+: how exactly do you sample light paths? That turns out to be the subject of most rendering research of the last 20 years. In fact, if you do not know the basics already, the best possible source of information is still Eric Veach\textquotesingle{}s \href{http://graphics.stanford.edu/papers/veach_thesis/}{\tt master thesis} from 1997, a work of rare and exceptional clarity, that literally laid the groundwork for this entire field. Again, Fermat just tries to summarize a few of the most widely spread and a few of the most recent algorithms, while focusing on doing that {\itshape efficiently}. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Getting to the point where we can actually describe how that is performed will require some time, but overall it all starts from four basic ingredients\+: ~\newline
+
+\begin{DoxyItemize}
+\item the virtual camera,
+\item the Bidirectional Scattering Distribution Function, or {\itshape B\+S\+DF},
+\item the light sources, or {\itshape emitters},
+\item and obviously, the scene geometry, or {\itshape meshes}, 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+And this is exactly what we\textquotesingle{}ll cover in the next few sections.
+\end{DoxyParagraph}
+\hypertarget{_overture_page_MeshesSection}{}\section{The Mesh Geometry}\label{_overture_page_MeshesSection}
+\begin{DoxyParagraph}{}
+If we want to see something in our pictures, we need some geometry for light to bounce against. In order to keep things simple, Fermat supports only one type\+: {\itshape triangle meshes}. The internal representation is the fairly typical one of indexed triangles, where the vertices together with their normals and texture coordinates are given in separate arrays, and yet another array provides the list of triangles as triplets of indices into the vertex and attribute lists. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+In practice it is all encapsulated behind a few interfaces. The first two are the classes reponsible for holding and owning the actual mesh {\itshape storage}, used on the host-\/side of things (i.\+e. on the C\+PU)\+: \hyperlink{class_mesh_storage}{Mesh\+Storage}, to allocate and hold a mesh in host memory, and \hyperlink{class_device_mesh_storage}{Device\+Mesh\+Storage}, to allocate and hold a mesh in device memory (i.\+e. the G\+PU). The third interface, \hyperlink{struct_mesh_view}{Mesh\+View}, is what we call a \hyperlink{_fermat_host_device_page_FermatPlainViewsSection}{view} of the mesh\+: a thin class used to simply access the mesh representation, without actually owning any of its data -\/ in practice, the moral equivalent of a pointer. This is what can be passed to device kernels to retrieve any of the relative information (without the need to dereference an {\itshape actual} pointer, which would require an expensive host memory access). 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Without going into the details of its internals, we can list the free functions which provide access to its raw vertex data\+: ~\newline
+
+\begin{DoxyCode}
+\textcolor{comment}{// helper method to fetch a vertex}
+\textcolor{comment}{//}
+FERMAT\_HOST\_DEVICE FERMAT\_FORCEINLINE
+\textcolor{keyword}{const} MeshView::vertex\_type& \hyperlink{group___mesh_module_ga4b65791b4c323a93e391c4c2e88cd601}{fetch\_vertex}(\textcolor{keyword}{const} \hyperlink{struct_mesh_view}{MeshView}& mesh, \textcolor{keyword}{const} uint32 vertex\_idx
+      );
+
+\textcolor{comment}{// helper method to fetch a normal vertex}
+\textcolor{comment}{//}
+FERMAT\_HOST\_DEVICE FERMAT\_FORCEINLINE
+\textcolor{keyword}{const} MeshView::normal\_type& \hyperlink{group___mesh_module_ga2d3d06537c1b2fc31399190bd353f6e6}{fetch\_normal}(\textcolor{keyword}{const} \hyperlink{struct_mesh_view}{MeshView}& mesh, \textcolor{keyword}{const} uint32 vertex\_idx
+      );
+
+\textcolor{comment}{// helper method to fetch a texture coordinate vertex}
+\textcolor{comment}{//}
+FERMAT\_HOST\_DEVICE FERMAT\_FORCEINLINE
+\textcolor{keyword}{const} MeshView::texture\_coord\_type& \hyperlink{group___mesh_module_gae33ea9281c4276a5132e37c0b1331069}{fetch\_tex\_coord}(\textcolor{keyword}{const} 
+      \hyperlink{struct_mesh_view}{MeshView}& mesh, \textcolor{keyword}{const} uint32 vertex\_idx);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+the functions to access the triangle lists\+: ~\newline
+
+\begin{DoxyCode}
+\textcolor{comment}{// helper method to fetch the vertex indices of a given triangle}
+\textcolor{comment}{//}
+FERMAT\_HOST\_DEVICE FERMAT\_FORCEINLINE
+int3 \hyperlink{group___mesh_module_ga50a8be2a2adb88816865cbd13a5aab57}{load\_vertex\_triangle}(\textcolor{keyword}{const} \textcolor{keywordtype}{int}* triangle\_indices, \textcolor{keyword}{const} uint32 tri\_idx);
+
+\textcolor{comment}{// helper method to fetch the normal indices of a given triangle}
+\textcolor{comment}{//}
+FERMAT\_HOST\_DEVICE FERMAT\_FORCEINLINE
+int3 \hyperlink{group___mesh_module_ga85e3684bd6c76144d9dc00a2b59cf93f}{load\_normal\_triangle}(\textcolor{keyword}{const} \textcolor{keywordtype}{int}* triangle\_indices, \textcolor{keyword}{const} uint32 tri\_idx);
+
+\textcolor{comment}{// helper method to fetch the texture coordinate indices of a given triangle}
+\textcolor{comment}{//}
+FERMAT\_HOST\_DEVICE FERMAT\_FORCEINLINE
+int3 \hyperlink{group___mesh_module_ga347e9722a85a86f87f7d31a63f333dd5}{load\_texture\_triangle}(\textcolor{keyword}{const} \textcolor{keywordtype}{int}* triangle\_indices, \textcolor{keyword}{const} uint32 tri\_idx);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+and the utilities to {\itshape compute} useful information about local triangle geometry\+: ~\newline
+
+\begin{DoxyCode}
+\textcolor{comment}{// return the area of a given primitive}
+\textcolor{comment}{//}
+FERMAT\_HOST\_DEVICE \textcolor{keyword}{inline}
+\textcolor{keywordtype}{float} \hyperlink{group___mesh_module_ga516a7610fe394a18d5083aa21f6cda75}{prim\_area}(\textcolor{keyword}{const} \hyperlink{struct_mesh_view}{MeshView}& mesh, \textcolor{keyword}{const} uint32 tri\_id);
+
+\textcolor{comment}{// return the differential geometry of a given point on the mesh, specified by a (prim\_id, uv) pair}
+\textcolor{comment}{//}
+FERMAT\_HOST\_DEVICE \textcolor{keyword}{inline}
+\textcolor{keywordtype}{void} \hyperlink{group___mesh_module_ga4fa88a02d11b01ea12e6a602b3e3e5c2}{setup\_differential\_geometry}(
+       \textcolor{keyword}{const} \hyperlink{struct_mesh_view}{MeshView}&         mesh,
+       \textcolor{keyword}{const} \hyperlink{struct_vertex_geometry_id}{VertexGeometryId}  v,
+       \hyperlink{struct_vertex_geometry}{VertexGeometry}*         geom,
+       \textcolor{keywordtype}{float}*                  pdf = 0);
+
+\textcolor{comment}{// return the interpolated position at a given point on the mesh, specified by a (prim\_id, uv) pair}
+\textcolor{comment}{//}
+FERMAT\_HOST\_DEVICE \textcolor{keyword}{inline}
+\hyperlink{structcugar_1_1_vector}{cugar::Vector3f} \hyperlink{group___mesh_module_ga9eea5d10bfff40b7f050910a97212189}{interpolate\_position}(\textcolor{keyword}{const} 
+      \hyperlink{struct_mesh_view}{MeshView}& mesh, \textcolor{keyword}{const} \hyperlink{struct_vertex_geometry_id}{VertexGeometryId} v, \textcolor{keywordtype}{float}* pdf = 0);
+
+\textcolor{comment}{// return the interpolated normal at a given point on the mesh, specified by a (prim\_id, uv) pair}
+\textcolor{comment}{//}
+FERMAT\_HOST\_DEVICE \textcolor{keyword}{inline}
+\hyperlink{structcugar_1_1_vector}{cugar::Vector3f} \hyperlink{group___mesh_module_gac16c0ec581833a6cf3f821d0edeb698b}{interpolate\_normal}(\textcolor{keyword}{const} 
+      \hyperlink{struct_mesh_view}{MeshView}& mesh, \textcolor{keyword}{const} \hyperlink{struct_vertex_geometry_id}{VertexGeometryId} v, \textcolor{keyword}{const} \textcolor{keywordtype}{float} v);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+A complete list of the available functions can be found in the \hyperlink{group___mesh_module}{Mesh\+Module}. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Notice how each point on the mesh surface is addressed by a small data structure, that compactly encodes all the necessary information needed to uniquely identify the point\+: ~\newline
+
+\begin{DoxyCode}
+\textcolor{comment}{// }
+\textcolor{comment}{// Encodes the minimal amount of information needed to represent a point on a surface,}
+\textcolor{comment}{// or a <i>hit</i> in ray tracing parlance}
+\textcolor{comment}{// }
+\textcolor{keyword}{struct }\hyperlink{struct_vertex_geometry_id}{VertexGeometryId}
+\{
+   \hyperlink{structcugar_1_1_vector}{cugar::Vector2f} uv;
+   uint32          prim\_id;
+
+   FERMAT\_HOST\_DEVICE
+   \hyperlink{struct_vertex_geometry_id}{VertexGeometryId}() \{\}
+
+   FERMAT\_HOST\_DEVICE
+   \hyperlink{struct_vertex_geometry_id}{VertexGeometryId}(\textcolor{keyword}{const} uint32 \_prim\_id, \textcolor{keyword}{const} \textcolor{keywordtype}{float} \_u, \textcolor{keyword}{const} \textcolor{keywordtype}{float} \_v) : prim\_id(
+      \_prim\_id), uv(\_u, \_v) \{\}
+
+   FERMAT\_HOST\_DEVICE
+   \hyperlink{struct_vertex_geometry_id}{VertexGeometryId}(\textcolor{keyword}{const} uint32 \_prim\_id, \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector2f} \_uv) : 
+      prim\_id(\_prim\_id), uv(\_uv) \{\}
+\};
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+In fact, one of the tricks to high performance rendering is tightly packing {\itshape all} information, so as to consume as little bandwith and on-\/chip memory as possible, and this is just one of the many examples you\textquotesingle{}ll find in Fermat.
+\end{DoxyParagraph}
+\hypertarget{_overture_page_CameraSection}{}\section{The Camera Model}\label{_overture_page_CameraSection}
+\begin{DoxyParagraph}{}
+Simulating a realistic camera accurately (as needed for example to match live action film) can by itself be a rather complex subject. Currently, Fermat doesn\textquotesingle{}t attempt to do that, and simply models an infinitely thin pinhole camera. So simple, in fact, that it can be described by a handful of vectors and a single scalar\+: ~\newline
+
+\begin{DoxyCode}
+\textcolor{keyword}{struct }\hyperlink{struct_camera}{Camera}
+\{
+    float3  eye;    \textcolor{comment}{// the eye position}
+    float3  aim;    \textcolor{comment}{// the aim position}
+    float3  up;     \textcolor{comment}{// a vector specifying where the upwards direction is relative to the camera frame}
+    float3  dx;     \textcolor{comment}{// a vector specifying where the right is relative to the camera frame}
+    \textcolor{keywordtype}{float}   fov;    \textcolor{comment}{// the field of view}
+\};
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Together with the camera itself, Fermat also provides a utility \hyperlink{struct_camera_sampler}{Camera\+Sampler} class\+: ~\newline
+
+\begin{DoxyCode}
+\textcolor{comment}{// A sampler for the pinhole camera model}
+\textcolor{comment}{//}
+\textcolor{keyword}{struct }\hyperlink{struct_camera_sampler}{CameraSampler}
+\{
+   \textcolor{comment}{// empty constructor}
+   \textcolor{comment}{//}
+   FERMAT\_HOST\_DEVICE
+   \hyperlink{struct_camera_sampler_a50332d884a007ab1ffcb05215af5d92a}{CameraSampler}() \{\}
+
+   FERMAT\_HOST\_DEVICE
+   \hyperlink{struct_camera_sampler_a50332d884a007ab1ffcb05215af5d92a}{CameraSampler}(\textcolor{keyword}{const} \hyperlink{struct_camera}{Camera}& camera, \textcolor{keyword}{const} \textcolor{keywordtype}{float} aspect\_ratio);
+
+   \textcolor{comment}{// sample a direction from normalized device coordinates (NDC) in [0,1]^2}
+   \textcolor{comment}{//}
+   FERMAT\_HOST\_DEVICE
+   \hyperlink{structcugar_1_1_vector}{cugar::Vector3f} \hyperlink{struct_camera_sampler_ac502e1699c99c595b773b1419225fe32}{sample\_direction}(\textcolor{keyword}{const} 
+      \hyperlink{structcugar_1_1_vector}{cugar::Vector2f} ndc) \textcolor{keyword}{const};
+
+   \textcolor{comment}{// compute the direction pdf}
+   \textcolor{comment}{//}
+   \textcolor{comment}{// \(\backslash\)param dir               the given direction}
+   \textcolor{comment}{// \(\backslash\)param projected         whether to return the pdf in projected solid angle or solid angle measure}
+   FERMAT\_HOST\_DEVICE
+   \textcolor{keywordtype}{float} \hyperlink{struct_camera_sampler_a0edd94ccee6da3180f13845d189bc758}{pdf}(\textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f} direction, \textcolor{keyword}{const} \textcolor{keywordtype}{bool} projected = \textcolor{keyword}{false}) \textcolor{keyword}{const};
+
+   \textcolor{comment}{// invert the camera direction sampler}
+   \textcolor{comment}{//}
+   \textcolor{comment}{// \(\backslash\)param dir               the given direction}
+   \textcolor{comment}{// \(\backslash\)return                  the NDC coordinates corresponding to the given direction}
+   FERMAT\_HOST\_DEVICE
+   \hyperlink{structcugar_1_1_vector}{cugar::Vector2f} \hyperlink{struct_camera_sampler_a347623323319a7111f933d4af6ac2d19}{invert}(\textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f} dir) \textcolor{keyword}{const};
+
+   \textcolor{comment}{// invert the camera direction sampler and compute its projected solid angle pdf}
+   \textcolor{comment}{//}
+   \textcolor{comment}{// \(\backslash\)param dir               the given direction}
+   \textcolor{comment}{// \(\backslash\)param projected         whether to return the pdf in projected solid angle or solid angle measure}
+   \textcolor{comment}{// \(\backslash\)return                  the NDC coordinates corresponding to the given direction}
+   FERMAT\_HOST\_DEVICE
+   \hyperlink{structcugar_1_1_vector}{cugar::Vector2f} \hyperlink{struct_camera_sampler_a347623323319a7111f933d4af6ac2d19}{invert}(\textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f} dir, \textcolor{keywordtype}{float}* pdf\_proj) \textcolor{keyword}{
+      const};
+
+   \hyperlink{structcugar_1_1_vector}{cugar::Vector3f} U;                      \textcolor{comment}{// camera space +X axis in world coords}
+   \hyperlink{structcugar_1_1_vector}{cugar::Vector3f} V;                      \textcolor{comment}{// camera space +Y axis in world coords}
+   \hyperlink{structcugar_1_1_vector}{cugar::Vector3f} W;                      \textcolor{comment}{// camera space +Z axis in world coords}
+   \textcolor{keywordtype}{float}           W\_len;                  \textcolor{comment}{// precomputed length of the W vector}
+   \textcolor{keywordtype}{float}           square\_focal\_length;    \textcolor{comment}{// square focal length}
+\};
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\hypertarget{_overture_page_BSDFSection}{}\section{The B\+S\+D\+F Model}\label{_overture_page_BSDFSection}
+\begin{DoxyParagraph}{}
+Again, a whole book could be easily dedicated to the subject of properly simulating realistic B\+S\+D\+Fs. Fermat does take some shortcuts there, and focuses on a single, monolithic, layered B\+S\+DF model. It is {\itshape very} simple, and yet expressive enough to represent a decent spectrum of the materials we see in everday\textquotesingle{}s life. It contains four basic components\+: 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+
+\begin{DoxyItemize}
+\item a diffuse reflection component
+\item a diffuse transmission component
+\item a glossy reflection component layered on top of the diffuse layer
+\item a glossy transmission component layered on top of the diffuse layer 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The diffuse components are purely Lambertian, while the glossy components are based on the G\+GX model with Smith\textquotesingle{}s joint masking-\/shadowing function described in\+: \begin{quote}
+\mbox{[}Heitz 2014, \char`\"{}\+Understanding the Masking-\/\+Shadowing Function in Microfacet-\/\+Based B\+R\+D\+Fs\char`\"{}\mbox{]} \end{quote}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The B\+S\+DF uses Fresnel coefficients to determine how much light undergoes glossy reflection, and how much undergoes transmission. Part of the radiance transmitted from the upper glossy layer undergoes diffuse scattering. The interaction between the glossy layer and the underlying diffuse layer is modeled in a simplified manner, as if the layer was infinitely thin and the diffusely reflected particles were not interacting again with the upper layer. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Its basic interface looks like this\+: ~\newline
+
+\begin{DoxyCode}
+\textcolor{keyword}{struct }\hyperlink{struct_bsdf}{Bsdf}
+\{
+   \textcolor{comment}{// component type bitmasks}
+   \textcolor{comment}{//}
+   \textcolor{keyword}{enum} \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{ComponentType}
+   \{
+       kAbsorption             = 0u,
+
+       kDiffuseReflection      = 0x1u,
+       kDiffuseTransmission    = 0x2u,
+       kGlossyReflection       = 0x4u,
+       kGlossyTransmission     = 0x8u,
+
+       kDiffuseMask            = 0x3u,
+       kGlossyMask             = 0xCu,
+
+       kReflectionMask         = 0x5u,
+       kTransmissionMask       = 0xAu,
+       kAllComponents          = 0xFFu
+   \};
+
+   \textcolor{keyword}{typedef} \hyperlink{structcugar_1_1_lambert_trans_bsdf}{cugar::LambertTransBsdf} diffuse\_trans\_component;
+   \textcolor{keyword}{typedef} \hyperlink{structcugar_1_1_lambert_bsdf}{cugar::LambertBsdf}      diffuse\_component;
+   \textcolor{keyword}{typedef} \hyperlink{structcugar_1_1_g_g_x_smith_bsdf}{cugar::GGXSmithBsdf}     glossy\_component;
+
+   \textcolor{comment}{// evaluate the BSDF f(V,L)}
+   \textcolor{comment}{//}
+   \textcolor{comment}{// \(\backslash\)param geometry              the local differential geometry}
+   \textcolor{comment}{// \(\backslash\)param in                    the incoming direction}
+   \textcolor{comment}{// \(\backslash\)param out                   the outgoing direction}
+   \textcolor{comment}{// \(\backslash\)param components            the components to consider}
+   FERMAT\_FORCEINLINE FERMAT\_HOST\_DEVICE
+   \hyperlink{structcugar_1_1_vector}{cugar::Vector3f} \hyperlink{struct_bsdf_a58f402b71508cb422ebe3f0e628fd2fd}{f}(
+       \textcolor{keyword}{const} \hyperlink{structcugar_1_1_differential_geometry}{cugar::DifferentialGeometry}&  geometry,
+       \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}               in,
+       \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}               out,
+       \textcolor{keyword}{const} \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{ComponentType}                 components) \textcolor{keyword}{const}
+
+   \textcolor{comment}{// evaluate the total projected probability density p(V,L) = p(L|V)}
+   \textcolor{comment}{//}
+   \textcolor{comment}{// \(\backslash\)param geometry              the local differential geometry}
+   \textcolor{comment}{// \(\backslash\)param in                    the incoming direction}
+   \textcolor{comment}{// \(\backslash\)param out                   the outgoing direction}
+   \textcolor{comment}{// \(\backslash\)param measure               the spherical measure to use}
+   \textcolor{comment}{// \(\backslash\)param RR                    indicate whether to use Russian-Roulette or not}
+   \textcolor{comment}{// \(\backslash\)param components            the components to consider}
+   FERMAT\_FORCEINLINE FERMAT\_HOST\_DEVICE
+   \textcolor{keywordtype}{float} \hyperlink{struct_bsdf_a88c3b1f89a3248d4b2684fd402a59ced}{p}(
+       \textcolor{keyword}{const} \hyperlink{structcugar_1_1_differential_geometry}{cugar::DifferentialGeometry}&  geometry,
+       \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}               in,
+       \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}               out,
+       \textcolor{keyword}{const} cugar::SphericalMeasure       measure,
+       \textcolor{keyword}{const} \textcolor{keywordtype}{bool}                          RR,
+       \textcolor{keyword}{const} \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{ComponentType}                 components) \textcolor{keyword}{const}
+
+   \textcolor{comment}{// sample an outgoing direction}
+   \textcolor{comment}{//}
+   \textcolor{comment}{// \(\backslash\)param geometry              the local differential geometry}
+   \textcolor{comment}{// \(\backslash\)param z                     the incoming direction}
+   \textcolor{comment}{// \(\backslash\)param in                    the incoming direction}
+   \textcolor{comment}{// \(\backslash\)param out\_comp              the output component}
+   \textcolor{comment}{// \(\backslash\)param out                   the outgoing direction}
+   \textcolor{comment}{// \(\backslash\)param out\_p                 the output solid angle pdf}
+   \textcolor{comment}{// \(\backslash\)param out\_p\_proj            the output projected solid angle pdf}
+   \textcolor{comment}{// \(\backslash\)param out\_g                 the output sample value = f/p\_proj}
+   \textcolor{comment}{// \(\backslash\)param RR                    indicate whether to use Russian-Roulette or not}
+   \textcolor{comment}{// \(\backslash\)param evaluate\_full\_bsdf    indicate whether to evaluate the full BSDF, or just an unbiased estimate}
+   \textcolor{comment}{// \(\backslash\)param components            the components to consider}
+   FERMAT\_HOST\_DEVICE FERMAT\_FORCEINLINE
+   \textcolor{keywordtype}{bool} \hyperlink{struct_bsdf_ac4ce2cad14795e1ff7f82ed10990ba3e}{sample}(
+       \textcolor{keyword}{const} \hyperlink{structcugar_1_1_differential_geometry}{cugar::DifferentialGeometry}&  geometry,
+       \textcolor{keyword}{const} \textcolor{keywordtype}{float}                         z[3],
+       \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}               in,
+       \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{ComponentType}&                      out\_comp,
+       \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&                    out,
+       \textcolor{keywordtype}{float}&                              out\_p,
+       \textcolor{keywordtype}{float}&                              out\_p\_proj,
+       \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&                    out\_g,
+       \textcolor{keywordtype}{bool}                                RR,
+       \textcolor{keywordtype}{bool}                                evaluate\_full\_bsdf,
+       \textcolor{keyword}{const} \hyperlink{struct_bsdf_a5f7db6f81220ed9ee6da109d6eb5b585}{ComponentType}                 components) \textcolor{keyword}{const}
+\};
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+In the actual \hyperlink{struct_bsdf}{Bsdf} class, a few more methods are present to calculate f() and p() at the same time, and to calculate both component-\/by-\/component, all in one go, as well as auxiliary methods to compute the Fresnel weights associated with each layer.
+\end{DoxyParagraph}
+\hypertarget{_overture_page_LightSection}{}\section{The Light Source Model}\label{_overture_page_LightSection}
+\begin{DoxyParagraph}{}
+In nature, light sources are just emissive geometry. Fermat supports both emissive geometry and a bunch of other {\itshape primitive} light sources, including some that have a singular distribution (e.\+g. directional lights), or others that provide good analytic sampling algorithms. All of them respond to a single \hyperlink{struct_light}{Light} interface that provides basic methods to point-\/sample the light source surface, and query the Emission Distribution Function, or {\itshape E\+DF}, at each point. The basic interface is the following\+: ~\newline
+
+\begin{DoxyCode}
+\textcolor{keyword}{struct }\hyperlink{struct_light}{Light}
+\{
+   \textcolor{comment}{// sample a point on the light source, given 3 random numbers}
+   \textcolor{comment}{//}
+   \textcolor{comment}{// \(\backslash\)param Z             the input random numbers}
+   \textcolor{comment}{// \(\backslash\)param prim\_id       the output primitive index, in case the light is made of a mesh}
+   \textcolor{comment}{// \(\backslash\)param uv            the output uv coordinates on the sampled primitive}
+   \textcolor{comment}{// \(\backslash\)param geom          the output sample's differential geometry}
+   \textcolor{comment}{// \(\backslash\)param pdf           the output sample's area pdf}
+   \textcolor{comment}{// \(\backslash\)param edf           the output sample's EDF}
+   \textcolor{comment}{//}
+   \textcolor{comment}{// \(\backslash\)return true iff the pdf is singular}
+   FERMAT\_HOST\_DEVICE
+   \textcolor{keywordtype}{bool} \hyperlink{group___lights_module_ga67cc240bcda4b08efd26c8727144bf16}{sample}(
+       \textcolor{keyword}{const} \textcolor{keywordtype}{float}*        Z,
+       uint32\_t*           prim\_id,
+       \hyperlink{structcugar_1_1_vector}{cugar::Vector2f}*    uv,
+       \hyperlink{struct_vertex_geometry}{VertexGeometry}*     geom,
+       \textcolor{keywordtype}{float}*              pdf,
+       \hyperlink{struct_edf}{Edf}*                edf) \textcolor{keyword}{const};
+
+   \textcolor{comment}{// sample a point on the light source given a selected shading point (or receiver)}
+   \textcolor{comment}{//}
+   \textcolor{comment}{// \(\backslash\)param p             the input shading point}
+   \textcolor{comment}{// \(\backslash\)param Z             the input random numbers}
+   \textcolor{comment}{// \(\backslash\)param prim\_id       the output primitive index, in case the light is made of a mesh}
+   \textcolor{comment}{// \(\backslash\)param uv            the output uv coordinates on the sampled primitive}
+   \textcolor{comment}{// \(\backslash\)param geom          the output sample's differential geometry}
+   \textcolor{comment}{// \(\backslash\)param pdf           the output sample's area pdf}
+   \textcolor{comment}{// \(\backslash\)param edf           the output sample's EDF}
+   \textcolor{comment}{//}
+   \textcolor{comment}{// \(\backslash\)return true iff the pdf is singular}
+   FERMAT\_HOST\_DEVICE
+   \textcolor{keywordtype}{bool} \hyperlink{group___lights_module_ga67cc240bcda4b08efd26c8727144bf16}{sample}(
+       \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}   p,
+       \textcolor{keyword}{const} \textcolor{keywordtype}{float}*            Z,
+       uint32\_t*               prim\_id,
+       \hyperlink{structcugar_1_1_vector}{cugar::Vector2f}*        uv,
+       \hyperlink{struct_vertex_geometry}{VertexGeometry}*         geom,
+       \textcolor{keywordtype}{float}*                  pdf,
+       \hyperlink{struct_edf}{Edf}*                    edf) \textcolor{keyword}{const};
+
+   \textcolor{comment}{// intersect the given ray with the light source}
+   \textcolor{comment}{//}
+   \textcolor{comment}{// \(\backslash\)param ray           the input ray}
+   \textcolor{comment}{// \(\backslash\)param uv            the output uv coordinates on the sampled primitive}
+   \textcolor{comment}{// \(\backslash\)param t             the output ray intersection distance}
+   \textcolor{comment}{//}
+   FERMAT\_HOST\_DEVICE
+   \textcolor{keywordtype}{void} \hyperlink{group___lights_module_ga6a7452cab8b733d48174016b845f8d53}{intersect}(\textcolor{keyword}{const} \hyperlink{struct_ray}{Ray} ray, float2* uv, \textcolor{keywordtype}{float}* t) \textcolor{keyword}{const};
+
+   \textcolor{comment}{// map a (prim,uv) pair to a surface element and compute the corresponding edf/pdf}
+   \textcolor{comment}{//}
+   \textcolor{comment}{// \(\backslash\)param prim\_id       the input primitive index, in case the light is made of a mesh}
+   \textcolor{comment}{// \(\backslash\)param uv            the input uv coordinates on the sampled primitive}
+   \textcolor{comment}{// \(\backslash\)param geom          the output sample's differential geometry}
+   \textcolor{comment}{// \(\backslash\)param pdf           the output sample's area pdf}
+   \textcolor{comment}{// \(\backslash\)param edf           the output sample's EDF}
+   \textcolor{comment}{//}
+   FERMAT\_HOST\_DEVICE
+   \textcolor{keywordtype}{void} \hyperlink{group___lights_module_gaf14a70f7d23b422f8953bc55d1eade44}{map}(\textcolor{keyword}{const} uint32\_t prim\_id, \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector2f}& uv, 
+      \hyperlink{struct_vertex_geometry}{VertexGeometry}* geom, \textcolor{keywordtype}{float}* pdf, \hyperlink{struct_edf}{Edf}* edf) \textcolor{keyword}{const};
+
+   \textcolor{comment}{// map a (prim,uv) pair and a (precomputed) surface element to the corresponding edf/pdf}
+   \textcolor{comment}{//}
+   \textcolor{comment}{// \(\backslash\)param prim\_id       the input primitive index, in case the light is made of a mesh}
+   \textcolor{comment}{// \(\backslash\)param uv            the input uv coordinates on the sampled primitive}
+   \textcolor{comment}{// \(\backslash\)param geom          the input sample's differential geometry}
+   \textcolor{comment}{// \(\backslash\)param pdf           the output sample's area pdf}
+   \textcolor{comment}{// \(\backslash\)param edf           the output sample's EDF}
+   \textcolor{comment}{//}
+   FERMAT\_HOST\_DEVICE
+   \textcolor{keywordtype}{void} \hyperlink{group___lights_module_gaf14a70f7d23b422f8953bc55d1eade44}{map}(\textcolor{keyword}{const} uint32\_t prim\_id, \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector2f}& uv, \textcolor{keyword}{const} 
+      \hyperlink{struct_vertex_geometry}{VertexGeometry}& geom, \textcolor{keywordtype}{float}* pdf, \hyperlink{struct_edf}{Edf}* edf) \textcolor{keyword}{const};
+\};
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Currently, the only supported E\+DF model is a simple lambertian emitter, with an interface analogous to the \hyperlink{struct_bsdf}{Bsdf} class (following Veach\textquotesingle{}s recommended practice of treating sources and sensors as scattering events, assuming the incident direction to an E\+DF is a {\itshape virtual source vector} where all light comes from, see Chapter 8.\+3.\+2.\+1, pp. 235-\/237 in his \href{http://graphics.stanford.edu/papers/veach_thesis/}{\tt thesis}).
+\end{DoxyParagraph}
+Next\+: \hyperlink{_r_t_context_page}{Ray Tracing Contexts} 

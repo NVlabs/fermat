@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2011, NVIDIA Corporation
+ * Copyright (c) 2010-2018, NVIDIA Corporation
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -80,7 +80,7 @@ void LBVH_builder<integer, bvh_node_type, node_vector, range_vector, index_vecto
             points_begin,
             points_begin + n_points,
             m_codes.begin(),
-            morton_functor<integer, 3u>( bbox ) );
+            morton_functor<integer, 3u, Bbox3f>( bbox ) );
 
         // setup the point indices, from 0 to n_points-1
         thrust::copy(

@@ -1,0 +1,44 @@
+\hypertarget{structcugar_1_1_variance__estimator}{}\section{cugar\+:\+:Variance\+\_\+estimator$<$ T $>$ Struct Template Reference}
+\label{structcugar_1_1_variance__estimator}\index{cugar\+::\+Variance\+\_\+estimator$<$ T $>$@{cugar\+::\+Variance\+\_\+estimator$<$ T $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$typename T$>$\newline
+struct cugar\+::\+Variance\+\_\+estimator$<$ T $>$}
+
+An implementation of a robust online variance estimator, using Welford\textquotesingle{}s algorithm 
+
+{\ttfamily \#include $<$variance.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_variance__estimator_a77434cbd63ef2496380fb60570229868}\label{structcugar_1_1_variance__estimator_a77434cbd63ef2496380fb60570229868}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_variance__estimator}{Variance\+\_\+estimator} \& {\bfseries operator=} (const \hyperlink{structcugar_1_1_variance__estimator}{Variance\+\_\+estimator} \&other)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_variance__estimator_a6c54bc1d74d494afc15fff5e7da82c1b}\label{structcugar_1_1_variance__estimator_a6c54bc1d74d494afc15fff5e7da82c1b}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1_variance__estimator}{Variance\+\_\+estimator} \& {\bfseries operator+=} (const float x)
+\item 
+\mbox{\Hypertarget{structcugar_1_1_variance__estimator_afdb744d3e0405ae6d4b64f635ec3e032}\label{structcugar_1_1_variance__estimator_afdb744d3e0405ae6d4b64f635ec3e032}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float {\bfseries mean} () const
+\item 
+\mbox{\Hypertarget{structcugar_1_1_variance__estimator_aa68fe115c99d0e9f5045ad884eec2cff}\label{structcugar_1_1_variance__estimator_aa68fe115c99d0e9f5045ad884eec2cff}} 
+C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float {\bfseries variance} () const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_variance__estimator_a71b5e2688ce3c516da87b22f513f9a88}\label{structcugar_1_1_variance__estimator_a71b5e2688ce3c516da87b22f513f9a88}} 
+T {\bfseries m\+\_\+mean}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_variance__estimator_adb00cc00b55bb03c81d7a47d37d21162}\label{structcugar_1_1_variance__estimator_adb00cc00b55bb03c81d7a47d37d21162}} 
+T {\bfseries m\+\_\+\+M2}
+\item 
+\mbox{\Hypertarget{structcugar_1_1_variance__estimator_a1fcbc50804fcf300dea010cdcafd8df7}\label{structcugar_1_1_variance__estimator_a1fcbc50804fcf300dea010cdcafd8df7}} 
+float {\bfseries m\+\_\+n}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/sampling/\hyperlink{variance_8h}{variance.\+h}\end{DoxyCompactItemize}

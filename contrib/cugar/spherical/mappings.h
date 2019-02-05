@@ -96,6 +96,32 @@ CUGAR_HOST CUGAR_DEVICE Vector3f uniform_square_to_sphere(const Vector2f& uv);
 /// \param dir  3d direction
 CUGAR_HOST CUGAR_DEVICE Vector2f uniform_sphere_to_square(const Vector3f& vec);
 
+/// maps normalized 3d input on +Z hemisphere to the 2d hemioct representation
+/// described in "A Survey of Efficient Representations for Independent Unit Vectors"
+/// by Cigolle et al.
+/// Output is on [-1, 1]^2.
+//
+CUGAR_HOST CUGAR_DEVICE Vector2f hemisphere_to_hemioct(Vector3f v);
+
+/// maps a 2d vector to a 3d vector on the +Z hemisphere, using the 2d hemioct representation
+/// described in "A Survey of Efficient Representations for Independent Unit Vectors"
+/// by Cigolle et al.
+///
+CUGAR_HOST CUGAR_DEVICE Vector3f hemioct_to_hemisphere(Vector2f e);
+
+/// maps normalized 3d input to the 2d oct representation described in
+/// "A Survey of Efficient Representations for Independent Unit Vectors"
+/// by Cigolle et al.
+/// Output is on [-1, 1]^2.
+///
+CUGAR_HOST CUGAR_DEVICE Vector2f sphere_to_oct(Vector3f v);
+
+/// maps a 2d vector to a 3d vector on the sphere, using the 2d oct representation
+/// described in "A Survey of Efficient Representations for Independent Unit Vectors"
+/// by Cigolle et al.
+///
+CUGAR_HOST CUGAR_DEVICE Vector3f oct_to_sphere(Vector2f e);
+
 /*! \}
  */
 

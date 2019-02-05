@@ -1,0 +1,47 @@
+\hypertarget{struct_ray_wavefront_queue}{}\section{Ray\+Wavefront\+Queue Struct Reference}
+\label{struct_ray_wavefront_queue}\index{Ray\+Wavefront\+Queue@{Ray\+Wavefront\+Queue}}
+
+
+\subsection{Detailed description}
+a ray queue is a regular queue where the header of the payload is augmented with a \hyperlink{struct_ray}{Ray} and a \hyperlink{struct_hit}{Hit} data structure 
+
+{\ttfamily \#include $<$wavefront\+\_\+queues.\+h$>$}
+
+Inheritance diagram for Ray\+Wavefront\+Queue\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{struct_ray_wavefront_queue}
+\end{center}
+\end{figure}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{struct_ray_wavefront_queue_a65fe540801f6b86491d12288ceeab0af}{alloc} (uint8 $\ast$\+\_\+ptr, uint32 $\ast$\+\_\+size)
+\item 
+\mbox{\Hypertarget{struct_ray_wavefront_queue_adcb587089968aa849dbd2517856abc7d}\label{struct_ray_wavefront_queue_adcb587089968aa849dbd2517856abc7d}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{struct_ray}{Ray} $\ast$ {\bfseries rays} () const
+\item 
+\mbox{\Hypertarget{struct_ray_wavefront_queue_ab582c9be03fbca960e64d8e8b630914a}\label{struct_ray_wavefront_queue_ab582c9be03fbca960e64d8e8b630914a}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{struct_hit}{Hit} $\ast$ {\bfseries hits} () const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_ray_wavefront_queue_acb3fa9d67907eeab50aea2dfd7eccef8}\label{struct_ray_wavefront_queue_acb3fa9d67907eeab50aea2dfd7eccef8}} 
+uint8 $\ast$ {\bfseries ray\+\_\+ptr}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{struct_ray_wavefront_queue_a65fe540801f6b86491d12288ceeab0af}\label{struct_ray_wavefront_queue_a65fe540801f6b86491d12288ceeab0af}} 
+\index{Ray\+Wavefront\+Queue@{Ray\+Wavefront\+Queue}!alloc@{alloc}}
+\index{alloc@{alloc}!Ray\+Wavefront\+Queue@{Ray\+Wavefront\+Queue}}
+\subsubsection{\texorpdfstring{alloc()}{alloc()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void Ray\+Wavefront\+Queue\+::alloc (\begin{DoxyParamCaption}\item[{uint8 $\ast$}]{\+\_\+ptr,  }\item[{uint32 $\ast$}]{\+\_\+size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+setup the baking storage 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/wavefront\+\_\+queues.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,87 @@
+\hypertarget{struct_hello_p_t}{}\section{Hello\+PT Struct Reference}
+\label{struct_hello_p_t}\index{Hello\+PT@{Hello\+PT}}
+
+
+\subsection{Detailed description}
+A \char`\"{}\+Hello Path Tracing\char`\"{} renderer 
+
+{\ttfamily \#include $<$hellopt.\+h$>$}
+
+Inheritance diagram for Hello\+PT\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{struct_hello_p_t}
+\end{center}
+\end{figure}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{struct_hello_p_t_a8ec59e3fac8eff801cecdd3220cd8d41}{init} (int argc, char $\ast$$\ast$argv, \hyperlink{struct_rendering_context}{Rendering\+Context} \&renderer)
+\item 
+void \hyperlink{struct_hello_p_t_af772aac0d80118742450fd8b6b3c58c2}{render} (const uint32 instance, \hyperlink{struct_rendering_context}{Rendering\+Context} \&renderer)
+\item 
+void \hyperlink{struct_hello_p_t_ac81e09dcfb28dffc85aa6c4df06a4426}{destroy} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_hello_p_t_a347a1e63590b2e1dc84f8ef601a3574b}\label{struct_hello_p_t_a347a1e63590b2e1dc84f8ef601a3574b}} 
+static \hyperlink{struct_renderer_interface}{Renderer\+Interface} $\ast$ {\bfseries factory} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_hello_p_t_a2e7ca0c493562e157984ce410b86509e}\label{struct_hello_p_t_a2e7ca0c493562e157984ce410b86509e}} 
+\hyperlink{struct_hello_p_t_options}{Hello\+P\+T\+Options} {\bfseries m\+\_\+options}
+\item 
+\mbox{\Hypertarget{struct_hello_p_t_a82179262319c026678ae4f7ed8a706d8}\label{struct_hello_p_t_a82179262319c026678ae4f7ed8a706d8}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, uint8 $>$ {\bfseries m\+\_\+memory\+\_\+pool}
+\item 
+\mbox{\Hypertarget{struct_hello_p_t_ad14d0897040544317b951e59c6657fd5}\label{struct_hello_p_t_ad14d0897040544317b951e59c6657fd5}} 
+\hyperlink{struct_tiled_sequence}{Tiled\+Sequence} {\bfseries m\+\_\+sequence}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{struct_hello_p_t_ac81e09dcfb28dffc85aa6c4df06a4426}\label{struct_hello_p_t_ac81e09dcfb28dffc85aa6c4df06a4426}} 
+\index{Hello\+PT@{Hello\+PT}!destroy@{destroy}}
+\index{destroy@{destroy}!Hello\+PT@{Hello\+PT}}
+\subsubsection{\texorpdfstring{destroy()}{destroy()}}
+{\footnotesize\ttfamily void Hello\+P\+T\+::destroy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+this method is responsible for destroying the object itself 
+
+Reimplemented from \hyperlink{struct_renderer_interface_a7469218aafa029a3e22bac2c00dca9f5}{Renderer\+Interface}.
+
+\mbox{\Hypertarget{struct_hello_p_t_a8ec59e3fac8eff801cecdd3220cd8d41}\label{struct_hello_p_t_a8ec59e3fac8eff801cecdd3220cd8d41}} 
+\index{Hello\+PT@{Hello\+PT}!init@{init}}
+\index{init@{init}!Hello\+PT@{Hello\+PT}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void Hello\+P\+T\+::init (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv,  }\item[{\hyperlink{struct_rendering_context}{Rendering\+Context} \&}]{renderer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+this method is responsible for any command options parsing / initializations the renderer might need to perform 
+
+Reimplemented from \hyperlink{struct_renderer_interface_a2ead9b943d6d48fcd32872e0005ebe63}{Renderer\+Interface}.
+
+\mbox{\Hypertarget{struct_hello_p_t_af772aac0d80118742450fd8b6b3c58c2}\label{struct_hello_p_t_af772aac0d80118742450fd8b6b3c58c2}} 
+\index{Hello\+PT@{Hello\+PT}!render@{render}}
+\index{render@{render}!Hello\+PT@{Hello\+PT}}
+\subsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void Hello\+P\+T\+::render (\begin{DoxyParamCaption}\item[{const uint32}]{instance,  }\item[{\hyperlink{struct_rendering_context}{Rendering\+Context} \&}]{renderer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+this method is responsible for rendering a given frame in a progressive rendering
+
+
+\begin{DoxyParams}{Parameters}
+{\em instance} & the frame instance \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{struct_renderer_interface_aa64254dd44c94929b05092dc8d74f29d}{Renderer\+Interface}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/renderers/hellopt.\+h\end{DoxyCompactItemize}

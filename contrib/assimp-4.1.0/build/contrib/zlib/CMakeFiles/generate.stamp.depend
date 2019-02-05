@@ -1,0 +1,10 @@
+# CMake generation dependency list for this directory.
+C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/contrib/zlib/CMakeLists.txt
+C:/Program Files/CMake/share/cmake-3.7/Modules/CheckTypeSize.cmake
+C:/Program Files/CMake/share/cmake-3.7/Modules/CheckIncludeFile.cmake
+C:/Program Files/CMake/share/cmake-3.7/Modules/CheckIncludeFileCXX.cmake
+C:/Program Files/CMake/share/cmake-3.7/Modules/CheckFunctionExists.cmake
+C:/Program Files/CMake/share/cmake-3.7/Modules/CheckIncludeFile.cmake
+C:/Program Files/CMake/share/cmake-3.7/Modules/CheckCSourceCompiles.cmake
+C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/contrib/zlib/zlib.pc.cmakein
+C:/p4research/research/jpantaleoni/Fermat/contrib/assimp-4.1.0/contrib/zlib/zconf.h.cmakein

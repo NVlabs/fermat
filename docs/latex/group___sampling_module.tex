@@ -1,0 +1,63 @@
+\hypertarget{group___sampling_module}{}\section{Sampling\+Module}
+\label{group___sampling_module}\index{Sampling\+Module@{Sampling\+Module}}
+
+
+\subsection{Detailed Description}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structstrided__vec}{strided\+\_\+vec}
+\item 
+struct \hyperlink{structsample__set__3d}{sample\+\_\+set\+\_\+3d}
+\item 
+struct \hyperlink{struct_tiled_sequence_view}{Tiled\+Sequence\+View}
+\item 
+struct \hyperlink{struct_tiled_sequence}{Tiled\+Sequence}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{group___sampling_module_gaec17bbbfd36295353081b7b4480d933d}{random} ()
+\item 
+uint32 \hyperlink{group___sampling_module_ga60d3362a11c556fce4eaf7e9989b119a}{irandom} (const uint32 N)
+\item 
+void \hyperlink{group___sampling_module_ga74a2d233874c14c777b4a1f7de6dcad7}{mj\+\_\+3d} (uint32 X, uint32 Y, uint32 Z, \hyperlink{structsample__set__3d}{sample\+\_\+set\+\_\+3d} p, const uint32 slice)
+\item 
+void \hyperlink{group___sampling_module_gaab55fcc60947be784a6023b83b155ad1}{build\+\_\+tiled\+\_\+samples\+\_\+3d} (const uint32 X, const uint32 Y, const uint32 Z, float $\ast$samples)
+\item 
+void \hyperlink{group___sampling_module_gac2c10d84fc3ae4eab94ebad2c1e72e99}{load\+\_\+samples} (const char $\ast$nameradix, const uint32 X, const uint32 Y, const uint32 Z, float $\ast$samples)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___sampling_module_gaab55fcc60947be784a6023b83b155ad1}\label{group___sampling_module_gaab55fcc60947be784a6023b83b155ad1}} 
+\index{Sampling\+Module@{Sampling\+Module}!build\+\_\+tiled\+\_\+samples\+\_\+3d@{build\+\_\+tiled\+\_\+samples\+\_\+3d}}
+\index{build\+\_\+tiled\+\_\+samples\+\_\+3d@{build\+\_\+tiled\+\_\+samples\+\_\+3d}!Sampling\+Module@{Sampling\+Module}}
+\subsubsection{\texorpdfstring{build\+\_\+tiled\+\_\+samples\+\_\+3d()}{build\_tiled\_samples\_3d()}}
+{\footnotesize\ttfamily void build\+\_\+tiled\+\_\+samples\+\_\+3d (\begin{DoxyParamCaption}\item[{const uint32}]{X,  }\item[{const uint32}]{Y,  }\item[{const uint32}]{Z,  }\item[{float $\ast$}]{samples }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Build a 3d lattice of 3d points with low discrepancy. The samples are arranged in a S\+OA layout, so that the point (x,y,z).i coordinates are located at (x + y$\ast$X + z$\ast$\+X$\ast$\+Y$\ast$3 + i$\ast$\+X$\ast$Y) (i.\+e. if the set has Z slices of X$\ast$Y points, there will be Z$\ast$3 consecutive arrays of X$\ast$Y floats). \mbox{\Hypertarget{group___sampling_module_ga60d3362a11c556fce4eaf7e9989b119a}\label{group___sampling_module_ga60d3362a11c556fce4eaf7e9989b119a}} 
+\index{Sampling\+Module@{Sampling\+Module}!irandom@{irandom}}
+\index{irandom@{irandom}!Sampling\+Module@{Sampling\+Module}}
+\subsubsection{\texorpdfstring{irandom()}{irandom()}}
+{\footnotesize\ttfamily uint32 irandom (\begin{DoxyParamCaption}\item[{const uint32}]{N }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+utility function for \mbox{[}0,N) integer randoms \mbox{\Hypertarget{group___sampling_module_gac2c10d84fc3ae4eab94ebad2c1e72e99}\label{group___sampling_module_gac2c10d84fc3ae4eab94ebad2c1e72e99}} 
+\index{Sampling\+Module@{Sampling\+Module}!load\+\_\+samples@{load\+\_\+samples}}
+\index{load\+\_\+samples@{load\+\_\+samples}!Sampling\+Module@{Sampling\+Module}}
+\subsubsection{\texorpdfstring{load\+\_\+samples()}{load\_samples()}}
+{\footnotesize\ttfamily void load\+\_\+samples (\begin{DoxyParamCaption}\item[{const char $\ast$}]{nameradix,  }\item[{const uint32}]{X,  }\item[{const uint32}]{Y,  }\item[{const uint32}]{Z,  }\item[{float $\ast$}]{samples }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+load a set of 3d samples from a file \mbox{\Hypertarget{group___sampling_module_ga74a2d233874c14c777b4a1f7de6dcad7}\label{group___sampling_module_ga74a2d233874c14c777b4a1f7de6dcad7}} 
+\index{Sampling\+Module@{Sampling\+Module}!mj\+\_\+3d@{mj\+\_\+3d}}
+\index{mj\+\_\+3d@{mj\+\_\+3d}!Sampling\+Module@{Sampling\+Module}}
+\subsubsection{\texorpdfstring{mj\+\_\+3d()}{mj\_3d()}}
+{\footnotesize\ttfamily void mj\+\_\+3d (\begin{DoxyParamCaption}\item[{uint32}]{X,  }\item[{uint32}]{Y,  }\item[{uint32}]{Z,  }\item[{\hyperlink{structsample__set__3d}{sample\+\_\+set\+\_\+3d}}]{p,  }\item[{const uint32}]{slice }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+build a 3d multi-\/jittering pattern \mbox{\Hypertarget{group___sampling_module_gaec17bbbfd36295353081b7b4480d933d}\label{group___sampling_module_gaec17bbbfd36295353081b7b4480d933d}} 
+\index{Sampling\+Module@{Sampling\+Module}!random@{random}}
+\index{random@{random}!Sampling\+Module@{Sampling\+Module}}
+\subsubsection{\texorpdfstring{random()}{random()}}
+{\footnotesize\ttfamily float random (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+utility function for \mbox{[}0,1) randoms 

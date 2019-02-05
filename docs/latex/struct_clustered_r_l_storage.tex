@@ -1,0 +1,62 @@
+\hypertarget{struct_clustered_r_l_storage}{}\section{Clustered\+R\+L\+Storage Struct Reference}
+\label{struct_clustered_r_l_storage}\index{Clustered\+R\+L\+Storage@{Clustered\+R\+L\+Storage}}
+
+
+\subsection{Detailed description}
+Host-\/side class to handle the storage of a Clustered Reinforcement Learning sampler (\hyperlink{group___clustered_r_l_module}{Clustered RL}). 
+
+{\ttfamily \#include $<$clustered\+\_\+rl.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_clustered_r_l_storage_a3d4bd4d60bfb6d6dae7079ffebeaea83}\label{struct_clustered_r_l_storage_a3d4bd4d60bfb6d6dae7079ffebeaea83}} 
+typedef \hyperlink{struct_clustered_r_l_view}{Clustered\+R\+L\+View} {\bfseries view\+\_\+type}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_clustered_r_l_storage_a3731b06b8bffb45d81cacbdc915e9f1d}\label{struct_clustered_r_l_storage_a3731b06b8bffb45d81cacbdc915e9f1d}} 
+uint64 {\bfseries needed\+\_\+bytes} (const uint32 \+\_\+hash\+\_\+size, const uint32 \+\_\+n\+\_\+clusters) const
+\item 
+\mbox{\Hypertarget{struct_clustered_r_l_storage_a143a5bf05f78ce5f085d9ca5ee8c8442}\label{struct_clustered_r_l_storage_a143a5bf05f78ce5f085d9ca5ee8c8442}} 
+void {\bfseries init} (const uint32 \+\_\+hash\+\_\+size, const uint32 \+\_\+n\+\_\+clusters, const uint32 $\ast$\+\_\+cluster\+\_\+offsets)
+\item 
+\mbox{\Hypertarget{struct_clustered_r_l_storage_ad12cc46508974f99ae6db1894b8d712e}\label{struct_clustered_r_l_storage_ad12cc46508974f99ae6db1894b8d712e}} 
+void {\bfseries resize} (const uint32 \+\_\+hash\+\_\+size, const uint32 \+\_\+n\+\_\+clusters, const uint32 $\ast$\+\_\+cluster\+\_\+offsets)
+\item 
+\mbox{\Hypertarget{struct_clustered_r_l_storage_a8e1c6f4731566515705afc77c46412f1}\label{struct_clustered_r_l_storage_a8e1c6f4731566515705afc77c46412f1}} 
+void {\bfseries update} (const float bias=0.\+1f)
+\item 
+\mbox{\Hypertarget{struct_clustered_r_l_storage_a1937674e3486d060f08bc9212330ab0e}\label{struct_clustered_r_l_storage_a1937674e3486d060f08bc9212330ab0e}} 
+void {\bfseries clear} ()
+\item 
+\mbox{\Hypertarget{struct_clustered_r_l_storage_a47aae2f04a21d8f3cbc53d0b94739673}\label{struct_clustered_r_l_storage_a47aae2f04a21d8f3cbc53d0b94739673}} 
+uint32 {\bfseries size} () const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_clustered_r_l_storage_a3acff6c4ac3c6f5d3c02bf78ead67356}\label{struct_clustered_r_l_storage_a3acff6c4ac3c6f5d3c02bf78ead67356}} 
+\hyperlink{struct_device_hash_table}{Device\+Hash\+Table} {\bfseries hashmap}
+\item 
+\mbox{\Hypertarget{struct_clustered_r_l_storage_af3a0096e3b6a3094bef12992b7836207}\label{struct_clustered_r_l_storage_af3a0096e3b6a3094bef12992b7836207}} 
+\hyperlink{class_domain_buffer}{Domain\+Buffer}$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+ER, float $>$ {\bfseries values}
+\item 
+\mbox{\Hypertarget{struct_clustered_r_l_storage_aa238fd3a424bf22c83cbde232c1ac1eb}\label{struct_clustered_r_l_storage_aa238fd3a424bf22c83cbde232c1ac1eb}} 
+uint32 {\bfseries hash\+\_\+size}
+\item 
+\mbox{\Hypertarget{struct_clustered_r_l_storage_af0819b2be3ca0503d7e93a0ed152eaff}\label{struct_clustered_r_l_storage_af0819b2be3ca0503d7e93a0ed152eaff}} 
+uint32 {\bfseries n\+\_\+clusters}
+\item 
+\mbox{\Hypertarget{struct_clustered_r_l_storage_a9cb6e900f69b2d554cf85debddcd5616}\label{struct_clustered_r_l_storage_a9cb6e900f69b2d554cf85debddcd5616}} 
+const uint32 $\ast$ {\bfseries cluster\+\_\+offsets}
+\item 
+\mbox{\Hypertarget{struct_clustered_r_l_storage_a326a561b8d3a694d5211ebb35d3df0ea}\label{struct_clustered_r_l_storage_a326a561b8d3a694d5211ebb35d3df0ea}} 
+uint32 {\bfseries old\+\_\+hash\+\_\+size}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/clustered\+\_\+rl.\+h\end{DoxyCompactItemize}

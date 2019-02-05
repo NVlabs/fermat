@@ -1,0 +1,60 @@
+\hypertarget{struct_tiled_sequence_view}{}\section{Tiled\+Sequence\+View Struct Reference}
+\label{struct_tiled_sequence_view}\index{Tiled\+Sequence\+View@{Tiled\+Sequence\+View}}
+
+
+\subsection{Detailed description}
+A tiled sample sequence view.
+
+\begin{DoxyParagraph}{}
+Basically, represents a tiled 2d grid of N-\/dimensional sample sequences, which can be conveniently \char`\"{}sliced\char`\"{} in 1d or 2d sections (each such slice representing a 2d grid of 1d or 2d samples). The per-\/pixel sequences are constructed by \char`\"{}offsetting\char`\"{} a base, common sequence using a set of per-\/pixel N-\/dimensional shifts. The offsetting process is a regular Cranley-\/\+Patterson rotation, i.\+e. the {\itshape d}-\/th coordinate of the final sequence for pixel {\itshape p} is given by\+: ~\newline
+
+\begin{DoxyCode}
+sequence(p,d) = \hyperlink{group___basic_gaa6ea8810d6e0f5f42d49be632566378c}{mod}( base\_sequence[d] + shift[p][d], 1 );
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+
+
+{\ttfamily \#include $<$tiled\+\_\+sequence.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_tiled_sequence_view_a94c00d57e91280fcf46ab4afba7b4d12}\label{struct_tiled_sequence_view_a94c00d57e91280fcf46ab4afba7b4d12}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 {\bfseries shift\+\_\+index} (const uint32 idx, const uint32 dim) const
+\item 
+\mbox{\Hypertarget{struct_tiled_sequence_view_ae47506c753bd6036a31e011bac010a85}\label{struct_tiled_sequence_view_ae47506c753bd6036a31e011bac010a85}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float {\bfseries sample} (const uint32 idx, const uint32 dim) const
+\item 
+\mbox{\Hypertarget{struct_tiled_sequence_view_ade3dac7c05205c7bd7d69fba750dfbab}\label{struct_tiled_sequence_view_ade3dac7c05205c7bd7d69fba750dfbab}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float {\bfseries shift} (const uint32 idx, const uint32 dim) const
+\item 
+\mbox{\Hypertarget{struct_tiled_sequence_view_ab221bfbf4b7fc8eaa42a5b17281f182e}\label{struct_tiled_sequence_view_ab221bfbf4b7fc8eaa42a5b17281f182e}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float {\bfseries shift} (const uint32 pixel\+\_\+x, const uint32 pixel\+\_\+y, const uint32 dim) const
+\item 
+\mbox{\Hypertarget{struct_tiled_sequence_view_a67088ceab693ec7de0fcb7860efb5a14}\label{struct_tiled_sequence_view_a67088ceab693ec7de0fcb7860efb5a14}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float {\bfseries sample\+\_\+1d} (const uint32 tile\+\_\+idx, const uint32 idx, const uint32 dim) const
+\item 
+\mbox{\Hypertarget{struct_tiled_sequence_view_ae76fdb905c7181ceb69d2de6b6b90ca9}\label{struct_tiled_sequence_view_ae76fdb905c7181ceb69d2de6b6b90ca9}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float {\bfseries sample\+\_\+2d} (const uint32 pixel\+\_\+x, const uint32 pixel\+\_\+y, const uint32 dim) const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_tiled_sequence_view_a52f246e06774e4d559f4161ccd713b9a}\label{struct_tiled_sequence_view_a52f246e06774e4d559f4161ccd713b9a}} 
+uint32 {\bfseries n\+\_\+dimensions}
+\item 
+\mbox{\Hypertarget{struct_tiled_sequence_view_ae815bc08d3f8836eb45e806c70c37815}\label{struct_tiled_sequence_view_ae815bc08d3f8836eb45e806c70c37815}} 
+uint32 {\bfseries tile\+\_\+size}
+\item 
+\mbox{\Hypertarget{struct_tiled_sequence_view_ad8fe8ad4e9cb241023b6327de8036213}\label{struct_tiled_sequence_view_ad8fe8ad4e9cb241023b6327de8036213}} 
+const float $\ast$ {\bfseries samples}
+\item 
+\mbox{\Hypertarget{struct_tiled_sequence_view_a54420151b70e0f6b13bb56d2902d0561}\label{struct_tiled_sequence_view_a54420151b70e0f6b13bb56d2902d0561}} 
+const float $\ast$ {\bfseries shifts}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/tiled\+\_\+sequence.\+h\end{DoxyCompactItemize}

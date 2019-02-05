@@ -1,0 +1,57 @@
+\hypertarget{group___textures_module}{}\section{Textures\+Module}
+\label{group___textures_module}\index{Textures\+Module@{Textures\+Module}}
+
+
+\subsection{Detailed Description}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_texture_storage}{Texture\+Storage$<$ T\+Y\+P\+E $>$}
+\item 
+struct \hyperlink{struct_mip_map_storage}{Mip\+Map\+Storage$<$ T\+Y\+P\+E $>$}
+\item 
+struct \hyperlink{struct_texture_reference}{Texture\+Reference}
+\item 
+struct \hyperlink{struct_texture_view}{Texture\+View}
+\item 
+struct \hyperlink{struct_mip_map_view}{Mip\+Map\+View}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___textures_module_ga87c0af527c07361181b2af404b384b82}\label{group___textures_module_ga87c0af527c07361181b2af404b384b82}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE float4 {\bfseries texture\+\_\+load} (const float4 $\ast$tex)
+\item 
+\mbox{\Hypertarget{group___textures_module_ga80c6b2d36a2a58dd91a11fff93f40937}\label{group___textures_module_ga80c6b2d36a2a58dd91a11fff93f40937}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector4f} {\bfseries texture\+\_\+lookup} (float4 st, const \hyperlink{struct_texture_reference}{Texture\+Reference} texture\+\_\+ref, const \hyperlink{struct_mip_map_view}{Mip\+Map\+View} $\ast$textures, const float4 default\+\_\+value)
+\item 
+\mbox{\Hypertarget{group___textures_module_gac41ff3200f14118ea951d1d26f5e1421}\label{group___textures_module_gac41ff3200f14118ea951d1d26f5e1421}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector4f} {\bfseries bilinear\+\_\+texture\+\_\+lookup\+\_\+unscaled} (\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector4f} st, const \hyperlink{struct_texture_reference}{Texture\+Reference} texture\+\_\+ref, const \hyperlink{struct_mip_map_view}{Mip\+Map\+View} $\ast$textures, const float4 default\+\_\+value)
+\item 
+\mbox{\Hypertarget{group___textures_module_gadeb88db4f9ae0a87f98ec8acec9a54b5}\label{group___textures_module_gadeb88db4f9ae0a87f98ec8acec9a54b5}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector4f} {\bfseries bilinear\+\_\+texture\+\_\+lookup} (\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector4f} st, const \hyperlink{struct_texture_reference}{Texture\+Reference} texture\+\_\+ref, const \hyperlink{struct_mip_map_view}{Mip\+Map\+View} $\ast$textures, const float4 default\+\_\+value)
+\item 
+\mbox{\Hypertarget{group___textures_module_gabf9307a5d5d23eeb4fc135d882b1e0a5}\label{group___textures_module_gabf9307a5d5d23eeb4fc135d882b1e0a5}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} {\bfseries diff\+\_\+texture\+\_\+lookup} (\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector4f} st, const \hyperlink{struct_texture_reference}{Texture\+Reference} texture\+\_\+ref, const \hyperlink{struct_mip_map_view}{Mip\+Map\+View} $\ast$textures, const float2 default\+\_\+value)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___textures_module_ga1fe67133ba5fdedbf564aae35203f335}\label{group___textures_module_ga1fe67133ba5fdedbf564aae35203f335}} 
+F\+E\+R\+M\+A\+T\+\_\+\+A\+P\+I\+\_\+\+E\+X\+T\+E\+RN template class F\+E\+R\+M\+A\+T\+\_\+\+A\+PI {\bfseries Domain\+Buffer$<$ H\+O\+S\+T\+\_\+\+B\+U\+F\+F\+E\+R, Texture\+View $>$}
+\item 
+\mbox{\Hypertarget{group___textures_module_ga5aece62a851f66d4b2c3236ab9658f16}\label{group___textures_module_ga5aece62a851f66d4b2c3236ab9658f16}} 
+F\+E\+R\+M\+A\+T\+\_\+\+A\+P\+I\+\_\+\+E\+X\+T\+E\+RN template class F\+E\+R\+M\+A\+T\+\_\+\+A\+PI {\bfseries Domain\+Buffer$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+E\+R, Texture\+View $>$}
+\item 
+\mbox{\Hypertarget{group___textures_module_ga28bacf6b37b17d33e0952230222a4507}\label{group___textures_module_ga28bacf6b37b17d33e0952230222a4507}} 
+F\+E\+R\+M\+A\+T\+\_\+\+A\+P\+I\+\_\+\+E\+X\+T\+E\+RN template struct F\+E\+R\+M\+A\+T\+\_\+\+A\+PI {\bfseries Texture\+Storage$<$ H\+O\+S\+T\+\_\+\+B\+U\+F\+F\+E\+R $>$}
+\item 
+\mbox{\Hypertarget{group___textures_module_gaa68fd3fb87aecadaede3a441f9347120}\label{group___textures_module_gaa68fd3fb87aecadaede3a441f9347120}} 
+F\+E\+R\+M\+A\+T\+\_\+\+A\+P\+I\+\_\+\+E\+X\+T\+E\+RN template struct F\+E\+R\+M\+A\+T\+\_\+\+A\+PI {\bfseries Texture\+Storage$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+E\+R $>$}
+\item 
+\mbox{\Hypertarget{group___textures_module_gaa6144ece5b83804020fe97f01a01a71a}\label{group___textures_module_gaa6144ece5b83804020fe97f01a01a71a}} 
+F\+E\+R\+M\+A\+T\+\_\+\+A\+P\+I\+\_\+\+E\+X\+T\+E\+RN template struct F\+E\+R\+M\+A\+T\+\_\+\+A\+PI {\bfseries Mip\+Map\+Storage$<$ H\+O\+S\+T\+\_\+\+B\+U\+F\+F\+E\+R $>$}
+\item 
+\mbox{\Hypertarget{group___textures_module_ga87d3981e4857c3f7cceeae5cf43a1810}\label{group___textures_module_ga87d3981e4857c3f7cceeae5cf43a1810}} 
+F\+E\+R\+M\+A\+T\+\_\+\+A\+P\+I\+\_\+\+E\+X\+T\+E\+RN template struct F\+E\+R\+M\+A\+T\+\_\+\+A\+PI {\bfseries Mip\+Map\+Storage$<$ C\+U\+D\+A\+\_\+\+B\+U\+F\+F\+E\+R $>$}
+\end{DoxyCompactItemize}

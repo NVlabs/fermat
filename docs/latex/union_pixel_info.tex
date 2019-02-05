@@ -1,0 +1,63 @@
+\hypertarget{union_pixel_info}{}\section{Pixel\+Info Union Reference}
+\label{union_pixel_info}\index{Pixel\+Info@{Pixel\+Info}}
+
+
+\subsection{Detailed description}
+Store packed pixel information, including\+:
+\begin{DoxyItemize}
+\item the pixel index
+\item the current path type (diffuse or glossy)
+\item a bit indicating whether the path went through a diffuse bounce 
+\end{DoxyItemize}
+
+{\ttfamily \#include $<$pathtracer\+\_\+core.\+h$>$}
+
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{union_pixel_info_a2808405cb466ebf0eeec02c5a6193f8a}\label{union_pixel_info_a2808405cb466ebf0eeec02c5a6193f8a}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries Pixel\+Info} (const uint32 \+\_\+packed)
+\item 
+\mbox{\Hypertarget{union_pixel_info_a8d9e9bdd9d6e2cb960ef18b27e0ca2d0}\label{union_pixel_info_a8d9e9bdd9d6e2cb960ef18b27e0ca2d0}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries Pixel\+Info} (const uint32 \+\_\+pixel, const uint32 \+\_\+comp, const uint32 \+\_\+diffuse=0)
+\item 
+\mbox{\Hypertarget{union_pixel_info_ab0c8785ed0f1f2e80fc4c6b245e9ba5a}\label{union_pixel_info_ab0c8785ed0f1f2e80fc4c6b245e9ba5a}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries operator uint32} () const
+\item 
+\mbox{\Hypertarget{union_pixel_info_a2808405cb466ebf0eeec02c5a6193f8a}\label{union_pixel_info_a2808405cb466ebf0eeec02c5a6193f8a}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries Pixel\+Info} (const uint32 \+\_\+packed)
+\item 
+\mbox{\Hypertarget{union_pixel_info_a090a4d707252d2619143308e61bc85a6}\label{union_pixel_info_a090a4d707252d2619143308e61bc85a6}} 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE {\bfseries Pixel\+Info} (const uint32 \+\_\+pixel, const uint32 \+\_\+channel)
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{union_pixel_info_ab677c8b10c956d02631657ef7f28bf43}\label{union_pixel_info_ab677c8b10c956d02631657ef7f28bf43}} 
+uint32 {\bfseries packed}
+\item 
+\mbox{\Hypertarget{union_pixel_info_a4b22838a8ee477577f2491da1de8914d}\label{union_pixel_info_a4b22838a8ee477577f2491da1de8914d}} 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint32 {\bfseries pixel}: 27\\
+\>uint32 {\bfseries comp}: 4\\
+\>uint32 {\bfseries diffuse}: 1\\
+\}; \\
+
+\end{tabbing}\item 
+\mbox{\Hypertarget{union_pixel_info_a6c937a0d866bd704d1e863f19cd0dc97}\label{union_pixel_info_a6c937a0d866bd704d1e863f19cd0dc97}} 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint32 {\bfseries pixel}: 28\\
+\>uint32 {\bfseries channel}: 4\\
+\}; \\
+
+\end{tabbing}\end{DoxyCompactItemize}
+
+
+The documentation for this union was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/pathtracer\+\_\+core.\+h\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/ray\+\_\+queues.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,79 @@
+\hypertarget{struct_disk_light}{}\section{Disk\+Light Struct Reference}
+\label{struct_disk_light}\index{Disk\+Light@{Disk\+Light}}
+
+
+\subsection{Detailed description}
+Disk-\/light class 
+
+{\ttfamily \#include $<$lights.\+h$>$}
+
+Inheritance diagram for Disk\+Light\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{struct_disk_light}
+\end{center}
+\end{figure}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{struct_disk_light_a79772898d99e5779c17ef39d9b9ac3bd}{sample\+\_\+impl} (const float $\ast$Z, uint32\+\_\+t $\ast$prim\+\_\+id, \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} $\ast$uv, \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} $\ast$geom, float $\ast$pdf, \hyperlink{struct_edf}{Edf} $\ast$edf) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{struct_disk_light_a230967dac9dee2f71e7edf0b6b19f9bc}{intersect\+\_\+impl} (const \hyperlink{struct_ray}{Ray} ray, float2 $\ast$uv, float $\ast$t) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{struct_disk_light_a7be348de13a69241954e8780aad94da9}{map\+\_\+impl} (const uint32\+\_\+t prim\+\_\+id, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} \&uv, \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} $\ast$geom, float $\ast$pdf, \hyperlink{struct_edf}{Edf} $\ast$edf) const
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{struct_disk_light_addaaf579434c189bfd0b3f0ded4762d7}{map\+\_\+impl} (const uint32\+\_\+t prim\+\_\+id, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} \&uv, const \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} \&geom, float $\ast$pdf, \hyperlink{struct_edf}{Edf} $\ast$edf) const
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_disk_light_ad5c2e262ab9ee8035c13825954a0197c}\label{struct_disk_light_ad5c2e262ab9ee8035c13825954a0197c}} 
+\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} {\bfseries pos}
+\item 
+\mbox{\Hypertarget{struct_disk_light_a4026cb48e89a6f88a02f56f0f8c09e21}\label{struct_disk_light_a4026cb48e89a6f88a02f56f0f8c09e21}} 
+\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} {\bfseries dir}
+\item 
+\mbox{\Hypertarget{struct_disk_light_ab13b47c395c952a7f9968be755daffd1}\label{struct_disk_light_ab13b47c395c952a7f9968be755daffd1}} 
+\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} {\bfseries u}
+\item 
+\mbox{\Hypertarget{struct_disk_light_ac074e59c5a7b9a5c91a350c5de3f8a2c}\label{struct_disk_light_ac074e59c5a7b9a5c91a350c5de3f8a2c}} 
+\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} {\bfseries v}
+\item 
+\mbox{\Hypertarget{struct_disk_light_a98efccd3799bec4ecaab15669aa84cea}\label{struct_disk_light_a98efccd3799bec4ecaab15669aa84cea}} 
+\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} {\bfseries color}
+\item 
+\mbox{\Hypertarget{struct_disk_light_ad652919f70f9f394dd62c07779e8ce12}\label{struct_disk_light_ad652919f70f9f394dd62c07779e8ce12}} 
+float {\bfseries radius}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{struct_disk_light_a230967dac9dee2f71e7edf0b6b19f9bc}\label{struct_disk_light_a230967dac9dee2f71e7edf0b6b19f9bc}} 
+\index{Disk\+Light@{Disk\+Light}!intersect\+\_\+impl@{intersect\+\_\+impl}}
+\index{intersect\+\_\+impl@{intersect\+\_\+impl}!Disk\+Light@{Disk\+Light}}
+\subsubsection{\texorpdfstring{intersect\+\_\+impl()}{intersect\_impl()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void Disk\+Light\+::intersect\+\_\+impl (\begin{DoxyParamCaption}\item[{const \hyperlink{struct_ray}{Ray}}]{ray,  }\item[{float2 $\ast$}]{uv,  }\item[{float $\ast$}]{t }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+intersect the given ray with the light source \mbox{\Hypertarget{struct_disk_light_a7be348de13a69241954e8780aad94da9}\label{struct_disk_light_a7be348de13a69241954e8780aad94da9}} 
+\index{Disk\+Light@{Disk\+Light}!map\+\_\+impl@{map\+\_\+impl}}
+\index{map\+\_\+impl@{map\+\_\+impl}!Disk\+Light@{Disk\+Light}}
+\subsubsection{\texorpdfstring{map\+\_\+impl()}{map\_impl()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void Disk\+Light\+::map\+\_\+impl (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{prim\+\_\+id,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} \&}]{uv,  }\item[{\hyperlink{struct_vertex_geometry}{Vertex\+Geometry} $\ast$}]{geom,  }\item[{float $\ast$}]{pdf,  }\item[{\hyperlink{struct_edf}{Edf} $\ast$}]{edf }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+map a (prim,uv) pair to a surface element \mbox{\Hypertarget{struct_disk_light_addaaf579434c189bfd0b3f0ded4762d7}\label{struct_disk_light_addaaf579434c189bfd0b3f0ded4762d7}} 
+\index{Disk\+Light@{Disk\+Light}!map\+\_\+impl@{map\+\_\+impl}}
+\index{map\+\_\+impl@{map\+\_\+impl}!Disk\+Light@{Disk\+Light}}
+\subsubsection{\texorpdfstring{map\+\_\+impl()}{map\_impl()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void Disk\+Light\+::map\+\_\+impl (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{prim\+\_\+id,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} \&}]{uv,  }\item[{const \hyperlink{struct_vertex_geometry}{Vertex\+Geometry} \&}]{geom,  }\item[{float $\ast$}]{pdf,  }\item[{\hyperlink{struct_edf}{Edf} $\ast$}]{edf }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+map a (prim,uv) pair to a surface element \mbox{\Hypertarget{struct_disk_light_a79772898d99e5779c17ef39d9b9ac3bd}\label{struct_disk_light_a79772898d99e5779c17ef39d9b9ac3bd}} 
+\index{Disk\+Light@{Disk\+Light}!sample\+\_\+impl@{sample\+\_\+impl}}
+\index{sample\+\_\+impl@{sample\+\_\+impl}!Disk\+Light@{Disk\+Light}}
+\subsubsection{\texorpdfstring{sample\+\_\+impl()}{sample\_impl()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool Disk\+Light\+::sample\+\_\+impl (\begin{DoxyParamCaption}\item[{const float $\ast$}]{Z,  }\item[{uint32\+\_\+t $\ast$}]{prim\+\_\+id,  }\item[{\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} $\ast$}]{uv,  }\item[{\hyperlink{struct_vertex_geometry}{Vertex\+Geometry} $\ast$}]{geom,  }\item[{float $\ast$}]{pdf,  }\item[{\hyperlink{struct_edf}{Edf} $\ast$}]{edf }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+sample a surface element on the light source 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/lights.\+h\end{DoxyCompactItemize}

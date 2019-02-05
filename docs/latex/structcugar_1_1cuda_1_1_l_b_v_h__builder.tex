@@ -1,0 +1,170 @@
+\hypertarget{structcugar_1_1cuda_1_1_l_b_v_h__builder}{}\section{cugar\+:\+:cuda\+:\+:L\+B\+V\+H\+\_\+builder$<$ integer, bvh\+\_\+node\+\_\+type, node\+\_\+vector, range\+\_\+vector, index\+\_\+vector $>$ Struct Template Reference}
+\label{structcugar_1_1cuda_1_1_l_b_v_h__builder}\index{cugar\+::cuda\+::\+L\+B\+V\+H\+\_\+builder$<$ integer, bvh\+\_\+node\+\_\+type, node\+\_\+vector, range\+\_\+vector, index\+\_\+vector $>$@{cugar\+::cuda\+::\+L\+B\+V\+H\+\_\+builder$<$ integer, bvh\+\_\+node\+\_\+type, node\+\_\+vector, range\+\_\+vector, index\+\_\+vector $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$typename integer, typename bvh\+\_\+node\+\_\+type = Bvh\+\_\+node, typename node\+\_\+vector = vector$<$device\+\_\+tag,bvh\+\_\+node\+\_\+type$>$, typename range\+\_\+vector = vector$<$device\+\_\+tag,uint2$>$, typename index\+\_\+vector = vector$<$device\+\_\+tag,uint32$>$$>$\newline
+struct cugar\+::cuda\+::\+L\+B\+V\+H\+\_\+builder$<$ integer, bvh\+\_\+node\+\_\+type, node\+\_\+vector, range\+\_\+vector, index\+\_\+vector $>$}
+
+G\+P\+U-\/based Linear B\+VH builder
+
+This class provides the context to generate L\+B\+V\+Hs on the G\+PU starting from a set of unordered points. The output is a set of nodes with the corresponding leaves and a set of primitive indices into the input set of points. The output leaves will specify contiguous ranges into this index.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em integer} & an integer type that determines the number of bits used to compute the points\textquotesingle{} Morton codes. Accepted values are uint32 and uint64.\\
+\hline
+\end{DoxyTemplParams}
+The following code snippet shows how to use this builder\+:
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <\hyperlink{lbvh__builder_8h}{cugar/bvh/cuda/lbvh\_builder.h}>}
+
+thrust::device\_vector<Vector3f> points;
+... \textcolor{comment}{// code to fill the input vector of points}
+
+thrust::device\_vector<Bvh\_node> bvh\_nodes;
+thrust::device\_vector<uint32>   bvh\_index;
+
+\hyperlink{structcugar_1_1cuda_1_1_l_b_v_h__builder}{cugar::cuda::LBVH\_builder<uint64>} builder( &bvh\_nodes, &bvh\_index );
+builder.build(
+    Bbox3f( Vector3f(0.0f), Vector3f(1.0f) ),   \textcolor{comment}{// suppose all bboxes are in [0,1]^3}
+    points.begin(),                             \textcolor{comment}{// begin iterator}
+    points.end(),                               \textcolor{comment}{// end iterator}
+    4 );                                        \textcolor{comment}{// target 4 objects per leaf}
+\end{DoxyCode}
+ 
+
+{\ttfamily \#include $<$lbvh\+\_\+builder.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_l_b_v_h__builder_aa77f410c55c8e76a68b38b1a7ab8b61c}\label{structcugar_1_1cuda_1_1_l_b_v_h__builder_aa77f410c55c8e76a68b38b1a7ab8b61c}} 
+typedef \hyperlink{structcugar_1_1cuda_1_1_l_b_v_h__builder__stats}{L\+B\+V\+H\+\_\+builder\+\_\+stats} {\bfseries Stats}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structcugar_1_1cuda_1_1_l_b_v_h__builder_ad2cafc8f7671ebbef3de1abeef7fa766}{L\+B\+V\+H\+\_\+builder} (node\+\_\+vector $\ast$nodes=N\+U\+LL, index\+\_\+vector $\ast$index=N\+U\+LL, range\+\_\+vector $\ast$leaf\+\_\+ranges=N\+U\+LL, index\+\_\+vector $\ast$leaf\+\_\+pointers=N\+U\+LL, index\+\_\+vector $\ast$parents=N\+U\+LL, index\+\_\+vector $\ast$skip\+\_\+nodes=N\+U\+LL, range\+\_\+vector $\ast$node\+\_\+ranges=N\+U\+LL)
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_l_b_v_h__builder_aa6cc3f6681a0f8b2d0b8f901ea2b59f3}\label{structcugar_1_1cuda_1_1_l_b_v_h__builder_aa6cc3f6681a0f8b2d0b8f901ea2b59f3}} 
+void {\bfseries set\+\_\+nodes} (node\+\_\+vector $\ast$nodes)
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_l_b_v_h__builder_a4c3f8a21e560d6080976832b893d3be1}\label{structcugar_1_1cuda_1_1_l_b_v_h__builder_a4c3f8a21e560d6080976832b893d3be1}} 
+void {\bfseries set\+\_\+index} (index\+\_\+vector $\ast$index)
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_l_b_v_h__builder_a11c97b820d063fabf9ba1f3118c44c49}\label{structcugar_1_1cuda_1_1_l_b_v_h__builder_a11c97b820d063fabf9ba1f3118c44c49}} 
+void {\bfseries set\+\_\+parents} (index\+\_\+vector $\ast$parents)
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_l_b_v_h__builder_a43352b876b36408051b2cc2d05f1fb7d}\label{structcugar_1_1cuda_1_1_l_b_v_h__builder_a43352b876b36408051b2cc2d05f1fb7d}} 
+void {\bfseries set\+\_\+skip\+\_\+nodes} (index\+\_\+vector $\ast$skip\+\_\+nodes)
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_l_b_v_h__builder_a27167dc98d5d8933e42f8eca0663ce32}\label{structcugar_1_1cuda_1_1_l_b_v_h__builder_a27167dc98d5d8933e42f8eca0663ce32}} 
+void {\bfseries set\+\_\+leaf\+\_\+pointers} (index\+\_\+vector $\ast$leaf\+\_\+pointers)
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_l_b_v_h__builder_ab75c51d1c806ddba42bbc2bf995541d3}\label{structcugar_1_1cuda_1_1_l_b_v_h__builder_ab75c51d1c806ddba42bbc2bf995541d3}} 
+void {\bfseries set\+\_\+leaf\+\_\+ranges} (range\+\_\+vector $\ast$leaf\+\_\+ranges)
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_l_b_v_h__builder_af0af9e90fb42ee2979cb11ec22542e1e}\label{structcugar_1_1cuda_1_1_l_b_v_h__builder_af0af9e90fb42ee2979cb11ec22542e1e}} 
+void {\bfseries set\+\_\+node\+\_\+ranges} (range\+\_\+vector $\ast$node\+\_\+ranges)
+\item 
+{\footnotesize template$<$typename Iterator $>$ }\\void \hyperlink{structcugar_1_1cuda_1_1_l_b_v_h__builder_ab39b2be673c43e12283c25800f22d5b1}{build} (const \hyperlink{structcugar_1_1_bbox}{Bbox3f} bbox, const Iterator points\+\_\+begin, const Iterator points\+\_\+end, const uint32 max\+\_\+leaf\+\_\+size, \hyperlink{structcugar_1_1cuda_1_1_l_b_v_h__builder__stats}{Stats} $\ast$stats=N\+U\+LL)
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_l_b_v_h__builder_a948ce9c517f4c9808ec1bfba5c6b07fc}\label{structcugar_1_1cuda_1_1_l_b_v_h__builder_a948ce9c517f4c9808ec1bfba5c6b07fc}} 
+node\+\_\+vector $\ast$ {\bfseries m\+\_\+nodes}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_l_b_v_h__builder_afa8bf8d86713360be6f6af0d97905e56}\label{structcugar_1_1cuda_1_1_l_b_v_h__builder_afa8bf8d86713360be6f6af0d97905e56}} 
+range\+\_\+vector $\ast$ {\bfseries m\+\_\+node\+\_\+ranges}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_l_b_v_h__builder_ae5f8095b418252982c45ec5daae37865}\label{structcugar_1_1cuda_1_1_l_b_v_h__builder_ae5f8095b418252982c45ec5daae37865}} 
+range\+\_\+vector $\ast$ {\bfseries m\+\_\+leaf\+\_\+ranges}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_l_b_v_h__builder_ae7d4352019b89335dd918c1f54a86000}\label{structcugar_1_1cuda_1_1_l_b_v_h__builder_ae7d4352019b89335dd918c1f54a86000}} 
+index\+\_\+vector $\ast$ {\bfseries m\+\_\+leaf\+\_\+pointers}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_l_b_v_h__builder_ad97bb4a51bc462d3d68cb55bd40ae612}\label{structcugar_1_1cuda_1_1_l_b_v_h__builder_ad97bb4a51bc462d3d68cb55bd40ae612}} 
+index\+\_\+vector $\ast$ {\bfseries m\+\_\+parents}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_l_b_v_h__builder_ab10e91221af38e8c59565c422c2d41f1}\label{structcugar_1_1cuda_1_1_l_b_v_h__builder_ab10e91221af38e8c59565c422c2d41f1}} 
+index\+\_\+vector $\ast$ {\bfseries m\+\_\+skip\+\_\+nodes}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_l_b_v_h__builder_a3c519a9c4451dd5f36ae57c95b5313a8}\label{structcugar_1_1cuda_1_1_l_b_v_h__builder_a3c519a9c4451dd5f36ae57c95b5313a8}} 
+index\+\_\+vector $\ast$ {\bfseries m\+\_\+index}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_l_b_v_h__builder_ae1c5e80ec751b75ea09b8caca5f5cf1e}\label{structcugar_1_1cuda_1_1_l_b_v_h__builder_ae1c5e80ec751b75ea09b8caca5f5cf1e}} 
+\hyperlink{structcugar_1_1caching__device__vector}{caching\+\_\+device\+\_\+vector}$<$ integer $>$ {\bfseries m\+\_\+codes}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_l_b_v_h__builder_ae8fe2378cc2bb077bba1d99e37654c7d}\label{structcugar_1_1cuda_1_1_l_b_v_h__builder_ae8fe2378cc2bb077bba1d99e37654c7d}} 
+\hyperlink{structcugar_1_1caching__device__vector}{caching\+\_\+device\+\_\+vector}$<$ integer $>$ {\bfseries m\+\_\+temp\+\_\+codes}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_l_b_v_h__builder_a27d88ae14040cf89f954d5f522fdd5f8}\label{structcugar_1_1cuda_1_1_l_b_v_h__builder_a27d88ae14040cf89f954d5f522fdd5f8}} 
+\hyperlink{structcugar_1_1caching__device__vector}{caching\+\_\+device\+\_\+vector}$<$ uint32 $>$ {\bfseries m\+\_\+temp\+\_\+index}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_l_b_v_h__builder_add5c2e6c44d45b6358f66d92b506bd11}\label{structcugar_1_1cuda_1_1_l_b_v_h__builder_add5c2e6c44d45b6358f66d92b506bd11}} 
+\hyperlink{structcugar_1_1_bbox}{Bbox3f} {\bfseries m\+\_\+bbox}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_l_b_v_h__builder_a2f092a6d3a49a450f0e57c48e71ee1df}\label{structcugar_1_1cuda_1_1_l_b_v_h__builder_a2f092a6d3a49a450f0e57c48e71ee1df}} 
+uint32 {\bfseries m\+\_\+node\+\_\+count}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_l_b_v_h__builder_ae45d5655734f95b79d7b02cf96b8a28d}\label{structcugar_1_1cuda_1_1_l_b_v_h__builder_ae45d5655734f95b79d7b02cf96b8a28d}} 
+uint32 {\bfseries m\+\_\+leaf\+\_\+count}
+\item 
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_l_b_v_h__builder_a9379b12f1846a39568c2041b7a3492fe}\label{structcugar_1_1cuda_1_1_l_b_v_h__builder_a9379b12f1846a39568c2041b7a3492fe}} 
+\hyperlink{structcugar_1_1cuda_1_1_radixtree__context}{cuda\+::\+Radixtree\+\_\+context} {\bfseries m\+\_\+kd\+\_\+context}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_l_b_v_h__builder_ad2cafc8f7671ebbef3de1abeef7fa766}\label{structcugar_1_1cuda_1_1_l_b_v_h__builder_ad2cafc8f7671ebbef3de1abeef7fa766}} 
+\index{cugar\+::cuda\+::\+L\+B\+V\+H\+\_\+builder@{cugar\+::cuda\+::\+L\+B\+V\+H\+\_\+builder}!L\+B\+V\+H\+\_\+builder@{L\+B\+V\+H\+\_\+builder}}
+\index{L\+B\+V\+H\+\_\+builder@{L\+B\+V\+H\+\_\+builder}!cugar\+::cuda\+::\+L\+B\+V\+H\+\_\+builder@{cugar\+::cuda\+::\+L\+B\+V\+H\+\_\+builder}}
+\subsubsection{\texorpdfstring{L\+B\+V\+H\+\_\+builder()}{LBVH\_builder()}}
+{\footnotesize\ttfamily template$<$typename integer, typename bvh\+\_\+node\+\_\+type = Bvh\+\_\+node, typename node\+\_\+vector = vector$<$device\+\_\+tag,bvh\+\_\+node\+\_\+type$>$, typename range\+\_\+vector = vector$<$device\+\_\+tag,uint2$>$, typename index\+\_\+vector = vector$<$device\+\_\+tag,uint32$>$$>$ \\
+\hyperlink{structcugar_1_1cuda_1_1_l_b_v_h__builder}{cugar\+::cuda\+::\+L\+B\+V\+H\+\_\+builder}$<$ integer, bvh\+\_\+node\+\_\+type, node\+\_\+vector, range\+\_\+vector, index\+\_\+vector $>$\+::\hyperlink{structcugar_1_1cuda_1_1_l_b_v_h__builder}{L\+B\+V\+H\+\_\+builder} (\begin{DoxyParamCaption}\item[{node\+\_\+vector $\ast$}]{nodes = {\ttfamily NULL},  }\item[{index\+\_\+vector $\ast$}]{index = {\ttfamily NULL},  }\item[{range\+\_\+vector $\ast$}]{leaf\+\_\+ranges = {\ttfamily NULL},  }\item[{index\+\_\+vector $\ast$}]{leaf\+\_\+pointers = {\ttfamily NULL},  }\item[{index\+\_\+vector $\ast$}]{parents = {\ttfamily NULL},  }\item[{index\+\_\+vector $\ast$}]{skip\+\_\+nodes = {\ttfamily NULL},  }\item[{range\+\_\+vector $\ast$}]{node\+\_\+ranges = {\ttfamily NULL} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em nodes} & output nodes array \\
+\hline
+{\em leaves} & output leaf array \\
+\hline
+{\em index} & output index array \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1cuda_1_1_l_b_v_h__builder_ab39b2be673c43e12283c25800f22d5b1}\label{structcugar_1_1cuda_1_1_l_b_v_h__builder_ab39b2be673c43e12283c25800f22d5b1}} 
+\index{cugar\+::cuda\+::\+L\+B\+V\+H\+\_\+builder@{cugar\+::cuda\+::\+L\+B\+V\+H\+\_\+builder}!build@{build}}
+\index{build@{build}!cugar\+::cuda\+::\+L\+B\+V\+H\+\_\+builder@{cugar\+::cuda\+::\+L\+B\+V\+H\+\_\+builder}}
+\subsubsection{\texorpdfstring{build()}{build()}}
+{\footnotesize\ttfamily template$<$typename integer , typename bvh\+\_\+node\+\_\+type , typename node\+\_\+vector , typename range\+\_\+vector , typename index\+\_\+vector $>$ \\
+template$<$typename Iterator $>$ \\
+void \hyperlink{structcugar_1_1cuda_1_1_l_b_v_h__builder}{cugar\+::cuda\+::\+L\+B\+V\+H\+\_\+builder}$<$ integer, bvh\+\_\+node\+\_\+type, node\+\_\+vector, range\+\_\+vector, index\+\_\+vector $>$\+::build (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_bbox}{Bbox3f}}]{bbox,  }\item[{const Iterator}]{points\+\_\+begin,  }\item[{const Iterator}]{points\+\_\+end,  }\item[{const uint32}]{max\+\_\+leaf\+\_\+size,  }\item[{\hyperlink{structcugar_1_1cuda_1_1_l_b_v_h__builder__stats}{Stats} $\ast$}]{stats = {\ttfamily NULL} }\end{DoxyParamCaption})}
+
+build a bvh given a set of points that will be reordered in-\/place
+
+
+\begin{DoxyParams}{Parameters}
+{\em bbox} & global bbox \\
+\hline
+{\em points\+\_\+begin} & beginning of the point sequence to sort \\
+\hline
+{\em points\+\_\+end} & end of the point sequence to sort \\
+\hline
+{\em max\+\_\+leaf\+\_\+size} & maximum leaf size \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bvh/cuda/\hyperlink{lbvh__builder_8h}{lbvh\+\_\+builder.\+h}\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/bvh/cuda/lbvh\+\_\+builder\+\_\+inline.\+h\end{DoxyCompactItemize}

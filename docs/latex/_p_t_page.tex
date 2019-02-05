@@ -1,0 +1,281 @@
+Top\+: \hyperlink{_overture_contents_page}{Contents}
+
+ ~\newline
+\begin{DoxyParagraph}{}
+This chapter aims to show how to use \hyperlink{group___p_t_lib}{P\+T\+Lib} library to build a much more streamlined, yet even more powerful path tracer. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+If you take look at the full implementation in \hyperlink{_p_t_page_code}{pathtracer\+\_\+impl.\+h}, you should notice that the overall structure is pretty similar to that of our \hyperlink{_hello_renderer_page}{Hello World} prototype path-\/tracer, yet even more compact. We will skip some details and go directly to the important bits. Remember that the central feature of \hyperlink{group___p_t_lib}{P\+T\+Lib} is the \hyperlink{_p_t_lib_page_path_trace_loop_anchor}{path\+\_\+trace\+\_\+loop()} function, and that this is configured by a few template classes that need to be provided by the user. The first here is the implementation of the \hyperlink{_p_t_lib_page_TPTContext}{T\+P\+T\+Context} class\+: ~\newline
+
+\begin{DoxyCodeInclude}
+    \textcolor{comment}{// the internal path tracing context}
+    \textcolor{comment}{//}
+    \textcolor{keyword}{template} <\textcolor{keyword}{typename} TDirectLightingSampler>
+    \textcolor{keyword}{struct }PathTracingContext : \hyperlink{struct_p_t_context_base}{PTContextBase}<PTOptions>, 
+      \hyperlink{struct_p_t_context_queues}{PTContextQueues}
+    \{
+        TDirectLightingSampler dl;
+    \};
+\end{DoxyCodeInclude}
+ 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The main news here is the fact we inherited it from \hyperlink{struct_p_t_context_base}{P\+T\+Context\+Base} and \hyperlink{struct_p_t_context_queues}{P\+T\+Context\+Queues}, and added a single member, the templated \hyperlink{_p_t_lib_page_TPTDirectLightingSampler}{T\+P\+T\+Direct\+Lighting\+Sampler}, Path\+Tracing\+Context\+::dl.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The render method itself starts almost identically to the one we already saw\+:
+\end{DoxyParagraph}
+
+\begin{DoxyCodeInclude}
+    \textcolor{comment}{// pre-multiply the previous frame for blending}
+    renderer.rescale\_frame( instance );
+
+    \textcolor{comment}{//fprintf(stderr, "render started (%u)\(\backslash\)n", instance);}
+    \textcolor{keyword}{const} uint2 res = renderer.res();
+    \textcolor{keyword}{const} uint32 n\_pixels = res.x * res.y;
+
+    \hyperlink{structcugar_1_1memory__arena}{cugar::memory\_arena} arena( m\_memory\_pool.ptr() );
+
+    \hyperlink{struct_p_t_ray_queue}{PTRayQueue} in\_queue;
+    \hyperlink{struct_p_t_ray_queue}{PTRayQueue} scatter\_queue;
+    \hyperlink{struct_p_t_ray_queue}{PTRayQueue} shadow\_queue;
+
+    \hyperlink{group___p_t_lib_gaf8daef8b815f7712ff692edbaa628881}{alloc\_queues}(
+        m\_options,
+        n\_pixels,
+        in\_queue,
+        scatter\_queue,
+        shadow\_queue,
+        arena );
+
+    \textcolor{comment}{// fetch a view of the renderer}
+    \hyperlink{struct_rendering_context_view}{RenderingContextView} renderer\_view = renderer.view(instance);
+
+    \textcolor{comment}{// instantiate the vertex processor}
+    \hyperlink{struct_p_s_f_p_t_vertex_processor}{PSFPTVertexProcessor} vertex\_processor( m\_options.firefly\_filter );
+\end{DoxyCodeInclude}
+ \begin{DoxyParagraph}{}
+The main news should be the last two lines\+:
+\end{DoxyParagraph}
+
+\begin{DoxyCodeInclude}
+    \textcolor{comment}{// instantiate the vertex processor}
+    \hyperlink{struct_p_s_f_p_t_vertex_processor}{PSFPTVertexProcessor} vertex\_processor( m\_options.firefly\_filter );
+\end{DoxyCodeInclude}
+ \begin{DoxyParagraph}{}
+i.\+e. the instantiation of a custom \hyperlink{_p_t_lib_page_TPTVertexProcessor}{T\+P\+T\+Vertex\+Processor} -\/ the second template interface that must be implemented in order to configure \hyperlink{group___p_t_lib}{P\+T\+Lib}. After that, the body of the render method is almost trivial\+:
+\end{DoxyParagraph}
+
+\begin{DoxyCodeInclude}
+        \textcolor{comment}{// use the Reinforcement-Learning direct-lighting sampler}
+        \textcolor{keywordflow}{if} (m\_options.nee\_type == NEE\_ALGORITHM\_RL)
+        \{
+            \textcolor{comment}{// initialize the path-tracing context}
+            PathTracingContext<DirectLightingRL> context;
+            context.options         = m\_options;
+            context.in\_bounce       = 0;
+            context.in\_queue        = in\_queue;
+            context.scatter\_queue   = scatter\_queue;
+            context.shadow\_queue    = shadow\_queue;
+            context.sequence        = m\_sequence.view();
+            context.frame\_weight    = 1.0f / float(renderer\_view.instance + 1);
+            context.device\_timers   = device\_timers;
+            context.bbox            = m\_bbox;
+            context.dl              = \hyperlink{struct_direct_lighting_r_l}{DirectLightingRL}(
+                view( *m\_vtls\_rl ),
+                m\_mesh\_vtls->view() );
+
+            \textcolor{comment}{// instantiate the actual path tracing loop}
+            \hyperlink{group___p_t_lib_gadbd6e824e2ecdd07fae235bddebcd1d8}{path\_trace\_loop}( context, vertex\_processor, renderer, renderer\_view, stats );
+        \}
+        \textcolor{keywordflow}{else} \textcolor{comment}{// use the regular mesh emitter direct-lighting sampler}
+        \{
+            \textcolor{comment}{// select which instantiation of the mesh light to use (VPLs or the plain mesh)}
+            \hyperlink{struct_mesh_light}{MeshLight} mesh\_light = m\_options.nee\_type == NEE\_ALGORITHM\_VPL ? renderer\_view.
+      mesh\_vpls : renderer\_view.mesh\_light;
+
+            \textcolor{comment}{// initialize the path-tracing context}
+            PathTracingContext<DirectLightingMesh> context;
+            context.options         = m\_options;
+            context.in\_bounce       = 0;
+            context.in\_queue        = in\_queue;
+            context.scatter\_queue   = scatter\_queue;
+            context.shadow\_queue    = shadow\_queue;
+            context.sequence        = m\_sequence.view();
+            context.frame\_weight    = 1.0f / float(renderer\_view.instance + 1);
+            context.device\_timers   = device\_timers;
+            context.bbox            = m\_bbox;
+            context.dl              = \hyperlink{struct_direct_lighting_mesh}{DirectLightingMesh}( mesh\_light );
+
+            \textcolor{comment}{// instantiate the actual path tracing loop}
+            \hyperlink{group___p_t_lib_gadbd6e824e2ecdd07fae235bddebcd1d8}{path\_trace\_loop}( context, vertex\_processor, renderer, renderer\_view, stats );
+        \}
+\end{DoxyCodeInclude}
+ \begin{DoxyParagraph}{}
+You\textquotesingle{}ll notice that there are two parts to it, with two different instantiations of the \hyperlink{_p_t_lib_page_path_trace_loop_anchor}{path\+\_\+trace\+\_\+loop()} call\+: they correspond to using two different direct-\/lighting samplers provided by Fermat, the default mesh-\/based sampler (\hyperlink{struct_direct_lighting_mesh}{Direct\+Lighting\+Mesh}, second branch), which can be configured to either generate samples on the mesh triangles on the fly, or use a set of pre-\/sampled V\+P\+Ls, and a more advanced \href{https://en.wikipedia.org/wiki/Reinforcement_learning}{\tt Reinforcement Learning} based sampler (\hyperlink{struct_direct_lighting_r_l}{Direct\+Lighting\+RL}, first branch). Other than that, the two branches are almost identical\+: they initialize the context with all its members, and call into \hyperlink{_p_t_lib_page_path_trace_loop_anchor}{path\+\_\+trace\+\_\+loop()}.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+So what does our vertex processor do, exactly? It implements a few methods specifying how to weight and accumulate the path samples generated by \hyperlink{_p_t_lib_page_path_trace_loop_anchor}{path\+\_\+trace\+\_\+loop()}. The first such method handles the calculation of Next-\/\+Event Estimation (N\+EE) weights\+:
+\end{DoxyParagraph}
+
+\begin{DoxyCodeInclude}
+    \textcolor{keyword}{template} <\textcolor{keyword}{typename} PTContext>
+    FERMAT\_DEVICE
+    \textcolor{keywordtype}{void} compute\_nee\_weights(
+        \textcolor{keyword}{const} PTContext&            context,                \textcolor{comment}{// the current context}
+        \textcolor{keyword}{const} \hyperlink{struct_rendering_context_view}{RenderingContextView}& renderer,               \textcolor{comment}{// the current renderer}
+        \textcolor{keyword}{const} \hyperlink{union_pixel_info}{PixelInfo}                pixel\_info,             \textcolor{comment}{// packed pixel info}
+        \textcolor{keyword}{const} uint32                prev\_vertex\_info,       \textcolor{comment}{// packed previous vertex info}
+        \textcolor{keyword}{const} uint32                vertex\_info,            \textcolor{comment}{// packed vertex info}
+        \textcolor{keyword}{const} \hyperlink{struct_eye_vertex}{EyeVertex}&           ev,                     \textcolor{comment}{// the local vertex}
+        \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&       f\_d,                    \textcolor{comment}{// the diffuse BSDF weight}
+        \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&       f\_g,                    \textcolor{comment}{// the glossy BSDF weight}
+        \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&       w,                      \textcolor{comment}{// the current path weight}
+        \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&       f\_L,                    \textcolor{comment}{// the current light EDF sample
+       contribution}
+              \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&       out\_w\_d,                \textcolor{comment}{// the output diffuse weight}
+              \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&       out\_w\_g,                \textcolor{comment}{// the output glossy weight}
+              uint32&               out\_vertex\_info)        \textcolor{comment}{// the output packed vertex info}
+    \{
+        out\_w\_d = (context.in\_bounce == 0 ? f\_d : f\_d + f\_g) * w * f\_L;
+        out\_w\_g = (context.in\_bounce == 0 ? f\_g : f\_d + f\_g) * w * f\_L;
+        out\_vertex\_info = 0xFFFFFFFF; \textcolor{comment}{// mark this unused}
+\textcolor{comment}{}    \}
+\end{DoxyCodeInclude}
+ \begin{DoxyParagraph}{}
+The relevant lines are just these\+:
+\end{DoxyParagraph}
+
+\begin{DoxyCodeInclude}
+        out\_w\_d = (context.in\_bounce == 0 ? f\_d : f\_d + f\_g) * w * f\_L;
+        out\_w\_g = (context.in\_bounce == 0 ? f\_g : f\_d + f\_g) * w * f\_L;
+        out\_vertex\_info = 0xFFFFFFFF; \textcolor{comment}{// mark this unused}
+\end{DoxyCodeInclude}
+ \begin{DoxyParagraph}{}
+For now we\textquotesingle{}ll focus on the first two, and ignore the third and last line; we\textquotesingle{}ll come back to that later. The first says that output diffuse weight, {\itshape out\+\_\+w\+\_\+d} should be equal to the local diffuse B\+S\+DF component {\itshape f\+\_\+d}, times the light\textquotesingle{}s E\+DF {\itshape f\+\_\+L}, times the path weight {\itshape w} if this is the very first vertex along a path (i.\+e. the one directly visible from the camera), and otherwise it should be the sum of both the diffuse and glossy components {\itshape (f\+\_\+d + f\+\_\+g)}, times the E\+DF and the path weight. The rationale for this distinction is that this path tracer supports splitting the output to distinct framebuffer channels for diffuse and specular components, and this output diffuse weight is what will be eventually accumulated into the {\itshape diffuse} channel, and we want it to contain the diffuse direct lighting at the first bounce, plus {\itshape all} the indirect lighting (whether glossy or diffuse) seen through any {\itshape previous diffuse scattering event}. The output glossy weight {\itshape out\+\_\+w\+\_\+g} is computed with similar logic.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+At this point you might wonder how we\textquotesingle{}re going to find out whether this sample did go through some previous scattering event, and we will find the answer examining the next method, specifying the recipe for the actual sample accumulation\+:
+\end{DoxyParagraph}
+
+\begin{DoxyCodeInclude}
+    \textcolor{keyword}{template} <\textcolor{keyword}{typename} PTContext>
+    FERMAT\_DEVICE
+    \textcolor{keywordtype}{void} accumulate\_nee(
+        \textcolor{keyword}{const} PTContext&            context,                \textcolor{comment}{// the current context}
+              \hyperlink{struct_rendering_context_view}{RenderingContextView}& renderer,               \textcolor{comment}{// the current renderer}
+        \textcolor{keyword}{const} \hyperlink{union_pixel_info}{PixelInfo}                pixel\_info,             \textcolor{comment}{// packed pixel info}
+        \textcolor{keyword}{const} uint32                vertex\_info,            \textcolor{comment}{// packed vertex info}
+        \textcolor{keyword}{const} \textcolor{keywordtype}{bool}                  shadow\_hit,             \textcolor{comment}{// the hit information}
+        \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&       w\_d,                    \textcolor{comment}{// the diffuse NEE weight}
+        \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&       w\_g)                    \textcolor{comment}{// the glossy NEE weight}
+    \{
+        \textcolor{keywordflow}{if} (shadow\_hit == \textcolor{keyword}{false})
+        \{
+            \hyperlink{struct_f_buffer_view}{FBufferView}& fb = renderer.fb;
+            \hyperlink{struct_f_buffer_channel_view}{FBufferChannelView}& composited\_channel = fb(FBufferDesc::COMPOSITED\_C);
+            \hyperlink{struct_f_buffer_channel_view}{FBufferChannelView}& diffuse\_channel    = fb(FBufferDesc::DIFFUSE\_C);
+            \hyperlink{struct_f_buffer_channel_view}{FBufferChannelView}& specular\_channel   = fb(FBufferDesc::SPECULAR\_C);
+
+            \textcolor{keyword}{const} uint32 pixel\_index = pixel\_info.pixel;
+            \textcolor{keyword}{const} uint32 pixel\_comp  = pixel\_info.comp;
+            \textcolor{keyword}{const} \textcolor{keywordtype}{float} frame\_weight = context.frame\_weight;
+
+            add\_in<false>( composited\_channel, pixel\_index, w\_d + w\_g, frame\_weight );
+
+            \textcolor{keywordflow}{if} (context.in\_bounce == 0)
+            \{
+                \textcolor{comment}{// accumulate the per-component values to the respective output channels}
+                add\_in<true>( diffuse\_channel,  pixel\_index, w\_d, frame\_weight );
+                add\_in<true>( specular\_channel, pixel\_index, w\_g, frame\_weight );
+            \}
+            \textcolor{keywordflow}{else}
+            \{
+                \textcolor{comment}{// accumulate the per-component value to the proper output channel}
+                \textcolor{keywordflow}{if} (pixel\_comp & Bsdf::kDiffuseMask) add\_in<true>( diffuse\_channel,  pixel\_index, w\_d, 
+      frame\_weight );
+                \textcolor{keywordflow}{if} (pixel\_comp & Bsdf::kGlossyMask)  add\_in<true>( specular\_channel, pixel\_index, w\_g, 
+      frame\_weight );
+            \}
+        \}
+    \}
+\end{DoxyCodeInclude}
+ \begin{DoxyParagraph}{}
+Here you can notice that, again, we have some special casing for the first bounce -\/ which adds both the diffuse and the glossy sample values to their respective channels -\/ and another case for all other bounces -\/ which selectively write to {\itshape either} the diffuse {\itshape or} the glossy channel based on the {\itshape pixel\+\_\+info.\+comp} field, which is exactly what \hyperlink{group___p_t_lib}{P\+T\+Lib} uses to mark whether a path is diffuse or glossy (or in other words, whether the first scattering event as seen from the camera was diffuse or glossy).
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The next method we should look at is the one specifying the assignment of the new path weight after a scattering event\+:
+\end{DoxyParagraph}
+
+\begin{DoxyCodeInclude}
+    \textcolor{keyword}{template} <\textcolor{keyword}{typename} PTContext>
+    FERMAT\_DEVICE
+    \textcolor{keywordtype}{void} compute\_scattering\_weights(
+        \textcolor{keyword}{const} PTContext&            context,                \textcolor{comment}{// the current context}
+        \textcolor{keyword}{const} \hyperlink{struct_rendering_context_view}{RenderingContextView}& renderer,               \textcolor{comment}{// the current renderer}
+        \textcolor{keyword}{const} \hyperlink{union_pixel_info}{PixelInfo}                pixel\_info,             \textcolor{comment}{// packed pixel info}
+        \textcolor{keyword}{const} uint32                prev\_vertex\_info,       \textcolor{comment}{// packed previous vertex info}
+        \textcolor{keyword}{const} uint32                vertex\_info,            \textcolor{comment}{// packed vertex info}
+        \textcolor{keyword}{const} \hyperlink{struct_eye_vertex}{EyeVertex}&           ev,                     \textcolor{comment}{// the local vertex}
+        \textcolor{keyword}{const} uint32                out\_comp,               \textcolor{comment}{// the bsdf scattering component}
+        \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&       g,                      \textcolor{comment}{// the bsdf scattering weight
+       (= f/p)}
+        \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&       w,                      \textcolor{comment}{// the current path weight}
+              \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&       out\_w,                  \textcolor{comment}{// the output path weight}
+              uint32&               out\_vertex\_info)        \textcolor{comment}{// the output vertex info}
+    \{
+        out\_w = g * w;
+        out\_vertex\_info = 0xFFFFFFFF; \textcolor{comment}{// mark this unused}
+    \}
+\end{DoxyCodeInclude}
+ \begin{DoxyParagraph}{}
+and again, besides the function signature boilerplate, this method is very simple\+: it says that the output path weight {\itshape out\+\_\+w} should be the product of the local B\+S\+DF scattering weight {\itshape g} (which is calculated as the B\+S\+DF value divided by the sampling pdf, i.\+e. {\itshape g = f/p}), times the current path weight {\itshape w}.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Finally, we\textquotesingle{}ll look at the recipe for accumulating emissive vertices found along a path\+:
+\end{DoxyParagraph}
+
+\begin{DoxyCodeInclude}
+    \textcolor{keyword}{template} <\textcolor{keyword}{typename} PTContext>
+    FERMAT\_DEVICE
+    \textcolor{keywordtype}{void} accumulate\_emissive(
+        \textcolor{keyword}{const} PTContext&            context,                \textcolor{comment}{// the current context}
+              \hyperlink{struct_rendering_context_view}{RenderingContextView}& renderer,               \textcolor{comment}{// the current renderer}
+        \textcolor{keyword}{const} \hyperlink{union_pixel_info}{PixelInfo}                pixel\_info,             \textcolor{comment}{// packed pixel info}
+        \textcolor{keyword}{const} uint32                prev\_vertex\_info,       \textcolor{comment}{// packed previous vertex info}
+        \textcolor{keyword}{const} uint32                vertex\_info,            \textcolor{comment}{// packed vertex info}
+        \textcolor{keyword}{const} \hyperlink{struct_eye_vertex}{EyeVertex}&           ev,                     \textcolor{comment}{// the local vertex}
+        \textcolor{keyword}{const} \hyperlink{structcugar_1_1_vector}{cugar::Vector3f}&       w)                      \textcolor{comment}{// the current path weight}
+    \{
+        \hyperlink{struct_f_buffer_view}{FBufferView}& fb = renderer.fb;
+        \hyperlink{struct_f_buffer_channel_view}{FBufferChannelView}& composited\_channel = fb(FBufferDesc::COMPOSITED\_C);
+        \hyperlink{struct_f_buffer_channel_view}{FBufferChannelView}& direct\_channel     = fb(FBufferDesc::DIRECT\_C);
+        \hyperlink{struct_f_buffer_channel_view}{FBufferChannelView}& diffuse\_channel    = fb(FBufferDesc::DIFFUSE\_C);
+        \hyperlink{struct_f_buffer_channel_view}{FBufferChannelView}& specular\_channel   = fb(FBufferDesc::SPECULAR\_C);
+
+        \textcolor{keyword}{const} uint32 pixel\_index = pixel\_info.pixel;
+        \textcolor{keyword}{const} uint32 pixel\_comp  = pixel\_info.comp;
+        \textcolor{keyword}{const} \textcolor{keywordtype}{float} frame\_weight = context.frame\_weight;
+
+        \textcolor{comment}{// accumulate to the image}
+        add\_in<false>(composited\_channel, pixel\_index, w, frame\_weight);
+
+        \textcolor{comment}{// accumulate the per-component value to the proper output channel}
+        \textcolor{keywordflow}{if} (context.in\_bounce == 0)
+            add\_in<false>(direct\_channel, pixel\_index, w, frame\_weight);
+        \textcolor{keywordflow}{else}
+        \{
+            \textcolor{keywordflow}{if} (pixel\_comp & Bsdf::kDiffuseMask) add\_in<true>(diffuse\_channel,  pixel\_index, w, 
+      frame\_weight);
+            \textcolor{keywordflow}{if} (pixel\_comp & Bsdf::kGlossyMask)  add\_in<true>(specular\_channel, pixel\_index, w, 
+      frame\_weight);
+        \}
+    \}
+\end{DoxyCodeInclude}
+ \begin{DoxyParagraph}{}
+and hopefully at this point you sort of understand what\textquotesingle{}s going on\+: the emissive sample {\itshape w} is simply accumulated to the various framebuffer channels it contributes to, again depending on whether this is the first bounce (in which case the sample represents direct lighting), or a secondary one.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+This should more or less clarify how to use \hyperlink{group___p_t_lib}{P\+T\+Lib}. More importantly, it should clarify what it is designed for\+: implementing massively parallel, {\itshape customizable} path tracers, without actually writing any of the relatively complex kernel and queueing logic necessary to implement them. In the next chapter, we\textquotesingle{}ll see a more advanced use case, where the same exact library is customized to perform path space filtering. Incidentally, so far we didn\textquotesingle{}t quite explain what were all those {\itshape packed vertex\+\_\+info}\textquotesingle{}s that we blatantly initialized to 0x\+F\+F\+F\+F\+F\+F\+FF (essentially marking them {\itshape unused})\+: the next section will show what they can be used for.
+\end{DoxyParagraph}
+Next\+: \hyperlink{_p_s_f_p_t_page}{The Path-\/\+Space Filtering Path Tracer} 

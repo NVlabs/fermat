@@ -1,0 +1,191 @@
+\hypertarget{structcugar_1_1priority__queue}{}\section{cugar\+:\+:priority\+\_\+queue$<$ Key, Container, Compare $>$ Struct Template Reference}
+\label{structcugar_1_1priority__queue}\index{cugar\+::priority\+\_\+queue$<$ Key, Container, Compare $>$@{cugar\+::priority\+\_\+queue$<$ Key, Container, Compare $>$}}
+
+
+\subsection{Detailed description}
+\subsubsection*{template$<$typename Key, typename Container, typename Compare$>$\newline
+struct cugar\+::priority\+\_\+queue$<$ Key, Container, Compare $>$}
+
+A priority queue adaptor, that can be built on top of any user-\/provided container
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Key} & the key type \\
+\hline
+{\em Container} & the underlying container used to hold keys, must implement push\+\_\+back(), \hyperlink{structcugar_1_1priority__queue_aa75b22d30695f86f47dba642f44a4774}{size()}, resize(), \hyperlink{structcugar_1_1priority__queue_ae83fdf473503faff06093363f2fbd9de}{clear()} \\
+\hline
+{\em Compare} & the comparison binary functor, Compare(a,b) == true iff a $<$ b \\
+\hline
+\end{DoxyTemplParams}
+
+
+{\ttfamily \#include $<$priority\+\_\+queue.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1priority__queue_a76d40fc86f92d59d868f9ae8751f9e01}\label{structcugar_1_1priority__queue_a76d40fc86f92d59d868f9ae8751f9e01}} 
+typedef Key {\bfseries value\+\_\+type}
+\item 
+\mbox{\Hypertarget{structcugar_1_1priority__queue_a9b33573c1416545cf54280341c8598c4}\label{structcugar_1_1priority__queue_a9b33573c1416545cf54280341c8598c4}} 
+typedef Container {\bfseries container\+\_\+type}
+\item 
+\mbox{\Hypertarget{structcugar_1_1priority__queue_a7657dda28e85b50f5e9d4b64e71f44a9}\label{structcugar_1_1priority__queue_a7657dda28e85b50f5e9d4b64e71f44a9}} 
+typedef container\+\_\+type\+::const\+\_\+iterator {\bfseries const\+\_\+iterator}
+\item 
+\mbox{\Hypertarget{structcugar_1_1priority__queue_a9b22c2c55291745163c5944e5e79b0b5}\label{structcugar_1_1priority__queue_a9b22c2c55291745163c5944e5e79b0b5}} 
+typedef const\+\_\+iterator {\bfseries iterator}
+\end{DoxyCompactItemize}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1priority__queue_ac27881d03a273accfa84ddf946c0466b}{priority\+\_\+queue} (Container cont=Container(), const Compare cmp=Compare())
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{structcugar_1_1priority__queue_aa7c04643a12d912dfada807743a8c1a8}{empty} () const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structcugar_1_1priority__queue_aa75b22d30695f86f47dba642f44a4774}{size} () const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1priority__queue_a4772719e001bba3c9ac2c02f4b12ba83}{push} (const Key key)
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1priority__queue_aedb3ffb12d8f0d8515715235e7b518ae}{pop} ()
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Key \& \hyperlink{structcugar_1_1priority__queue_ae74971b0d5b9ed6d0822601ba8afc875}{top} ()
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Key \hyperlink{structcugar_1_1priority__queue_a1c4ec8611f6fe2e6dbfdae408435b9cd}{top} () const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const Key \& \hyperlink{structcugar_1_1priority__queue_aaa3d4e418725e5c5442382b007f4bc13}{operator\mbox{[}$\,$\mbox{]}} (const uint32 i) const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1priority__queue_ae83fdf473503faff06093363f2fbd9de}{clear} ()
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const\+\_\+iterator \hyperlink{structcugar_1_1priority__queue_a9311ca225c87bcb2b5681cd10f033881}{begin} () const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE iterator \hyperlink{structcugar_1_1priority__queue_a5b3729e96e1f4e05bf2f7e08f0c821b0}{begin} ()
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const\+\_\+iterator \hyperlink{structcugar_1_1priority__queue_a1ffb30afe7e85d8b1ccb10446cae678d}{end} () const
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE iterator \hyperlink{structcugar_1_1priority__queue_a2e23a349f2e9092a2fe0b1593a91f03a}{end} ()
+\item 
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE iterator \hyperlink{structcugar_1_1priority__queue_a31cc4b1e4f45712ec454ef62052db97a}{upper\+\_\+bound} (const Key \&x)
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcugar_1_1priority__queue_aa55e95734379e6facb7cd3f3ebdcb9ad}\label{structcugar_1_1priority__queue_aa55e95734379e6facb7cd3f3ebdcb9ad}} 
+uint32 {\bfseries m\+\_\+size}
+\item 
+\mbox{\Hypertarget{structcugar_1_1priority__queue_a382b4bcc1754ef6f662975bada2fc168}\label{structcugar_1_1priority__queue_a382b4bcc1754ef6f662975bada2fc168}} 
+Container {\bfseries m\+\_\+queue}
+\item 
+\mbox{\Hypertarget{structcugar_1_1priority__queue_af6af20a53f5c0fb4134c8c916d31613d}\label{structcugar_1_1priority__queue_af6af20a53f5c0fb4134c8c916d31613d}} 
+Compare {\bfseries m\+\_\+cmp}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcugar_1_1priority__queue_ac27881d03a273accfa84ddf946c0466b}\label{structcugar_1_1priority__queue_ac27881d03a273accfa84ddf946c0466b}} 
+\index{cugar\+::priority\+\_\+queue@{cugar\+::priority\+\_\+queue}!priority\+\_\+queue@{priority\+\_\+queue}}
+\index{priority\+\_\+queue@{priority\+\_\+queue}!cugar\+::priority\+\_\+queue@{cugar\+::priority\+\_\+queue}}
+\subsubsection{\texorpdfstring{priority\+\_\+queue()}{priority\_queue()}}
+{\footnotesize\ttfamily template$<$typename Key , typename Container , typename Compare $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1priority__queue}{cugar\+::priority\+\_\+queue}$<$ Key, Container, Compare $>$\+::\hyperlink{structcugar_1_1priority__queue}{priority\+\_\+queue} (\begin{DoxyParamCaption}\item[{Container}]{cont = {\ttfamily Container()},  }\item[{const Compare}]{cmp = {\ttfamily Compare()} }\end{DoxyParamCaption})}
+
+constructor 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcugar_1_1priority__queue_a9311ca225c87bcb2b5681cd10f033881}\label{structcugar_1_1priority__queue_a9311ca225c87bcb2b5681cd10f033881}} 
+\index{cugar\+::priority\+\_\+queue@{cugar\+::priority\+\_\+queue}!begin@{begin}}
+\index{begin@{begin}!cugar\+::priority\+\_\+queue@{cugar\+::priority\+\_\+queue}}
+\subsubsection{\texorpdfstring{begin()}{begin()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Key, typename Container, typename Compare$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const\+\_\+iterator \hyperlink{structcugar_1_1priority__queue}{cugar\+::priority\+\_\+queue}$<$ Key, Container, Compare $>$\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+starting iterator \mbox{\Hypertarget{structcugar_1_1priority__queue_a5b3729e96e1f4e05bf2f7e08f0c821b0}\label{structcugar_1_1priority__queue_a5b3729e96e1f4e05bf2f7e08f0c821b0}} 
+\index{cugar\+::priority\+\_\+queue@{cugar\+::priority\+\_\+queue}!begin@{begin}}
+\index{begin@{begin}!cugar\+::priority\+\_\+queue@{cugar\+::priority\+\_\+queue}}
+\subsubsection{\texorpdfstring{begin()}{begin()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Key, typename Container, typename Compare$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE iterator \hyperlink{structcugar_1_1priority__queue}{cugar\+::priority\+\_\+queue}$<$ Key, Container, Compare $>$\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+starting iterator \mbox{\Hypertarget{structcugar_1_1priority__queue_ae83fdf473503faff06093363f2fbd9de}\label{structcugar_1_1priority__queue_ae83fdf473503faff06093363f2fbd9de}} 
+\index{cugar\+::priority\+\_\+queue@{cugar\+::priority\+\_\+queue}!clear@{clear}}
+\index{clear@{clear}!cugar\+::priority\+\_\+queue@{cugar\+::priority\+\_\+queue}}
+\subsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily template$<$typename Key , typename Container , typename Compare $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1priority__queue}{cugar\+::priority\+\_\+queue}$<$ Key, Container, Compare $>$\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+clear the queue \mbox{\Hypertarget{structcugar_1_1priority__queue_aa7c04643a12d912dfada807743a8c1a8}\label{structcugar_1_1priority__queue_aa7c04643a12d912dfada807743a8c1a8}} 
+\index{cugar\+::priority\+\_\+queue@{cugar\+::priority\+\_\+queue}!empty@{empty}}
+\index{empty@{empty}!cugar\+::priority\+\_\+queue@{cugar\+::priority\+\_\+queue}}
+\subsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily template$<$typename Key , typename Container , typename Compare $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE bool \hyperlink{structcugar_1_1priority__queue}{cugar\+::priority\+\_\+queue}$<$ Key, Container, Compare $>$\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+is queue empty? \mbox{\Hypertarget{structcugar_1_1priority__queue_a1ffb30afe7e85d8b1ccb10446cae678d}\label{structcugar_1_1priority__queue_a1ffb30afe7e85d8b1ccb10446cae678d}} 
+\index{cugar\+::priority\+\_\+queue@{cugar\+::priority\+\_\+queue}!end@{end}}
+\index{end@{end}!cugar\+::priority\+\_\+queue@{cugar\+::priority\+\_\+queue}}
+\subsubsection{\texorpdfstring{end()}{end()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Key, typename Container, typename Compare$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const\+\_\+iterator \hyperlink{structcugar_1_1priority__queue}{cugar\+::priority\+\_\+queue}$<$ Key, Container, Compare $>$\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+ending iterator \mbox{\Hypertarget{structcugar_1_1priority__queue_a2e23a349f2e9092a2fe0b1593a91f03a}\label{structcugar_1_1priority__queue_a2e23a349f2e9092a2fe0b1593a91f03a}} 
+\index{cugar\+::priority\+\_\+queue@{cugar\+::priority\+\_\+queue}!end@{end}}
+\index{end@{end}!cugar\+::priority\+\_\+queue@{cugar\+::priority\+\_\+queue}}
+\subsubsection{\texorpdfstring{end()}{end()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Key, typename Container, typename Compare$>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE iterator \hyperlink{structcugar_1_1priority__queue}{cugar\+::priority\+\_\+queue}$<$ Key, Container, Compare $>$\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+ending iterator \mbox{\Hypertarget{structcugar_1_1priority__queue_aaa3d4e418725e5c5442382b007f4bc13}\label{structcugar_1_1priority__queue_aaa3d4e418725e5c5442382b007f4bc13}} 
+\index{cugar\+::priority\+\_\+queue@{cugar\+::priority\+\_\+queue}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!cugar\+::priority\+\_\+queue@{cugar\+::priority\+\_\+queue}}
+\subsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily template$<$typename Key , typename Container , typename Compare $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE const Key \& \hyperlink{structcugar_1_1priority__queue}{cugar\+::priority\+\_\+queue}$<$ Key, Container, Compare $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const uint32}]{i }\end{DoxyParamCaption}) const}
+
+return the i-\/th element in the heap \mbox{\Hypertarget{structcugar_1_1priority__queue_aedb3ffb12d8f0d8515715235e7b518ae}\label{structcugar_1_1priority__queue_aedb3ffb12d8f0d8515715235e7b518ae}} 
+\index{cugar\+::priority\+\_\+queue@{cugar\+::priority\+\_\+queue}!pop@{pop}}
+\index{pop@{pop}!cugar\+::priority\+\_\+queue@{cugar\+::priority\+\_\+queue}}
+\subsubsection{\texorpdfstring{pop()}{pop()}}
+{\footnotesize\ttfamily template$<$typename Key , typename Container , typename Compare $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1priority__queue}{cugar\+::priority\+\_\+queue}$<$ Key, Container, Compare $>$\+::pop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+pop an element \mbox{\Hypertarget{structcugar_1_1priority__queue_a4772719e001bba3c9ac2c02f4b12ba83}\label{structcugar_1_1priority__queue_a4772719e001bba3c9ac2c02f4b12ba83}} 
+\index{cugar\+::priority\+\_\+queue@{cugar\+::priority\+\_\+queue}!push@{push}}
+\index{push@{push}!cugar\+::priority\+\_\+queue@{cugar\+::priority\+\_\+queue}}
+\subsubsection{\texorpdfstring{push()}{push()}}
+{\footnotesize\ttfamily template$<$typename Key , typename Container , typename Compare $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE void \hyperlink{structcugar_1_1priority__queue}{cugar\+::priority\+\_\+queue}$<$ Key, Container, Compare $>$\+::push (\begin{DoxyParamCaption}\item[{const Key}]{key }\end{DoxyParamCaption})}
+
+push an element \mbox{\Hypertarget{structcugar_1_1priority__queue_aa75b22d30695f86f47dba642f44a4774}\label{structcugar_1_1priority__queue_aa75b22d30695f86f47dba642f44a4774}} 
+\index{cugar\+::priority\+\_\+queue@{cugar\+::priority\+\_\+queue}!size@{size}}
+\index{size@{size}!cugar\+::priority\+\_\+queue@{cugar\+::priority\+\_\+queue}}
+\subsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$typename Key , typename Container , typename Compare $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint32 \hyperlink{structcugar_1_1priority__queue}{cugar\+::priority\+\_\+queue}$<$ Key, Container, Compare $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+return queue size \mbox{\Hypertarget{structcugar_1_1priority__queue_ae74971b0d5b9ed6d0822601ba8afc875}\label{structcugar_1_1priority__queue_ae74971b0d5b9ed6d0822601ba8afc875}} 
+\index{cugar\+::priority\+\_\+queue@{cugar\+::priority\+\_\+queue}!top@{top}}
+\index{top@{top}!cugar\+::priority\+\_\+queue@{cugar\+::priority\+\_\+queue}}
+\subsubsection{\texorpdfstring{top()}{top()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Key , typename Container , typename Compare $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Key \& \hyperlink{structcugar_1_1priority__queue}{cugar\+::priority\+\_\+queue}$<$ Key, Container, Compare $>$\+::top (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+top of the queue \mbox{\Hypertarget{structcugar_1_1priority__queue_a1c4ec8611f6fe2e6dbfdae408435b9cd}\label{structcugar_1_1priority__queue_a1c4ec8611f6fe2e6dbfdae408435b9cd}} 
+\index{cugar\+::priority\+\_\+queue@{cugar\+::priority\+\_\+queue}!top@{top}}
+\index{top@{top}!cugar\+::priority\+\_\+queue@{cugar\+::priority\+\_\+queue}}
+\subsubsection{\texorpdfstring{top()}{top()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Key , typename Container , typename Compare $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE Key \hyperlink{structcugar_1_1priority__queue}{cugar\+::priority\+\_\+queue}$<$ Key, Container, Compare $>$\+::top (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+top of the queue \mbox{\Hypertarget{structcugar_1_1priority__queue_a31cc4b1e4f45712ec454ef62052db97a}\label{structcugar_1_1priority__queue_a31cc4b1e4f45712ec454ef62052db97a}} 
+\index{cugar\+::priority\+\_\+queue@{cugar\+::priority\+\_\+queue}!upper\+\_\+bound@{upper\+\_\+bound}}
+\index{upper\+\_\+bound@{upper\+\_\+bound}!cugar\+::priority\+\_\+queue@{cugar\+::priority\+\_\+queue}}
+\subsubsection{\texorpdfstring{upper\+\_\+bound()}{upper\_bound()}}
+{\footnotesize\ttfamily template$<$typename Key , typename Container , typename Compare $>$ \\
+C\+U\+G\+A\+R\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE C\+U\+G\+A\+R\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE \hyperlink{structcugar_1_1priority__queue}{priority\+\_\+queue}$<$ Key, Container, Compare $>$\+::iterator \hyperlink{structcugar_1_1priority__queue}{cugar\+::priority\+\_\+queue}$<$ Key, Container, Compare $>$\+::upper\+\_\+bound (\begin{DoxyParamCaption}\item[{const Key \&}]{x }\end{DoxyParamCaption})}
+
+locate the largest element v such that v $<$= x; return \hyperlink{structcugar_1_1priority__queue_a2e23a349f2e9092a2fe0b1593a91f03a}{end()} if no such element exists 
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/\hyperlink{priority__queue_8h}{priority\+\_\+queue.\+h}\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/contrib/cugar/basic/priority\+\_\+queue\+\_\+inline.\+h\end{DoxyCompactItemize}

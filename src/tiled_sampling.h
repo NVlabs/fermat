@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -29,6 +29,7 @@
 #pragma once
 
 #include <types.h>
+#include <cugar/basic/numbers.h>
 #include <algorithm>
 #include <vector>
 
@@ -50,7 +51,7 @@ inline float random()
 inline uint32 irandom(const uint32 N)
 {
 	const float r = random();
-	return min(uint32(r * N), N - 1);
+	return cugar::min(uint32(r * N), N - 1);
 }
 
 struct strided_vec
@@ -58,7 +59,8 @@ struct strided_vec
 	FERMAT_HOST_DEVICE strided_vec() {}
 	FERMAT_HOST_DEVICE strided_vec(float* _ptr, const uint32 _off, const uint32 _stride) : base(_ptr), off(_off), stride(_stride) {}
 
-	FERMAT_HOST_DEVICE float& operator[] (const uint32 i) { return base[off + i*stride]; }
+	FERMAT_HOST_DEVICE const float& operator[] (const uint32 i) const { return base[off + i*stride]; }
+	FERMAT_HOST_DEVICE		 float& operator[] (const uint32 i)		  { return base[off + i*stride]; }
 
 	float*	base;
 	uint32	off;

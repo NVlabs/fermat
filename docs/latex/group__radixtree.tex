@@ -1,0 +1,271 @@
+\hypertarget{group__radixtree}{}\section{Radix Trees}
+\label{group__radixtree}\index{Radix Trees@{Radix Trees}}
+
+
+\subsection{Detailed Description}
+This module defines functions to generate binary Radix Trees on top of sorted integer sequences \subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcugar_1_1cuda_1_1_radixtree__context}{cugar\+::cuda\+::\+Radixtree\+\_\+context}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Tree\+\_\+writer , typename Integer $>$ }\\void \hyperlink{group__radixtree_gafb888a81f085548c89a282181d74649a}{cugar\+::cuda\+::generate\+\_\+radix\+\_\+tree} (const uint32 n\+\_\+codes, const Integer $\ast$codes, const uint32 bits, const uint32 max\+\_\+leaf\+\_\+size, const bool keep\+\_\+singletons, const bool middle\+\_\+splits, Tree\+\_\+writer \&tree)
+\item 
+{\footnotesize template$<$typename Tree\+\_\+writer , typename Integer $>$ }\\void \hyperlink{group__radixtree_ga5993c99673b557cb58a86ec0fbb39e35}{cugar\+::cuda\+::generate\+\_\+radix\+\_\+tree} (\hyperlink{structcugar_1_1cuda_1_1_radixtree__context}{Radixtree\+\_\+context} \&context, const uint32 n\+\_\+codes, const Integer $\ast$codes, const uint32 bits, const uint32 max\+\_\+leaf\+\_\+size, const bool keep\+\_\+singletons, const bool middle\+\_\+splits, Tree\+\_\+writer \&tree)
+\item 
+{\footnotesize template$<$typename Tree\+\_\+writer , typename Integer $>$ }\\void \hyperlink{group__radixtree_gafa925282e2b6e8bd87c1a00c1f1e6807}{cugar\+::generate\+\_\+radix\+\_\+tree} (const uint32 n\+\_\+codes, const Integer $\ast$codes, const uint32 bits, const uint32 max\+\_\+leaf\+\_\+size, const bool keep\+\_\+singletons, const bool middle\+\_\+splits, Tree\+\_\+writer \&tree)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__radixtree_gafa925282e2b6e8bd87c1a00c1f1e6807}\label{group__radixtree_gafa925282e2b6e8bd87c1a00c1f1e6807}} 
+\index{Radix Trees@{Radix Trees}!generate\+\_\+radix\+\_\+tree@{generate\+\_\+radix\+\_\+tree}}
+\index{generate\+\_\+radix\+\_\+tree@{generate\+\_\+radix\+\_\+tree}!Radix Trees@{Radix Trees}}
+\subsubsection{\texorpdfstring{generate\+\_\+radix\+\_\+tree()}{generate\_radix\_tree()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename Tree\+\_\+writer , typename Integer $>$ \\
+void cugar\+::generate\+\_\+radix\+\_\+tree (\begin{DoxyParamCaption}\item[{const uint32}]{n\+\_\+codes,  }\item[{const Integer $\ast$}]{codes,  }\item[{const uint32}]{bits,  }\item[{const uint32}]{max\+\_\+leaf\+\_\+size,  }\item[{const bool}]{keep\+\_\+singletons,  }\item[{const bool}]{middle\+\_\+splits,  }\item[{Tree\+\_\+writer \&}]{tree }\end{DoxyParamCaption})}
+
+Generate a binary radix tree from a set of sorted integers, splitting the set top-\/down at each occurrence of a bit set to 1. In practice, if the integers are seen as Morton codes, this algorithm generates a middle-\/split k-\/d tree.
+
+
+\begin{DoxyParams}{Parameters}
+{\em n\+\_\+codes} & number of entries in the input set of codes \\
+\hline
+{\em codes} & input set of codes \\
+\hline
+{\em bits} & number of bits per code \\
+\hline
+{\em max\+\_\+leaf\+\_\+size} & maximum target number of entries per leaf \\
+\hline
+{\em keep\+\_\+singletons} & mark whether to keep or suppress singleton nodes in the output tree \\
+\hline
+{\em middle\+\_\+splits} & mark whether to allow pure middle splits once a group of integers are all equal. N\+O\+TE that if this flag is set to false, the maximum leaf size cannot be guaranteed \\
+\hline
+{\em tree} & output tree\\
+\hline
+\end{DoxyParams}
+Generate a binary radix tree from a set of sorted integers, splitting the set top-\/down at each occurrence of a bit set to 1. In practice, if the integers are seen as Morton codes, this algorithm generates a middle-\/split k-\/d tree.
+
+
+\begin{DoxyParams}{Parameters}
+{\em context} & the generation context \\
+\hline
+{\em n\+\_\+codes} & number of entries in the input set of codes \\
+\hline
+{\em codes} & input set of codes \\
+\hline
+{\em bits} & number of bits per code \\
+\hline
+{\em max\+\_\+leaf\+\_\+size} & maximum target number of entries per leaf \\
+\hline
+{\em keep\+\_\+singletons} & mark whether to keep or suppress singleton nodes in the output tree \\
+\hline
+{\em tree} & output tree\\
+\hline
+\end{DoxyParams}
+The Tree\+\_\+writer template parameter has to provide the following interface\+: \label{group__radixtree_TreeWriterAnchor}%
+\Hypertarget{group__radixtree_TreeWriterAnchor}%
+ 
+\begin{DoxyCode}
+\textcolor{keyword}{struct }Tree\_writer
+\{
+   \textcolor{keywordtype}{void} reserve\_nodes(\textcolor{keyword}{const} uint32 n);  \textcolor{comment}{// reserve space for n nodes}
+   \textcolor{keywordtype}{void} reserve\_leaves(\textcolor{keyword}{const} uint32 n); \textcolor{comment}{// reserve space for n leaves}
+
+   context\_type get\_context();          \textcolor{comment}{// get a context to write nodes/leaves}
+
+   \textcolor{keyword}{struct }context\_type
+   \{
+       \textcolor{keywordtype}{void} write\_node(
+          \textcolor{keyword}{const} uint32 node,          \textcolor{comment}{// node to write}
+          \textcolor{keyword}{const} uint32 parent,        \textcolor{comment}{// node parent}
+          \textcolor{keyword}{const} \textcolor{keywordtype}{bool}   left\_child,    \textcolor{comment}{// specify whether the node has a left child}
+          \textcolor{keyword}{const} \textcolor{keywordtype}{bool}   right\_child,   \textcolor{comment}{// specify whether the node has a right child}
+          \textcolor{keyword}{const} uint32 offset,        \textcolor{comment}{// child offset}
+          \textcolor{keyword}{const} uint32 skip\_node,     \textcolor{comment}{// skip node}
+          \textcolor{keyword}{const} uint32 level,         \textcolor{comment}{// split level}
+          \textcolor{keyword}{const} uint32 \hyperlink{namespacecugar_a2121df08f967e232ea5fe0ee378dee67}{begin},         \textcolor{comment}{// node range begin}
+          \textcolor{keyword}{const} uint32 end,           \textcolor{comment}{// node range end}
+          \textcolor{keyword}{const} uint32 split\_index);  \textcolor{comment}{// split index}
+
+       \textcolor{keywordtype}{void} write\_leaf(
+          \textcolor{keyword}{const} uint32 leaf\_index,    \textcolor{comment}{// leaf to write}
+          \textcolor{keyword}{const} uint32 node\_index,    \textcolor{comment}{// node containing this leaf}
+          \textcolor{keyword}{const} uint32 \hyperlink{namespacecugar_a2121df08f967e232ea5fe0ee378dee67}{begin},         \textcolor{comment}{// leaf range begin}
+          \textcolor{keyword}{const} uint32 end);          \textcolor{comment}{// leaf range end}
+   \};
+\};
+\end{DoxyCode}
+
+
+The following code snippet shows how to use this builder\+:
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <cugar/bintree/cuda/bintree\_gen.h>}
+\textcolor{preprocessor}{#include <cugar/bintree/cuda/bintree\_context.h>}
+\textcolor{preprocessor}{#include <\hyperlink{morton_8h}{cugar/bits/morton.h}>}
+
+\textcolor{keyword}{typedef} Bintree\_node<leaf\_index\_tag> node\_type;
+
+\textcolor{keyword}{const} uint32 n\_points = 1000000;
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,Vecto3f>} points( n\_points );
+... \textcolor{comment}{// generate a bunch of points here}
+
+\textcolor{comment}{// compute their Morton codes}
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint32>} codes( n\_points );
+\hyperlink{group___primitives_gab584ee91ed39f9b1fec5aa0e7a0284a4}{thrust::transform}(
+    points.begin(),
+    points.begin() + n\_points,
+    codes.begin(),
+    morton\_functor<uint32,3>() );
+
+\textcolor{comment}{// sort them}
+thrust::sort( codes.begin(), codes.end() );
+
+\textcolor{comment}{// allocate storage for a binary tree...}
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,node\_type>} nodes;
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint2>}     leaves;
+
+Bintree\_writer<node\_type, device\_tag> tree\_writer( nodes, leaves );
+
+\textcolor{comment}{// ...and generate it!}
+\hyperlink{group__radixtree_gafb888a81f085548c89a282181d74649a}{cuda::generate\_radix\_tree}(
+    n\_points,
+    thrust::raw\_pointer\_cast( &codes.front() ),
+    30u,
+    16u,
+    \textcolor{keyword}{false},
+    tree\_writer );
+\end{DoxyCode}
+ \mbox{\Hypertarget{group__radixtree_gafb888a81f085548c89a282181d74649a}\label{group__radixtree_gafb888a81f085548c89a282181d74649a}} 
+\index{Radix Trees@{Radix Trees}!generate\+\_\+radix\+\_\+tree@{generate\+\_\+radix\+\_\+tree}}
+\index{generate\+\_\+radix\+\_\+tree@{generate\+\_\+radix\+\_\+tree}!Radix Trees@{Radix Trees}}
+\subsubsection{\texorpdfstring{generate\+\_\+radix\+\_\+tree()}{generate\_radix\_tree()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$typename Tree\+\_\+writer , typename Integer $>$ \\
+void cugar\+::cuda\+::generate\+\_\+radix\+\_\+tree (\begin{DoxyParamCaption}\item[{const uint32}]{n\+\_\+codes,  }\item[{const Integer $\ast$}]{codes,  }\item[{const uint32}]{bits,  }\item[{const uint32}]{max\+\_\+leaf\+\_\+size,  }\item[{const bool}]{keep\+\_\+singletons,  }\item[{const bool}]{middle\+\_\+splits,  }\item[{Tree\+\_\+writer \&}]{tree }\end{DoxyParamCaption})}
+
+Generate a binary radix tree from a set of sorted integers, splitting the set top-\/down at each occurrence of a bit set to 1. In practice, if the integers are seen as Morton codes, this algorithm generates a middle-\/split k-\/d tree.
+
+
+\begin{DoxyParams}{Parameters}
+{\em context} & the generation context \\
+\hline
+{\em n\+\_\+codes} & number of entries in the input set of codes \\
+\hline
+{\em codes} & input set of codes \\
+\hline
+{\em bits} & number of bits per code \\
+\hline
+{\em max\+\_\+leaf\+\_\+size} & maximum target number of entries per leaf \\
+\hline
+{\em keep\+\_\+singletons} & mark whether to keep or suppress singleton nodes in the output tree \\
+\hline
+{\em tree} & output tree\\
+\hline
+\end{DoxyParams}
+The Tree\+\_\+writer template parameter has to provide the following interface\+: \label{group__radixtree_TreeWriterAnchor}%
+\Hypertarget{group__radixtree_TreeWriterAnchor}%
+ 
+\begin{DoxyCode}
+\textcolor{keyword}{struct }Tree\_writer
+\{
+   \textcolor{keywordtype}{void} reserve\_nodes(\textcolor{keyword}{const} uint32 n);  \textcolor{comment}{// reserve space for n nodes}
+   \textcolor{keywordtype}{void} reserve\_leaves(\textcolor{keyword}{const} uint32 n); \textcolor{comment}{// reserve space for n leaves}
+
+   context\_type get\_context();          \textcolor{comment}{// get a context to write nodes/leaves}
+
+   \textcolor{keyword}{struct }context\_type
+   \{
+       \textcolor{keywordtype}{void} write\_node(
+          \textcolor{keyword}{const} uint32 node,          \textcolor{comment}{// node to write}
+          \textcolor{keyword}{const} uint32 parent,        \textcolor{comment}{// node parent}
+          \textcolor{keyword}{const} \textcolor{keywordtype}{bool}   left\_child,    \textcolor{comment}{// specify whether the node has a left child}
+          \textcolor{keyword}{const} \textcolor{keywordtype}{bool}   right\_child,   \textcolor{comment}{// specify whether the node has a right child}
+          \textcolor{keyword}{const} uint32 offset,        \textcolor{comment}{// child offset}
+          \textcolor{keyword}{const} uint32 skip\_node,     \textcolor{comment}{// skip node}
+          \textcolor{keyword}{const} uint32 level,         \textcolor{comment}{// split level}
+          \textcolor{keyword}{const} uint32 \hyperlink{namespacecugar_a2121df08f967e232ea5fe0ee378dee67}{begin},         \textcolor{comment}{// node range begin}
+          \textcolor{keyword}{const} uint32 end,           \textcolor{comment}{// node range end}
+          \textcolor{keyword}{const} uint32 split\_index);  \textcolor{comment}{// split index}
+
+       \textcolor{keywordtype}{void} write\_leaf(
+          \textcolor{keyword}{const} uint32 leaf\_index,    \textcolor{comment}{// leaf to write}
+          \textcolor{keyword}{const} uint32 node\_index,    \textcolor{comment}{// node containing this leaf}
+          \textcolor{keyword}{const} uint32 \hyperlink{namespacecugar_a2121df08f967e232ea5fe0ee378dee67}{begin},         \textcolor{comment}{// leaf range begin}
+          \textcolor{keyword}{const} uint32 end);          \textcolor{comment}{// leaf range end}
+   \};
+\};
+\end{DoxyCode}
+
+
+The following code snippet shows how to use this builder\+:
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <cugar/bintree/cuda/bintree\_gen.h>}
+\textcolor{preprocessor}{#include <cugar/bintree/cuda/bintree\_context.h>}
+\textcolor{preprocessor}{#include <\hyperlink{morton_8h}{cugar/bits/morton.h}>}
+
+\textcolor{keyword}{typedef} Bintree\_node<leaf\_index\_tag> node\_type;
+
+\textcolor{keyword}{const} uint32 n\_points = 1000000;
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,Vecto3f>} points( n\_points );
+... \textcolor{comment}{// generate a bunch of points here}
+
+\textcolor{comment}{// compute their Morton codes}
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint32>} codes( n\_points );
+\hyperlink{group___primitives_gab584ee91ed39f9b1fec5aa0e7a0284a4}{thrust::transform}(
+    points.begin(),
+    points.begin() + n\_points,
+    codes.begin(),
+    morton\_functor<uint32,3>() );
+
+\textcolor{comment}{// sort them}
+thrust::sort( codes.begin(), codes.end() );
+
+\textcolor{comment}{// allocate storage for a binary tree...}
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,node\_type>} nodes;
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint2>}     leaves;
+
+Bintree\_writer<node\_type, device\_tag> tree\_writer( nodes, leaves );
+
+\textcolor{comment}{// ...and generate it!}
+\hyperlink{group__radixtree_gafb888a81f085548c89a282181d74649a}{cuda::generate\_radix\_tree}(
+    n\_points,
+    thrust::raw\_pointer\_cast( &codes.front() ),
+    30u,
+    16u,
+    \textcolor{keyword}{false},
+    tree\_writer );
+\end{DoxyCode}
+ \mbox{\Hypertarget{group__radixtree_ga5993c99673b557cb58a86ec0fbb39e35}\label{group__radixtree_ga5993c99673b557cb58a86ec0fbb39e35}} 
+\index{Radix Trees@{Radix Trees}!generate\+\_\+radix\+\_\+tree@{generate\+\_\+radix\+\_\+tree}}
+\index{generate\+\_\+radix\+\_\+tree@{generate\+\_\+radix\+\_\+tree}!Radix Trees@{Radix Trees}}
+\subsubsection{\texorpdfstring{generate\+\_\+radix\+\_\+tree()}{generate\_radix\_tree()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename Tree\+\_\+writer , typename Integer $>$ \\
+void cugar\+::cuda\+::generate\+\_\+radix\+\_\+tree (\begin{DoxyParamCaption}\item[{\hyperlink{structcugar_1_1cuda_1_1_radixtree__context}{Radixtree\+\_\+context} \&}]{context,  }\item[{const uint32}]{n\+\_\+codes,  }\item[{const Integer $\ast$}]{codes,  }\item[{const uint32}]{bits,  }\item[{const uint32}]{max\+\_\+leaf\+\_\+size,  }\item[{const bool}]{keep\+\_\+singletons,  }\item[{const bool}]{middle\+\_\+splits,  }\item[{Tree\+\_\+writer \&}]{tree }\end{DoxyParamCaption})}
+
+Generate a binary tree from a set of sorted integers, splitting the set top-\/down at each occurrence of a bit set to 1. In practice, if the integers are seen as Morton codes, this algorithm generates a middle-\/split k-\/d tree.
+
+
+\begin{DoxyParams}{Parameters}
+{\em context} & the generation context \\
+\hline
+{\em n\+\_\+codes} & number of entries in the input set of codes \\
+\hline
+{\em codes} & input set of codes \\
+\hline
+{\em bits} & number of bits per code \\
+\hline
+{\em max\+\_\+leaf\+\_\+size} & maximum target number of entries per leaf \\
+\hline
+{\em keep\+\_\+singletons} & mark whether to keep or suppress singleton nodes in the output tree \\
+\hline
+{\em middle\+\_\+splits} & mark whether to allow pure middle splits once a group of integers are all equal. N\+O\+TE that if this flag is set to false, the maximum leaf size cannot be guaranteed \\
+\hline
+{\em tree} & output tree \\
+\hline
+\end{DoxyParams}

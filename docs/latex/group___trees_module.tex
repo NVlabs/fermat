@@ -1,0 +1,228 @@
+\hypertarget{group___trees_module}{}\section{Trees}
+\label{group___trees_module}\index{Trees@{Trees}}
+
+
+\subsection{Detailed Description}
+This module defines utility functions to operate with generic trees, such as tree reductions \subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Tree\+\_\+visitor , typename Input\+\_\+iterator , typename Output\+\_\+iterator , typename Operator , typename Value\+\_\+type $>$ }\\void \hyperlink{group___trees_module_ga8044d04a72e3a0a2bf628bbfc237f954}{cugar\+::cuda\+::tree\+\_\+reduce} (const Tree\+\_\+visitor tree, const Input\+\_\+iterator in\+\_\+values, Output\+\_\+iterator node\+\_\+values, const Operator op, const Value\+\_\+type def\+\_\+value)
+\item 
+{\footnotesize template$<$typename Tree\+\_\+visitor , typename Value\+\_\+iterator , typename Operator $>$ }\\void \hyperlink{group___trees_module_gaf560f435723578e34050172fab671529}{cugar\+::cuda\+::tree\+\_\+reduce} (const Tree\+\_\+visitor tree, Value\+\_\+iterator values, const Operator op)
+\item 
+{\footnotesize template$<$typename Tree\+\_\+visitor , typename Input\+\_\+iterator , typename Output\+\_\+iterator , typename Operator , typename Value\+\_\+type $>$ }\\void \hyperlink{group___trees_module_gaf7e2c5b8c843cd382db2d1b23c981694}{cugar\+::tree\+\_\+reduce} (const Tree\+\_\+visitor tree, const Input\+\_\+iterator in\+\_\+values, Output\+\_\+iterator node\+\_\+values, const Operator op, const Value\+\_\+type def\+\_\+value)
+\item 
+{\footnotesize template$<$typename Tree\+\_\+visitor , typename Value\+\_\+iterator , typename Operator $>$ }\\void \hyperlink{group___trees_module_ga808e7cb4b98d8dc0c3ef125ca457cb68}{cugar\+::tree\+\_\+reduce} (const Tree\+\_\+visitor tree, Value\+\_\+iterator values, const Operator op)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___trees_module_ga8044d04a72e3a0a2bf628bbfc237f954}\label{group___trees_module_ga8044d04a72e3a0a2bf628bbfc237f954}} 
+\index{Trees@{Trees}!tree\+\_\+reduce@{tree\+\_\+reduce}}
+\index{tree\+\_\+reduce@{tree\+\_\+reduce}!Trees@{Trees}}
+\subsubsection{\texorpdfstring{tree\+\_\+reduce()}{tree\_reduce()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$typename Tree\+\_\+visitor , typename Input\+\_\+iterator , typename Output\+\_\+iterator , typename Operator , typename Value\+\_\+type $>$ \\
+void cugar\+::cuda\+::tree\+\_\+reduce (\begin{DoxyParamCaption}\item[{const Tree\+\_\+visitor}]{tree,  }\item[{const Input\+\_\+iterator}]{in\+\_\+values,  }\item[{Output\+\_\+iterator}]{node\+\_\+values,  }\item[{const Operator}]{op,  }\item[{const Value\+\_\+type}]{def\+\_\+value }\end{DoxyParamCaption})}
+
+Reduce a bunch of values attached to the elemens in the leaves of a tree. The Tree\+\_\+visitor template type has to provide the following interface\+:
+
+
+\begin{DoxyCode}
+\textcolor{keyword}{struct }Tree\_visitor
+\{
+    \textcolor{comment}{// get node count}
+    \textcolor{comment}{//}
+    uint32 get\_node\_count() \textcolor{keyword}{const};
+
+    \textcolor{comment}{// get leaf count}
+    \textcolor{comment}{//}
+    uint32 get\_leaf\_count() \textcolor{keyword}{const};
+
+    \textcolor{comment}{// get child count}
+    \textcolor{comment}{//}
+    \textcolor{comment}{// \(\backslash\)param node    node index}
+    uint32 get\_child\_count(\textcolor{keyword}{const} uint32 node) \textcolor{keyword}{const};
+
+    \textcolor{comment}{// get i-th child (among the active ones)}
+    \textcolor{comment}{//}
+    \textcolor{comment}{// \(\backslash\)param node    node index}
+    \textcolor{comment}{// \(\backslash\)param i        child index}
+    uint32 get\_child(\textcolor{keyword}{const} uint32 node, \textcolor{keyword}{const} uint32 i) \textcolor{keyword}{const};
+
+    \textcolor{comment}{// get parent}
+    \textcolor{comment}{//}
+    \textcolor{comment}{// \(\backslash\)param node    node index}
+    uint32 get\_parent(\textcolor{keyword}{const} uint32 node) \textcolor{keyword}{const};
+
+    \textcolor{comment}{// get leaf range}
+    \textcolor{comment}{//}
+    \textcolor{comment}{// \(\backslash\)param node    node index}
+    uint2 get\_leaf\_range(\textcolor{keyword}{const} uint32 node) \textcolor{keyword}{const};
+
+    \textcolor{comment}{// get primitive range size}
+    \textcolor{comment}{//}
+    \textcolor{comment}{// \(\backslash\)param node    node index}
+    uint2 get\_range\_size(\textcolor{keyword}{const} uint32 node) \textcolor{keyword}{const};
+
+    \textcolor{comment}{// return whether it's possible to locate leaf nodes}
+    \textcolor{keywordtype}{bool} has\_leaf\_pointers() \textcolor{keyword}{const};
+
+    \textcolor{comment}{// return the index of the i-th leaf node}
+    uint32 get\_leaf\_node(\textcolor{keyword}{const} uint32 i) \textcolor{keyword}{const};
+\};
+\end{DoxyCode}
+
+
+The following code snippet illustrates an example usage\+:
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <cugar/tree/cuda/tree\_reduce.h>}
+\textcolor{preprocessor}{#include <cugar/tree/model.h>}
+
+\textcolor{keyword}{struct }merge\_op
+\{
+    CUGAR\_HOST\_DEVICE Bbox4f operator() (
+        \textcolor{keyword}{const} Bbox4f op1,
+        \textcolor{keyword}{const} Bbox4f op2)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} Bbox4f( op1, op2 ); \}
+\};
+
+\textcolor{comment}{// compute the bboxes of a tree}
+\textcolor{keywordtype}{void} compute\_bboxes(
+    uint32      node\_count,     \textcolor{comment}{// input tree nodes}
+    uint32      leaf\_count,     \textcolor{comment}{// input tree leaves}
+    Bvh\_node*   nodes,          \textcolor{comment}{// input tree nodes, device pointer}
+    uint32*     parents,        \textcolor{comment}{// input tree node parents, device pointer}
+    Bbox4f*     prim\_bboxes,    \textcolor{comment}{// input primitive bboxes, device pointer}
+    Bbox4f*     node\_bboxes)    \textcolor{comment}{// output node bboxes, device pointer}
+\{
+    \textcolor{comment}{// instantiate a breadth-first tree view}
+    Bintree\_visitor<Bvh\_node> bvh(
+        node\_count,
+        leaf\_count,
+        nodes,
+        parents,
+        NULL,
+        NULL );
+
+    \textcolor{comment}{// compute a tree reduction}
+    \hyperlink{group___trees_module_ga8044d04a72e3a0a2bf628bbfc237f954}{cuda::tree\_reduce}(
+        bvh,
+        prim\_bboxes,
+        node\_bboxes,
+        merge\_op(),
+        Bbox4f() );
+\}
+\end{DoxyCode}
+ \mbox{\Hypertarget{group___trees_module_gaf7e2c5b8c843cd382db2d1b23c981694}\label{group___trees_module_gaf7e2c5b8c843cd382db2d1b23c981694}} 
+\index{Trees@{Trees}!tree\+\_\+reduce@{tree\+\_\+reduce}}
+\index{tree\+\_\+reduce@{tree\+\_\+reduce}!Trees@{Trees}}
+\subsubsection{\texorpdfstring{tree\+\_\+reduce()}{tree\_reduce()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$typename Tree\+\_\+visitor , typename Input\+\_\+iterator , typename Output\+\_\+iterator , typename Operator , typename Value\+\_\+type $>$ \\
+void cugar\+::tree\+\_\+reduce (\begin{DoxyParamCaption}\item[{const Tree\+\_\+visitor}]{tree,  }\item[{const Input\+\_\+iterator}]{in\+\_\+values,  }\item[{Output\+\_\+iterator}]{node\+\_\+values,  }\item[{const Operator}]{op,  }\item[{const Value\+\_\+type}]{def\+\_\+value }\end{DoxyParamCaption})}
+
+Reduce a bunch of values attached to the elemens in the leaves of a tree. The Tree\+\_\+visitor template type has to provide the following interface\+:
+
+
+\begin{DoxyCode}
+\textcolor{keyword}{struct }Tree\_visitor
+\{
+    \textcolor{comment}{// get node count}
+    \textcolor{comment}{//}
+    uint32 get\_node\_count() \textcolor{keyword}{const};
+
+    \textcolor{comment}{// get leaf count}
+    \textcolor{comment}{//}
+    uint32 get\_leaf\_count() \textcolor{keyword}{const};
+
+    \textcolor{comment}{// get child count}
+    \textcolor{comment}{//}
+    \textcolor{comment}{// \(\backslash\)param node    node index}
+    uint32 get\_child\_count(\textcolor{keyword}{const} uint32 node) \textcolor{keyword}{const};
+
+    \textcolor{comment}{// get i-th child (among the active ones)}
+    \textcolor{comment}{//}
+    \textcolor{comment}{// \(\backslash\)param node    node index}
+    \textcolor{comment}{// \(\backslash\)param i        child index}
+    uint32 get\_child(\textcolor{keyword}{const} uint32 node, \textcolor{keyword}{const} uint32 i) \textcolor{keyword}{const};
+
+    \textcolor{comment}{// get parent}
+    \textcolor{comment}{//}
+    \textcolor{comment}{// \(\backslash\)param node    node index}
+    uint32 get\_parent(\textcolor{keyword}{const} uint32 node) \textcolor{keyword}{const};
+
+    \textcolor{comment}{// get leaf range}
+    \textcolor{comment}{//}
+    \textcolor{comment}{// \(\backslash\)param node    node index}
+    uint2 get\_leaf\_range(\textcolor{keyword}{const} uint32 node) \textcolor{keyword}{const};
+
+    \textcolor{comment}{// get primitive range size}
+    \textcolor{comment}{//}
+    \textcolor{comment}{// \(\backslash\)param node    node index}
+    uint2 get\_range\_size(\textcolor{keyword}{const} uint32 node) \textcolor{keyword}{const};
+
+    \textcolor{comment}{// return whether it's possible to locate leaf nodes}
+    \textcolor{keywordtype}{bool} has\_leaf\_pointers() \textcolor{keyword}{const};
+
+    \textcolor{comment}{// return the index of the i-th leaf node}
+    uint32 get\_leaf\_node(\textcolor{keyword}{const} uint32 i) \textcolor{keyword}{const};
+\};
+\end{DoxyCode}
+
+
+The following code snippet illustrates an example usage\+:
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <cugar/tree/cuda/tree\_reduce.h>}
+\textcolor{preprocessor}{#include <cugar/tree/model.h>}
+
+\textcolor{keyword}{struct }merge\_op
+\{
+    CUGAR\_HOST\_DEVICE Bbox4f operator() (
+        \textcolor{keyword}{const} Bbox4f op1,
+        \textcolor{keyword}{const} Bbox4f op2)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} Bbox4f( op1, op2 ); \}
+\};
+
+\textcolor{comment}{// compute the bboxes of a tree}
+\textcolor{keywordtype}{void} compute\_bboxes(
+    uint32      node\_count,     \textcolor{comment}{// input tree nodes}
+    uint32      leaf\_count,     \textcolor{comment}{// input tree leaves}
+    Bvh\_node*   nodes,          \textcolor{comment}{// input tree nodes, device pointer}
+    uint32*     parents,        \textcolor{comment}{// input tree node parents, device pointer}
+    Bbox4f*     prim\_bboxes,    \textcolor{comment}{// input primitive bboxes, device pointer}
+    Bbox4f*     node\_bboxes)    \textcolor{comment}{// output node bboxes, device pointer}
+\{
+    \textcolor{comment}{// instantiate a breadth-first tree view}
+    Bintree\_visitor<Bvh\_node>(
+        node\_count,
+        leaf\_count,
+        nodes,
+        parents,
+        NULL,
+        NULL );
+
+    \textcolor{comment}{// compute a tree reduction}
+    \hyperlink{group___trees_module_ga8044d04a72e3a0a2bf628bbfc237f954}{cuda::tree\_reduce}(
+        bvh,
+        prim\_bboxes,
+        node\_bboxes,
+        merge\_op(),
+        Bbox4f() );
+\}
+\end{DoxyCode}
+ \mbox{\Hypertarget{group___trees_module_ga808e7cb4b98d8dc0c3ef125ca457cb68}\label{group___trees_module_ga808e7cb4b98d8dc0c3ef125ca457cb68}} 
+\index{Trees@{Trees}!tree\+\_\+reduce@{tree\+\_\+reduce}}
+\index{tree\+\_\+reduce@{tree\+\_\+reduce}!Trees@{Trees}}
+\subsubsection{\texorpdfstring{tree\+\_\+reduce()}{tree\_reduce()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$typename Tree\+\_\+visitor , typename Value\+\_\+iterator , typename Operator $>$ \\
+void cugar\+::tree\+\_\+reduce (\begin{DoxyParamCaption}\item[{const Tree\+\_\+visitor}]{tree,  }\item[{Value\+\_\+iterator}]{values,  }\item[{const Operator}]{op }\end{DoxyParamCaption})}
+
+Reduce a bunch of values attached to the leaves of a tree, with a simple bottom-\/up propagation. \mbox{\Hypertarget{group___trees_module_gaf560f435723578e34050172fab671529}\label{group___trees_module_gaf560f435723578e34050172fab671529}} 
+\index{Trees@{Trees}!tree\+\_\+reduce@{tree\+\_\+reduce}}
+\index{tree\+\_\+reduce@{tree\+\_\+reduce}!Trees@{Trees}}
+\subsubsection{\texorpdfstring{tree\+\_\+reduce()}{tree\_reduce()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$typename Tree\+\_\+visitor , typename Value\+\_\+iterator , typename Operator $>$ \\
+void cugar\+::cuda\+::tree\+\_\+reduce (\begin{DoxyParamCaption}\item[{const Tree\+\_\+visitor}]{tree,  }\item[{Value\+\_\+iterator}]{values,  }\item[{const Operator}]{op }\end{DoxyParamCaption})}
+
+Reduce a bunch of values attached to the leaves of a tree, with a simple bottom-\/up propagation. 

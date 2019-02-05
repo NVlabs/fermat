@@ -1,0 +1,36 @@
+\hypertarget{group___spatial_hash_module}{}\section{Spatial\+Hash\+Module}
+\label{group___spatial_hash_module}\index{Spatial\+Hash\+Module@{Spatial\+Hash\+Module}}
+
+
+\subsection{Detailed Description}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint64 \hyperlink{group___spatial_hash_module_ga04c40211588f9601e16bc99d3bef70ed}{spatial\+\_\+hash} (const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} P, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} N, const \hyperlink{structcugar_1_1_bbox}{cugar\+::\+Bbox3f} bbox, const float samples\mbox{[}6\mbox{]}, const float cone\+\_\+radius, const uint32 normal\+\_\+bits=4)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint64 \hyperlink{group___spatial_hash_module_ga2513a4c97931956f4af57ea0e56a6829}{spatial\+\_\+hash} (const uint32 pixel\+\_\+index, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} P, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} N, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} T, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} B, const \hyperlink{structcugar_1_1_bbox}{cugar\+::\+Bbox3f} bbox, const float samples\mbox{[}6\mbox{]}, const float cone\+\_\+radius, const float filter\+\_\+radius, const uint32 normal\+\_\+bits=4)
+\item 
+F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float \hyperlink{group___spatial_hash_module_gac8381b402e3663f4c235952ca96a5391}{spatial\+\_\+hash\+\_\+lod} (const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f} P, const \hyperlink{structcugar_1_1_bbox}{cugar\+::\+Bbox3f} bbox, const float cone\+\_\+radius)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___spatial_hash_module_ga04c40211588f9601e16bc99d3bef70ed}\label{group___spatial_hash_module_ga04c40211588f9601e16bc99d3bef70ed}} 
+\index{Spatial\+Hash\+Module@{Spatial\+Hash\+Module}!spatial\+\_\+hash@{spatial\+\_\+hash}}
+\index{spatial\+\_\+hash@{spatial\+\_\+hash}!Spatial\+Hash\+Module@{Spatial\+Hash\+Module}}
+\subsubsection{\texorpdfstring{spatial\+\_\+hash()}{spatial\_hash()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint64 spatial\+\_\+hash (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{P,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{N,  }\item[{const \hyperlink{structcugar_1_1_bbox}{cugar\+::\+Bbox3f}}]{bbox,  }\item[{const float}]{samples\mbox{[}6\mbox{]},  }\item[{const float}]{cone\+\_\+radius,  }\item[{const uint32}]{normal\+\_\+bits = {\ttfamily 4} }\end{DoxyParamCaption})}
+
+Perform jittered spatial hashing \mbox{\Hypertarget{group___spatial_hash_module_ga2513a4c97931956f4af57ea0e56a6829}\label{group___spatial_hash_module_ga2513a4c97931956f4af57ea0e56a6829}} 
+\index{Spatial\+Hash\+Module@{Spatial\+Hash\+Module}!spatial\+\_\+hash@{spatial\+\_\+hash}}
+\index{spatial\+\_\+hash@{spatial\+\_\+hash}!Spatial\+Hash\+Module@{Spatial\+Hash\+Module}}
+\subsubsection{\texorpdfstring{spatial\+\_\+hash()}{spatial\_hash()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE uint64 spatial\+\_\+hash (\begin{DoxyParamCaption}\item[{const uint32}]{pixel\+\_\+index,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{P,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{N,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{T,  }\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{B,  }\item[{const \hyperlink{structcugar_1_1_bbox}{cugar\+::\+Bbox3f}}]{bbox,  }\item[{const float}]{samples\mbox{[}6\mbox{]},  }\item[{const float}]{cone\+\_\+radius,  }\item[{const float}]{filter\+\_\+radius,  }\item[{const uint32}]{normal\+\_\+bits = {\ttfamily 4} }\end{DoxyParamCaption})}
+
+Perform jittered spatial hashing \mbox{\Hypertarget{group___spatial_hash_module_gac8381b402e3663f4c235952ca96a5391}\label{group___spatial_hash_module_gac8381b402e3663f4c235952ca96a5391}} 
+\index{Spatial\+Hash\+Module@{Spatial\+Hash\+Module}!spatial\+\_\+hash\+\_\+lod@{spatial\+\_\+hash\+\_\+lod}}
+\index{spatial\+\_\+hash\+\_\+lod@{spatial\+\_\+hash\+\_\+lod}!Spatial\+Hash\+Module@{Spatial\+Hash\+Module}}
+\subsubsection{\texorpdfstring{spatial\+\_\+hash\+\_\+lod()}{spatial\_hash\_lod()}}
+{\footnotesize\ttfamily F\+E\+R\+M\+A\+T\+\_\+\+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE F\+E\+R\+M\+A\+T\+\_\+\+H\+O\+S\+T\+\_\+\+D\+E\+V\+I\+CE float spatial\+\_\+hash\+\_\+lod (\begin{DoxyParamCaption}\item[{const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector3f}}]{P,  }\item[{const \hyperlink{structcugar_1_1_bbox}{cugar\+::\+Bbox3f}}]{bbox,  }\item[{const float}]{cone\+\_\+radius }\end{DoxyParamCaption})}
+
+Compute the L\+OD level used for jittered spatial hashing 

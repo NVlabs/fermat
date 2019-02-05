@@ -1,0 +1,45 @@
+This \hyperlink{group__radixtree}{module} provides functions to build radix trees on top of sorted integer sequences. In practice, if the integers are seen as Morton codes of spatial points, the algorithms generate a middle-\/split k-\/d tree.
+
+The following code snippet shows an example of how to use such builders\+:
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <cugar/bintree/cuda/bintree\_gen.h>}
+\textcolor{preprocessor}{#include <cugar/bintree/cuda/bintree\_context.h>}
+\textcolor{preprocessor}{#include <\hyperlink{morton_8h}{cugar/bits/morton.h}>}
+
+\textcolor{keyword}{typedef} Bintree\_node<leaf\_index\_tag> node\_type;
+
+\textcolor{keyword}{const} uint32 n\_points = 1000000;
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,Vecto3f>} points( n\_points );
+... \textcolor{comment}{// generate a bunch of points here}
+
+\textcolor{comment}{// compute their Morton codes}
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint32>} codes( n\_points );
+\hyperlink{group___primitives_gab584ee91ed39f9b1fec5aa0e7a0284a4}{thrust::transform}(
+    points.begin(),
+    points.begin() + n\_points,
+    codes.begin(),
+    morton\_functor<uint32,3>() );
+
+\textcolor{comment}{// sort them}
+thrust::sort( codes.begin(), codes.end() );
+
+\textcolor{comment}{// allocate storage for a binary tree...}
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,node\_type>} nodes;
+\hyperlink{structcugar_1_1vector}{cugar::vector<device\_tag,uint2>}     leaves;
+
+\textcolor{comment}{// build a tree writer}
+Bintree\_writer<node\_type, device\_tag> tree\_writer( nodes, leaves );
+
+\textcolor{comment}{// ...and generate it!}
+\hyperlink{group__radixtree_gafb888a81f085548c89a282181d74649a}{cuda::generate\_radix\_tree}(
+    n\_points,
+    thrust::raw\_pointer\_cast( &codes.front() ),
+    30u,
+    16u,
+    \textcolor{keyword}{false},
+    \textcolor{keyword}{true},
+    tree\_writer );
+\end{DoxyCode}
+ 

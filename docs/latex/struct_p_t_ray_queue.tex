@@ -1,0 +1,43 @@
+\hypertarget{struct_p_t_ray_queue}{}\section{P\+T\+Ray\+Queue Struct Reference}
+\label{struct_p_t_ray_queue}\index{P\+T\+Ray\+Queue@{P\+T\+Ray\+Queue}}
+\subsection*{Public Methods}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_p_t_ray_queue_a1ec2884588889c325a4674e461a1bdf7}\label{struct_p_t_ray_queue_a1ec2884588889c325a4674e461a1bdf7}} 
+F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE void {\bfseries warp\+\_\+append} (const uint32 pixel\+\_\+info, const \hyperlink{struct_masked_ray}{Masked\+Ray} \&ray, const float4 weight, const \hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f} cone=\hyperlink{structcugar_1_1_vector}{cugar\+::\+Vector2f}(0), const uint32 vertex\+\_\+info=uint32(-\/1), const uint32 nee\+\_\+slot=uint32(-\/1))
+\item 
+\mbox{\Hypertarget{struct_p_t_ray_queue_a628174eca7254d845b11c126b98d04a0}\label{struct_p_t_ray_queue_a628174eca7254d845b11c126b98d04a0}} 
+F\+E\+R\+M\+A\+T\+\_\+\+D\+E\+V\+I\+CE void {\bfseries warp\+\_\+append} (const uint32 pixel\+\_\+info, const \hyperlink{struct_masked_ray}{Masked\+Ray} \&ray, const float4 weight, const float4 weight\+\_\+d, const float4 weight\+\_\+g, const uint32 vertex\+\_\+info=uint32(-\/1), const uint32 nee\+\_\+slot=uint32(-\/1), const uint32 nee\+\_\+cluster=uint32(-\/1))
+\end{DoxyCompactItemize}
+\subsection*{Public Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_p_t_ray_queue_a50c36644ff617e7d31877f2b7bc846e9}\label{struct_p_t_ray_queue_a50c36644ff617e7d31877f2b7bc846e9}} 
+\hyperlink{struct_masked_ray}{Masked\+Ray} $\ast$ {\bfseries rays}
+\item 
+\mbox{\Hypertarget{struct_p_t_ray_queue_a9bef005df970aed0778679ed3677c1e4}\label{struct_p_t_ray_queue_a9bef005df970aed0778679ed3677c1e4}} 
+\hyperlink{struct_hit}{Hit} $\ast$ {\bfseries hits}
+\item 
+\mbox{\Hypertarget{struct_p_t_ray_queue_a6f4898183dc5a730e00931732a68fee6}\label{struct_p_t_ray_queue_a6f4898183dc5a730e00931732a68fee6}} 
+float4 $\ast$ {\bfseries weights}
+\item 
+\mbox{\Hypertarget{struct_p_t_ray_queue_ac9373c04bb1b46923eb67cb4d4e7df79}\label{struct_p_t_ray_queue_ac9373c04bb1b46923eb67cb4d4e7df79}} 
+float4 $\ast$ {\bfseries weights\+\_\+d}
+\item 
+\mbox{\Hypertarget{struct_p_t_ray_queue_ab6b0e303e20568e23a2ff5f2848f705d}\label{struct_p_t_ray_queue_ab6b0e303e20568e23a2ff5f2848f705d}} 
+float4 $\ast$ {\bfseries weights\+\_\+g}
+\item 
+\mbox{\Hypertarget{struct_p_t_ray_queue_ad2c279fe4c74ec555d599438ab8021d1}\label{struct_p_t_ray_queue_ad2c279fe4c74ec555d599438ab8021d1}} 
+uint4 $\ast$ {\bfseries pixels}
+\item 
+\mbox{\Hypertarget{struct_p_t_ray_queue_a91f323703fecdfb8141a5d5fea79b4b9}\label{struct_p_t_ray_queue_a91f323703fecdfb8141a5d5fea79b4b9}} 
+float2 $\ast$ {\bfseries cones}
+\item 
+\mbox{\Hypertarget{struct_p_t_ray_queue_a1f996121a4f1c9e74fefaa46b65b76b3}\label{struct_p_t_ray_queue_a1f996121a4f1c9e74fefaa46b65b76b3}} 
+uint32 $\ast$ {\bfseries size}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/p4research/research/jpantaleoni/\+Fermat-\/\+Public/src/pathtracer\+\_\+queues.\+h\end{DoxyCompactItemize}
