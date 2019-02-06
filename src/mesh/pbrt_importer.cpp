@@ -40,6 +40,8 @@
 
 namespace pbrt {
 
+void make_sphere(MeshStorage& other, const float radius, const bool inner_normals = false);
+
 // https://seblagarde.wordpress.com/2013/04/29/memo-on-fresnel-equations/
 cugar::Vector3f FresnelConductor(
 	float cosThetaI,
@@ -313,6 +315,50 @@ void FermatImporter::light_source(const char* type, const ParameterList& params)
 		light.dir = to - from;
 
 		m_dir_lights->push_back( light );
+	}
+	else if (strcmp(type, "infinite") == 0)
+	{
+		std::string filename;
+
+		for (size_t i = 0; i < params.names.size(); ++i)
+		{
+			if (params.names[i] == "mapname")
+				filename = params.values[i].get_string(0);
+		}
+
+		const uint32 texture_ref = m_mesh->insert_texture( filename );
+	
+		// make a sphere mesh
+		float radius = 1.0e3f; // make it very large...
+
+		MeshStorage other;
+		make_sphere(other, radius, true);
+
+		cugar::Matrix4x4f M = m_transform_stack.top();
+		::transform( other, &M[0][0] );
+
+		const int triangle_offset = m_mesh->getNumTriangles();
+		const int num_materials   = m_mesh->getNumMaterials();
+
+		merge( *m_mesh, other );
+
+		// make a new, custom material for this guy
+		MeshMaterial material	= MeshMaterial::zero_material();
+		material.emissive		= cugar::Vector4f(1.0f);
+		material.emissive_map	= texture_ref;
+
+		m_materials.push_back( material );
+		m_material_names.push_back( "" ); // unnamed material
+
+		const int material_id = int(m_materials.size() - 1);
+
+		// replace the default material
+		{
+			// NOTE: here, we assume that each loaded mesh has a default material placed at index 0, and that merging
+			// will cause it to be moved at index 'num_materials (the number of materials in 'mesh before merging).
+			for (int i = 0; i < other.getNumTriangles(); ++i)
+				m_mesh->m_material_indices.set( triangle_offset + i, material_id );
+		}
 	}
 }
 
@@ -777,6 +823,120 @@ void FermatImporter::build_material(const char* type, const ParameterList& param
 		material.specular  = cugar::Vector4f( FresnelConductor( 1.0f, cugar::Vector3f(1.0f), eta, k ), 0.0f );
 		material.roughness = (uroughness + vroughness) / 2; // TODO: add anisotropic materials support!
 	}
+}
+
+void make_sphere(MeshStorage& other, const float radius, const bool inner_normals)
+{
+	// make a sphere
+	const uint32 u_subdivs = 256;
+	const uint32 v_subdivs = 128;
+	uint32 triangle_count = u_subdivs * v_subdivs * 2;
+	uint32 vertex_count	  = u_subdivs * (v_subdivs + 1);
+
+	other.alloc( triangle_count, vertex_count, 0u, vertex_count, 1u );
+	// write vertex indices
+	{
+		MeshStorage::vertex_triangle* triangles = reinterpret_cast<MeshStorage::vertex_triangle*>(other.m_vertex_indices.ptr());
+		for (uint32 v = 0; v < v_subdivs; ++v)
+		{
+			for (uint32 u = 0; u < u_subdivs; ++u)
+			{
+				const uint32 t = (u + v * u_subdivs) * 2;
+
+				const uint32 bu = inner_normals ? 0u : 1u;
+				const uint32 iu = inner_normals ? 1u : 0u;
+
+				triangles[t+0].x = ((u+bu) % u_subdivs) + ((v+0) * u_subdivs);
+				triangles[t+0].y = ((u+iu) % u_subdivs) + ((v+0) * u_subdivs);
+				triangles[t+0].z = ((u+ 0) % u_subdivs) + ((v+1) * u_subdivs);
+				triangles[t+0].w = 0u;	// triangle flags
+
+				triangles[t+1].x = ((u+ 1) % u_subdivs) + ((v+0) * u_subdivs);
+				triangles[t+1].y = ((u+iu) % u_subdivs) + ((v+1) * u_subdivs);
+				triangles[t+1].z = ((u+bu) % u_subdivs) + ((v+1) * u_subdivs);
+				triangles[t+1].w = 0u;	// triangle flags
+			}
+		}
+	}
+	// write texture indices
+	{
+		MeshStorage::texture_triangle* triangles = reinterpret_cast<MeshStorage::texture_triangle*>(other.m_texture_indices.ptr());
+		for (uint32 v = 0; v < v_subdivs; ++v)
+		{
+			for (uint32 u = 0; u < u_subdivs; ++u)
+			{
+				const uint32 t = (u + v * u_subdivs) * 2;
+
+				const uint32 bu = inner_normals ? 0u : 1u;
+				const uint32 iu = inner_normals ? 1u : 0u;
+
+				triangles[t+0].x = ((u+bu) % u_subdivs) + ((v+0) * u_subdivs);
+				triangles[t+0].y = ((u+iu) % u_subdivs) + ((v+0) * u_subdivs);
+				triangles[t+0].z = ((u+ 0) % u_subdivs) + ((v+1) * u_subdivs);
+				triangles[t+0].w = 0u;	// triangle flags
+
+				triangles[t+1].x = ((u+ 1) % u_subdivs) + ((v+0) * u_subdivs);
+				triangles[t+1].y = ((u+iu) % u_subdivs) + ((v+1) * u_subdivs);
+				triangles[t+1].z = ((u+bu) % u_subdivs) + ((v+1) * u_subdivs);
+				triangles[t+1].w = 0u;	// triangle flags
+			}
+		}
+	}
+	// write vertex data
+	{
+		MeshView::vertex_type* vertices = reinterpret_cast<MeshView::vertex_type*>(other.m_vertex_data.ptr());
+		const float phi_delta   = M_TWO_PIf / float(u_subdivs);
+		const float theta_delta = M_PIf / float(v_subdivs);
+		for (uint32 v = 0; v <= v_subdivs; ++v)
+		{
+			for (uint32 u = 0; u < u_subdivs; ++u)
+			{
+				const uint32 t = (u + v * u_subdivs);
+
+				const float phi   = u * phi_delta;
+				const float theta = M_PIf - v * theta_delta;
+
+				const cugar::Vector3f p(
+					cosf(phi)*sinf(theta),
+					sinf(phi)*sinf(theta),
+					cosf(theta) );
+
+				// write the vertex
+				vertices[t].x = p.x * radius;
+				vertices[t].y = p.y * radius;
+				vertices[t].z = p.z * radius;
+			}
+		}
+	}
+	// write texture data
+	{
+		MeshView::texture_coord_type* vertices = reinterpret_cast<MeshView::texture_coord_type*>(other.m_texture_data.ptr());
+		const float phi_delta   = M_TWO_PIf / float(u_subdivs);
+		const float theta_delta = M_PIf / float(v_subdivs);
+		for (uint32 v = 0; v <= v_subdivs; ++v)
+		{
+			for (uint32 u = 0; u < u_subdivs; ++u)
+			{
+				const uint32 t = (u + v * u_subdivs);
+
+				// write the vertex
+				vertices[t].x = float(u) / float(u_subdivs);
+				vertices[t].y = float(v) / float(v_subdivs);
+			}
+		}
+	}
+
+	// set the group offsets
+	other.m_group_offsets[0] = 0;
+	other.m_group_offsets[1] = triangle_count;
+
+	// set the group names
+	other.m_group_names[0] = "sphere";
+
+	// set the zero-th default material
+	other.alloc_materials(1u);
+	other.alloc_material_names(0u);
+	memset( other.m_material_indices.ptr(), 0u, sizeof(uint32)*triangle_count );
 }
 
 } // namespace pbrt

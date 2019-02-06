@@ -177,6 +177,9 @@
     <ClInclude Include="..\..\bsdf\bsdf_test.h">
       <Filter>Source Files\cugar\bsdf</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\image\pfm.h">
+      <Filter>Source Files\cugar\image</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -421,6 +424,9 @@
     </ClCompile>
     <ClCompile Include="..\..\analysis\diff_test.cpp">
       <Filter>Source Files\cugar\analysis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\image\pfm.cpp">
+      <Filter>Source Files\cugar\image</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

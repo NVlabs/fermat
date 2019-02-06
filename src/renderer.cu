@@ -49,6 +49,7 @@
 #include <cugar/basic/cuda/sort.h>
 #include <cugar/basic/timer.h>
 #include <cugar/image/tga.h>
+#include <cugar/image/pfm.h>
 #include <cugar/bsdf/ltc.h>
 #include <buffers.h>
 #include <vector>
@@ -815,6 +816,37 @@ void RenderingContextImpl::init(int argc, char** argv)
 								float(rgb[3 * p + 0]) / 255.0f,
 								float(rgb[3 * p + 1]) / 255.0f,
 								float(rgb[3 * p + 2]) / 255.0f,
+								0.0f);
+
+						// generate the mipmap for this texture
+						m_textures_h[i]->set(texture_h);
+
+						// and copy it to the device
+						*m_textures_d[i] = *m_textures_h[i];
+
+						delete[] rgb;
+					}
+					else
+						fprintf(stderr, "warning: unable to load texture %s\n", texture_name);
+				}
+				else if (strcmp(texture_name + strlen(texture_name) - 4, ".pfm") == 0)
+				{
+					uint32 width, height;
+					float* rgb = cugar::load_pfm(texture_name, &width, &height);
+
+					if (rgb)
+					{
+						MipMapStorage<HOST_BUFFER>::TexturePtr texture_h(new TextureStorage<HOST_BUFFER>());
+
+						texture_h->resize(width, height);
+
+						float4* tex = texture_h->ptr();
+
+						for (uint32 p = 0; p < width * height; ++p)
+							tex[p] = make_float4(
+								float(rgb[3 * p + 0]),
+								float(rgb[3 * p + 1]),
+								float(rgb[3 * p + 2]),
 								0.0f);
 
 						// generate the mipmap for this texture

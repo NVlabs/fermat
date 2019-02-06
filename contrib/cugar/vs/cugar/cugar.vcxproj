@@ -227,6 +227,7 @@
     <ClInclude Include="..\..\bvh\cuda\packing.h" />
     <ClInclude Include="..\..\color\hsv.h" />
     <ClInclude Include="..\..\color\rgbe.h" />
+    <ClInclude Include="..\..\image\pfm.h" />
     <ClInclude Include="..\..\image\tga.h" />
     <ClInclude Include="..\..\image\tga_utils.h" />
     <ClInclude Include="..\..\kd\cuda\kd_builder.h" />
@@ -283,6 +284,7 @@
     <ClCompile Include="..\..\basic\exceptions.cpp" />
     <ClCompile Include="..\..\basic\threads.cpp" />
     <ClCompile Include="..\..\basic\timer.cpp" />
+    <ClCompile Include="..\..\image\pfm.cpp" />
     <ClCompile Include="..\..\image\tga.cpp" />
     <ClCompile Include="..\..\sampling\em_test.cpp" />
     <ClCompile Include="..\..\spherical\oct.cpp" />

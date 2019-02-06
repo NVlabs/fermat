@@ -71,6 +71,23 @@ struct SUTILCLASSAPI MeshMaterial
 	TextureReference specular_map;
 	TextureReference emissive_map;
 	TextureReference bump_map;
+
+	FERMAT_HOST_DEVICE
+	static MeshMaterial zero_material()
+	{
+		MeshMaterial material;
+		material.diffuse				= make_float4(0.0f,0.0f,0.0f,0.0f);
+		material.diffuse_trans			= make_float4(0.0f,0.0f,0.0f,0.0f);
+		material.ambient				= make_float4(0.0f,0.0f,0.0f,0.0f);
+		material.specular				= make_float4(0.0f,0.0f,0.0f,0.0f);
+		material.emissive				= make_float4(0.0f,0.0f,0.0f,0.0f);
+		material.reflectivity			= make_float4(0.0f,0.0f,0.0f,0.0f);
+		material.roughness				= 0.0f;
+		material.index_of_refraction	= 1.0f;
+		material.opacity				= 1.0f;
+		material.flags					= 0;
+		return material;
+	}
 };
 
 ///

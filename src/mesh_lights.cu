@@ -166,7 +166,7 @@ void MeshLightsStorageImpl::init(const uint32 n_vpls, MeshView h_mesh, MeshView 
 	cugar::vector<cugar::host_tag, float> h_mesh_cdf(h_mesh.num_triangles);
 	cugar::vector<cugar::host_tag, float> h_mesh_inv_area(h_mesh.num_triangles);
 
-	float sum = 0.0f;
+	double sum = 0.0f;
 
 	cugar::LFSRGeneratorMatrix generator(32, cugar::LFSRGeneratorMatrix::GOOD_PROJECTIONS);
 	cugar::LFSRRandomStream random(&generator,1u,cugar::hash(1351u + instance));
@@ -251,7 +251,7 @@ void MeshLightsStorageImpl::init(const uint32 n_vpls, MeshView h_mesh, MeshView 
 			sum += E * area;
 		}
 
-		h_mesh_cdf[i] = sum;
+		h_mesh_cdf[i] = float(sum);
 		h_mesh_inv_area[i] = 1.0f / area;
 	}
 
@@ -259,9 +259,8 @@ void MeshLightsStorageImpl::init(const uint32 n_vpls, MeshView h_mesh, MeshView 
 	if (sum)
 	{
 		fprintf(stderr, "    total emission: %f\n", sum);
-		float inv_sum = 1.0f / sum;
 		for (uint32 i = 0; i < (uint32)h_mesh_cdf.size(); ++i)
-			h_mesh_cdf[i] *= inv_sum;
+			h_mesh_cdf[i] = float( double(h_mesh_cdf[i]) / double(sum) ); // do the division in double precision
 
 		// go backwards in the cdf, and fix the trail of values that should be one but aren't
 		if (h_mesh_cdf.last() != 1.0f)
