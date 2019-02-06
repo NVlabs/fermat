@@ -1228,7 +1228,7 @@ bool shade_vertex(
 					out_ray,
 					cugar::Vector4f(out_w, out_p),
 					out_cone,
-					vertex_info,
+					out_vertex_info,
 					nee_vertex_id );
 
 				DEVICE_TIME( per_warp_atomic_add( context.device_timers + TRACE_SHADED_TIME, timer.take() ) );
