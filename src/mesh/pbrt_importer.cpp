@@ -329,7 +329,7 @@ void FermatImporter::light_source(const char* type, const ParameterList& params)
 		const uint32 texture_ref = m_mesh->insert_texture( filename );
 	
 		// make a sphere mesh
-		float radius = 1.0e3f; // make it very large...
+		float radius = 1.0e6f; // make it very large...
 
 		MeshStorage other;
 		make_sphere(other, radius, true);
@@ -346,6 +346,7 @@ void FermatImporter::light_source(const char* type, const ParameterList& params)
 		MeshMaterial material	= MeshMaterial::zero_material();
 		material.emissive		= cugar::Vector4f(1.0f);
 		material.emissive_map	= texture_ref;
+		material.index_of_refraction = 0.0f; // NOTE: set the IOR to zero to signal the suppression of glossy reflections
 
 		m_materials.push_back( material );
 		m_material_names.push_back( "" ); // unnamed material
@@ -654,6 +655,7 @@ void FermatImporter::build_material(const char* type, const ParameterList& param
 	if (strcmp(type, "matte") == 0)
 	{
 		material.diffuse = cugar::Vector4f(0.5f);
+		//material.index_of_refraction = 0.0f; // NOTE: set the IOR to zero to signal the suppression of glossy reflections
 
 		for (size_t i = 0; i < params.names.size(); ++i)
 		{

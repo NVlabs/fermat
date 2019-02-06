@@ -606,13 +606,21 @@ struct Bsdf
 	#if 1
 		const cugar::Vector3f N = geometry.normal_s;
 
-		const float eta     = dot(N, V) > 0.0f ? 1.0f / m_ior : m_ior;
-		const float inv_eta = dot(N, V) > 0.0f ? m_ior        : 1.0f / m_ior;
+		if (m_ior)
+		{
+			const float eta     = dot(N, V) > 0.0f ? 1.0f / m_ior : m_ior;
+			const float inv_eta = dot(N, V) > 0.0f ? m_ior        : 1.0f / m_ior;
 
-		const cugar::Vector3f H = microfacet(V, L, N, inv_eta);
+			const cugar::Vector3f H = microfacet(V, L, N, inv_eta);
 
-		r_coeff = Fresnel(geometry, dot(V,H), eta, m_fresnel);
-		t_coeff = cugar::Vector3f(1.0f - cugar::max_comp(r_coeff));
+			r_coeff = Fresnel(geometry, dot(V,H), eta, m_fresnel);
+			t_coeff = cugar::Vector3f(1.0f - cugar::max_comp(r_coeff));
+		}
+		else // NOTE: m_ior == 0 signals the complete suppression of glossy reflections
+		{
+			r_coeff = cugar::Vector3f(0.0f);
+			t_coeff = cugar::Vector3f(1.0f);
+		}
 	#else
 		if (dot(V, geometry.normal_s)*dot(L, geometry.normal_s) >= 0.0f)
 		{
