@@ -25,6 +25,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
 #pragma once
 
 // ------------------------------------------------------------------------- //
@@ -285,10 +286,8 @@ struct Bsdf
 		const cugar::Vector3f				L,
 		const ComponentType					components	= kAllComponents) const
 	{
-		cugar::Vector3f r_coeff;
-		cugar::Vector3f t_coeff;
-
-		weights(geometry, V, L, r_coeff, t_coeff);
+		cugar::Vector3f w[4];
+		component_weights( geometry, V, L, w );
 
 		float factor = 1.0f;
 		if (m_transport == kRadianceTransport)
@@ -301,10 +300,10 @@ struct Bsdf
 		}
 
 		return
-			((components & kDiffuseReflection)	 ? m_diffuse.f(geometry, V, L)			* t_coeff * m_opacity * factor			: 0.0f) + 
-			((components & kDiffuseTransmission) ? m_diffuse_trans.f(geometry, V, L)	* t_coeff * m_opacity * factor			: 0.0f) +
-			((components & kGlossyReflection)    ? m_glossy.f(geometry, V, L)			* r_coeff * factor						: 0.0f) + 
-			((components & kGlossyTransmission)	 ? m_glossy_trans.f(geometry, V, L)		* t_coeff * (1.0f - m_opacity) * factor : 0.0f);
+			((components & kDiffuseReflection)	 ? m_diffuse.f(geometry, V, L)			* w[kDiffuseReflectionIndex]   * factor	: 0.0f) + 
+			((components & kDiffuseTransmission) ? m_diffuse_trans.f(geometry, V, L)	* w[kDiffuseTransmissionIndex] * factor	: 0.0f) +
+			((components & kGlossyReflection)    ? m_glossy.f(geometry, V, L)			* w[kGlossyReflectionIndex]    * factor	: 0.0f) + 
+			((components & kGlossyTransmission)	 ? m_glossy_trans.f(geometry, V, L)		* w[kGlossyTransmissionIndex]  * factor : 0.0f);
 	}
 
 	/// evaluate the BSDF f(V,L) separately for all components
@@ -323,8 +322,8 @@ struct Bsdf
 		f_dt = m_glossy.f(geometry, V, L);
 		f_gt = m_glossy_trans.f(geometry, V, L);
 
-		cugar::Vector3f r_coeff, t_coeff;
-		weights(geometry, V, L, r_coeff, t_coeff);
+		cugar::Vector3f w[4];
+		component_weights( geometry, V, L, w );
 
 		float factor = 1.0f;
 		if (m_transport == kRadianceTransport)
@@ -336,10 +335,10 @@ struct Bsdf
 				factor = cugar::sqr( NoV > 0.0f ? m_ior : 1.0f / m_ior );
 		}
 
-		f[kDiffuseReflectionIndex]		= f_d	* t_coeff * m_opacity * factor;
-		f[kDiffuseTransmissionIndex]	= f_dt	* t_coeff * m_opacity * factor;
-		f[kGlossyReflectionIndex]		= f_g	* r_coeff * factor;
-		f[kGlossyTransmissionIndex]		= f_gt	* t_coeff * (1 - m_opacity) * factor;
+		f[kDiffuseReflectionIndex]		= f_d	* w[kDiffuseReflectionIndex]   * factor;
+		f[kDiffuseTransmissionIndex]	= f_dt	* w[kDiffuseTransmissionIndex] * factor;
+		f[kGlossyReflectionIndex]		= f_g	* w[kGlossyReflectionIndex]    * factor;
+		f[kGlossyTransmissionIndex]		= f_gt	* w[kGlossyTransmissionIndex]  * factor;
 	}
 
 	/// evaluate the BSDF f(V,L) and its pdf p(V,L) in a single call
@@ -384,8 +383,8 @@ struct Bsdf
 		p[kGlossyReflectionIndex]		= p_g * glossy_refl_prob;
 		p[kGlossyTransmissionIndex]		= p_gt * glossy_trans_prob;
 
-		cugar::Vector3f r_coeff, t_coeff;
-		weights(geometry, V, L, r_coeff, t_coeff);
+		cugar::Vector3f w[4];
+		component_weights( geometry, V, L, w );
 
 		float factor = 1.0f;
 		if (m_transport == kRadianceTransport)
@@ -397,10 +396,10 @@ struct Bsdf
 				factor = cugar::sqr( NoV > 0.0f ? m_ior : 1.0f / m_ior );
 		}
 
-		f[kDiffuseReflectionIndex]		= f_d	* t_coeff * m_opacity * factor;
-		f[kDiffuseTransmissionIndex]	= f_dt	* t_coeff * m_opacity * factor;
-		f[kGlossyReflectionIndex]		= f_g	* r_coeff * factor;
-		f[kGlossyTransmissionIndex]		= f_gt	* t_coeff * (1 - m_opacity) * factor;
+		f[kDiffuseReflectionIndex]		= f_d	* w[kDiffuseReflectionIndex]   * factor;
+		f[kDiffuseTransmissionIndex]	= f_dt	* w[kDiffuseTransmissionIndex] * factor;
+		f[kGlossyReflectionIndex]		= f_g	* w[kGlossyReflectionIndex]    * factor;
+		f[kGlossyTransmissionIndex]		= f_gt	* w[kGlossyTransmissionIndex]  * factor;
 	}
 
 	/// evaluate the BSDF f(V,L) and its p(V,L) in a single call
@@ -446,8 +445,8 @@ struct Bsdf
 			p_g * glossy_refl_prob +
 			p_gt * glossy_trans_prob;
 		
-		cugar::Vector3f r_coeff, t_coeff;
-		weights(geometry, V, L, r_coeff, t_coeff);
+		cugar::Vector3f w[4];
+		component_weights( geometry, V, L, w );
 
 		float factor = 1.0f;
 		if (m_transport == kRadianceTransport)
@@ -459,10 +458,10 @@ struct Bsdf
 				factor = cugar::sqr( NoV > 0.0f ? m_ior : 1.0f / m_ior );
 		}
 
-		f = f_d		* t_coeff * m_opacity * factor +
-			f_dt	* t_coeff * m_opacity * factor +
-			f_g		* r_coeff * factor +
-			f_gt	* t_coeff * (1 - m_opacity) * factor;
+		f = f_d		* w[kDiffuseReflectionIndex]   * factor +
+			f_dt	* w[kDiffuseTransmissionIndex] * factor +
+			f_g		* w[kGlossyReflectionIndex]    * factor +
+			f_gt	* w[kGlossyTransmissionIndex]  * factor;
 	}
 
 	/// evaluate the total projected probability p(V,L) = p(L|V)
@@ -523,10 +522,18 @@ struct Bsdf
 		float&								glossy_refl_prob,
 		float&								glossy_trans_prob) const
 	{
-		const float NoV = fabsf(cugar::dot(geometry.normal_s, V));
+		const float NoV_signed = cugar::dot(geometry.normal_s, V);
+		const float NoV        = fabsf( NoV_signed );
 
 		cugar::Vector3f r_coeff;
 		cugar::Vector3f t_coeff;
+
+		if (m_ior == 0) // suppress the glossy layer
+		{
+			r_coeff = cugar::Vector3f(0.0f);
+			t_coeff = cugar::Vector3f(1.0f);
+			return;
+		}
 
 	#if 0
 		const float Fc = pow5(1 - NoV);									// 1 sub, 3 mul
@@ -546,18 +553,7 @@ struct Bsdf
 		r_coeff = cugar::Vector3f(0.5f);
 		t_coeff = cugar::Vector3f(0.5f);
 	#else
-		const uint32 S = 32;
-
-		const float eta = cugar::dot(geometry.normal_s, V) > 0.0f ?  1.0f / m_ior : m_ior;
-
-		const uint32 cos_theta_i = cugar::min( S-1u, uint32( NoV * (S-1) ) );
-		const uint32 base_spec_i = cugar::min( S-1u, uint32( cugar::max_comp( m_fresnel ) * (S-1) ) );
-		const uint32 eta_i       = cugar::min( S-1u, uint32( (eta / 2.0f) * (S-1) ) );
-		const uint32 roughness_i = cugar::min( S-1u, uint32( m_glossy.roughness * (S-1) ) );
-
-		const uint32 cell_i = (eta_i*S*S*S + base_spec_i*S*S + roughness_i*S + cos_theta_i);
-
-		r_coeff = m_glossy_reflectance[cell_i];
+		r_coeff = glossy_reflectance( NoV_signed );
 		t_coeff = cugar::Vector3f(1.0f - cugar::max_comp(r_coeff));
 	#endif
 
@@ -594,16 +590,16 @@ struct Bsdf
 		sampling_weights( geometry, V, w[kDiffuseReflectionIndex], w[kDiffuseTransmissionIndex], w[kGlossyReflectionIndex], w[kGlossyTransmissionIndex] );
 	}
 
+	/// compute the Fresnel reflection and transmission weights
 	///
 	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
-	void weights(
+	void fresnel_weights(
 		const cugar::DifferentialGeometry&	geometry,
 		const cugar::Vector3f				V,
 		const cugar::Vector3f				L,
 		cugar::Vector3f&					r_coeff,
 		cugar::Vector3f&					t_coeff) const
 	{
-	#if 1
 		const cugar::Vector3f N = geometry.normal_s;
 
 		if (m_ior)
@@ -621,30 +617,6 @@ struct Bsdf
 			r_coeff = cugar::Vector3f(0.0f);
 			t_coeff = cugar::Vector3f(1.0f);
 		}
-	#else
-		if (dot(V, geometry.normal_s)*dot(L, geometry.normal_s) >= 0.0f)
-		{
-			const cugar::Vector3f H = cugar::normalize(V + L);
-			const float NoV = fabsf(cugar::dot(H, V));
-
-			const float Fc = pow5(1 - NoV);									// 1 sub, 3 mul
-			//const float Fc = exp2( (-5.55473 * VoH - 6.98316) * VoH );	// 1 mad, 1 mul, 1 exp
-
-			r_coeff = cugar::Vector3f(Fc) + (1 - Fc) * m_fresnel;			// 1 add, 3 mad
-			t_coeff = cugar::Vector3f(1.0f - cugar::max_comp(r_coeff));
-		}
-		else
-		{
-			const cugar::Vector3f H = cugar::normalize(V - L); // use -L for transmission, though we should have a better look into this...
-			const float NoV = fabsf(cugar::dot(H, V));
-
-			const float Fc = pow5(1 - NoV);									// 1 sub, 3 mul
-			//const float Fc = exp2( (-5.55473 * VoH - 6.98316) * VoH );	// 1 mad, 1 mul, 1 exp
-
-			r_coeff = cugar::Vector3f(Fc) + (1 - Fc) * m_fresnel;		// 1 add, 3 smad
-			t_coeff = cugar::Vector3f(1.0f - cugar::max_comp(r_coeff));
-		}
-	#endif
 
 	#if DIFFUSE_ONLY
 		// disable Fresnel mixing - allow diffuse only
@@ -662,7 +634,8 @@ struct Bsdf
 		t_coeff = cugar::Vector3f(0.0f);
 	#endif
 	}
-
+	
+	/// <i>deprecated</i>
 	/// evaluate the Fresnel weight for the glossy component
 	///
 	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
@@ -675,13 +648,13 @@ struct Bsdf
 		cugar::Vector3f&					glossy_refl_coeff,
 		cugar::Vector3f&					glossy_trans_coeff) const
 	{
-		cugar::Vector3f r_coeff, t_coeff;
-		weights( geometry, V, L, r_coeff, t_coeff );
+		cugar::Vector3f w[4];
+		component_weights( geometry, V, L, w );
 
-		glossy_refl_coeff   = r_coeff;
-		glossy_trans_coeff  = t_coeff * (1 - m_opacity);
-		diffuse_refl_coeff  = t_coeff * m_opacity;
-		diffuse_trans_coeff = t_coeff * m_opacity;
+		glossy_refl_coeff   = w[kGlossyReflectionIndex];
+		glossy_trans_coeff  = w[kGlossyTransmissionIndex];
+		diffuse_refl_coeff  = w[kDiffuseReflectionIndex];
+		diffuse_trans_coeff = w[kDiffuseTransmissionIndex];
 	}
 
 	/// evaluate the component weights
@@ -694,12 +667,20 @@ struct Bsdf
 		cugar::Vector3f*					w) const
 	{
 		cugar::Vector3f r_coeff, t_coeff;
-		weights( geometry, V, L, r_coeff, t_coeff );
+		fresnel_weights( geometry, V, L, r_coeff, t_coeff );
+
+		// compute an additional weight for the diffuse (or matte) component, necessary for energy conservation,
+		// as explained in:
+		//   "A Microfacet Based Coupled Specular-Matte BRDF Model with Importance Sampling",
+		//   Csaba Kelemen and László Szirmay-Kalos
+		const float diffuse_weight =
+			(1.0f - glossy_reflectance( dot(geometry.normal_s,V) )) *
+			(1.0f - glossy_reflectance( dot(geometry.normal_s,L) ));
 
 		w[kGlossyReflectionIndex]		= r_coeff;
 		w[kGlossyTransmissionIndex]		= t_coeff * (1 - m_opacity);
-		w[kDiffuseReflectionIndex]		= t_coeff * m_opacity;
-		w[kDiffuseTransmissionIndex]	= t_coeff * m_opacity;
+		w[kDiffuseReflectionIndex]		= t_coeff * m_opacity * diffuse_weight;
+		w[kDiffuseTransmissionIndex]	= t_coeff * m_opacity * diffuse_weight;
 	}
 
 	/// sample a given component
@@ -985,8 +966,8 @@ struct Bsdf
 	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
 	static cugar::Vector3f Fresnel(const cugar::DifferentialGeometry& geometry, const float VoH, const float eta, const cugar::Vector3f fresnel_base)
 	{
-		const float cos_theta_i = fabsf(VoH);
-		const float cos_theta_t2 = 1.f - eta * eta * (1.f - cos_theta_i * cos_theta_i);
+		const float cos_theta_i  = cugar::min( fabsf(VoH), 1.0f );
+		const float cos_theta_t2 = cugar::min( 1.f - eta * eta * (1.f - cos_theta_i * cos_theta_i), 1.0f );
 		if (cos_theta_t2 < 0.0f)
 		{
 			// TIR
@@ -1003,6 +984,23 @@ struct Bsdf
 
 			return cugar::Vector3f(Fc) + (1 - Fc) * fresnel_base;						// 1 add, 3 mad
 		}
+	}
+
+	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
+	float glossy_reflectance(const float cos_theta) const
+	{
+		const uint32 S = 32;
+
+		const float eta = cos_theta > 0.0f ?  1.0f / m_ior : m_ior;
+
+		const uint32 cos_theta_i = cugar::min( S-1u, uint32( fabsf(cos_theta) * (S-1) ) );
+		const uint32 base_spec_i = cugar::min( S-1u, uint32( cugar::max_comp( m_fresnel ) * (S-1) ) );
+		const uint32 eta_i       = cugar::min( S-1u, uint32( (eta / 2.0f) * (S-1) ) );
+		const uint32 roughness_i = cugar::min( S-1u, uint32( m_glossy.roughness * (S-1) ) );
+
+		const uint32 cell_i = (eta_i*S*S*S + base_spec_i*S*S + roughness_i*S + cos_theta_i);
+
+		return m_glossy_reflectance[cell_i];
 	}
 
 	diffuse_component		m_diffuse;

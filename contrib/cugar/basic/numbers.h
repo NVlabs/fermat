@@ -1,7 +1,7 @@
 /*
  * CUGAR : Cuda Graphics Accelerator
  *
- * Copyright (c) 2011-2018, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2011-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -116,6 +116,12 @@ CUGAR_FORCEINLINE __device__ uint32 warp_tid() { return threadIdx.x & 31; }
 CUGAR_FORCEINLINE __device__ uint32 warp_id()  { return threadIdx.x >> 5; }
 
 #endif
+
+CUGAR_HOST_DEVICE CUGAR_FORCEINLINE
+float float_infinity() { return cugar::binary_cast<float>(0x7f800000u); }
+
+CUGAR_HOST_DEVICE CUGAR_FORCEINLINE
+double double_infinity() { return cugar::binary_cast<double>(0x7ff0000000000000ULL ); }
 
 ///\page utilities_page Utilities
 ///

@@ -972,8 +972,8 @@ void connect_to_camera(const uint32 light_idx, const uint32 n_light_paths, TBPTC
 					const cugar::Vector3f f_L = light_bsdf.f(light_vertex_geom, light_vertex_geom.position, -out);
 					const float           p_L = light_bsdf.p(light_vertex_geom, light_vertex_geom.position, -out, cugar::kProjectedSolidAngle);
 
-					const float pGp = p_s * G * p_L;
-					const float next_pGp = p_L * light_weights.pG;
+					const float pGp      = pdf_product( p_s, G, p_L );
+					const float next_pGp = pdf_product( p_L, light_weights.pG );
 					const float mis_w =
 						(config.visible_lights == 0) ? 1.0f :
 						bpt_mis(pGp / (/*n_light_paths * */config.light_tracing), next_pGp, light_weights.pGp_sum);
@@ -994,8 +994,8 @@ void connect_to_camera(const uint32 light_idx, const uint32 n_light_paths, TBPTC
 				const cugar::Vector3f f_L = light_bsdf.f(light_vertex_geom, light_in_dir, -out);
 				const float           p_L = light_bsdf.p(light_vertex_geom, light_in_dir, -out, cugar::kProjectedSolidAngle);
 
-				const float pGp = p_s * G * p_L;
-				const float next_pGp = cugar::max_comp(f_L) * light_weights.pG;
+				const float pGp      = pdf_product( p_s, G, p_L );
+				const float next_pGp = pdf_product( cugar::max_comp(f_L), light_weights.pG );
 				const float mis_w =
 					(light_depth == 1 &&
 						config.direct_lighting_nee == 0 &&
@@ -1113,10 +1113,14 @@ void light_tracing(const uint32 n_light_paths, TBPTContext& context, RenderingCo
 	else
 		n_threads = n_light_paths;
 		
-	const uint32 blockSize(128);
-	const dim3 gridSize(cugar::divide_ri(n_threads, blockSize));
+	// do not execute if nothing to do
+	if (n_threads)
+	{
+		const uint32 blockSize(128);
+		const dim3 gridSize(cugar::divide_ri(n_threads, blockSize));
 
-	light_tracing_kernel << < gridSize, blockSize >> > (n_light_paths, context, renderer, config);
+		light_tracing_kernel << < gridSize, blockSize >> > (n_light_paths, context, renderer, config);
+	}
 }
 
 template <typename TSampleSink, typename TBPTContext>
@@ -1132,6 +1136,10 @@ void solve_occlusions_kernel(const uint32 in_queue_size, TSampleSink sample_sink
 template <typename TSampleSink, typename TBPTContext>
 void solve_occlusions(const uint32 in_queue_size, TSampleSink sample_sink, TBPTContext context, RenderingContextView renderer)
 {
+	// bail-out if nothing to do
+	if (in_queue_size == 0)
+		return;
+
 	const uint32 blockSize(128);
 	const dim3 gridSize(cugar::divide_ri(in_queue_size, blockSize));
 	solve_occlusions_kernel << < gridSize, blockSize >> > (in_queue_size, sample_sink, context, renderer);
@@ -1150,9 +1158,13 @@ void generate_primary_light_vertices_kernel(const uint32 n_light_paths, TPrimary
 template <typename TPrimaryCoordinates, typename TBPTContext, typename TBPTConfig>
 void generate_primary_light_vertices(const uint32 n_light_paths, TPrimaryCoordinates primary_coords, TBPTContext context, RenderingContextView renderer, const TBPTConfig config)
 {
-	const uint32 blockSize(128);
-	const dim3 gridSize(cugar::divide_ri(n_light_paths, blockSize));
-	generate_primary_light_vertices_kernel << < gridSize, blockSize >> > (n_light_paths, primary_coords, context, renderer, config);
+	// do not execute the kernel if nothing to do
+	if (n_light_paths)
+	{
+		const uint32 blockSize(128);
+		const dim3 gridSize(cugar::divide_ri(n_light_paths, blockSize));
+		generate_primary_light_vertices_kernel << < gridSize, blockSize >> > (n_light_paths, primary_coords, context, renderer, config);
+	}
 
 	// update the per-level cumulative vertex counts
 	if (VertexOrdering(config.light_ordering) == VertexOrdering::kRandomOrdering)
@@ -1174,6 +1186,10 @@ void process_secondary_light_vertices_kernel(const uint32 in_queue_size, const u
 template <typename TPrimaryCoordinates, typename TBPTContext, typename TBPTConfig>
 void process_secondary_light_vertices(const uint32 in_queue_size, const uint32 n_light_paths, TPrimaryCoordinates primary_coords, TBPTContext context, RenderingContextView renderer, const TBPTConfig config)
 {
+	// bail-out if nothing to do
+	if (in_queue_size == 0)
+		return;
+
 	const uint32 blockSize(SECONDARY_LIGHT_VERTICES_BLOCKSIZE);
 	const dim3 gridSize(cugar::divide_ri(in_queue_size, blockSize));
 	process_secondary_light_vertices_kernel << < gridSize, blockSize >> > (in_queue_size, n_light_paths, primary_coords, context, renderer, config);

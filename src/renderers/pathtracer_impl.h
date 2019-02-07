@@ -223,7 +223,7 @@ void PathTracer::render(const uint32 instance, RenderingContext& renderer)
 
 	//! [PT::instantiate_vertex_processor]
 	// instantiate the vertex processor
-	PSFPTVertexProcessor vertex_processor( m_options.firefly_filter );
+	PTVertexProcessor vertex_processor;
 	//! [PT::instantiate_vertex_processor]
 	//! [PT::render-1]
 

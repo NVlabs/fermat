@@ -82,6 +82,23 @@ float bpt_mis(const float pGp, const float other_pGp, const float pGp_sum)
 }
 
 FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
+float pdf_product(const float p1, const float p2)
+{
+	return
+		cugar::is_finite(p1) && 
+		cugar::is_finite(p2) ? p1 * p2 : cugar::float_infinity();
+}
+
+FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
+float pdf_product(const float p1, const float p2, const float p3)
+{
+	return 
+		cugar::is_finite(p1) && 
+		cugar::is_finite(p2) && 
+		cugar::is_finite(p3) ? p1 * p2 * p3 : cugar::float_infinity();
+}
+
+FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
 uint32 channel_selector(const Bsdf::ComponentType comp)
 {
 	return (comp & Bsdf::kDiffuseMask) ? FBufferDesc::DIFFUSE_C : FBufferDesc::SPECULAR_C;
@@ -253,6 +270,33 @@ FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
 cugar::Vector3f unpack_bsdf_diffuse_trans(const uint4 packed_info) { return cugar::from_rgbe(packed_info.w); }
 
 ///\par
+/// Return the normal delta due to bump-mapping
+///
+FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
+cugar::Vector3f bump_mapping(const VertexGeometryId& geom_id, const VertexGeometry& geom, const TextureReference& bump_map, const RenderingContextView& renderer)
+{
+	// 1. lookup dh_dst using the bump map
+	const cugar::Vector2f dh_dst = diff_texture_lookup(geom.texture_coords, bump_map, renderer.textures, cugar::Vector2f(0.0f));
+
+	if (dh_dst != cugar::Vector2f(0.0f))
+	{
+		// 2. compute dp_dst
+		const cugar::Matrix3x2f dp_dst = prim_dp_dst<kTextureCoords0>( renderer.mesh, geom_id.prim_id );
+
+		cugar::Vector3f dp_ds( dp_dst[0][0], dp_dst[1][0], dp_dst[2][0] );
+		cugar::Vector3f dp_dt( dp_dst[0][1], dp_dst[1][1], dp_dst[2][1] );
+
+		// 3. project dp_ds and dp_dt on the plane formed by the local interpolated normal
+		dp_ds = dp_ds - geom.normal_s * dot(dp_ds, geom.normal_s);
+		dp_dt = dp_dt - geom.normal_s * dot(dp_dt, geom.normal_s);
+
+		// 4. recompute the new normal as: N + dh_dt * (dp_ds x N) + dh_ds * (dp_dt x N)
+		return dh_dst.y * cugar::cross(dp_ds, geom.normal_s) + dh_dst.x * cugar::cross(dp_dt, geom.normal_s);
+	}
+	return cugar::Vector3f(0.0f);
+}
+
+///\par
 /// A utility class to encapsulate all important information for a light subpath vertex
 ///
 struct LightVertex
@@ -314,10 +358,16 @@ struct LightVertex
 		material = renderer.mesh.materials[material_id];
 
 		// perform all texture lookups
-		material.diffuse		*= texture_lookup(geom.texture_coords, material.diffuse_map, renderer.textures, cugar::Vector4f(1.0f));
-		material.specular		*= texture_lookup(geom.texture_coords, material.specular_map, renderer.textures, cugar::Vector4f(1.0f));
-		material.emissive		*= texture_lookup(geom.texture_coords, material.emissive_map, renderer.textures, cugar::Vector4f(1.0f));
-		material.diffuse_trans	*= texture_lookup(geom.texture_coords, material.diffuse_trans_map, renderer.textures, cugar::Vector4f(1.0f));
+		material.diffuse		*= bilinear_texture_lookup(geom.texture_coords, material.diffuse_map,  renderer.textures, cugar::Vector4f(1.0f));
+		material.specular		*= bilinear_texture_lookup(geom.texture_coords, material.specular_map, renderer.textures, cugar::Vector4f(1.0f));
+		material.emissive		*= bilinear_texture_lookup(geom.texture_coords, material.emissive_map, renderer.textures, cugar::Vector4f(1.0f));
+		material.diffuse_trans	*= bilinear_texture_lookup(geom.texture_coords, material.diffuse_trans_map, renderer.textures, cugar::Vector4f(1.0f));
+
+	  #if 0
+		// perform bump-mapping
+		geom.normal_s += 0.05f * bump_mapping( geom_id, geom, material.bump_map, renderer );
+		geom.normal_s = cugar::normalize( geom.normal_s );
+	  #endif
 
 		in = -cugar::normalize(cugar::Vector3f(ray.dir));
 
@@ -341,8 +391,8 @@ struct LightVertex
 		// compute the MIS terms for the next iteration
 		prev_G_prime = fabsf(dot(in, geom.normal_s)) / fmaxf(hit.t * hit.t, MIN_G_DENOM);
 		
-		prev_pG = _weights.out_p * _weights.out_cos_theta * prev_G_prime;
-		pGp_sum = _weights.pGp_sum + mis_power(1 / (_weights.pG * _weights.out_p));
+		prev_pG = pdf_product( _weights.out_p, _weights.out_cos_theta * prev_G_prime );
+		pGp_sum = _weights.pGp_sum + mis_power(1 / pdf_product(_weights.pG, _weights.out_p));
 	}
 
 	FERMAT_HOST_DEVICE
@@ -361,7 +411,7 @@ struct LightVertex
 		depth	= _depth;
 		//assert(depth);
 
-		FERMAT_ASSERT(_v.prim_id < uint32(renderer.mesh.num_triangles));
+		FERMAT_ASSERT(_v.prim_id < renderer.mesh.num_triangles);
 		setup_differential_geometry(renderer.mesh, _v, &geom);
 
 		// fetch the material
@@ -370,10 +420,16 @@ struct LightVertex
 		material = renderer.mesh.materials[material_id];
 
 		// perform all texture lookups
-		material.diffuse		*= texture_lookup(geom.texture_coords, material.diffuse_map, renderer.textures, cugar::Vector4f(1.0f));
-		material.specular		*= texture_lookup(geom.texture_coords, material.specular_map, renderer.textures, cugar::Vector4f(1.0f));
-		material.emissive		*= texture_lookup(geom.texture_coords, material.emissive_map, renderer.textures, cugar::Vector4f(1.0f));
-		material.diffuse_trans	*= texture_lookup(geom.texture_coords, material.diffuse_trans_map, renderer.textures, cugar::Vector4f(1.0f));
+		material.diffuse		*= bilinear_texture_lookup(geom.texture_coords, material.diffuse_map, renderer.textures, cugar::Vector4f(1.0f));
+		material.specular		*= bilinear_texture_lookup(geom.texture_coords, material.specular_map, renderer.textures, cugar::Vector4f(1.0f));
+		material.emissive		*= bilinear_texture_lookup(geom.texture_coords, material.emissive_map, renderer.textures, cugar::Vector4f(1.0f));
+		material.diffuse_trans	*= bilinear_texture_lookup(geom.texture_coords, material.diffuse_trans_map, renderer.textures, cugar::Vector4f(1.0f));
+
+	  #if 0
+		// perform bump-mapping
+		geom.normal_s += 0.05f * bump_mapping( geom_id, geom, material.bump_map, renderer );
+		geom.normal_s = cugar::normalize( geom.normal_s );
+	  #endif
 
 		in = cugar::normalize( _in );
 
@@ -385,8 +441,8 @@ struct LightVertex
 		// compute the MIS terms for the next iteration
 		prev_G_prime = fabsf(dot(in, geom.normal_s)) / fmaxf(cugar::square_length(_in), MIN_G_DENOM);
 		
-		prev_pG = _weights.out_p * _weights.out_cos_theta * prev_G_prime;
-		pGp_sum = _weights.pGp_sum + mis_power(1 / (_weights.pG * _weights.out_p));
+		prev_pG = pdf_product( _weights.out_p, _weights.out_cos_theta * prev_G_prime );
+		pGp_sum = _weights.pGp_sum + mis_power(1 / pdf_product(_weights.pG, _weights.out_p));
 	}
 
 	FERMAT_HOST_DEVICE
@@ -505,10 +561,16 @@ struct EyeVertex
 		material = renderer.mesh.materials[material_id];
 
 		// perform all texture lookups
-		material.diffuse		*= texture_lookup(geom.texture_coords, material.diffuse_map,  renderer.textures, cugar::Vector4f(1.0f));
-		material.specular		*= texture_lookup(geom.texture_coords, material.specular_map, renderer.textures, cugar::Vector4f(1.0f));
-		material.emissive		*= texture_lookup(geom.texture_coords, material.emissive_map, renderer.textures, cugar::Vector4f(1.0f));
-		material.diffuse_trans	*= texture_lookup(geom.texture_coords, material.diffuse_trans_map, renderer.textures, cugar::Vector4f(1.0f));
+		material.diffuse		*= bilinear_texture_lookup(geom.texture_coords, material.diffuse_map,  renderer.textures, cugar::Vector4f(1.0f));
+		material.specular		*= bilinear_texture_lookup(geom.texture_coords, material.specular_map, renderer.textures, cugar::Vector4f(1.0f));
+		material.emissive		*= bilinear_texture_lookup(geom.texture_coords, material.emissive_map, renderer.textures, cugar::Vector4f(1.0f));
+		material.diffuse_trans	*= bilinear_texture_lookup(geom.texture_coords, material.diffuse_trans_map, renderer.textures, cugar::Vector4f(1.0f));
+
+	  #if 0
+		// perform bump-mapping
+		geom.normal_s += 0.05f * bump_mapping( geom_id, geom, material.bump_map, renderer );
+		geom.normal_s = cugar::normalize( geom.normal_s );
+	  #endif
 
 		in = -cugar::normalize(cugar::Vector3f(ray.dir));
 
@@ -522,8 +584,8 @@ struct EyeVertex
 		// compute the MIS terms for the next iteration
 		prev_G_prime = fabsf(dot(in, geom.normal_s)) / (hit.t * hit.t); // the G' of the incoming edge
 
-		prev_pG = weights.out_p * weights.out_cos_theta * prev_G_prime;
-		pGp_sum = weights.pGp_sum + mis_power(1 / (weights.pG * weights.out_p));
+		prev_pG = pdf_product( weights.out_p, weights.out_cos_theta * prev_G_prime );
+		pGp_sum = weights.pGp_sum + mis_power(1 / pdf_product(weights.pG, weights.out_p));
 	}
 
 	FERMAT_HOST_DEVICE
@@ -550,10 +612,16 @@ struct EyeVertex
 		material = renderer.mesh.materials[material_id];
 
 		// perform all texture lookups
-		material.diffuse		*= texture_lookup(geom.texture_coords, material.diffuse_map, renderer.textures, cugar::Vector4f(1.0f));
-		material.specular		*= texture_lookup(geom.texture_coords, material.specular_map, renderer.textures, cugar::Vector4f(1.0f));
-		material.emissive		*= texture_lookup(geom.texture_coords, material.emissive_map, renderer.textures, cugar::Vector4f(1.0f));
-		material.diffuse_trans	*= texture_lookup(geom.texture_coords, material.diffuse_trans_map, renderer.textures, cugar::Vector4f(1.0f));
+		material.diffuse		*= bilinear_texture_lookup(geom.texture_coords, material.diffuse_map,  renderer.textures, cugar::Vector4f(1.0f));
+		material.specular		*= bilinear_texture_lookup(geom.texture_coords, material.specular_map, renderer.textures, cugar::Vector4f(1.0f));
+		material.emissive		*= bilinear_texture_lookup(geom.texture_coords, material.emissive_map, renderer.textures, cugar::Vector4f(1.0f));
+		material.diffuse_trans	*= bilinear_texture_lookup(geom.texture_coords, material.diffuse_trans_map, renderer.textures, cugar::Vector4f(1.0f));
+
+	  #if 0
+		// perform bump-mapping
+		geom.normal_s += 0.05f * bump_mapping( geom_id, geom, material.bump_map, renderer );
+		geom.normal_s = cugar::normalize( geom.normal_s );
+	  #endif
 
 		in = cugar::normalize( _in );
 
@@ -565,8 +633,8 @@ struct EyeVertex
 		// compute the MIS terms for the next iteration
 		prev_G_prime = fabsf(dot(in, geom.normal_s)) / fmaxf(cugar::square_length(_in), MIN_G_DENOM);
 		
-		prev_pG = _weights.out_p * _weights.out_cos_theta * prev_G_prime;
-		pGp_sum = _weights.pGp_sum + mis_power(1 / (_weights.pG * _weights.out_p));
+		prev_pG = pdf_product( weights.out_p, weights.out_cos_theta * prev_G_prime );
+		pGp_sum = weights.pGp_sum + mis_power(1 / pdf_product(weights.pG, weights.out_p));
 	}
 
 	FERMAT_HOST_DEVICE
@@ -715,7 +783,7 @@ void eval_connection_terms(const EyeVertex ev, const LightVertex& lv, cugar::Vec
 	//p_s = ev.bsdf.p(ev.geom, ev.in, out, cugar::kProjectedSolidAngle, RR);
 	ev.bsdf.f_and_p(ev.geom, ev.in, out, f_s, p_s, cugar::kProjectedSolidAngle, RR);
 
-	const float prev_pGp = ev.prev_pG * p_s;
+	const float prev_pGp = pdf_product( ev.prev_pG, p_s );
 
 	if (lv.depth == 0) // this is a primary VPL / light vertex
 	{
@@ -726,8 +794,8 @@ void eval_connection_terms(const EyeVertex ev, const LightVertex& lv, cugar::Vec
 		const cugar::Vector3f f_L = light_bsdf.f(lv.geom, lv.geom.position, -out);
 		const float			  p_L = light_bsdf.p(lv.geom, lv.geom.position, -out, cugar::kProjectedSolidAngle);
 
-		const float pGp = p_s * G * p_L;
-		const float next_pGp = p_L * lv.weights.pG;
+		const float pGp      = pdf_product( p_s, G, p_L ); // infinity checks are not really needed here... but just in case
+		const float next_pGp = pdf_product( p_L, lv.weights.pG );
 		mis_w =
 			mis_selector(
 				lv.depth + 1, ev.depth + 2,
@@ -748,8 +816,8 @@ void eval_connection_terms(const EyeVertex ev, const LightVertex& lv, cugar::Vec
 		//p_L = light_bsdf.p(lv.geom, lv.in, -out, RR, cugar::kProjectedSolidAngle);
 		light_bsdf.f_and_p(lv.geom, lv.in, -out, f_L, p_L, cugar::kProjectedSolidAngle, RR);
 
-		const float pGp = p_s * G * p_L;
-		const float next_pGp = p_L * lv.weights.pG;
+		const float pGp = pdf_product( p_s, G, p_L ); // infinity checks are not really needed here... but just in case
+		const float next_pGp = pdf_product( p_L, lv.weights.pG );
 		mis_w =
 			mis_selector(
 				lv.depth + 1, ev.depth + 2,
@@ -791,7 +859,7 @@ void eval_connection_terms(const EyeVertex ev, const LightVertex& lv, cugar::Vec
 	//p_s = ev.bsdf.p(ev.geom, ev.in, out, cugar::kProjectedSolidAngle, RR);
 	ev.bsdf.f_and_p(ev.geom, ev.in, out, f_s, p_s, cugar::kProjectedSolidAngle, RR);
 
-	const float prev_pGp = ev.prev_pG * p_s;
+	const float prev_pGp = pdf_product( ev.prev_pG, p_s );
 
 	if (lv.depth == 0) // this is a primary VPL / light vertex
 	{
@@ -802,8 +870,8 @@ void eval_connection_terms(const EyeVertex ev, const LightVertex& lv, cugar::Vec
 					f_L = light_bsdf.f(lv.geom, lv.geom.position, -out);
 		const float p_L = light_bsdf.p(lv.geom, lv.geom.position, -out, cugar::kProjectedSolidAngle);
 
-		const float pGp = p_s * G * p_L;
-		const float next_pGp = p_L * lv.weights.pG;
+		const float pGp      = pdf_product( p_s, G, p_L );
+		const float next_pGp = pdf_product( p_L, lv.weights.pG );
 		mis_w =
 			mis_selector(
 				lv.depth + 1, ev.depth + 2,
@@ -821,8 +889,8 @@ void eval_connection_terms(const EyeVertex ev, const LightVertex& lv, cugar::Vec
 		//p_L = light_bsdf.p(lv.geom, lv.in, -out, RR, cugar::kProjectedSolidAngle);
 		light_bsdf.f_and_p(lv.geom, lv.in, -out, f_L, p_L, cugar::kProjectedSolidAngle, RR);
 
-		const float pGp = p_s * G * p_L;
-		const float next_pGp = p_L * lv.weights.pG;
+		const float pGp      = pdf_product( p_s, G, p_L );
+		const float next_pGp = pdf_product( p_L, lv.weights.pG );
 		mis_w =
 			mis_selector(
 				lv.depth + 1, ev.depth + 2,
@@ -855,7 +923,7 @@ void eval_connection(
 	//p_s = ev.bsdf.p(ev.geom, ev.in, out, cugar::kProjectedSolidAngle, RR);
 	ev.bsdf.f_and_p(ev.geom, ev.in, out, f_s, p_s, cugar::kProjectedSolidAngle, RR);
 
-	const float prev_pGp = ev.prev_pG * p_s;
+	const float prev_pGp = pdf_product( ev.prev_pG, p_s );
 
 	if (lv.depth == 0) // this is a primary VPL / light vertex
 	{
@@ -870,8 +938,8 @@ void eval_connection(
 			const cugar::Vector3f f_L = light_bsdf.f(lv.geom, lv.geom.position, -out);
 			const float			  p_L = light_bsdf.p(lv.geom, lv.geom.position, -out, cugar::kProjectedSolidAngle);
 
-			const float pGp = p_s * G * p_L;
-			const float next_pGp = p_L * lv.weights.pG;
+			const float pGp      = pdf_product( p_s, G, p_L );
+			const float next_pGp = pdf_product( p_L, lv.weights.pG );
 			const float mis_w =
 				mis_selector(
 					lv.depth + 1, ev.depth + 2,
@@ -894,8 +962,8 @@ void eval_connection(
 		//p_L = light_bsdf.p(lv.geom, lv.in, -out, RR, cugar::kProjectedSolidAngle);
 		light_bsdf.f_and_p(lv.geom, lv.in, -out, f_L, p_L, cugar::kProjectedSolidAngle, RR);
 
-		const float pGp = p_s * G * p_L;
-		const float next_pGp = p_L * lv.weights.pG;
+		const float pGp      = pdf_product( p_s, G, p_L );
+		const float next_pGp = pdf_product( p_L, lv.weights.pG );
 		const float mis_w =
 			mis_selector(
 				lv.depth + 1, ev.depth + 2,
@@ -929,8 +997,8 @@ cugar::Vector3f eval_incoming_emission(
 	const cugar::Vector3f f_L = light_edf.f(light_vertex_geom, light_vertex_geom.position, ev.in);
 	const float		      p_L = light_edf.p(light_vertex_geom, light_vertex_geom.position, ev.in, cugar::kProjectedSolidAngle);
 
-	const float pGp = p_L * light_pdf;
-	const float prev_pGp = ev.prev_pG * p_L;
+	const float pGp      = pdf_product( p_L, light_pdf );
+	const float prev_pGp = pdf_product( ev.prev_pG, p_L );
 	const float mis_w =
 		mis_selector(
 			0, ev.depth + 2,

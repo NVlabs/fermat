@@ -346,6 +346,7 @@ void FermatImporter::light_source(const char* type, const ParameterList& params)
 		MeshMaterial material	= MeshMaterial::zero_material();
 		material.emissive		= cugar::Vector4f(1.0f);
 		material.emissive_map	= texture_ref;
+		material.roughness		= 1.0f;
 		material.index_of_refraction = 0.0f; // NOTE: set the IOR to zero to signal the suppression of glossy reflections
 
 		m_materials.push_back( material );
@@ -730,6 +731,11 @@ void FermatImporter::build_material(const char* type, const ParameterList& param
 			{
 				vroughness = params.values[i].get_float(0);
 			}
+			else if ((params.names[i] == "eta"   && params.values[i].type == FLOAT_TYPE) ||
+					 (params.names[i] == "index" && params.values[i].type == FLOAT_TYPE))
+			{
+				material.index_of_refraction = params.values[i].get_float(0);
+			}
 		}
 		material.roughness = (uroughness + vroughness) / 2; // TODO: add anisotropic materials support!
 	}
@@ -913,8 +919,6 @@ void make_sphere(MeshStorage& other, const float radius, const bool inner_normal
 	// write texture data
 	{
 		MeshView::texture_coord_type* vertices = reinterpret_cast<MeshView::texture_coord_type*>(other.m_texture_data.ptr());
-		const float phi_delta   = M_TWO_PIf / float(u_subdivs);
-		const float theta_delta = M_PIf / float(v_subdivs);
 		for (uint32 v = 0; v <= v_subdivs; ++v)
 		{
 			for (uint32 u = 0; u < u_subdivs; ++u)
@@ -923,7 +927,7 @@ void make_sphere(MeshStorage& other, const float radius, const bool inner_normal
 
 				// write the vertex
 				vertices[t].x = float(u) / float(u_subdivs);
-				vertices[t].y = float(v) / float(v_subdivs);
+				vertices[t].y = 1.0f - float(v) / float(v_subdivs);
 			}
 		}
 	}
