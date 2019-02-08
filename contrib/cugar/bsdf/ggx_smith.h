@@ -86,6 +86,53 @@ struct GGXSmithMicrofacetDistribution
 	}
 #endif
 
+	/// evaluate the pdf of sampling H given V, p(H|V) = p(V,H) - in the local surface frame
+	///
+	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+	float p(const Vector3f V, const Vector3f H) const
+	{
+		const float2 inv_alpha = make_float2(inv_roughness, inv_roughness);
+
+		const float VoH = fabsf( dot(V, H) );
+		const float NoV = fabsf( V.z );
+		const float NoH = fabsf( H.z );
+
+		const float G1 = SmithG1V(NoV);
+
+		const float D = hvd_ggx_eval(inv_alpha, NoH, H.x, H.y);
+			  float p = D * G1 * VoH / NoV;
+			// NOTE: if reflection of V against H was used to generate a ray, the Jacobian 1 / (4*VoH) would elide
+			// the VoH at the numerator, leaving: D * G1 / (4 * NoV) as a solid angle probability, or D * G1 / (4 * NoV * NoL)
+			// as a projected solid angle probability
+
+		return (!isfinite(p) || isnan(p)) ? 1.0e8f : p;
+	}
+
+	/// sample H given V and return the pdf p - in the local surface frame
+	///
+	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+	cugar::Vector3f sample(
+		const Vector3f				u,
+		const Vector3f				V,
+		float*						p = NULL) const
+	{
+		const float2 alpha     = make_float2(roughness, roughness);
+		const float2 inv_alpha = make_float2(inv_roughness, inv_roughness);
+
+		// flip V.z to make it positive
+		const float sgn_V = V.z >= 0.0f ? 1.0f : -1.0f;
+
+		cugar::Vector3f H = vndf_ggx_smith_sample( make_float2(u.x,u.y), alpha, Vector3f(V.x,V.y, V.z * sgn_V));
+
+		// flip H if needed
+		H.z *= sgn_V;
+
+		if ( p)
+			*p = this->p(V, H);
+
+		return H;
+	}
+
 	/// evaluate the pdf of sampling H given V, p(H|V) = p(V,H)
 	///
 	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
@@ -113,29 +160,34 @@ struct GGXSmithMicrofacetDistribution
 	/// sample H given V and return the pdf p
 	///
 	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
-	void sample(
+	cugar::Vector3f sample(
 		const Vector3f				u,
 		const DifferentialGeometry& geometry,
 		const Vector3f				V,
-		Vector3f&					H,
-		float&						p) const
+		float*						p = NULL) const
 	{
 		const float2 alpha     = make_float2(roughness, roughness);
 		const float2 inv_alpha = make_float2(inv_roughness, inv_roughness);
 
+		const float NoV   = dot(V, geometry.normal_s);
+		const float sgn_V = NoV > 0.0f ? 1.0f : -1.0f;
+
 		const Vector3f V_local(
 			dot(V, geometry.tangent),
 			dot(V, geometry.binormal),
-			dot(V, geometry.normal_s) );
+			sgn_V * NoV );
 
-		H = vndf_ggx_smith_sample( make_float2(u.x,u.y), alpha, V_local);
+		cugar::Vector3f H = vndf_ggx_smith_sample( make_float2(u.x,u.y), alpha, V_local);
 
 		H =
 			H.x * geometry.tangent +
 			H.y * geometry.binormal +
-			H.z * geometry.normal_s;
+			H.z * geometry.normal_s * sgn_V;
 
-		p = this->p(geometry, V, H);
+		if ( p)
+			*p = this->p(geometry, V, H);
+
+		return H;
 	}
 
 public:
@@ -151,6 +203,8 @@ public:
 ///
 struct GGXSmithBsdf
 {
+	typedef GGXSmithMicrofacetDistribution	distribution_type;
+
 	/// Constructor
 	///
 	/// \param _roughness		the surface roughness
@@ -175,6 +229,11 @@ struct GGXSmithBsdf
 	///
 	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
 	float get_eta(const float NoV) const { return NoV >= 0.0f ? ext_ior / int_ior : int_ior / ext_ior; }
+
+	/// return the microfacet distribution
+	///
+	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+	GGXSmithMicrofacetDistribution distribution() const { return GGXSmithMicrofacetDistribution(roughness); }
 
 	/// fetch the interior/exterior IOR ratio
 	///
@@ -464,6 +523,102 @@ struct GGXSmithBsdf
 		return p;
 	}
 
+	/// sample L given V and H, and return both the pdf p and the value g = f/p
+	///
+	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+	void sample(
+		const DifferentialGeometry& geometry,
+		const Vector3f				H,
+		const Vector3f				V,
+		Vector3f&					L,
+		Vector3f&					g,
+		float&						p,
+		float&						p_proj) const
+	{
+		const float2 alpha     = make_float2(roughness, roughness);
+		const float2 inv_alpha = make_float2(inv_roughness, inv_roughness);
+
+		const Vector3f N = geometry.normal_s;
+
+		const float NoV = dot(N, V);
+
+		const float eta		= get_eta(NoV);
+		const float inv_eta	= get_inv_eta(NoV);
+
+		if (NoV == 0.0f)
+		{
+			p		= 0.0f;
+			p_proj	= 0.0f;
+			g		= Vector3f(0.0f);
+			return;
+		}
+
+		if (!is_transmissive())
+		{
+			// reflect
+			L = 2 * dot(V, H) * H - V;
+		}
+		else
+		{
+			// compute whether this is a ray for which we have total internal reflection,
+			// i.e. if cos_theta_t2 <= 0, and in that case return zero.
+			const float VoH = dot(V, H);
+			const float cos_theta_i  = VoH;
+			const float cos_theta_t2 = 1.f - eta * eta * (1.f - cos_theta_i * cos_theta_i);
+			if (cos_theta_t2 < 0.0f)
+			{
+				L		= 2 * dot(V, H) * H - V; // initialize to reflection
+				p		= 0.0f;
+				p_proj	= 0.0f;
+				g		= Vector3f(0.0f);
+				return;
+			}
+			const float cos_theta_t = -(cos_theta_i >= 0.0f ? 1.0f : -1.0f) * sqrtf(cos_theta_t2);
+
+			// refract
+			L = (eta * cos_theta_i + cos_theta_t) * H - eta * V;
+		}
+
+		const float NoL = dot(N, L);
+		const float NoH = dot(N, H);
+
+		const float transmission_sign = is_transmissive() ? -1.0f : 1.0f;
+
+		// check whether there is energy exchange between different sides of the surface
+		if (transmission_sign * NoL * NoV <= 0.0f || NoH == 0.0f)
+		{
+			p		= 0.0f;
+			p_proj	= 0.0f;
+			g		= Vector3f(0.0f);
+		}
+		else
+		{
+			const float D = hvd_ggx_eval(inv_alpha, fabsf( NoH ), dot(geometry.tangent, H), dot(geometry.binormal, H));
+
+		  #if defined(USE_APPROX_SMITH)
+			const float G = PredividedSmithJointApprox(fabsf(NoV), fabsf(NoL));
+		  #else
+			const float G = PredividedSmithJoint(fabsf(NoV), fabsf(NoL));
+		  #endif
+
+			const float G1 = PredividedSmithG1V(fabsf(NoV), fabsf(NoL));
+
+			float transmission_factor = 1.0f;
+			if (is_transmissive())
+			{
+				const float VoH = dot(V, H);
+				const float LoH = dot(L, H);
+
+				transmission_factor = dwo_dh_transmission_factor(VoH, LoH, eta, inv_eta);
+			}
+
+			p_proj	= clamp_inf( G1 * D * transmission_factor );
+			p		= p_proj * fabsf(NoL);
+			g		= clamp_inf( G / G1 );
+			assert(is_finite(g.x) && is_finite(g.y) && is_finite(g.z));
+		}
+	}
+
 	/// sample L given V and return both the pdf p and the value g = f/p
 	///
 	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
@@ -507,7 +662,7 @@ struct GGXSmithBsdf
 		H =
 			H.x * geometry.tangent +
 			H.y * geometry.binormal +
-			sgn_V * H.z * geometry.normal_s;
+			H.z * geometry.normal_s * sgn_V;
 
 		if (!is_transmissive())
 		{

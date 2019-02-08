@@ -31,6 +31,7 @@
 #include <bpt_context.h>
 #include <bpt_utils.h>
 #include <bpt_options.h>
+#include <cugar/basic/cuda/warp_atomics.h>
 
 ///@addtogroup Fermat
 ///@{
@@ -78,7 +79,7 @@ struct BPTConfigBase
 	BPTConfigBase(
 		uint32			_max_path_length		= 6,
 		VertexSampling	_light_sampling			= VertexSampling::kAll,
-		VertexOrdering	_light_ordering			= VertexOrdering::kRandomOrdering, 
+		VertexOrdering	_light_ordering			= VertexOrdering::kRandomOrdering,
 		VertexSampling	_eye_sampling			= VertexSampling::kAll,
 		bool			_use_vpls				= true,
 		bool			_use_rr					= true,
@@ -334,7 +335,11 @@ void generate_primary_light_vertex(
 	if (terminate || (VertexSampling(config.light_sampling) == VertexSampling::kAll))
 	{
 		const uint32 slot = (VertexOrdering(config.light_ordering) == VertexOrdering::kRandomOrdering) ?
+		#if defined(FERMAT_DEVICE_COMPILATION)
+			cugar::cuda::warp_increment(context.light_vertices.vertex_counter) :
+		#else
 			cugar::atomic_add(context.light_vertices.vertex_counter, 1u) :
+		#endif
 			light_path_id;
 
 		const uint32 packed_normal = pack_direction(geom.normal_s);
@@ -489,12 +494,17 @@ void process_secondary_light_vertex(
 		if (config.store_light_vertex(light_path_id, context.in_bounce + 2, absorbed))
 		{
 			const uint32 slot = (VertexOrdering(config.light_ordering) == VertexOrdering::kRandomOrdering) ?
+			#if defined(FERMAT_DEVICE_COMPILATION)
+				cugar::cuda::warp_increment(context.light_vertices.vertex_counter) :
+			#else
 				cugar::atomic_add(context.light_vertices.vertex_counter, 1u) :
+			#endif
 				light_path_id + context.light_vertices.vertex_counts[light_path_id] * n_light_paths;	// store all vertices: use the global vertex index
 
 			const uint32 packed_normal	  = pack_direction(lv.geom.normal_s);
 			const uint32 packed_direction = pack_direction(lv.in);
 
+			context.light_vertices.vertex[slot]			= VPL( hit.triId, cugar::Vector2f(hit.u, hit.v), 0.0f );
 			context.light_vertices.vertex_gbuffer[slot] = pack_bsdf(lv.material);
 			context.light_vertices.vertex_pos[slot]		= cugar::Vector4f(lv.geom.position, cugar::binary_cast<float>(packed_normal));
 			context.light_vertices.vertex_input[slot]	= make_uint2(packed_direction, cugar::to_rgbe(w.xyz()));
@@ -693,7 +703,9 @@ void process_secondary_eye_vertex(
 		}
 
 		// compute the maximum depth a light vertex might have
-		const int32 max_light_depth = config.max_path_length - ev.depth - 2;
+		const int32 max_path_verts  = config.max_path_length + 1;
+		const int32 max_s           = max_path_verts - ev.depth - 2;
+		const int32 max_light_depth = max_s - 1;
 
 		// perform a bidirectional connection
 		if (max_light_depth >= 0 &&
@@ -715,8 +727,8 @@ void process_secondary_eye_vertex(
 					for (uint32 i = 0; i < 3; ++i)
 						z[i] = primary_coords.sample(pixel_info.pixel, context.in_bounce + 2, 3 + i);
 
-					const uint32 n_light_vertices	  = context.light_vertices.vertex_counts[max_light_depth];
 					const uint32 n_light_vertex_paths = context.light_vertices.vertex_counts[0];
+					const uint32 n_light_vertices	  = context.light_vertices.vertex_counter[0];
 
 					//
 					// The theory: we want to accumulate all VPLs at each depth, weighted by 1/#(light_vertex_paths);
@@ -929,6 +941,7 @@ void connect_to_camera(const uint32 light_idx, const uint32 n_light_paths, TBPTC
 
 	#if 0
 		// evaluate the differential geometry at the light vertex (TODO: replace using pre-encoded position and normal (and later on tangents?))
+		VertexGeometryId   light_vertex = context.light_vertices.vertex[light_idx];
 		setup_differential_geometry(renderer.mesh, light_vertex.prim_id, light_vertex.uv.x, light_vertex.uv.y, &light_vertex_geom);
 	#else
 		light_vertex_geom.position = light_pos.xyz();
@@ -987,7 +1000,6 @@ void connect_to_camera(const uint32 light_idx, const uint32 n_light_paths, TBPTC
 			else
 			{
 				// build the local BSDF
-				//Bsdf light_bsdf(light_material);
 				Bsdf light_bsdf = unpack_bsdf(renderer, light_gbuffer );
 
 				// evaluate the light's EDF and the surface BSDF
@@ -1186,13 +1198,13 @@ void process_secondary_light_vertices_kernel(const uint32 in_queue_size, const u
 template <typename TPrimaryCoordinates, typename TBPTContext, typename TBPTConfig>
 void process_secondary_light_vertices(const uint32 in_queue_size, const uint32 n_light_paths, TPrimaryCoordinates primary_coords, TBPTContext context, RenderingContextView renderer, const TBPTConfig config)
 {
-	// bail-out if nothing to do
-	if (in_queue_size == 0)
-		return;
-
-	const uint32 blockSize(SECONDARY_LIGHT_VERTICES_BLOCKSIZE);
-	const dim3 gridSize(cugar::divide_ri(in_queue_size, blockSize));
-	process_secondary_light_vertices_kernel << < gridSize, blockSize >> > (in_queue_size, n_light_paths, primary_coords, context, renderer, config);
+	// do not execute the kernel if nothing to do
+	if (in_queue_size)
+	{
+		const uint32 blockSize(SECONDARY_LIGHT_VERTICES_BLOCKSIZE);
+		const dim3 gridSize(cugar::divide_ri(in_queue_size, blockSize));
+		process_secondary_light_vertices_kernel << < gridSize, blockSize >> > (in_queue_size, n_light_paths, primary_coords, context, renderer, config);
+	}
 
 	// update the per-level cumulative vertex counts
 	if (VertexOrdering(config.light_ordering) == VertexOrdering::kRandomOrdering)

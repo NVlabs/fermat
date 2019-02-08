@@ -214,10 +214,13 @@ uint4 pack_edf(const MeshMaterial& material)
 FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
 uint4 pack_bsdf(const MeshMaterial& material)
 {
+	const uint32 roughness_i = (uint16)cugar::quantize( material.roughness,  65535u );
+	const uint32 opacity_i   = (uint16)cugar::quantize( material.opacity, 255u );
+	const uint32 ior_i       = (uint16)cugar::quantize( material.index_of_refraction / 3.0f, 255u );
 	return make_uint4(
 		cugar::to_rgbe(cugar::Vector4f(material.diffuse).xyz()),
 		cugar::to_rgbe(cugar::Vector4f(material.specular).xyz()),
-		cugar::binary_cast<uint32>(material.roughness),
+		roughness_i | (opacity_i << 16) | (ior_i << 24),
 		cugar::to_rgbe(cugar::Vector4f(material.diffuse_trans).xyz()));
 }
 
@@ -236,13 +239,19 @@ Edf unpack_edf(const uint4 packed_info)
 FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
 Bsdf unpack_bsdf(const RenderingContextView& renderer, const uint4 packed_info, const TransportType transport = kParticleTransport)
 {
+	const float roughness = (packed_info.z & 65535u) / 65535.0f;
+	const float opacity   = ((packed_info.z >> 16) & 255) / 255.0f;
+	const float ior       = cugar::max( 3.0f * ((packed_info.z >> 24) / 255.0f), 0.00001f );
+
 	return Bsdf(
 		transport,
 		renderer,
 		cugar::from_rgbe(packed_info.x),
 		cugar::from_rgbe(packed_info.y),
-		cugar::binary_cast<float>(packed_info.z),
-		cugar::from_rgbe(packed_info.w));
+		roughness,
+		cugar::from_rgbe(packed_info.w),
+		opacity,
+		ior);
 }
 
 ///\par
@@ -400,6 +409,50 @@ struct LightVertex
 		const cugar::Vector3f&		_in,
 		const VertexGeometryId&		_v,
 		const cugar::Vector3f&		_alpha,
+		const PathWeights&			_weights,
+		const uint32				_depth,
+		const RenderingContextView&	renderer)
+	{
+		geom_id = _v;
+
+		alpha	= _alpha;
+		weights = _weights;
+		depth	= _depth;
+		//assert(depth);
+
+		FERMAT_ASSERT(_v.prim_id < (uint32)renderer.mesh.num_triangles);
+		setup_differential_geometry(renderer.mesh, _v, &geom);
+
+		// fetch the material
+		const int material_id = renderer.mesh.material_indices[_v.prim_id];
+
+		material = renderer.mesh.materials[material_id];
+
+		// perform all texture lookups
+		material.diffuse		*= bilinear_texture_lookup(geom.texture_coords, material.diffuse_map, renderer.textures, cugar::Vector4f(1.0f));
+		material.specular		*= bilinear_texture_lookup(geom.texture_coords, material.specular_map, renderer.textures, cugar::Vector4f(1.0f));
+		material.emissive		*= bilinear_texture_lookup(geom.texture_coords, material.emissive_map, renderer.textures, cugar::Vector4f(1.0f));
+		material.diffuse_trans	*= bilinear_texture_lookup(geom.texture_coords, material.diffuse_trans_map, renderer.textures, cugar::Vector4f(1.0f));
+
+	  #if 0
+		// perform bump-mapping
+		geom.normal_s += 0.05f * bump_mapping( geom_id, geom, material.bump_map, renderer );
+		geom.normal_s = cugar::normalize( geom.normal_s );
+	  #endif
+
+		in = cugar::normalize( _in );
+
+		//if (dot(geom.normal_s, in) < 0.0f)
+		//	geom.normal_s = -geom.normal_s;
+
+		bsdf = Bsdf(kParticleTransport, renderer, material);
+	}
+
+	FERMAT_HOST_DEVICE
+	void setup(
+		const cugar::Vector3f&		_in,
+		const VertexGeometryId&		_v,
+		const cugar::Vector3f&		_alpha,
 		const TempPathWeights&		_weights,
 		const uint32				_depth,
 		const RenderingContextView&	renderer)
@@ -411,7 +464,7 @@ struct LightVertex
 		depth	= _depth;
 		//assert(depth);
 
-		FERMAT_ASSERT(_v.prim_id < renderer.mesh.num_triangles);
+		FERMAT_ASSERT(_v.prim_id < (uint32)renderer.mesh.num_triangles);
 		setup_differential_geometry(renderer.mesh, _v, &geom);
 
 		// fetch the material

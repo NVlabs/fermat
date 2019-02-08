@@ -34,6 +34,8 @@
 #include <cugar/basic/types.h>
 #include <cugar/linalg/vector.h>
 
+#define BILINEAR_TEXTURE_LOOKUPS	1
+
 ///@addtogroup Fermat
 ///@{
 
@@ -82,7 +84,7 @@ struct MipMapView
 };
 
 FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
-cugar::Vector4f texture_lookup(float4 st, const TextureReference texture_ref, const MipMapView* textures, const float4 default_value)
+cugar::Vector4f unfiltered_texture_lookup(float4 st, const TextureReference texture_ref, const MipMapView* textures, const float4 default_value)
 {
 	if (texture_ref.texture == uint32(-1) || textures[texture_ref.texture].n_levels == 0)
 		return default_value;
@@ -104,6 +106,38 @@ cugar::Vector4f texture_lookup(float4 st, const TextureReference texture_ref, co
 		return default_value;
 }
 
+FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
+void unchecked_quad_texture_lookup(uint2 texel, const MipMapView texture, const uint32 lod, const float4 default_value, cugar::Vector4f quad[4])
+{
+	const uint32 x = texel.x;
+	const uint32 y = texel.y;
+	const uint32 xx = (x + 1) % texture.res_x;
+	const uint32 yy = (y + 1) % texture.res_y;
+
+	quad[0] = texture(x,  y,  lod);
+	quad[1] = texture(xx, y,  lod);
+	quad[2] = texture(x,  yy, lod);
+	quad[3] = texture(xx, yy, lod);
+}
+
+FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
+void quad_texture_lookup(uint2 texel, const TextureReference texture_ref, const MipMapView* textures, const uint32 lod, const float4 default_value, cugar::Vector4f quad[4])
+{
+	if (texture_ref.texture == uint32(-1) || textures[texture_ref.texture].n_levels == 0)
+	{
+		quad[0] = quad[1] = quad[2] = quad[3] = default_value;
+		return;
+	}
+
+	const MipMapView texture = textures[texture_ref.texture];
+	if (texture.n_levels > lod)
+	{
+		// fetch the quad at the given lod
+		unchecked_quad_texture_lookup( texel, texture, lod, default_value, quad );
+	}
+	else
+		quad[0] = quad[1] = quad[2] = quad[3] = default_value;
+}
 
 FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
 cugar::Vector4f bilinear_texture_lookup_unscaled(cugar::Vector4f st, const TextureReference texture_ref, const MipMapView* textures, const float4 default_value)
@@ -117,20 +151,17 @@ cugar::Vector4f bilinear_texture_lookup_unscaled(cugar::Vector4f st, const Textu
 		const uint32 x = uint32(st.x) % texture.res_x;
 		const uint32 y = uint32(st.y) % texture.res_y;
 
-		const uint32 xx = (x + 1) % texture.res_x;
-		const uint32 yy = (y + 1) % texture.res_y;
+		// fetch the quad at LOD 0
+		cugar::Vector4f quad[4];
+		const uint32 lod = 0u;
+		unchecked_quad_texture_lookup( make_uint2(x,y), texture, lod, default_value, quad );
 
 		const float u = cugar::mod(st.x, 1.0f);
 		const float v = cugar::mod(st.y, 1.0f);
 
-		cugar::Vector4f c00 = texture(x,  y,  0);
-		cugar::Vector4f c10 = texture(xx, y,  0);
-		cugar::Vector4f c01 = texture(x,  yy, 0);
-		cugar::Vector4f c11 = texture(xx, yy, 0);
-
 		return
-			(c00 * (1-u) + c10 * u) * (1-v) +
-			(c01 * (1-u) + c11 * u) * v;
+			(quad[0] * (1-u) + quad[1] * u) * (1-v) +
+			(quad[2] * (1-u) + quad[3] * u) * v;
 	}
 	else
 		return default_value;
@@ -154,23 +185,30 @@ cugar::Vector4f bilinear_texture_lookup(cugar::Vector4f st, const TextureReferen
 		const uint32 x = cugar::min(uint32(st.x * texture.res_x), texture.res_x - 1);
 		const uint32 y = cugar::min(uint32(st.y * texture.res_y), texture.res_y - 1);
 
-		const uint32 xx = (x + 1) % texture.res_x;
-		const uint32 yy = (y + 1) % texture.res_y;
+		// fetch the quad at LOD 0
+		cugar::Vector4f quad[4];
+		const uint32 lod = 0u;
+		unchecked_quad_texture_lookup( make_uint2(x,y), texture, lod, default_value, quad );
 
-		const float u = cugar::mod(st.x, 1.0f);
-		const float v = cugar::mod(st.y, 1.0f);
-
-		cugar::Vector4f c00 = texture(x,  y,  0);
-		cugar::Vector4f c10 = texture(xx, y,  0);
-		cugar::Vector4f c01 = texture(x,  yy, 0);
-		cugar::Vector4f c11 = texture(xx, yy, 0);
+		const float u = cugar::mod(st.x * texture.res_x, 1.0f);
+		const float v = cugar::mod(st.y * texture.res_y, 1.0f);
 
 		return
-			(c00 * (1-u) + c10 * u) * (1-v) +
-			(c01 * (1-u) + c11 * u) * v;
+			(quad[0] * (1-u) + quad[1] * u) * (1-v) +
+			(quad[2] * (1-u) + quad[3] * u) * v;
 	}
 	else
 		return default_value;
+}
+
+FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
+cugar::Vector4f texture_lookup(float4 st, const TextureReference texture_ref, const MipMapView* textures, const float4 default_value)
+{
+  #if BILINEAR_TEXTURE_LOOKUPS
+	return bilinear_texture_lookup( st, texture_ref, textures, default_value );
+  #else
+	return unfiltered_texture_lookup( st, texture_ref, textures, default_value );
+  #endif
 }
 
 FERMAT_HOST_DEVICE FERMAT_FORCEINLINE

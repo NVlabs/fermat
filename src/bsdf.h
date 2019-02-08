@@ -42,11 +42,21 @@
 #include <cugar/bsdf/ggx_smith.h>
 #include <cugar/bsdf/ltc.h>
 #include <renderer_view.h>
+#include <mis_utils.h>
 
 #define DIFFUSE_ONLY		0
 #define SPECULAR_ONLY		0
 #define SUPPRESS_SPECULAR	0
 #define SUPPRESS_DIFFUSE	0
+
+#define USE_EFFICIENT_SAMPLER_WITH_APPROXIMATE_PDFS	1
+	// When this is set to 1, a different, more efficient sampling method will be used, for which the pdf computation
+	// will no longer be exact - in the sense it will no longer match the actual pdfs usded for sampling - which would
+	// have to be expressed as an integral with no closed-form solution - yet, for the purpose of MIS, exact pdfs are
+	// not really needed.
+	// One potential problem with this efficient sampler is that it makes exact inversion impossible - in the sense
+	// that the probabilities assigned to the various components are stochastic variables and cannot be computed, and
+	// invertex, exactly.
 
 ///@addtogroup Fermat
 ///@{
@@ -237,8 +247,8 @@ struct Bsdf
 		m_glossy_trans(roughness, true, ior, 1.0f),
 	#endif
 		m_fresnel(specular / M_PIf),
-		m_ior(opacity),
-		m_opacity(ior),
+		m_ior(ior),
+		m_opacity(opacity),
 		m_glossy_reflectance(renderer.glossy_reflectance),
 		m_transport(transport)
 	{}
@@ -290,7 +300,7 @@ struct Bsdf
 		component_weights( geometry, V, L, w );
 
 		float factor = 1.0f;
-		if (m_transport == kRadianceTransport)
+		if (m_transport == kRadianceTransport && m_ior)
 		{
 			// apply the radiance compression factor of (eta_t / eta_i)^2
 			const float NoV = dot(V, geometry.normal_s);
@@ -326,7 +336,7 @@ struct Bsdf
 		component_weights( geometry, V, L, w );
 
 		float factor = 1.0f;
-		if (m_transport == kRadianceTransport)
+		if (m_transport == kRadianceTransport && m_ior)
 		{
 			// apply the radiance compression factor of (eta_t / eta_i)^2
 			const float NoV = dot(V, geometry.normal_s);
@@ -387,7 +397,7 @@ struct Bsdf
 		component_weights( geometry, V, L, w );
 
 		float factor = 1.0f;
-		if (m_transport == kRadianceTransport)
+		if (m_transport == kRadianceTransport && m_ior)
 		{
 			// apply the radiance compression factor of (eta_t / eta_i)^2
 			const float NoV = dot(V, geometry.normal_s);
@@ -449,7 +459,7 @@ struct Bsdf
 		component_weights( geometry, V, L, w );
 
 		float factor = 1.0f;
-		if (m_transport == kRadianceTransport)
+		if (m_transport == kRadianceTransport && m_ior)
 		{
 			// apply the radiance compression factor of (eta_t / eta_i)^2
 			const float NoV = dot(V, geometry.normal_s);
@@ -532,30 +542,12 @@ struct Bsdf
 		{
 			r_coeff = cugar::Vector3f(0.0f);
 			t_coeff = cugar::Vector3f(1.0f);
-			return;
 		}
-
-	#if 0
-		const float Fc = pow5(1 - NoV);									// 1 sub, 3 mul
-		//const float Fc = exp2( (-5.55473 * VoH - 6.98316) * VoH );	// 1 mad, 1 mul, 1 exp
-
-		r_coeff = cugar::Vector3f(Fc) + (1 - Fc) * m_fresnel;			// 1 add, 3 mad
-		t_coeff = cugar::Vector3f(1.0f - cugar::max_comp(r_coeff));
-	#elif 0
-		const cugar::Vector3f N = geometry.normal_s;
-
-		const float eta     = dot(N, V) > 0.0f ? 1.0f / m_ior : m_ior;
-		const float inv_eta = dot(N, V) > 0.0f ? m_ior        : 1.0f / m_ior;
-
-		r_coeff = Fresnel(geometry, NoV, eta, m_fresnel);
-		t_coeff = cugar::Vector3f(1.0f - cugar::max_comp(r_coeff));
-	#elif 0
-		r_coeff = cugar::Vector3f(0.5f);
-		t_coeff = cugar::Vector3f(0.5f);
-	#else
-		r_coeff = glossy_reflectance( NoV_signed );
-		t_coeff = cugar::Vector3f(1.0f - cugar::max_comp(r_coeff));
-	#endif
+		else
+		{
+			r_coeff = glossy_reflectance( NoV_signed );
+			t_coeff = cugar::Vector3f(1.0f - cugar::max_comp(r_coeff));
+		}
 
 	#if DIFFUSE_ONLY
 		// disable Fresnel mixing - allow diffuse only
@@ -594,28 +586,20 @@ struct Bsdf
 	///
 	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
 	void fresnel_weights(
-		const cugar::DifferentialGeometry&	geometry,
-		const cugar::Vector3f				V,
-		const cugar::Vector3f				L,
+		const float							VoH,
+		const float							eta,
 		cugar::Vector3f&					r_coeff,
 		cugar::Vector3f&					t_coeff) const
 	{
-		const cugar::Vector3f N = geometry.normal_s;
-
-		if (m_ior)
-		{
-			const float eta     = dot(N, V) > 0.0f ? 1.0f / m_ior : m_ior;
-			const float inv_eta = dot(N, V) > 0.0f ? m_ior        : 1.0f / m_ior;
-
-			const cugar::Vector3f H = microfacet(V, L, N, inv_eta);
-
-			r_coeff = Fresnel(geometry, dot(V,H), eta, m_fresnel);
-			t_coeff = cugar::Vector3f(1.0f - cugar::max_comp(r_coeff));
-		}
-		else // NOTE: m_ior == 0 signals the complete suppression of glossy reflections
+		if (eta == 0.0f) // NOTE: eta == m_ior == 0 signals the complete suppression of glossy reflections
 		{
 			r_coeff = cugar::Vector3f(0.0f);
 			t_coeff = cugar::Vector3f(1.0f);
+		}
+		else
+		{
+			r_coeff = Fresnel(VoH, eta, m_fresnel);
+			t_coeff = cugar::Vector3f(1.0f - cugar::max_comp(r_coeff));
 		}
 
 	#if DIFFUSE_ONLY
@@ -633,6 +617,37 @@ struct Bsdf
 	#if SUPPRESS_DIFFUSE
 		t_coeff = cugar::Vector3f(0.0f);
 	#endif
+	}
+
+	/// compute the Fresnel reflection and transmission weights
+	///
+	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
+	void fresnel_weights(
+		const cugar::DifferentialGeometry&	geometry,
+		const cugar::Vector3f				V,
+		const cugar::Vector3f				L,
+		cugar::Vector3f&					r_coeff,
+		cugar::Vector3f&					t_coeff) const
+	{
+		float eta	  = 0.0f;
+		float inv_eta = 0.0f;
+		float VoH	  = 0.0f;
+
+		if (m_ior)
+		{
+			const cugar::Vector3f N = geometry.normal_s;
+
+			eta     = dot(N, V) > 0.0f ? 1.0f / m_ior : m_ior;
+			inv_eta = dot(N, V) > 0.0f ? m_ior        : 1.0f / m_ior;
+
+			// recover the microfacet H
+			const cugar::Vector3f H = microfacet(V, L, N, inv_eta);
+
+			VoH = dot(V,H);
+		}
+		// NOTE: eta == m_ior == 0 signals the complete suppression of glossy reflections
+
+		fresnel_weights( VoH, eta, r_coeff, t_coeff );
 	}
 	
 	/// <i>deprecated</i>
@@ -767,7 +782,7 @@ struct Bsdf
 			}
 
 			float factor = 1.0f;
-			if (m_transport == kRadianceTransport)
+			if (m_transport == kRadianceTransport && m_ior)
 			{
 				// apply the radiance compression factor of (eta_t / eta_i)^2
 				const float NoV = dot(in, geometry.normal_s);
@@ -832,6 +847,45 @@ struct Bsdf
 
 		sampling_weights(geometry, in, diffuse_refl_prob, diffuse_trans_prob, glossy_refl_prob, glossy_trans_prob);
 
+	#if USE_EFFICIENT_SAMPLER_WITH_APPROXIMATE_PDFS
+		//
+		// The following scheme is orders of magnitude more efficient at sampling the glossy/specular layer near normal incidence,
+		// as the a-priori glossy sampling weights calculated using the *average* glossy reflectance tend to be way too low for high
+		// values of cos(theta).
+		//
+
+		// sample the GGX microfacet distribution
+		glossy_component::distribution_type glossy_distribution = m_glossy.distribution();
+		
+		// move to local coordinates
+		const cugar::Vector3f V_local = cugar::Vector3f(
+			dot( in, geometry.tangent ),
+			dot( in, geometry.binormal ),
+			dot( in, geometry.normal_s ) );
+
+		const cugar::Vector3f H_local = glossy_distribution.sample( cugar::Vector3f(z[0], z[1], z[2]), V_local );
+
+		// move to world coordinates
+		const cugar::Vector3f H =
+			H_local.x * geometry.tangent +
+			H_local.y * geometry.binormal +
+			H_local.z * geometry.normal_s;
+
+		// compute the Fresnel coefficients
+		cugar::Vector3f r_coeff, t_coeff;
+
+		// compute eta based on the surface side
+		const float eta = V_local.z > 0.0f ? 1.0f / m_ior : m_ior;
+
+		fresnel_weights( dot(V_local, H_local), eta, r_coeff, t_coeff );
+
+		// assign component probabilities
+		glossy_refl_prob	= (glossy_refl_prob		+	cugar::max_comp( r_coeff ) ) * 0.5f;
+		glossy_trans_prob	= (glossy_trans_prob	+	(1 - m_opacity) * cugar::max_comp( t_coeff )) * 0.5f;
+		diffuse_refl_prob	= (diffuse_refl_prob	+	m_opacity * cugar::max_comp( t_coeff * m_diffuse.color ) * M_PIf) * 0.5f;
+		diffuse_trans_prob	= (diffuse_trans_prob	+	m_opacity * cugar::max_comp( t_coeff * m_diffuse_trans.color ) * M_PIf) * 0.5f;
+	#endif
+
 		// set to zero unwanted components
 		if ((components & kDiffuseReflection)	== 0)	diffuse_refl_prob	= 0;
 		if ((components & kDiffuseTransmission)	== 0)	diffuse_trans_prob	= 0;
@@ -869,8 +923,18 @@ struct Bsdf
 			z_norm = (z[2] - diffuse_refl_prob) / glossy_refl_prob;
 			p_comp = glossy_refl_prob;
 
+		#if !USE_EFFICIENT_SAMPLER_WITH_APPROXIMATE_PDFS
 			component.sample(cugar::Vector3f(z[0], z[1], z_norm), geometry, in, out, g, p, p_proj);
+		#else
+			// move to world coordinates
+			const cugar::Vector3f H =
+				H_local.x * geometry.tangent +
+				H_local.y * geometry.binormal +
+				H_local.z * geometry.normal_s;
 
+			// sample L given H
+			component.sample( geometry, H, in, out, g, p, p_proj );
+		#endif
 			out_comp = kGlossyReflection;
 		}
 		else if (z[2] < diffuse_refl_prob + glossy_refl_prob + diffuse_trans_prob)
@@ -893,7 +957,18 @@ struct Bsdf
 			z_norm = (z[2] - diffuse_refl_prob - glossy_refl_prob - diffuse_trans_prob) / glossy_trans_prob;
 			p_comp = glossy_trans_prob;
 
+		#if !USE_EFFICIENT_SAMPLER_WITH_APPROXIMATE_PDFS
 			component.sample(cugar::Vector3f(z[0], z[1], z_norm), geometry, in, out, g, p, p_proj);
+		#else
+			// move to world coordinates
+			const cugar::Vector3f H =
+				H_local.x * geometry.tangent +
+				H_local.y * geometry.binormal +
+				H_local.z * geometry.normal_s;
+
+			// sample L given H
+			component.sample( geometry, H, in, out, g, p, p_proj );
+		#endif
 
 			out_comp = kGlossyTransmission;
 		}
@@ -908,7 +983,18 @@ struct Bsdf
 			// re-evaluate the entire BSDF and its sampling probabilities
 			if (evaluate_full_bsdf)
 			{
-				p_proj	= this->p(geometry, in, out, cugar::kProjectedSolidAngle, RR, components);
+				float p_d	= (components & kDiffuseReflection)		?       diffuse().p(geometry, in, out, cugar::kProjectedSolidAngle) : 0.0f;
+				float p_dt	= (components & kDiffuseTransmission)	? diffuse_trans().p(geometry, in, out, cugar::kProjectedSolidAngle) : 0.0f;
+				float p_g	= (components & kGlossyReflection)		?        glossy().p(geometry, in, out, cugar::kProjectedSolidAngle) : 0.0f;
+				float p_gt	= (components & kGlossyTransmission)	?  glossy_trans().p(geometry, in, out, cugar::kProjectedSolidAngle) : 0.0f;
+
+				p_proj = 
+					p_d  * diffuse_refl_prob	+
+					p_dt * diffuse_trans_prob	+
+					p_g  * glossy_refl_prob		+
+					p_gt * glossy_trans_prob;
+
+				//p_proj	= this->p(geometry, in, out, cugar::kProjectedSolidAngle, RR, components); // NOTE: this does not work when USE_EFFICIENT_SAMPLER_WITH_APPROXIMATE_PDFS = 1
 				p		= p_proj * fabsf( dot(out, geometry.normal_s) );
 				g		= this->f(geometry, in, out, components) / p_proj;
 			}
@@ -935,7 +1021,7 @@ struct Bsdf
 			}
 
 			float factor = 1.0f;
-			if (m_transport == kRadianceTransport)
+			if (m_transport == kRadianceTransport && m_ior)
 			{
 				// apply the radiance compression factor of (eta_t / eta_i)^2
 				const float NoV = dot(in, geometry.normal_s);
@@ -964,7 +1050,7 @@ struct Bsdf
 	/// \param eta			incoming IOR / outgoing IOR
 	///
 	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
-	static cugar::Vector3f Fresnel(const cugar::DifferentialGeometry& geometry, const float VoH, const float eta, const cugar::Vector3f fresnel_base)
+	static cugar::Vector3f Fresnel(const float VoH, const float eta, const cugar::Vector3f fresnel_base)
 	{
 		const float cos_theta_i  = cugar::min( fabsf(VoH), 1.0f );
 		const float cos_theta_t2 = cugar::min( 1.f - eta * eta * (1.f - cos_theta_i * cos_theta_i), 1.0f );
@@ -1078,7 +1164,7 @@ void precompute_glossy_reflectance(const uint32 S, float* tables)
 
 						const float VoH = dot(V,H);
 
-						const float F = cugar::max_comp( Bsdf::Fresnel( geom, VoH, eta, base_spec ) );
+						const float F = cugar::max_comp( Bsdf::Fresnel( VoH, eta, base_spec ) );
 
 						sum += F * g.x;
 					}
