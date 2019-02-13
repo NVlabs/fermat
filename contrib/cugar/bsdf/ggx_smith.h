@@ -111,7 +111,7 @@ struct GGXSmithMicrofacetDistribution
 	/// sample H given V and return the pdf p - in the local surface frame
 	///
 	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
-	cugar::Vector3f sample(
+	Vector3f sample(
 		const Vector3f				u,
 		const Vector3f				V,
 		float*						p = NULL) const
@@ -122,7 +122,7 @@ struct GGXSmithMicrofacetDistribution
 		// flip V.z to make it positive
 		const float sgn_V = V.z >= 0.0f ? 1.0f : -1.0f;
 
-		cugar::Vector3f H = vndf_ggx_smith_sample( make_float2(u.x,u.y), alpha, Vector3f(V.x,V.y, V.z * sgn_V));
+		Vector3f H = vndf_ggx_smith_sample( make_float2(u.x,u.y), alpha, Vector3f(V.x,V.y, V.z * sgn_V));
 
 		// flip H if needed
 		H.z *= sgn_V;
@@ -160,7 +160,7 @@ struct GGXSmithMicrofacetDistribution
 	/// sample H given V and return the pdf p
 	///
 	CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
-	cugar::Vector3f sample(
+	Vector3f sample(
 		const Vector3f				u,
 		const DifferentialGeometry& geometry,
 		const Vector3f				V,
@@ -177,7 +177,7 @@ struct GGXSmithMicrofacetDistribution
 			dot(V, geometry.binormal),
 			sgn_V * NoV );
 
-		cugar::Vector3f H = vndf_ggx_smith_sample( make_float2(u.x,u.y), alpha, V_local);
+		Vector3f H = vndf_ggx_smith_sample( make_float2(u.x,u.y), alpha, V_local);
 
 		H =
 			H.x * geometry.tangent +
@@ -363,7 +363,7 @@ struct GGXSmithBsdf
 
 		// check whether there is energy exchange between different sides of the surface
 		if (transmission_sign * NoL * NoV <= 0.0f || NoH == 0.0f)
-			return cugar::Vector3f(0.0f);
+			return Vector3f(0.0f);
 
 		const float D = hvd_ggx_eval(inv_alpha, fabsf( NoH ), dot(geometry.tangent, H), dot(geometry.binormal, H));
 		//const float denom = (4 * NoV * NoL);
@@ -409,7 +409,7 @@ struct GGXSmithBsdf
 
 		// check whether there is energy exchange between different sides of the surface
 		if (transmission_sign * NoL * NoV <= 0.0f || NoH == 0.0f)
-			return cugar::Vector3f(0.0f);
+			return Vector3f(0.0f);
 
 		const float G1 = PredividedSmithG1V(fabsf(NoV), fabsf(NoL));
 
@@ -419,7 +419,7 @@ struct GGXSmithBsdf
 		const float G  = PredividedSmithJoint(fabsf(NoV), fabsf(NoL));
 	  #endif
 
-		return cugar::Vector3f(clamp_inf( G / G1 ));
+		return Vector3f(clamp_inf( G / G1 ));
 	}
 
 	/// evaluate the BRDF and the pdf in a single call
@@ -573,10 +573,10 @@ struct GGXSmithBsdf
 				g		= Vector3f(0.0f);
 				return;
 			}
-			const float cos_theta_t = -(cos_theta_i >= 0.0f ? 1.0f : -1.0f) * sqrtf(cos_theta_t2);
+			const float cos_theta_t = (cos_theta_i >= 0.0f ? 1.0f : -1.0f) * sqrtf(cos_theta_t2);
 
 			// refract
-			L = (eta * cos_theta_i + cos_theta_t) * H - eta * V;
+			L = (eta * cos_theta_i - cos_theta_t) * H - eta * V;
 		}
 
 		const float NoL = dot(N, L);

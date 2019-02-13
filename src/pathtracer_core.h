@@ -544,6 +544,7 @@ union PixelInfo
 FERMAT_DEVICE FERMAT_FORCEINLINE
 void per_warp_atomic_add(uint64* ptr, uint64 val) // NOTE: ptr needs to be the same across the warp!
 {
+#if __CUDA_ARCH__ > 700
 	const unsigned int lane_id = threadIdx.x & 31;
 
 	int pred;
@@ -551,7 +552,16 @@ void per_warp_atomic_add(uint64* ptr, uint64 val) // NOTE: ptr needs to be the s
 	int leader = __ffs(mask) - 1;	// select a leader
 
 	if (lane_id == leader)			// only the leader does the update
-		atomicAdd(ptr, val);	
+		atomicAdd(ptr, val);
+#else
+	const unsigned int lane_id = threadIdx.x & 31;
+
+	int mask = __ballot_sync(__activemask(), true);
+	int leader = __ffs(mask) - 1;	// select a leader
+
+	if (lane_id == leader)			// only the leader does the update
+		atomicAdd(ptr, val);
+#endif
 }
 
 /// Base path tracing context class

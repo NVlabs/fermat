@@ -41,6 +41,7 @@
 #include <cugar/bsdf/ggx.h>
 #include <cugar/bsdf/ggx_smith.h>
 #include <cugar/bsdf/ltc.h>
+#include <cugar/bsdf/refraction.h>
 #include <renderer_view.h>
 #include <mis_utils.h>
 
@@ -88,27 +89,34 @@ enum TransportType
 //#define USE_LTC
 #define USE_GGX_SMITH
 
-FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
-float pow5(const float x)
-{
-	const float x2 = (x*x);
-	return x2 * x2 * x;
-}
-
 ///
 /// Composite BSDF class
 ///\par
 /// This class defines the Bidirectional Scattering Distribution Function employed throughout Fermat.
-/// At present time, this model is rather simple, and consists of four layered components only:
+/// At present time, this model is rather simple, and consists of five layered components only:
 ///\par
 /// - a diffuse reflection component
 /// - a diffuse transmission component
 /// - a glossy reflection component layered on top of the diffuse layer
 /// - a glossy transmission component layered on top of the diffuse layer
+/// - a clearcoat layer on top of all of the above
 ///\par
-/// The BSDF uses Fresnel coefficients to determine how much light undergoes glossy reflection, and how
+///
+/// The interaction between the top clearcoat layer and the inner layers below that is modeled approximately,
+/// computing only the Fresnel transmission factor to enter the clearcoat, but without modeling the change
+/// due to refraction of the input and output directions a la Weidlich and Wilkie.
+/// This is done because the approach from Weidlich and Wilkie simulates only first-order scattering, and results
+/// in dramatic energy loss for rough materials.
+/// It is also questionable whether that would be more correct, given that accounting for multiple-scattering through
+/// the various layers can be modeled without altering the final lobe directions, and while only changing the statistics
+/// of the inner layer distributions, as described in:
+/// "Efficient Rendering of Layered Materials using an Atomic Decomposition with Statistical Operators",
+/// Laurent Belcour - in ACM Transactions on Graphics, Association for Computing Machinery, 2018.
+/// While we plan to adopt the full machinery of the latter in the future, we currently just crudely approximate it.
+///
+/// The inner layers of the BSDF use Fresnel coefficients to determine how much light undergoes glossy reflection, and how
 /// much undergoes transmission. Part of the radiance transmitted from the upper glossy layer undergoes
-/// diffuse scattering. The interaction between the glossy layer and the underlying diffuse layer is
+/// diffuse scattering. Again, the interaction between the glossy layer and the underlying diffuse layer is
 /// modeled in a simplified manner, as if the layer was infinitely thin and the diffusely reflected particles
 /// were not interacting again with the upper layer.
 ///
@@ -122,7 +130,8 @@ struct Bsdf
 		kDiffuseTransmissionIndex	= 1u,
 		kGlossyReflectionIndex		= 2u,
 		kGlossyTransmissionIndex	= 3u,
-		kNumComponents				= 4u,
+		kClearcoatReflectionIndex	= 4u,
+		kNumComponents				= 5u,
 	};
 
 	/// component type bitmasks
@@ -135,6 +144,7 @@ struct Bsdf
 		kDiffuseTransmission	= 0x2u,
 		kGlossyReflection		= 0x4u,
 		kGlossyTransmission		= 0x8u,
+		kClearcoatReflection	= 0x10u,
 
 		kDiffuseMask			= 0x3u,
 		kGlossyMask				= 0xCu,
@@ -196,8 +206,10 @@ struct Bsdf
 		m_glossy(bsdf.m_glossy),
 		m_glossy_trans(bsdf.m_glossy_trans),
 		m_fresnel(bsdf.m_fresnel),
+		m_reflectivity(bsdf.m_reflectivity),
 		m_ior(bsdf.m_ior),
 		m_opacity(bsdf.m_opacity),
+		m_clearcoat_ior(bsdf.m_clearcoat_ior),
 		m_glossy_reflectance(bsdf.m_glossy_reflectance),
 		m_transport(bsdf.m_transport) {}
 
@@ -220,11 +232,15 @@ struct Bsdf
 		m_glossy_trans(material.roughness /** mollification_factor + mollification_bias*/, true, material.index_of_refraction, 1.0f),
 	#endif
 		m_fresnel(cugar::Vector3f(material.specular.x, material.specular.y, material.specular.z) / M_PIf),
+		m_reflectivity(cugar::Vector3f(material.reflectivity.x, material.reflectivity.y, material.reflectivity.z)),
 		m_ior(material.index_of_refraction),
 		m_opacity(material.opacity),
 		m_glossy_reflectance(renderer.glossy_reflectance),
 		m_transport(transport)
-	{}
+	{
+		const float R0	= cugar::min( cugar::max_comp( m_reflectivity ), 0.95f );
+		m_clearcoat_ior = (1 + sqrtf(R0)) / (1 - sqrtf(R0));	// calculate the clearcoat's IOR based on the normal incidence reflectivity
+	}
 
 	/// constructor
 	///
@@ -251,7 +267,10 @@ struct Bsdf
 		m_opacity(opacity),
 		m_glossy_reflectance(renderer.glossy_reflectance),
 		m_transport(transport)
-	{}
+	{
+		const float R0	= cugar::min( cugar::max_comp( m_reflectivity ), 0.95f );
+		m_clearcoat_ior = (1 + sqrtf(R0)) / (1 - sqrtf(R0));	// calculate the clearcoat's IOR based on the normal incidence reflectivity
+	}
 
 	/// return the diffuse transmission component
 	///
@@ -292,28 +311,23 @@ struct Bsdf
 	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
 	cugar::Vector3f f(
 		const cugar::DifferentialGeometry&	geometry,
-		const cugar::Vector3f				V,
-		const cugar::Vector3f				L,
+		const cugar::Vector3f				w_i,
+		const cugar::Vector3f				w_o,
 		const ComponentType					components	= kAllComponents) const
 	{
+		// compute the true component weights together with the transmitted directions and coefficients
+		cugar::Vector3f Fc_1, Tc_1;
+		cugar::Vector3f Fc_2, Tc_2;
 		cugar::Vector3f w[4];
-		component_weights( geometry, V, L, w );
+		component_weights( geometry, w_i, w_o, Fc_1, Tc_1, Fc_2, Tc_2, w );
 
-		float factor = 1.0f;
-		if (m_transport == kRadianceTransport && m_ior)
-		{
-			// apply the radiance compression factor of (eta_t / eta_i)^2
-			const float NoV = dot(V, geometry.normal_s);
-			const float NoL = dot(L, geometry.normal_s);
-			if (NoV * NoL < 0.0f)
-				factor = cugar::sqr( NoV > 0.0f ? m_ior : 1.0f / m_ior );
-		}
+		const float factor = compression_factor( geometry, w_i, w_o );
 
 		return
-			((components & kDiffuseReflection)	 ? m_diffuse.f(geometry, V, L)			* w[kDiffuseReflectionIndex]   * factor	: 0.0f) + 
-			((components & kDiffuseTransmission) ? m_diffuse_trans.f(geometry, V, L)	* w[kDiffuseTransmissionIndex] * factor	: 0.0f) +
-			((components & kGlossyReflection)    ? m_glossy.f(geometry, V, L)			* w[kGlossyReflectionIndex]    * factor	: 0.0f) + 
-			((components & kGlossyTransmission)	 ? m_glossy_trans.f(geometry, V, L)		* w[kGlossyTransmissionIndex]  * factor : 0.0f);
+			((components & kDiffuseReflection)	 ? m_diffuse.f(geometry, w_i, w_o)			* w[kDiffuseReflectionIndex]   * factor	: 0.0f) + 
+			((components & kDiffuseTransmission) ? m_diffuse_trans.f(geometry, w_i, w_o)	* w[kDiffuseTransmissionIndex] * factor	: 0.0f) +
+			((components & kGlossyReflection)    ? m_glossy.f(geometry, w_i, w_o)			* w[kGlossyReflectionIndex]    * factor	: 0.0f) + 
+			((components & kGlossyTransmission)	 ? m_glossy_trans.f(geometry, w_i, w_o)		* w[kGlossyTransmissionIndex]  * factor : 0.0f);
 	}
 
 	/// evaluate the BSDF f(V,L) separately for all components
@@ -321,29 +335,24 @@ struct Bsdf
 	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
 	void f(
 		const cugar::DifferentialGeometry&	geometry,
-		const cugar::Vector3f				V,
-		const cugar::Vector3f				L,
+		const cugar::Vector3f				w_i,
+		const cugar::Vector3f				w_o,
 		cugar::Vector3f*					f) const
 	{
+		// compute the true component weights together with the transmitted directions and coefficients
+		cugar::Vector3f Fc_1, Tc_1;
+		cugar::Vector3f Fc_2, Tc_2;
+		cugar::Vector3f w[4];
+		component_weights( geometry, w_i, w_o, Fc_1, Tc_1, Fc_2, Tc_2, w );
+
 		cugar::Vector3f f_d, f_g, f_dt, f_gt;
 
-		f_d = m_diffuse.f(geometry, V, L);
-		f_g = m_diffuse_trans.f(geometry, V, L);
-		f_dt = m_glossy.f(geometry, V, L);
-		f_gt = m_glossy_trans.f(geometry, V, L);
+		f_d = m_diffuse.f(geometry, w_i, w_o);
+		f_g = m_diffuse_trans.f(geometry, w_i, w_o);
+		f_dt = m_glossy.f(geometry, w_i, w_o);
+		f_gt = m_glossy_trans.f(geometry, w_i, w_o);
 
-		cugar::Vector3f w[4];
-		component_weights( geometry, V, L, w );
-
-		float factor = 1.0f;
-		if (m_transport == kRadianceTransport && m_ior)
-		{
-			// apply the radiance compression factor of (eta_t / eta_i)^2
-			const float NoV = dot(V, geometry.normal_s);
-			const float NoL = dot(L, geometry.normal_s);
-			if (NoV * NoL < 0.0f)
-				factor = cugar::sqr( NoV > 0.0f ? m_ior : 1.0f / m_ior );
-		}
+		const float factor = compression_factor( geometry, w_i, w_o );
 
 		f[kDiffuseReflectionIndex]		= f_d	* w[kDiffuseReflectionIndex]   * factor;
 		f[kDiffuseTransmissionIndex]	= f_dt	* w[kDiffuseTransmissionIndex] * factor;
@@ -356,55 +365,45 @@ struct Bsdf
 	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
 	void f_and_p(
 		const cugar::DifferentialGeometry&	geometry,
-		const cugar::Vector3f				V,
-		const cugar::Vector3f				L,
+		const cugar::Vector3f				w_i,
+		const cugar::Vector3f				w_o,
 		cugar::Vector3f*					f,
 		float*								p,
 		const cugar::SphericalMeasure		measure = cugar::kProjectedSolidAngle,
 		bool								RR = true) const
 	{
+		// compute the true component weights together with the transmitted directions and coefficients
+		cugar::Vector3f Fc_1, Tc_1;
+		cugar::Vector3f Fc_2, Tc_2;
+		cugar::Vector3f w[4];
+		component_weights( geometry, w_i, w_o, Fc_1, Tc_1, Fc_2, Tc_2, w );
+
+		// compute the coat reflection & transmission probabilities
+		float coat_reflection_prob   = cugar::average(Fc_1);
+		float coat_transmission_prob = 1.0f - coat_reflection_prob;
+
+		// evaluate the inner layers
 		cugar::Vector3f f_d, f_g, f_dt, f_gt;
 		float           p_d, p_g, p_dt, p_gt;
 
-		m_diffuse.f_and_p(geometry, V, L, f_d, p_d, measure);
-		m_diffuse_trans.f_and_p(geometry, V, L, f_dt, p_dt, measure);
-		m_glossy.f_and_p(geometry, V, L, f_g, p_g, measure);
-		m_glossy_trans.f_and_p(geometry, V, L, f_gt, p_gt, measure);
+		m_diffuse.f_and_p(geometry, w_i, w_o, f_d, p_d, measure);
+		m_diffuse_trans.f_and_p(geometry, w_i, w_o, f_dt, p_dt, measure);
+		m_glossy.f_and_p(geometry, w_i, w_o, f_g, p_g, measure);
+		m_glossy_trans.f_and_p(geometry, w_i, w_o, f_gt, p_gt, measure);
 
-		float diffuse_refl_prob;
-		float diffuse_trans_prob;
-		float glossy_refl_prob;
-		float glossy_trans_prob;
+		// compute the sampling weights for the inner layers
+		float w_p[4];
+		sampling_weights(geometry, w_i, w_p);
 
-		sampling_weights(geometry, V, diffuse_refl_prob, diffuse_trans_prob, glossy_refl_prob, glossy_trans_prob);
+		// modulate the sampling weights by the coat transmission probability
+		normalize_sampling_weights( w_p, coat_reflection_prob, coat_transmission_prob, RR );
 
-		if (RR == false)
-		{
-			const float inv_sum = 1.0f / (diffuse_refl_prob + diffuse_trans_prob + glossy_refl_prob + glossy_trans_prob);
+		p[kDiffuseReflectionIndex]		= p_d	* w_p[kDiffuseReflectionIndex];
+		p[kDiffuseTransmissionIndex]	= p_dt	* w_p[kDiffuseTransmissionIndex];
+		p[kGlossyReflectionIndex]		= p_g	* w_p[kGlossyReflectionIndex];
+		p[kGlossyTransmissionIndex]		= p_gt	* w_p[kGlossyTransmissionIndex];
 
-			diffuse_refl_prob	*= inv_sum;
-			glossy_refl_prob	*= inv_sum;
-			diffuse_trans_prob	*= inv_sum;
-			glossy_trans_prob   *= inv_sum;
-		}
-
-		p[kDiffuseReflectionIndex]		= p_d * diffuse_refl_prob;
-		p[kDiffuseTransmissionIndex]	= p_dt * diffuse_trans_prob;
-		p[kGlossyReflectionIndex]		= p_g * glossy_refl_prob;
-		p[kGlossyTransmissionIndex]		= p_gt * glossy_trans_prob;
-
-		cugar::Vector3f w[4];
-		component_weights( geometry, V, L, w );
-
-		float factor = 1.0f;
-		if (m_transport == kRadianceTransport && m_ior)
-		{
-			// apply the radiance compression factor of (eta_t / eta_i)^2
-			const float NoV = dot(V, geometry.normal_s);
-			const float NoL = dot(L, geometry.normal_s);
-			if (NoV * NoL < 0.0f)
-				factor = cugar::sqr( NoV > 0.0f ? m_ior : 1.0f / m_ior );
-		}
+		const float factor = compression_factor( geometry, w_i, w_o );
 
 		f[kDiffuseReflectionIndex]		= f_d	* w[kDiffuseReflectionIndex]   * factor;
 		f[kDiffuseTransmissionIndex]	= f_dt	* w[kDiffuseTransmissionIndex] * factor;
@@ -417,56 +416,46 @@ struct Bsdf
 	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
 	void f_and_p(
 		const cugar::DifferentialGeometry&	geometry,
-		const cugar::Vector3f				V,
-		const cugar::Vector3f				L,
+		const cugar::Vector3f				w_i,
+		const cugar::Vector3f				w_o,
 		cugar::Vector3f&					f,
 		float&								p,
 		const cugar::SphericalMeasure		measure		= cugar::kProjectedSolidAngle,
 		const bool							RR			= true,
 		const ComponentType					components	= kAllComponents) const
 	{
+		// compute the true component weights together with the transmitted directions and coefficients
+		cugar::Vector3f Fc_1, Tc_1;
+		cugar::Vector3f Fc_2, Tc_2;
+		cugar::Vector3f w[4];
+		component_weights( geometry, w_i, w_o, Fc_1, Tc_1, Fc_2, Tc_2, w );
+
+		// compute the coat reflection & transmission probabilities
+		float coat_reflection_prob   = cugar::average(Fc_1);
+		float coat_transmission_prob = 1.0f - coat_reflection_prob;
+
+		// evaluate the inner layers
 		cugar::Vector3f f_d(0.0f), f_g(0.0f), f_dt(0.0f), f_gt(0.0f);
 		float           p_d(0.0f), p_g(0.0f), p_dt(0.0f), p_gt(0.0f);
 
-		if (components & kDiffuseReflection)	m_diffuse.f_and_p(geometry, V, L, f_d, p_d, measure);
-		if (components & kDiffuseTransmission)	m_diffuse_trans.f_and_p(geometry, V, L, f_dt, p_dt, measure);
-		if (components & kGlossyReflection)		m_glossy.f_and_p(geometry, V, L, f_g, p_g, measure);
-		if (components & kGlossyTransmission)	m_glossy_trans.f_and_p(geometry, V, L, f_gt, p_gt, measure);
+		if (components & kDiffuseReflection)	m_diffuse.f_and_p(geometry, w_i, w_o, f_d, p_d, measure);
+		if (components & kDiffuseTransmission)	m_diffuse_trans.f_and_p(geometry, w_i, w_o, f_dt, p_dt, measure);
+		if (components & kGlossyReflection)		m_glossy.f_and_p(geometry, w_i, w_o, f_g, p_g, measure);
+		if (components & kGlossyTransmission)	m_glossy_trans.f_and_p(geometry, w_i, w_o, f_gt, p_gt, measure);
 
-		float diffuse_refl_prob;
-		float diffuse_trans_prob;
-		float glossy_refl_prob;
-		float glossy_trans_prob;
+		// compute the sampling weights for the inner layers
+		float w_p[4];
+		sampling_weights(geometry, w_i, w_p);
 
-		sampling_weights(geometry, V, diffuse_refl_prob, diffuse_trans_prob, glossy_refl_prob, glossy_trans_prob);
+		// modulate the sampling weights by the coat transmission probability
+		normalize_sampling_weights( w_p, coat_reflection_prob, coat_transmission_prob, RR, components );
 
-		if (RR == false)
-		{
-			const float inv_sum = 1.0f / (diffuse_refl_prob + diffuse_trans_prob + glossy_refl_prob + glossy_trans_prob);
-
-			diffuse_refl_prob	*= inv_sum;
-			glossy_refl_prob	*= inv_sum;
-			diffuse_trans_prob	*= inv_sum;
-			glossy_trans_prob   *= inv_sum;
-		}
-
-		p = p_d * diffuse_refl_prob +
-			p_dt * diffuse_trans_prob +
-			p_g * glossy_refl_prob +
-			p_gt * glossy_trans_prob;
+		p = p_d		* w_p[kDiffuseReflectionIndex]	 +
+			p_dt	* w_p[kDiffuseTransmissionIndex] +
+			p_g		* w_p[kGlossyReflectionIndex]	 +
+			p_gt	* w_p[kGlossyTransmissionIndex]; 
 		
-		cugar::Vector3f w[4];
-		component_weights( geometry, V, L, w );
-
-		float factor = 1.0f;
-		if (m_transport == kRadianceTransport && m_ior)
-		{
-			// apply the radiance compression factor of (eta_t / eta_i)^2
-			const float NoV = dot(V, geometry.normal_s);
-			const float NoL = dot(L, geometry.normal_s);
-			if (NoV * NoL < 0.0f)
-				factor = cugar::sqr( NoV > 0.0f ? m_ior : 1.0f / m_ior );
-		}
+		const float factor = compression_factor( geometry, w_i, w_o );
 
 		f = f_d		* w[kDiffuseReflectionIndex]   * factor +
 			f_dt	* w[kDiffuseTransmissionIndex] * factor +
@@ -477,51 +466,65 @@ struct Bsdf
 	/// evaluate the total projected probability p(V,L) = p(L|V)
 	///
 	/// \param geometry				the local differential geometry
-	/// \param in					the incoming direction
-	/// \param out					the outgoing direction
+	/// \param w_i					the incoming direction
+	/// \param w_o					the outgoing direction
 	/// \param measure				the spherical measure to use
 	/// \param RR					indicate whether to use Russian-Roulette or not
 	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
 	float p(
 		const cugar::DifferentialGeometry&	geometry,
-		const cugar::Vector3f				V,
-		const cugar::Vector3f				L,
+		const cugar::Vector3f				w_i,
+		const cugar::Vector3f				w_o,
 		const cugar::SphericalMeasure		measure		= cugar::kProjectedSolidAngle,
 		const bool							RR			= true,
 		const ComponentType					components	= kAllComponents) const
 	{
-		float diffuse_refl_prob;
-		float diffuse_trans_prob;
-		float glossy_refl_prob;
-		float glossy_trans_prob;
+		// evaluate the clearcoat's transmission
+		cugar::Vector3f H_c;
+		cugar::Vector3f Fc_1;
+		cugar::Vector3f Tc_1;
+		float			eta_c;
+		float			cos_theta_i;
 
-		sampling_weights(geometry, V, diffuse_refl_prob, diffuse_trans_prob, glossy_refl_prob, glossy_trans_prob);
-
-		if (RR == false)
+		if (!clearcoat_transmission(
+			geometry,
+			w_i,
+			H_c,
+			cos_theta_i,
+			eta_c,
+			Fc_1,
+			Tc_1 ))
 		{
-			const float inv_sum = 1.0f / (diffuse_refl_prob + diffuse_trans_prob + glossy_refl_prob + glossy_trans_prob);
-
-			diffuse_refl_prob	*= inv_sum;
-			glossy_refl_prob	*= inv_sum;
-			diffuse_trans_prob	*= inv_sum;
-			glossy_trans_prob   *= inv_sum;
+			// total internal reflection - no chance to enter the clearcoat layer
+			return 0.0f;
 		}
+
+		// compute the coat reflection & transmission probabilities
+		float coat_reflection_prob   = cugar::average(Fc_1);
+		float coat_transmission_prob = 1.0f - coat_reflection_prob;
+
+		// compute the sampling weights for the inner layers
+		float w_p[4];
+		sampling_weights(geometry, w_i, w_p);
+
+		// modulate the sampling weights by the coat transmission probability
+		normalize_sampling_weights( w_p, coat_reflection_prob, coat_transmission_prob, RR, components );
 
 		float p_d(0.0f), p_g(0.0f), p_dt(0.0f), p_gt(0.0f);
 
-		if (components & kDiffuseReflection)	p_d  = m_diffuse.p(geometry, V, L, measure);
-		if (components & kDiffuseTransmission)	p_dt = m_diffuse_trans.p(geometry, V, L, measure);
-		if (components & kGlossyReflection)		p_g  = m_glossy.p(geometry, V, L, measure);
-		if (components & kGlossyTransmission)	p_gt = m_glossy_trans.p(geometry, V, L, measure);
+		if (components & kDiffuseReflection)	p_d  = m_diffuse.p(geometry, w_i, w_o, measure);
+		if (components & kDiffuseTransmission)	p_dt = m_diffuse_trans.p(geometry, w_i, w_o, measure);
+		if (components & kGlossyReflection)		p_g  = m_glossy.p(geometry, w_i, w_o, measure);
+		if (components & kGlossyTransmission)	p_gt = m_glossy_trans.p(geometry, w_i, w_o, measure);
 
 		return
-			p_d * diffuse_refl_prob +
-			p_dt * diffuse_trans_prob +
-			p_g * glossy_refl_prob +
-			p_gt * glossy_trans_prob;
+			p_d		* w_p[kDiffuseReflectionIndex]	 +
+			p_dt	* w_p[kDiffuseTransmissionIndex] +
+			p_g		* w_p[kGlossyReflectionIndex]	 +
+			p_gt	* w_p[kGlossyTransmissionIndex]; 
 	}
 
-	/// evaluate the Fresnel weight for the glossy component
+	/// evaluate the sampling weights for the inner layers
 	///
 	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
 	void sampling_weights(
@@ -571,7 +574,7 @@ struct Bsdf
 		diffuse_trans_prob	= m_opacity * cugar::max_comp( t_coeff * m_diffuse_trans.color ) * M_PIf;
 	}
 
-	/// evaluate the Fresnel weight for the glossy component
+	/// evaluate the sampling weights for the inner layers
 	///
 	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
 	void sampling_weights(
@@ -580,6 +583,47 @@ struct Bsdf
 		float*								w) const
 	{
 		sampling_weights( geometry, V, w[kDiffuseReflectionIndex], w[kDiffuseTransmissionIndex], w[kGlossyReflectionIndex], w[kGlossyTransmissionIndex] );
+	}
+
+	/// normalize the sampling weights of the inner layers given the coat sampling probability
+	///
+	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
+	void normalize_sampling_weights(
+		float*				w_p,
+		float&				coat_reflection_prob,
+		float&				coat_transmission_prob,
+		const bool			RR,
+		const ComponentType	components = kAllComponents) const
+	{
+		// set to zero unwanted components
+		if ((components & kDiffuseReflection)	== 0)	w_p[kDiffuseReflectionIndex]	= 0;
+		if ((components & kDiffuseTransmission)	== 0)	w_p[kDiffuseTransmission]		= 0;
+		if ((components & kGlossyReflection)	== 0)	w_p[kGlossyReflection]			= 0;
+		if ((components & kGlossyTransmission)	== 0)	w_p[kGlossyTransmission]		= 0;
+		if ((components & kClearcoatReflection)	== 0) { coat_reflection_prob = 0; coat_transmission_prob = 1; }
+
+		// modulate the sampling weights by the coat transmission probability
+		w_p[kDiffuseReflectionIndex]	*= coat_transmission_prob;
+		w_p[kDiffuseTransmissionIndex]	*= coat_transmission_prob;
+		w_p[kGlossyReflectionIndex]		*= coat_transmission_prob;
+		w_p[kGlossyTransmissionIndex]	*= coat_transmission_prob;
+
+		if (RR == false)
+		{
+			const float inv_sum = 1.0f / (
+				w_p[kDiffuseReflectionIndex]	+
+				w_p[kDiffuseTransmissionIndex]	+
+				w_p[kGlossyReflectionIndex]		+
+				w_p[kGlossyTransmissionIndex]	+
+				coat_reflection_prob);
+
+			w_p[kDiffuseReflectionIndex]	*= inv_sum;
+			w_p[kDiffuseTransmissionIndex]	*= inv_sum;
+			w_p[kGlossyReflectionIndex]		*= inv_sum;
+			w_p[kGlossyTransmissionIndex]   *= inv_sum;
+			coat_reflection_prob			*= inv_sum;
+			coat_transmission_prob			*= inv_sum;
+		}
 	}
 
 	/// compute the Fresnel reflection and transmission weights
@@ -598,7 +642,7 @@ struct Bsdf
 		}
 		else
 		{
-			r_coeff = Fresnel(VoH, eta, m_fresnel);
+			r_coeff = cugar::fresnel_schlick(VoH, eta, m_fresnel);
 			t_coeff = cugar::Vector3f(1.0f - cugar::max_comp(r_coeff));
 		}
 
@@ -651,10 +695,10 @@ struct Bsdf
 	}
 	
 	/// <i>deprecated</i>
-	/// evaluate the Fresnel weight for the glossy component
+	/// evaluate the Fresnel weight for the glossy component - after the clearcoat
 	///
 	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
-	void component_weights(
+	void inner_component_weights(
 		const cugar::DifferentialGeometry&	geometry,
 		const cugar::Vector3f				V,
 		const cugar::Vector3f				L,
@@ -664,7 +708,7 @@ struct Bsdf
 		cugar::Vector3f&					glossy_trans_coeff) const
 	{
 		cugar::Vector3f w[4];
-		component_weights( geometry, V, L, w );
+		inner_component_weights( geometry, V, L, w );
 
 		glossy_refl_coeff   = w[kGlossyReflectionIndex];
 		glossy_trans_coeff  = w[kGlossyTransmissionIndex];
@@ -672,10 +716,10 @@ struct Bsdf
 		diffuse_trans_coeff = w[kDiffuseTransmissionIndex];
 	}
 
-	/// evaluate the component weights
+	/// evaluate the component weights of the inner layers - after the clearcoat
 	///
 	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
-	void component_weights(
+	void inner_component_weights(
 		const cugar::DifferentialGeometry&	geometry,
 		const cugar::Vector3f				V,
 		const cugar::Vector3f				L,
@@ -696,6 +740,72 @@ struct Bsdf
 		w[kGlossyTransmissionIndex]		= t_coeff * (1 - m_opacity);
 		w[kDiffuseReflectionIndex]		= t_coeff * m_opacity * diffuse_weight;
 		w[kDiffuseTransmissionIndex]	= t_coeff * m_opacity * diffuse_weight;
+	}
+
+	/// evaluate the component weights of all layers - including the clearcoat
+	///
+	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
+	void component_weights(
+		const cugar::DifferentialGeometry&	geometry,
+		const cugar::Vector3f				w_i,
+		const cugar::Vector3f				w_o,
+		cugar::Vector3f&					Fc_1,
+		cugar::Vector3f&					Tc_1,
+		cugar::Vector3f&					Fc_2,
+		cugar::Vector3f&					Tc_2,
+		cugar::Vector3f*					w) const
+	{
+		// calculate the transmitted incident vector seen from the inner layers
+		cugar::Vector3f H_c;
+		float			eta_c;
+		float			cos_theta_i;
+
+		if (!clearcoat_transmission(
+			geometry,
+			w_i,
+			H_c,
+			cos_theta_i,
+			eta_c,
+			Fc_1,
+			Tc_1 ))
+		{
+			// total internal reflection - no chance to enter the clearcoat layer
+			w[kGlossyReflectionIndex]		= 0.0f;
+			w[kGlossyTransmissionIndex]		= 0.0f;
+			w[kDiffuseReflectionIndex]		= 0.0f;
+			w[kDiffuseTransmissionIndex]	= 0.0f;
+			return;
+		}
+
+		// Here we blatantly ignore the second refraction to exit the clearcoat layer - as accounting for that explicitly
+		// would lead to severe energy loss due to the lack of multiple-scattering.
+		// A much better alternative we plan to adopt is the adding-doubling algorithm proposed by L.Belcour.
+		Fc_2 = 0.0f;
+		Tc_2 = 1.0f - Fc_2;
+
+		inner_component_weights( geometry, w_i, w_o, w );
+
+		w[kGlossyReflectionIndex]		*= Tc_1 * Tc_2;
+		w[kGlossyTransmissionIndex]		*= Tc_1 * Tc_2;
+		w[kDiffuseReflectionIndex]		*= Tc_1 * Tc_2;
+		w[kDiffuseTransmissionIndex]	*= Tc_1 * Tc_2;
+	}
+
+	/// evaluate the component weights of all layers - including the clearcoat
+	///
+	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
+	void component_weights(
+		const cugar::DifferentialGeometry&	geometry,
+		const cugar::Vector3f				w_i,
+		const cugar::Vector3f				w_o,
+		cugar::Vector3f*					w) const
+	{
+		cugar::Vector3f Fc_1;
+		cugar::Vector3f Tc_1;
+		cugar::Vector3f Fc_2;
+		cugar::Vector3f Tc_2;
+
+		component_weights( geometry, w_i, w_o, Fc_1, Tc_1, Fc_2, Tc_2, w );
 	}
 
 	/// sample a given component
@@ -765,31 +875,19 @@ struct Bsdf
 			}
 			else
 			{
-				cugar::Vector3f diffuse_refl_coeff;
-				cugar::Vector3f diffuse_trans_coeff;
-				cugar::Vector3f glossy_refl_coeff;
-				cugar::Vector3f glossy_trans_coeff;
-
 				// evaluate the true weights, now that the output direction is known
-				component_weights(geometry, in, out, diffuse_refl_coeff, diffuse_trans_coeff, glossy_refl_coeff, glossy_trans_coeff);
+				cugar::Vector3f w[4];
+				component_weights(geometry, in, out, w);
 
 				// re-weight the bsdf value
 				g *=
-					(out_comp & kGlossyReflection)   ?	glossy_refl_coeff :
-					(out_comp & kGlossyTransmission) ?	glossy_trans_coeff :
-					(out_comp & kDiffuseReflection)  ?	diffuse_refl_coeff :
-														diffuse_trans_coeff;
+					(out_comp & kGlossyReflection)   ?	w[kGlossyReflectionIndex] :
+					(out_comp & kGlossyTransmission) ?	w[kGlossyTransmissionIndex] :
+					(out_comp & kDiffuseReflection)  ?	w[kDiffuseReflectionIndex] :
+														w[kDiffuseTransmissionIndex];
 			}
 
-			float factor = 1.0f;
-			if (m_transport == kRadianceTransport && m_ior)
-			{
-				// apply the radiance compression factor of (eta_t / eta_i)^2
-				const float NoV = dot(in, geometry.normal_s);
-				const float NoL = dot(out, geometry.normal_s);
-				if (NoV * NoL < 0.0f)
-					factor = cugar::sqr( NoV > 0.0f ? m_ior : 1.0f / m_ior );
-			}
+			const float factor = compression_factor( geometry, in, out );
 
 			out_p		= p;
 			out_p_proj	= p_proj;
@@ -839,13 +937,69 @@ struct Bsdf
 		float			z_norm(0.0f);
 		float			p_comp(0.0f);
 
-		// evaluate the Fresnel mixing weights
-		float diffuse_refl_prob;
-		float diffuse_trans_prob;
-		float glossy_refl_prob;
-		float glossy_trans_prob;
+		cugar::Vector3f w_i = in;
+		cugar::Vector3f w_o;
+		
+		//
+		// 1. compute the Fresnel term Fc due to the coating layer
+		// 2. use Fc to derive sampling probabilities of all layers (i.e. multiplying their pdf by (1-Fc))
+		//   2b. normalize all probabilities if RR is disabled 
+		// 3. sample reflection from the coating layer with probability Fc
+		// 4. choose an inner layer with the above probabilities
+		// 5. refract the output from the selected inner layer through the coating layer
+		//
 
-		sampling_weights(geometry, in, diffuse_refl_prob, diffuse_trans_prob, glossy_refl_prob, glossy_trans_prob);
+		// We assume the clearcoat is actually made of two layers, C_o and C_i: one with a relative index of refraction (eta)
+		// of eta with respect to the outer medium, and another adjacent one with a relative index of refraction
+		// of eta with respect to the inner medium.
+		// i.e. ior(C_o)/ior(O) = eta
+		// i.e. ior(C_i)/ior(I) = eta
+		// Now, this means that if the material's IOR specifies the ratio ior(I)/ior(O), we have:
+		//
+		// ior(C_i)/ior(C_o) = ior(I)/ior(O)
+		//
+		// We suppose the substrate GGX/diffuse layer sits at the surface between C_o and C_i, implying that
+		// the transmissive component of that layer sees exactly the same ratio eta = ior(I)/ior(O).
+		// In practice, this means that rays that go through all the layers will simply see a combined refraction
+		// of eta.
+		// In theory of course modeling the individual interactions would be significant for multiple scattering
+		// within the medium, yet that would be rather expensive and require stochastic evaluation, e.g. using
+		// the scheme proposed in:
+		// "Position-Free Monte Carlo Simulation for Arbitrary Layered BSDFs", Yu Guo, Milos Hasan, Shuang Zhao.
+		// A more convenient approach is the one taken by:
+		// "Efficient Rendering of Layered Materials using an Atomic Decomposition with Statistical Operators",
+		// Laurent Belcour - in ACM Transactions on Graphics, Association for Computing Machinery, 2018.
+		// While we plan to adopt the full machinery of the latter in the future, we currently just approximate it.
+
+		cugar::Vector3f H_c;
+		cugar::Vector3f Fc_1;
+		cugar::Vector3f Tc_1;
+		float			eta_c;
+		float			cos_theta_i;
+
+		if (!clearcoat_transmission(
+			geometry,
+			in,
+			H_c,
+			cos_theta_i,
+			eta_c,
+			Fc_1,
+			Tc_1 ))
+		{
+			// total internal reflection - no chance to enter the clearcoat layer
+			out			= cugar::Vector3f(0.0f);
+			out_p		= 0.0f;
+			out_p_proj	= 0.0f;
+			out_g		= cugar::Vector3f(0.0f);
+			return false;
+		}
+
+		float coat_reflection_prob   = cugar::average(Fc_1);
+		float coat_transmission_prob = 1.0f - coat_reflection_prob;
+
+		// evaluate the sampling weights for the inner layers
+		float w_p[4];
+		sampling_weights(geometry, in, w_p);
 
 	#if USE_EFFICIENT_SAMPLER_WITH_APPROXIMATE_PDFS
 		//
@@ -858,18 +1012,12 @@ struct Bsdf
 		glossy_component::distribution_type glossy_distribution = m_glossy.distribution();
 		
 		// move to local coordinates
-		const cugar::Vector3f V_local = cugar::Vector3f(
-			dot( in, geometry.tangent ),
-			dot( in, geometry.binormal ),
-			dot( in, geometry.normal_s ) );
+		const cugar::Vector3f V_local = geometry.to_local( w_i );
 
 		const cugar::Vector3f H_local = glossy_distribution.sample( cugar::Vector3f(z[0], z[1], z[2]), V_local );
 
 		// move to world coordinates
-		const cugar::Vector3f H =
-			H_local.x * geometry.tangent +
-			H_local.y * geometry.binormal +
-			H_local.z * geometry.normal_s;
+		const cugar::Vector3f H = geometry.from_local( H_local );
 
 		// compute the Fresnel coefficients
 		cugar::Vector3f r_coeff, t_coeff;
@@ -880,155 +1028,160 @@ struct Bsdf
 		fresnel_weights( dot(V_local, H_local), eta, r_coeff, t_coeff );
 
 		// assign component probabilities
-		glossy_refl_prob	= (glossy_refl_prob		+	cugar::max_comp( r_coeff ) ) * 0.5f;
-		glossy_trans_prob	= (glossy_trans_prob	+	(1 - m_opacity) * cugar::max_comp( t_coeff )) * 0.5f;
-		diffuse_refl_prob	= (diffuse_refl_prob	+	m_opacity * cugar::max_comp( t_coeff * m_diffuse.color ) * M_PIf) * 0.5f;
-		diffuse_trans_prob	= (diffuse_trans_prob	+	m_opacity * cugar::max_comp( t_coeff * m_diffuse_trans.color ) * M_PIf) * 0.5f;
+		w_p[kGlossyReflectionIndex]		= (w_p[kGlossyReflectionIndex]		+	cugar::max_comp( r_coeff ) ) * 0.5f;
+		w_p[kGlossyTransmissionIndex]	= (w_p[kGlossyTransmissionIndex]	+	(1 - m_opacity) * cugar::max_comp( t_coeff )) * 0.5f;
+		w_p[kDiffuseReflectionIndex]	= (w_p[kDiffuseReflectionIndex]		+	m_opacity * cugar::max_comp( t_coeff * m_diffuse.color ) * M_PIf) * 0.5f;
+		w_p[kDiffuseTransmissionIndex]	= (w_p[kDiffuseTransmissionIndex]	+	m_opacity * cugar::max_comp( t_coeff * m_diffuse_trans.color ) * M_PIf) * 0.5f;
 	#endif
 
-		// set to zero unwanted components
-		if ((components & kDiffuseReflection)	== 0)	diffuse_refl_prob	= 0;
-		if ((components & kDiffuseTransmission)	== 0)	diffuse_trans_prob	= 0;
-		if ((components & kGlossyReflection)	== 0)	glossy_refl_prob	= 0;
-		if ((components & kGlossyTransmission)	== 0)	glossy_trans_prob	= 0;
-
-		if (RR == false)
-		{
-			const float inv_sum = 1.0f / (diffuse_refl_prob + diffuse_trans_prob + glossy_refl_prob + glossy_trans_prob);
-
-			diffuse_refl_prob	*= inv_sum;
-			glossy_refl_prob	*= inv_sum;
-			diffuse_trans_prob	*= inv_sum;
-			glossy_trans_prob   *= inv_sum;
-		}
+		// modulate the sampling weights by the cleacoat sampling probability
+		normalize_sampling_weights( w_p, coat_reflection_prob, coat_transmission_prob, RR, components );
 
 		// select a BSDF component with z[2]
-		if (z[2] < diffuse_refl_prob)
+		if (z[2] < w_p[kDiffuseReflectionIndex])
 		{
-			// sample the diffuse component
+			// sample the diffuse reflection component
 			const Bsdf::diffuse_component component = diffuse();
 
-			z_norm = z[2] / diffuse_refl_prob;
-			p_comp = diffuse_refl_prob;
+			z_norm = z[2] / w_p[kDiffuseReflectionIndex];
+			p_comp = w_p[kDiffuseReflectionIndex];
 
-			component.sample(cugar::Vector3f(z[0], z[1], z_norm), geometry, in, out, g, p, p_proj);
+			component.sample(cugar::Vector3f(z[0], z[1], z_norm), geometry, w_i, w_o, g, p, p_proj);
 
 			out_comp = kDiffuseReflection;
 		}
-		else if (z[2] < diffuse_refl_prob + glossy_refl_prob)
+		else if (z[2] < w_p[kDiffuseReflectionIndex] +
+						w_p[kGlossyReflectionIndex])
 		{
-			// sample the glossy component
+			// sample the glossy reflection component
 			const Bsdf::glossy_component component = glossy();
 
-			z_norm = (z[2] - diffuse_refl_prob) / glossy_refl_prob;
-			p_comp = glossy_refl_prob;
+			z_norm = (z[2] - w_p[kDiffuseReflectionIndex]) / w_p[kGlossyReflectionIndex];
+			p_comp = w_p[kGlossyReflectionIndex];
 
 		#if !USE_EFFICIENT_SAMPLER_WITH_APPROXIMATE_PDFS
-			component.sample(cugar::Vector3f(z[0], z[1], z_norm), geometry, in, out, g, p, p_proj);
+			component.sample(cugar::Vector3f(z[0], z[1], z_norm), geometry, w_i, w_o, g, p, p_proj);
 		#else
-			// move to world coordinates
-			const cugar::Vector3f H =
-				H_local.x * geometry.tangent +
-				H_local.y * geometry.binormal +
-				H_local.z * geometry.normal_s;
-
 			// sample L given H
-			component.sample( geometry, H, in, out, g, p, p_proj );
+			component.sample( geometry, H, w_i, w_o, g, p, p_proj );
 		#endif
 			out_comp = kGlossyReflection;
 		}
-		else if (z[2] < diffuse_refl_prob + glossy_refl_prob + diffuse_trans_prob)
+		else if (z[2] < w_p[kDiffuseReflectionIndex]	+
+						w_p[kGlossyReflectionIndex]		+
+						w_p[kDiffuseTransmissionIndex])
 		{
-			// sample the diffuse component
+			// sample the diffuse transmission component
 			const Bsdf::diffuse_trans_component component = diffuse_trans();
 
-			z_norm = (z[2] - diffuse_refl_prob - glossy_refl_prob) / diffuse_trans_prob;
-			p_comp = diffuse_trans_prob;
+			z_norm = (z[2] - w_p[kDiffuseReflectionIndex] - w_p[kGlossyReflectionIndex]) / w_p[kDiffuseTransmissionIndex];
+			p_comp = w_p[kDiffuseTransmissionIndex];
 
-			component.sample(cugar::Vector3f(z[0], z[1], z_norm), geometry, in, out, g, p, p_proj);
+			component.sample(cugar::Vector3f(z[0], z[1], z_norm), geometry, w_i, w_o, g, p, p_proj);
 
 			out_comp = kDiffuseTransmission;
 		}
-		else if (z[2] < diffuse_refl_prob + glossy_refl_prob + diffuse_trans_prob + glossy_trans_prob)
+		else if (z[2] <	w_p[kDiffuseReflectionIndex]	+
+						w_p[kGlossyReflectionIndex]		+
+						w_p[kDiffuseTransmissionIndex]	+
+						w_p[kGlossyTransmissionIndex])
 		{
-			// sample the glossy component
+			// sample the glossy transmission component
 			const Bsdf::glossy_component& component = glossy_trans();
 
-			z_norm = (z[2] - diffuse_refl_prob - glossy_refl_prob - diffuse_trans_prob) / glossy_trans_prob;
-			p_comp = glossy_trans_prob;
+			z_norm = (z[2] - w_p[kDiffuseReflectionIndex] - w_p[kGlossyReflectionIndex] - w_p[kDiffuseTransmissionIndex]) / w_p[kGlossyTransmissionIndex];
+			p_comp = w_p[kGlossyTransmissionIndex];
 
 		#if !USE_EFFICIENT_SAMPLER_WITH_APPROXIMATE_PDFS
-			component.sample(cugar::Vector3f(z[0], z[1], z_norm), geometry, in, out, g, p, p_proj);
+			component.sample(cugar::Vector3f(z[0], z[1], z_norm), geometry, w_i, w_o, g, p, p_proj);
 		#else
-			// move to world coordinates
-			const cugar::Vector3f H =
-				H_local.x * geometry.tangent +
-				H_local.y * geometry.binormal +
-				H_local.z * geometry.normal_s;
-
 			// sample L given H
-			component.sample( geometry, H, in, out, g, p, p_proj );
+			component.sample( geometry, H, w_i, w_o, g, p, p_proj );
 		#endif
 
 			out_comp = kGlossyTransmission;
+		}
+		else if (z[2] < w_p[kDiffuseReflectionIndex]	+
+						w_p[kGlossyReflectionIndex]		+
+						w_p[kDiffuseTransmissionIndex]	+
+						w_p[kGlossyTransmissionIndex]	+
+						coat_reflection_prob)
+		{
+			// sample the clearcoat reflection
+			z_norm = (z[2] - w_p[kDiffuseReflectionIndex] - w_p[kGlossyReflectionIndex] - w_p[kDiffuseTransmissionIndex] - w_p[kGlossyTransmissionIndex]) / coat_reflection_prob;
+			p_comp = coat_reflection_prob;
+
+			// compute the reflection direction
+			out    = 2 * cos_theta_i * H_c - in;
+			g      = Fc_1 / p_comp;					// NOTE: we pre-divide by p_comp here, unlike for other components
+			p_proj = cugar::float_infinity();
+			p      = cugar::float_infinity();
+
+			out_comp = kClearcoatReflection;
 		}
 		else
 		{
 			out_comp = kAbsorption;
 		}
 
+		if (out_comp != kAbsorption && 
+			out_comp != kClearcoatReflection)
+		{
+			// Here we blatantly ignore the second refraction to exit the clearcoat layer - as accounting for that explicitly
+			// would lead to severe energy loss due to the lack of multiple-scattering.
+			// A much better alternative we plan to adopt is the adding-doubling algorithm proposed by L.Belcour.
+			cugar::Vector3f Fc_2 = 0.0f;
+			cugar::Vector3f Tc_2 = 1.0f - Fc_2;
+
+			// modulate g by both clearcoat transmission terms
+			g *= Tc_1 * Tc_2;
+
+			// write out the output direction
+			out = w_o;
+		}
+
 		// TODO: chose the channel based on our new BSDF factorization heuristic
 		if (out_comp != kAbsorption)
 		{
 			// re-evaluate the entire BSDF and its sampling probabilities
-			if (evaluate_full_bsdf)
+			if (out_comp != kClearcoatReflection)
 			{
-				float p_d	= (components & kDiffuseReflection)		?       diffuse().p(geometry, in, out, cugar::kProjectedSolidAngle) : 0.0f;
-				float p_dt	= (components & kDiffuseTransmission)	? diffuse_trans().p(geometry, in, out, cugar::kProjectedSolidAngle) : 0.0f;
-				float p_g	= (components & kGlossyReflection)		?        glossy().p(geometry, in, out, cugar::kProjectedSolidAngle) : 0.0f;
-				float p_gt	= (components & kGlossyTransmission)	?  glossy_trans().p(geometry, in, out, cugar::kProjectedSolidAngle) : 0.0f;
+				if (evaluate_full_bsdf)
+				{
+					float p_d	= (components & kDiffuseReflection)		?       diffuse().p(geometry, in, out, cugar::kProjectedSolidAngle) : 0.0f;
+					float p_dt	= (components & kDiffuseTransmission)	? diffuse_trans().p(geometry, in, out, cugar::kProjectedSolidAngle) : 0.0f;
+					float p_g	= (components & kGlossyReflection)		?        glossy().p(geometry, in, out, cugar::kProjectedSolidAngle) : 0.0f;
+					float p_gt	= (components & kGlossyTransmission)	?  glossy_trans().p(geometry, in, out, cugar::kProjectedSolidAngle) : 0.0f;
 
-				p_proj = 
-					p_d  * diffuse_refl_prob	+
-					p_dt * diffuse_trans_prob	+
-					p_g  * glossy_refl_prob		+
-					p_gt * glossy_trans_prob;
+					p_proj = 
+						p_d  * w_p[kDiffuseReflectionIndex]	* coat_transmission_prob	+
+						p_dt * w_p[kDiffuseTransmissionIndex]	* coat_transmission_prob	+
+						p_g  * w_p[kGlossyReflectionIndex]		* coat_transmission_prob	+
+						p_gt * w_p[kGlossyTransmissionIndex]	* coat_transmission_prob;
 
-				//p_proj	= this->p(geometry, in, out, cugar::kProjectedSolidAngle, RR, components); // NOTE: this does not work when USE_EFFICIENT_SAMPLER_WITH_APPROXIMATE_PDFS = 1
-				p		= p_proj * fabsf( dot(out, geometry.normal_s) );
-				g		= this->f(geometry, in, out, components) / p_proj;
-			}
-			else
-			{
-				cugar::Vector3f diffuse_refl_coeff;
-				cugar::Vector3f diffuse_trans_coeff;
-				cugar::Vector3f glossy_refl_coeff;
-				cugar::Vector3f glossy_trans_coeff;
+					p		= p_proj * fabsf( dot(out, geometry.normal_s) );
+					g		= this->f(geometry, in, out, components) / p_proj;
+				}
+				else
+				{
+					// evaluate the true weights, now that the output direction is known
+					cugar::Vector3f w[4];
+					inner_component_weights(geometry, in, out, w);
 
-				// evaluate the true weights, now that the output direction is known
-				component_weights(geometry, in, out, diffuse_refl_coeff, diffuse_trans_coeff, glossy_refl_coeff, glossy_trans_coeff);
+					// re-weight the bsdf value
+					g *=
+						(out_comp & kGlossyReflection)   ?	w[kGlossyReflectionIndex] :
+						(out_comp & kGlossyTransmission) ?	w[kGlossyTransmissionIndex] :
+						(out_comp & kDiffuseReflection)  ?	w[kDiffuseReflectionIndex] :
+															w[kDiffuseTransmissionIndex];
 
-				// re-weight the bsdf value
-				g *=
-					(out_comp & kGlossyReflection)   ?	glossy_refl_coeff :
-					(out_comp & kGlossyTransmission) ?	glossy_trans_coeff :
-					(out_comp & kDiffuseReflection)  ?	diffuse_refl_coeff :
-														diffuse_trans_coeff;
-
-				g		/= p_comp;
-				p		*= p_comp;
-				p_proj	*= p_comp;
+					g		/= p_comp;
+					p		*= p_comp;
+					p_proj	*= p_comp;
+				}
 			}
 
-			float factor = 1.0f;
-			if (m_transport == kRadianceTransport && m_ior)
-			{
-				// apply the radiance compression factor of (eta_t / eta_i)^2
-				const float NoV = dot(in, geometry.normal_s);
-				const float NoL = dot(out, geometry.normal_s);
-				if (NoV * NoL < 0.0f)
-					factor = cugar::sqr( NoV > 0.0f ? m_ior : 1.0f / m_ior );
-			}
+			const float factor = compression_factor( geometry, in, out );
 
 			out_p		= p;
 			out_p_proj	= p_proj;
@@ -1045,31 +1198,56 @@ struct Bsdf
 		}
 	}
 
-	/// evaluate the Fresnel weight
-	///
-	/// \param eta			incoming IOR / outgoing IOR
+	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
+	bool clearcoat_transmission(
+		const cugar::DifferentialGeometry&	geometry,
+		const cugar::Vector3f	w_i,
+		cugar::Vector3f&		H,					// the output clearcoat microfacet
+		float&					cos_theta_i,		// the output cosine of the incident angle - dot(w_i,H)
+		float&					eta,				// the output clearcoat relative IOR
+		cugar::Vector3f&		Fc_1,				// the output Fresnel reflection coefficient - R12
+		cugar::Vector3f&		Tc_1) const			// the output Fresnel transmission coefficient - T12
+	{
+		const float R0			= cugar::min( cugar::max_comp( m_reflectivity ), 0.95f );
+		const float eta_c		= 1.0f / m_clearcoat_ior;
+
+		H			= geometry.normal_s; // for now, assume the clearcoat to be perfectly specular
+		cos_theta_i = dot(w_i, H);
+
+		// compute the refracted direction - which will be the input to the internal layers
+		cugar::Vector3f w_t;
+		float Fc_1_s;
+		if (!cugar::refract(w_i, H, cos_theta_i, eta_c, &w_t, &Fc_1_s))
+		{
+			// total internal reflection - no chance to enter the clearcoat layer
+			Fc_1 = 1.0f;
+			Tc_1 = 0.0f;
+			return false;
+		}
+
+		// use the true Fresnel coefficient to interpolate between m_reflectivity at normal incidence and pure white at grazing angles
+		Fc_1 = cugar::lerp( m_reflectivity, cugar::Vector3f(1.0f), cugar::max(Fc_1_s - R0, 0.0f) / (1 - R0) );
+		Tc_1 = 1.0f - Fc_1;
+		return true;
+	}
+
+	/// apply the radiance compression factor of (eta_t / eta_i)^2
 	///
 	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
-	static cugar::Vector3f Fresnel(const float VoH, const float eta, const cugar::Vector3f fresnel_base)
+	float compression_factor(
+		const cugar::DifferentialGeometry&	geometry,
+		const cugar::Vector3f				w_i,
+		const cugar::Vector3f				w_o) const
 	{
-		const float cos_theta_i  = cugar::min( fabsf(VoH), 1.0f );
-		const float cos_theta_t2 = cugar::min( 1.f - eta * eta * (1.f - cos_theta_i * cos_theta_i), 1.0f );
-		if (cos_theta_t2 < 0.0f)
+		if (m_transport == kRadianceTransport && m_ior)
 		{
-			// TIR
-			//if (eta != 1.0f)
-			//	printf("T: %f, eta^2[%f], sin[%f]\n", cos_theta_t2, eta * eta, (1.f - cos_theta_i * cos_theta_i));
-			return 1.0f;
+			// apply the radiance compression factor of (eta_t / eta_i)^2
+			const float NoV = dot(w_i, geometry.normal_s);
+			const float NoL = dot(w_o, geometry.normal_s);
+			if (NoV * NoL < 0.0f)
+				return cugar::sqr( NoV > 0.0f ? m_ior : 1.0f / m_ior );
 		}
-		else
-		{
-			const float cos_theta = eta > 1.0f ? sqrtf(cos_theta_t2) : cos_theta_i;
-
-			const float Fc = pow5(1 - cos_theta);										// 1 sub, 3 mul
-			//const float Fc = exp2( (-5.55473 * cos_theta - 6.98316) * cos_theta );	// 1 mad, 1 mul, 1 exp
-
-			return cugar::Vector3f(Fc) + (1 - Fc) * fresnel_base;						// 1 add, 3 mad
-		}
+		return 1.0f;
 	}
 
 	FERMAT_FORCEINLINE FERMAT_HOST_DEVICE
@@ -1094,88 +1272,14 @@ struct Bsdf
 	glossy_component		m_glossy;
 	glossy_component		m_glossy_trans;
 	cugar::Vector3f			m_fresnel;
+	cugar::Vector3f			m_reflectivity;	// normal-incidence reflectivity of the clear-coat layer
 	float					m_ior;
 	float					m_opacity;
+	float					m_clearcoat_ior;
 	const float*			m_glossy_reflectance;
 	TransportType			m_transport;
 };
 
-inline
-void precompute_glossy_reflectance(const uint32 S, float* tables)
-{
-	cugar::DifferentialGeometry geom;
-	geom.tangent  = cugar::Vector3f(1,0,0);
-	geom.binormal = cugar::Vector3f(0,1,0);
-	geom.normal_s = geom.normal_g = cugar::Vector3f(0,0,1);
-
-	//cugar::Random rand;
-
-	for (uint32 eta_i = 0; eta_i < S; ++eta_i)
-	{
-		const float eta = 2.0f * float(eta_i + 0.5f) / float(S);
-
-		for (uint32 base_spec_i = 0; base_spec_i < S; ++base_spec_i)
-		{
-			const float base_spec = float(base_spec_i) / float(S-1);
-
-			for (uint32 roughness_i = 0; roughness_i < S; ++roughness_i)
-			{
-				const float roughness = cugar::sqr( float(roughness_i) / float(S-1) ); // square the roughness
-
-				cugar::GGXSmithBsdf bsdf(roughness);
-
-				for (uint32 theta_i = 0; theta_i < S; ++theta_i)
-				{
-					const float cos_theta = float(theta_i) / float(S-1);
-
-					const cugar::Vector3f V( sqrtf(1.0f - cos_theta*cos_theta), 0.0f, cos_theta );
-
-					const uint32 cell_index = (eta_i*S*S*S + base_spec_i*S*S + roughness_i*S + theta_i);
-
-					const uint32 N = 1024;
-
-					float sum = 0.0f;
-
-					for (uint32 s = 0; s < N; ++s)
-					{
-						const cugar::Vector3f u(
-							//rand.next(),
-							//rand.next(),
-							//rand.next() );
-							cugar::randfloat(cell_index*3u + 0u, 0u),
-							cugar::randfloat(cell_index*3u + 1u, 0u),
-							cugar::randfloat(cell_index*3u + 2u, 0u) );
-
-						cugar::Vector3f L;
-						cugar::Vector3f g;
-						float			p;
-						float			p_pr;
-
-						bsdf.sample(
-							u,
-							geom,
-							V,
-							L,
-							g,
-							p,
-							p_pr );
-
-						const cugar::Vector3f H(cugar::normalize(V+L));
-
-						const float VoH = dot(V,H);
-
-						const float F = cugar::max_comp( Bsdf::Fresnel( VoH, eta, base_spec ) );
-
-						sum += F * g.x;
-					}
-
-					tables[cell_index] = sum / N;
-				}
-			}
-			fprintf(stderr, "\rreflectance: %.1f%%  ", 100.0f * float(eta_i*S + base_spec_i)/float(S*S));
-		}
-	}
-}
 
 ///@} BSDFModule
 ///@} Fermat

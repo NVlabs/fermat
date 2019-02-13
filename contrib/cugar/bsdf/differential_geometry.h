@@ -44,18 +44,60 @@ namespace cugar {
  *  \{
  */
 
+///
+/// Spherical measure type
+///
 enum SphericalMeasure
 {
 	kSolidAngle				= 0,
 	kProjectedSolidAngle	= 1
 };
 
+///
+/// A simplified notion of the local differential geometry at a surface
+///
 struct DifferentialGeometry
 {
 	Vector3f normal_s;		// shading normal
 	Vector3f normal_g;		// geometric normal
 	Vector3f tangent;		// local tangent
 	Vector3f binormal;		// local binormal
+
+	///\par
+	/// transform to the local coordinate system
+	///
+	CUGAR_HOST_DEVICE
+	Vector3f to_local(const Vector3f v) const
+	{
+		return Vector3f(
+			dot( v, tangent ),
+			dot( v, binormal ),
+			dot( v, normal_s ) );
+	}
+
+	///\par
+	/// transform back to world space
+	///
+	CUGAR_HOST_DEVICE
+	Vector3f from_local(const Vector3f v) const
+	{
+		return
+			v.x * tangent +
+			v.y * binormal +
+			v.z * normal_s;
+	}
+
+	///\par
+	/// cosine of theta of a vector expressed in local coordinates
+	///
+	CUGAR_HOST_DEVICE
+	float cos_theta_l(const Vector3f v) const { return v.z; }
+
+	///\par
+	/// cosine of theta of a vector expressed in global coordinates
+	///
+	CUGAR_HOST_DEVICE
+	float cos_theta_g(const Vector3f v) const { return dot( v, normal_s ); }
 };
 
 /*! \}

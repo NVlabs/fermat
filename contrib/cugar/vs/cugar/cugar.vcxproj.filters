@@ -180,6 +180,9 @@
     <ClInclude Include="..\..\image\pfm.h">
       <Filter>Source Files\cugar\image</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\bsdf\refraction.h">
+      <Filter>Source Files\cugar\bsdf</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

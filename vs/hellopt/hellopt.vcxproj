@@ -154,7 +154,7 @@
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(CudaToolkitLibDir);../../contrib/freeglut/win64/Release/; ../../contrib/OptiX/lib64; ../../contrib/cugar/win64; ../../contrib/assimp-4.1.0/build/code/Release; $(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
     <CudaCompile>
-      <CodeGeneration>compute_70,sm_70</CodeGeneration>
+      <CodeGeneration>compute_70,sm_70; compute_60,sm_60</CodeGeneration>
       <PtxAsOptionV>true</PtxAsOptionV>
       <Include>$(CudaToolkitIncludeDir);../../src/; ../../src/renderers; ../../src/mesh/;  ../../contrib;  ../../contrib/OptiX/include/; ../../contrib/freeglut/include/;</Include>
       <TargetMachinePlatform>64</TargetMachinePlatform>

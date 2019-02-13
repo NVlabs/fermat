@@ -684,8 +684,9 @@ void FermatImporter::build_material(const char* type, const ParameterList& param
 		float uroughness = 0.1f;
 		float vroughness = 0.1f;
 
-		material.diffuse  = cugar::Vector4f(0.5f);
-		material.specular = cugar::Vector4f(0.5f);
+		material.diffuse		= cugar::Vector4f(0.5f);
+		material.specular		= cugar::Vector4f(0.5f);
+		material.reflectivity	= cugar::Vector4f(0.0f);
 
 		for (size_t i = 0; i < params.names.size(); ++i)
 		{
@@ -723,6 +724,15 @@ void FermatImporter::build_material(const char* type, const ParameterList& param
 				else
 					material.specular_map = TextureReference( texture_it->second );
 			}
+			else if (params.names[i] == "Kr" && params.values[i].type == RGB_TYPE)
+			{
+				material.reflectivity = cugar::Vector4f(
+					params.values[i].get_float(0),
+					params.values[i].get_float(1),
+					params.values[i].get_float(2),
+					0.0f
+				);
+			}
 			else if (params.names[i] == "uroughness" && params.values[i].type == FLOAT_TYPE)
 			{
 				uroughness = params.values[i].get_float(0);
@@ -744,7 +754,7 @@ void FermatImporter::build_material(const char* type, const ParameterList& param
 		float uroughness = 0.00001f;
 		float vroughness = 0.00001f;
 
-		material.opacity = 0.0f;
+		material.opacity  = 0.02f;
 		material.specular = cugar::Vector4f(1.0f);
 
 		for (size_t i = 0; i < params.names.size(); ++i)
@@ -786,6 +796,15 @@ void FermatImporter::build_material(const char* type, const ParameterList& param
 			{
 				vroughness = params.values[i].get_float(0);
 			}
+			else if (params.names[i] == "coat" && params.values[i].type == RGB_TYPE)
+			{
+				material.reflectivity = cugar::Vector4f(
+					params.values[i].get_float(0),
+					params.values[i].get_float(1),
+					params.values[i].get_float(2),
+					0.0f
+				);
+			}
 		}
 		material.roughness = (uroughness + vroughness) / 2; // TODO: add anisotropic materials support!
 	}
@@ -826,6 +845,15 @@ void FermatImporter::build_material(const char* type, const ParameterList& param
 			else if (params.names[i] == "vroughness" && params.values[i].type == FLOAT_TYPE)
 			{
 				vroughness = params.values[i].get_float(0);
+			}
+			else if (params.names[i] == "Kr" && params.values[i].type == RGB_TYPE)
+			{
+				material.reflectivity = cugar::Vector4f(
+					params.values[i].get_float(0),
+					params.values[i].get_float(1),
+					params.values[i].get_float(2),
+					0.0f
+				);
 			}
 		}
 		material.specular  = cugar::Vector4f( FresnelConductor( 1.0f, cugar::Vector3f(1.0f), eta, k ), 0.0f );

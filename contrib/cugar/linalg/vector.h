@@ -615,6 +615,16 @@ CUGAR_HOST_DEVICE
 Vector<T, 3> orthogonal(const Vector<T, 3> v);
 
 /// \relates Vector
+/// build an orthonormal basis
+///
+template <typename T>
+CUGAR_HOST_DEVICE
+void orthonormal_basis(
+	const Vector<T, 3>	normal,
+		  Vector<T, 3>&	tangent,
+		  Vector<T, 3>&	bitangent);
+
+/// \relates Vector
 /// pack a normalized 2d vector using n bits per component
 ///
 template <typename T>
@@ -649,6 +659,121 @@ template <typename T, uint32 DIM>
 CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
 bool is_finite(const Vector<T, DIM>& op);
 
+/// \relates Vector
+/// L_1 vector norm
+///
+template <typename T, uint32 DIM>
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+T L1_norm(const Vector<T, DIM>& op);
+
+/// \relates Vector
+/// L_2 vector norm
+///
+template <typename T, uint32 DIM>
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+T L2_norm(const Vector<T, DIM>& op);
+
+/// \relates Vector
+/// L_inf vector norm
+///
+template <typename T, uint32 DIM>
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+T L_inf_norm(const Vector<T, DIM>& op);
+
+/// \relates Vector
+/// L_p vector norm
+///
+template <typename T, uint32 DIM, uint32 p>
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+T L_norm(const Vector<T, DIM>& op);
+
+/// \relates Vector
+/// L_1 vector norm
+///
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+float L1_norm(const float op);
+
+/// \relates Vector
+/// L_1 vector norm
+///
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+double L1_norm(const double op);
+
+/// \relates Vector
+/// L_2 vector norm
+///
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+float L2_norm(const float op);
+
+/// \relates Vector
+/// L_2 vector norm
+///
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+double L2_norm(const double op);
+
+/// \relates Vector
+/// L_inf vector norm
+///
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+float L_inf_norm(const float op);
+
+/// \relates Vector
+/// L_inf vector norm
+///
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+double L_inf_norm(const double op);
+
+/// \relates Vector
+/// L_p vector norm
+///
+template <uint32 p>
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+float L_norm(const float op);
+
+/// \relates Vector
+/// L_p vector norm
+///
+template <uint32 p>
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+double L_norm(const double op);
+
+/// \relates Vector
+/// vector average
+///
+template <typename T, uint32 DIM>
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+T average(const Vector<T, DIM>& op);
+
+/// \relates Vector
+/// vector average
+///
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+float average(const float op);
+
+/// \relates Vector
+/// vector average
+///
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+double average(const double op);
+
+/// \relates Vector
+/// vector lerp
+///
+template <typename T, uint32 DIM>
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+Vector<T, DIM> lerp(const Vector<T, DIM>& op1, const Vector<T, DIM>& op2, const T u);
+
+/// \relates Vector
+/// vector lerp
+///
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+float lerp(const float op1, const float op2, const float u);
+
+/// \relates Vector
+/// vector lerp
+///
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE
+double lerp(const double op1, const double op2, const double u);
 
 typedef Vector<float, 2>	Vector2f;
 typedef Vector<float, 3>	Vector3f;

@@ -294,6 +294,9 @@
     <ClInclude Include="..\..\src\mesh\pbrt_parser.h">
       <Filter>Source Files\mesh</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\bsdf_utils.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\mesh\glm.cpp">
@@ -393,6 +396,9 @@
     </CudaCompile>
     <CudaCompile Include="..\..\src\renderers\rpt.cu">
       <Filter>Source Files\renderers</Filter>
+    </CudaCompile>
+    <CudaCompile Include="..\..\src\bsdf.cu">
+      <Filter>Source Files</Filter>
     </CudaCompile>
   </ItemGroup>
   <ItemGroup>

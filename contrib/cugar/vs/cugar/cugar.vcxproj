@@ -152,7 +152,7 @@
       <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;cudart.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <CudaCompile>
-      <CodeGeneration>compute_70,sm_70</CodeGeneration>
+      <CodeGeneration>compute_70,sm_70; compute_60,sm_60; compute_50,sm_50</CodeGeneration>
       <TargetMachinePlatform>64</TargetMachinePlatform>
       <PtxAsOptionV>true</PtxAsOptionV>
     </CudaCompile>
@@ -216,6 +216,7 @@
     <ClInclude Include="..\..\bsdf\lambert_edf.h" />
     <ClInclude Include="..\..\bsdf\lambert_trans.h" />
     <ClInclude Include="..\..\bsdf\ltc.h" />
+    <ClInclude Include="..\..\bsdf\refraction.h" />
     <ClInclude Include="..\..\bvh\bvh.h" />
     <ClInclude Include="..\..\bvh\bvh_inline.h" />
     <ClInclude Include="..\..\bvh\bvh_node.h" />

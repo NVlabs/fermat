@@ -58,12 +58,12 @@
 /// \section FermatIntroductionSection Introduction
 ///\par
 /// At the highest level, Fermat is basically a collection of separate renderers.
-/// All renderers use Optix Prime as a ray tracing backend, and implement recursive ray / path tracing as an iterative
+/// All renderers use Optix as a ray tracing backend, and implement recursive ray / path tracing as an iterative
 /// process, in which rays representing new path segments are spawned in <i>wavefronts</i>.
 /// This means each renderer is pretty much written like a pipeline of interleaved <i>tracing</i> and <i>shading</i> stages
 /// communicating through global memory queues.
 ///\n
-/// Currently, the list of available renderers include:
+/// Currently, the list of available renderers includes:
 ///\n
 /// - PathTracer (<i>PT</i>): a simple forward path tracer with next-event estimation
 /// - PSFPT: a path space filtering path tracer, following ideas first developed by Sascha Fricke, Nikolaus Binder and Alex Keller:
@@ -98,11 +98,11 @@
 /// \section FermatCompilationSection Compiling Fermat
 ///\par
 /// Assuming you have Windows 10.0, Visual Studio 2015, CUDA 10.0 and OptiX 6 installed (driver version 418.81 and above), compiling Fermat should be straightforward.
-/// It will be sufficient to open the VS solution located in <i>.\vs\fermat\fermat.sln</i>, and press Build -> Build Solution.
-/// Note that there are three different projects:
-///   - <b>fermatdll</b>: Fermat's core library
-///   - <b>fermat</b>: the main executable, linking fermat.dll
-///   - <b>hellopt</b>: an example plugin renderer
+/// It will be sufficient to open the VS solution located in <i>.\\vs\\fermat\\fermat.sln</i>, and press Build -> Build Solution.
+/// Note that the solution references three different projects:
+///   - <i>fermatdll</i>: Fermat's core library
+///   - <i>fermat</i>: the main executable, linking fermat.dll
+///   - <i>hellopt</i>: an example plugin renderer
 ///
 /// \section FermatDocumentationSection Documentation
 ///
@@ -148,6 +148,7 @@
 ///    <li> 10.3. \ref BPTExampleSection
 ///   </ul>
 /// <li> 11. \ref ModulesPage
+/// <li> 12. \ref GalleryPage
 /// </ul>
 ///
 /// \section FermatDependenciesSection Dependencies
@@ -204,7 +205,7 @@
 ///\n
 /// or directly clone the repository with the command:
 ///\n
-/// git clone https://github.com/NVlabs/fermat.io
+/// git clone https://github.com/NVlabs/fermat
 ///
 ///\htmlonly
 /// <a href="http://nvidia.com"><img src="nvidia.png" style="position:relative; bottom:-10px; border:0px;"/></a>
@@ -251,6 +252,7 @@
 ///    <li> 10.3. \ref BPTExampleSection
 ///   </ul>
 /// <li> 11. \ref ModulesPage
+/// <li> 12. \ref GalleryPage
 /// </ul>
 
 /// \page OverturePage An Overture
@@ -511,14 +513,27 @@
 /// - a diffuse transmission component
 /// - a glossy reflection component layered on top of the diffuse layer
 /// - a glossy transmission component layered on top of the diffuse layer
+/// - a clearcoat layer on top of all of the above
 ///\par
 /// The diffuse components are purely Lambertian, while the glossy components are based on the GGX model with Smith's joint masking-shadowing function
 /// described in:
 ///> [Heitz 2014, "Understanding the Masking-Shadowing Function in Microfacet-Based BRDFs"]
 ///\par
-/// The BSDF uses Fresnel coefficients to determine how much light undergoes glossy reflection, and how
+/// The interaction between the top clearcoat layer and the inner layers below that is modeled approximately,
+/// computing only the Fresnel transmission factor to enter the clearcoat.
+/// The refraction of the incident and outgoing directions is not modeled explicitly as in the approach described in
+/// "Arbitrarily Layered Micro-facet Surfaces" by Weidlich and Wilkie - as that model results in severe energy loss
+/// due to the fact it simulates single-scattering only.
+/// It is also questionable whether that would be more correct, given that accounting for multiple-scattering through
+/// the various layers can be modeled without altering the final lobe directions, and while only changing the statistics
+/// of the inner layer distributions, as described in:
+/// "Efficient Rendering of Layered Materials using an Atomic Decomposition with Statistical Operators",
+/// Laurent Belcour - in ACM Transactions on Graphics, Association for Computing Machinery, 2018.
+/// While we plan to adopt the full machinery of the latter in the future, we currently just crudely approximate it.
+///
+/// The inner layers of the BSDF use Fresnel coefficients to determine how much light undergoes glossy reflection, and how
 /// much undergoes transmission. Part of the radiance transmitted from the upper glossy layer undergoes
-/// diffuse scattering. The interaction between the glossy layer and the underlying diffuse layer is
+/// diffuse scattering. The interaction between the glossy layer and the underlying diffuse layer is again
 /// modeled in a simplified manner, as if the layer was infinitely thin and the diffusely reflected particles
 /// were not interacting again with the upper layer.
 ///\par
@@ -537,6 +552,7 @@
 /// 		kDiffuseTransmission	= 0x2u,
 /// 		kGlossyReflection		= 0x4u,
 /// 		kGlossyTransmission		= 0x8u,
+/// 		kClearcoatReflection	= 0x10u,
 /// 
 /// 		kDiffuseMask			= 0x3u,
 /// 		kGlossyMask				= 0xCu,
@@ -1162,7 +1178,7 @@
 /// and then start executing a pipeline, where we:
 ///\par
 /// 1. trace rays
-/// 2. shade the ray hits (i.e. the new path verticies), potentially generating new shadow
+/// 2. shade the ray hits (i.e. the new path vertices), potentially generating new shadow
 ///    and scattering rays
 /// 3. trace any queued shadow rays
 /// 4. shade the shadow hits
@@ -1770,4 +1786,37 @@
 /// - \ref PSSMLTModule
 /// - \ref CMLTModule
 /// - \ref RPTModule "RPTModule"
+///
+
+
+/// \page GalleryPage Image Gallery
+/// Top: \ref OvertureContentsPage
+///
+/// <img src="escher_room.png" style="position:relative; bottom:-10px; border:0px; width:740px;"/>
+///\par
+/// <small>'Escher's Room', based on a <a href="http://www.blendswap.com/blends/view/75795">model</a> by <i>Wig42</i></small>
+///\n
+/// <img src="morning-coffee-bath.jpg" style="position:relative; bottom:-10px; border:0px; width:740px;"/>
+///\par
+/// <small>'Salle de bain, with coffee', based on a <a href="http://www.blendswap.com/blends/view/73937">model</a> by <i>nacimus</i></small>
+///\n
+/// <img src="morning-bath-rec.jpg" style="position:relative; bottom:-10px; border:0px; width:740px;"/>
+///\par
+/// <small>'Inception', based on a <a href="http://www.blendswap.com/blends/view/73937">model</a> by <i>nacimus</i></small>
+///\n
+/// <img src="staircase2-sunset.jpg" style="position:relative; bottom:-10px; border:0px; width:740px;"/>
+///\par
+/// <small>'Modern Hall, at sunset', based on a <a href="http://www.blendswap.com/blends/view/51997">model</a> by <i>NewSee2l035</i></small>
+///\n
+/// <img src="staircase2-evening.jpg" style="position:relative; bottom:-10px; border:0px; width:740px;"/>
+///\par
+/// <small>'Modern Hall, at dusk', based on a <a href="http://www.blendswap.com/blends/view/51997">model</a> by <i>NewSee2l035</i></small>
+///\n
+/// <img src="staircase-moonlight.jpg" style="position:relative; bottom:-10px; border:0px; width:450px;"/>
+///\par
+/// <center><small>'That green light', based on a <a href="http://www.blendswap.com/blends/view/77668">model</a> by <i>Wig42</i></small></center>
+///\n
+/// <img src="water_caustic.jpg" style="position:relative; bottom:-10px; border:0px; width:450px;"/>
+///\par
+/// <center><small>'Water Caustic', based on a <a href="from https://benedikt-bitterli.me/resources/">model</a> by <i>Benedikt Bitterli</i></small></center>
 ///

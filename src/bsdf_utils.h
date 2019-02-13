@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2018-2019, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -28,17 +28,22 @@
 
 #pragma once
 
-#include "optix_payload.h"
-#include "renderer_view.h"
+#include <types.h>
+#include <cugar/linalg/vector.h>
 
-rtDeclareVariable(unsigned int,         g_launch_index,    rtLaunchIndex,  );
-rtDeclareVariable(uint2,                g_launch_index_2d, rtLaunchIndex,  );
-rtDeclareVariable(rtObject,             g_top_object,                ,  );
+///@addtogroup Fermat
+///@{
 
-rtDeclareVariable(optix::Ray,           g_ray,          rtCurrentRay,   );
-rtDeclareVariable(float,				g_hit_t,        rtIntersectionDistance,   );
+///@addtogroup BSDFModule
+///@{
 
-rtDeclareVariable(RenderingContextView,	g_renderer,		,   );
+// for the glossy reflectance profile
+FERMAT_API
+void precompute_glossy_reflectance(const uint32 S, float* tables);
 
-//rtBuffer<Ray,1> g_in_ray_buffer;
-//rtBuffer<Hit,1> g_out_hit_buffer;
+// for a given input direction, precompute how much energy is lost to TIR
+FERMAT_API
+void precompute_TIR_loss(const uint32 S, float* tables);
+
+///@} BSDFModule
+///@} Fermat

@@ -154,7 +154,7 @@
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(CudaToolkitLibDir);../../contrib/freeglut/win64/Release/; ../../contrib/OptiX/lib64; ../../contrib/cugar/win64; ../../contrib/assimp-4.1.0/build/code/Release</AdditionalLibraryDirectories>
     </Link>
     <CudaCompile>
-      <CodeGeneration>compute_70,sm_70</CodeGeneration>
+      <CodeGeneration>compute_70,sm_70; compute_60,sm_60</CodeGeneration>
       <PtxAsOptionV>true</PtxAsOptionV>
       <Include>$(CudaToolkitIncludeDir);../../src/; ../../src/renderers; ../../src/mesh/;  ../../contrib;  ../../contrib/OptiX/include/; ../../contrib/freeglut/include/;</Include>
       <TargetMachinePlatform>64</TargetMachinePlatform>
@@ -169,6 +169,7 @@
     <ClInclude Include="..\..\src\bpt_samplers.h" />
     <ClInclude Include="..\..\src\bpt_utils.h" />
     <ClInclude Include="..\..\src\bsdf.h" />
+    <ClInclude Include="..\..\src\bsdf_utils.h" />
     <ClInclude Include="..\..\src\buffers.h" />
     <ClInclude Include="..\..\src\camera.h" />
     <ClInclude Include="..\..\src\clustered_rl.h" />
@@ -265,6 +266,7 @@
     <ClCompile Include="..\..\src\rt.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <CudaCompile Include="..\..\src\bsdf.cu" />
     <CudaCompile Include="..\..\src\clustered_rl.cu" />
     <CudaCompile Include="..\..\src\eaw.cu" />
     <CudaCompile Include="..\..\src\glut_viewer.cu" />
@@ -272,21 +274,25 @@
       <CompileOut Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)..\..\..\fermat\ptx\%(Filename)%(Extension).ptx</CompileOut>
       <NvccCompilation Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ptx</NvccCompilation>
       <Defines Condition="'$(Configuration)|$(Platform)'=='Release|x64'">OPTIX_COMPILATION</Defines>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_60,sm_60</CodeGeneration>
     </CudaCompile>
     <CudaCompile Include="..\..\src\kernels\optix_material.cu">
       <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(CudaToolkitIncludeDir);../../src/; ../../src/mesh/;  ../../contrib;  ../../contrib/OptiX/include/;</Include>
       <NvccCompilation Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ptx</NvccCompilation>
       <CompileOut Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)..\..\..\fermat\ptx\%(Filename)%(Extension).ptx</CompileOut>
       <Defines Condition="'$(Configuration)|$(Platform)'=='Release|x64'">OPTIX_COMPILATION</Defines>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_60,sm_60</CodeGeneration>
     </CudaCompile>
     <CudaCompile Include="..\..\src\kernels\optix_rt.cu">
       <CompileOut Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)..\..\..\fermat\ptx\%(Filename)%(Extension).ptx</CompileOut>
       <NvccCompilation Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ptx</NvccCompilation>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_60,sm_60</CodeGeneration>
     </CudaCompile>
     <CudaCompile Include="..\..\src\kernels\optix_shadow_material.cu">
       <CompileOut Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)..\..\..\fermat\ptx\%(Filename)%(Extension).ptx</CompileOut>
       <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(CudaToolkitIncludeDir);../../src/; ../../src/mesh/;  ../../contrib;  ../../contrib/OptiX/include/;</Include>
       <NvccCompilation Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ptx</NvccCompilation>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_60,sm_60</CodeGeneration>
     </CudaCompile>
     <CudaCompile Include="..\..\src\mesh\MeshKernels.cu" />
     <CudaCompile Include="..\..\src\mesh_lights.cu" />

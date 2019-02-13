@@ -724,9 +724,12 @@ void RenderingContextImpl::init(int argc, char** argv)
 			m_camera = cameras[0];
 
 		// store directional lights on both host and device
-		m_dir_lights_h.alloc( dir_lights.size() );
-		m_dir_lights_h.copy_from( dir_lights.size(), HOST_BUFFER, &dir_lights.front() );
-		m_dir_lights_d = m_dir_lights_h;
+		if (dir_lights.size())
+		{
+			m_dir_lights_h.alloc( dir_lights.size() );
+			m_dir_lights_h.copy_from( dir_lights.size(), HOST_BUFFER, &dir_lights.front() );
+			m_dir_lights_d = m_dir_lights_h;
+		}
 
 		// perform normal compression
 		m_mesh.compress_normals();
