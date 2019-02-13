@@ -95,10 +95,14 @@ CUGAR_FORCEINLINE CUGAR_HOST_DEVICE&#160;</td><td class="memItemRight" valign="b
 <tr class="memitem:a5c3fe2084e477686847a5235b1c15c2c"><td class="memItemLeft" align="right" valign="top"><a id="a5c3fe2084e477686847a5235b1c15c2c"></a>
 CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float&#160;</td><td class="memItemRight" valign="bottom"><b>SmithG1V</b> (const float NoV) const</td></tr>
 <tr class="separator:a5c3fe2084e477686847a5235b1c15c2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a015f82a9bcbc0bd0e3f0976a399d1c76"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcugar_1_1_g_g_x_smith_microfacet_distribution.html#a015f82a9bcbc0bd0e3f0976a399d1c76">p</a> (const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> V, const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> H) const</td></tr>
+<tr class="separator:a015f82a9bcbc0bd0e3f0976a399d1c76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bf71e377524540532aa0dbef235c230"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcugar_1_1_g_g_x_smith_microfacet_distribution.html#a2bf71e377524540532aa0dbef235c230">sample</a> (const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> u, const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> V, float *<a class="el" href="structcugar_1_1_g_g_x_smith_microfacet_distribution.html#a015f82a9bcbc0bd0e3f0976a399d1c76">p</a>=NULL) const</td></tr>
+<tr class="separator:a2bf71e377524540532aa0dbef235c230"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ab852daebbd282ab41c8003bbf02c51"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcugar_1_1_g_g_x_smith_microfacet_distribution.html#a5ab852daebbd282ab41c8003bbf02c51">p</a> (const <a class="el" href="structcugar_1_1_differential_geometry.html">DifferentialGeometry</a> &amp;geometry, const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> V, const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> H) const</td></tr>
 <tr class="separator:a5ab852daebbd282ab41c8003bbf02c51"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad985938cdb73621b83bd28664395dc0e"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcugar_1_1_g_g_x_smith_microfacet_distribution.html#ad985938cdb73621b83bd28664395dc0e">sample</a> (const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> u, const <a class="el" href="structcugar_1_1_differential_geometry.html">DifferentialGeometry</a> &amp;geometry, const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> V, <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> &amp;H, float &amp;<a class="el" href="structcugar_1_1_g_g_x_smith_microfacet_distribution.html#a5ab852daebbd282ab41c8003bbf02c51">p</a>) const</td></tr>
-<tr class="separator:ad985938cdb73621b83bd28664395dc0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a116c2ae3f786ed6d19e0c66accffed70"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcugar_1_1_g_g_x_smith_microfacet_distribution.html#a116c2ae3f786ed6d19e0c66accffed70">sample</a> (const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> u, const <a class="el" href="structcugar_1_1_differential_geometry.html">DifferentialGeometry</a> &amp;geometry, const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> V, float *<a class="el" href="structcugar_1_1_g_g_x_smith_microfacet_distribution.html#a015f82a9bcbc0bd0e3f0976a399d1c76">p</a>=NULL) const</td></tr>
+<tr class="separator:a116c2ae3f786ed6d19e0c66accffed70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Members</h2></td></tr>
@@ -110,8 +114,45 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>inv_roughness</b></t
 <tr class="separator:a771e0e5255287fd44206448daaeb2dc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a015f82a9bcbc0bd0e3f0976a399d1c76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a015f82a9bcbc0bd0e3f0976a399d1c76">&#9670;&nbsp;</a></span>p() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float cugar::GGXSmithMicrofacetDistribution::p </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td>
+          <td class="paramname"><em>V</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td>
+          <td class="paramname"><em>H</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>evaluate the pdf of sampling H given V, p(H|V) = p(V,H) - in the local surface frame </p>
+
+</div>
+</div>
 <a id="a5ab852daebbd282ab41c8003bbf02c51"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5ab852daebbd282ab41c8003bbf02c51">&#9670;&nbsp;</a></span>p()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ab852daebbd282ab41c8003bbf02c51">&#9670;&nbsp;</a></span>p() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -153,8 +194,8 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>inv_roughness</b></t
 
 </div>
 </div>
-<a id="ad985938cdb73621b83bd28664395dc0e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad985938cdb73621b83bd28664395dc0e">&#9670;&nbsp;</a></span>sample()</h2>
+<a id="a2bf71e377524540532aa0dbef235c230"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bf71e377524540532aa0dbef235c230">&#9670;&nbsp;</a></span>sample() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -163,7 +204,50 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>inv_roughness</b></t
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE void cugar::GGXSmithMicrofacetDistribution::sample </td>
+          <td class="memname">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> cugar::GGXSmithMicrofacetDistribution::sample </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td>
+          <td class="paramname"><em>u</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td>
+          <td class="paramname"><em>V</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>p</em> = <code>NULL</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>sample H given V and return the pdf p - in the local surface frame </p>
+
+</div>
+</div>
+<a id="a116c2ae3f786ed6d19e0c66accffed70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a116c2ae3f786ed6d19e0c66accffed70">&#9670;&nbsp;</a></span>sample() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> cugar::GGXSmithMicrofacetDistribution::sample </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td>
           <td class="paramname"><em>u</em>, </td>
@@ -183,14 +267,8 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>inv_roughness</b></t
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structcugar_1_1_vector.html">Vector3f</a> &amp;&#160;</td>
-          <td class="paramname"><em>H</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float &amp;&#160;</td>
-          <td class="paramname"><em>p</em>&#160;</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>p</em> = <code>NULL</code>&#160;</td>
         </tr>
         <tr>
           <td></td>

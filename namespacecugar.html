@@ -1073,7 +1073,7 @@ Enumerations</h2></td></tr>
 <b>COLUMN_MAJOR_LAYOUT</b> = 1u
  }</td></tr>
 <tr class="separator:ga3d26fe53e476a0d79cd2f2e23310ea32"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga31d5c3496d9630777d98ec49f397cbfd"><td class="memItemLeft" align="right" valign="top"><a id="ga31d5c3496d9630777d98ec49f397cbfd"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>SphericalMeasure</b> { <b>kSolidAngle</b> = 0, 
+<tr class="memitem:ga31d5c3496d9630777d98ec49f397cbfd"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___b_s_d_f_module.html#ga31d5c3496d9630777d98ec49f397cbfd">SphericalMeasure</a> { <b>kSolidAngle</b> = 0, 
 <b>kProjectedSolidAngle</b> = 1
  }</td></tr>
 <tr class="separator:ga31d5c3496d9630777d98ec49f397cbfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1474,6 +1474,12 @@ template&lt;typename F , typename C &gt; </td></tr>
 template&lt;typename Iterator &gt; </td></tr>
 <tr class="memitem:ga9ddc5a46d21892ed104592b370f67011"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structcugar_1_1gather__functor.html">gather_functor</a>&lt; Iterator &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>make_gather_functor</b> (const Iterator perm)</td></tr>
 <tr class="separator:ga9ddc5a46d21892ed104592b370f67011"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafd004eadc756694e8e7658b533fb9a9"><td class="memItemLeft" align="right" valign="top"><a id="aafd004eadc756694e8e7658b533fb9a9"></a>
+CUGAR_HOST_DEVICE CUGAR_FORCEINLINE float&#160;</td><td class="memItemRight" valign="bottom"><b>float_infinity</b> ()</td></tr>
+<tr class="separator:aafd004eadc756694e8e7658b533fb9a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5740d7ca4a831df78bc6d105d5786a8"><td class="memItemLeft" align="right" valign="top"><a id="ad5740d7ca4a831df78bc6d105d5786a8"></a>
+CUGAR_HOST_DEVICE CUGAR_FORCEINLINE double&#160;</td><td class="memItemRight" valign="bottom"><b>double_infinity</b> ()</td></tr>
+<tr class="separator:ad5740d7ca4a831df78bc6d105d5786a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaf1c33dd2c16b4650bae4a033c14f39a5"><td class="memTemplParams" colspan="2">template&lt;uint32 N&gt; </td></tr>
 <tr class="memitem:gaf1c33dd2c16b4650bae4a033c14f39a5"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE uint32&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___basic_utils.html#gaf1c33dd2c16b4650bae4a033c14f39a5">lo_bits</a> ()</td></tr>
 <tr class="separator:gaf1c33dd2c16b4650bae4a033c14f39a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2095,6 +2101,24 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>bsdf_test</b> (uint32
 <tr class="separator:gabe2116f566e70937f1abb126140afae8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0ddbffc856042ea191e9ed868fe58ca9"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE uint32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___b_s_d_f_module.html#ga0ddbffc856042ea191e9ed868fe58ca9">clip_quad_to_horizon</a> (<a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> L[5])</td></tr>
 <tr class="separator:ga0ddbffc856042ea191e9ed868fe58ca9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga275490fed04d81ce0e39dac1510f6088"><td class="memTemplParams" colspan="2">template&lt;typename VectorType &gt; </td></tr>
+<tr class="memitem:ga275490fed04d81ce0e39dac1510f6088"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE VectorType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___b_s_d_f_module.html#ga275490fed04d81ce0e39dac1510f6088">fresnel_dielectric</a> (const float cos_theta_i, const float cos_theta_t, const VectorType eta)</td></tr>
+<tr class="separator:ga275490fed04d81ce0e39dac1510f6088"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga97f10f2451b37acacc2e9fc856b44655"><td class="memTemplParams" colspan="2">template&lt;typename VectorType &gt; </td></tr>
+<tr class="memitem:ga97f10f2451b37acacc2e9fc856b44655"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_HOST_DEVICE CUGAR_FORCEINLINE VectorType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___b_s_d_f_module.html#ga97f10f2451b37acacc2e9fc856b44655">fresnel_dielectric_conductor</a> (const float cos_theta, const VectorType eta, const VectorType eta_k)</td></tr>
+<tr class="separator:ga97f10f2451b37acacc2e9fc856b44655"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae9c5940ddecfb2942ac3ab32e1a0f030"><td class="memItemLeft" align="right" valign="top">
+CUGAR_HOST_DEVICE CUGAR_FORCEINLINE float&#160;</td><td class="memItemRight" valign="bottom"><b>pow5</b> (const float x)</td></tr>
+<tr class="separator:gae9c5940ddecfb2942ac3ab32e1a0f030"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga87cd8f4c96941f3940826b1d9385f23c"><td class="memTemplParams" colspan="2">template&lt;typename VectorType &gt; </td></tr>
+<tr class="memitem:ga87cd8f4c96941f3940826b1d9385f23c"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE VectorType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___b_s_d_f_module.html#ga87cd8f4c96941f3940826b1d9385f23c">fresnel_schlick</a> (float cos_theta_i, const float eta, const VectorType fresnel_base)</td></tr>
+<tr class="separator:ga87cd8f4c96941f3940826b1d9385f23c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabec1346901c5f8d7e67f737a9355f392"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___b_s_d_f_module.html#gabec1346901c5f8d7e67f737a9355f392">refraction_angle</a> (const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> w_i, const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> N, const float eta, const float cos_theta_i, float *cos_theta_t)</td></tr>
+<tr class="separator:gabec1346901c5f8d7e67f737a9355f392"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac9103073d6f9f099bfcdd39327fcb38b"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___b_s_d_f_module.html#gac9103073d6f9f099bfcdd39327fcb38b">refract</a> (const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> w_i, const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> N, const float cos_theta_i, const float eta, <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> *out, float *F)</td></tr>
+<tr class="separator:gac9103073d6f9f099bfcdd39327fcb38b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaae74e9718ef1de84cda2a5193e4fd16b"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___b_s_d_f_module.html#gaae74e9718ef1de84cda2a5193e4fd16b">refract</a> (const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> w_i, const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> N, const float eta, const float cos_theta_i, const float cos_theta_t)</td></tr>
+<tr class="separator:gaae74e9718ef1de84cda2a5193e4fd16b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3f50a853dcace7bd0d1a8503f0ef00fe"><td class="memItemLeft" align="right" valign="top">
 float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__bvh.html#ga3f50a853dcace7bd0d1a8503f0ef00fe">compute_sah_cost</a> (const <a class="el" href="structcugar_1_1_bvh.html">Bvh</a>&lt; 3 &gt; &amp;bvh, uint32 node_index=0)</td></tr>
 <tr class="memdesc:ga3f50a853dcace7bd0d1a8503f0ef00fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">compute SAH cost of a subtree <br /></td></tr>
@@ -2122,6 +2146,9 @@ CUGAR_HOST_DEVICE CUGAR_FORCEINLINE uint32&#160;</td><td class="memItemRight" va
 <tr class="memitem:acb42b3c31b3e43aaa832ec8d0fa4b46c"><td class="memItemLeft" align="right" valign="top"><a id="acb42b3c31b3e43aaa832ec8d0fa4b46c"></a>
 CUGAR_HOST_DEVICE CUGAR_FORCEINLINE <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td><td class="memItemRight" valign="bottom"><b>from_rgbe</b> (const uint32 rgbe)</td></tr>
 <tr class="separator:acb42b3c31b3e43aaa832ec8d0fa4b46c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2e03d2165e707d6c621cf9df53fb3c1"><td class="memItemLeft" align="right" valign="top"><a id="ab2e03d2165e707d6c621cf9df53fb3c1"></a>
+float *&#160;</td><td class="memItemRight" valign="bottom"><b>load_pfm</b> (const char *filename, uint32 *xres, uint32 *yres)</td></tr>
+<tr class="separator:ab2e03d2165e707d6c621cf9df53fb3c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a452d6bcec635d49ff07a942cd1316fc4"><td class="memItemLeft" align="right" valign="top"><a id="a452d6bcec635d49ff07a942cd1316fc4"></a>
 unsigned char *&#160;</td><td class="memItemRight" valign="bottom"><b>load_tga</b> (const char *filename, <a class="el" href="structcugar_1_1_t_g_a_header.html">TGAHeader</a> *hdr)</td></tr>
 <tr class="separator:a452d6bcec635d49ff07a942cd1316fc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2567,6 +2594,13 @@ template&lt;typename T &gt; </td></tr>
 template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a223b405acfc7299e4583883dfe6713da"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_HOST_DEVICE CUGAR_FORCEINLINE <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, 3 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>refraction_normal</b> (const <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, 3 &gt; I, const <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, 3 &gt; T, const float eta)</td></tr>
 <tr class="separator:a223b405acfc7299e4583883dfe6713da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8970cab1f0cdeb5ba2459ff1bab99077"><td class="memTemplParams" colspan="2"><a id="a8970cab1f0cdeb5ba2459ff1bab99077"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a8970cab1f0cdeb5ba2459ff1bab99077"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_HOST_DEVICE void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>orthonormal_basis</b> (const <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, 3 &gt; normal, <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, 3 &gt; &amp;tangent, <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, 3 &gt; &amp;bitangent)</td></tr>
+<tr class="separator:a8970cab1f0cdeb5ba2459ff1bab99077"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae304b030e095f45fd1e58308441b73ba"><td class="memItemLeft" align="right" valign="top"><a id="ae304b030e095f45fd1e58308441b73ba"></a>
+CUGAR_HOST_DEVICE CUGAR_FORCEINLINE void&#160;</td><td class="memItemRight" valign="bottom"><b>orthonormal_basis</b> (const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> normal, <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> &amp;tangent, <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> &amp;bitangent)</td></tr>
+<tr class="separator:ae304b030e095f45fd1e58308441b73ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af35f5ded025795e3e8fc4a87b448f95e"><td class="memTemplParams" colspan="2"><a id="af35f5ded025795e3e8fc4a87b448f95e"></a>
 template&lt;typename T , uint32 DIM&gt; </td></tr>
 <tr class="memitem:af35f5ded025795e3e8fc4a87b448f95e"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, DIM &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>sqrt</b> (const <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, DIM &gt; &amp;op)</td></tr>
@@ -2575,6 +2609,68 @@ template&lt;typename T , uint32 DIM&gt; </td></tr>
 template&lt;uint32 DIM&gt; </td></tr>
 <tr class="memitem:a64f49be63359445738c18dee1a0db670"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; float, DIM &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>sqrt</b> (const <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; float, DIM &gt; &amp;op)</td></tr>
 <tr class="separator:a64f49be63359445738c18dee1a0db670"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcf72708422b7462481ce7ff8211376b"><td class="memTemplParams" colspan="2"><a id="afcf72708422b7462481ce7ff8211376b"></a>
+template&lt;typename T , uint32 DIM&gt; </td></tr>
+<tr class="memitem:afcf72708422b7462481ce7ff8211376b"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE T&#160;</td><td class="memTemplItemRight" valign="bottom"><b>L1_norm</b> (const <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, DIM &gt; &amp;op)</td></tr>
+<tr class="separator:afcf72708422b7462481ce7ff8211376b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40c523f805730ecc4d9f418290ca7d62"><td class="memTemplParams" colspan="2"><a id="a40c523f805730ecc4d9f418290ca7d62"></a>
+template&lt;typename T , uint32 DIM&gt; </td></tr>
+<tr class="memitem:a40c523f805730ecc4d9f418290ca7d62"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE T&#160;</td><td class="memTemplItemRight" valign="bottom"><b>L2_norm</b> (const <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, DIM &gt; &amp;op)</td></tr>
+<tr class="separator:a40c523f805730ecc4d9f418290ca7d62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a268bff143ef532ad9b500668fbcd58b6"><td class="memTemplParams" colspan="2"><a id="a268bff143ef532ad9b500668fbcd58b6"></a>
+template&lt;typename T , uint32 DIM&gt; </td></tr>
+<tr class="memitem:a268bff143ef532ad9b500668fbcd58b6"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE T&#160;</td><td class="memTemplItemRight" valign="bottom"><b>L_inf_norm</b> (const <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, DIM &gt; &amp;op)</td></tr>
+<tr class="separator:a268bff143ef532ad9b500668fbcd58b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b2099d7b1d8f9bc4c1cde561b68dceb"><td class="memTemplParams" colspan="2"><a id="a1b2099d7b1d8f9bc4c1cde561b68dceb"></a>
+template&lt;typename T , uint32 DIM, uint32 p&gt; </td></tr>
+<tr class="memitem:a1b2099d7b1d8f9bc4c1cde561b68dceb"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE T&#160;</td><td class="memTemplItemRight" valign="bottom"><b>L_norm</b> (const <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, DIM &gt; &amp;op)</td></tr>
+<tr class="separator:a1b2099d7b1d8f9bc4c1cde561b68dceb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55e6561737cb28e9b1952a1b6af98154"><td class="memItemLeft" align="right" valign="top"><a id="a55e6561737cb28e9b1952a1b6af98154"></a>
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float&#160;</td><td class="memItemRight" valign="bottom"><b>L1_norm</b> (const float op)</td></tr>
+<tr class="separator:a55e6561737cb28e9b1952a1b6af98154"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9c9128bfb96bc42d201317d9c5b9e17"><td class="memItemLeft" align="right" valign="top"><a id="ae9c9128bfb96bc42d201317d9c5b9e17"></a>
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE double&#160;</td><td class="memItemRight" valign="bottom"><b>L1_norm</b> (const double op)</td></tr>
+<tr class="separator:ae9c9128bfb96bc42d201317d9c5b9e17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fd69317fe21c8b650d9c740e995c95c"><td class="memItemLeft" align="right" valign="top"><a id="a7fd69317fe21c8b650d9c740e995c95c"></a>
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float&#160;</td><td class="memItemRight" valign="bottom"><b>L2_norm</b> (const float op)</td></tr>
+<tr class="separator:a7fd69317fe21c8b650d9c740e995c95c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e96380ebcaa552777d0e8d966874a17"><td class="memItemLeft" align="right" valign="top"><a id="a7e96380ebcaa552777d0e8d966874a17"></a>
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE double&#160;</td><td class="memItemRight" valign="bottom"><b>L2_norm</b> (const double op)</td></tr>
+<tr class="separator:a7e96380ebcaa552777d0e8d966874a17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a283d8312ec0a3329c787239258d3fa31"><td class="memItemLeft" align="right" valign="top"><a id="a283d8312ec0a3329c787239258d3fa31"></a>
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float&#160;</td><td class="memItemRight" valign="bottom"><b>L_inf_norm</b> (const float op)</td></tr>
+<tr class="separator:a283d8312ec0a3329c787239258d3fa31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18ff4bf2777146b2ba2805900d260ebb"><td class="memItemLeft" align="right" valign="top"><a id="a18ff4bf2777146b2ba2805900d260ebb"></a>
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE double&#160;</td><td class="memItemRight" valign="bottom"><b>L_inf_norm</b> (const double op)</td></tr>
+<tr class="separator:a18ff4bf2777146b2ba2805900d260ebb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2e17de93f4f121b0fdd816dd7f9f066"><td class="memTemplParams" colspan="2"><a id="ac2e17de93f4f121b0fdd816dd7f9f066"></a>
+template&lt;uint32 p&gt; </td></tr>
+<tr class="memitem:ac2e17de93f4f121b0fdd816dd7f9f066"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float&#160;</td><td class="memTemplItemRight" valign="bottom"><b>L_norm</b> (const float op)</td></tr>
+<tr class="separator:ac2e17de93f4f121b0fdd816dd7f9f066"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15238686f8a43745dac5c3cfb0023ba5"><td class="memTemplParams" colspan="2"><a id="a15238686f8a43745dac5c3cfb0023ba5"></a>
+template&lt;uint32 p&gt; </td></tr>
+<tr class="memitem:a15238686f8a43745dac5c3cfb0023ba5"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE double&#160;</td><td class="memTemplItemRight" valign="bottom"><b>L_norm</b> (const double op)</td></tr>
+<tr class="separator:a15238686f8a43745dac5c3cfb0023ba5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0306d641f7086df17c92f586eeff65ff"><td class="memTemplParams" colspan="2"><a id="a0306d641f7086df17c92f586eeff65ff"></a>
+template&lt;typename T , uint32 DIM&gt; </td></tr>
+<tr class="memitem:a0306d641f7086df17c92f586eeff65ff"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE T&#160;</td><td class="memTemplItemRight" valign="bottom"><b>average</b> (const <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, DIM &gt; &amp;op)</td></tr>
+<tr class="separator:a0306d641f7086df17c92f586eeff65ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfaf7f6ce583169eb807225622d7e4b7"><td class="memItemLeft" align="right" valign="top"><a id="adfaf7f6ce583169eb807225622d7e4b7"></a>
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float&#160;</td><td class="memItemRight" valign="bottom"><b>average</b> (const float op)</td></tr>
+<tr class="separator:adfaf7f6ce583169eb807225622d7e4b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a377a0fce59695426dbe849503fad0647"><td class="memItemLeft" align="right" valign="top"><a id="a377a0fce59695426dbe849503fad0647"></a>
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE double&#160;</td><td class="memItemRight" valign="bottom"><b>average</b> (const double op)</td></tr>
+<tr class="separator:a377a0fce59695426dbe849503fad0647"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f0b5338c75c3a71c6ab3212a49fd046"><td class="memTemplParams" colspan="2"><a id="a1f0b5338c75c3a71c6ab3212a49fd046"></a>
+template&lt;typename T , uint32 DIM&gt; </td></tr>
+<tr class="memitem:a1f0b5338c75c3a71c6ab3212a49fd046"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, DIM &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>lerp</b> (const <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, DIM &gt; &amp;op1, const <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, DIM &gt; &amp;op2, const T u)</td></tr>
+<tr class="separator:a1f0b5338c75c3a71c6ab3212a49fd046"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0104b072bb3a95c2d2b351b13cf8d230"><td class="memItemLeft" align="right" valign="top"><a id="a0104b072bb3a95c2d2b351b13cf8d230"></a>
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float&#160;</td><td class="memItemRight" valign="bottom"><b>lerp</b> (const float op1, const float op2, const float u)</td></tr>
+<tr class="separator:a0104b072bb3a95c2d2b351b13cf8d230"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93f63b2b3704b23d632f52c27ce8c477"><td class="memItemLeft" align="right" valign="top"><a id="a93f63b2b3704b23d632f52c27ce8c477"></a>
+CUGAR_FORCEINLINE CUGAR_HOST_DEVICE double&#160;</td><td class="memItemRight" valign="bottom"><b>lerp</b> (const double op1, const double op2, const double u)</td></tr>
+<tr class="separator:a93f63b2b3704b23d632f52c27ce8c477"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a056602bb03ab793f2f18616396138ce0"><td class="memItemLeft" align="right" valign="top"><a id="a056602bb03ab793f2f18616396138ce0"></a>
 CUGAR_FORCEINLINE CUGAR_HOST_DEVICE <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td><td class="memItemRight" valign="bottom"><b>encode_normal</b> (<a class="el" href="structcugar_1_1_vector.html">Vector3f</a> N)</td></tr>
 <tr class="separator:a056602bb03ab793f2f18616396138ce0"><td class="memSeparator" colspan="2">&#160;</td></tr>

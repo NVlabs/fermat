@@ -250,6 +250,9 @@ Functions</h2></td></tr>
 <tr class="memitem:gadb782eb379c7b928c89790191e3bd692"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:gadb782eb379c7b928c89790191e3bd692"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_HOST_DEVICE <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, 3 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___vectors_module.html#gadb782eb379c7b928c89790191e3bd692">orthogonal</a> (const <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, 3 &gt; v)</td></tr>
 <tr class="separator:gadb782eb379c7b928c89790191e3bd692"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa40e0960547c4eedf7cc9a93e8d2dacb"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:gaa40e0960547c4eedf7cc9a93e8d2dacb"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_HOST_DEVICE void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___vectors_module.html#gaa40e0960547c4eedf7cc9a93e8d2dacb">orthonormal_basis</a> (const <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, 3 &gt; normal, <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, 3 &gt; &amp;tangent, <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, 3 &gt; &amp;bitangent)</td></tr>
+<tr class="separator:gaa40e0960547c4eedf7cc9a93e8d2dacb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga338c773d1de0c975ff611a6a56782976"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ga338c773d1de0c975ff611a6a56782976"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_HOST_DEVICE uint32&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___vectors_module.html#ga338c773d1de0c975ff611a6a56782976">pack_vector</a> (const <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, 2 &gt; v, const uint32 n_bits_comp)</td></tr>
 <tr class="separator:ga338c773d1de0c975ff611a6a56782976"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -265,6 +268,50 @@ Functions</h2></td></tr>
 <tr class="memitem:gaf2a8279368671ac3504889251ac8ddc6"><td class="memTemplParams" colspan="2">template&lt;typename T , uint32 DIM&gt; </td></tr>
 <tr class="memitem:gaf2a8279368671ac3504889251ac8ddc6"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___vectors_module.html#gaf2a8279368671ac3504889251ac8ddc6">is_finite</a> (const <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, DIM &gt; &amp;op)</td></tr>
 <tr class="separator:gaf2a8279368671ac3504889251ac8ddc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga47aaf93206a60773920097bd1f31511a"><td class="memTemplParams" colspan="2">template&lt;typename T , uint32 DIM&gt; </td></tr>
+<tr class="memitem:ga47aaf93206a60773920097bd1f31511a"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___vectors_module.html#ga47aaf93206a60773920097bd1f31511a">L1_norm</a> (const <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, DIM &gt; &amp;op)</td></tr>
+<tr class="separator:ga47aaf93206a60773920097bd1f31511a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabec16be113d3cb06f67a657f2c268b48"><td class="memTemplParams" colspan="2">template&lt;typename T , uint32 DIM&gt; </td></tr>
+<tr class="memitem:gabec16be113d3cb06f67a657f2c268b48"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___vectors_module.html#gabec16be113d3cb06f67a657f2c268b48">L2_norm</a> (const <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, DIM &gt; &amp;op)</td></tr>
+<tr class="separator:gabec16be113d3cb06f67a657f2c268b48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7283c0da25105264570d274608184715"><td class="memTemplParams" colspan="2">template&lt;typename T , uint32 DIM&gt; </td></tr>
+<tr class="memitem:ga7283c0da25105264570d274608184715"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___vectors_module.html#ga7283c0da25105264570d274608184715">L_inf_norm</a> (const <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, DIM &gt; &amp;op)</td></tr>
+<tr class="separator:ga7283c0da25105264570d274608184715"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7ce9d89e062b5eb7ef42e80f5c24b631"><td class="memTemplParams" colspan="2">template&lt;typename T , uint32 DIM, uint32 p&gt; </td></tr>
+<tr class="memitem:ga7ce9d89e062b5eb7ef42e80f5c24b631"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___vectors_module.html#ga7ce9d89e062b5eb7ef42e80f5c24b631">L_norm</a> (const <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, DIM &gt; &amp;op)</td></tr>
+<tr class="separator:ga7ce9d89e062b5eb7ef42e80f5c24b631"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5a8ce78b30005fc0206d37cbea5862f7"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___vectors_module.html#ga5a8ce78b30005fc0206d37cbea5862f7">L1_norm</a> (const float op)</td></tr>
+<tr class="separator:ga5a8ce78b30005fc0206d37cbea5862f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga62c2f14ace8176405ea753ff62551bce"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___vectors_module.html#ga62c2f14ace8176405ea753ff62551bce">L1_norm</a> (const double op)</td></tr>
+<tr class="separator:ga62c2f14ace8176405ea753ff62551bce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga075b087cf1bab1efc1021d09bd32f638"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___vectors_module.html#ga075b087cf1bab1efc1021d09bd32f638">L2_norm</a> (const float op)</td></tr>
+<tr class="separator:ga075b087cf1bab1efc1021d09bd32f638"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gadd12f143a9c73f5a527bf6109bd21f76"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___vectors_module.html#gadd12f143a9c73f5a527bf6109bd21f76">L2_norm</a> (const double op)</td></tr>
+<tr class="separator:gadd12f143a9c73f5a527bf6109bd21f76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab3de046dd676c96c31dbf94ffbd6df7d"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___vectors_module.html#gab3de046dd676c96c31dbf94ffbd6df7d">L_inf_norm</a> (const float op)</td></tr>
+<tr class="separator:gab3de046dd676c96c31dbf94ffbd6df7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2e892826cfb68dae24a1223e94bde8e2"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___vectors_module.html#ga2e892826cfb68dae24a1223e94bde8e2">L_inf_norm</a> (const double op)</td></tr>
+<tr class="separator:ga2e892826cfb68dae24a1223e94bde8e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6b3f0057ded38bc2df3a86ff2dbd4b00"><td class="memTemplParams" colspan="2">template&lt;uint32 p&gt; </td></tr>
+<tr class="memitem:ga6b3f0057ded38bc2df3a86ff2dbd4b00"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___vectors_module.html#ga6b3f0057ded38bc2df3a86ff2dbd4b00">L_norm</a> (const float op)</td></tr>
+<tr class="separator:ga6b3f0057ded38bc2df3a86ff2dbd4b00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac4809a6bfab656c93eede791e00fbabe"><td class="memTemplParams" colspan="2">template&lt;uint32 p&gt; </td></tr>
+<tr class="memitem:gac4809a6bfab656c93eede791e00fbabe"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___vectors_module.html#gac4809a6bfab656c93eede791e00fbabe">L_norm</a> (const double op)</td></tr>
+<tr class="separator:gac4809a6bfab656c93eede791e00fbabe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4389829d358aee5a0f64d9736581e03d"><td class="memTemplParams" colspan="2">template&lt;typename T , uint32 DIM&gt; </td></tr>
+<tr class="memitem:ga4389829d358aee5a0f64d9736581e03d"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___vectors_module.html#ga4389829d358aee5a0f64d9736581e03d">average</a> (const <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, DIM &gt; &amp;op)</td></tr>
+<tr class="separator:ga4389829d358aee5a0f64d9736581e03d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac8b06785d9df466c10f6e3c73410db28"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___vectors_module.html#gac8b06785d9df466c10f6e3c73410db28">average</a> (const float op)</td></tr>
+<tr class="separator:gac8b06785d9df466c10f6e3c73410db28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7fc5a957e48a518fc23319bcfab13cab"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___vectors_module.html#ga7fc5a957e48a518fc23319bcfab13cab">average</a> (const double op)</td></tr>
+<tr class="separator:ga7fc5a957e48a518fc23319bcfab13cab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2e3966531b952c760c010b7907d5d328"><td class="memTemplParams" colspan="2">template&lt;typename T , uint32 DIM&gt; </td></tr>
+<tr class="memitem:ga2e3966531b952c760c010b7907d5d328"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, DIM &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___vectors_module.html#ga2e3966531b952c760c010b7907d5d328">lerp</a> (const <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, DIM &gt; &amp;op1, const <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, DIM &gt; &amp;op2, const T u)</td></tr>
+<tr class="separator:ga2e3966531b952c760c010b7907d5d328"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga878e167138b0b422cf00e7d979eca752"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___vectors_module.html#ga878e167138b0b422cf00e7d979eca752">lerp</a> (const float op1, const float op2, const float u)</td></tr>
+<tr class="separator:ga878e167138b0b422cf00e7d979eca752"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1789be12cafb86cad223c9cd30ae792c"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___vectors_module.html#ga1789be12cafb86cad223c9cd30ae792c">lerp</a> (const double op1, const double op2, const double u)</td></tr>
+<tr class="separator:ga1789be12cafb86cad223c9cd30ae792c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="gaa8c18c612c2f31b5e74fc5691ad470a5"></a>
@@ -351,6 +398,93 @@ template&lt;typename T , uint32 DIM&gt; </div>
 </table>
 </div><div class="memdoc">
 <p>return true if any of the components is non-zero </p>
+
+</div>
+</div>
+<a id="ga4389829d358aee5a0f64d9736581e03d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4389829d358aee5a0f64d9736581e03d">&#9670;&nbsp;</a></span>average() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , uint32 DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE T average </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, DIM &gt; &amp;&#160;</td>
+          <td class="paramname"><em>op</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>vector average </p>
+
+</div>
+</div>
+<a id="gac8b06785d9df466c10f6e3c73410db28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac8b06785d9df466c10f6e3c73410db28">&#9670;&nbsp;</a></span>average() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, uint32 DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float average </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>op</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>vector average </p>
+
+</div>
+</div>
+<a id="ga7fc5a957e48a518fc23319bcfab13cab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7fc5a957e48a518fc23319bcfab13cab">&#9670;&nbsp;</a></span>average() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, uint32 DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE double average </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>op</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>vector average </p>
 
 </div>
 </div>
@@ -500,6 +634,354 @@ template&lt;typename T , uint32 DIM&gt; </div>
 
 </div>
 </div>
+<a id="ga47aaf93206a60773920097bd1f31511a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga47aaf93206a60773920097bd1f31511a">&#9670;&nbsp;</a></span>L1_norm() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , uint32 DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE T L1_norm </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, DIM &gt; &amp;&#160;</td>
+          <td class="paramname"><em>op</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>L_1 vector norm </p>
+
+</div>
+</div>
+<a id="ga5a8ce78b30005fc0206d37cbea5862f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5a8ce78b30005fc0206d37cbea5862f7">&#9670;&nbsp;</a></span>L1_norm() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, uint32 DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float L1_norm </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>op</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>L_1 vector norm </p>
+
+</div>
+</div>
+<a id="ga62c2f14ace8176405ea753ff62551bce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga62c2f14ace8176405ea753ff62551bce">&#9670;&nbsp;</a></span>L1_norm() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, uint32 DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE double L1_norm </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>op</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>L_1 vector norm </p>
+
+</div>
+</div>
+<a id="gabec16be113d3cb06f67a657f2c268b48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabec16be113d3cb06f67a657f2c268b48">&#9670;&nbsp;</a></span>L2_norm() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , uint32 DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE T L2_norm </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, DIM &gt; &amp;&#160;</td>
+          <td class="paramname"><em>op</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>L_2 vector norm </p>
+
+</div>
+</div>
+<a id="ga075b087cf1bab1efc1021d09bd32f638"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga075b087cf1bab1efc1021d09bd32f638">&#9670;&nbsp;</a></span>L2_norm() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, uint32 DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float L2_norm </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>op</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>L_2 vector norm </p>
+
+</div>
+</div>
+<a id="gadd12f143a9c73f5a527bf6109bd21f76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gadd12f143a9c73f5a527bf6109bd21f76">&#9670;&nbsp;</a></span>L2_norm() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, uint32 DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE double L2_norm </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>op</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>L_2 vector norm </p>
+
+</div>
+</div>
+<a id="ga7283c0da25105264570d274608184715"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7283c0da25105264570d274608184715">&#9670;&nbsp;</a></span>L_inf_norm() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , uint32 DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE T L_inf_norm </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, DIM &gt; &amp;&#160;</td>
+          <td class="paramname"><em>op</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>L_inf vector norm </p>
+
+</div>
+</div>
+<a id="gab3de046dd676c96c31dbf94ffbd6df7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab3de046dd676c96c31dbf94ffbd6df7d">&#9670;&nbsp;</a></span>L_inf_norm() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, uint32 DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float L_inf_norm </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>op</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>L_inf vector norm </p>
+
+</div>
+</div>
+<a id="ga2e892826cfb68dae24a1223e94bde8e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2e892826cfb68dae24a1223e94bde8e2">&#9670;&nbsp;</a></span>L_inf_norm() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, uint32 DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE double L_inf_norm </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>op</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>L_inf vector norm </p>
+
+</div>
+</div>
+<a id="ga7ce9d89e062b5eb7ef42e80f5c24b631"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7ce9d89e062b5eb7ef42e80f5c24b631">&#9670;&nbsp;</a></span>L_norm() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , uint32 DIM, uint32 p&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE T L_norm </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, DIM &gt; &amp;&#160;</td>
+          <td class="paramname"><em>op</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>L_p vector norm </p>
+
+</div>
+</div>
+<a id="ga6b3f0057ded38bc2df3a86ff2dbd4b00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6b3f0057ded38bc2df3a86ff2dbd4b00">&#9670;&nbsp;</a></span>L_norm() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;uint32 p&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float L_norm </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>op</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>L_p vector norm </p>
+
+</div>
+</div>
+<a id="gac4809a6bfab656c93eede791e00fbabe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac4809a6bfab656c93eede791e00fbabe">&#9670;&nbsp;</a></span>L_norm() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;uint32 p&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE double L_norm </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>op</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>L_p vector norm </p>
+
+</div>
+</div>
 <a id="gae8f08ae6e6dc212eb407dd3a13c06bd8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gae8f08ae6e6dc212eb407dd3a13c06bd8">&#9670;&nbsp;</a></span>length()</h2>
 
@@ -526,6 +1008,141 @@ template&lt;typename T , uint32 DIM&gt; </div>
 </table>
 </div><div class="memdoc">
 <p>Euclidean length </p>
+
+</div>
+</div>
+<a id="ga2e3966531b952c760c010b7907d5d328"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2e3966531b952c760c010b7907d5d328">&#9670;&nbsp;</a></span>lerp() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , uint32 DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, DIM &gt; lerp </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, DIM &gt; &amp;&#160;</td>
+          <td class="paramname"><em>op1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, DIM &gt; &amp;&#160;</td>
+          <td class="paramname"><em>op2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T&#160;</td>
+          <td class="paramname"><em>u</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>vector lerp </p>
+
+</div>
+</div>
+<a id="ga878e167138b0b422cf00e7d979eca752"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga878e167138b0b422cf00e7d979eca752">&#9670;&nbsp;</a></span>lerp() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, uint32 DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE float lerp </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>op1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>op2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>u</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>vector lerp </p>
+
+</div>
+</div>
+<a id="ga1789be12cafb86cad223c9cd30ae792c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1789be12cafb86cad223c9cd30ae792c">&#9670;&nbsp;</a></span>lerp() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, uint32 DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE double lerp </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>op1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>op2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>u</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>vector lerp </p>
 
 </div>
 </div>
@@ -1607,6 +2224,51 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 <p>return a vector orthogonal to a given vector </p>
+
+</div>
+</div>
+<a id="gaa40e0960547c4eedf7cc9a93e8d2dacb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa40e0960547c4eedf7cc9a93e8d2dacb">&#9670;&nbsp;</a></span>orthonormal_basis()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_HOST_DEVICE void orthonormal_basis </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, 3 &gt;&#160;</td>
+          <td class="paramname"><em>normal</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, 3 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>tangent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structcugar_1_1_vector.html">Vector</a>&lt; T, 3 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>bitangent</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>build an orthonormal basis </p>
 
 </div>
 </div>

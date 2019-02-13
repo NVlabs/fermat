@@ -55,6 +55,7 @@ var searchData=
   ['dispatch_5fsum_3c_20vt_2c_20n_2c_200_2c_20o_20_3e',['dispatch_sum&lt; VT, N, 0, O &gt;',['../structcugar_1_1detail_1_1dispatch__sum_3_01_v_t_00_01_n_00_010_00_01_o_01_4.html',1,'cugar::detail']]],
   ['dispatch_5fsum_3c_20vt_2c_20n_2c_20o_2c_200_20_3e',['dispatch_sum&lt; VT, N, O, 0 &gt;',['../structcugar_1_1detail_1_1dispatch__sum_3_01_v_t_00_01_n_00_01_o_00_010_01_4.html',1,'cugar::detail']]],
   ['dispose',['dispose',['../classcugar_1_1internals_1_1_counted_base.html#a0136f9f7bac652b751f55c3fd3c0b9c0',1,'cugar::internals::CountedBase::dispose()'],['../classcugar_1_1internals_1_1_counted_base__impl.html#a5582b40e7ded61b0d1e9b77d2a21b05d',1,'cugar::internals::CountedBase_impl::dispose()']]],
+  ['distribution',['distribution',['../structcugar_1_1_g_g_x_smith_bsdf.html#abeda2edf1ae88cf26746304a1bb2b7eb',1,'cugar::GGXSmithBsdf']]],
   ['distributions',['Distributions',['../group__distributions.html',1,'']]],
   ['distributions_2eh',['distributions.h',['../distributions_8h.html',1,'']]],
   ['divide_5fri',['divide_ri',['../group___basic_utils.html#gabb6714186dbbd864f0a9298944ba509b',1,'cugar']]],

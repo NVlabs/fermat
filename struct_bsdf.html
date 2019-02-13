@@ -80,15 +80,18 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">Detailed description</h2>
-<div class="textblock"><p>Composite BSDF class </p><dl class="section user"><dt></dt><dd>This class defines the Bidirectional Scattering Distribution Function employed throughout Fermat. At present time, this model is rather simple, and consists of four layered components only: </dd></dl>
+<div class="textblock"><p>Composite BSDF class </p><dl class="section user"><dt></dt><dd>This class defines the Bidirectional Scattering Distribution Function employed throughout Fermat. At present time, this model is rather simple, and consists of five layered components only: </dd></dl>
 <dl class="section user"><dt></dt><dd><ul>
 <li>a diffuse reflection component</li>
 <li>a diffuse transmission component</li>
 <li>a glossy reflection component layered on top of the diffuse layer</li>
-<li>a glossy transmission component layered on top of the diffuse layer </li>
+<li>a glossy transmission component layered on top of the diffuse layer</li>
+<li>a clearcoat layer on top of all of the above </li>
 </ul>
 </dd></dl>
-<dl class="section user"><dt></dt><dd>The BSDF uses Fresnel coefficients to determine how much light undergoes glossy reflection, and how much undergoes transmission. Part of the radiance transmitted from the upper glossy layer undergoes diffuse scattering. The interaction between the glossy layer and the underlying diffuse layer is modeled in a simplified manner, as if the layer was infinitely thin and the diffusely reflected particles were not interacting again with the upper layer. </dd></dl>
+<dl class="section user"><dt></dt><dd></dd></dl>
+<p>The interaction between the top clearcoat layer and the inner layers below that is modeled approximately, computing only the Fresnel transmission factor to enter the clearcoat, but without modeling the change due to refraction of the input and output directions a la Weidlich and Wilkie. This is done because the approach from Weidlich and Wilkie simulates only first-order scattering, and results in dramatic energy loss for rough materials. It is also questionable whether that would be more correct, given that accounting for multiple-scattering through the various layers can be modeled without altering the final lobe directions, and while only changing the statistics of the inner layer distributions, as described in: "Efficient Rendering of Layered Materials using an Atomic Decomposition with Statistical Operators", Laurent Belcour - in ACM Transactions on Graphics, Association for Computing Machinery, 2018. While we plan to adopt the full machinery of the latter in the future, we currently just crudely approximate it.</p>
+<p>The inner layers of the BSDF use Fresnel coefficients to determine how much light undergoes glossy reflection, and how much undergoes transmission. Part of the radiance transmitted from the upper glossy layer undergoes diffuse scattering. Again, the interaction between the glossy layer and the underlying diffuse layer is modeled in a simplified manner, as if the layer was infinitely thin and the diffusely reflected particles were not interacting again with the upper layer. </p>
 </div>
 <p><code>#include &lt;<a class="el" href="bsdf_8h_source.html">bsdf.h</a>&gt;</code></p>
 <table class="memberdecls">
@@ -100,7 +103,8 @@ Public Types</h2></td></tr>
 <b>kGlossyReflectionIndex</b> = 2u, 
 <b>kGlossyTransmissionIndex</b> = 3u, 
 <br />
-&#160;&#160;<b>kNumComponents</b> = 4u
+&#160;&#160;<b>kClearcoatReflectionIndex</b> = 4u, 
+<b>kNumComponents</b> = 5u
 <br />
  }</td></tr>
 <tr class="separator:acaa87fb810c0f7957db85bf41843f70c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -111,11 +115,12 @@ Public Types</h2></td></tr>
 <b>kGlossyReflection</b> = 0x4u, 
 <br />
 &#160;&#160;<b>kGlossyTransmission</b> = 0x8u, 
+<b>kClearcoatReflection</b> = 0x10u, 
 <b>kDiffuseMask</b> = 0x3u, 
 <b>kGlossyMask</b> = 0xCu, 
-<b>kReflectionMask</b> = 0x5u, 
 <br />
-&#160;&#160;<b>kTransmissionMask</b> = 0xAu, 
+&#160;&#160;<b>kReflectionMask</b> = 0x5u, 
+<b>kTransmissionMask</b> = 0xAu, 
 <b>kAllComponents</b> = 0xFFu
 <br />
  }</td></tr>
@@ -152,31 +157,46 @@ Public Methods</h2></td></tr>
 <tr class="separator:ac8350cc0e45d5cc5e1eb4720200eb472"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b87e71a26d0a87080be653929e52cd5"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_bsdf.html#a7b87e71a26d0a87080be653929e52cd5">get_inv_eta</a> (const float NoV) const</td></tr>
 <tr class="separator:a7b87e71a26d0a87080be653929e52cd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58f402b71508cb422ebe3f0e628fd2fd"><td class="memItemLeft" align="right" valign="top">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_bsdf.html#a58f402b71508cb422ebe3f0e628fd2fd">f</a> (const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;geometry, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> V, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> L, const <a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">ComponentType</a> components=kAllComponents) const</td></tr>
-<tr class="separator:a58f402b71508cb422ebe3f0e628fd2fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b91ccd2463e6461f2c758be5b1e35b8"><td class="memItemLeft" align="right" valign="top">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_bsdf.html#a6b91ccd2463e6461f2c758be5b1e35b8">f</a> (const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;geometry, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> V, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> L, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> *f) const</td></tr>
-<tr class="separator:a6b91ccd2463e6461f2c758be5b1e35b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1ad14ad4a31c7604581a551c3fb1901"><td class="memItemLeft" align="right" valign="top">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_bsdf.html#af1ad14ad4a31c7604581a551c3fb1901">f_and_p</a> (const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;geometry, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> V, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> L, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> *<a class="el" href="struct_bsdf.html#a58f402b71508cb422ebe3f0e628fd2fd">f</a>, float *<a class="el" href="struct_bsdf.html#a88c3b1f89a3248d4b2684fd402a59ced">p</a>, const cugar::SphericalMeasure measure=cugar::kProjectedSolidAngle, bool RR=true) const</td></tr>
-<tr class="separator:af1ad14ad4a31c7604581a551c3fb1901"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67523c8158f74a07a6ed0b32b97f6bb2"><td class="memItemLeft" align="right" valign="top">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_bsdf.html#a67523c8158f74a07a6ed0b32b97f6bb2">f_and_p</a> (const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;geometry, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> V, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> L, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;<a class="el" href="struct_bsdf.html#a58f402b71508cb422ebe3f0e628fd2fd">f</a>, float &amp;<a class="el" href="struct_bsdf.html#a88c3b1f89a3248d4b2684fd402a59ced">p</a>, const cugar::SphericalMeasure measure=cugar::kProjectedSolidAngle, const bool RR=true, const <a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">ComponentType</a> components=kAllComponents) const</td></tr>
-<tr class="separator:a67523c8158f74a07a6ed0b32b97f6bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88c3b1f89a3248d4b2684fd402a59ced"><td class="memItemLeft" align="right" valign="top">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_bsdf.html#a88c3b1f89a3248d4b2684fd402a59ced">p</a> (const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;geometry, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> V, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> L, const cugar::SphericalMeasure measure=cugar::kProjectedSolidAngle, const bool RR=true, const <a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">ComponentType</a> components=kAllComponents) const</td></tr>
-<tr class="separator:a88c3b1f89a3248d4b2684fd402a59ced"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3ba6449881d9be16cba1742e60ea276"><td class="memItemLeft" align="right" valign="top">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_bsdf.html#ad3ba6449881d9be16cba1742e60ea276">f</a> (const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;geometry, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> w_i, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> w_o, const <a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">ComponentType</a> components=kAllComponents) const</td></tr>
+<tr class="separator:ad3ba6449881d9be16cba1742e60ea276"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad48199015daf0fce4807d44653629187"><td class="memItemLeft" align="right" valign="top">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_bsdf.html#ad48199015daf0fce4807d44653629187">f</a> (const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;geometry, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> w_i, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> w_o, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> *f) const</td></tr>
+<tr class="separator:ad48199015daf0fce4807d44653629187"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeaa045b2c299f9e0f04a86bd23acc798"><td class="memItemLeft" align="right" valign="top">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_bsdf.html#aeaa045b2c299f9e0f04a86bd23acc798">f_and_p</a> (const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;geometry, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> w_i, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> w_o, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> *<a class="el" href="struct_bsdf.html#ad3ba6449881d9be16cba1742e60ea276">f</a>, float *<a class="el" href="struct_bsdf.html#a099113267f9fa22765fbe8d12f6c82f9">p</a>, const <a class="el" href="group___b_s_d_f_module.html#ga31d5c3496d9630777d98ec49f397cbfd">cugar::SphericalMeasure</a> measure=cugar::kProjectedSolidAngle, bool RR=true) const</td></tr>
+<tr class="separator:aeaa045b2c299f9e0f04a86bd23acc798"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af29036eca45707f981e844d19c64ca90"><td class="memItemLeft" align="right" valign="top">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_bsdf.html#af29036eca45707f981e844d19c64ca90">f_and_p</a> (const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;geometry, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> w_i, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> w_o, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;<a class="el" href="struct_bsdf.html#ad3ba6449881d9be16cba1742e60ea276">f</a>, float &amp;<a class="el" href="struct_bsdf.html#a099113267f9fa22765fbe8d12f6c82f9">p</a>, const <a class="el" href="group___b_s_d_f_module.html#ga31d5c3496d9630777d98ec49f397cbfd">cugar::SphericalMeasure</a> measure=cugar::kProjectedSolidAngle, const bool RR=true, const <a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">ComponentType</a> components=kAllComponents) const</td></tr>
+<tr class="separator:af29036eca45707f981e844d19c64ca90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a099113267f9fa22765fbe8d12f6c82f9"><td class="memItemLeft" align="right" valign="top">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_bsdf.html#a099113267f9fa22765fbe8d12f6c82f9">p</a> (const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;geometry, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> w_i, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> w_o, const <a class="el" href="group___b_s_d_f_module.html#ga31d5c3496d9630777d98ec49f397cbfd">cugar::SphericalMeasure</a> measure=cugar::kProjectedSolidAngle, const bool RR=true, const <a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">ComponentType</a> components=kAllComponents) const</td></tr>
+<tr class="separator:a099113267f9fa22765fbe8d12f6c82f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6484768a455903e0bc0946d3d9722940"><td class="memItemLeft" align="right" valign="top">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_bsdf.html#a6484768a455903e0bc0946d3d9722940">sampling_weights</a> (const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;geometry, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> V, float &amp;diffuse_refl_prob, float &amp;diffuse_trans_prob, float &amp;glossy_refl_prob, float &amp;glossy_trans_prob) const</td></tr>
 <tr class="separator:a6484768a455903e0bc0946d3d9722940"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3382a14f577b359f61cca760a7d1296"><td class="memItemLeft" align="right" valign="top">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_bsdf.html#aa3382a14f577b359f61cca760a7d1296">sampling_weights</a> (const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;geometry, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> V, float *w) const</td></tr>
 <tr class="separator:aa3382a14f577b359f61cca760a7d1296"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af572e3b9da16737eeb585fefb56c62ef"><td class="memItemLeft" align="right" valign="top"><a id="af572e3b9da16737eeb585fefb56c62ef"></a>
-FERMAT_FORCEINLINE FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><b>weights</b> (const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;geometry, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> V, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> L, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;r_coeff, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;t_coeff) const</td></tr>
-<tr class="separator:af572e3b9da16737eeb585fefb56c62ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a474750a7281cd4945bc40ca5c9ea3ffd"><td class="memItemLeft" align="right" valign="top">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_bsdf.html#a474750a7281cd4945bc40ca5c9ea3ffd">component_weights</a> (const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;geometry, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> V, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> L, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;diffuse_refl_coeff, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;diffuse_trans_coeff, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;glossy_refl_coeff, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;glossy_trans_coeff) const</td></tr>
-<tr class="separator:a474750a7281cd4945bc40ca5c9ea3ffd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8390c41355fe415ebd71d3243266c6a9"><td class="memItemLeft" align="right" valign="top">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_bsdf.html#a8390c41355fe415ebd71d3243266c6a9">component_weights</a> (const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;geometry, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> V, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> L, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> *w) const</td></tr>
-<tr class="separator:a8390c41355fe415ebd71d3243266c6a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e093a9be3a88c0a6d086ad24358a49b"><td class="memItemLeft" align="right" valign="top">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_bsdf.html#a3e093a9be3a88c0a6d086ad24358a49b">normalize_sampling_weights</a> (float *w_p, float &amp;coat_reflection_prob, float &amp;coat_transmission_prob, const bool RR, const <a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">ComponentType</a> components=kAllComponents) const</td></tr>
+<tr class="separator:a3e093a9be3a88c0a6d086ad24358a49b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29c2975f01c40b387f7c5c994f0a9bcf"><td class="memItemLeft" align="right" valign="top">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_bsdf.html#a29c2975f01c40b387f7c5c994f0a9bcf">fresnel_weights</a> (const float VoH, const float eta, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;r_coeff, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;t_coeff) const</td></tr>
+<tr class="separator:a29c2975f01c40b387f7c5c994f0a9bcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa32ce7f63e7b4af9f0fababf4f4c89f2"><td class="memItemLeft" align="right" valign="top">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_bsdf.html#aa32ce7f63e7b4af9f0fababf4f4c89f2">fresnel_weights</a> (const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;geometry, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> V, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> L, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;r_coeff, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;t_coeff) const</td></tr>
+<tr class="separator:aa32ce7f63e7b4af9f0fababf4f4c89f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace11115a37f3ba451c9a0ee8ebf32426"><td class="memItemLeft" align="right" valign="top">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_bsdf.html#ace11115a37f3ba451c9a0ee8ebf32426">inner_component_weights</a> (const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;geometry, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> V, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> L, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;diffuse_refl_coeff, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;diffuse_trans_coeff, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;glossy_refl_coeff, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;glossy_trans_coeff) const</td></tr>
+<tr class="separator:ace11115a37f3ba451c9a0ee8ebf32426"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6df4fc230a8ad62eebadd2285b2039fc"><td class="memItemLeft" align="right" valign="top">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_bsdf.html#a6df4fc230a8ad62eebadd2285b2039fc">inner_component_weights</a> (const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;geometry, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> V, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> L, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> *w) const</td></tr>
+<tr class="separator:a6df4fc230a8ad62eebadd2285b2039fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad9249754b7ccdfcdc8ed116ff43217a"><td class="memItemLeft" align="right" valign="top">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_bsdf.html#aad9249754b7ccdfcdc8ed116ff43217a">component_weights</a> (const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;geometry, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> w_i, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> w_o, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;Fc_1, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;Tc_1, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;Fc_2, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;Tc_2, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> *w) const</td></tr>
+<tr class="separator:aad9249754b7ccdfcdc8ed116ff43217a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a6bf9a405c67912c5ab787398966601"><td class="memItemLeft" align="right" valign="top">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_bsdf.html#a1a6bf9a405c67912c5ab787398966601">component_weights</a> (const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;geometry, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> w_i, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> w_o, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> *w) const</td></tr>
+<tr class="separator:a1a6bf9a405c67912c5ab787398966601"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99fc011c47e622f99dbbc78dc7a930a1"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_bsdf.html#a99fc011c47e622f99dbbc78dc7a930a1">sample_component</a> (const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;geometry, const float z[3], const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> in, const <a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">ComponentType</a> out_comp, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;out, float &amp;out_p, float &amp;out_p_proj, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;out_g, const bool evaluate_full_bsdf=false) const</td></tr>
 <tr class="separator:a99fc011c47e622f99dbbc78dc7a930a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4ce2cad14795e1ff7f82ed10990ba3e"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_bsdf.html#ac4ce2cad14795e1ff7f82ed10990ba3e">sample</a> (const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;geometry, const float z[3], const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> in, <a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">ComponentType</a> &amp;out_comp, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;out, float &amp;out_p, float &amp;out_p_proj, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;out_g, bool RR=true, bool evaluate_full_bsdf=false, const <a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">ComponentType</a> components=kAllComponents) const</td></tr>
 <tr class="separator:ac4ce2cad14795e1ff7f82ed10990ba3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f4931e6fcffed6cc8ca618897fdf237"><td class="memItemLeft" align="right" valign="top"><a id="a2f4931e6fcffed6cc8ca618897fdf237"></a>
+FERMAT_FORCEINLINE FERMAT_HOST_DEVICE bool&#160;</td><td class="memItemRight" valign="bottom"><b>clearcoat_transmission</b> (const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;geometry, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> w_i, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;H, float &amp;cos_theta_i, float &amp;eta, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;Fc_1, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;Tc_1) const</td></tr>
+<tr class="separator:a2f4931e6fcffed6cc8ca618897fdf237"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbf084bc26e91939a99f191771ff2264"><td class="memItemLeft" align="right" valign="top">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_bsdf.html#adbf084bc26e91939a99f191771ff2264">compression_factor</a> (const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;geometry, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> w_i, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> w_o) const</td></tr>
+<tr class="separator:adbf084bc26e91939a99f191771ff2264"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae417ea83ef2f26a0792eba3bfcea7f49"><td class="memItemLeft" align="right" valign="top"><a id="ae417ea83ef2f26a0792eba3bfcea7f49"></a>
+FERMAT_FORCEINLINE FERMAT_HOST_DEVICE float&#160;</td><td class="memItemRight" valign="bottom"><b>glossy_reflectance</b> (const float cos_theta) const</td></tr>
+<tr class="separator:ae417ea83ef2f26a0792eba3bfcea7f49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Methods</h2></td></tr>
@@ -186,8 +206,6 @@ Static Public Methods</h2></td></tr>
 <tr class="separator:a0eccbf03af0e1d86cee1d7ebd1d5e752"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f95cfb6e2c6988cef49c8dcaefda5e6"><td class="memItemLeft" align="right" valign="top">static FERMAT_HOST_DEVICE <a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">ComponentType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_bsdf.html#a6f95cfb6e2c6988cef49c8dcaefda5e6">component_mask</a> (const <a class="el" href="struct_bsdf.html#acaa87fb810c0f7957db85bf41843f70c">ComponentIndex</a> comp)</td></tr>
 <tr class="separator:a6f95cfb6e2c6988cef49c8dcaefda5e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa35356849fd5563fe53584fa45ca3714"><td class="memItemLeft" align="right" valign="top">FERMAT_FORCEINLINE static FERMAT_HOST_DEVICE <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_bsdf.html#aa35356849fd5563fe53584fa45ca3714">Fresnel</a> (const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;geometry, const float VoH, const float eta, const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> fresnel_base)</td></tr>
-<tr class="separator:aa35356849fd5563fe53584fa45ca3714"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Members</h2></td></tr>
@@ -206,12 +224,18 @@ Public Members</h2></td></tr>
 <tr class="memitem:a1fef34fd64df70b96e39d368efc66dc6"><td class="memItemLeft" align="right" valign="top"><a id="a1fef34fd64df70b96e39d368efc66dc6"></a>
 <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td><td class="memItemRight" valign="bottom"><b>m_fresnel</b></td></tr>
 <tr class="separator:a1fef34fd64df70b96e39d368efc66dc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a5c864a65b30bf04e34806cb15288f1"><td class="memItemLeft" align="right" valign="top"><a id="a7a5c864a65b30bf04e34806cb15288f1"></a>
+<a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td><td class="memItemRight" valign="bottom"><b>m_reflectivity</b></td></tr>
+<tr class="separator:a7a5c864a65b30bf04e34806cb15288f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6be949f0571a3f7f854b0fd4b5f8708e"><td class="memItemLeft" align="right" valign="top"><a id="a6be949f0571a3f7f854b0fd4b5f8708e"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>m_ior</b></td></tr>
 <tr class="separator:a6be949f0571a3f7f854b0fd4b5f8708e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc6015bf971d0de0745116dd3d343f53"><td class="memItemLeft" align="right" valign="top"><a id="adc6015bf971d0de0745116dd3d343f53"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>m_opacity</b></td></tr>
 <tr class="separator:adc6015bf971d0de0745116dd3d343f53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5815f6bb044f9b238e78783a23cc2edf"><td class="memItemLeft" align="right" valign="top"><a id="a5815f6bb044f9b238e78783a23cc2edf"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>m_clearcoat_ior</b></td></tr>
+<tr class="separator:a5815f6bb044f9b238e78783a23cc2edf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c4968259fa76abd54fc31021a413bb5"><td class="memItemLeft" align="right" valign="top"><a id="a0c4968259fa76abd54fc31021a413bb5"></a>
 const float *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glossy_reflectance</b></td></tr>
 <tr class="separator:a0c4968259fa76abd54fc31021a413bb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -519,8 +543,8 @@ const float *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glossy_ref
 
 </div>
 </div>
-<a id="a474750a7281cd4945bc40ca5c9ea3ffd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a474750a7281cd4945bc40ca5c9ea3ffd">&#9670;&nbsp;</a></span>component_weights() <span class="overload">[1/2]</span></h2>
+<a id="aad9249754b7ccdfcdc8ed116ff43217a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad9249754b7ccdfcdc8ed116ff43217a">&#9670;&nbsp;</a></span>component_weights() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -538,80 +562,37 @@ const float *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glossy_ref
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td>
-          <td class="paramname"><em>V</em>, </td>
+          <td class="paramname"><em>w_i</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td>
-          <td class="paramname"><em>L</em>, </td>
+          <td class="paramname"><em>w_o</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;&#160;</td>
-          <td class="paramname"><em>diffuse_refl_coeff</em>, </td>
+          <td class="paramname"><em>Fc_1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;&#160;</td>
-          <td class="paramname"><em>diffuse_trans_coeff</em>, </td>
+          <td class="paramname"><em>Tc_1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;&#160;</td>
-          <td class="paramname"><em>glossy_refl_coeff</em>, </td>
+          <td class="paramname"><em>Fc_2</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;&#160;</td>
-          <td class="paramname"><em>glossy_trans_coeff</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>evaluate the Fresnel weight for the glossy component </p>
-
-</div>
-</div>
-<a id="a8390c41355fe415ebd71d3243266c6a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8390c41355fe415ebd71d3243266c6a9">&#9670;&nbsp;</a></span>component_weights() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE void Bsdf::component_weights </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;&#160;</td>
-          <td class="paramname"><em>geometry</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td>
-          <td class="paramname"><em>V</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td>
-          <td class="paramname"><em>L</em>, </td>
+          <td class="paramname"><em>Tc_2</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -631,7 +612,99 @@ const float *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glossy_ref
   </tr>
 </table>
 </div><div class="memdoc">
-<p>evaluate the component weights </p>
+<p>evaluate the component weights of all layers - including the clearcoat </p>
+
+</div>
+</div>
+<a id="a1a6bf9a405c67912c5ab787398966601"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a6bf9a405c67912c5ab787398966601">&#9670;&nbsp;</a></span>component_weights() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE void Bsdf::component_weights </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;&#160;</td>
+          <td class="paramname"><em>geometry</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td>
+          <td class="paramname"><em>w_i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td>
+          <td class="paramname"><em>w_o</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> *&#160;</td>
+          <td class="paramname"><em>w</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>evaluate the component weights of all layers - including the clearcoat </p>
+
+</div>
+</div>
+<a id="adbf084bc26e91939a99f191771ff2264"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbf084bc26e91939a99f191771ff2264">&#9670;&nbsp;</a></span>compression_factor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE float Bsdf::compression_factor </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;&#160;</td>
+          <td class="paramname"><em>geometry</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td>
+          <td class="paramname"><em>w_i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td>
+          <td class="paramname"><em>w_o</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>apply the radiance compression factor of (eta_t / eta_i)^2 </p>
 
 </div>
 </div>
@@ -687,8 +760,8 @@ const float *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glossy_ref
 
 </div>
 </div>
-<a id="a58f402b71508cb422ebe3f0e628fd2fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a58f402b71508cb422ebe3f0e628fd2fd">&#9670;&nbsp;</a></span>f() <span class="overload">[1/2]</span></h2>
+<a id="ad3ba6449881d9be16cba1742e60ea276"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3ba6449881d9be16cba1742e60ea276">&#9670;&nbsp;</a></span>f() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -706,13 +779,13 @@ const float *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glossy_ref
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td>
-          <td class="paramname"><em>V</em>, </td>
+          <td class="paramname"><em>w_i</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td>
-          <td class="paramname"><em>L</em>, </td>
+          <td class="paramname"><em>w_o</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -745,8 +818,8 @@ const float *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glossy_ref
 
 </div>
 </div>
-<a id="a6b91ccd2463e6461f2c758be5b1e35b8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6b91ccd2463e6461f2c758be5b1e35b8">&#9670;&nbsp;</a></span>f() <span class="overload">[2/2]</span></h2>
+<a id="ad48199015daf0fce4807d44653629187"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad48199015daf0fce4807d44653629187">&#9670;&nbsp;</a></span>f() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -764,13 +837,13 @@ const float *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glossy_ref
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td>
-          <td class="paramname"><em>V</em>, </td>
+          <td class="paramname"><em>w_i</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td>
-          <td class="paramname"><em>L</em>, </td>
+          <td class="paramname"><em>w_o</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -794,8 +867,8 @@ const float *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glossy_ref
 
 </div>
 </div>
-<a id="af1ad14ad4a31c7604581a551c3fb1901"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af1ad14ad4a31c7604581a551c3fb1901">&#9670;&nbsp;</a></span>f_and_p() <span class="overload">[1/2]</span></h2>
+<a id="aeaa045b2c299f9e0f04a86bd23acc798"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeaa045b2c299f9e0f04a86bd23acc798">&#9670;&nbsp;</a></span>f_and_p() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -813,13 +886,13 @@ const float *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glossy_ref
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td>
-          <td class="paramname"><em>V</em>, </td>
+          <td class="paramname"><em>w_i</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td>
-          <td class="paramname"><em>L</em>, </td>
+          <td class="paramname"><em>w_o</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -836,7 +909,7 @@ const float *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glossy_ref
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const cugar::SphericalMeasure&#160;</td>
+          <td class="paramtype">const <a class="el" href="group___b_s_d_f_module.html#ga31d5c3496d9630777d98ec49f397cbfd">cugar::SphericalMeasure</a>&#160;</td>
           <td class="paramname"><em>measure</em> = <code>cugar::kProjectedSolidAngle</code>, </td>
         </tr>
         <tr>
@@ -861,8 +934,8 @@ const float *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glossy_ref
 
 </div>
 </div>
-<a id="a67523c8158f74a07a6ed0b32b97f6bb2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a67523c8158f74a07a6ed0b32b97f6bb2">&#9670;&nbsp;</a></span>f_and_p() <span class="overload">[2/2]</span></h2>
+<a id="af29036eca45707f981e844d19c64ca90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af29036eca45707f981e844d19c64ca90">&#9670;&nbsp;</a></span>f_and_p() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -880,13 +953,13 @@ const float *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glossy_ref
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td>
-          <td class="paramname"><em>V</em>, </td>
+          <td class="paramname"><em>w_i</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td>
-          <td class="paramname"><em>L</em>, </td>
+          <td class="paramname"><em>w_o</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -903,7 +976,7 @@ const float *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glossy_ref
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const cugar::SphericalMeasure&#160;</td>
+          <td class="paramtype">const <a class="el" href="group___b_s_d_f_module.html#ga31d5c3496d9630777d98ec49f397cbfd">cugar::SphericalMeasure</a>&#160;</td>
           <td class="paramname"><em>measure</em> = <code>cugar::kProjectedSolidAngle</code>, </td>
         </tr>
         <tr>
@@ -934,8 +1007,8 @@ const float *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glossy_ref
 
 </div>
 </div>
-<a id="aa35356849fd5563fe53584fa45ca3714"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa35356849fd5563fe53584fa45ca3714">&#9670;&nbsp;</a></span>Fresnel()</h2>
+<a id="a29c2975f01c40b387f7c5c994f0a9bcf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29c2975f01c40b387f7c5c994f0a9bcf">&#9670;&nbsp;</a></span>fresnel_weights() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -944,14 +1017,8 @@ const float *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glossy_ref
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">FERMAT_FORCEINLINE static FERMAT_HOST_DEVICE <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> Bsdf::Fresnel </td>
+          <td class="memname">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE void Bsdf::fresnel_weights </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;&#160;</td>
-          <td class="paramname"><em>geometry</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">const float&#160;</td>
           <td class="paramname"><em>VoH</em>, </td>
         </tr>
@@ -964,28 +1031,83 @@ const float *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glossy_ref
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td>
-          <td class="paramname"><em>fresnel_base</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;&#160;</td>
+          <td class="paramname"><em>r_coeff</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;&#160;</td>
+          <td class="paramname"><em>t_coeff</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>evaluate the Fresnel weight</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">eta</td><td>incoming IOR / outgoing IOR </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>compute the Fresnel reflection and transmission weights </p>
+
+</div>
+</div>
+<a id="aa32ce7f63e7b4af9f0fababf4f4c89f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa32ce7f63e7b4af9f0fababf4f4c89f2">&#9670;&nbsp;</a></span>fresnel_weights() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE void Bsdf::fresnel_weights </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;&#160;</td>
+          <td class="paramname"><em>geometry</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td>
+          <td class="paramname"><em>V</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td>
+          <td class="paramname"><em>L</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;&#160;</td>
+          <td class="paramname"><em>r_coeff</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;&#160;</td>
+          <td class="paramname"><em>t_coeff</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>compute the Fresnel reflection and transmission weights </p>
 
 </div>
 </div>
@@ -1095,8 +1217,8 @@ const float *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glossy_ref
 
 </div>
 </div>
-<a id="a88c3b1f89a3248d4b2684fd402a59ced"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a88c3b1f89a3248d4b2684fd402a59ced">&#9670;&nbsp;</a></span>p()</h2>
+<a id="ace11115a37f3ba451c9a0ee8ebf32426"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace11115a37f3ba451c9a0ee8ebf32426">&#9670;&nbsp;</a></span>inner_component_weights() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1105,7 +1227,7 @@ const float *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glossy_ref
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE float Bsdf::p </td>
+          <td class="memname">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE void Bsdf::inner_component_weights </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;&#160;</td>
           <td class="paramname"><em>geometry</em>, </td>
@@ -1125,7 +1247,178 @@ const float *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glossy_ref
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const cugar::SphericalMeasure&#160;</td>
+          <td class="paramtype"><a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;&#160;</td>
+          <td class="paramname"><em>diffuse_refl_coeff</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;&#160;</td>
+          <td class="paramname"><em>diffuse_trans_coeff</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;&#160;</td>
+          <td class="paramname"><em>glossy_refl_coeff</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;&#160;</td>
+          <td class="paramname"><em>glossy_trans_coeff</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p><em>deprecated</em> evaluate the Fresnel weight for the glossy component - after the clearcoat </p>
+
+</div>
+</div>
+<a id="a6df4fc230a8ad62eebadd2285b2039fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6df4fc230a8ad62eebadd2285b2039fc">&#9670;&nbsp;</a></span>inner_component_weights() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE void Bsdf::inner_component_weights </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;&#160;</td>
+          <td class="paramname"><em>geometry</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td>
+          <td class="paramname"><em>V</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td>
+          <td class="paramname"><em>L</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> *&#160;</td>
+          <td class="paramname"><em>w</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>evaluate the component weights of the inner layers - after the clearcoat </p>
+
+</div>
+</div>
+<a id="a3e093a9be3a88c0a6d086ad24358a49b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e093a9be3a88c0a6d086ad24358a49b">&#9670;&nbsp;</a></span>normalize_sampling_weights()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE void Bsdf::normalize_sampling_weights </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>w_p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float &amp;&#160;</td>
+          <td class="paramname"><em>coat_reflection_prob</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float &amp;&#160;</td>
+          <td class="paramname"><em>coat_transmission_prob</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>RR</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">ComponentType</a>&#160;</td>
+          <td class="paramname"><em>components</em> = <code>kAllComponents</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>normalize the sampling weights of the inner layers given the coat sampling probability </p>
+
+</div>
+</div>
+<a id="a099113267f9fa22765fbe8d12f6c82f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a099113267f9fa22765fbe8d12f6c82f9">&#9670;&nbsp;</a></span>p()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">FERMAT_FORCEINLINE FERMAT_HOST_DEVICE float Bsdf::p </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_differential_geometry.html">cugar::DifferentialGeometry</a> &amp;&#160;</td>
+          <td class="paramname"><em>geometry</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td>
+          <td class="paramname"><em>w_i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td>
+          <td class="paramname"><em>w_o</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___b_s_d_f_module.html#ga31d5c3496d9630777d98ec49f397cbfd">cugar::SphericalMeasure</a>&#160;</td>
           <td class="paramname"><em>measure</em> = <code>cugar::kProjectedSolidAngle</code>, </td>
         </tr>
         <tr>
@@ -1156,8 +1449,8 @@ const float *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glossy_ref
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">geometry</td><td>the local differential geometry </td></tr>
-    <tr><td class="paramname">in</td><td>the incoming direction </td></tr>
-    <tr><td class="paramname">out</td><td>the outgoing direction </td></tr>
+    <tr><td class="paramname">w_i</td><td>the incoming direction </td></tr>
+    <tr><td class="paramname">w_o</td><td>the outgoing direction </td></tr>
     <tr><td class="paramname">measure</td><td>the spherical measure to use </td></tr>
     <tr><td class="paramname">RR</td><td>indicate whether to use Russian-Roulette or not </td></tr>
   </table>
@@ -1425,7 +1718,7 @@ const float *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glossy_ref
   </tr>
 </table>
 </div><div class="memdoc">
-<p>evaluate the Fresnel weight for the glossy component </p>
+<p>evaluate the sampling weights for the inner layers </p>
 
 </div>
 </div>
@@ -1468,7 +1761,7 @@ const float *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glossy_ref
   </tr>
 </table>
 </div><div class="memdoc">
-<p>evaluate the Fresnel weight for the glossy component </p>
+<p>evaluate the sampling weights for the inner layers </p>
 
 </div>
 </div>

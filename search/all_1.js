@@ -36,6 +36,7 @@ var searchData=
   ['atomics',['Atomics',['../atomics_page.html',1,'basic_page']]],
   ['automatic_2ddifferentiation',['Automatic-Differentiation',['../group___auto_diff_module.html',1,'']]],
   ['auxiliary_5fchannel_5fcount',['auxiliary_channel_count',['../struct_renderer_interface.html#a0bedb16a0103c95dae460afef2a0fc2a',1,'RendererInterface']]],
+  ['average',['average',['../group___vectors_module.html#ga4389829d358aee5a0f64d9736581e03d',1,'cugar::Vector::average(const Vector&lt; T, DIM &gt; &amp;op)'],['../group___vectors_module.html#gac8b06785d9df466c10f6e3c73410db28',1,'cugar::Vector::average(const float op)'],['../group___vectors_module.html#ga7fc5a957e48a518fc23319bcfab13cab',1,'cugar::Vector::average(const double op)']]],
   ['average_5fin',['average_in',['../group___framebuffer_module.html#ga5dc81569ddc64436e1fe3638e3e031ce',1,'average_in(FBufferChannelView &amp;fb, const uint32_t pixel, const cugar::Vector4f f, const float inv_n):&#160;framebuffer.h'],['../group___framebuffer_module.html#ga27004dfdf67948b9846f3b70efbbca67',1,'average_in(FBufferChannelView &amp;fb, const uint32_t pixel, const cugar::Vector3f f, const float inv_n):&#160;framebuffer.h']]],
   ['an_20overture',['An Overture',['../_overture_page.html',1,'']]]
 ];

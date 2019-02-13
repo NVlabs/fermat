@@ -48,6 +48,7 @@ var searchData=
   ['to_5fconst_3c_20const_20t_20_2a_20_3e',['to_const&lt; const T * &gt;',['../structcugar_1_1to__const_3_01const_01_t_01_5_01_4.html',1,'cugar']]],
   ['to_5fconst_3c_20t_20_26_20_3e',['to_const&lt; T &amp; &gt;',['../structcugar_1_1to__const_3_01_t_01_6_01_4.html',1,'cugar']]],
   ['to_5fconst_3c_20t_20_2a_20_3e',['to_const&lt; T * &gt;',['../structcugar_1_1to__const_3_01_t_01_5_01_4.html',1,'cugar']]],
+  ['to_5flocal',['to_local',['../structcugar_1_1_differential_geometry.html#a0752988ee7424d1bec996e7d54c008c5',1,'cugar::DifferentialGeometry']]],
   ['to_5fspherical_5fcoords',['to_spherical_coords',['../group__spherical__mappings.html#ga180b90ffc2cc3cfcfe63e911ea51a1ab',1,'cugar']]],
   ['top',['top',['../structcugar_1_1priority__queue.html#ae74971b0d5b9ed6d0822601ba8afc875',1,'cugar::priority_queue::top()'],['../structcugar_1_1priority__queue.html#a1c4ec8611f6fe2e6dbfdae408435b9cd',1,'cugar::priority_queue::top() const']]],
   ['transform',['transform',['../group___primitives.html#gab584ee91ed39f9b1fec5aa0e7a0284a4',1,'cugar::transform(const uint32 n, const Iterator in, const Output out, const Functor functor)'],['../group___primitives.html#ga2c0c3bba686f00f120c68465c28f5259',1,'cugar::transform(const uint32 n, const Iterator1 in1, const Iterator2 in2, const Output out, const Functor functor)']]],

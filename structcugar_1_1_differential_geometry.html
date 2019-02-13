@@ -74,12 +74,17 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Methods</a> &#124;
 <a href="#pub-attribs">Public Members</a> &#124;
 <a href="structcugar_1_1_differential_geometry-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">cugar::DifferentialGeometry Struct Reference<div class="ingroups"><a class="el" href="group___fermat.html">Fermat</a> &raquo; <a class="el" href="group___b_s_d_f_module.html">BSDF</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
+<a name="details" id="details"></a><h2 class="groupheader">Detailed description</h2>
+<div class="textblock"><p>A simplified notion of the local differential geometry at a surface </p>
+</div>
+<p><code>#include &lt;<a class="el" href="differential__geometry_8h_source.html">differential_geometry.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for cugar::DifferentialGeometry:</div>
 <div class="dyncontent">
@@ -90,6 +95,17 @@ Inheritance diagram for cugar::DifferentialGeometry:</div>
 </map>
  </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Methods</h2></td></tr>
+<tr class="memitem:a0752988ee7424d1bec996e7d54c008c5"><td class="memItemLeft" align="right" valign="top">CUGAR_HOST_DEVICE <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcugar_1_1_differential_geometry.html#a0752988ee7424d1bec996e7d54c008c5">to_local</a> (const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> v) const</td></tr>
+<tr class="separator:a0752988ee7424d1bec996e7d54c008c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcabbee1a1b9d5d79256e01849fe4190"><td class="memItemLeft" align="right" valign="top">CUGAR_HOST_DEVICE <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcugar_1_1_differential_geometry.html#abcabbee1a1b9d5d79256e01849fe4190">from_local</a> (const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> v) const</td></tr>
+<tr class="separator:abcabbee1a1b9d5d79256e01849fe4190"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62185aa5aeb808933bbc515f4908ebfa"><td class="memItemLeft" align="right" valign="top">CUGAR_HOST_DEVICE float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcugar_1_1_differential_geometry.html#a62185aa5aeb808933bbc515f4908ebfa">cos_theta_l</a> (const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> v) const</td></tr>
+<tr class="separator:a62185aa5aeb808933bbc515f4908ebfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59cb43b1f2922634d710c4a66420b031"><td class="memItemLeft" align="right" valign="top">CUGAR_HOST_DEVICE float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcugar_1_1_differential_geometry.html#a59cb43b1f2922634d710c4a66420b031">cos_theta_g</a> (const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> v) const</td></tr>
+<tr class="separator:a59cb43b1f2922634d710c4a66420b031"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Members</h2></td></tr>
 <tr class="memitem:aabf2543aae8db745fd6d8f970d026844"><td class="memItemLeft" align="right" valign="top"><a id="aabf2543aae8db745fd6d8f970d026844"></a>
@@ -105,6 +121,115 @@ Public Members</h2></td></tr>
 <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td><td class="memItemRight" valign="bottom"><b>binormal</b></td></tr>
 <tr class="separator:a4f0f88fac0d7463008e23af95ca846af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a59cb43b1f2922634d710c4a66420b031"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59cb43b1f2922634d710c4a66420b031">&#9670;&nbsp;</a></span>cos_theta_g()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_HOST_DEVICE float cugar::DifferentialGeometry::cos_theta_g </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section user"><dt></dt><dd>cosine of theta of a vector expressed in global coordinates </dd></dl>
+
+</div>
+</div>
+<a id="a62185aa5aeb808933bbc515f4908ebfa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62185aa5aeb808933bbc515f4908ebfa">&#9670;&nbsp;</a></span>cos_theta_l()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_HOST_DEVICE float cugar::DifferentialGeometry::cos_theta_l </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section user"><dt></dt><dd>cosine of theta of a vector expressed in local coordinates </dd></dl>
+
+</div>
+</div>
+<a id="abcabbee1a1b9d5d79256e01849fe4190"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abcabbee1a1b9d5d79256e01849fe4190">&#9670;&nbsp;</a></span>from_local()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_HOST_DEVICE <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> cugar::DifferentialGeometry::from_local </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section user"><dt></dt><dd>transform back to world space </dd></dl>
+
+</div>
+</div>
+<a id="a0752988ee7424d1bec996e7d54c008c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0752988ee7424d1bec996e7d54c008c5">&#9670;&nbsp;</a></span>to_local()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_HOST_DEVICE <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> cugar::DifferentialGeometry::to_local </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section user"><dt></dt><dd>transform to the local coordinate system </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>C:/p4research/research/jpantaleoni/Fermat-Public/contrib/cugar/bsdf/<a class="el" href="differential__geometry_8h_source.html">differential_geometry.h</a></li>
 </ul>

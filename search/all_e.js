@@ -5,6 +5,7 @@ var searchData=
   ['next_5fdim',['next_dim',['../classcugar_1_1_weyl__sampler__opt.html#a08292e9f6053315e5be2419ed54c4069',1,'cugar::Weyl_sampler_opt']]],
   ['next_5finstance',['next_instance',['../classcugar_1_1_weyl__sampler__opt.html#a3f3762ed4fd1a0b3bc9ca163f15b8fb9',1,'cugar::Weyl_sampler_opt']]],
   ['normalize',['normalize',['../group___vectors_module.html#ga0db9153dc023976fdf7f5d7edba12344',1,'cugar::Vector']]],
+  ['normalize_5fsampling_5fweights',['normalize_sampling_weights',['../struct_bsdf.html#a3e093a9be3a88c0a6d086ad24358a49b',1,'Bsdf']]],
   ['not_5fequal_5ffunctor',['not_equal_functor',['../structcugar_1_1not__equal__functor.html',1,'cugar']]],
   ['not_5ffunctor',['not_functor',['../structcugar_1_1not__functor.html',1,'cugar']]],
   ['null_5ftype',['null_type',['../structcugar_1_1null__type.html',1,'cugar']]],

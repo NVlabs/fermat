@@ -17,6 +17,7 @@ var searchData=
   ['directlightingmesh',['DirectLightingMesh',['../struct_direct_lighting_mesh.html#a6f51872d622c3ee9a81e2f433b9e256c',1,'DirectLightingMesh::DirectLightingMesh()'],['../struct_direct_lighting_mesh.html#af86ba1cf583e3a9e8527afa4d83a2f3d',1,'DirectLightingMesh::DirectLightingMesh(const MeshLight _mesh_light)']]],
   ['directlightingrl',['DirectLightingRL',['../struct_direct_lighting_r_l.html#a4ffd83e2326fa69465a1f474ad7b9a82',1,'DirectLightingRL::DirectLightingRL()'],['../struct_direct_lighting_r_l.html#abbfe3a309d668177190c5dc5df992953',1,'DirectLightingRL::DirectLightingRL(RLMap _rl, VTLMeshView _vtls)']]],
   ['dispose',['dispose',['../classcugar_1_1internals_1_1_counted_base.html#a0136f9f7bac652b751f55c3fd3c0b9c0',1,'cugar::internals::CountedBase::dispose()'],['../classcugar_1_1internals_1_1_counted_base__impl.html#a5582b40e7ded61b0d1e9b77d2a21b05d',1,'cugar::internals::CountedBase_impl::dispose()']]],
+  ['distribution',['distribution',['../structcugar_1_1_g_g_x_smith_bsdf.html#abeda2edf1ae88cf26746304a1bb2b7eb',1,'cugar::GGXSmithBsdf']]],
   ['divide_5fri',['divide_ri',['../group___basic_utils.html#gabb6714186dbbd864f0a9298944ba509b',1,'cugar']]],
   ['divide_5frz',['divide_rz',['../group___basic_utils.html#gae5973146d12ab34b3cdf518c2ea0d14b',1,'cugar']]],
   ['dot',['dot',['../group___vectors_module.html#gab7854923b97b44405c7335f0df540fd3',1,'cugar::Vector']]],

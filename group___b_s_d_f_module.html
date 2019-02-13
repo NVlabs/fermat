@@ -125,19 +125,19 @@ Enumerations</h2></td></tr>
 <b>kParticleTransport</b> = 1
  }</td></tr>
 <tr class="separator:gaca1e72535e7f260e54ed8bbf984dade9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga31d5c3496d9630777d98ec49f397cbfd"><td class="memItemLeft" align="right" valign="top"><a id="ga31d5c3496d9630777d98ec49f397cbfd"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>SphericalMeasure</b> { <b>kSolidAngle</b> = 0, 
+<tr class="memitem:ga31d5c3496d9630777d98ec49f397cbfd"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___b_s_d_f_module.html#ga31d5c3496d9630777d98ec49f397cbfd">cugar::SphericalMeasure</a> { <b>kSolidAngle</b> = 0, 
 <b>kProjectedSolidAngle</b> = 1
  }</td></tr>
 <tr class="separator:ga31d5c3496d9630777d98ec49f397cbfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga452befdd31de89c5de5863c06d2cc901"><td class="memItemLeft" align="right" valign="top"><a id="ga452befdd31de89c5de5863c06d2cc901"></a>
-FERMAT_HOST_DEVICE FERMAT_FORCEINLINE float&#160;</td><td class="memItemRight" valign="bottom"><b>pow5</b> (const float x)</td></tr>
-<tr class="separator:ga452befdd31de89c5de5863c06d2cc901"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad2e2716498c2e506ddb0346bcd76a577"><td class="memItemLeft" align="right" valign="top"><a id="gad2e2716498c2e506ddb0346bcd76a577"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>precompute_glossy_reflectance</b> (const uint32 S, float *tables)</td></tr>
-<tr class="separator:gad2e2716498c2e506ddb0346bcd76a577"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafaa632d27201f0f578d65a608cf57661"><td class="memItemLeft" align="right" valign="top"><a id="gafaa632d27201f0f578d65a608cf57661"></a>
+FERMAT_API void&#160;</td><td class="memItemRight" valign="bottom"><b>precompute_glossy_reflectance</b> (const uint32 S, float *tables)</td></tr>
+<tr class="separator:gafaa632d27201f0f578d65a608cf57661"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad9dbe372664de31e15e0f4ff4c076108"><td class="memItemLeft" align="right" valign="top"><a id="gad9dbe372664de31e15e0f4ff4c076108"></a>
+FERMAT_API void&#160;</td><td class="memItemRight" valign="bottom"><b>precompute_TIR_loss</b> (const uint32 S, float *tables)</td></tr>
+<tr class="separator:gad9dbe372664de31e15e0f4ff4c076108"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga406d45267a7c015d38cd6db45c8391fb"><td class="memItemLeft" align="right" valign="top"><a id="ga406d45267a7c015d38cd6db45c8391fb"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>cugar::bsdf_test</b> (uint32 test_index, const <a class="el" href="structcugar_1_1_g_g_x_smith_bsdf.html">GGXSmithBsdf</a> &amp;bsdf)</td></tr>
 <tr class="separator:ga406d45267a7c015d38cd6db45c8391fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -161,8 +161,41 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>cugar::bsdf_test</b> 
 <tr class="separator:gabe2116f566e70937f1abb126140afae8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0ddbffc856042ea191e9ed868fe58ca9"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE uint32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___b_s_d_f_module.html#ga0ddbffc856042ea191e9ed868fe58ca9">cugar::clip_quad_to_horizon</a> (<a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> L[5])</td></tr>
 <tr class="separator:ga0ddbffc856042ea191e9ed868fe58ca9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga275490fed04d81ce0e39dac1510f6088"><td class="memTemplParams" colspan="2">template&lt;typename VectorType &gt; </td></tr>
+<tr class="memitem:ga275490fed04d81ce0e39dac1510f6088"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE VectorType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___b_s_d_f_module.html#ga275490fed04d81ce0e39dac1510f6088">cugar::fresnel_dielectric</a> (const float cos_theta_i, const float cos_theta_t, const VectorType eta)</td></tr>
+<tr class="separator:ga275490fed04d81ce0e39dac1510f6088"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga97f10f2451b37acacc2e9fc856b44655"><td class="memTemplParams" colspan="2">template&lt;typename VectorType &gt; </td></tr>
+<tr class="memitem:ga97f10f2451b37acacc2e9fc856b44655"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_HOST_DEVICE CUGAR_FORCEINLINE VectorType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___b_s_d_f_module.html#ga97f10f2451b37acacc2e9fc856b44655">cugar::fresnel_dielectric_conductor</a> (const float cos_theta, const VectorType eta, const VectorType eta_k)</td></tr>
+<tr class="separator:ga97f10f2451b37acacc2e9fc856b44655"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae9c5940ddecfb2942ac3ab32e1a0f030"><td class="memItemLeft" align="right" valign="top"><a id="gae9c5940ddecfb2942ac3ab32e1a0f030"></a>
+CUGAR_HOST_DEVICE CUGAR_FORCEINLINE float&#160;</td><td class="memItemRight" valign="bottom"><b>cugar::pow5</b> (const float x)</td></tr>
+<tr class="separator:gae9c5940ddecfb2942ac3ab32e1a0f030"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga87cd8f4c96941f3940826b1d9385f23c"><td class="memTemplParams" colspan="2">template&lt;typename VectorType &gt; </td></tr>
+<tr class="memitem:ga87cd8f4c96941f3940826b1d9385f23c"><td class="memTemplItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE VectorType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___b_s_d_f_module.html#ga87cd8f4c96941f3940826b1d9385f23c">cugar::fresnel_schlick</a> (float cos_theta_i, const float eta, const VectorType fresnel_base)</td></tr>
+<tr class="separator:ga87cd8f4c96941f3940826b1d9385f23c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabec1346901c5f8d7e67f737a9355f392"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___b_s_d_f_module.html#gabec1346901c5f8d7e67f737a9355f392">cugar::refraction_angle</a> (const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> w_i, const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> N, const float eta, const float cos_theta_i, float *cos_theta_t)</td></tr>
+<tr class="separator:gabec1346901c5f8d7e67f737a9355f392"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac9103073d6f9f099bfcdd39327fcb38b"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___b_s_d_f_module.html#gac9103073d6f9f099bfcdd39327fcb38b">cugar::refract</a> (const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> w_i, const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> N, const float cos_theta_i, const float eta, <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> *out, float *F)</td></tr>
+<tr class="separator:gac9103073d6f9f099bfcdd39327fcb38b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaae74e9718ef1de84cda2a5193e4fd16b"><td class="memItemLeft" align="right" valign="top">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___b_s_d_f_module.html#gaae74e9718ef1de84cda2a5193e4fd16b">cugar::refract</a> (const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> w_i, const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> N, const float eta, const float cos_theta_i, const float cos_theta_t)</td></tr>
+<tr class="separator:gaae74e9718ef1de84cda2a5193e4fd16b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="ga31d5c3496d9630777d98ec49f397cbfd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga31d5c3496d9630777d98ec49f397cbfd">&#9670;&nbsp;</a></span>SphericalMeasure</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="group___b_s_d_f_module.html#ga31d5c3496d9630777d98ec49f397cbfd">cugar::SphericalMeasure</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Spherical measure type </p>
+
+</div>
+</div>
 <a id="gaca1e72535e7f260e54ed8bbf984dade9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gaca1e72535e7f260e54ed8bbf984dade9">&#9670;&nbsp;</a></span>TransportType</h2>
 
@@ -221,6 +254,123 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>cugar::bsdf_test</b> 
       </table>
 </div><div class="memdoc">
 <p>clip a quad to the plane z = 0 </p>
+
+</div>
+</div>
+<a id="ga275490fed04d81ce0e39dac1510f6088"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga275490fed04d81ce0e39dac1510f6088">&#9670;&nbsp;</a></span>fresnel_dielectric()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename VectorType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE VectorType cugar::fresnel_dielectric </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>cos_theta_i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>cos_theta_t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const VectorType&#160;</td>
+          <td class="paramname"><em>eta</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section user"><dt></dt><dd>Evaluate the Fresnel reflection coefficient for dielectrics </dd></dl>
+
+</div>
+</div>
+<a id="ga97f10f2451b37acacc2e9fc856b44655"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga97f10f2451b37acacc2e9fc856b44655">&#9670;&nbsp;</a></span>fresnel_dielectric_conductor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename VectorType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_HOST_DEVICE CUGAR_FORCEINLINE VectorType cugar::fresnel_dielectric_conductor </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>cos_theta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const VectorType&#160;</td>
+          <td class="paramname"><em>eta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const VectorType&#160;</td>
+          <td class="paramname"><em>eta_k</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section user"><dt></dt><dd>Evaluate the Fresnel reflection coefficient for dielectric/conductor interfaces </dd></dl>
+
+</div>
+</div>
+<a id="ga87cd8f4c96941f3940826b1d9385f23c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga87cd8f4c96941f3940826b1d9385f23c">&#9670;&nbsp;</a></span>fresnel_schlick()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename VectorType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE VectorType cugar::fresnel_schlick </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>cos_theta_i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>eta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const VectorType&#160;</td>
+          <td class="paramname"><em>fresnel_base</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section user"><dt></dt><dd>Evaluate the Fresnel reflection coefficient using Schlick's approximation</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">eta</td><td>incoming IOR / outgoing IOR </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -392,6 +542,153 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>cugar::bsdf_test</b> 
       </table>
 </div><div class="memdoc">
 <p>return the microfacet normal for a given pair of incident and outgoing direction vectors </p>
+
+</div>
+</div>
+<a id="gac9103073d6f9f099bfcdd39327fcb38b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac9103073d6f9f099bfcdd39327fcb38b">&#9670;&nbsp;</a></span>refract() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE bool cugar::refract </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td>
+          <td class="paramname"><em>w_i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td>
+          <td class="paramname"><em>N</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>cos_theta_i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>eta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structcugar_1_1_vector.html">Vector3f</a> *&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>F</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section user"><dt></dt><dd>Evaluate refraction; this function returns false upon Total Internal Reflection (TIR). </dd></dl>
+
+</div>
+</div>
+<a id="gaae74e9718ef1de84cda2a5193e4fd16b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaae74e9718ef1de84cda2a5193e4fd16b">&#9670;&nbsp;</a></span>refract() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE <a class="el" href="structcugar_1_1_vector.html">Vector3f</a> cugar::refract </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td>
+          <td class="paramname"><em>w_i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td>
+          <td class="paramname"><em>N</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>eta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>cos_theta_i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>cos_theta_t</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section user"><dt></dt><dd>Evaluate refraction given the incident and transmitted angles with the normal </dd></dl>
+
+</div>
+</div>
+<a id="gabec1346901c5f8d7e67f737a9355f392"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabec1346901c5f8d7e67f737a9355f392">&#9670;&nbsp;</a></span>refraction_angle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">CUGAR_FORCEINLINE CUGAR_HOST_DEVICE bool cugar::refraction_angle </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td>
+          <td class="paramname"><em>w_i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structcugar_1_1_vector.html">Vector3f</a>&#160;</td>
+          <td class="paramname"><em>N</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>eta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>cos_theta_i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>cos_theta_t</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section user"><dt></dt><dd>Evaluate the cosine of the refraction angle with the normal - cos(theta_t) </dd></dl>
 
 </div>
 </div>

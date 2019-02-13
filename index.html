@@ -84,7 +84,7 @@ $(function() {
 <h1><a class="anchor" id="FermatIntroductionSection"></a>
 Introduction</h1>
 <dl class="section user"><dt></dt><dd>At the highest level, Fermat is basically a collection of separate renderers. All renderers use Optix as a ray tracing backend, and implement recursive ray / path tracing as an iterative process, in which rays representing new path segments are spawned in <em>wavefronts</em>. This means each renderer is pretty much written like a pipeline of interleaved <em>tracing</em> and <em>shading</em> stages communicating through global memory queues. <br />
- Currently, the list of available renderers include: <br />
+ Currently, the list of available renderers includes: <br />
 <ul>
 <li><a class="el" href="struct_path_tracer.html">PathTracer</a> (<em>PT</em>): a simple forward path tracer with next-event estimation</li>
 <li><a class="el" href="struct_p_s_f_p_t.html">PSFPT</a>: a path space filtering path tracer, following ideas first developed by Sascha Fricke, Nikolaus Binder and Alex Keller: <a href="https://dl.acm.org/citation.cfm?id=3214806">Fast path space filtering by jittered spatial hashing</a>, Binder et al, ACM SIGGRAPH 2018 Talks.</li>
@@ -99,10 +99,10 @@ Introduction</h1>
  Finally, all unidirectional renderers are based on a common, template-based library for path tracing, described in the <a class="el" href="group___p_t_lib.html">PTLib</a> module, while all bidirectional renderers are based on a similar template-based library for bidirectional path tracing, described in the <a class="el" href="group___b_p_t_lib.html">BPTLib</a> module.</dd></dl>
 <h1><a class="anchor" id="FermatCompilationSection"></a>
 Compiling Fermat</h1>
-<dl class="section user"><dt></dt><dd>Assuming you have Windows 10.0, Visual Studio 2015, CUDA 10.0 and OptiX 6 installed (driver version 418.81 and above), compiling Fermat should be straightforward. It will be sufficient to open the VS solution located in <em>.\vs\fermat\fermat.sln</em>, and press Build -&gt; Build Solution. Note that there are three different projects:<ul>
-<li><b>fermatdll</b>: Fermat's core library</li>
-<li><b>fermat</b>: the main executable, linking fermat.dll</li>
-<li><b>hellopt</b>: an example plugin renderer</li>
+<dl class="section user"><dt></dt><dd>Assuming you have Windows 10.0, Visual Studio 2015, CUDA 10.0 and OptiX 6 installed (driver version 418.81 and above), compiling Fermat should be straightforward. It will be sufficient to open the VS solution located in <em>.\vs\fermat\fermat.sln</em>, and press Build -&gt; Build Solution. Note that the solution references three different projects:<ul>
+<li><em>fermatdll</em>: Fermat's core library</li>
+<li><em>fermat</em>: the main executable, linking fermat.dll</li>
+<li><em>hellopt</em>: an example plugin renderer</li>
 </ul>
 </dd></dl>
 <h1><a class="anchor" id="FermatDocumentationSection"></a>

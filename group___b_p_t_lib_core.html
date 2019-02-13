@@ -137,6 +137,12 @@ FERMAT_HOST_DEVICE FERMAT_FORCEINLINE float&#160;</td><td class="memItemRight" v
 <tr class="memitem:gaf967121c1d37c948098d2845ca434a6d"><td class="memItemLeft" align="right" valign="top"><a id="gaf967121c1d37c948098d2845ca434a6d"></a>
 FERMAT_HOST_DEVICE FERMAT_FORCEINLINE float&#160;</td><td class="memItemRight" valign="bottom"><b>bpt_mis</b> (const float pGp, const float other_pGp, const float pGp_sum)</td></tr>
 <tr class="separator:gaf967121c1d37c948098d2845ca434a6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad49e80d845d5ed30d7e8dc0318b46ce3"><td class="memItemLeft" align="right" valign="top"><a id="gad49e80d845d5ed30d7e8dc0318b46ce3"></a>
+FERMAT_HOST_DEVICE FERMAT_FORCEINLINE float&#160;</td><td class="memItemRight" valign="bottom"><b>pdf_product</b> (const float p1, const float p2)</td></tr>
+<tr class="separator:gad49e80d845d5ed30d7e8dc0318b46ce3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1ca981c9400e18ad120b8859d1781292"><td class="memItemLeft" align="right" valign="top"><a id="ga1ca981c9400e18ad120b8859d1781292"></a>
+FERMAT_HOST_DEVICE FERMAT_FORCEINLINE float&#160;</td><td class="memItemRight" valign="bottom"><b>pdf_product</b> (const float p1, const float p2, const float p3)</td></tr>
+<tr class="separator:ga1ca981c9400e18ad120b8859d1781292"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga6dccad51efe9f04afa22146e529150a8"><td class="memItemLeft" align="right" valign="top"><a id="ga6dccad51efe9f04afa22146e529150a8"></a>
 FERMAT_HOST_DEVICE FERMAT_FORCEINLINE uint32&#160;</td><td class="memItemRight" valign="bottom"><b>channel_selector</b> (const <a class="el" href="struct_bsdf.html#a5f7db6f81220ed9ee6da109d6eb5b585">Bsdf::ComponentType</a> comp)</td></tr>
 <tr class="separator:ga6dccad51efe9f04afa22146e529150a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -158,6 +164,8 @@ FERMAT_HOST_DEVICE FERMAT_FORCEINLINE uint32&#160;</td><td class="memItemRight" 
 <tr class="separator:ga51ab08450720cf29963a5ea1ba68f600"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga6622eb324770dae8cd60dc5b6def876a"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___b_p_t_lib_core.html#ga6622eb324770dae8cd60dc5b6def876a">unpack_bsdf_diffuse_trans</a> (const uint4 packed_info)</td></tr>
 <tr class="separator:ga6622eb324770dae8cd60dc5b6def876a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaab7cc6d8fc440aa43de686236e7bdcad"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___b_p_t_lib_core.html#gaab7cc6d8fc440aa43de686236e7bdcad">bump_mapping</a> (const <a class="el" href="struct_vertex_geometry_id.html">VertexGeometryId</a> &amp;geom_id, const <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> &amp;geom, const <a class="el" href="struct_texture_reference.html">TextureReference</a> &amp;bump_map, const <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> &amp;renderer)</td></tr>
+<tr class="separator:gaab7cc6d8fc440aa43de686236e7bdcad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gab2057368defff97d2e5a217450c9ec9b"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___b_p_t_lib_core.html#gab2057368defff97d2e5a217450c9ec9b">eval_connection_terms</a> (const <a class="el" href="struct_eye_vertex.html">EyeVertex</a> ev, const <a class="el" href="struct_light_vertex.html">LightVertex</a> &amp;lv, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;out, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;f_conn, float &amp;G, float &amp;d)</td></tr>
 <tr class="separator:gab2057368defff97d2e5a217450c9ec9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga630c6ca6bd993457e69d47dda397e6a3"><td class="memItemLeft" align="right" valign="top">FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___b_p_t_lib_core.html#ga630c6ca6bd993457e69d47dda397e6a3">eval_connection_terms</a> (const <a class="el" href="struct_eye_vertex.html">EyeVertex</a> ev, const <a class="el" href="struct_light_vertex.html">LightVertex</a> &amp;lv, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;out, <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> &amp;f_conn, float &amp;G, float &amp;d, float &amp;mis_w, bool RR=true, bool direct_lighting_nee=true, bool direct_lighting_bsdf=true)</td></tr>
@@ -174,6 +182,47 @@ FERMAT_HOST_DEVICE void&#160;</td><td class="memItemRight" valign="bottom"><b>ev
 <tr class="separator:ga161551b8c343e47e329703e71e0aaeca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="gaab7cc6d8fc440aa43de686236e7bdcad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaab7cc6d8fc440aa43de686236e7bdcad">&#9670;&nbsp;</a></span>bump_mapping()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">FERMAT_HOST_DEVICE FERMAT_FORCEINLINE <a class="el" href="structcugar_1_1_vector.html">cugar::Vector3f</a> bump_mapping </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_vertex_geometry_id.html">VertexGeometryId</a> &amp;&#160;</td>
+          <td class="paramname"><em>geom_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_vertex_geometry.html">VertexGeometry</a> &amp;&#160;</td>
+          <td class="paramname"><em>geom</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_texture_reference.html">TextureReference</a> &amp;&#160;</td>
+          <td class="paramname"><em>bump_map</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_rendering_context_view.html">RenderingContextView</a> &amp;&#160;</td>
+          <td class="paramname"><em>renderer</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section user"><dt></dt><dd>Return the normal delta due to bump-mapping </dd></dl>
+
+</div>
+</div>
 <a id="gaf85f457b11ee79f45371b8afe928cabe"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gaf85f457b11ee79f45371b8afe928cabe">&#9670;&nbsp;</a></span>connect_to_camera()</h2>
 
