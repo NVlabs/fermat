@@ -396,6 +396,13 @@ void import(FILE* file, Importer* importer)
 			parse_parameter_list(file, params);
 			importer->area_light_source(type, params);
 		}
+		else if (strcmp(buf, "LightSource") == 0)
+		{
+			char type[1024];
+			parse_string(file, type);
+			parse_parameter_list(file, params);
+			importer->light_source(type, params);
+		}
 		else if (strcmp(buf, "Shape") == 0)
 		{
 			char type[1024];

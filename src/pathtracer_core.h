@@ -869,7 +869,7 @@ bool shade_vertex(
 		// directional-lighting
 		if ((context.in_bounce + 2 <= context.options.max_path_length) &&
 			(context.in_bounce > 0 || context.options.direct_lighting) &&
-			renderer.dir_lights_count)
+			 renderer.dir_lights_count)
 		{
 			DEVICE_TIME( timer.restart() );
 
@@ -1128,7 +1128,7 @@ bool shade_vertex(
 			// compute the MIS weight with next event estimation at the previous vertex
 			const float G_partial = fabsf(cugar::dot(ev.in, light_vertex_geom.normal_s)) / d2; // NOTE: G_partial doesn't include the dot product between 'in and the normal at the previous vertex
 
-			const float p1 = G_partial * p_prev;											// NOTE: p_prev is the solid angle probability of sampling the BSDF at the previous vertex, i.e. p_proj * dot(in,normal)
+			const float p1 = pdf_product( G_partial, p_prev );		// NOTE: p_prev is the solid angle probability of sampling the BSDF at the previous vertex, i.e. p_proj * dot(in,normal)
 			const float p2 = light_pdf;
 			const float mis_w =
 				(bounce == 1 && context.options.direct_lighting_nee) ||
@@ -1210,7 +1210,7 @@ bool shade_vertex(
 
 			DEVICE_TIME( per_warp_atomic_add( context.device_timers + SCATTERING_WEIGHTS_TIME, timer.take() ) );
 
-			if (p != 0.0f && cugar::max_comp(out_w) > 0.0f && cugar::is_finite(out_w))
+			if (out_comp != Bsdf::kAbsorption && p != 0.0f && cugar::max_comp(out_w) > 0.0f && cugar::is_finite(out_w))
 			{
 				// enqueue the output ray
 				MaskedRay out_ray;

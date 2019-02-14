@@ -1,7 +1,7 @@
 /*
  * Fermat
  *
- * Copyright (c) 2016-2019, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2017-2019, NVIDIA CORPORATION. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -25,6 +25,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
 #pragma once
 
 #include <types.h>
@@ -42,7 +43,12 @@ float balance_heuristic(const float p1, const float p2)
 FERMAT_HOST_DEVICE FERMAT_FORCEINLINE
 float power_heuristic(const float p1, const float p2)
 {
-	return (p1 * p1) / (p1 * p1 + p2 * p2);
+	const bool p1_inf = !cugar::is_finite(p1);
+	const bool p2_inf = !cugar::is_finite(p2);
+	return
+		p1_inf ? 1.0f :
+		p2_inf ? 0.0f :
+		(p1 * p1) / (p1 * p1 + p2 * p2);
 }
 
 /// The usual cutoff heuristic

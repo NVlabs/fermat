@@ -332,7 +332,10 @@ namespace {
 							context.vpls.in_alpha[pixel_info.pixel] += out_w2;
 						}
 						else
-							renderer.fb(context.in_bounce == 0 ? FBufferDesc::COMPOSITED_C : pixel_info.channel, pixel_info.pixel) += out_w * frame_weight;
+						{
+							renderer.fb(FBufferDesc::COMPOSITED_C,	pixel_info.pixel) += out_w * frame_weight;
+							renderer.fb(pixel_info.channel,			pixel_info.pixel) += out_w * frame_weight;
+						}
 					}
 				}
 

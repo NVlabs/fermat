@@ -530,7 +530,7 @@
 /// "Efficient Rendering of Layered Materials using an Atomic Decomposition with Statistical Operators",
 /// Laurent Belcour - in ACM Transactions on Graphics, Association for Computing Machinery, 2018.
 /// While we plan to adopt the full machinery of the latter in the future, we currently just crudely approximate it.
-///
+///\par
 /// The inner layers of the BSDF use Fresnel coefficients to determine how much light undergoes glossy reflection, and how
 /// much undergoes transmission. Part of the radiance transmitted from the upper glossy layer undergoes
 /// diffuse scattering. The interaction between the glossy layer and the underlying diffuse layer is again
@@ -1819,4 +1819,24 @@
 /// <img src="water_caustic.jpg" style="position:relative; bottom:-10px; border:0px; width:450px;"/>
 ///\par
 /// <center><small>'Water Caustic', based on a <a href="from https://benedikt-bitterli.me/resources/">model</a> by <i>Benedikt Bitterli</i></small></center>
+///\n
+/// <img src="testball-coated-copper.jpg" style="position:relative; bottom:-10px; border:0px; width:450px;"/>
+///\par
+/// <center><small>'Coated Copper', based on a <a href="from https://benedikt-bitterli.me/resources/">model</a> by <i>Benedikt Bitterli</i></small></center>
+///\n
+/// <img src="testball-coated-metal.jpg" style="position:relative; bottom:-10px; border:0px; width:450px;"/>
+///\par
+/// <center><small>'Coated Metal', based on a <a href="from https://benedikt-bitterli.me/resources/">model</a> by <i>Benedikt Bitterli</i></small></center>
+///\n
+/// <img src="testball-coated-glass.jpg" style="position:relative; bottom:-10px; border:0px; width:450px;"/>
+///\par
+/// <center><small>'Glass', based on a <a href="from https://benedikt-bitterli.me/resources/">model</a> by <i>Benedikt Bitterli</i></small></center>
+///\n
+/// <img src="testball-coated-frosted-glass.jpg" style="position:relative; bottom:-10px; border:0px; width:450px;"/>
+///\par
+/// <center><small>'Coated Frosted Glass', based on a <a href="from https://benedikt-bitterli.me/resources/">model</a> by <i>Benedikt Bitterli</i></small></center>
+///\n
+/// <img src="testball-coated-ice.jpg" style="position:relative; bottom:-10px; border:0px; width:450px;"/>
+///\par
+/// <center><small>'Coated Ice', based on a <a href="from https://benedikt-bitterli.me/resources/">model</a> by <i>Benedikt Bitterli</i></small></center>
 ///

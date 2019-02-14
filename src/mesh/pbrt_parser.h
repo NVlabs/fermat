@@ -229,6 +229,7 @@ struct Importer
 	virtual void medium_interface(const char* name1, const char* name2) {}
 	virtual void material(const char* name, const ParameterList& params) {}
 	virtual void area_light_source(const char* type, const ParameterList& params) {}
+	virtual void light_source(const char* type, const ParameterList& params) {}
 
 	virtual void shape(const char* type, const ParameterList& params) {}
 };
@@ -325,6 +326,7 @@ struct EchoImporter : public Importer
 	virtual void medium_interface(const char* name1, const char* name2) { indent(); fprintf(file, "MediumInterface \"%s\" \"%s\"\n", name1, name2); }
 	virtual void material(const char* type, const ParameterList& params) { indent(); fprintf(file, "Material \"%s\" ", type); print_params(params); fprintf(file,"\n"); }
 	virtual void area_light_source(const char* type, const ParameterList& params) { indent(); fprintf(file, "AreaLightSource \"%s\" ", type); print_params(params); fprintf(file,"\n"); }
+	virtual void light_source(const char* type, const ParameterList& params) { indent(); fprintf(file, "LightSource \"%s\" ", type); print_params(params); fprintf(file,"\n"); }
 
 	virtual void shape(const char* type, const ParameterList& params) { indent(); fprintf(file, "Shape \"%s\" ", type); print_params(params); fprintf(file,"\n"); }
 
